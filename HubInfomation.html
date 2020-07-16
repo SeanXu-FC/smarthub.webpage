@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">-->
+    <link href="css/global.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/HubInformation.js"></script>
+    <!-- <link href="layui/css/layui.css" rel="stylesheet" /> -->
+    <!-- <link rel="stylesheet" href="css/global.css"> -->
+    <style>
+        .layui-btn {
+            display: inline-block;
+            height: 38px;
+            line-height: 38px;
+            padding: 0 18px;
+            background-color: #861f41;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div style="margin-left:20px">
+            <h2>Hub information</h2>
+            <table class="table table-hover table-responsive">
+                <tr>
+                    <td colspan="2">
+                        <h4>Product info</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="30%">Model:</td>
+                    <td><span id="model" class="title"></span></td>
+                </tr>
+                <tr>
+                    <td>Software version:</td>
+                    <td><span id="sv" class="title"></span></td>
+                </tr>
+                <tr>
+                    <td>Serial number:</td>
+                    <td><span id="sn" class="title"></span></td>
+                </tr>
+
+                <tr>
+                    <td>IMEI:</td>
+                    <td><span id="iMeiInfo" class="title"></span></td>
+                </tr>
+                <tr>
+                    <td>Voltage:</td>
+                    <td><span id="voltage" class="title"></span></td>
+                </tr>
+                <tr>
+                    <td>Current draw:</td>
+                    <td><span id="cd" class="title"></span></td>
+                </tr>
+                <tr>
+                    <td>Temperature:</td>
+                    <td><span id="temperature" class="title"></span></td>
+                </tr>
+                <tr>
+                    <td>Operating hours:</td>
+                    <td><span id="oh" class="title"></span></td>
+                </tr>
+
+            </table>
+            <table class="table table-hover table-responsive">
+
+                <tr>
+                    <td colspan="2">
+                        <h4>Network info</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="30%">MAC address 1:</td>
+                    <td><span id="macAddress1" class="title"></span></td>
+                </tr>
+                <tr>
+                    <td>MAC address 2:</td>
+                    <td><span id="macAddress2" class="title"></span></td>
+                </tr>
+                <tr>
+                    <td>Access point MAC address:</td>
+                    <td><span id="aPma" class="title"></span></td>
+                </tr>
+                <tr>
+                    <td>IPQ address:</td>
+                    <td>
+                        <a id="ipqAddress" class="title" href="http://10.88.11.179" target="_blank"></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- <div style="margin-left:20px">
+            <div class="layui-input-inline">
+                <button class="layui-btn" id="btnSave" lay-submit>Save crash log(12)</button>
+            </div>
+        </div> -->
+    </div>
+</body>
+
+</html>

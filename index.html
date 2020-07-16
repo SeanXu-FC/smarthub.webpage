@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Raymarine</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="bookmark" href="images/favicon.ico" />
+    <!-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> -->
+    <!-- <link rel="stylesheet" href="css/font.css"> -->
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/xadmin.css">
+    <script type="text/javascript" src="js/jquery/3.2.1/jquery.min.js"></script>
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/xadmin.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- 顶部开始 -->
+    <div class="main">
+        <div class="logo"><a href="./index.html">Raymarine</a></div>
+        <div class="left_open">
+            <i title="展开左侧栏" class="iconfont">&#xe620;</i>
+        </div>
+
+        <ul class="layui-nav right" lay-filter="">
+            <li class="layui-nav-item to-index"><a href="/">Smart Hub Manager</a></li>
+        </ul>
+
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <!-- 左侧菜单开始 -->
+    <div class="left-nav">
+        <div id="side-nav">
+
+            <ul id="nav">
+                <li>
+                    <a _href="home.html" class="title">
+                        <i class="iconfont">&#xe616;</i>
+                        <cite>HOME </cite>
+                        <i class="iconfont nav_right ">&#xe603;</i>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:; " class="title">
+                        <i class="iconfont ">&#xe656;</i>
+                        <cite>SET-UP WIZARD </cite>
+                        <i class="iconfont nav_right ">&#xe603;</i>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:; " class="title">
+                        <i class="iconfont ">&#xe6b4;</i>
+                        <cite>BASIC SETTINGS</cite>
+                        <i class="iconfont nav_right ">&#xe603;</i>
+                    </a>
+                    <ul class="sub-menu ">
+                        <li>
+                            <a _href="WiFiNetwork.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>Wi-Fi network</cite>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a _href="MobileData.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>Mobile data</cite>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a _href="SmartHubPoint.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>SmartHub access point</cite>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a _href="HubInfomation.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>Info</cite>
+
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a _href="connectedDevices.html" class="title">
+                        <i class="iconfont ">&#xe65b;</i>
+                        <cite>CONNECTED DEVICES </cite>
+                        <i class="iconfont nav_right ">&#xe603;</i>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:; " class="title">
+                        <i class="iconfont ">&#xe647;</i>
+                        <cite>ADVANCED SETTINGS</cite>
+                        <i class="iconfont nav_right ">&#xe603;</i>
+                    </a>
+                    <ul class="sub-menu ">
+                        <li>
+                            <a _href="LanConfiguration.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>LAN configuration</cite>
+                            </a>
+                        </li>
+                        <li>
+                            <a _href="Gnss.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>GNSS</cite>
+                            </a>
+                        </li>
+                        <li>
+                            <a _href="InOutput.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite id="io" class="dropdown">inputs & Outputs</cite>
+                                <i class="iconfont nav_right ">&#xe603;</i>
+                            </a>
+                            <script>
+                                $(function() {
+                                    $('.dropdown').hover(
+                                        function() {
+                                            $(this).children('.sub-menu').slideDown(200);
+                                        },
+                                        function() {
+                                            $(this).children('.sub-menu').slideUp(200);
+                                        }
+                                    );
+
+                                });
+                            </script>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a _href="channels-monitoring.html">
+                                        <i class="iconfont ">&#xe6b6;</i>
+                                        <cite>channels monitoring</cite>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a _href="channels-configuration.html">
+                                        <i class="iconfont ">&#xe6b6;</i>
+                                        <cite>Channels configuration</cite>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a _href="alert-notifications.html">
+                                        <i class="iconfont ">&#xe6b6;</i>
+                                        <cite>Alert notifications</cite>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a _href="SoftwareUpgrade.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>Software upgrade</cite>
+                            </a>
+                        </li>
+                        <li>
+                            <a _href="restart.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>Restart & factory reset</cite>
+                            </a>
+                        </li>
+                        <li>
+                            <a _href="adminPassword.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>Admin password</cite>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a _href="help.html " class="title">
+                        <i class="iconfont ">&#xe6e3;</i>
+                        <cite>HELP </cite>
+                        <i class="iconfont nav_right ">&#xe603;</i>
+                    </a>
+                    <ul class="sub-menu ">
+                        <li>
+                            <a _href="addMAC.html ">
+                                <i class="iconfont ">&#xe6b6;</i>
+                                <cite>Add MAC</cite>
+                            </a>
+                        </li>
+                    </ul>
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- <div class="x-slide_left"></div> -->
+    <!-- 左侧菜单结束 -->
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+            <ul class="layui-tab-title">
+                <li>Home</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src="home.html" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                    <!-- <iframe src="{:url('')}" frameborder="0" scrolling="yes" class="x-iframe"></iframe> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content-bg"></div>
+    <!-- 右侧主体结束 -->
+    <!-- 中部结束 -->
+    <!-- 底部开始 -->
+    <div class="footer">
+        <div class="copyright">Copyright ©2020 Raymarine All Rights Reserved</div>
+    </div>
+    <!-- 底部结束 -->
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+/*@charset "utf-8"; */
+
+/*#m_c_list {width: 96%;overflow: hidden; border:1px solid #BCBCBC}*/    /*外层容器*/
+.l_m_c_list {    /*1级菜单*/
+	height: 42px;
+	line-height:42px;
+	background: #ebebeb;
+	/*overflow: hidden;*/
+	font-size: 12px;
+	/*border-top: 1px solid #FFFFFF;*/
+	color: #000000;
+	cursor: pointer;
+	/*font-weight:100;	*/
+	display:block;
+	/*width:100%;*/
+}
+.first_class_odd{    /*1级菜单*/
+	background: #fff;
+}
+.first_class_expand{    /*1级菜单 展开时背景*/
+	background: #00a0e9;
+	color: #fff;
+}
+.c_m_center {    /*2级菜单*/
+	height: 42px;
+	line-height:42px;
+	background: #f3f3f3;
+	/*overflow: hidden;*/
+	font-size: 12px;
+    border-bottom:1px solid #e5e5e5;
+	/*border-top: 1px solid #FFFFFF;*/
+	color: #000000;
+	cursor: pointer;
+	/*padding-left:10px;*/
+	display:none;
+}
+
+.chan_manag_son {/*margin:0 0 5px 0; background:#EEEEEE;*/ font-size:12px; display:none;}
+.l_mana_son {
+	width: 100%;
+	float: left;
+	height:48px;
+	line-height:48px;
+	background: #ffffff;
+	white-space: nowrap;
+	/*border-right: 1px solid #E2E1DD;*/
+	border-bottom: 1px solid #eeeeee;
+}
+
+
+/*1级菜单---左侧*/
+.l_pLeft2 {float:left; /*width:94%;*/ /*height:42px;*/ /*line-height:42px;*/ margin-left:24px;}
+/*.l_pLeft2 a {cursor:pointer;}*/    /*--1级左--侧有--a*/
+/*3级菜单---左侧*/
+.l_pLeft {float:left; /*width:120px;*/ /*height:42px; line-height:42px;*/ margin-left:86px;}
+/*1级菜单  3级菜单---右侧*/
+.l_pRight {float:right; /*height:42px; line-height:42px;*/ /*text-align:right;*/ margin-right:24px;}
+.l_pRight input, .c_pRight input{margin:1px 4px 0 0;}
+.l_pRight a {margin:0 15px; color:#000000;}
+
+
+/*2级菜单---左侧*/
+.c_pLeft { float:left; /*width: 94%; height: 25px; line-height: 25px;*/ margin-left:48px;}
+.c_pLeft a.c_pLeft_round {font-size:12px; margin-right:4px; color:#999999; text-decoration:none; /*cursor:default;*/}
+.c_pLeft label {cursor:pointer;}
+/*2级菜单---右侧*/
+.c_pRight{ float:right; /*height: 25px; line-height: 25px;*/ /*text-align:right;*/ margin-right:24px;}
+.c_pRight a { margin:0 15px; color: #000000;}
+.c_pRight label {cursor:pointer;}
+/*.c_pRight input{
+   margin-right:4px;
+}*/
+
+
+
+
+
+
+
+
+
+

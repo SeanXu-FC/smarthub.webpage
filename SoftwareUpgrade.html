@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>文件上传</title>
+
+    <link href="layui/css/layui.css" rel="stylesheet" />
+
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="layui/layui.js" type="text/javascript"></script>
+    <script src="js/upload.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div class="container" style="margin:40px 80px;">
+        <div class="row">
+            <h2 class="col-md-12" style="margin-bottom:10px;">Software upgrade</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom:10px;">Current version:<span id="version" style="padding-left:10px;font-size:16px;font-weight:bold;"></span></div>
+        </div>
+
+
+        <div class="layui-form-mid layui-word-aux">Some information on updating the router and what will happen</div>
+        <form class="layui-form" method="post" action="javascript:;" enctype="multipart/form-data">
+
+            <div class="layui-form-item">
+                <!-- <label class="layui-form-label">图片上传</label> -->
+                <div class="layui-inline">
+                    <div class="layui-upload-drag" id="upload">
+                        <i class="layui-icon red"></i>
+                        <p>Drag file here or...</p>
+                    </div>
+                </div>
+                <div class="layui-inline" id="upload_preview"></div>
+            </div>
+
+            <div class="layui-form-item layui-hide" id="upload_progress">
+                <!-- <label class="layui-form-label"></label> -->
+                <div class="layui-input-inline" style="width:21%;">
+                    <div class="layui-progress" lay-showpercent="true" lay-filter="upload_progress">
+                        <div class="layui-progress-bar layui-bg-blue" lay-percent="0%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="layui-input-inline">
+                    <input type="button" class="layui-btn" lay-submit value="Upgrade">
+                    <!-- <button class="layui-btn" lay-submit>Upgrade</button> -->
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

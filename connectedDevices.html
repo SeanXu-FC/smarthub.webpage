@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/connectedDevices.js"></script>
+    <title>Document</title>
+    <style>
+        .align {
+            vertical-align: middle !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" style="margin:10px 40px;">
+        <div class="row">
+            <h3>Connected devices</h3>
+            <h6>All devices currently connected to your SmartHub device:</h6>
+            <table class="table table-bordered table-responsive table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center active">Device</th>
+                        <th class="text-center active">Device name</th>
+                        <th class="text-center active">Type </th>
+                        <th class="text-center active">IP address</th>
+                        <th class="text-center active">Connection type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td class="align"><img src="images/img-mobile.png"></td>
+                        <td class="align"><span id="DeviceName"></span>Dave's iPhone </td>
+                        <td class="align"><span id="Mobile"></span>Mobile </td>
+                        <td class="align"><span id="IPAddress"></span>192.143.1.1 </td>
+                        <td class="align"><span id="ConnectMode"></span>Wireless</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="align"><img src="images/img-mobile.png"></td>
+                        <td class="align">Dave's Samsung </td>
+                        <td class="align">Mobile </td>
+                        <td class="align">192.143.1.1 </td>
+                        <td class="align">Wireless</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="align"><img src="images/img-mobile.png"></td>
+                        <td class="align">Daves's Gphone </td>
+                        <td class="align">Mobile </td>
+                        <td class="align">192.143.1.1 </td>
+                        <td class="align">Wireless</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="align"><img src="images/img-pc.png"></td>
+                        <td class="align">Daves's laptop </td>
+                        <td class="align">PC </td>
+                        <td class="align">192.143.1.1 </td>
+                        <td class="align">Ethernet</td>
+                    </tr>
+                    <tr class="text-center">
+                        <td class="align"><img src="images/img-mfd.png"></td>
+                        <td class="align">Dave's Axiom </td>
+                        <td class="align">MFD </td>
+                        <td class="align">192.143.1.1 </td>
+                        <td class="align">Ethernet</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
