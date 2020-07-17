@@ -6,42 +6,43 @@
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript">
         $(function() {
+            var interval = window.setInterval(function() {
+                var domain = window.location.host;
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "upgrade_status",
+                    "params": {},
+                    "id": "9.1"
 
-            var domain = window.location.host;
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "upgrade_status",
-                "params": {},
-                "id": "9.1"
-            };
-            data = JSON.stringify(data);
-            $.ajax({
-                type: "post",
-                url: "/action/action?t=" + new Date().getTime(),
-                data: data,
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(data) {
-                    console.log(data.result);
-                    $("#status").html(data.result.status);
-                    $("#steps").html(data.result.steps)
-                    var data = data.result;
-                    if (data.steps == "1") {
-                        alert("升级成功！");
-                        top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
-                        //top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + '10.88.11.238/';
-                    } else {
-                        console.log("现在状态是：" + data.status + "--正在升级中...");
-                        //console.log("正在准备系统升级环境");
-                        //console.log(data.steps);
-                    }
+                };
+                data = JSON.stringify(data);
+                $.ajax({
+                    type: "post",
+                    url: "/action/action?t=" + new Date().getTime(),
+                    data: data,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function(data) {
+                        console.log(data.result);
+                        $("#status").html(data.result.status);
+                        $("#steps").html(data.result.steps)
+                        var data = data.result;
+                        if (data.status == "1") {
+                            alert("升级成功！");
+                            top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                            //top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + '10.88.11.238/';
+                        } else {
+                            console.log("现在状态是：" + data.status + "--正在升级中...");
+                            //console.log("正在准备系统升级环境");
+                            //console.log(data.steps);
+                        }
 
-                },
-                error: function(jqXHR) {
-                    alert("发生错误：" + jqXHR.status);
-                }
-            });
-
+                    },
+                    // error: function(jqXHR) {
+                    //     alert("发生错误：" + jqXHR.status);
+                    // }
+                });
+            }, 2000);
         });
     </script>
 </head>
