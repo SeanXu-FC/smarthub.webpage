@@ -240,6 +240,7 @@ xblock {
 .main {
     width: 100%;
     height: 65px;
+    /* background-color: #fff; */
     background-color: #03387f;
     border-bottom: 1px solid rgba(3, 56, 127, 0.2);
 }
@@ -258,6 +259,13 @@ xblock {
 
 .logo a {
     text-indent: 2em;
+    height: 58px;
+    width: 167px;
+    /* color: #fff; */
+    background: url(../images/RM_logo.svg) no-repeat;
+    margin: 15px 0 0 20px;
+    /* box-shadow: rgba(0, 0, 0, .5) 2px 3px 10px;
+    border-radius: 10px; */
 }
 
 .layui-nav .layui-nav-more {
@@ -547,6 +555,8 @@ table td {
 
 .footer .copyright {
     margin-left: 10px;
+    color: rgba(255, 255, 255, .7);
+    text-align: center;
 }
 
 @media screen and (max-width: 768px) {

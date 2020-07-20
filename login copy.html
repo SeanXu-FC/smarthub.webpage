@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <title>Raymarine</title>
+    <style>
+        body {
+            background-color: #03387f !important
+        }
+    </style>
+</head>
+
+<body>
+    <div style="position: fixed;left:10px;top:10px;color:#fff;font-size: 24px;">Raymarine</div>
+    <div class="container-fluid">
+        <div class="card-wrap" style="background-color: #fff !important;">
+            <div class="card border-0 shadow card--login is-show" id="login">
+                <div class="card-body">
+                    <h2 class="card-title">Welcome to login Raymarine !</h2>
+
+                    <form name="details" method="post" action="/action/login">
+                        <div class="form-group form-inline">
+                            Username: <input class="form-control" type="user" id="userId" name="username" placeholder="user" required="required" style="margin-left:10px" /><span></span>
+                        </div>
+                        <div class="form-group form-inline">
+                            Password: <input class="form-control" type="password" id="pwd" name="password" placeholder="Please enter the password, length: 6-16 digits" maxlength="16" required="required" pattern="\d{6,16}" style="margin-left:15px" /><span></span>
+                        </div>
+                        <!-- <p><a href="#"Forget the password?</a></p> -->
+                        <!-- <button class="btn btn-md btn-default ">login</button> -->
+                        <input class="btn btn-md btn-default " type="submit" id="login_btn" name="submit" value="login">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="text-center" style="position: fixed;bottom:10px;color:#fff;">Copyright ©2020 Raymarine All Rights Reserved</div>
+    <script src="js/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $("#login_btn").click(function() {
+                var userName = $.trim($("#username").val());
+                var passWord = $.trim($("#password").val());
+                if (userName == "") {
+                    alert("enter one user name");
+                    return false;
+                } else if (passWord == "") {
+                    alert("Please input a password");
+                    return false;
+                }
+                var data = {
+                    username: userName,
+                    password: passWord
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/action/login",
+                    data: data,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function(msg) {
+
+                        if (msg == 1) {
+                            window.location.href = "index.html";
+                        } else {
+                            alert("Login failed, please try again!");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

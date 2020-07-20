@@ -17,23 +17,32 @@
     <script type="text/javascript" src="js/jquery/3.2.1/jquery.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/xadmin.js"></script>
-    <style>
 
-    </style>
 </head>
 
 <body>
     <!-- 顶部开始 -->
     <div class="main">
-        <div class="logo"><a href="./index.html">Raymarine</a></div>
+        <div class="logo">
+            <a href="./index.html"></a>
+        </div>
         <div class="left_open">
             <i title="展开左侧栏" class="iconfont">&#xe620;</i>
         </div>
 
         <ul class="layui-nav right" lay-filter="">
             <li class="layui-nav-item to-index"><a href="/">Smart Hub Manager</a></li>
+            <li class="layui-nav-item to-index"><a href="/" id="logout">exit</a></li>
         </ul>
-
+        <script language="javascript" type="text/javascript">
+            var domain = window.location.host;
+            var logout = document.getElementById("logout");
+            logout.onclick = function() {
+                if (confirm("Are you sure you want to exit the system?"))           
+                    window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
+                return false;   
+            }
+        </script>
     </div>
     <!-- 顶部结束 -->
     <!-- 中部开始 -->

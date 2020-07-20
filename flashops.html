@@ -28,8 +28,15 @@
                         $("#steps").html(data.result.steps)
                         var data = data.result;
                         if (data.status == "1") {
-                            alert("升级成功！");
-                            top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                            //alert("升级成功！");
+                            console.log("现在状态是：" + data.status + "--升级完成...");
+                            var ds = "现在状态是：" + data.status + "--升级完成...";
+                            alert(ds);
+                            $("#steps").html(ds);
+                            setTimeout(function() {
+                                top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                            }, 10000);
+
                             //top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + '10.88.11.238/';
                         } else {
                             console.log("现在状态是：" + data.status + "--正在升级中...");

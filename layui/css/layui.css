@@ -3687,7 +3687,8 @@ body .layui-table-tips .layui-layer-content {
     display: block;
     padding: 0 20px;
     color: #fff;
-    /* color: rgba(255, 255, 255, .7); */
+    font-size: 18px;
+    color: rgba(255, 255, 255, .7);
     transition: all .3s;
     -webkit-transition: all .3s
 }
@@ -3700,7 +3701,7 @@ body .layui-table-tips .layui-layer-content {
     top: 0;
     width: 0;
     height: 5px;
-    background-color: #5FB878;
+    /* background-color: #5FB878; */
     transition: all .2s;
     -webkit-transition: all .2s
 }
@@ -3711,7 +3712,7 @@ body .layui-table-tips .layui-layer-content {
 
 .layui-nav .layui-nav-item a:hover,
 .layui-nav .layui-this a {
-    color: #000
+    color: #fff
 }
 
 .layui-nav .layui-this:after {
