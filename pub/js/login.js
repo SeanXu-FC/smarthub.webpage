@@ -13,31 +13,33 @@ $("#login_btn").click(function() {
             "color": "red"
         });
         event.preventDefault();
-        // } else {
+    } else {
 
-        //     $.ajax({
-        //         url: "/action/login",
-        //         type: "post",
-        //         data: {
-        //             username: $userId.val(),
-        //             password: $pwd.val()
-        //         },
-        //         success: function(res) {
-        //             if (res.result.login == "0") {
-        //                 $userId.next().text("Wrong user name or password").css({
-        //                     "font-weight": "bold",
-        //                     "color": "red"
-        //                 });
-        //                 $pwd.next().text("Wrong user name or password").css({
-        //                     "font-weight": "bold",
-        //                     "color": "red"
-        //                 });
-        //             } else {
+        $.ajax({
+            url: "/action/login",
+            type: "post",
+            data: {
+                username: $userId.val(),
+                password: $pwd.val()
+            },
+            // data = JSON.stringify(data),
+            // data=serialize(data),
+            success: function(res) {
+                if (res.result.login == "0") {
+                    $userId.next().text("Wrong user name or password").css({
+                        "font-weight": "bold",
+                        "color": "red"
+                    });
+                    $pwd.next().text("Wrong user name or password").css({
+                        "font-weight": "bold",
+                        "color": "red"
+                    });
+                } else {
 
-        //                 Top.Location.href = "index.html";
-        //             }
+                    Top.Location.href = "index.html";
+                }
 
-        //         }
-        //     });
+            }
+        });
     }
 });

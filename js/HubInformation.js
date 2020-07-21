@@ -18,7 +18,8 @@ $(function() {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             $("#model").html(res.result.Model);
-            $("#sv").html(res.result.ipq_version);
+            $("#iv").html(res.result.ipq_version);
+            $("#nv").html(res.result.nxp_version);
             $("#sn").html(res.result.serial_number);
             $("#iMeiInfo").html(res.result.IMEI);
             $("#voltage").html(res.result.Voltage);

@@ -35,13 +35,27 @@
             <li class="layui-nav-item to-index"><a href="/" id="logout">exit</a></li>
         </ul>
         <script language="javascript" type="text/javascript">
-            var domain = window.location.host;
-            var logout = document.getElementById("logout");
-            logout.onclick = function() {
-                if (confirm("Are you sure you want to exit the system?"))           
-                    window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
-                return false;   
-            }
+            $(function() {
+                var domain = window.location.host;
+                var logout = document.getElementById("logout");
+                $("#logout").click(function() {
+
+                    $.ajax({
+                        url: "/action/logout",
+                        type: "post",
+
+                        data: {
+
+                        },
+
+                    });
+
+                    if (confirm("Are you sure you want to exit the system?"))           
+                        window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
+                    return false;  
+
+                });
+            })
         </script>
     </div>
     <!-- 顶部结束 -->
