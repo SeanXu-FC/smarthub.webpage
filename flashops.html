@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
     <title>OpenWrt - Flashing...</title>
     <script src="js/jquery.min.js"></script>
     <script type="text/javascript">
@@ -28,7 +29,7 @@
                         $("#steps").html(data.result.steps)
                         var data = data.result;
                         if (data.status == "1") {
-                            alert("升级成功！");
+                            alert("Update Successful！");
                             console.log("现在状态是：" + data.status + "--升级完成...");
                             var ds = "现在状态是：" + data.status + "--升级完成...";
                             //alert(ds);

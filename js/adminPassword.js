@@ -13,7 +13,7 @@ $(function() {
         data = JSON.stringify(data);
         $.ajax({
             type: "post",
-            url: "http://10.88.11.175/action/action",
+            url: "/action/password",
             data: data,
             dataType: "json",
             contentType: "application/json;charset=utf-8",

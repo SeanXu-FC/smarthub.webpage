@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <title>Raymarine</title>
+    <style>
+        body {
+            background-color: #03387f !important
+        }
+    </style>
+</head>
+
+<body>
+    <div style="position: fixed;left:10px;top:10px;color:#fff;font-size: 24px;">Raymarine</div>
+    <div class="container-fluid">
+        <div class="card-wrap" style="background-color: #fff !important;">
+            <div class="card border-0 shadow card--login is-show" id="login">
+                <div class="card-body">
+                    <h2 class="card-title">Welcome to login Raymarine !</h2>
+
+                    <form name="details" id="loginInfo" onsubmit="return false" action="##">
+                        <div class="form-group form-inline">
+                            Username: <input class="form-control" type="user" id="userId" name="username" placeholder="user" required="required" style="margin-left:10px" /><span></span>
+                        </div>
+                        <div class="form-group form-inline">
+                            Password: <input class="form-control" type="password" id="pwd" name="password" placeholder="Please enter the password, length: 6-16 digits" maxlength="16" required="required" pattern="\d{6,16}" style="margin-left:15px" /><span></span>
+                        </div>
+
+                        <input class="btn btn-md btn-default " id="login_btn" type="submit" name="submit" value="login">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="text-center" style="position: fixed;bottom:10px;color:#fff;">Copyright ©2020 Raymarine All Rights Reserved</div>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("#login_btn").click(function() {
+                var domain = window.location.host;
+                var $userId = $("#userId");
+                var $pwd = $("#pwd");
+                if ($userId.val() == "") {
+                    $userId.next().text("Account number is empty").css({
+                        "font-weight": "bold",
+                        "color": "red"
+                    });
+                    event.preventDefault();
+                } else if ($pwd.val() == "") {
+                    $pwd.next().text("The password is empty").css({
+                        "font-weight": "bold",
+                        "color": "red"
+                    });
+                    event.preventDefault();
+                } else {
+                    var data = {
+                        "username": $userId.val(),
+                        "password": $pwd.val()
+                    };
+
+                    data = JSON.stringify(data);
+                    $.ajax({
+                        url: "/action/login",
+                        type: "post",
+                        async: "false",
+                        //data: {
+                        //    username: $userId.val(),
+                        //    password: $pwd.val()
+                        //},
+                        //data:data,
+                        data: $('#loginInfo').serialize(),
+                        dataType: "json",
+                        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                        //contentType: "application/json;charset=utf-8",
+                        beforeSend: function() {
+                            // 禁用按钮防止重复提交
+                            //$("#submit").attr({ disabled: "disabled" });
+                            console.info("before send:");
+                        },
+                        complete: function() {
+                            // $("#submit").removeAttr("disabled");
+                            console.info("complete send:");
+                        },
+                        error: function(data) {
+                            console.info("error: " + data.responseText);
+                            //alert("error send:" + data.responseText);
+                        },
+                        success: function(res) {
+                            if (res.result.login == "0") {
+                                $userId.next().text("Wrong user name or password").css({
+                                    "font-weight": "bold",
+                                    "color": "red"
+                                });
+                                $pwd.next().text("Wrong user name or password").css({
+                                    "font-weight": "bold",
+                                    "color": "red"
+                                });
+                            } else {
+                                console.info("OK: " + res.responseText);
+                                // alert(res);
+                                //Top.Location.href="index.html";
+                                //console.info("error: " + data.responseText);
+                                window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                            }
+
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+
+</body>
+
+</html>

@@ -93,7 +93,7 @@
                         layer.msg("Upload successful！");
 
                         setTimeout(function() {
-                            window.location.href = "http://" + domain + "/flashops.html";
+                            window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
                             //window.location.href = "http://10.88.11.238/flashops.html";
                         }, 2000);
                         //console.log(res.id);
