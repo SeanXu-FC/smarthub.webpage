@@ -21,11 +21,11 @@
             <div class="card border-0 shadow card--login is-show" id="login">
                 <div class="card-body">
                     <h2 class="card-title">Welcome to login Raymarine !</h2>
-                    <form name="details" method="POST" action="/action/login" class="form-horizontal">
+                    <form name="details" method="POST" action="/action/login" id="myForm" class="form-horizontal">
                         <div class="form-group form-inline">
                             <label class="col-sm-2 control-label">Username: </label>
                             <div class="col-sm-10">
-                                <input class="form-control" type="user" id="userId" name="username" placeholder="user" style="margin-left:15px" />
+                                <input class="form-control" type="user" id="userId" name="user" placeholder="user" style="margin-left:15px" />
                                 <div id="info-user"></div>
                             </div>
 
@@ -48,8 +48,36 @@
     </div>
     <div class="text-center" style="position: fixed;bottom:10px;color:#ccc;">Copyright ©2020 Raymarine All Rights Reserved</div>
     <script src="js/jquery.min.js"></script>
-    <script src="js/login.js"></script>
+    <!-- <script src="js/login.js"></script> -->
+    <script type="text/javascript">
+        $(function() {
+            $("#login_btn").click(function() {
+                data1 = $("#myForm").serializeArray();
+                //console.log(data1);
+                var str = "";
+                jQuery.ajax({
+                    type: 'POST',
+                    url: "/action/password",
+                    dataType: "json",
+                    contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+                    data: data1,
+                    success: function(data) {
+                        if (data.statusCode == "200") {
+                            var pathName = window.document.location.pathname;
+                            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+                            console.log(projectName);
+                            window.location.href = projectName + "/http_homeWork/" + data.referer;
+                        } else if (data.statusCode == "404") {
+                            // $("#loginInf").html(data.message + '<br/>');
+                        }
+                    },
+                    error: function(data) {
 
+                    }
+                });
+            });
+        })
+    </script>
 </body>
 
 </html>
