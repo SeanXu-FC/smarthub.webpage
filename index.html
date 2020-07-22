@@ -31,31 +31,150 @@
 
         <ul class="layui-nav right" lay-filter="">
             <li class="layui-nav-item to-index"><a href="/">Smart Hub Manager</a></li>
-            <li class="layui-nav-item to-index"><a href="/" id="logout">exit</a></li>
+            <li class="layui-nav-item to-index">
+                <div id="result"><a href="/" id="logout">exit</a></div>
+            </li>
         </ul>
         <script language="javascript" type="text/javascript">
             $(function() {
+                //设置cookie
+                function setCookie(cname, cvalue, exdays) {
+                    var d = new Date();
+                    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                    var expires = "expires=" + d.toUTCString();
+                    document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/"; //path=/是根路径
+                }
+                //获取cookie
+                function getCookie(cname) {
+                    var name = cname + "=";
+                    var ca = document.cookie.split(';');
+                    for (var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') c = c.substring(1);
+                        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+                    }
+                    return "";
+                }
+                getCookie("name");
+                getCookie("password");
+                console.log(getCookie("name"));
+                console.log(getCookie("password"));
+                //清除cookie
+                function clearCookie(name) {
+                    setCookie(name, "", -1);
+                }
+
+                function clearCookie(password) {
+                    setCookie(password, "", -1);
+                }
+
                 var domain = window.location.host;
-                var logout = document.getElementById("logout");
-                $("#logout").click(function() {
+                $("#logout").on('click', function() {
+                    alert(window.document.location.pathname);
+                    alert(document.cookie);
+                    var name = decodeURIComponent(getCookie("userName"));
+                    var password = decodeURIComponent(getCookie("userPassword"));
+                    if (name != "null" && password != "null") {
+                        delCookie('userName');
+                        delCookie('userPassword');
+                        location.reload();
+                    }
+                    Session.Clear();
+                    Session.Abandon();
                     sessionStorage.clear();
                     window.location.reload();
-                    data: {
-
-                    };
-
-                    $.ajax({
-                        url: "/action/logout",
-                        type: "post",
-
+                    $.post("/action/logout", function(msg) {
+                        if (msg == 1) {
+                            if (Request.Cookies["userName"] != null && Request.Cookies["userPassword"] != null) {
+                                Response.Cookies["userName"].Expires = DateTime.Now.AddDays(-1);
+                                Response.Cookies["userPassword"].Expires = DateTime.Now.AddDays(-1);
+                            }
+                            if (confirm("Are you sure you want to exit the system?"))           
+                                window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
+                            return false;  
+                        }
                     });
-
-                    if (confirm("Are you sure you want to exit the system?"))           
-                        window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
-                    return false;  
-
                 });
+
+
             })
+
+
+
+
+
+            // setCookie("remember", "true", {
+            //     expires: 7
+            // });
+
+            // setCookie("username", "userValue", {
+            //     expires: 7
+            // });
+            // setCookie("password", "password", {
+            //     expires: 7
+            // });
+            // console.log(getCookie("remember"));
+            // console.log(getCookie("username"));
+            // console.log(getCookie("password"));
+            // clearCookie("remember");
+            // clearCookie("username");
+            // clearCookie("password");
+            // console.log(getCookie("remember"));
+            // console.log(getCookie("username"));
+            // console.log(getCookie("password"));
+
+
+            // var logout = document.getElementById("logout");
+            // $("#logout").click(function() {
+            //     sessionStorage.clear();
+            //     window.location.reload();
+            //     data: {
+
+            //     };
+
+            //     $.ajax({
+            //         url: "/action/logout",
+            //         type: "post",
+
+            //     });
+
+            //     if (confirm("Are you sure you want to exit the system?"))           
+            //         window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
+            //     return false;  
+
+            // });
+
+
+            // $("#logout").onclick = function() {
+            //     $.ajax({
+            //         url: "/action/logout",
+            //         type: "post",
+            //         success: function(data) {
+            //             var info = JSON.parse(data);
+            //             console.log(info.message);
+            //             if (!info.code) {
+            //                 updataUser();
+            //             }
+            //         }
+
+            //     });
+            //     return false;
+            // ajax('post', 'guestbook/index.php',
+            //     'm=index&a=logout',
+            //     function(data) {
+            //         var info = JSON.parse(data);
+            //         alert(info.message);
+            //         if (!info.code) {
+            //             updataUser();
+            //         }
+
+            //     });
+            // return false;
+
+            // }
+
+
+            // })
         </script>
     </div>
     <!-- 顶部结束 -->
