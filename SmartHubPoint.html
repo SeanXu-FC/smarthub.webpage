@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        td {
+            padding: 10px;
+        }
+        
+        .mc {
+            margin: 20px 0 0 10px;
+            position: relative
+        }
+        
+        .sm {
+            font-size: 10px;
+            color: #999
+        }
+        
+        .mlImg {
+            margin-left: 10px;
+            margin-bottom: 3px;
+        }
+        
+        .red {
+            color: red;
+        }
+        
+        .form-control {
+            display: inline;
+        }
+        
+        #outer {
+            width: 100%;
+            margin: 10px auto;
+        }
+        
+        #tab {
+            overflow: hidden;
+            zoom: 1;
+            margin-left: 15px;
+        }
+        
+        #tab li {
+            float: left;
+            color: #333;
+            height: 30px;
+            cursor: pointer;
+            line-height: 30px;
+            list-style-type: none;
+            padding: 0 20px;
+        }
+        
+        #tab li.current {
+            background: #eee;
+        }
+        
+        #content {
+            border-top-width: 0;
+        }
+        
+        #content ul {
+            line-height: 25px;
+            display: none;
+            margin: 0 30px 0 15px;
+            padding: 10px 0;
+        }
+        
+        .layui-form-pane .layui-form-switch {
+            margin-top: 0px;
+            margin-left: 10px;
+        }
+        
+        .layui-form-switch em {
+            top: -1px;
+        }
+        
+        .layui-btn {
+            display: inline-block;
+            height: 38px;
+            line-height: 38px;
+            padding: 0 18px;
+            background-color: #861f41 !important;
+            color: #fff !important;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="mc">
+            <h2 style="margin-top:10px;"> SmartHub access point </h2>
+            <p class="red" style="margin-top:10px;">Your SmartHub access point allows other devices to connect to the SmartHub's cellular or WiFi data</p>
+            <p>Allow devices to connect to SmartHub access point:</p>
+
+            <div class="row">
+                <div id="outer" style="margin-top:20px;">
+                    <ul id="tab">
+                        <li class="current">wifi1: Client "Ray_4029_5G_AP"<span class="layui-form layui-form-pane layui-form-item">
+                            <i>
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </i>
+                        </span></li>
+                        <li>wifi2: Master "Ray_9984_2G"<span class="layui-form layui-form-pane layui-form-item" style="display: inline;">
+                            <i>
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </i>
+                        </span></li>
+                        <li>wifi2: Master "Ray_2G_Guest"<span class="layui-form layui-form-pane layui-form-item">
+                            <i>
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </i>
+                        </span></li>
+                        <li>wifi0: Master "Ray_4029_2G_AP"<span class="layui-form layui-form-pane layui-form-item">
+                            <i>
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </i>
+                        </span></li>
+                    </ul>
+                    <div id="content">
+                        <ul style="display:block;">
+                            <table class="table table-hover table-responsive">
+
+                                <tr>
+                                    <th colspan="2">Access point connection settings---1</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Use these details when connecting a device to the SmartHub's access point</th>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-sm-3">Access point name:</td>
+                                    <td class="col-sm-9"><input type="text" class="form-control" value="My access point" style="width:40%"></td>
+                                </tr>
+                                <tr>
+                                    <td>Password:</td>
+                                    <td><input type="password" class="form-control" value="******" style="width:40%"><span>SHOW</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Preferred Wi-Fi channel:</td>
+                                    <td>
+                                        <select class="form-control" style="width:40%">
+                                        <option>14</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Encryption type:</td>
+                                    <td>
+                                        <select class="form-control" style="width:40%">
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <div class="form-group form-line">
+
+                                            <button type="submit" class="btn layui-btn">Cancel</button>
+
+
+                                            <button type="submit" class="btn layui-btn">Save</button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                        <ul>
+                            <table class="table table-hover table-responsive">
+
+                                <tr>
+                                    <th colspan="2">Access point connection settings---2</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Use these details when connecting a device to the SmartHub's access point</th>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-sm-3">Access point name:</td>
+                                    <td class="col-sm-9"><input type="text" class="form-control" value="My access point" style="width:40%"></td>
+                                </tr>
+                                <tr>
+                                    <td>Password:</td>
+                                    <td><input type="password" class="form-control" value="******" style="width:40%"><span>SHOW</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Preferred Wi-Fi channel:</td>
+                                    <td>
+                                        <select class="form-control" style="width:40%">
+                                        <option>14</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Encryption type:</td>
+                                    <td>
+                                        <select class="form-control" style="width:40%">
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <div class="form-group form-line">
+
+                                            <button type="submit" class="btn layui-btn">Cancel</button>
+
+
+                                            <button type="submit" class="btn layui-btn">Save</button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                        <ul>
+                            <table class="table table-hover table-responsive">
+
+                                <tr>
+                                    <th colspan="2">Access point connection settings-----3</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Use these details when connecting a device to the SmartHub's access point</th>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-sm-3">Access point name:</td>
+                                    <td class="col-sm-9"><input type="text" class="form-control" value="My access point" style="width:40%"></td>
+                                </tr>
+                                <tr>
+                                    <td>Password:</td>
+                                    <td><input type="password" class="form-control" value="******" style="width:40%"><span>SHOW</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Preferred Wi-Fi channel:</td>
+                                    <td>
+                                        <select class="form-control" style="width:40%">
+                                        <option>14</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Encryption type:</td>
+                                    <td>
+                                        <select class="form-control" style="width:40%">
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <div class="form-group form-line">
+
+                                            <button type="submit" class="btn layui-btn">Cancel</button>
+
+
+                                            <button type="submit" class="btn layui-btn">Save</button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                        <ul>
+                            <table class="table table-hover table-responsive">
+
+                                <tr>
+                                    <th colspan="2">Access point connection settings----4</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Use these details when connecting a device to the SmartHub's access point</th>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-sm-3">Access point name:</td>
+                                    <td class="col-sm-9"><input type="text" class="form-control" value="My access point" style="width:40%"></td>
+                                </tr>
+                                <tr>
+                                    <td>Password:</td>
+                                    <td><input type="password" class="form-control" value="******" style="width:40%"><span>SHOW</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Preferred Wi-Fi channel:</td>
+                                    <td>
+                                        <select class="form-control" style="width:40%">
+                                        <option>14</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Encryption type:</td>
+                                    <td>
+                                        <select class="form-control" style="width:40%">
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                        <option>WPA</option>
+                                    </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <div class="form-group form-line">
+
+                                            <button type="submit" class="btn layui-btn">Cancel</button>
+
+
+                                            <button type="submit" class="btn layui-btn">Save</button>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                window.onload = function() {
+                    var oLi = document.getElementById("tab").getElementsByTagName("li");
+                    var oUl = document.getElementById("content").getElementsByTagName("ul");
+                    for (var i = 0; i < oLi.length; i++) {
+                        oLi[i].index = i;
+                        oLi[i].onmouseover = function() {
+                            for (var n = 0; n < oLi.length; n++) {
+                                oLi[n].className = "";
+                                this.className = "current";
+                            }
+                            for (var n = 0; n < oUl.length; n++) {
+                                oUl[n].style.display = "none";
+                                oUl[this.index].style.display = "block";
+                            }
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </div>
+
+
+    <script src="layui/layui.js" charset="utf-8"></script>
+
+    <script>
+        layui.use(['form'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate;
+
+        });
+    </script>
+</body>
+
+</html>

@@ -15,6 +15,10 @@
         table th {
             padding: 15px !important;
         }
+        
+        .layui-form-switch em {
+            top: -1px;
+        }
     </style>
 </head>
 
@@ -33,7 +37,13 @@
             <tbody>
                 <tr class="text-center">
                     <td class="align">Underwater lights </td>
-                    <td class="align"><img src="images/img-on.png"> </td>
+                    <td class="align">
+                        <div class="layui-form layui-form-pane layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </div>
+                        </div>
+                    </td>
                     <td class="align">1 </td>
                     <td class="align">HIGH LEVEL</td>
                     <td class="align">1.2v</td>
@@ -47,7 +57,13 @@
                 </tr>
                 <tr class="text-center">
                     <td class="align">Cabin lights </td>
-                    <td class="align"><img src="images/img-off.png"></td>
+                    <td class="align">
+                        <div class="layui-form layui-form-pane layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </div>
+                        </div>
+                    </td>
                     <td class="align">3</td>
                     <td class="align">HIGH LEVEL </td>
                     <td class="align">1.22v</td>
@@ -68,14 +84,26 @@
                 </tr>
                 <tr class="text-center">
                     <td class="align">Pump 1 </td>
-                    <td class="align"><img src="images/img-on.png"></td>
+                    <td class="align">
+                        <div class="layui-form layui-form-pane layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </div>
+                        </div>
+                    </td>
                     <td class="align">6</td>
                     <td class="align">HIGH LEVEL</td>
                     <td class="align">12.4A</td>
                 </tr>
                 <tr class="text-center">
                     <td class="align">Pump 2 </td>
-                    <td class="align"><img src="images/img-on.png"></td>
+                    <td class="align">
+                        <div class="layui-form layui-form-pane layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </div>
+                        </div>
+                    </td>
                     <td class="align">7</td>
                     <td class="align">HIGH LEVEL</td>
                     <td class="align">12.4A</td>
@@ -90,6 +118,17 @@
             </tbody>
         </table>
     </div>
+    <script src="layui/layui.js" charset="utf-8"></script>
+
+    <script>
+        layui.use(['form'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate;
+
+        });
+    </script>
 </body>
 
 </html>

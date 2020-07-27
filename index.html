@@ -10,8 +10,6 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="bookmark" href="images/favicon.ico" />
-    <!-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> -->
-    <!-- <link rel="stylesheet" href="css/font.css"> -->
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/xadmin.css">
     <script type="text/javascript" src="js/jquery/3.2.1/jquery.min.js"></script>
@@ -36,6 +34,29 @@
             </li>
         </ul>
         <script language="javascript" type="text/javascript">
+            $(function() {
+                var domain = window.location.host;
+                var logout = document.getElementById("logout");
+                $("#logout").click(function() {
+
+                    $.ajax({
+                        url: "/action/logout",
+                        type: "post",
+
+                        data: {
+
+                        },
+
+                    });
+
+                    if (confirm("Are you sure you want to exit the system?"))           
+                        window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
+                    return false;  
+
+                });
+            })
+        </script>
+        <!-- <script language="javascript" type="text/javascript">
             $(function() {
                 //设置cookie
                 function setCookie(cname, cvalue, exdays) {
@@ -81,6 +102,7 @@
                     }
                     Session.Clear();
                     Session.Abandon();
+
                     sessionStorage.clear();
                     window.location.reload();
                     $.post("/action/logout", function(msg) {
@@ -103,79 +125,79 @@
 
 
 
-            // setCookie("remember", "true", {
-            //     expires: 7
-            // });
+            setCookie("remember", "true", {
+                expires: 7
+            });
 
-            // setCookie("username", "userValue", {
-            //     expires: 7
-            // });
-            // setCookie("password", "password", {
-            //     expires: 7
-            // });
-            // console.log(getCookie("remember"));
-            // console.log(getCookie("username"));
-            // console.log(getCookie("password"));
-            // clearCookie("remember");
-            // clearCookie("username");
-            // clearCookie("password");
-            // console.log(getCookie("remember"));
-            // console.log(getCookie("username"));
-            // console.log(getCookie("password"));
-
-
-            // var logout = document.getElementById("logout");
-            // $("#logout").click(function() {
-            //     sessionStorage.clear();
-            //     window.location.reload();
-            //     data: {
-
-            //     };
-
-            //     $.ajax({
-            //         url: "/action/logout",
-            //         type: "post",
-
-            //     });
-
-            //     if (confirm("Are you sure you want to exit the system?"))           
-            //         window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
-            //     return false;  
-
-            // });
+            setCookie("username", "userValue", {
+                expires: 7
+            });
+            setCookie("password", "password", {
+                expires: 7
+            });
+            console.log(getCookie("remember"));
+            console.log(getCookie("username"));
+            console.log(getCookie("password"));
+            clearCookie("remember");
+            clearCookie("username");
+            clearCookie("password");
+            console.log(getCookie("remember"));
+            console.log(getCookie("username"));
+            console.log(getCookie("password"));
 
 
-            // $("#logout").onclick = function() {
-            //     $.ajax({
-            //         url: "/action/logout",
-            //         type: "post",
-            //         success: function(data) {
-            //             var info = JSON.parse(data);
-            //             console.log(info.message);
-            //             if (!info.code) {
-            //                 updataUser();
-            //             }
-            //         }
+            var logout = document.getElementById("logout");
+            $("#logout").click(function() {
+                sessionStorage.clear();
+                window.location.reload();
+                data: {
 
-            //     });
-            //     return false;
-            // ajax('post', 'guestbook/index.php',
-            //     'm=index&a=logout',
-            //     function(data) {
-            //         var info = JSON.parse(data);
-            //         alert(info.message);
-            //         if (!info.code) {
-            //             updataUser();
-            //         }
+                };
 
-            //     });
-            // return false;
+                $.ajax({
+                    url: "/action/logout",
+                    type: "post",
 
-            // }
+                });
+
+                if (confirm("Are you sure you want to exit the system?"))           
+                    window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
+                return false;  
+
+            });
 
 
-            // })
-        </script>
+            $("#logout").onclick = function() {
+                $.ajax({
+                    url: "/action/logout",
+                    type: "post",
+                    success: function(data) {
+                        var info = JSON.parse(data);
+                        console.log(info.message);
+                        if (!info.code) {
+                            updataUser();
+                        }
+                    }
+
+                });
+                return false;
+            ajax('post', 'guestbook/index.php',
+                'm=index&a=logout',
+                function(data) {
+                    var info = JSON.parse(data);
+                    alert(info.message);
+                    if (!info.code) {
+                        updataUser();
+                    }
+
+                });
+            return false;
+
+            }
+
+
+            })
+        </script> -->
     </div>
     <!-- 顶部结束 -->
     <!-- 中部开始 -->
@@ -192,7 +214,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:; " class="title">
+                    <a _href="setupWizard.html" class="title">
                         <i class="iconfont ">&#xe656;</i>
                         <cite>SET-UP WIZARD </cite>
                         <i class="iconfont nav_right ">&#xe603;</i>

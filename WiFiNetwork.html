@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        
+        td {
+            padding: 10px;
+        }
+        
+        .mc {
+            margin: 20px 0 0 10px;
+            position: relative
+        }
+        
+        .mCont {
+            position: absolute;
+            top: 180px;
+            left: 90px;
+            width: 350px;
+            height: 380px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #fff
+        }
+        
+        .btFs {
+            font-size: 16px;
+            font-weight: bold
+        }
+        
+        .green {
+            color: #00a516
+        }
+        
+        .c9 {
+            color: #999
+        }
+        
+        .fsFw {
+            font-size: 14px;
+            font-weight: bold
+        }
+        
+        .addN {
+            color: #861f41;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .ml20 {
+            margin-left: 20px;
+        }
+        
+        .layui-form-item {
+            margin-bottom: 0px;
+            clear: both;
+            *zoom: 1;
+        }
+        
+        .layui-form-switch em {
+            top: -1px;
+        }
+        
+        .mt20 {
+            margin-top: 20px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="mc">
+            <h2>Wi-Fi network</h2>
+            <p>WiFi network SmartHub will use when in range.SmartHub will distribute WiFi to devices connected to its access point</p>
+            <table class="table-responsive">
+                <tr>
+                    <td>Wi-Fi:</td>
+                    <td>
+                        <div class="layui-form layui-form-pane layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Network:</td>
+                    <td>Choose the Wi-Fi network for your SmartHub to connect to</td>
+                </tr>
+            </table>
+            <div class="mCont">
+                <table style="width:100%" class=" table-responsive">
+                    <tr>
+                        <td width="60%">
+                            <div class="btFs ml20 mt20" id="wn_name_01">SKY546H</div>
+                            <div class="green ml20" id="wn_connected">Connected(2.4GHz)</div>
+                        </td>
+                        <td width="25%"><img src="images/icon-wifi01.png"></td>
+                        <td width="15%"><img src="images/icon-info.png"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="fsFw">
+                            <div class="ml20 ">Available networks</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="ml20" id="wn_name_02">Mynetwork1</div>
+                            <div class="c9 ml20" id="wn_openStatus_01">Encrypted</div>
+                        </td>
+                        <td><img src="images/icon-wifi01.png"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="ml20" id="wn_name_03">Thenetwork</div>
+                            <div class="c9 ml20" id="wn_openStatus_02">Saved</div>
+                        </td>
+                        <td><img src="images/icon-wifi01.png"></td>
+                        <td><img src="images/icon-info.png"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="ml20" id="wn_name_02">Dave's network</div>
+                            <div class="c9 ml20 ">Saved</div>
+                        </td>
+                        <td><img src="images/icon-wifi01.png"></td>
+                        <td><img src="images/icon-info.png"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="ml20">Lanetwork</div>
+                        </td>
+                        <td><img src="images/icon-wifi01.png"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><img src="images/icon-add.png" style="margin-top:-6px !important;margin-left:18px">
+                            <span class="addN">Add network</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="layui/layui.js" charset="utf-8"></script>
+
+    <script>
+        layui.use(['form'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate;
+
+
+        });
+    </script>
+
+    <script>
+        $(function() {
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "GetWlanSettings",
+                "params": {
+
+                },
+                "id": "9.1"
+            };
+
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    console.log(res.result.wifi_config);
+                },
+                error: function(jqXHR) {
+                    alert("发生错误：" + jqXHR.status);
+
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

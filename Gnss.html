@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <title>Document</title>
+    <style>
+        .mc {
+            margin: 20px 0 0 10px;
+            position: relative
+        }
+        
+        .layui-form-switch em {
+            top: -1px;
+        }
+        
+        .layui-btn {
+            display: inline-block;
+            height: 38px;
+            line-height: 38px;
+            padding: 0 18px;
+            background-color: #861f41 !important;
+            color: #fff !important;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="mc">
+            <h2>GNSS</h2>
+            <table class="table table-hover table-responsive">
+                <tr>
+                    <td class="col-sm-3">GNSS Fix status: </td>
+                    <td class="col-sm-9">Fix</td>
+                </tr>
+                <tr>
+                    <td>Internal GNSS:
+                        <div>Disable if you do not want to use the router's internal GNSS receiver as a source for positioning data</div>
+                    </td>
+                    <td>
+                        <div class="layui-form layui-form-pane layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </div>
+                        </div>
+                    </td>
+                    <!-- <td><img src="images/img-on.png"></td> -->
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group form-line">
+                            <button type="submit" class="btn layui-btn">Restart GNSS</button>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>GNSS Constellations:
+
+                    </td>
+                    <td>
+                        GLONASS
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select which other satellite constellations are used to determine position,in addition to the GPS system </td>
+                    <td>
+                        BEIDOU
+                    </td>
+                </tr>
+                <tr>
+                    <td>Differential positioning:</td>
+                    <td>
+                        <div class="layui-form layui-form-pane layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Activating differential positioning provides more accurate positioning in regions covered by Satellite Based Augmentation Systems(SBAS)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Differential positioning systems:</td>
+                    <td>
+                        <div id="test2" class="demo-transfer"></div>
+
+
+                        <div class="layui-transfer-box" data-index="0" style="width: 300px; height: 150px;">
+
+                            <ul class="layui-transfer-data layui-form" style="height: 130px;overflow-y:auto">
+                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Alcomsat(Algeria)" value="1">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>Alcomsat(Algeria)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="AUS-NZ(Australia New Zealand)" value="2">
+                                    <div class="layui-unselect layui-form-checkbox " lay-skin="primary"><span>AUS-NZ(Australia New Zealand)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="BDSBAS(China)" value="3">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>BDSBAS(China)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="EGNOS(Europe)" value="4">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>EGNOS(Europe)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="GAGAN(Indian)" value="5">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>GAGAN(Indian)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="KAAS(Korea)" value="6">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>KAAS(Korea)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </td>
+                </tr>
+
+            </table>
+            <h4>Satellites in use:</h4>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <th>Satellite ID/PRN</th>
+                    <th>Constellation</th>
+                    <th>Used in fix flag</th>
+                    <th>HDOP</th>
+                    <th>Azimut</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Satellite ID/PRN</td>
+                        <td>Constellation</td>
+                        <td>yes</td>
+                        <td>HDOP</td>
+                        <td>Azimut</td>
+                    </tr>
+                    <tr>
+                        <td>Satellite ID/PRN</td>
+                        <td>Constellation</td>
+                        <td>yes</td>
+                        <td>HDOP</td>
+                        <td>Azimut</td>
+                    </tr>
+                    <tr>
+                        <td>Satellite ID/PRN</td>
+                        <td>Constellation</td>
+                        <td>yes</td>
+                        <td>HDOP</td>
+                        <td>Azimut</td>
+                    </tr>
+                    <tr>
+                        <td>Satellite ID/PRN</td>
+                        <td>Constellation</td>
+                        <td>yes</td>
+                        <td>HDOP</td>
+                        <td>Azimut</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="layui/layui.js" charset="utf-8"></script>
+
+    <script>
+        layui.use(['form'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate;
+
+        });
+    </script>
+</body>
+
+</html>
