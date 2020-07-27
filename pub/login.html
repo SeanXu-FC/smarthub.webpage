@@ -23,31 +23,34 @@
             <div class="card border-0 shadow card--login is-show" id="login">
                 <div class="card-body">
                     <h2 class="card-title">Welcome to login Raymarine !</h2>
-                    <form name="details" method="POST" action="/action/login" id="myForm" class="form-horizontal">
+                    <form name="details" method="POST" action="/action/login" id="loginInfo" class="form-horizontal">
                         <div class="form-group form-inline">
                             <label class="col-sm-2 control-label">Username: </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="user" id="userId" name="user" placeholder="user" style="margin-left:15px" />
-                                <div id="info-user"></div>
+                            <div class="col-sm-10" style="position:relative">
+                                <input class="form-control" type="user" id="user" name="username" placeholder="user" style="margin-left:15px" onfocus="showTips('user','User name must be filled in！')" onblur="checkUser('user','The user name cannot be empty')" />
+                                <div id="userspan"></div>
                             </div>
 
                         </div>
                         <div class="form-group form-inline">
 
                             <label class="col-sm-2 control-label">Password: </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="password" id="pwd" name="password" placeholder="password" style="width:200px;margin-left:15px;font-size: 10px;" />
-                                <div id="info-pass"></div>
+                            <div class="col-sm-10" style="position:relative">
+                                <input class="form-control" type="password" id="password" name="password" placeholder="password" style="width:200px;margin-left:15px;font-size: 10px;" onfocus="showTips('password','The password must be filled in！')" onblur="checkUser('password','Password cannot be empty')"
+                                />
+                                <div id="passwordspan"></div>
                             </div>
                         </div>
 
-                        <input class="btn btn-md btn-default " type="submit" id="login_btn" name="submit" value="login">
+                        <input class="btn btn-md btn-default " type="button" id="login_btn" name="submit" value="login">
                     </form>
                 </div>
             </div>
         </div>
 
     </div>
+    <script>
+    </script>
     <div class="text-center" style="position: fixed;bottom:10px;color:#ccc;">Copyright ©2020 Raymarine All Rights Reserved</div>
     <script src="js/jquery.min.js"></script>
     <script src="js/login.js"></script>

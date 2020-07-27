@@ -1,27 +1,29 @@
 $(function() {
-    $('saveBtn').one('click', function() {
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "change_password",
-                "params": {
-                    "oldPwd": $("#pwd").val(),
-                    "newPwd": $("#newPwd").val()
-                },
-                "id": "9.1"
-            };
+    $('#saveBtn').one('click', function() {
+            // var data = {
+            //     "jsonrpc": "2.0",
+            //     "method": "change_password",
+            //     "params": {
+            //         "oldPwd": $("#pwd").val(),
+            //         "newPwd": $("#newPwd").val()
+            //     },
+            //     "id": "9.1"
+            // };
 
-            data = JSON.stringify(data);
+            // data = JSON.stringify(data);
             $.ajax({
                 type: "post",
                 url: "/action/password",
-                data: data,
+                // data: data,
                 dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(data) {
-                    if (data.status == "success") {
-                        console.log(data.msg);
+                data: $("#form").serialize();
+                //contentType: "application/json;charset=utf-8",
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                success: function(res) {
+                    if (res.result.flag == "success") {
+                        console.log(res);
                     } else {
-                        console.log("An error occurred：" + data.msg);
+                        console.log("An error occurred：" + res.result.flag);
                     }
                 },
                 error: function(jqXHR) {

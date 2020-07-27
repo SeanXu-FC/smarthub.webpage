@@ -1,18 +1,39 @@
+document.onkeydown = function(e) {
+    var theEvent = window.event || e;
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+    if (code == 13) {
+        login();
+    }
+}
+
 $("#login_btn").click(function() {
+    login();
+});
+
+function showTips(id, info) {
+    document.getElementById(id + "span").innerHTML = "<span style=\"color:#f00;\">" + info + "</span>"
+}
+
+function checkUser(id, info) {
+    //1.Get the user name data entered by the user
+    var uValue = document.getElementById(id).value;
+    //2.To test the efficacy
+    if (uValue == "") {
+        document.getElementById(id + "span").innerHTML = "<span style=\"color:#f00\">" + info + "</span>"
+    } else {
+        document.getElementById(id + "span").innerHTML = ""
+    }
+}
+
+function login() {
     var $userId = $("#userId");
     var $pwd = $("#pwd");
     if ($userId.val() == "") {
-        $userId.next().text("Account number is empty").css({
-            "font-weight": "bold",
-            "color": "red"
-        });
-        event.preventDefault();
+        showTips(id, info);
+        checkUser(id, info);
     } else if ($pwd.val() == "") {
-        $pwd.next().text("The password is empty").css({
-            "font-weight": "bold",
-            "color": "red"
-        });
-        event.preventDefault();
+        showTips(id, info);
+        checkUser(id, info);
     } else {
 
         $.ajax({
@@ -21,10 +42,6 @@ $("#login_btn").click(function() {
             data: $('#loginInfo').serialize(),
             dataType: "json",
             contentType: "application/x-www-form-urlencoded;charset=utf-8",
-            //         data: {
-            //             username: $userId.val(),
-            //             password: $pwd.val()
-            //         },
             success: function(res) {
                 if (res.result.login == "0") {
                     $userId.next().text("Wrong user name or password").css({
@@ -36,11 +53,10 @@ $("#login_btn").click(function() {
                         "color": "red"
                     });
                 } else {
-                    //	window.location.href = "/index.html";
                     top.location.href = "/index.html";
                 }
 
             }
         });
     }
-});
+}
