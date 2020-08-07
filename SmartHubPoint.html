@@ -9,6 +9,7 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="js/SmartHubPoint.js"></script>
     <title>Document</title>
     <style>
         * {
@@ -102,6 +103,10 @@
             border-radius: 2px;
             cursor: pointer;
         }
+        
+        #eye {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -109,262 +114,44 @@
     <div class="container-fluid">
         <div class="mc">
             <h2 style="margin-top:10px;"> SmartHub access point </h2>
-            <p class="red" style="margin-top:10px;">Your SmartHub access point allows other devices to connect to the SmartHub's cellular or WiFi data</p>
-            <p>Allow devices to connect to SmartHub access point:</p>
+            <p class="red" style="margin-top:20px;">Your SmartHub access point allows other devices to connect to the SmartHub's cellular or WiFi data</p>
+            <p style="margin-top:30px;">Allow devices to connect to SmartHub access point:</p>
 
             <div class="row">
                 <div id="outer" style="margin-top:20px;">
                     <ul id="tab">
-                        <li class="current">wifi1: Client "Ray_4029_5G_AP"<span class="layui-form layui-form-pane layui-form-item">
+                        <!-- <li class="current"><span id="wifi_00"></span><span class="layui-form layui-form-pane layui-form-item">
                             <i>
                                 <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </i>
                         </span></li>
-                        <li>wifi2: Master "Ray_9984_2G"<span class="layui-form layui-form-pane layui-form-item" style="display: inline;">
+                        <li><span id="wifi_01"></span><span class="layui-form layui-form-pane layui-form-item" style="display: inline;">
                             <i>
                                 <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </i>
                         </span></li>
-                        <li>wifi2: Master "Ray_2G_Guest"<span class="layui-form layui-form-pane layui-form-item">
+                        <li><span id="wifi_02"></span><span class="layui-form layui-form-pane layui-form-item">
                             <i>
                                 <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </i>
-                        </span></li>
-                        <li>wifi0: Master "Ray_4029_2G_AP"<span class="layui-form layui-form-pane layui-form-item">
+                        </span></li> -->
+                        <!-- <li><span id="wifi_03"></span><span class="layui-form layui-form-pane layui-form-item">
                             <i>
                                 <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </i>
-                        </span></li>
+                        </span></li> -->
                     </ul>
                     <div id="content">
-                        <ul style="display:block;">
-                            <table class="table table-hover table-responsive">
-
-                                <tr>
-                                    <th colspan="2">Access point connection settings---1</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="2">Use these details when connecting a device to the SmartHub's access point</th>
-                                </tr>
-
-                                <tr>
-                                    <td class="col-sm-3">Access point name:</td>
-                                    <td class="col-sm-9"><input type="text" class="form-control" value="My access point" style="width:40%"></td>
-                                </tr>
-                                <tr>
-                                    <td>Password:</td>
-                                    <td><input type="password" class="form-control" value="******" style="width:40%"><span>SHOW</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Preferred Wi-Fi channel:</td>
-                                    <td>
-                                        <select class="form-control" style="width:40%">
-                                        <option>14</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Encryption type:</td>
-                                    <td>
-                                        <select class="form-control" style="width:40%">
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                    </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <div class="form-group form-line">
-
-                                            <button type="submit" class="btn layui-btn">Cancel</button>
-
-
-                                            <button type="submit" class="btn layui-btn">Save</button>
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </ul>
-                        <ul>
-                            <table class="table table-hover table-responsive">
-
-                                <tr>
-                                    <th colspan="2">Access point connection settings---2</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="2">Use these details when connecting a device to the SmartHub's access point</th>
-                                </tr>
-
-                                <tr>
-                                    <td class="col-sm-3">Access point name:</td>
-                                    <td class="col-sm-9"><input type="text" class="form-control" value="My access point" style="width:40%"></td>
-                                </tr>
-                                <tr>
-                                    <td>Password:</td>
-                                    <td><input type="password" class="form-control" value="******" style="width:40%"><span>SHOW</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Preferred Wi-Fi channel:</td>
-                                    <td>
-                                        <select class="form-control" style="width:40%">
-                                        <option>14</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Encryption type:</td>
-                                    <td>
-                                        <select class="form-control" style="width:40%">
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                    </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <div class="form-group form-line">
-
-                                            <button type="submit" class="btn layui-btn">Cancel</button>
-
-
-                                            <button type="submit" class="btn layui-btn">Save</button>
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </ul>
-                        <ul>
-                            <table class="table table-hover table-responsive">
-
-                                <tr>
-                                    <th colspan="2">Access point connection settings-----3</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="2">Use these details when connecting a device to the SmartHub's access point</th>
-                                </tr>
-
-                                <tr>
-                                    <td class="col-sm-3">Access point name:</td>
-                                    <td class="col-sm-9"><input type="text" class="form-control" value="My access point" style="width:40%"></td>
-                                </tr>
-                                <tr>
-                                    <td>Password:</td>
-                                    <td><input type="password" class="form-control" value="******" style="width:40%"><span>SHOW</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Preferred Wi-Fi channel:</td>
-                                    <td>
-                                        <select class="form-control" style="width:40%">
-                                        <option>14</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Encryption type:</td>
-                                    <td>
-                                        <select class="form-control" style="width:40%">
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                    </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <div class="form-group form-line">
-
-                                            <button type="submit" class="btn layui-btn">Cancel</button>
-
-
-                                            <button type="submit" class="btn layui-btn">Save</button>
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </ul>
-                        <ul>
-                            <table class="table table-hover table-responsive">
-
-                                <tr>
-                                    <th colspan="2">Access point connection settings----4</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="2">Use these details when connecting a device to the SmartHub's access point</th>
-                                </tr>
-
-                                <tr>
-                                    <td class="col-sm-3">Access point name:</td>
-                                    <td class="col-sm-9"><input type="text" class="form-control" value="My access point" style="width:40%"></td>
-                                </tr>
-                                <tr>
-                                    <td>Password:</td>
-                                    <td><input type="password" class="form-control" value="******" style="width:40%"><span>SHOW</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Preferred Wi-Fi channel:</td>
-                                    <td>
-                                        <select class="form-control" style="width:40%">
-                                        <option>14</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Encryption type:</td>
-                                    <td>
-                                        <select class="form-control" style="width:40%">
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                        <option>WPA</option>
-                                    </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <div class="form-group form-line">
-
-                                            <button type="submit" class="btn layui-btn">Cancel</button>
-
-
-                                            <button type="submit" class="btn layui-btn">Save</button>
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </ul>
+                        <!-- <div class="cbi-value-field" style="display: none;">
+                            <select class="cbi-input-select" size="1">
+                            <option value="auto">auto</option>
+                            <option value="ccmp">Force CCMP (AES)</option>
+                            <option value="gcmp" selected="selected">Force GCMP</option>
+                            <option value="tkip">Force TKIP</option>
+                            <option value="tkip+ccmp">Force TKIP and CCMP (AES)</option>
+                        </select>
+                            <input type="password" class="cbi-input-password" name="cbid.wireless.ath2._wpa_key" value="1234567890" cbi_datatype="wpakey" cbi_optional="true">
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -403,6 +190,135 @@
 
         });
     </script>
+    <script>
+        window.onload = function() {
+
+            save = function() {
+
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "SetWlanSettings",
+                    "params": {
+                        "wifi_config": [{
+                            "phy_id": 2,
+                            "phy_name": "wifi2",
+                            "phy_enable": 0,
+                            "hwmode": 3,
+                            "htmode": $(".mode option:selected").val(),
+                            "tx_power": 23,
+                            "Channel": $(".channel option:selected").val(),
+                            "country_code": $(".countryCode option:selected").val(),
+                            "vap_config": [{
+                                "vap_id": 0,
+                                "vap_mode": "ap",
+                                "vap_enable": 0,
+                                "Ssid": $(".ssid").val(),
+                                "SsidHidden": 0,
+                                "SecurityMode": 4,
+                                "WepType": 0,
+                                "WpaType": 2,
+                                "WepKey": "",
+                                "WpaKey": $(".pwd").val(),
+                                "ApIsolation": 0,
+                                "max_numsta": 15
+                            }]
+                        }]
+                    },
+                    "id": "9.1",
+                    // ssid: $(".ssid").val(),
+                    // channel: $(".channel option:selected").val(),
+                    // mode: $(".mode option:selected").val(),
+                    // EncryptionType: $(".EncryptionType option:selected").val(),
+                    // countryCode: $(".countryCode option:selected").val()
+
+                };
+
+                data = JSON.stringify(data);
+                $.ajax({
+                    type: "post",
+                    url: "/action/action",
+                    data: data,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function(res) {
+                        console.log(data);
+                    },
+                    error: function(jqXHR) {
+                        alert("An error occurred：" + jqXHR.status);
+                    }
+
+                });
+            }
+
+
+
+            var isShow = true;
+
+            change = function() {
+                var v = $(".pwd").get(0);
+                if (isShow) {
+                    v.type = "text";
+                    isShow = false;
+                } else {
+                    v.type = "password";
+                    isShow = true;
+                }
+            };
+            change();
+
+
+        }
+    </script>
+    <!-- <script>
+        window.onload = function() {
+            save = function() {
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "SetWlanSettings",
+                    "params": {},
+                    "id": "9.1",
+                    ssid: $(".ssid").val(),
+                    channel: $(".channel option:selected").val(),
+                    mode: $(".mode option:selected").val(),
+                    EncryptionType: $(".EncryptionType option:selected").val(),
+                    countryCode: $(".countryCode option:selected").val()
+
+                };
+
+                data = JSON.stringify(data);
+                $.ajax({
+                    type: "post",
+                    url: "/action/action",
+                    data: data,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function(res) {
+                        console.log(data);
+                    },
+                    error: function(jqXHR) {
+                        alert("An error occurred：" + jqXHR.status);
+                    }
+
+                });
+            }
+
+
+
+            var isShow = true;
+
+            change = function() {
+                var v = $(".pwd").get(0);
+                if (isShow) {
+                    v.type = "text";
+                    isShow = false;
+                } else {
+                    v.type = "password";
+                    isShow = true;
+                }
+            };
+            change();
+        }
+    </script> -->
 </body>
 
 </html>

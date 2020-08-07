@@ -8,6 +8,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="js/WiFiNetwork.js"></script>
     <title>Document</title>
     <style>
         table {
@@ -27,11 +28,16 @@
             position: absolute;
             top: 180px;
             left: 90px;
-            width: 350px;
-            height: 380px;
+            /* width: 350px; */
+            width: 80%;
+            /* max-height: 480px; */
+            overflow: hidden;
+            zoom: 1;
             border: 1px solid #333;
             border-radius: 5px;
-            background-color: #fff
+            background-color: #fff;
+            padding-bottom: 20px;
+            margin-bottom: 50px;
         }
         
         .btFs {
@@ -75,6 +81,10 @@
         .mt20 {
             margin-top: 20px !important;
         }
+        
+        .mt10 {
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -89,7 +99,7 @@
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
                             <div class="layui-input-block">
-                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" switch_goods_id="{$vo['goods_id']}" lay-text="ON|OFF" id="onoff">
                             </div>
                         </div>
                     </td>
@@ -99,104 +109,18 @@
                     <td>Choose the Wi-Fi network for your SmartHub to connect to</td>
                 </tr>
             </table>
+
+
             <div class="mCont">
-                <table style="width:100%" class=" table-responsive">
-                    <tr>
-                        <td width="60%">
-                            <div class="btFs ml20 mt20" id="wn_name_01">SKY546H</div>
-                            <div class="green ml20" id="wn_connected">Connected(2.4GHz)</div>
-                        </td>
-                        <td width="25%"><img src="images/icon-wifi01.png"></td>
-                        <td width="15%"><img src="images/icon-info.png"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="fsFw">
-                            <div class="ml20 ">Available networks</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ml20" id="wn_name_02">Mynetwork1</div>
-                            <div class="c9 ml20" id="wn_openStatus_01">Encrypted</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ml20" id="wn_name_03">Thenetwork</div>
-                            <div class="c9 ml20" id="wn_openStatus_02">Saved</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td><img src="images/icon-info.png"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ml20" id="wn_name_02">Dave's network</div>
-                            <div class="c9 ml20 ">Saved</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td><img src="images/icon-info.png"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ml20">Lanetwork</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><img src="images/icon-add.png" style="margin-top:-6px !important;margin-left:18px">
-                            <span class="addN">Add network</span>
-                        </td>
-                    </tr>
-                </table>
             </div>
+
         </div>
 
     </div>
 
     <script src="layui/layui.js" charset="utf-8"></script>
 
-    <script>
-        layui.use(['form'], function() {
-            var form = layui.form,
-                layer = layui.layer,
-                layedit = layui.layedit,
-                laydate = layui.laydate;
 
-
-        });
-    </script>
-
-    <script>
-        $(function() {
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "GetWlanSettings",
-                "params": {
-
-                },
-                "id": "9.1"
-            };
-
-            data = JSON.stringify(data);
-            $.ajax({
-                type: "post",
-                url: "/action/action",
-                data: data,
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(res) {
-                    console.log(res.result.wifi_config);
-                },
-                error: function(jqXHR) {
-                    alert("发生错误：" + jqXHR.status);
-
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>
