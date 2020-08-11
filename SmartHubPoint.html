@@ -120,38 +120,10 @@
             <div class="row">
                 <div id="outer" style="margin-top:20px;">
                     <ul id="tab">
-                        <!-- <li class="current"><span id="wifi_00"></span><span class="layui-form layui-form-pane layui-form-item">
-                            <i>
-                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
-                            </i>
-                        </span></li>
-                        <li><span id="wifi_01"></span><span class="layui-form layui-form-pane layui-form-item" style="display: inline;">
-                            <i>
-                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
-                            </i>
-                        </span></li>
-                        <li><span id="wifi_02"></span><span class="layui-form layui-form-pane layui-form-item">
-                            <i>
-                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
-                            </i>
-                        </span></li> -->
-                        <!-- <li><span id="wifi_03"></span><span class="layui-form layui-form-pane layui-form-item">
-                            <i>
-                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
-                            </i>
-                        </span></li> -->
+
                     </ul>
                     <div id="content">
-                        <!-- <div class="cbi-value-field" style="display: none;">
-                            <select class="cbi-input-select" size="1">
-                            <option value="auto">auto</option>
-                            <option value="ccmp">Force CCMP (AES)</option>
-                            <option value="gcmp" selected="selected">Force GCMP</option>
-                            <option value="tkip">Force TKIP</option>
-                            <option value="tkip+ccmp">Force TKIP and CCMP (AES)</option>
-                        </select>
-                            <input type="password" class="cbi-input-password" name="cbid.wireless.ath2._wpa_key" value="1234567890" cbi_datatype="wpakey" cbi_optional="true">
-                        </div> -->
+
                     </div>
                 </div>
             </div>
@@ -225,11 +197,6 @@
                         }]
                     },
                     "id": "9.1",
-                    // ssid: $(".ssid").val(),
-                    // channel: $(".channel option:selected").val(),
-                    // mode: $(".mode option:selected").val(),
-                    // EncryptionType: $(".EncryptionType option:selected").val(),
-                    // countryCode: $(".countryCode option:selected").val()
 
                 };
 
@@ -265,60 +232,10 @@
                 }
             };
             change();
-
 
         }
     </script>
-    <!-- <script>
-        window.onload = function() {
-            save = function() {
-                var data = {
-                    "jsonrpc": "2.0",
-                    "method": "SetWlanSettings",
-                    "params": {},
-                    "id": "9.1",
-                    ssid: $(".ssid").val(),
-                    channel: $(".channel option:selected").val(),
-                    mode: $(".mode option:selected").val(),
-                    EncryptionType: $(".EncryptionType option:selected").val(),
-                    countryCode: $(".countryCode option:selected").val()
 
-                };
-
-                data = JSON.stringify(data);
-                $.ajax({
-                    type: "post",
-                    url: "/action/action",
-                    data: data,
-                    dataType: "json",
-                    contentType: "application/json;charset=utf-8",
-                    success: function(res) {
-                        console.log(data);
-                    },
-                    error: function(jqXHR) {
-                        alert("An error occurred：" + jqXHR.status);
-                    }
-
-                });
-            }
-
-
-
-            var isShow = true;
-
-            change = function() {
-                var v = $(".pwd").get(0);
-                if (isShow) {
-                    v.type = "text";
-                    isShow = false;
-                } else {
-                    v.type = "password";
-                    isShow = true;
-                }
-            };
-            change();
-        }
-    </script> -->
 </body>
 
 </html>
