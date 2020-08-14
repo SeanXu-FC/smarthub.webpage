@@ -232,8 +232,8 @@ body {
 
 .card--login .btn:hover {
     background-color: #fff;
-    color: #03387f !important;
-    font-weight: bold;
+    color: #fff !important;
+    /* font-weight: bold; */
     border: 2px solid rgba(167, 191, 232, .25);
 }
 
@@ -272,6 +272,7 @@ body.is-login {
 
 .card {
     transition: all .3s .1s ease-out;
+    border-radius: 8px;
 }
 
 .card:not(.is-show) {

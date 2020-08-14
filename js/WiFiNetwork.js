@@ -95,7 +95,7 @@ $(function() {
             data = JSON.stringify(data);
             $.ajax({
                 type: "post",
-                url: "/action/action",
+                url: "/action/action" + new Date().getTime(),
                 data: data,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",

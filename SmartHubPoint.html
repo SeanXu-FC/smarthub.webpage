@@ -217,8 +217,6 @@
                 });
             }
 
-
-
             var isShow = true;
 
             change = function() {
@@ -235,7 +233,29 @@
 
         }
     </script>
+    <!-- <script>
+        $(function() {
+            var oldVal = "";
+            $('#content select').each(function() {
+                if ($(this).find("option:selected")) {
+                    var _thisVal = $(this).find('option:selected').val();
+                    oldVal = $(this).attr("old", _thisVal);
+                    $('.channel').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
+                }
+            })
 
+            $("#content select").change(function() {
+                oldVal = $(this).attr("old");
+                var _thisVal = $(this).find('option:selected').val();
+                var id = $(this).attr("id");
+                console.log(id)
+                $(this).find("option[value=" + _thisVal + "]").not("option[value=0]").hide();
+                $(this).find("option[value=" + oldVal + "]").show();
+                $(this).attr("old", _thisVal)
+            })
+
+        });
+    </script> -->
 </body>
 
 </html>

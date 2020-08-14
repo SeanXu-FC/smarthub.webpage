@@ -43,16 +43,22 @@ $(function() {
             $("#tab").html(str0);
             $("#content").html(str);
 
+            $("#content select").change(function() {
+                oldVal = $(this).attr("old");
+                var _thisVal = $(this).find('option:selected').val();
+                var id = $(this).attr("id");
+                //$(this).find("option[value=" + _thisVal + "]").not("option[value=0]").hide();
+                $(this).find("option[value=" + _thisVal + "]").hide();
+                $(this).find("option[value=" + oldVal + "]").show();
+                $(this).attr("old", _thisVal)
+            })
 
             for (var i = 0; i < json.length; i++) {
-
-
-
                 //channel
                 var optionChannel = document.createElement("option");
                 var channelselected = $(optionChannel).val(json[index].channel).attr("selected", "selected");
                 $(optionChannel).text(json[index].channel);
-                var channelArr = ['auto', '1 (2.412 GHz)', '2 (2.417 GHz)', '3 (2.422 GHz)', '4 (2.427 GHz)', '5 (2.432 GHz)', '6 (2.437 GHz)', '7 (2.442 GHz)', '8 (2.447 GHz)', '9 (2.452 GHz)', '10 (2.457 GHz)', '11 (2.462 GHz)']
+                var channelArr = ['0 auto', '1 (2.412 GHz)', '2 (2.417 GHz)', '3 (2.422 GHz)', '4 (2.427 GHz)', '5 (2.432 GHz)', '6 (2.437 GHz)', '7 (2.442 GHz)', '8 (2.447 GHz)', '9 (2.452 GHz)', '10 (2.457 GHz)', '11 (2.462 GHz)']
                 for (var i = 0; i < channelArr.length; i++) {
                     var channel = "<option value=" + i + ">" + channelArr[i] + "</option>";
                     $channel = $(channel).get(0).value;
@@ -61,18 +67,56 @@ $(function() {
                 }
                 var channelSelected = "<option value=" + i + " selected='selected' >" + json[index].channel + " </option>"
                 $('.channel').prepend(channelSelected);
-                if (json[index].channel == i && channelSelected.selected == true) {
-                    $('.channel option:selected').text("auto");
-                } else {
-                    $('.channel option:selected').text(channelArr[i]);
+                if (json[index].channel == 11) {
+                    $('.channel option:selected').text(channelArr[11]);
                 }
-                $(".channel option:first").remove()
+                if (json[index].channel == 10) {
+                    $('.channel option:selected').text(channelArr[10]);
+                }
+                if (json[index].channel == 9) {
+                    $('.channel option:selected').text(channelArr[9]);
+                }
+                if (json[index].channel == 8) {
+                    $('.channel option:selected').text(channelArr[8]);
+                }
+                if (json[index].channel == 7) {
+                    $('.channel option:selected').text(channelArr[7]);
+                }
+                if (json[index].channel == 6) {
+                    $('.channel option:selected').text(channelArr[6]);
+                }
+                if (json[index].channel == 5) {
+                    $('.channel option:selected').text(channelArr[5]);
+                }
+                if (json[index].channel == 4) {
+                    $('.channel option:selected').text(channelArr[4]);
+                }
+                if (json[index].channel == 3) {
+                    $('.channel option:selected').text(channelArr[3]);
+                }
+                if (json[index].channel == 2) {
+                    $('.channel option:selected').text(channelArr[2]);
+                }
+                if (json[index].channel == 1) {
+                    $('.channel option:selected').text(channelArr[1]);
+                }
+                if (json[index].channel == 0) {
+                    $('.channel option:selected').text(channelArr[0]);
+                    $(".channel option:first").remove();
+                }
+
+                // if (json[index].channel == i && channelSelected.selected == true) {
+                //     $('.channel option').text(channelArr[i]);
+                // } else {
+                //     $('.channel option:selected').text("auto");
+                // }
+
 
                 //hwmode
                 var optionHWMode = document.createElement("option");
                 $(optionHWMode).val(json[index].hwmode).attr("selected", "selected");
                 $(optionHWMode).text(json[index].hwmode);
-                var hwmodeArr = ['auto', '1 (802.11b)', '2 (802.11g)', '3 (802.11g+n)'];
+                var hwmodeArr = ['0 auto', '1 (802.11b)', '2 (802.11g)', '3 (802.11g+n)'];
                 for (var i = 0; i < hwmodeArr.length; i++) {
                     var hwmode = "<option value=" + i + ">" + hwmodeArr[i] + "</option>";
                     $hwmode = $(hwmode).get(0).value;
@@ -81,22 +125,35 @@ $(function() {
                 var hwmodeSelected = "<option value=" + i + " selected='selected'>" + json[index].hwmode + " </option>"
                 $('.hwmode').prepend(hwmodeSelected);
 
-                if (json[index].hwmode == 3) {
-                    $('.hwmode option:selected').text('3 (802.11g+n)');
-                    $(".hwmode option[value='3']").remove();
+                if (json[index].hwmode == i && hwmodeSelected.selected == true) {
+                    $('.hwmode option').text(hwmodeArr[i]);
+                } else if (json[index].hwmode == i && hwmodeSelected.selected == true) {
+                    $('.hwmode option:selected').text("0 auto");
+                } else if (json[index].hwmode == i && hwmodeSelected.selected == true) {
+                    $('.hwmode option:selected').text("1 (802.11b)");
+                } else if (json[index].hwmode == i && hwmodeSelected.selected == true) {
+                    $('.hwmode option:selected').text("2 (802.11g)");
+                } else {
+                    $('.hwmode option:selected').text("3 (802.11g+n)");
+                    $(".hwmode option:last").remove();
                 }
-                if (json[index].hwmode == 2) {
-                    $('.hwmode option:selected').text('2 (802.11g)');
-                    $(".hwmode option[value='2']").remove();
-                }
-                if (json[index].hwmode == 1) {
-                    $('.hwmode option:selected').text('1 (802.11b)');
-                    $(".hwmode option[value='1']").remove();
-                }
-                if (json[index].hwmode == 0) {
-                    $('.hwmode option:selected').text('auto');
-                    $(".hwmode option[value='0']").remove();
-                }
+                //$(".channel option:first").remove()
+                // if (json[index].hwmode == 3) {
+                //     $('.hwmode option:selected').text(hwmodeArr[3]);
+                //     $(".hwmode option[value='3']").remove();
+                // }
+                // if (json[index].hwmode == 2) {
+                //     $('.hwmode option:selected').text(hwmodeArr[2]);
+                //     $(".hwmode option[value='2']").remove();
+                // }
+                // if (json[index].hwmode == 1) {
+                //     $('.hwmode option:selected').text(hwmodeArr[1]);
+                //     $(".hwmode option[value='1']").remove();
+                // }
+                // if (json[index].hwmode == 0) {
+                //     $('.hwmode option:selected').text(hwmodeArr[0]);
+                //     $(".hwmode option[value='0']").remove();
+                // }
 
                 //EncryptionType
                 var optionEncryptionType = document.createElement("option");
@@ -110,26 +167,36 @@ $(function() {
                 }
                 var encryptionTypeSelected = "<option value=" + i + " selected='selected'>" + json[index].vap_config[index].SecurityMode + " </option>"
                 $('.EncryptionType').prepend(encryptionTypeSelected);
+
+                // if (json[index].vap_config[index].SecurityMode == i && encryptionTypeSelected.selected == true) {
+                //     $('.EncryptionType option').text(channelArr[i]);
+                // } else {
+                //     $('.EncryptionType option:selected').text(encryptionTypeArr[4]);
+                // }
                 if (json[index].vap_config[index].SecurityMode == 4) {
-                    $('.EncryptionType option:selected').text('psk-mixed');
-                    $(".EncryptionType option[value='4']").remove();
+                    $('.EncryptionType option:selected').text(encryptionTypeArr[4]);
+                    $(".EncryptionType option:last").remove();
                 }
                 if (json[index].vap_config[index].SecurityMode == 3) {
-                    $('.EncryptionType option:selected').text('WPA2-PSA');
-                    $(".EncryptionType option[value='3']").remove();
+                    $('.EncryptionType option:selected').text(encryptionTypeArr[3]);
+                    //$(this).remove();
                 }
                 if (json[index].vap_config[index].SecurityMode == 2) {
-                    $('.EncryptionType option:selected').text('WPA-PSA');
-                    $(".EncryptionType option[value='2']").remove();
+                    $('.EncryptionType option:selected').text(encryptionTypeArr[2]);
+                    //$(this).remove();
                 }
                 if (json[index].vap_config[index].SecurityMode == 1) {
-                    $('.EncryptionType option:selected').text('WEP');
-                    $(".EncryptionType option[value='1']").remove();
+                    $('.EncryptionType option:selected').text(encryptionTypeArr[1]);
                 }
                 if (json[index].vap_config[index].SecurityMode == 0) {
-                    $('.EncryptionType option:selected').text('No Encryption');
-                    $(".EncryptionType option[value='0']").remove();
+                    $('.EncryptionType option:selected').text(encryptionTypeArr[0]);
                 }
+
+                // $('.EncryptionType option').each(function() {
+                //     if ($(this).val() == 'psk-mixed') {
+                //         $(".EncryptionType option:first").remove();
+                //     }
+                // })
 
                 // countryCode
                 var optionCountryCode = document.createElement("option");
@@ -145,12 +212,32 @@ $(function() {
                 var countryCodeSelected = "<option value=" + json[index].CountryCode + " selected='selected'>" + json[index].CountryCode + " </option>"
                 $('.countryCode').prepend(countryCodeSelected);
 
-                if (json[index].CountryCode == i && countryCodeSelected.selected == true) {
-                    $('.countryCode option:selected').text(countryCodeArr[i]);
-                } else {
-                    $('.countryCode option:selected').text(countryCodeArr[i]);
-                }
+                // if (json[index].CountryCode == i && countryCodeSelected.selected == true) {
+                //     $('.countryCode option').text(countryCodeArr[i]);
+                // } else {
+                //     $('.countryCode option:selected').text(countryCodeArr[i]);
+                // }
+
+                // $('.countryCode option').each(function() {
+                //     if ($(this).val() == 'US') {
+                //         $(this).remove();
+                //     }
+                // })
+
+
+                // $('.countryCode option').change(function() {
+                //     "<option value=" + json[index].CountryCode + " selected='selected'>" + json[index].CountryCode + " </option>";
+                //     if ($(this).val() == 'US') {
+                //         $(this).remove();
+                //     }
+
+                // });
+                //$(".channel option:first").remove();
+
+
             }
+
+
 
             $("#content ul").eq(0).show();
 
