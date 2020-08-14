@@ -43,15 +43,8 @@ $(function() {
             $("#tab").html(str0);
             $("#content").html(str);
 
-            $("#content select").change(function() {
-                oldVal = $(this).attr("old");
-                var _thisVal = $(this).find('option:selected').val();
-                var id = $(this).attr("id");
-                //$(this).find("option[value=" + _thisVal + "]").not("option[value=0]").hide();
-                $(this).find("option[value=" + _thisVal + "]").hide();
-                $(this).find("option[value=" + oldVal + "]").show();
-                $(this).attr("old", _thisVal)
-            })
+
+
 
             for (var i = 0; i < json.length; i++) {
                 //channel
@@ -212,6 +205,47 @@ $(function() {
                 var countryCodeSelected = "<option value=" + json[index].CountryCode + " selected='selected'>" + json[index].CountryCode + " </option>"
                 $('.countryCode').prepend(countryCodeSelected);
 
+                // var oldVal = "";
+                // $('.countryCode').each(function() {
+
+                //     var _thisVal = $(this).find('option:selected').val();
+                //     console.log(_thisVal);
+                //     if ($('.countryCode').find("option[value=" + _thisVal + "]").not("option[value=0]") == "US") {
+
+                //         $('.countryCode').find("option[value=" + _thisVal + "]").not("option[value=0]").hide();
+                //     }
+                //     if ($(this).find("option:selected")) {
+                //         var _thisVal = $(this).find('option:selected').val();
+                //         oldVal = $(this).attr("old", _thisVal);
+                //         $('.countryCode').find("option[value=" + _thisVal + "]").not("option[value=0]").hide();
+
+                //     }
+                // })
+                //$('.countryCode').find("option[value=US]").not("option[value=0]").hide();
+
+
+
+                $("#content select").change(function() {
+                    oldVal = $(this).attr("old");
+                    var _thisVal = $(this).find('option:selected').val();
+                    var id = $(this).attr("id");
+                    //$(this).find("option[value=" + _thisVal + "]").not("option[value=0]").hide();
+                    $(this).find("option[value=" + _thisVal + "]").hide();
+                    $(this).find("option[value=" + oldVal + "]").show();
+                    $(this).attr("old", _thisVal);
+                })
+
+                var oldVal = "";
+                $('.countryCode').each(function() {
+                    if ($(this).find("option:selected")) {
+                        var _thisVal = $(this).find('option:selected').val();
+                        oldVal = $(this).attr("old", _thisVal);
+                        $('.countryCode').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
+                    }
+                })
+
+                //$('.countryCode').find("option[value='US']").not("option[value=0]").hide()
+
                 // if (json[index].CountryCode == i && countryCodeSelected.selected == true) {
                 //     $('.countryCode option').text(countryCodeArr[i]);
                 // } else {
@@ -219,7 +253,7 @@ $(function() {
                 // }
 
                 // $('.countryCode option').each(function() {
-                //     if ($(this).val() == 'US') {
+                //     if ($(this).val() == 'US' && $(this).not("option[value=0]")) {
                 //         $(this).remove();
                 //     }
                 // })
