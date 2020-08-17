@@ -33,18 +33,14 @@ $(function() {
                 str += '<tr><td>Encryption type:</td><td><select name="type" class="form-control select_02 EncryptionType" style="width:40%"></select></td></tr>';
                 str += '<tr><td>Password:</td><td><input type="password" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:40%"><span id="eye" onclick="change()">SHOW</span></td></tr>';
                 str += '<tr><td>country Code:</td><td><select name="type" class="form-control select_03 countryCode" style="width:40%"></select></td></tr>';
-                str += ' <tr><td></td><td><div class="form-group form-line"><button type="reset" class="btn layui-btn">Cancel</button><button type="button" id="btn1" class="btn layui-btn" onclick="save()">Save</button></div></td></tr>';
+                str += ' <tr><td></td><td><div class="form-group form-line"><button type="reset" id="edit" class="btn layui-btn">Edit</button><button type="button" id="btn1" class="btn layui-btn" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
                 str += '</ul>';
                 str += '</form>';
 
-
             }
             $("#tab").html(str0);
             $("#content").html(str);
-
-
-
 
             for (var i = 0; i < json.length; i++) {
                 //channel
@@ -143,11 +139,9 @@ $(function() {
                 }
                 if (json[index].vap_config[index].SecurityMode == 3) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[3]);
-                    //$(this).remove();
                 }
                 if (json[index].vap_config[index].SecurityMode == 2) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[2]);
-                    //$(this).remove();
                 }
                 if (json[index].vap_config[index].SecurityMode == 1) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[1]);
@@ -191,9 +185,17 @@ $(function() {
 
             }
 
-
-
             $("#content ul").eq(0).show();
+
+            $("#content select,#content input,#content button").prop("disabled", true);
+
+            $("#edit").click(function() {
+                $("#content select,#content input,#content button").removeAttr("disabled");
+            });
+
+            $("#content").mouseenter(function() {
+                $('#edit').removeAttr("disabled");
+            })
 
         },
         error: function(jqXHR) {
@@ -201,8 +203,6 @@ $(function() {
 
         }
     });
-
-
 
     layui.use(['form'], function() {
         var form = layui.form;
