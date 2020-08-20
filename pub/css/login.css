@@ -242,7 +242,7 @@ body {
 }
 
 .card--login .form-control {
-    color: #03387f;
+    /* color: #03387f; */
     border-color: rgba(167, 191, 232, .25);
 }
 

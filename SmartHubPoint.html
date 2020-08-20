@@ -209,6 +209,10 @@
                     contentType: "application/json;charset=utf-8",
                     success: function(res) {
                         console.log(data);
+                        // $('#pwd').attr("disabled", true);
+                        // $('#btn1').attr("disabled", true);
+                        $("#content select,#content input,#content button").prop("disabled", true);
+                        $('#edit').attr("disabled", false);
                     },
                     error: function(jqXHR) {
                         alert("An error occurred：" + jqXHR.status);

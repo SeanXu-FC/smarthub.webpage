@@ -41,6 +41,7 @@
                 //监听xhr进度，并返回给进度条
                 progress: function(value) { //上传进度回调 value进度值   
                     element.progress('upload_progress', value + '%') //设置页面进度条
+                    $("#upgrade").prop("disabled", true);
                 },
                 before: function(obj) {
                     //开始上传时候让进度条去除隐藏状态

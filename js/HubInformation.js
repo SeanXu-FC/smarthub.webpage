@@ -34,8 +34,8 @@ $(function() {
     // }
 
     function wd(m) {
-        var h = 5 / 9.0 * (m - 32);
-        h = h.toFixed(1);
+        var h = 5 / 9.0 * (m - 32) + 273.15; //热力学温度T与人们惯用的摄氏温度t的关系是：T（K）=273.15+t(℃)。
+        h = h.toFixed(2);
         return h;
 
     }

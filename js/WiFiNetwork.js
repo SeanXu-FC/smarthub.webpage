@@ -35,7 +35,7 @@ $(function() {
                 // str += '<td><img src="images/icon-info.png"></td>';
                 str += '</tr>';
             }
-            str += '<tr><td colspan="3"><img src="images/icon-add.png" style="margin-top:-6px !important;margin-left:18px"><span class="addN">Add network</span></td></tr>';
+            str += '<tr><td colspan="3"><img src="images/icon-add.png" style="margin-top:-6px !important;margin-left:18px"><span data-toggle="modal" data-target="#myModal" class="addN">Add network</span></td></tr>';
             str += '</table>'
 
             $(".mCont").html(str);

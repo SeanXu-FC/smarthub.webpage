@@ -127,7 +127,7 @@
             $('input[name="password"]').focus(function() {
                 $(this).siblings()
                     .find('span')
-                    .text('Password 6-20 characters, the beginning of the letter, only contains alphanumeric underline!')
+                    .text('Password 6-20 characters, only contains alphanumeric underline!')
                     .removeClass()
                     .addClass('state2');
             }).blur(function() {
@@ -206,14 +206,21 @@
             // })
 
             //提交
-            $('input[type="submit"]').click(function() {
-                // if (username && password && repassword && email) {
+            $('input[type=submit').on("click,mouseleave", function() {
                 if (username && password) {
                     $('form').submit();
                 } else {
                     return alert('You didn\'t fill it out completely or fill in the wrong format!');
                 }
             });
+            // $('input[type="submit"]').click(function() {
+            //     // if (username && password && repassword && email) {
+            //     if (username && password) {
+            //         $('form').submit();
+            //     } else {
+            //         return alert('You didn\'t fill it out completely or fill in the wrong format!');
+            //     }
+            // });
         })
     </script>
     <!-- <script type="text/javascript">

@@ -31,7 +31,7 @@ $(function() {
                 str += '<tr><td>Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel" style="width:40%"></select></td></tr>';
                 str += '<tr><td>Mode:</td><td><select name="type" class="form-control select_01 hwmode" style="width:40%"></select></td></tr>';
                 str += '<tr><td>Encryption type:</td><td><select name="type" class="form-control select_02 EncryptionType" style="width:40%"></select></td></tr>';
-                str += '<tr><td>Password:</td><td><input type="password" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:40%"><span id="eye" onclick="change()">SHOW</span></td></tr>';
+                str += '<tr><td>Password:</td><td><input type="password" id="pwd" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:40%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span></td></tr>';
                 str += '<tr><td>country Code:</td><td><select name="type" class="form-control select_03 countryCode" style="width:40%"></select></td></tr>';
                 str += ' <tr><td></td><td><div class="form-group form-line"><button type="reset" id="edit" class="btn layui-btn">Edit</button><button type="button" id="btn1" class="btn layui-btn" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
@@ -148,6 +148,7 @@ $(function() {
                 }
                 if (json[index].vap_config[index].SecurityMode == 0) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[0]);
+
                 }
 
                 // countryCode
@@ -194,7 +195,8 @@ $(function() {
             });
 
             $("#content").mouseenter(function() {
-                $('#edit').removeAttr("disabled");
+                //$('#edit').removeAttr("disabled");
+                $('#edit').prop("disabled", false);
             })
 
         },
@@ -209,6 +211,7 @@ $(function() {
         form.on('switch(switchTest)', function(data) {
             var checked = data.elem.checked;
             var serverStatus = 1;
+
             if (serverStatus) {
                 data.elem.checked = checked;
             } else {
@@ -234,12 +237,16 @@ $(function() {
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
-                    if (checked) {
-                        $("#content").show();
-                    } else {
-                        $("#content").hide();
-                    }
+                    var json = res.result.wifi_config;
+                    for (var index in json) {
+                        if (checked && json[index].vap_config[index].vap_enable == 0) {
+                            $("#content").show();
+                        } else {
+                            $("#content").hide();
 
+                        }
+
+                    }
                 },
                 error: function(jqXHR) {
                     alert("An error occurred：" + jqXHR.status);
