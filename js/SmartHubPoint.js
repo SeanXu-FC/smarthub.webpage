@@ -30,10 +30,10 @@ $(function() {
                 str += '<tr><td class="col-sm-3">Access point name:</td><td class="col-sm-9"><input type="text" class="form-control ssid" value="' + json[index].vap_config[index].Ssid + '" style="width:40%"></td></tr>';
                 str += '<tr><td>Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel" style="width:40%"></select></td></tr>';
                 str += '<tr><td>Mode:</td><td><select name="type" class="form-control select_01 hwmode" style="width:40%"></select></td></tr>';
-                str += '<tr><td>Encryption type:</td><td><select name="type" class="form-control select_02 EncryptionType" style="width:40%"></select></td></tr>';
+                str += '<tr><td>Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType" style="width:40%"></select></td></tr>';
                 str += '<tr><td>Password:</td><td><input type="password" id="pwd" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:40%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span></td></tr>';
                 str += '<tr><td>country Code:</td><td><select name="type" class="form-control select_03 countryCode" style="width:40%"></select></td></tr>';
-                str += ' <tr><td></td><td><div class="form-group form-line"><button type="reset" id="edit" class="btn layui-btn">Edit</button><button type="button" id="btn1" class="btn layui-btn" onclick="save()">Save</button></div></td></tr>';
+                str += ' <tr><td></td><td><div class="form-group form-line"><button type="button" id="edit" class="btn layui-btn">Edit</button><button type="reset" id="cancel" class="btn layui-btn">Cancel</button><button type="button" id="btn1" class="btn layui-btn" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
                 str += '</ul>';
                 str += '</form>';
@@ -58,6 +58,9 @@ $(function() {
                 $('.channel').prepend(channelSelected);
                 if (json[index].channel == 11) {
                     $('.channel option:selected').text(channelArr[11]);
+                }
+                if (json[index].channel == 10) {
+                    $('.channel option:selected').text(channelArr[10]);
                 }
                 if (json[index].channel == 10) {
                     $('.channel option:selected').text(channelArr[10]);
@@ -94,6 +97,7 @@ $(function() {
                     $(".channel option:first").remove();
                 }
 
+
                 //hwmode
                 var optionHWMode = document.createElement("option");
                 $(optionHWMode).val(json[index].hwmode).attr("selected", "selected");
@@ -107,17 +111,17 @@ $(function() {
                 var hwmodeSelected = "<option value=" + i + " selected='selected'>" + json[index].hwmode + " </option>"
                 $('.hwmode').prepend(hwmodeSelected);
 
-                if (json[index].hwmode == i && hwmodeSelected.selected == true) {
-                    $('.hwmode option').text(hwmodeArr[i]);
-                } else if (json[index].hwmode == i && hwmodeSelected.selected == true) {
-                    $('.hwmode option:selected').text("0 auto");
-                } else if (json[index].hwmode == i && hwmodeSelected.selected == true) {
-                    $('.hwmode option:selected').text("1 (802.11b)");
-                } else if (json[index].hwmode == i && hwmodeSelected.selected == true) {
-                    $('.hwmode option:selected').text("2 (802.11g)");
+                if (json[index].hwmode == 0) {
+                    $('.hwmode option:selected').text(hwmodeArr[0]);
+                } else if (json[index].hwmode == 1) {
+                    $('.hwmode option:selected').text(hwmodeArr[1]);
+                } else if (json[index].hwmode == 2) {
+                    $('.hwmode option:selected').text(hwmodeArr[2]);
+                } else if (json[index].hwmode == 3) {
+                    $('.hwmode option:selected').text(hwmodeArr[3]);
                 } else {
-                    $('.hwmode option:selected').text("3 (802.11g+n)");
-                    $(".hwmode option:last").remove();
+                    $('.hwmode option:selected').text(hwmodeArr[4]);
+                    $(".hwmode option:first").remove();
                 }
 
                 //EncryptionType
@@ -145,10 +149,10 @@ $(function() {
                 }
                 if (json[index].vap_config[index].SecurityMode == 1) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[1]);
+
                 }
                 if (json[index].vap_config[index].SecurityMode == 0) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[0]);
-
                 }
 
                 // countryCode
@@ -184,6 +188,22 @@ $(function() {
                     }
                 })
 
+                $('.hwmode').each(function() {
+                    if ($(this).find("option:selected")) {
+                        var _thisVal = $(this).find('option:selected').val();
+                        oldVal = $(this).attr("old", _thisVal);
+                        $('.hwmode').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
+                    }
+                })
+
+                $('.EncryptionType').each(function() {
+                    if ($(this).find("option:selected")) {
+                        var _thisVal = $(this).find('option:selected').val();
+                        oldVal = $(this).attr("old", _thisVal);
+                        $('.EncryptionType').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
+                    }
+                })
+
             }
 
             $("#content ul").eq(0).show();
@@ -192,12 +212,58 @@ $(function() {
 
             $("#edit").click(function() {
                 $("#content select,#content input,#content button").removeAttr("disabled");
+                //console.log($("#EncryptionType option[value=0]").val());
+                // if ($("#EncryptionType option[value=0]").text() == encryptionTypeArr[0]) {
+                //     console.log($("#EncryptionType option[value=0]").text() == encryptionTypeArr[0]);
+                //     console.log(encryptionTypeArr[0]);
+                //     console.log($("#EncryptionType option[value=0]").val() == 0);
+                //     $("#pwd").prop("disabled", true);
+                //     $("#eye").hide();
+                //     //$("#pwd").hide();
+                // } else {
+                //     $("#pwd").prop("disabled", false);
+                //     $("#eye").show();
+                // }
+
+
             });
+            document.getElementById('EncryptionType').onchange = function() {
+                //console.log(this.value) // return '';
+                if (this.value !== '0') {
+                    $("#pwd").prop("disabled", false);
+                    $("#pwd").show();
+                    $("#eye").show();
+
+                } else {
+                    $("#pwd").prop("disabled", true);
+                    $("#eye").hide();
+                    $("#pwd").hide();
+                }
+
+                //console.log(this.options[this.options.selectedIndex].value);
+                if (this.value == 0) {
+                    $("#pwd").prop("disabled", true);
+                    $("#eye").hide();
+                    $("#pwd").hide();
+                } else if (this.value == 1) {
+                    $("#pwd").val("");
+                } else {
+                    $("#pwd").val(json[index].vap_config[index].WpaKey)
+                }
+                //console.log($("#pwd").val(json[index].vap_config[index].WpaKey));
+            }
 
             $("#content").mouseenter(function() {
                 //$('#edit').removeAttr("disabled");
                 $('#edit').prop("disabled", false);
+                $('#cancel').attr("disabled", false);
             })
+
+
+            // function change(){
+
+            //     $("#pwd").attr("disabled", true);
+            // }
 
         },
         error: function(jqXHR) {
