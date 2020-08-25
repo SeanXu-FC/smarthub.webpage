@@ -45,56 +45,64 @@ $(function() {
             for (var i = 0; i < json.length; i++) {
                 //channel
                 var optionChannel = document.createElement("option");
-                var channelselected = $(optionChannel).val(json[index].channel).attr("selected", "selected");
+                $(optionChannel).val(json[index].channel).attr("selected", "selected");
                 $(optionChannel).text(json[index].channel);
                 var channelArr = ['0 auto', '1 (2.412 GHz)', '2 (2.417 GHz)', '3 (2.422 GHz)', '4 (2.427 GHz)', '5 (2.432 GHz)', '6 (2.437 GHz)', '7 (2.442 GHz)', '8 (2.447 GHz)', '9 (2.452 GHz)', '10 (2.457 GHz)', '11 (2.462 GHz)']
                 for (var i = 0; i < channelArr.length; i++) {
                     var channel = "<option value=" + i + ">" + channelArr[i] + "</option>";
-                    $channel = $(channel).get(0).value;
-                    $channelText = $(channel).get(0).text;
+                    // $channel = $(channel).get(0).value;
+                    // $channelText = $(channel).get(0).text;
                     $('.channel').append(channel);
                 }
                 var channelSelected = "<option value=" + i + " selected='selected' >" + json[index].channel + " </option>"
                 $('.channel').prepend(channelSelected);
                 if (json[index].channel == 11) {
                     $('.channel option:selected').text(channelArr[11]);
+                    $('.channel option[value=11]').hide();
                 }
                 if (json[index].channel == 10) {
                     $('.channel option:selected').text(channelArr[10]);
-                }
-                if (json[index].channel == 10) {
-                    $('.channel option:selected').text(channelArr[10]);
+                    $('.channel option[value=10]').hide();
                 }
                 if (json[index].channel == 9) {
                     $('.channel option:selected').text(channelArr[9]);
+                    $('.channel option[value=9]').hide();
                 }
                 if (json[index].channel == 8) {
                     $('.channel option:selected').text(channelArr[8]);
+                    $('.channel option[value=8]').hide();
                 }
                 if (json[index].channel == 7) {
                     $('.channel option:selected').text(channelArr[7]);
+                    $('.channel option[value=7]').hide();
                 }
                 if (json[index].channel == 6) {
                     $('.channel option:selected').text(channelArr[6]);
+                    $('.channel option[value=6]').hide();
                 }
                 if (json[index].channel == 5) {
                     $('.channel option:selected').text(channelArr[5]);
+                    $('.channel option[value=5]').hide();
                 }
                 if (json[index].channel == 4) {
                     $('.channel option:selected').text(channelArr[4]);
+                    $('.channel option[value=4]').hide();
                 }
                 if (json[index].channel == 3) {
                     $('.channel option:selected').text(channelArr[3]);
+                    $('.channel option[value=3]').hide();
                 }
                 if (json[index].channel == 2) {
                     $('.channel option:selected').text(channelArr[2]);
+                    $('.channel option[value=2]').hide();
                 }
                 if (json[index].channel == 1) {
                     $('.channel option:selected').text(channelArr[1]);
+                    $('.channel option[value=1]').hide();
                 }
                 if (json[index].channel == 0) {
                     $('.channel option:selected').text(channelArr[0]);
-                    $(".channel option:first").remove();
+                    $('.channel option[value=0]').hide();
                 }
 
 
@@ -105,23 +113,30 @@ $(function() {
                 var hwmodeArr = ['0 auto', '1 (802.11b)', '2 (802.11g)', '3 (802.11g+n)'];
                 for (var i = 0; i < hwmodeArr.length; i++) {
                     var hwmode = "<option value=" + i + ">" + hwmodeArr[i] + "</option>";
-                    $hwmode = $(hwmode).get(0).value;
+                    //$hwmode = $(hwmode).get(0).value;
                     $('.hwmode').append(hwmode);
                 }
                 var hwmodeSelected = "<option value=" + i + " selected='selected'>" + json[index].hwmode + " </option>"
                 $('.hwmode').prepend(hwmodeSelected);
 
+                if (json[index].hwmode == 3) {
+                    $('.hwmode option:selected').text(hwmodeArr[3]);
+                    $('.hwmode option[value=3]').hide();
+                }
+
+                if (json[index].hwmode == 2) {
+                    $('.hwmode option:selected').text(hwmodeArr[2]);
+                    $('.hwmode option[value=2]').hide();
+                }
+
+                if (json[index].hwmode == 1) {
+                    $('.hwmode option:selected').text(hwmodeArr[1]);
+                    $('.hwmode option[value=1]').hide();
+                }
+
                 if (json[index].hwmode == 0) {
                     $('.hwmode option:selected').text(hwmodeArr[0]);
-                } else if (json[index].hwmode == 1) {
-                    $('.hwmode option:selected').text(hwmodeArr[1]);
-                } else if (json[index].hwmode == 2) {
-                    $('.hwmode option:selected').text(hwmodeArr[2]);
-                } else if (json[index].hwmode == 3) {
-                    $('.hwmode option:selected').text(hwmodeArr[3]);
-                } else {
-                    $('.hwmode option:selected').text(hwmodeArr[4]);
-                    $(".hwmode option:first").remove();
+                    $('.hwmode option[value=0]').hide();
                 }
 
                 //EncryptionType
@@ -131,7 +146,7 @@ $(function() {
                 var encryptionTypeArr = ['No Encryption', 'WEP', 'WPA-PSA', 'WPA2-PSA', 'psk-mixed'];
                 for (var i = 0; i < encryptionTypeArr.length; i++) {
                     var EncryptionType = "<option value=" + i + ">" + encryptionTypeArr[i] + "</option>";
-                    $EncryptionType = $(EncryptionType).get(0).value;
+                    //$EncryptionType = $(EncryptionType).get(0).value;
                     $('.EncryptionType').append(EncryptionType);
                 }
                 var encryptionTypeSelected = "<option value=" + i + " selected='selected'>" + json[index].vap_config[index].SecurityMode + " </option>"
@@ -139,20 +154,23 @@ $(function() {
 
                 if (json[index].vap_config[index].SecurityMode == 4) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[4]);
-                    $(".EncryptionType option:last").remove();
+                    $('.EncryptionType option[value=4]').hide();
                 }
                 if (json[index].vap_config[index].SecurityMode == 3) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[3]);
+                    $('.EncryptionType option[value=3]').hide();
                 }
                 if (json[index].vap_config[index].SecurityMode == 2) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[2]);
+                    $('.EncryptionType option[value=2]').hide();
                 }
                 if (json[index].vap_config[index].SecurityMode == 1) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[1]);
-
+                    $('.EncryptionType option[value=1]').hide();
                 }
                 if (json[index].vap_config[index].SecurityMode == 0) {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[0]);
+                    $('.EncryptionType option[value=0]').hide();
                 }
 
                 // countryCode
@@ -180,27 +198,36 @@ $(function() {
                 })
 
                 var oldVal = "";
-                $('.countryCode').each(function() {
+
+                $('.channel').change(function() {
                     if ($(this).find("option:selected")) {
                         var _thisVal = $(this).find('option:selected').val();
                         oldVal = $(this).attr("old", _thisVal);
-                        $('.countryCode').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
+                        $('.channel').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
                     }
                 })
 
-                $('.hwmode').each(function() {
+                $('.hwmode').change(function() {
                     if ($(this).find("option:selected")) {
                         var _thisVal = $(this).find('option:selected').val();
                         oldVal = $(this).attr("old", _thisVal);
-                        $('.hwmode').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
+                        $('.hwmode').find("option[value=" + _thisVal + "]").hide()
                     }
                 })
 
-                $('.EncryptionType').each(function() {
+                $('.EncryptionType').change(function() {
                     if ($(this).find("option:selected")) {
                         var _thisVal = $(this).find('option:selected').val();
                         oldVal = $(this).attr("old", _thisVal);
                         $('.EncryptionType').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
+                    }
+                })
+
+                $('.countryCode').change(function() {
+                    if ($(this).find("option:selected")) {
+                        var _thisVal = $(this).find('option:selected').val();
+                        oldVal = $(this).attr("old", _thisVal);
+                        $('.countryCode').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
                     }
                 })
 
@@ -212,23 +239,8 @@ $(function() {
 
             $("#edit").click(function() {
                 $("#content select,#content input,#content button").removeAttr("disabled");
-                //console.log($("#EncryptionType option[value=0]").val());
-                // if ($("#EncryptionType option[value=0]").text() == encryptionTypeArr[0]) {
-                //     console.log($("#EncryptionType option[value=0]").text() == encryptionTypeArr[0]);
-                //     console.log(encryptionTypeArr[0]);
-                //     console.log($("#EncryptionType option[value=0]").val() == 0);
-                //     $("#pwd").prop("disabled", true);
-                //     $("#eye").hide();
-                //     //$("#pwd").hide();
-                // } else {
-                //     $("#pwd").prop("disabled", false);
-                //     $("#eye").show();
-                // }
-
-
             });
             document.getElementById('EncryptionType').onchange = function() {
-                //console.log(this.value) // return '';
                 if (this.value !== '0') {
                     $("#pwd").prop("disabled", false);
                     $("#pwd").show();
@@ -256,14 +268,8 @@ $(function() {
             $("#content").mouseenter(function() {
                 //$('#edit').removeAttr("disabled");
                 $('#edit').prop("disabled", false);
-                $('#cancel').attr("disabled", false);
+                // $('#cancel').attr("disabled", false);
             })
-
-
-            // function change(){
-
-            //     $("#pwd").attr("disabled", true);
-            // }
 
         },
         error: function(jqXHR) {
