@@ -1,10 +1,11 @@
 $(function() {
-
+    var oldPwd = $("#oldPwd").val();
+    var newPwd = $("#newpwd").val();
     $('input[name="oldPwd"]').focus(function() {
         $(this)
             .siblings()
             .find('span')
-            .text('password input error, should be No less than 8-digit password!')
+            .text('Please input a password!')
             .removeClass('state1 state4 state3').addClass('state2');
     }).blur(function() {
         var len = $(this).val().length;
@@ -17,7 +18,7 @@ $(function() {
         } else {
             $(this).siblings()
                 .find('span')
-                .text('password input error, should be No less than 8-digit password!')
+                .text('The password input error, should be No less than 8-digit password!')
                 .removeClass('state1 state2 state4')
                 .addClass('state3');
         }
@@ -27,7 +28,7 @@ $(function() {
         $(this)
             .siblings()
             .find('span')
-            .text('password input error, should be No less than 8-digit password!')
+            .text('Please enter a new password!')
             .removeClass('state1 state4 state3').addClass('state2');
     }).blur(function() {
         var len = $(this).val().length;
@@ -40,13 +41,19 @@ $(function() {
         } else {
             $(this).siblings()
                 .find('span')
-                .text('password input error, should be No less than 8-digit password!')
+                .text('The new password input error, should be No less than 8-digit password!')
                 .removeClass('state1 state2 state4')
                 .addClass('state3');
         }
     })
-    $('#saveBtn').one('click', function() {
-
+    $('input[type="submit"]').on('click', function() {
+            //console.log(111)
+            // if (oldPwd && newPwd) {
+            //     //$('form').submit();
+            //     alert("Password modified successfully");
+            // } else {
+            //     return alert('You didn\'t fill it out completely or fill in the wrong format!');
+            // }
             // var data = {
             //     "jsonrpc": "2.0",
             //     "method": "change_password",
@@ -68,7 +75,7 @@ $(function() {
                 contentType: "application/x-www-form-urlencoded;charset=utf-8",
                 success: function(res) {
                     if (res.result.flag == "success") {
-                        //console.log(res);
+                        console.log(res);
                         alert("Password modified successfully");
                     } else {
                         console.log("An error occurred：" + res.result.flag);

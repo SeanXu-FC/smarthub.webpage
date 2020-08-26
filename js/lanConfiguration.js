@@ -5,18 +5,41 @@ $(function() {
         "Static IP": "d2",
         "DHCP server": "d3",
     };
-    $("#rsd").bind("change", function() {
-        var divId = map[this.value];
-        $("#" + divId).show().siblings().hide();
-        $("#" + divId).eq(0).slideDown();;
-        $("#ipMode").slideDown();
-        $("#btn").slideDown();
-        // $(this).addClass("btn1")
 
-        //$("#btn").removeClass("btn1")
-    });
+    // 方法1：
+    // $("#rsd").bind("change", function() {
+    //     var divId = map[this.value];
+    //     $("#" + divId).show().siblings().hide();
+    //     $("#" + divId).eq(0).slideDown();;
+    //     $("#ipMode").slideDown();
+    //     $("#btn").slideDown();
+    // });
 
+    // $('#rsd').each(function() {
+    //     if ($(this).find("option:selected")) {
+    //         var _thisVal = $(this).find('option').val();
+    //         console.log(this.value);
+    //         oldVal = $(this).attr("value", _thisVal);
+    //         console.log(oldVal);
+    //         $('#rsd option').find('option[value=" + _thisVal + "]').not("option[value=0]").hide()
+    //     }
+    // })
 
+    //方法2：
+    $('#rsd').change(function() {
+        if ($(this).find("option:selected")) {
+            var _thisVal = $(this).find('option').val();
+            //console.log(this.value);
+            oldVal = $(this).attr("value", _thisVal);
+            //console.log(oldVal);
+            $('#rsd option').find('option[value=" + _thisVal + "]').not("option[value=0]").hide();
+            var divId = map[this.value];
+            $("#" + divId).show().siblings().hide();
+            $("#" + divId).eq(0).slideDown();
+            $("#ipMode").slideDown();
+            $("#btn").slideDown();
+        }
+    })
 
     $("#d1 input,#btn button").prop("disabled", true);
     $("#edit").click(function() {

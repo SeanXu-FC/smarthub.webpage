@@ -43,6 +43,20 @@
         .layui-form-switch em {
             top: -1px;
         }
+        
+        .advanced {
+            display: none;
+            margin-left: 30px;
+            font-size: 16px;
+            line-height: 32px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        #arrow {
+            cursor: pointer;
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -75,9 +89,41 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">Advanced<img class="mlImg" src="images/icon-arrow-up.png"></td>
+                    <td colspan="2"></td>
                 </tr>
+
             </table>
+            <div>
+                <div id="arrow">Advanced <img class="up" src="images/icon-arrow-up.png"></div>
+                <div class="advanced">
+                    <div>> APNs(Access point names,)</div>
+                    <div>> Data usage</div>
+                    <div>> SIM management</div>
+                </div>
+            </div>
+            <script>
+                $(function() {
+                    var images = ['images/icon-arrow-up.png', 'images/icon-arrow-down.png'];
+                    $('#arrow').click(function() {
+                        if ($('#arrow img').attr("class") == "up") {
+                            $('#arrow img').attr("src", images[1]);
+                            $('#arrow img').removeClass();
+                            $(".advanced").show();
+                        } else {
+                            $('#arrow img').attr("src", images[0]);
+                            $('#arrow img').addClass("up");
+                            $(".advanced").hide();
+                        }
+                    });
+                    // $("#arrow").hover(function() {
+                    //     $("#arrow").show();
+                    //     $(".advanced").show();
+
+                    // }, function() {
+                    //     $(".advanced").hide();
+                    // });
+                });
+            </script>
         </div>
 
     </div>
