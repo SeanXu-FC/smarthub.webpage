@@ -112,6 +112,22 @@
             display: table-cell !important;
             vertical-align: middle !important;
         }
+        
+        .state1 {
+            color: #aaa;
+        }
+        
+        .state2 {
+            color: #00b0ff;
+        }
+        
+        .state3 {
+            color: #EB4F38;
+        }
+        
+        .state4 {
+            color: #00B694;
+        }
     </style>
 </head>
 
@@ -194,7 +210,7 @@
                                 "SecurityMode": $(".EncryptionType").val(), //可变
                                 "WepType": 0, //可变
                                 "WpaType": 2, //可变
-                                "WepKey": "", //可变
+                                "WepKey": $(".pwd1").val(), //可变
                                 "WpaKey": $(".pwd").val(), //可变
                                 "ApIsolation": 0, //固定
                                 "max_numsta": 15 //固定
@@ -205,6 +221,7 @@
                     "id": "9.1",
 
                 };
+
 
 
                 data = JSON.stringify(data);

@@ -31,7 +31,8 @@ $(function() {
                 str += '<tr><td class="czjz">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel" style="width:40%"></select></td></tr>';
                 str += '<tr><td class="czjz">Mode:</td><td><select name="type" class="form-control select_01 hwmode" style="width:40%"></select></td></tr>';
                 str += '<tr><td class="czjz">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType" style="width:40%"></select></td></tr>';
-                str += '<tr><td class="czjz">Password:</td><td><input type="password" id="pwd" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:40%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span></td></tr>';
+                str += '<tr id="pwd"><td class="czjz">Password:</td><td><input type="password" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:40%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                str += '<tr id="pwd1" style="display:none;"><td class="czjz">Password:</td><td><input type="password" class="form-control pwd1" value="' + json[index].vap_config[index].WepKey + '" style="width:40%"><div id="info"><span></span></div></span><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
                 str += '<tr><td class="czjz">country Code:</td><td><select name="type" class="form-control select_03 countryCode" style="width:40%"></select></td></tr>';
                 str += ' <tr><td></td><td><div class="form-group form-line"><button type="button" id="edit" class="btn layui-btn">Edit</button><button type="reset" id="cancel" class="btn layui-btn">Cancel</button><button type="button" id="btn1" class="btn layui-btn" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
@@ -258,9 +259,13 @@ $(function() {
                     $("#eye").hide();
                     $("#pwd").hide();
                 } else if (this.value == 1) {
+                    $("#pwd1").show();
+                    $("#info").hide();
+                    $("#pwd").hide();
                     $("#pwd").val("");
                 } else {
-                    $("#pwd").val(json[index].vap_config[index].WpaKey)
+                    $("#pwd").val(json[index].vap_config[index].WpaKey);
+                    $("#pwd1").hide();
                 }
                 //console.log($("#pwd").val(json[index].vap_config[index].WpaKey));
             }
@@ -269,6 +274,30 @@ $(function() {
                 //$('#edit').removeAttr("disabled");
                 $('#edit').prop("disabled", false);
                 // $('#cancel').attr("disabled", false);
+            })
+
+            $('.pwd, .pwd1').focus(function() {
+                var pwd = $("#pwd").val();
+                pwd = false;
+                $(this).siblings()
+                    .find('span')
+                    .text('Please enter a password with more than 8 digits!')
+                    .removeClass('state1 state4 state3').addClass('state2');
+            }).blur(function() {
+                var len = $(this).val().length;
+                if (len >= 8 && len <= 20 && $(this).val() != '' && isNaN($(this).val()) == false) {
+                    $(this).siblings()
+                        .find('span')
+                        .text('The password is correct!')
+                        .removeClass('state1 state4 state3').addClass('state4');
+                    pwd = true;
+                } else {
+                    $(this).siblings()
+                        .find('span')
+                        .text('Please enter a password with more than 8 digits!')
+                        .removeClass('state1 state2 state4')
+                        .addClass('state3');
+                }
             })
 
         },
@@ -311,7 +340,7 @@ $(function() {
                 success: function(res) {
                     var json = res.result.wifi_config;
                     for (var index in json) {
-                        if (checked && json[index].vap_config[index].vap_enable == 0) {
+                        if (checked && json[index].phy_enable == 0) {
                             $("#content").show();
                         } else {
                             $("#content").hide();
