@@ -26,14 +26,14 @@ $(function () {
         str += '<table class="table table-hover table-responsive">';
         str += '<tr><th colspan="2">Access point connection settings</th></tr>';
         str += '<tr><th colspan="2">Use these details when connecting a device to the SmartHub\'s access point</th></tr>';
-        str += '<tr><td class="col-sm-3 czjz">Access point name:</td><td class="col-sm-9"><input type="text" class="form-control ssid" value="' + json[index].vap_config[index].Ssid + '" style="width:40%"></td></tr>';
-        str += '<tr><td class="czjz">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel" style="width:40%"></select></td></tr>';
-        str += '<tr><td class="czjz">Mode:</td><td><select name="type" class="form-control select_01 hwmode" style="width:40%"></select></td></tr>';
-        str += '<tr><td class="czjz">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType" style="width:40%"></select></td></tr>';
-        str += '<tr id="pwd"><td class="czjz">Password:</td><td><input type="password" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:40%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-        str += '<tr id="pwd1" style="display:none;"><td class="czjz">Password:</td><td><input type="password" class="form-control pwd1" value="' + json[index].vap_config[index].WepKey + '" style="width:40%"><div id="info"><span></span></div></span><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-        str += '<tr><td class="czjz">country Code:</td><td><select name="type" class="form-control select_03 countryCode" style="width:40%"></select></td></tr>';
-        str += ' <tr><td></td><td><div class="form-group form-line"><button type="button" id="edit" class="btn layui-btn">Edit</button><button type="reset" id="cancel" class="btn layui-btn">Cancel</button><button type="button" id="btn1" class="btn layui-btn" onclick="save()">Save</button></div></td></tr>';
+        str += '<tr><td class="col-sm-3 czjz">Access point name:</td><td class="col-sm-9"><input type="text" class="form-control ssid" value="' + json[index].vap_config[index].Ssid + '" style="width:70%"></td></tr>';
+        str += '<tr><td class="czjz">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel" style="width:70%"></select></td></tr>';
+        str += '<tr><td class="czjz">Mode:</td><td><select name="type" class="form-control select_01 hwmode" style="width:70%"></select></td></tr>';
+        str += '<tr><td class="czjz">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType" style="width:70%"></select></td></tr>';
+        str += '<tr id="pwd"><td class="col-sm-3 czjz">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:70%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+        str += '<tr id="pwd1"><td class="col-sm-3 czjz">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1" value="' + json[index].vap_config[index].WepKey + '" style="width:70%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+        str += '<tr><td class="czjz">country Code:</td><td><select name="type" class="form-control select_03 countryCode" style="width:70%"></select></td></tr>';
+        str += ' <tr><td></td><td><div class="form-group form-line btn-group"><button type="button" id="edit" class="btn btn-primary btn-primary active">Edit</button><button type="reset" id="cancel" class="btn btn-primary btn-primary active ml-10">Cancel</button><button type="button" id="btn1" class="btn btn-primary btn-primary active ml-10" onclick="save()">Save</button></div></td></tr>';
         str += '</table>';
         str += '</ul>';
         str += '</form>';
@@ -255,38 +255,82 @@ $(function () {
 
       $("#content ul").eq(0).show();
       $("#content select,#content input,#content button").prop("disabled", true);
-      $("#edit").click(function () {
-        $("#content select,#content input,#content button").removeAttr("disabled");
-      });
-
-      document.getElementById('EncryptionType').onchange = function () {
-        if (this.value !== '0') {
-          $("#pwd").prop("disabled", false);
-          $("#pwd").show();
-          $("#eye").show();
-        } else {
-          $("#pwd").prop("disabled", true);
-          $("#eye").hide();
-          $("#pwd").hide();
-        } //console.log(this.options[this.options.selectedIndex].value);
-
-
+      $('#EncryptionType').each(function () {
         if (this.value == 0) {
           $("#pwd").prop("disabled", true);
+          $("#pwd1").prop("disabled", true);
           $("#eye").hide();
+          $("#eye1").hide();
+          $("#pwd").hide();
+          $("#pwd1").hide();
+          console.log('000');
+        } else if (this.value == 5 && this.value == 0) {
+          $("#pwd1").show();
+          console.log('111000');
           $("#pwd").hide();
         } else if (this.value == 1) {
           $("#pwd1").show();
-          $("#info").hide();
+          console.log('111');
           $("#pwd").hide();
-          $("#pwd").val("");
+        } else if (this.value == 5 && this.value == 1) {
+          $("#pwd1").show();
+          console.log('555111');
+          $("#pwd").hide();
+        } else if (this.value == 5) {
+          $("#eye").show();
+          $("#eye1").hide();
+          $("#pwd").show();
+          $("#pwd1").hide();
+          console.log('555');
+        } else if (this.value == 5 && this.value == 2 && this.value == 3 && this.value == 4) {
+          $("#eye").hide();
+          $("#eye1").hide();
+          $("#pwd").hide();
+          $("#pwd1").hide();
+          console.log('555000');
         } else {
           $("#pwd").val(json[index].vap_config[index].WpaKey);
           $("#pwd1").hide();
+          console.log('222333');
+          $("#pwd").show();
+          $("#eye").hide();
+          $("#eye1").hide();
+          $("#pwd").hide();
+          $("#pwd1").hide();
+        }
+      });
+      $("#edit").click(function () {
+        $("#content select,#content input,#content button").removeAttr("disabled");
+      });
+      $('#EncryptionType').change(function () {
+        //console.log(this.options[this.options.selectedIndex].value === this.value)
+        //console.log(this.options[this.options.selectedIndex].value);
+        if (this.value == 0) {
+          $("#pwd").prop("disabled", true);
+          $("#pwd1").prop("disabled", true);
+          $("#eye").hide();
+          $("#eye1").hide();
+          $("#pwd").hide();
+          $("#pwd1").hide();
+          console.log('000');
+        } else if (this.value == 1) {
+          $("#pwd1").show();
+          console.log('111');
+          $("#pwd").hide();
+        } else if (this.value == 5) {
+          $("#eye").show();
+          $("#eye1").hide();
+          $("#pwd").show();
+          $("#pwd1").hide();
+          console.log('555');
+        } else {
+          $("#pwd").val(json[index].vap_config[index].WpaKey);
+          $("#pwd1").hide();
+          console.log('222333');
+          $("#pwd").show();
         } //console.log($("#pwd").val(json[index].vap_config[index].WpaKey));
 
-      };
-
+      });
       $("#content").mouseenter(function () {
         //$('#edit').removeAttr("disabled");
         $('#edit').prop("disabled", false); // $('#cancel').attr("disabled", false);

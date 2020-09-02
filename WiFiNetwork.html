@@ -29,22 +29,6 @@
             position: relative
         }
         
-        .mCont {
-            position: absolute;
-            top: 180px;
-            left: 90px;
-            /* width: 350px; */
-            width: 80%;
-            /* max-height: 480px; */
-            overflow: hidden;
-            zoom: 1;
-            border: 1px solid #333;
-            border-radius: 5px;
-            background-color: #fff;
-            padding-bottom: 20px;
-            margin-bottom: 50px;
-        }
-        
         .btFs {
             font-size: 16px;
             font-weight: bold
@@ -122,7 +106,7 @@
 
             <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content" style="padding:30px 0 20px">
+                    <div class="modal-content" style="padding:30px">
                         <form class="form-horizontal">
                             <h4 class="text-center" style="font-size:16px;font-weight:bold;padding-bottom:20px;" id="add">Add network</h4>
                             <h4 class="text-center" style="font-size:16px;font-weight:bold;padding-bottom:20px;display: none;" id="create">Create network</h4>
@@ -187,7 +171,7 @@
             var oCreate = document.getElementById("create");
             var oWpa = document.getElementById("wpa");
 
-            
+
             if (oSecurity == 0) {
                 $("#add").show();
                 $("#create").hide();

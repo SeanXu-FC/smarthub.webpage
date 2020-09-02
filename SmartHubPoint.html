@@ -104,7 +104,8 @@
             cursor: pointer;
         }
         
-        #eye {
+        #eye,
+        #eye1 {
             cursor: pointer;
         }
         
@@ -127,6 +128,14 @@
         
         .state4 {
             color: #00B694;
+        }
+        
+        #pwd {
+            display: none
+        }
+        
+        #pwd1 {
+            display: none;
         }
     </style>
 </head>
@@ -195,7 +204,7 @@
                         "wifi_config": [{
                             "phy_id": 2, //固定
                             "phy_name": "wifi2", //固定
-                            "phy_enable": 0, //对于开关
+                            "phy_enable": $('.current input[type="checkbox"]').val(), //对于开关
                             "hwmode": $(".hwmode option:selected").val(), //可变
                             "htmode": 3, //固定
                             "tx_power": 23, //固定
@@ -205,7 +214,7 @@
                                 "vap_id": 0, //固定
                                 "vap_mode": "ap", //固定
                                 "vap_enable": 0, //固定
-                                "Ssid": $(".ssid").val(),
+                                "Ssid": $(".ssid").val(), //可变
                                 "SsidHidden": 0, //固定
                                 "SecurityMode": $(".EncryptionType").val(), //可变
                                 "WepType": 0, //可变
@@ -253,11 +262,14 @@
 
             change = function() {
                 var v = $(".pwd").get(0);
+                var v1 = $(".pwd1").get(0);
                 if (isShow) {
                     v.type = "text";
+                    v1.type = "text";
                     isShow = false;
                 } else {
                     v.type = "password";
+                    v1.type = "password";
                     isShow = true;
                 }
             };
