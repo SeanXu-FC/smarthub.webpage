@@ -137,6 +137,12 @@
         #pwd1 {
             display: none;
         }
+        
+        .btn-primary.active {
+            color: #fff;
+            background-color: #03387f !important;
+            border-color: #03387f !important;
+        }
     </style>
 </head>
 
@@ -243,6 +249,7 @@
                     contentType: "application/json;charset=utf-8",
                     success: function(res) {
                         console.log(data);
+                        //console.log($('.current input[type="checkbox"]').val());
                         // $('#pwd').attr("disabled", true);
                         // $('#btn1').attr("disabled", true);
                         $("#content select,#content input,#content button").prop("disabled", true);

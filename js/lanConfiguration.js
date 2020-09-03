@@ -46,8 +46,11 @@ $(function() {
         $("#d1 input").removeAttr("disabled");
         return false;
     });
-
-    // $("#edit").trigger("click");
+    $(document).on("click", "#edit", function() {
+            $("#content select,#content input,#content button").removeAttr("disabled");
+        })
+        //document.body.addEventListener('touchstart,touchend', function() {});
+        // $("#edit").trigger("click");
     $("#content").mouseenter(function() {
         //$('#edit').removeAttr("disabled");
         $('#edit').prop("disabled", false);

@@ -81,7 +81,7 @@ $(function() {
                 data.elem.checked = !checked;
             }
             form.render();
-            // TODO
+
             var data = {
                 "jsonrpc": "2.0",
                 "method": "triger_scan_wifi",
@@ -101,7 +101,6 @@ $(function() {
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
                     if (checked) {
-                        $("#wn_name_01").html(res.result.sta_info[0].ssid)
                         $(".mCont").show();
                     } else {
                         $(".mCont").hide();

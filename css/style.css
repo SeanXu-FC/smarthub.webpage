@@ -562,8 +562,14 @@
     width: 90%
 }
 
-.widthper100 {
-    width: 100%
+.width100 {
+    width: 40%
+}
+
+@media screen and (max-width: 768px) {
+    .width100 {
+        width: 100%
+    }
 }
 
 .height20 {

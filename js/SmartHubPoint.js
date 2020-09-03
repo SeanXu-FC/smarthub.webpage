@@ -34,7 +34,7 @@ $(function() {
                 str += '<tr id="pwd"><td class="col-sm-3 czjz">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:70%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
                 str += '<tr id="pwd1"><td class="col-sm-3 czjz">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1" value="' + json[index].vap_config[index].WepKey + '" style="width:70%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
                 str += '<tr><td class="czjz">country Code:</td><td><select name="type" class="form-control select_03 countryCode" style="width:70%"></select></td></tr>';
-                str += ' <tr><td></td><td><div class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="btn btn-primary btn-primary active">Edit</button><button type="reset" id="cancel" class="btn btn-primary btn-primary active ml-10">Cancel</button><button type="button" id="btn1" class="btn btn-primary btn-primary active ml-10" onclick="save()">Save</button></div></td></tr>';
+                str += ' <tr><td></td><td><div class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="btn btn-primary active">Edit</button><button type="reset" id="cancel" class="btn btn-primary active ml-10">Cancel</button><button type="button" id="btn1" class="btn btn-primary active ml-10" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
                 str += '</ul>';
                 str += '</form>';
@@ -269,6 +269,7 @@ $(function() {
                 //     $("#content select,#content input,#content button").removeAttr("disabled");
                 // });
             document.body.addEventListener('touchstart,touchend', function() {});
+            //document.getElementById('edit').addEventListener('touchstart,touchend', function() {});
             $('#EncryptionType').change(function() {
                 //console.log(this.value == "5")
                 if (this.value == "4") {
@@ -373,10 +374,13 @@ $(function() {
                             $("#content").show();
                             $('.onoff').prop("value", json[index].phy_enable);
                             //$('.onoff').prop("value", '0');
-                        } else if (!checked && json[index].phy_enable == '1') {
+                            console.log("a" + json[index].phy_enable);
+                        } else {
+                            if (!checked);
                             $("#content").hide();
-                            $('.onoff').prop("value", json[index].phy_enable);
+                            $('.onoff').prop("value", [index].phy_enable);
                             //$('.onoff').prop("value", "1");
+                            console.log("b" + json[index].phy_enable);
                         }
 
                     }
