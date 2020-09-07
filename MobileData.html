@@ -57,6 +57,11 @@
             cursor: pointer;
             margin-left: 10px;
         }
+        
+        .czjz {
+            display: table-cell !important;
+            vertical-align: middle !important;
+        }
     </style>
 </head>
 
@@ -96,8 +101,56 @@
             <div>
                 <div id="arrow">Advanced <img class="up" src="images/icon-arrow-up.png"></div>
                 <div class="advanced">
-                    <div>> APNs(Access point names,)</div>
-                    <div>> Data usage</div>
+                    <div> sim1: <input type="radio"> sim2:<input type="radio"></div>
+                    <div>
+                        <table class="table table-responsive table-bordered">
+                            <tr>
+                                <td width="12%" rowspan="2" class="czjz">
+                                    APN:
+                                </td>
+                                <td width="37%">name:</td>
+                                <td width="51%">CMNET</td>
+
+                            </tr>
+                            <tr>
+                                <td>passwd:</td>
+                                <td>123456</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div>Data:</div>
+                                </td>
+                                <td>100</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div>
+                                        <div>sim_id:</div>
+                                    </div>
+                                </td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                        <!-- <table class="table table-responsive table-bordered">
+                            <tr>
+                                <td class="col-sm-6">APN:</td>
+                                <td class="col-sm-6"></td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-6">APN:</td>
+                                <td class="col-sm-6"></td>
+                            </tr>
+                            <tr>
+                                <td>Data:</td>
+                                <td>100</td>
+                            </tr>
+                            <tr>
+                                <td>sim_id:</td>
+                                <td>0</td>
+                            </tr>
+                        </table> -->
+                    </div>
+
                     <div>> SIM management</div>
                 </div>
             </div>
@@ -127,6 +180,31 @@
         </div>
 
     </div>
+    <script>
+        $(function() {
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "lte_set_status",
+                "params": {},
+                "id": "9.1"
+            };
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    console.log(res);
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+
+                }
+            });
+        });
+    </script>
 
     <script src="layui/layui.js" charset="utf-8"></script>
 
