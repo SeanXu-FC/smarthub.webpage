@@ -15,6 +15,7 @@
     <script type="text/javascript" src="js/jquery/3.2.1/jquery.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/xadmin.js"></script>
+    <script type="text/javascript" src="js/SmartHubPointSave.js"></script>
     <style>
         .layui-nav span {
             color: red;
@@ -100,6 +101,11 @@
             })
         </script>
 
+
+
+
+
+
     </div>
     <!-- Top end -->
     <!-- Start in the middle -->
@@ -111,14 +117,14 @@
                 <li>
                     <a _href="home.html" class="title">
                         <i class="iconfont">&#xe616;</i>
-                        <cite>HOME </cite>
+                        <cite class="hd">HOME </cite>
                         <i class="iconfont nav_right ">&#xe603;</i>
                     </a>
                 </li>
                 <li>
                     <a _href="setupWizard.html" class="title">
                         <i class="iconfont ">&#xe656;</i>
-                        <cite>SET-UP WIZARD </cite>
+                        <cite class="hd">SET-UP WIZARD </cite>
                         <i class="iconfont nav_right ">&#xe603;</i>
                     </a>
                 </li>
@@ -132,28 +138,28 @@
                         <li>
                             <a _href="WiFiNetwork.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite>Wi-Fi network</cite>
+                                <cite class="hd">Wi-Fi network</cite>
 
                             </a>
                         </li>
                         <li>
                             <a _href="MobileData.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite>Mobile data</cite>
+                                <cite class="hd">Mobile data</cite>
 
                             </a>
                         </li>
                         <li>
                             <a _href="SmartHubPoint.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite id="smartHub">SmartHub access point</cite>
+                                <cite class="hd" id="smartHub">SmartHub access point</cite>
 
                             </a>
                         </li>
                         <li>
                             <a _href="HubInfomation.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite>Info</cite>
+                                <cite class="hd">Info</cite>
 
                             </a>
                         </li>
@@ -162,7 +168,7 @@
                 <li>
                     <a _href="connectedDevices.html" class="title">
                         <i class="iconfont ">&#xe65b;</i>
-                        <cite>CONNECTED DEVICES </cite>
+                        <cite class="hd">CONNECTED DEVICES </cite>
                         <i class="iconfont nav_right ">&#xe603;</i>
                     </a>
                 </li>
@@ -176,13 +182,13 @@
                         <li>
                             <a _href="LanConfiguration.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite>LAN configuration</cite>
+                                <cite class="hd">LAN configuration</cite>
                             </a>
                         </li>
                         <li>
                             <a _href="Gnss.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite>GNSS</cite>
+                                <cite class="hd">GNSS</cite>
                             </a>
                         </li>
                         <li>
@@ -208,19 +214,19 @@
                                 <li>
                                     <a _href="channels-monitoring.html">
                                         <i class="iconfont ">&#xe6b6;</i>
-                                        <cite>channels monitoring</cite>
+                                        <cite class="hd">channels monitoring</cite>
                                     </a>
                                 </li>
                                 <li>
                                     <a _href="channels-configuration.html">
                                         <i class="iconfont ">&#xe6b6;</i>
-                                        <cite>Channels configuration</cite>
+                                        <cite class="hd">Channels configuration</cite>
                                     </a>
                                 </li>
                                 <li>
                                     <a _href="alert-notifications.html">
                                         <i class="iconfont ">&#xe6b6;</i>
-                                        <cite>Alert notifications</cite>
+                                        <cite class="hd">Alert notifications</cite>
                                     </a>
                                 </li>
                             </ul>
@@ -228,19 +234,19 @@
                         <li>
                             <a _href="SoftwareUpgrade.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite>Software upgrade</cite>
+                                <cite class="hd">Software upgrade</cite>
                             </a>
                         </li>
                         <li>
                             <a _href="restart.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite>Restart & factory reset</cite>
+                                <cite class="hd">Restart & factory reset</cite>
                             </a>
                         </li>
                         <li>
                             <a _href="adminPassword.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite>Admin password</cite>
+                                <cite class="hd">Admin password</cite>
                             </a>
                         </li>
                     </ul>
@@ -255,7 +261,7 @@
                         <li>
                             <a _href="addMAC.html ">
                                 <i class="iconfont ">&#xe6b6;</i>
-                                <cite>Add MAC</cite>
+                                <cite class="hd">Add MAC</cite>
                             </a>
                         </li>
                     </ul>
@@ -290,69 +296,70 @@
     </div>
     <!-- Bottom end -->
 
-    <script>
-        // $(function() {
-        //     $("#smartHub").click(function() {
-        //         var data = {
-        //             "jsonrpc": "2.0",
-        //             "method": "SetWlanSettings",
-        //             "params": {
-        //                 "wifi_config": [{
-        //                     "phy_id": 2, //固定
-        //                     "phy_name": "wifi2", //固定
-        //                     "phy_enable": 0, //对于开关
-        //                     "hwmode": $(".hwmode option:selected").val(), //可变
-        //                     "htmode": 3, //固定
-        //                     "tx_power": 23, //固定
-        //                     "Channel": $(".channel option:selected").val(), //可变
-        //                     "country_code": $(".countryCode option:selected").val(), //可变
-        //                     "vap_config": [{
-        //                         "vap_id": 0, //固定
-        //                         "vap_mode": "ap", //固定
-        //                         "vap_enable": 0, //固定
-        //                         "Ssid": $(".ssid").val(),
-        //                         "SsidHidden": 0, //固定
-        //                         "SecurityMode": $(".EncryptionType").val(), //可变
-        //                         "WepType": 0, //可变
-        //                         "WpaType": 2, //可变
-        //                         "WepKey": "", //可变
-        //                         "WpaKey": $(".pwd").val(), //可变
-        //                         "ApIsolation": 0, //固定
-        //                         "max_numsta": 15 //固定
-        //                     }]
-        //                 }]
-        //             },
-        //             "id": "9.1",
-        //         };
 
-        //         data = JSON.stringify(data);
-        //         $.ajax({
-        //             type: "post",
-        //             url: "/action/action",
-        //             data: data,
+    <!-- <script>
+        $(function() {
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "SetWlanSettings",
+                "params": {
+                    "wifi_config": [{
+                        "phy_id": 2, //固定
+                        "phy_name": "wifi2", //固定
+                        "phy_enable": 0, //对于开关
+                        "hwmode": $(".hwmode option:selected").val(), //可变
+                        "htmode": 3, //固定
+                        "tx_power": 23, //固定
+                        "Channel": $(".channel option:selected").val(), //可变
+                        "country_code": $(".countryCode option:selected").val(), //可变
+                        "vap_config": [{
+                            "vap_id": 0, //固定
+                            "vap_mode": "ap", //固定
+                            "vap_enable": 0, //固定
+                            "Ssid": $(".ssid").val(),
+                            "SsidHidden": 0, //固定
+                            "SecurityMode": $(".EncryptionType").val(), //可变
+                            "WepType": 0, //可变
+                            "WpaType": 2, //可变
+                            "WepKey": "", //可变
+                            "WpaKey": $(".pwd").val(), //可变
+                            "ApIsolation": 0, //固定
+                            "max_numsta": 15 //固定
+                        }]
+                    }]
+                },
+                "id": "9.1",
+            };
 
-        //             dataType: "json",
-        //             contentType: "application/json;charset=utf-8",
-        //             success: function(res) {
-        //                 console.log(data);
-        //                 // $('#pwd').attr("disabled", true);
-        //                 // $('#btn1').attr("disabled", true);
-        //                 $("#content select,#content input,#content button").prop("disabled", true);
-        //                 $('#edit').attr("disabled", false);
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
 
-        //                 $('#pwd').attr("disabled", true);
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    console.log(data);
+                    // $('#pwd').attr("disabled", true);
+                    // $('#btn1').attr("disabled", true);
+                    $("#content select,#content input,#content button").prop("disabled", true);
+                    $('#edit').attr("disabled", false);
 
-        //             },
-        //             error: function(jqXHR) {
-        //                 alert("An error occurred：" + jqXHR.status);
-        //             }
+                    $('#pwd').attr("disabled", true);
 
-        //         });
-        //     });
-        // });
-    </script>
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+                }
 
-    <script type="text/javascript" src="js/SmartHubPointSave.js"></script>
+            });
+
+
+        });
+    </script> -->
+
+
 </body>
 
 </html>

@@ -28,12 +28,12 @@ $(function() {
                 str += '<tr><th colspan="2">Access point connection settings</th></tr>';
                 str += '<tr><th colspan="2">Use these details when connecting a device to the SmartHub\'s access point</th></tr>';
                 str += '<tr><td class="col-sm-3 czjz">Access point name:</td><td class="col-sm-9"><input type="text" class="form-control ssid" value="' + json[index].vap_config[index].Ssid + '" style="width:70%"></td></tr>';
-                str += '<tr><td class="czjz">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel" style="width:70%"></select></td></tr>';
                 str += '<tr><td class="czjz">Mode:</td><td><select name="type" class="form-control select_01 hwmode" style="width:70%"></select></td></tr>';
+                str += '<tr><td class="czjz">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel" style="width:70%"></select></td></tr>';
                 str += '<tr><td class="czjz">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType" style="width:70%"></select></td></tr>';
                 str += '<tr id="pwd"><td class="col-sm-3 czjz">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:70%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
                 str += '<tr id="pwd1"><td class="col-sm-3 czjz">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1" value="' + json[index].vap_config[index].WepKey + '" style="width:70%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                str += '<tr><td class="czjz">country Code:</td><td><select name="type" class="form-control select_03 countryCode" style="width:70%"></select></td></tr>';
+                str += '<tr><td class="czjz">country Code:</td><td><select name="type" class="form-control select_03 countryCode" value="' + json[index].CountryCode + '"  style="width:70%"></select></td></tr>';
                 str += ' <tr><td></td><td><div class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="btn btn-primary active">Edit</button><button type="reset" id="cancel" class="btn btn-primary active ml-10">Cancel</button><button type="button" id="btn1" class="btn btn-primary active ml-10" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
                 str += '</ul>';
@@ -54,54 +54,75 @@ $(function() {
                     // $channel = $(channel).get(0).value;
                     // $channelText = $(channel).get(0).text;
                     $('.channel').append(channel);
+                    //console.log(channelArr[i])
                 }
                 var channelSelected = "<option value=" + i + " selected='selected' >" + json[index].channel + " </option>"
                 $('.channel').prepend(channelSelected);
+
+                var oldVal = "";
+
+                $('.channel').change(function() {
+                    if ($(this).find("option:selected")) {
+                        var _thisVal = $(this).find('option:selected').val();
+                        //console.log(_thisVal);
+                        oldVal = $(this).attr("old", _thisVal);
+                        //$('.channel').find("option[value=" + _thisVal + "]").not("option[value=0]").hide();
+                        $('.channel').find("option[value=" + _thisVal + "]").show();
+                        $('.channel option[value=12]').hide();
+                        $('.channel option[value=0]').show();
+
+                    }
+                })
                 if (json[index].channel == 11) {
                     $('.channel option:selected').text(channelArr[11]);
-                    $('.channel option[value=11]').hide();
+                    //$('.channel option:selected').hide();
+
                 }
                 if (json[index].channel == 10) {
                     $('.channel option:selected').text(channelArr[10]);
-                    $('.channel option[value=10]').hide();
+                    //$('.channel option[value=10]').hide();
                 }
                 if (json[index].channel == 9) {
                     $('.channel option:selected').text(channelArr[9]);
-                    $('.channel option[value=9]').hide();
+                    //$('.channel option[value=9]').hide();
                 }
                 if (json[index].channel == 8) {
                     $('.channel option:selected').text(channelArr[8]);
-                    $('.channel option[value=8]').hide();
+                    //$('.channel option[value=8]').hide();
                 }
                 if (json[index].channel == 7) {
                     $('.channel option:selected').text(channelArr[7]);
-                    $('.channel option[value=7]').hide();
+                    //$('.channel option[value=7]').hide();
                 }
                 if (json[index].channel == 6) {
                     $('.channel option:selected').text(channelArr[6]);
-                    $('.channel option[value=6]').hide();
+                    //$('.channel option[value=6]').hide();
                 }
                 if (json[index].channel == 5) {
                     $('.channel option:selected').text(channelArr[5]);
-                    $('.channel option[value=5]').hide();
+                    //$('.channel option[value=5]').hide();
                 }
                 if (json[index].channel == 4) {
                     $('.channel option:selected').text(channelArr[4]);
-                    $('.channel option[value=4]').hide();
+                    //$('.channel option[value=4]').hide();
                 }
                 if (json[index].channel == 3) {
                     $('.channel option:selected').text(channelArr[3]);
-                    $('.channel option[value=3]').hide();
+                    //$('.channel option[value=3]').hide();
                 }
                 if (json[index].channel == 2) {
                     $('.channel option:selected').text(channelArr[2]);
-                    $('.channel option[value=2]').hide();
+                    //$('.channel option[value=2]').hide();
                 }
                 if (json[index].channel == 1) {
                     $('.channel option:selected').text(channelArr[1]);
-                    $('.channel option[value=1]').hide();
+                    //$('.channel option[value=1]').hide();
                 }
                 if (json[index].channel == 0) {
+                    $('.channel option:selected').text(channelArr[0]);
+                    //$('.channel option[value=0]').hide();
+                }
+                if (!json[index].channel) {
                     $('.channel option:selected').text(channelArr[0]);
                     $('.channel option[value=0]').hide();
                 }
@@ -119,23 +140,39 @@ $(function() {
                 }
                 var hwmodeSelected = "<option value=" + i + " selected='selected'>" + json[index].hwmode + " </option>"
                 $('.hwmode').prepend(hwmodeSelected);
+                // console.log(hwmodeSelected)
+
+                $('.hwmode').change(function() {
+                    if ($(this).find("option:selected")) {
+                        var _thisVal = $(this).find('option:selected').val();
+                        oldVal = $(this).attr("old", _thisVal);
+                        $('.hwmode').find("option[value=" + _thisVal + "]").show()
+                        $('.hwmode option[value=4]').hide();
+                        $('.hwmode option[value=0]').show();
+                    }
+                })
 
                 if (json[index].hwmode == 3) {
                     $('.hwmode option:selected').text(hwmodeArr[3]);
-                    $('.hwmode option[value=3]').hide();
+                    //$('.hwmode option[value=3]').hide();
                 }
 
                 if (json[index].hwmode == 2) {
                     $('.hwmode option:selected').text(hwmodeArr[2]);
-                    $('.hwmode option[value=2]').hide();
+                    //$('.hwmode option[value=2]').hide();
                 }
 
                 if (json[index].hwmode == 1) {
                     $('.hwmode option:selected').text(hwmodeArr[1]);
-                    $('.hwmode option[value=1]').hide();
+                    //$('.hwmode option[value=1]').hide();
                 }
 
                 if (json[index].hwmode == 0) {
+                    $('.hwmode option:selected').text(hwmodeArr[0]);
+                    //$('.hwmode option[value=0]').hide();
+                }
+
+                if (!json[index].hwmode) {
                     $('.hwmode option:selected').text(hwmodeArr[0]);
                     $('.hwmode option[value=0]').hide();
                 }
@@ -149,86 +186,35 @@ $(function() {
                     var EncryptionType = "<option value=" + i + ">" + encryptionTypeArr[i] + "</option>";
                     //$EncryptionType = $(EncryptionType).get(0).value;
                     $('.EncryptionType').append(EncryptionType);
-                }
-                var encryptionTypeSelected = "<option value=" + i + " selected='selected'>" + json[index].vap_config[index].SecurityMode + " </option>"
-                $('.EncryptionType').prepend(encryptionTypeSelected);
 
-                if (json[index].vap_config[index].SecurityMode == 4) {
-                    $('.EncryptionType option:selected').text(encryptionTypeArr[4]);
-                    $('.EncryptionType option[value=4]').hide();
                 }
-                if (json[index].vap_config[index].SecurityMode == 3) {
-                    $('.EncryptionType option:selected').text(encryptionTypeArr[3]);
-                    $('.EncryptionType option[value=3]').hide();
-                }
-                if (json[index].vap_config[index].SecurityMode == 2) {
-                    $('.EncryptionType option:selected').text(encryptionTypeArr[2]);
-                    $('.EncryptionType option[value=2]').hide();
-                }
-                if (json[index].vap_config[index].SecurityMode == 1) {
-                    $('.EncryptionType option:selected').text(encryptionTypeArr[1]);
-                    $('.EncryptionType option[value=1]').hide();
-                }
-                if (json[index].vap_config[index].SecurityMode == 0) {
-                    $('.EncryptionType option:selected').text(encryptionTypeArr[0]);
-                    $('.EncryptionType option[value=0]').hide();
-                }
+                // var encryptionTypeSelected = "<option value=" + i + " selected='selected'>" + json[index].vap_config[index].SecurityMode + " </option>"
+                // $('.EncryptionType').append(encryptionTypeSelected);
+
+
 
                 // countryCode
                 var optionCountryCode = document.createElement("option");
                 $(optionCountryCode).val(json[index].CountryCode).attr("selected", "selected");
                 $(optionCountryCode).text(json[index].CountryCode);
                 var countryCodeArr = [
-                    "00 - World", "AE - United Arab Emirates", "AL - Albania", "AM - Armenia", "AR - Argentina", "AT - Austria", "AU - Australia", "AZ - Azerbaijan", "BE - Belgium", "BG - Bulgaria", "BH - Bahrain", "BN - Brunei Darussalam", "BO - Bolivia", "BR - Brazil", "BY - Belarus", "BZ - Belize", "CA - Canada", "CH - Switzerland ", "CL - Chile", "CN - China", "CO - Colombia", "CR - Costa Rica", "CY - Cyprus", "CZ - Czech Republic", "DE - Germany", "DK - Denmark", "DO - Dominican Republic", "DZ - Algeria", "EC - Ecuador", "EE - Estonia", "EG - Egypt", "ES - Spain", "FI - Finland", "FO - Faroe Islands", "FR - France", "GB - United Kingdom", "GE - Georgia", "GR - Greece", "GT - Guatemala", "HK - Hong Kong", "HN - Honduras", "HR - Croatia", "HU - Hungary ", "ID - Indonesia", "IE - Ireland", "IL - Israel", "IN - India", "IQ - Iraq", "IR - Iran", "IS - Iceland", "IT - Italy", "JM - Jamaica", "JO - Jordan", "JP - Japan", "KE - Kenya", "KP - North Korea", "KR - South Korea", "KW - Kuwait", "KZ - Kazakhstan", "LB - Lebanon", "LI - Liechtenstein", "LT - Lithuania", "LU - Luxembourg", "LV - Latvia", "LY - Libyan Arab Jamahiriya", "MA - Morocco", "MC - Monaco", "MK - Macedonia", "MO - Macao", "MX - Mexico", "MY - Malaysia", "NI - Nicaragua", "NL - Netherlands", "NO - Norway", "NZ - New Zealand", "OM - Oman", "PA - Panama", "PE - Peru", "PH - Philippines", "PK - Pakistan", "PL - Poland", "PR - Puerto Rico", "PT - Portugal", "PY - Paraguay", "QA - Qatar", "RO - Romania", "RU - Russian Federation", "SA - Saudi Arabia", "SE - Sweden", "SG - Singapore", "SI - Slovenia", "SK - Slovakia", "SV - El Salvador", "SY - Syrian Arab Republic", "TH - Thailand", "TN - Tunisia", "TR - Turkey", "TT - Trinidad and Tobago", "TW - Taiwan", "UA - Ukraine", "US - United States", "UY - Uruguay", "UZ - Uzbekistan", "VE - Venezuela", "VN - Viet Nam", "YE - Yemen", "ZA - South Africa", "ZW - Zimbabwe"
+                    "00 - World", "AE - United Arab Emirates", "AL - Albania", "AM - Armenia", "AR - Argentina", "AT - Austria", "AU - Australia", "AZ - Azerbaijan", "BE - Belgium", "BG - Bulgaria", "BH - Bahrain", "BN - Brunei Darussalam", "BO - Bolivia", "BR - Brazil", "BY - Belarus", "BZ - Belize", "CA - Canada", "CH - Switzerland ", "CL - Chile", "CN - China", "CO - Colombia", "CR - Costa Rica", "CY - Cyprus", "CZ - Czech Republic", "DE - Germany", "DK - Denmark", "DO - Dominican Republic", "DZ - Algeria", "EC - Ecuador", "EE - Estonia", "EG - Egypt", "ES - Spain", "FI - Finland", "FO - Faroe Islands", "FR - France", "GB - United Kingdom", "GE - Georgia", "GR - Greece", "GT - Guatemala", "HK - Hong Kong", "HN - Honduras", "HR - Croatia", "HU - Hungary ", "ID - Indonesia", "IE - Ireland", "IL - Israel", "IN - India", "IQ - Iraq", "IR - Iran", "IS - Iceland", "IT - Italy", "JM - Jamaica", "JO - Jordan", "JP - Japan", "KE - Kenya", "KP - North Korea", "KR - South Korea", "KW - Kuwait", "KZ - Kazakhstan", "LB - Lebanon", "LI - Liechtenstein", "LT - Lithuania", "LU - Luxembourg", "LV - Latvia", "LY - Libyan Arab Jamahiriya", "MA - Morocco", "MC - Monaco", "MK - Macedonia", "MO - Macao", "MX - Mexico", "MY - Malaysia", "NI - Nicaragua", "NL - Netherlands", "NO - Norway", "NZ - New Zealand", "OM - Oman", "PA - Panama", "PE - Peru", "PH - Philippines", "PK - Pakistan", "PL - Poland", "PR - Puerto Rico", "PT - Portugal", "PY - Paraguay", "QA - Qatar", "RO - Romania", "RU - Russian Federation", "SA - Saudi Arabia", "SE - Sweden", "SG - Singapore", "SI - Slovenia", "SK - Slovakia", "SV - El Salvador", "SY - Syrian Arab Republic", "TH - Thailand", "TN - Tunisia", "TR - Turkey", "TT - Trinidad and Tobago", "TW - China Taiwan", "UA - Ukraine", "US - United States", "UY - Uruguay", "UZ - Uzbekistan", "VE - Venezuela", "VN - Viet Nam", "YE - Yemen", "ZA - South Africa", "ZW - Zimbabwe"
                 ];
                 for (var i = 0; i < countryCodeArr.length; i++) {
                     var countryCode = "<option value=" + countryCodeArr[i].slice(0, 2) + ">" + countryCodeArr[i] + "</option>"
                     $('.countryCode').append(countryCode);
                 }
                 var countryCodeSelected = "<option value=" + json[index].CountryCode + " selected='selected'>" + json[index].CountryCode + " </option>"
-                $('.countryCode').prepend(countryCodeSelected);
-
-                $("#content select").change(function() {
-                    oldVal = $(this).attr("old");
-                    var _thisVal = $(this).find('option:selected').val();
-                    var id = $(this).attr("id");
-                    //$(this).find("option[value=" + _thisVal + "]").not("option[value=0]").hide();
-                    $(this).find("option[value=" + _thisVal + "]").hide();
-                    $(this).find("option[value=" + oldVal + "]").show();
-                    $(this).attr("old", _thisVal);
-                })
-
-                var oldVal = "";
-
-                $('.channel').change(function() {
-                    if ($(this).find("option:selected")) {
-                        var _thisVal = $(this).find('option:selected').val();
-                        oldVal = $(this).attr("old", _thisVal);
-                        $('.channel').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
-                    }
-                })
-
-                $('.hwmode').change(function() {
-                    if ($(this).find("option:selected")) {
-                        var _thisVal = $(this).find('option:selected').val();
-                        oldVal = $(this).attr("old", _thisVal);
-                        $('.hwmode').find("option[value=" + _thisVal + "]").hide()
-                    }
-                })
-
-                $('.EncryptionType').change(function() {
-                    if ($(this).find("option:selected")) {
-                        var _thisVal = $(this).find('option:selected').val();
-                        oldVal = $(this).attr("old", _thisVal);
-                        $('.EncryptionType').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
-                    }
-                })
+                $('.countryCode').append(countryCodeSelected);
 
                 $('.countryCode').change(function() {
                     if ($(this).find("option:selected")) {
                         var _thisVal = $(this).find('option:selected').val();
                         oldVal = $(this).attr("old", _thisVal);
-                        $('.countryCode').find("option[value=" + _thisVal + "]").not("option[value=0]").hide()
+                        $('.countryCode').find("option[value=" + _thisVal + "]").not("option[value=0]").show();
+                        $('.countryCode option:last').hide();
+                        //console.log(countryCodeSelected);
+                        //$(countryCodeSelected).hide();
                     }
                 })
 
@@ -238,66 +224,57 @@ $(function() {
 
             $("#content select,#content input,#content button").prop("disabled", true);
 
-            if ($("#EncryptionType option:selected").text() == "psk-mixed") {
-                $('#pwd').show();
-            }
-            if ($("#EncryptionType option:selected").text() == "WPA2-PSA") {
-                $('#pwd').show();
-            }
-            if ($("#EncryptionType option:selected").text() == "WPA-PSA") {
-                $('#pwd').show();
-            }
-            if ($("#EncryptionType option:selected").text() == "WEP") {
-                $('#pwd1').show();
-                $('#pwd').hide();
-            }
-            if ($("#EncryptionType option:selected").text() == "No Encryption") {
-                $('#pwd1').hide();
-                $('#pwd').hide();
-            }
-
-            // $("#edit").on("click", ".edit", function() {
-            //     $("#content select,#content input,#content button").removeAttr("disabled");
-            // });
             $(document).on("click", ".edit", function() {
-                    $("#content select,#content input,#content button").removeAttr("disabled");
-                })
-                // $("#edit").addEventListener("onclick", function() {
-                //     $("#content select,#content input,#content button").removeAttr("disabled");
-                // });
-                // $("#edit").click(function() {
-                //     $("#content select,#content input,#content button").removeAttr("disabled");
-                // });
+                $("#content select,#content input,#content button").removeAttr("disabled");
+            })
+            $('#cancel').click(function() {
+                $('#pwd').hide();
+                $('#pwd1').hide();
+            })
+
             document.body.addEventListener('touchstart,touchend', function() {});
             //document.getElementById('edit').addEventListener('touchstart,touchend', function() {});
             $('#EncryptionType').change(function() {
-                //console.log(this.value == "5")
+
                 if (this.value == "4") {
                     $("#pwd1").hide();
                     $("#pwd").show();
-                    //console.log("444")
                 } else if (this.value == "3") {
                     $("#pwd1").hide();
                     $("#pwd").show();
-                    //console.log("333")
                 } else if (this.value == "2") {
                     $("#pwd1").hide();
                     $("#pwd").show();
-                    //console.log("222")
                 } else if (this.value == "1") {
                     $("#pwd1").show();
                     $("#pwd").hide();
-                    //console.log("111")
+                    $(".pwd1").val("");
                 } else if (this.value == "0") {
                     $("#pwd1").hide();
                     $("#pwd").hide();
-                    //console.log("000")
                 } else {
                     $("#pwd").show();
                     $("#pwd1").hide();
                 }
 
             })
+
+            var isShow = true;
+
+            change = function() {
+                var v = $(".pwd").get(0);
+                var v1 = $(".pwd1").get(0);
+                if (isShow) {
+                    v.type = "text";
+                    v1.type = "text";
+                    isShow = false;
+                } else {
+                    v.type = "password";
+                    v1.type = "password";
+                    isShow = true;
+                }
+            };
+            change();
 
             $("#content").mouseenter(function() {
                 //$('#edit').removeAttr("disabled");

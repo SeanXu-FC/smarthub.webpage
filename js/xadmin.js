@@ -86,6 +86,24 @@ $(function() {
         $('.layui-tab-title li').eq(0).find('i').remove();
     });
 
+    if ($(window).width() < 768) {
+        //$('.page-content-bg').show();
+        //$('#nav').css("width", "auto")
+        $('.hd').click(function(event) {
+
+            $('.left-nav').animate({ left: '-281px' }, 100);
+            $('.page-content').animate({ left: '0px' }, 100);
+
+            $('.page-content-bg').hide();
+        });
+
+        $('.page-content-bg').click(function(event) {
+            $('.left-nav').animate({ left: '-281px' }, 100);
+            $('.page-content').animate({ left: '0px' }, 100);
+            $(this).hide();
+        });
+    }
+
     //左侧菜单效果
     // $('#content').bind("click",function(event){
     $('.left-nav #nav li').click(function(event) {

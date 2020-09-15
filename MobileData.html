@@ -17,6 +17,7 @@
         td {
             padding: 10px;
             border: 1px solid #fff;
+            font-size: 12px
         }
         
         .mc {
@@ -47,9 +48,9 @@
         .advanced {
             display: none;
             margin-left: 30px;
-            font-size: 16px;
+            font-size: 14px;
             line-height: 32px;
-            font-weight: bold;
+            /* font-weight: bold; */
             margin-top: 10px;
         }
         
@@ -102,11 +103,11 @@
                 <div id="arrow">Advanced <img class="up" src="images/icon-arrow-up.png"></div>
                 <div class="advanced">
                     <div> sim1: <input type="radio"> sim2:<input type="radio"></div>
-                    <div>
+                    <div class="col-sm-6">
                         <table class="table table-responsive table-bordered">
                             <tr>
                                 <td width="12%" rowspan="2" class="czjz">
-                                    APN:
+                                    sim1 APN:
                                 </td>
                                 <td width="37%">name:</td>
                                 <td width="51%">CMNET</td>
@@ -150,6 +151,36 @@
                             </tr>
                         </table> -->
                     </div>
+                    <div class="col-sm-6">
+                        <table class="table table-responsive table-bordered">
+                            <tr>
+                                <td width="12%" rowspan="2" class="czjz">
+                                    sim2 APN:
+                                </td>
+                                <td width="37%">name:</td>
+                                <td width="51%">CMNET</td>
+
+                            </tr>
+                            <tr>
+                                <td>passwd:</td>
+                                <td>123456</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div>Data:</div>
+                                </td>
+                                <td>100</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div>
+                                        <div>sim_id:</div>
+                                    </div>
+                                </td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
 
                     <div>> SIM management</div>
                 </div>
@@ -161,11 +192,11 @@
                         if ($('#arrow img').attr("class") == "up") {
                             $('#arrow img').attr("src", images[1]);
                             $('#arrow img').removeClass();
-                            $(".advanced").show();
+                            $(".advanced").slideDown(500);
                         } else {
                             $('#arrow img').attr("src", images[0]);
                             $('#arrow img').addClass("up");
-                            $(".advanced").hide();
+                            $(".advanced").slideUp(500);
                         }
                     });
                     // $("#arrow").hover(function() {
@@ -179,12 +210,14 @@
             </script>
         </div>
 
+
     </div>
-    <script>
+    <!-- <script>
         $(function() {
             var data = {
                 "jsonrpc": "2.0",
                 "method": "lte_set_status",
+
                 "params": {},
                 "id": "9.1"
             };
@@ -204,7 +237,7 @@
                 }
             });
         });
-    </script>
+    </script> -->
 
     <script src="layui/layui.js" charset="utf-8"></script>
 
