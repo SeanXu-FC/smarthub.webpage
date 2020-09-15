@@ -1,5 +1,5 @@
 $(function() {
-
+    $(".pwd1").val("");
     save = function() {
 
         var data = {
