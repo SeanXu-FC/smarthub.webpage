@@ -1,5 +1,6 @@
 $(function() {
     $(".pwd1").val("");
+    $(".pwd").val("");
     save = function() {
 
         var data = {
@@ -21,7 +22,7 @@ $(function() {
                         "vap_enable": 0, //固定
                         "Ssid": $(".ssid").val(), //可变
                         "SsidHidden": 0, //固定
-                        "SecurityMode": parseInt($(".EncryptionType option:selected").val()), //可变
+                        "SecurityMode": $(".EncryptionType option:selected").val(), //可变
                         "WepType": 0, //可变
                         "WpaType": 2, //可变
                         "WepKey": $(".pwd1").val(), //可变
