@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        
+        td {
+            padding: 20px 0 0 20px;
+        }
+        
+        .mc1 {
+            margin: 20px 0 0 90px;
+            position: relative
+        }
+        
+        .mCont {
+            position: relative;
+            /* margin: 0 auto; */
+            /* top: 150px;
+            left: 0px; */
+            width: 272px;
+            height: 320px;
+            margin-top: 40px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #fff
+        }
+        
+        .btFs {
+            font-size: 16px;
+            font-weight: bold
+        }
+        
+        .green {
+            color: #00a516
+        }
+        
+        .c9 {
+            color: #999
+        }
+        
+        .fsFw {
+            font-size: 14px;
+            font-weight: bold
+        }
+        
+        .addN {
+            color: #861f41;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .w100 {
+            width: 100px;
+        }
+        
+        .Set-up-wizard {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 10px;
+        }
+        
+        .Choose-your-wireless-network {
+            font-family: OpenSans;
+            font-size: 26px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .When-connected-your-SmartHub-will-distribute-wireless-data-to-all-devices-connected-to-its-access-point-If-there-are-no-wireless-networks-you-wish-to-connect-to-now-then-just-select-continue {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Rectangle-1182 {
+            width: 124px;
+            height: 50px;
+            border-radius: 5px;
+            background-color: #861f41;
+            background-color: #f1f1f1;
+        }
+        
+        .Rectangle-1182 {
+            width: 137px;
+            height: 50px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+        }
+        
+        .Rectangle-1182:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Rectangle-1182.active {
+            background-color: #861f41;
+        }
+        
+        .Back {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #555555;
+        }
+        
+        .Continue {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .Connected-24GHz {
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.63;
+            letter-spacing: normal;
+            text-align: left;
+            color: #26b167;
+        }
+        
+        .Rectangle-1185 {
+            width: 235px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            padding: 5px 10px;
+        }
+        
+        .Access-point-name {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Password {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Set-up-complete {
+            font-family: OpenSans;
+            font-size: 40px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: center;
+            color: #000000;
+        }
+        
+        .Your-SmartHub-is-now-set-up-and-ready-to-use {
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.18;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="text-left mc ml-70">
+            <h2 class="Set-up-wizard"> Set-up wizard </h2>
+        </div>
+        <div class="row text-center">
+            <p class="Set-up-complete mt-40">Set-up complete</p>
+            <div class="mt-40"><img src="images/SetupFinish.png"></div>
+            <div class="mt-40 Your-SmartHub-is-now-set-up-and-ready-to-use">
+                Your SmartHub is now set-up and ready to use
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>

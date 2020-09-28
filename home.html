@@ -8,33 +8,114 @@
     <script src="js/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/xadmin.css">
+    <script type="text/javascript" src="js/jquery/3.2.1/jquery.min.js"></script>
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/xadmin.js"></script>
     <title>Document</title>
+    <style>
+        /* img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+        } */
+        
+        .Connected {
+            width: 111px;
+            height: 30px;
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.14;
+            letter-spacing: normal;
+            text-align: left;
+            color: #26b167;
+        }
+        
+        .MyText {
+            width: 133px;
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-1 mt-40"><img class="img-responsive" src="img/home001.png"></div>
-            <div class="col-md-7 col-sm-7 col-lg-7 mt-40">
-                <div class="mt-40 mb-10 bb1c w80">
-                    <h3 class="fw24">Cloud</h3>
-                    <div class="mb-10 mt-15">Status:<span class="ml-100 font18 red">Error</span></div>
+            <h4 class="ml-60" style="font-size:44px;font-weight: 600;color:#861f41;border-bottom: solid 1px #d2d2d2; padding-bottom: 20px;width:92%">Status</h4>
+            <div class="col-md-5 col-sm-5 col-lg-5 col-md-offset-1 mt-30 ">
+                <div class="bd" style="width:560px;height:auto;position:relative;overflow:hidden;zoom:1;border:0px solid #f00">
+                    <a href="WiFiNetwork.html" title="Wi-Fi network"><img src="images/r_03.png" style="position: absolute;top:120px;left:197px;z-index: 1;width:69px;max-width:100%;height:auto;display:block;"></a>
+                    <a href="MobileData.html" title="Mobile data"><img src="images/r_04.png" style="position: absolute;top:260px;left:261px;z-index: 2;width:56px;max-width:100%;height:auto;display:block;"></a>
+                    <div style="position: relative;width:520px">
+                        <img src="images/r_01.png" style="display:block;width:100px;max-width:100%;height:auto;display:block;margin:0 auto">
+                    </div>
+                    <div style="position: relative;width:520px">
+                        <img src="images/r_02.png" style="display:block;margin:0 auto;width:70px;max-width:100%;height:auto;display:block;">
+
+                    </div>
+                    <div style="position: relative;width:520px">
+                        <img src="images/Group 2916.png" style="display:block;margin:0 auto;width:90px;max-width:100%;height:auto;display:block;">
+                    </div>
+                    <div style="position: relative;width:520px">
+                        <a href="SmartHubPoint.html" title="SmartHub access point"><img src="images/r_06.png" style="display:block;margin:5px auto;width:55px;max-width:100%;height:auto;display:block;"></a>
+                    </div>
+                    <div style="position: relative;width:520px">
+                        <img src="images/r_07.png" style="display:block;margin:0 auto;width:329px;max-width:100%;height:auto;display:block;">
+                    </div>
+                    <div style="position: relative;width:520px">
+                        <div style="float:left;margin-left:20px;">
+                            <div style="font-size:18px;">Wireless connections (3)</div>
+                            <div class="mt-10">
+                                <img src="images/Group 2901.png" style="margin-left:21px;width:34px;max-width:100%;height:auto;display:inline-block;">
+                                <img src="images/Group 2901.png" style="margin-left:21px;width:34px;max-width:100%;height:auto;display:inline-block;">
+                                <img src="images/Group 2901.png" style="margin-left:21px;width:34px;max-width:100%;height:auto;display:inline-block;">
+                            </div>
+                        </div>
+                        <div style="float:right">
+                            <div style="font-size:18px;">Ethernet connections (2)</div>
+                            <div class="mt-10">
+                                <img src="images/Group 2902.png" style="width:100px;max-width:100%;height:auto;display:inline-block;">
+                                <img src="images/Group 2903.png" style="margin-left:10px;width:100px;max-width:100%;height:auto;display:inline-block;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mt-40 mb-10 bb1c w80">
-                    <h3 class="fw24">WiFi</h3>
-                    <div class="mb-10 mt-15">Status:<span class="ml-100 font18 clg">connected(2.4GHz)</span></div>
-                    <div class="mb-10 mt-15">Network:<span class="ml-88">SKY54MD</span></div>
+                <!-- <img class="img-responsive" src="img/home001.png"> -->
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                <div class="mt-30 mb-10 bb1c w80">
+                    <h3 class="fw26">Cloud</h3>
+                    <div class="mb-10 mt-10 font18">Status:<span class="ml-100 Connected red">Connected</span></div>
                 </div>
-                <div class="mt-40 mb-10 bb1c w80">
-                    <h3 class="fw24">Mobile network</h3>
-                    <div class="mb-10 mt-15">Status:<span class="ml-100 font18 clg">Connected(4G)</span></div>
-                    <div class="mb-10 mt-15">Network provider:<span class="ml-36">Vodaphone UK</span></div>
-                    <div class="mb-10 mt-15">SIM card(in use):<span class="ml-38">1</span></div>
+                <div class="mt-20 mb-10 bb1c w80">
+                    <h3 class="fw26">WiFi</h3>
+                    <div class="mb-10 mt-10 font18">Status:<span class="ml-100 Connected clg">connected(2.4GHz)</span></div>
+                    <div class="mb-10 mt-10 font18">Network:<span class="ml-85 MyText">SKY54MD</span></div>
                 </div>
-                <div class="mb-10 mt-40 bb1c w80">
-                    <h3 class="fw24">SmartHub access point</h3>
-                    <div class="mb-10 mt-15">Status:<span class="ml-100 font18 clg">Active</span></div>
-                    <div class="mb-10 mt-15">Name:<span class="ml-100">My access point</span></div>
+                <div class="mt-20 mb-10 bb1c w80">
+                    <h3 class="fw26">Mobile network</h3>
+                    <div class="mb-10 mt-10 font18">Status:<span class="ml-100 Connected clg">Connected(4G)</span></div>
+                    <div class="mb-10 mt-10 font18">Network provider:<span class="ml-16 MyText">Vodaphone UK</span></div>
+                    <div class="mb-10 mt-10 font18">SIM card(in use):<span class="ml-18 MyText">1</span></div>
+                </div>
+                <div class="mb-10 mt-20 bb1c w80">
+                    <h3 class="fw26">SmartHub access point</h3>
+                    <div class="mb-10 mt-10 font18">Status:<span class="ml-100 Connected clg">On</span></div>
+                    <div class="mb-10 mt-10 font18">Name:<span class="ml-103 MyText">My access point</span></div>
                 </div>
             </div>
         </div>

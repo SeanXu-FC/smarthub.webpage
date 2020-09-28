@@ -63,12 +63,12 @@ $(function() {
 
     $('.main .left_open i').click(function(event) {
         if ($('.left-nav').css('left') == '0px') {
-            $('.left-nav').animate({ left: '-281px' }, 100);
+            $('.left-nav').animate({ left: '-407px' }, 100);
             $('.page-content').animate({ left: '0px' }, 100);
             $('.page-content-bg').hide();
         } else {
             $('.left-nav').animate({ left: '0px' }, 100);
-            $('.page-content').animate({ left: '281px' }, 100);
+            $('.page-content').animate({ left: '407px' }, 100);
             if ($(window).width() < 768) {
                 $('.page-content-bg').show();
             }
@@ -77,7 +77,7 @@ $(function() {
     });
 
     $('.page-content-bg').click(function(event) {
-        $('.left-nav').animate({ left: '-281px' }, 100);
+        $('.left-nav').animate({ left: '-407px' }, 100);
         $('.page-content').animate({ left: '0px' }, 100);
         $(this).hide();
     });
@@ -91,14 +91,14 @@ $(function() {
         //$('#nav').css("width", "auto")
         $('.hd').click(function(event) {
 
-            $('.left-nav').animate({ left: '-281px' }, 100);
+            $('.left-nav').animate({ left: '-407px' }, 100);
             $('.page-content').animate({ left: '0px' }, 100);
 
             $('.page-content-bg').hide();
         });
 
         $('.page-content-bg').click(function(event) {
-            $('.left-nav').animate({ left: '-281px' }, 100);
+            $('.left-nav').animate({ left: '-407px' }, 100);
             $('.page-content').animate({ left: '0px' }, 100);
             $(this).hide();
         });
@@ -143,6 +143,27 @@ $(function() {
         event.stopPropagation();
 
     })
+
+    // $('.bd a').click(function(event) {
+    //     var url = $(this).attr('_href');
+    //     var title = $(this).attr("title");
+    //     var index = $('.bd a').index($(this));
+    //     //console.log(title);
+    //     console.log(url);
+
+    //     for (var i = 0; i < $('.x-iframe').length; i++) {
+    //         if ($('.x-iframe').eq(i).attr('tab-id') == index + 1) {
+    //             tab.tabChange(index + 1);
+    //             event.stopPropagation();
+    //             return;
+    //         }
+    //     };
+
+    //     tab.tabAdd(title, url, index + 1);
+    //     tab.tabChange(index + 1);
+
+    //     event.stopPropagation();
+    // });
 
 })
 

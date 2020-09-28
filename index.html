@@ -12,13 +12,241 @@
     <link rel="bookmark" href="images/favicon.ico" />
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/xadmin.css">
+    <link href="css/style.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery/3.2.1/jquery.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/xadmin.js"></script>
     <script type="text/javascript" src="js/SmartHubPointSave.js"></script>
     <style>
+        body {
+            line-height: 24px;
+            font: 14px OpenSans, Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial, sans-serif
+        }
+        
         .layui-nav span {
             color: red;
+        }
+        /* .layui-nav .layui-nav-item a {
+            display: block;
+            padding: 0 20px;
+            color: #fff;
+            color: #000;
+            transition: all .3s;
+            -webkit-transition: all .3s;
+        } */
+        
+        .layui-nav .layui-nav-item a:hover {
+            color: #861f41;
+        }
+        
+        .layui-nav-bar {
+            border: 0;
+        }
+        
+        .chart {
+            height: 200px;
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        h5 {
+            margin-top: 30px;
+            font-weight: bold;
+        }
+        
+        h5:first-child {
+            margin-top: 15px;
+        }
+        
+        .Rectangle-1187 {
+            width: 500px;
+            height: 318px;
+            border: solid 1px #707070;
+            border: solid 1px #000;
+            background-color: #ffffff;
+            z-index: 9999
+        }
+        
+        .Enter-admin-password {
+            /* width: 260px; */
+            height: 33px;
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.08;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Enter-the-admin-password-to-make-changes {
+            /* width: 368px; */
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Password {
+            /* width: 86px; */
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Rectangle-1188 {
+            width: 364px;
+            height: 40px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+            padding: 5px 10px;
+        }
+        
+        .Forgot-password {
+            /* width: 148px; */
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            margin-left: 134px;
+        }
+        
+        .Path-101 {
+            width: 114px;
+            height: 50px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        .Path-101:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Rectangle-1187 {
+            width: 534px;
+            height: 347px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+        }
+        
+        .Rectangle-1182 {
+            width: 124px;
+            height: 50px;
+            border-radius: 5px;
+            background-color: #861f41;
+            background-color: #f1f1f1;
+        }
+        
+        .Rectangle-1182:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Rectangle-1182.active {
+            background-color: #861f41;
+        }
+        
+        .Cancel {
+            /* width: 62px;
+  height: 27px; */
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.45;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+        }
+        
+        .OK {
+            /* width: 28px;
+            height: 27px; */
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        #enterPass,
+        #enterPass1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 318px;
+            margin-left: -250px;
+            margin-top: -152px;
+            padding: 30px 34px;
+        }
+        
+        #bg {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        #bg1 {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            filter: alpha(opacity=50);
+            -moz-opacity: 0.5;
+            opacity: 0.5;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            display: none;
+            z-index: 2;
+        }
+        
+        .Password-is-incorrect {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #ff002a;
+            margin-left: 90px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -30,15 +258,15 @@
             <a><img src="images/RM_logo.svg"></a>
             <!-- <a href="./index.html"></a> -->
         </div>
-        <div class="left_open">
+        <!-- <div class="left_open">
             <i title="Expand the left column" class="iconfont">&#xe620;</i>
-        </div>
+        </div> -->
 
         <ul class="layui-nav right" lay-filter="">
-            <li class="layui-nav-item to-index"><a href="/">Smart Hub Manager <span>1.00</span></a></li>
-            <li class="layui-nav-item to-index">
+            <li class="Smart-Hub-Manager">Smart Hub Manager</li>
+            <!-- <li class="layui-nav-item to-index">
                 <div id="result"><a href="/" id="logout">exit</a></div>
-            </li>
+            </li> -->
         </ul>
         <script language="javascript" type="text/javascript">
             $(function() {
@@ -115,50 +343,50 @@
 
             <ul id="nav">
                 <li>
-                    <a _href="home.html" class="title">
-                        <i class="iconfont">&#xe616;</i>
+                    <a href="home.html" target="my-iframe" class="title">
+                        <!-- <i class="iconfont">&#xe616;</i> -->
                         <cite class="hd">HOME </cite>
-                        <i class="iconfont nav_right ">&#xe603;</i>
+                        <!-- <i class="iconfont nav_right ">&#xe603;</i> -->
                     </a>
                 </li>
                 <li>
-                    <a _href="setupWizard.html" class="title">
-                        <i class="iconfont ">&#xe656;</i>
+                    <a href="setupWizard.html" target="my-iframe" class="title">
+                        <!-- <i class="iconfont ">&#xe656;</i> -->
                         <cite class="hd">SET-UP WIZARD </cite>
-                        <i class="iconfont nav_right ">&#xe603;</i>
+                        <!-- <i class="iconfont nav_right ">&#xe603;</i> -->
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:; " class="title">
-                        <i class="iconfont ">&#xe6b4;</i>
+                    <a href="javascript:;" class="title">
+                        <!-- <i class="iconfont ">&#xe6b4;</i> -->
                         <cite>BASIC SETTINGS</cite>
-                        <i class="iconfont nav_right ">&#xe603;</i>
+                        <!-- <i class="iconfont nav_right ">&#xe603;</i> -->
                     </a>
                     <ul class="sub-menu ">
                         <li>
-                            <a _href="WiFiNetwork.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
-                                <cite class="hd">Wi-Fi network</cite>
+                            <a href="WiFiNetwork-info1.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
+                                <cite class="hd">Wireless network</cite>
 
                             </a>
                         </li>
                         <li>
-                            <a _href="MobileData.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="MobileData.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">Mobile data</cite>
 
                             </a>
                         </li>
                         <li>
-                            <a _href="SmartHubPoint.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="SmartHubPoint.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd" id="smartHub">SmartHub access point</cite>
 
                             </a>
                         </li>
                         <li>
-                            <a _href="HubInfomation.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="HubInfomation.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">Info</cite>
 
                             </a>
@@ -166,36 +394,36 @@
                     </ul>
                 </li>
                 <li>
-                    <a _href="connectedDevices.html" class="title">
-                        <i class="iconfont ">&#xe65b;</i>
+                    <a href="connectedDevices.html" class="title" target="my-iframe">
+                        <!-- <i class="iconfont ">&#xe65b;</i> -->
                         <cite class="hd">CONNECTED DEVICES </cite>
-                        <i class="iconfont nav_right ">&#xe603;</i>
+                        <!-- <i class="iconfont nav_right ">&#xe603;</i> -->
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:; " class="title">
-                        <i class="iconfont ">&#xe647;</i>
+                    <a href="javascript:;" class="title">
+                        <!-- <i class="iconfont ">&#xe647;</i> -->
                         <cite>ADVANCED SETTINGS</cite>
-                        <i class="iconfont nav_right ">&#xe603;</i>
+                        <!-- <i class="iconfont nav_right ">&#xe603;</i> -->
                     </a>
-                    <ul class="sub-menu ">
+                    <ul class="sub-menu">
                         <li>
-                            <a _href="LanConfiguration.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="LanConfiguration.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">LAN configuration</cite>
                             </a>
                         </li>
                         <li>
-                            <a _href="Gnss.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="Gnss.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">GNSS</cite>
                             </a>
                         </li>
                         <li>
-                            <a _href="InOutput.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="InOutput.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite id="io" class="dropdown">inputs & Outputs</cite>
-                                <i class="iconfont nav_right ">&#xe603;</i>
+                                <!-- <i class="iconfont nav_right ">&#xe603;</i> -->
                             </a>
                             <script>
                                 $(function() {
@@ -212,55 +440,55 @@
                             </script>
                             <ul class="sub-menu">
                                 <li>
-                                    <a _href="channels-monitoring.html">
-                                        <i class="iconfont ">&#xe6b6;</i>
+                                    <a href="channels-monitoring.html" target="my-iframe">
+                                        <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                         <cite class="hd">channels monitoring</cite>
                                     </a>
                                 </li>
                                 <li>
-                                    <a _href="channels-configuration.html">
-                                        <i class="iconfont ">&#xe6b6;</i>
+                                    <a href="channels-configuration.html" target="my-iframe">
+                                        <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                         <cite class="hd">Channels configuration</cite>
                                     </a>
                                 </li>
                                 <li>
-                                    <a _href="alert-notifications.html">
-                                        <i class="iconfont ">&#xe6b6;</i>
+                                    <a href="alert-notifications.html" target="my-iframe">
+                                        <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                         <cite class="hd">Alert notifications</cite>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a _href="SoftwareUpgrade.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="SoftwareUpgrade.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">Software upgrade</cite>
                             </a>
                         </li>
                         <li>
-                            <a _href="restart.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="restart.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">Restart & factory reset</cite>
                             </a>
                         </li>
                         <li>
-                            <a _href="adminPassword.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="adminPassword.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">Admin password</cite>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a _href="help.html " class="title">
-                        <i class="iconfont ">&#xe6e3;</i>
+                    <a href="help.html" class="title" target="my-iframe">
+                        <!-- <i class="iconfont ">&#xe6e3;</i> -->
                         <cite>HELP </cite>
-                        <i class="iconfont nav_right ">&#xe603;</i>
+                        <!-- <i class="iconfont nav_right ">&#xe603;</i> -->
                     </a>
-                    <ul class="sub-menu ">
+                    <ul class="sub-menu">
                         <li>
-                            <a _href="addMAC.html ">
-                                <i class="iconfont ">&#xe6b6;</i>
+                            <a href="addMAC.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">Add MAC</cite>
                             </a>
                         </li>
@@ -275,25 +503,47 @@
     <!-- End of left menu -->
     <!-- Right main start -->
     <div class="page-content">
-        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
-            <ul class="layui-tab-title">
+        <div class="layui-tab tab">
+            <!-- <ul class="layui-tab-title">
                 <li>Home</li>
-            </ul>
+            </ul> -->
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
-                    <iframe src="home.html" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                    <iframe src="home.html" id="my-iframe" name="my-iframe" frameborder="0" scrolling="yes"></iframe>
                     <!-- <iframe src="{:url('')}" frameborder="0" scrolling="yes" class="x-iframe"></iframe> -->
                 </div>
             </div>
         </div>
     </div>
-    <div class="page-content-bg"></div>
+    <div id="enterPass" class="Rectangle-1187" style="display: none;">
+        <h3 class="Enter-admin-password">Enter admin password</h3>
+        <p class="Enter-the-admin-password-to-make-changes mt-20">Enter admin password to make change</p>
+        <label class="Password mt-40">password:</label>
+        <input type="password" value="" class="Rectangle-1188 mt-40" />
+        <div class="Forgot-password mt-20">Forgot password?</div>
+        <div style="margin-left:192px;" class="mt-40"><button class="Path-101 Cancel">Cancel</button><button class="Rectangle-1187 Rectangle-1182 active OK" style="margin-left:20px;">OK</button></div>
+    </div>
+    <div id="bg1"></div>
+    <!-- <div id="enterPass1" class="Rectangle-1187">
+        <h3 class="Enter-admin-password">Enter admin password</h3>
+        <p class="Enter-the-admin-password-to-make-changes mt-20">Enter admin password to make change</p>
+        <label class="Password mt-30">password:</label>
+        <input type="password" value="********" class="Rectangle-1188 mt-40" />
+        <div class="Password-is-incorrect">Password is incorrect</div>
+        <div class="Forgot-password mt-20">Forgot password?</div>
+        <div style="margin-left:192px;" class="mt-30"><button class="Path-101 Cancel">Cancel</button><button class="Rectangle-1187 Rectangle-1182 active OK" style="margin-left:20px;">OK</button></div>
+    </div> -
+
+    <div id="bg1"></div>->
+
+
+    <!-- <div class="page-content-bg"></div> -->
     <!-- End of right main body -->
     <!-- Middle end -->
     <!-- Start at the bottom -->
-    <div class="footer">
+    <!-- <div class="footer">
         <div class="copyright">Copyright ©2020 Raymarine All Rights Reserved</div>
-    </div>
+    </div> -->
     <!-- Bottom end -->
 
 
@@ -359,7 +609,47 @@
         });
     </script> -->
 
+    <!-- <script>
+        $(function() {
+            reSetSize();
+            window.onresize = reSetSize;
 
+            function reSetSize() {
+                var windowsHeight = window.innerHeight;
+                document.getElementById("my-iframe").style.height = (windowsHeight - 67) + "px";
+            }
+        });
+    </script> -->
+
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+    <script>
+        $(function() {
+            $('#enterPass').hide();
+            $('.sub-menu li a').click(function() {
+                $('#bg1').show();
+                $('#enterPass').show(500);
+            });
+
+            $('#enterPass1').hide();
+            $('.sub-menu li a').click(function() {
+                $('#bg1').show();
+                $('#enterPass').show(500);
+            });
+
+
+
+            $(document).click(function() {
+                $('#bg1').hide();
+                $('#enterPass').hide(500);
+            });
+        });
+
+        // bg1 = function() {
+        //     $('#bg1').show();
+        // }
+    </script>
 </body>
 
 </html>

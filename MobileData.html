@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 
 <head>
     <meta charset="UTF-8">
@@ -7,17 +7,18 @@
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link href="layui/css/modules/laydate/default/laydate.css" rel="stylesheet" media="all">
+    <link href="css/style.css" rel="stylesheet" />
     <title>Document</title>
     <style>
-        table {
+    table {
             border-collapse: collapse;
         }
         
         td {
             padding: 10px;
             border: 1px solid #fff;
-            font-size: 12px
         }
         
         .mc {
@@ -45,51 +46,582 @@
             top: -1px;
         }
         
-        .advanced {
+        .advancedContent {
             display: none;
             margin-left: 30px;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 32px;
-            /* font-weight: bold; */
+            font-weight: bold;
             margin-top: 10px;
         }
         
-        #arrow {
+        #arrow,
+        #arrow1,
+        #arrow2 {
             cursor: pointer;
-            margin-left: 10px;
+            margin-top: -2px;
+            /* margin-left: 10px; */
         }
         
         .czjz {
             display: table-cell !important;
             vertical-align: middle !important;
         }
+        
+        .Mobile-data {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Mobile-data-big {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+        }
+        
+        .Use-cellular-network-for-data-connection {
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.86;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Advanced {
+            font-family: OpenSans;
+            font-size: 26px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+        }
+        
+        .Data-usage {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .tab-wrapper {
+            margin: 20px auto;
+            width: 100%;
+        }
+        
+        .tab-menu li {
+            position: relative;
+            background-color: #fff;
+            color: #bcbcbc;
+            display: inline-block;
+            padding: 20px 10px;
+            opacity: 0.8;
+            cursor: pointer;
+            z-index: 0;
+        }
+        
+        .tab-menu li:hover {
+            color: #861f41;
+        }
+        
+        .tab-menu li.active {
+            font-weight: 600;
+            color: #861f41;
+            opacity: 1;
+        }
+        
+        .tab-menu li.active:hover {
+            color: #861f41;
+        }
+        
+        .tab-content>div {
+            background-color: #fff;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 20px 50px;
+        }
+        
+        .line {
+            position: absolute;
+            width: 0;
+            height: 7px;
+            background-color: #861f41;
+            top: 55px;
+            left: 7px;
+        }
+        
+        .SIM1-SIM2 {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #3a3a3a;
+        }
+        
+        .layui-form-pane .layui-form-label {
+            width: 40%;
+            padding: 8px 0px;
+            height: 38px;
+            line-height: 20px;
+            border-width: 0px;
+            /* border-style: solid; */
+            /* border-radius: 2px 0 0 2px; */
+            text-align: left;
+            background-color: #fff;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        
+        .Set-monthly-data-limit {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .The-remaining-data-allowance-threshold-below-which-the-router-will-switch-to-the-other-SIM {
+            width: 360px;
+            height: 45px;
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+            padding-left: 0px;
+        }
+        
+        .Rectangle-1185 {
+            width: 74px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+        }
+        
+        .MB {
+            width: 31px;
+            height: 27px;
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .Start-data-limit-on {
+            width: 156px;
+            height: 23px;
+            font-family: OpenSans;
+            font-size: 17px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.53;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        /* .Rectangle-1185 {
+            width: 122px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+        } */
+        
+        .for {
+            width: 24px;
+            height: 23px;
+            font-family: OpenSans;
+            font-size: 17px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.53;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .months {
+            width: 57px;
+            height: 22px;
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .Rectangle-1185-2021 {
+            width: 122px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+        }
+        
+        .Rectangle-1185-12 {
+            width: 74px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+        }
+        
+        .Usage-reminders {
+            /* width: 180px; */
+            height: 30px;
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .Receive-notifications-when-the-data-limit-has-been-reached {
+            width: 338px;
+            height: 39px;
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Active-SIM {
+            /* width: 91px; */
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .SIM-1 {
+            width: 46px;
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .SIM1-to-SIM2 {
+            /* width: 124px; */
+            height: 27px;
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #861f41;
+        }
+        
+        .pl30 {
+            position: absolute;
+            top: -4px;
+            left: 30px;
+        }
+        
+        .SIM1 {
+            /* width: 62px; */
+            height: 36px;
+            font-family: OpenSans;
+            font-size: 26px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: center;
+            color: #861f41;
+        }
+        
+        .z1 {
+            font-weight: normal;
+        }
+        
+        .Network-provider {
+            /* width: 152px; */
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+            padding-left: 0;
+        }
+        
+        .SIM-pin {
+            /* width: 79px; */
+            overflow: hidden;
+            zoom: 1;
+            height: 30px;
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .SIM-pin-lock {
+            /* width: 105px; */
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        /* .Rectangle-1182 {
+            width: 174px;
+            height: 42px;
+            border-color: #861f41;
+            border: 1px solid #861f41;
+            border-radius: 5px;
+            background-color: #861f41; */
+    }
+    .Change-SIM-pin {
+        /* width: 146px; */
+        
+        height: 27px;
+        font-family: OpenSans;
+        font-size: 20px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.35;
+        letter-spacing: normal;
+        text-align: center;
+        color: #ffffff;
+    }
+    .Rectangle-1205 table>tbody>tr>td {
+        border: 0;
+        padding: 10px 0px 10px 20px;
+    }
+    .Rectangle-1205 table>tbody>tr:hover {
+        background-color: #fff1f6;
+    }
+    .Rectangle-1205 table>tbody>tr:nth-child(2):hover,
+    .Rectangle-1205 table>tbody>tr:last-child:hover {
+        background-color: #ffffff;
+    }
+    .Rectangle-1187 {
+        width: 500px;
+        height: 318px;
+        border: solid 1px #707070;
+        border: solid 1px #000;
+        background-color: #ffffff;
+        z-index: 9999
+    }
+    .Enter-admin-password {
+        /* width: 260px; */
+        
+        height: 33px;
+        font-family: OpenSans;
+        font-size: 24px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.08;
+        letter-spacing: normal;
+        text-align: left;
+        color: #343434;
+    }
+    .Enter-the-admin-password-to-make-changes {
+        /* width: 368px; */
+        
+        height: 24px;
+        font-family: OpenSans;
+        font-size: 18px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.44;
+        letter-spacing: normal;
+        text-align: left;
+        color: #343434;
+    }
+    .Password {
+        /* width: 86px; */
+        
+        height: 24px;
+        font-family: OpenSans;
+        font-size: 18px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.61;
+        letter-spacing: normal;
+        text-align: left;
+        color: #343434;
+    }
+    /* .Rectangle-1188 {
+            width: 364px;
+            height: 40px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+            padding: 5px 10px;
+        } */
+    .Forgot-password {
+        /* width: 148px; */
+        
+        height: 24px;
+        font-family: OpenSans;
+        font-size: 18px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.61;
+        letter-spacing: normal;
+        text-align: left;
+        color: #861f41;
+        margin-left: 134px;
+    }
+    #bg {
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+    #bg1 {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        zoom: 1;
+        background-color: #000;
+        filter: alpha(opacity=50);
+        opacity: 0.5 !important;
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        display: none;
+        z-index: 4;
+    }
+    .Rectangle-1182 {
+        /* width: 174px; */
+        
+        height: 50px;
+        padding: 0 20px;
+        border-radius: 5px;
+        background-color: #861f41;
+        color: #fff;
+    }
     </style>
 </head>
 
-<body>
+<body id="main">
     <div class="container-fluid">
-        <div class="mc">
-            <h2> Mobile data</h2>
-            <table width="500px" class=" table-responsive">
+        <div class="mc ml-70">
+            <h2 class="Mobile-data-big"> Mobile data</h2>
+            <table class=" table-responsive">
                 <tr>
-                    <td>Mobile data:</td>
+                    <td>
+                        <div class="Mobile-data">Mobile data:</div>
+                        <div class="sm Use-cellular-network-for-data-connection">Use cellular network for data connection</div>
+                    </td>
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
                             <div class="layui-input-block">
-                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <input id="mobileData1" type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div>Data roaming:</div>
-                        <div class="sm">Connect to network data when roaming</div>
+                        <div class="Mobile-data">Data roaming:</div>
+                        <div class="sm Use-cellular-network-for-data-connection">Use mobile data when roaming, this may result in additional fees</div>
                     </td>
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
                             <div class="layui-input-block">
-                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <input id="mobileData2" type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
@@ -99,125 +631,575 @@
                 </tr>
 
             </table>
-            <div>
-                <div id="arrow">Advanced <img class="up" src="images/icon-arrow-up.png"></div>
-                <div class="advanced">
-                    <div> sim1: <input type="radio"> sim2:<input type="radio"></div>
-                    <div class="col-sm-6">
-                        <table class="table table-responsive table-bordered">
-                            <tr>
-                                <td width="12%" rowspan="2" class="czjz">
-                                    sim1 APN:
-                                </td>
-                                <td width="37%">name:</td>
-                                <td width="51%">CMNET</td>
 
-                            </tr>
-                            <tr>
-                                <td>passwd:</td>
-                                <td>123456</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div>Data:</div>
-                                </td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div>
-                                        <div>sim_id:</div>
+            <div class="main">
+                <div class="Advanced">Advanced <span><img id="arrow" class="up" src="images/icon-arrow-up.png"></span></div>
+                <div class="advancedContent" style="overflow: hidden;zoom:1;">
+                    <div class="body1 mb-15">
+                        <div class="Data-usage mt-30"><span><img id="arrow1" class="up" src="images/icon-arrow-right.png"></span> Data usage</div>
+                        <div class="tab-wrapper content" id="content" style="display: none;">
+
+                            <ul class="tab-menu ml-20">
+                                <li class="SIM1-SIM2 active">SIM1</li>
+                                <li class="SIM1-SIM2">SIM2</li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div>
+                                    <h3>Usage for this month -1</h3>
+                                    <div><img src="images/usage.png"></div>
+                                    <p class="widthper50 mt-40 mb-40 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600"><e style="font-size:26px;font-weight:600">500</e>MB</span> total used, <span style="font-size:18px;font-weight:600"><e style="font-size:26px;font-weight:600">300</e>MB</span>                                        remaining</p>
+                                    <div class="layui-form layui-form-pane layui-form-item">
+                                        <label class="layui-form-label Set-monthly-data-limit">Set monthly data limit:</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                        </div>
                                     </div>
-                                </td>
-                                <td>0</td>
-                            </tr>
-                        </table>
-                        <!-- <table class="table table-responsive table-bordered">
-                            <tr>
-                                <td class="col-sm-6">APN:</td>
-                                <td class="col-sm-6"></td>
-                            </tr>
-                            <tr>
-                                <td class="col-sm-6">APN:</td>
-                                <td class="col-sm-6"></td>
-                            </tr>
-                            <tr>
-                                <td>Data:</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td>sim_id:</td>
-                                <td>0</td>
-                            </tr>
-                        </table> -->
-                    </div>
-                    <div class="col-sm-6">
-                        <table class="table table-responsive table-bordered">
-                            <tr>
-                                <td width="12%" rowspan="2" class="czjz">
-                                    sim2 APN:
-                                </td>
-                                <td width="37%">name:</td>
-                                <td width="51%">CMNET</td>
 
-                            </tr>
-                            <tr>
-                                <td>passwd:</td>
-                                <td>123456</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div>Data:</div>
-                                </td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <div>
-                                        <div>sim_id:</div>
+                                    <div class="mt-30" style="position: relative;">
+                                        <div class="Set-monthly-data-limit">Data limit:</div>
+                                        <div style="display: inline-block;">
+                                            <div class="The-remaining-data-allowance-threshold-below-which-the-router-will-switch-to-the-other-SIM">The remaining data allowance threshold below which the router will switch to the other SIM</div>
+                                        </div>
+                                        <div class="layui-input-inline" style="display: inline-block;margin-left:56px;margin-top: -40px;">
+                                            <input type="text" name="text" value="800" class="Rectangle-1185 pl-10">
+                                        </div>
+                                        <div class="" style="display: inline-block;margin-top: -40px;position:absolute;top:60px;">
+                                            <div class="layui-input-block" style="margin-left: 7px;">
+                                                <select name="city" lay-verify="required" style="border:0">
+                                            <option value="0" class="MB">MB</option>
+                                            <option value="1" class="MB">GB</option>
+                                      </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </td>
-                                <td>0</td>
-                            </tr>
-                        </table>
+
+                                    <div class="" style="position: relative;">
+                                        <div class="Set-monthly-data-limit mt-30 mb-20">Data limit start date and duration:</div>
+                                        <div style="display: inline-block;">
+                                            <div class="Start-data-limit-on">Start data limit on</div>
+                                        </div>
+                                        <div class="layui-input-inline" style="display: inline-block;margin-left:56px;">
+                                            <input type="text" id="test1" name="text" value="01/01/2021" class="Rectangle-1185-2021 pl-10 test1">
+
+                                        </div>
+
+                                        <div style="display: inline-block;margin-left: 23px;" class="for">for</div>
+                                        <div class="" style="display: inline-block;">
+                                            <div class="layui-input-block" style="margin-left:30px;">
+                                                <select name="city" lay-verify="required" class="Rectangle-1185-12">
+                                                <option value="12" class="MB">12</option>
+                                                <option value="1" class="MB">1</option>
+                                                <option value="2" class="MB">2</option>
+                                                <option value="3" class="MB">3</option>
+                                                <option value="4" class="MB">4</option>
+                                                <option value="5" class="MB">5</option>
+                                                <option value="6" class="MB">6</option>
+                                                <option value="7" class="MB">7</option>
+                                                <option value="8" class="MB">8</option>
+                                                <option value="9" class="MB">9</option>
+                                                <option value="10" class="MB">10</option>
+                                                <option value="11" class="MB">11</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div style="display: inline-block;" class="months ml-5">months</div>
+                                    </div>
+
+                                    <div class=" Usage-reminders mt-30">Usage reminders</div>
+                                    <div class="layui-form layui-form-pane layui-form-item">
+                                        <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data limit notifications:</label>
+                                        <div class="layui-input-block pt-5">
+                                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                        </div>
+                                    </div>
+                                    <div class="Receive-notifications-when-the-data-limit-has-been-reached">Receive notifications when the data limit has been reached
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <h3>Usage for this month -2</h3>
+                                    <div><img src="images/usage.png"></div>
+                                    <p class="widthper50 mt-40 mb-40 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600"><e style="font-size:26px;font-weight:600">500</e>MB</span> total used, <span style="font-size:18px;font-weight:600"><e style="font-size:26px;font-weight:600">300</e>MB</span>                                        remaining</p>
+                                    <div class="layui-form layui-form-pane layui-form-item">
+                                        <label class="layui-form-label Set-monthly-data-limit">Set monthly data limit:</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-30" style="position: relative;">
+                                        <div class="Set-monthly-data-limit">Data limit:</div>
+                                        <div style="display: inline-block;">
+                                            <div class="The-remaining-data-allowance-threshold-below-which-the-router-will-switch-to-the-other-SIM">The remaining data allowance threshold below which the router will switch to the other SIM</div>
+                                        </div>
+                                        <div class="layui-input-inline" style="display: inline-block;margin-left:56px;margin-top: -40px;">
+                                            <input type="text" name="text" value="800" class="Rectangle-1185 pl-10">
+                                        </div>
+                                        <div class="" style="display: inline-block;margin-top: -40px;position:absolute;top:60px;">
+                                            <div class="layui-input-block" style="margin-left: 7px;">
+                                                <select name="city" lay-verify="required" style="border:0">
+                                            <option value="0" class="MB">MB</option>
+                                            <option value="1" class="MB">GB</option>
+                                      </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="" style="position: relative;">
+                                        <div class="Set-monthly-data-limit mt-30 mb-20">Data limit start date and duration:</div>
+                                        <div style="display: inline-block;">
+                                            <div class="Start-data-limit-on">Start data limit on</div>
+                                        </div>
+                                        <div class="layui-input-inline" style="display: inline-block;margin-left:56px;">
+                                            <input type="text" id="test2" name="text" value="01/01/2021" class="Rectangle-1185-2021 pl-10 test1">
+                                        </div>
+                                        <div style="display: inline-block;margin-left: 23px;" class="for">for</div>
+                                        <div class="" style="display: inline-block;">
+                                            <div class="layui-input-block" style="margin-left:30px;">
+                                                <select name="city" lay-verify="required" class="Rectangle-1185-12">
+                                                <option value="12" class="MB">12</option>
+                                                <option value="1" class="MB">1</option>
+                                                <option value="2" class="MB">2</option>
+                                                <option value="3" class="MB">3</option>
+                                                <option value="4" class="MB">4</option>
+                                                <option value="5" class="MB">5</option>
+                                                <option value="6" class="MB">6</option>
+                                                <option value="7" class="MB">7</option>
+                                                <option value="8" class="MB">8</option>
+                                                <option value="9" class="MB">9</option>
+                                                <option value="10" class="MB">10</option>
+                                                <option value="11" class="MB">11</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div style="display: inline-block;" class="months ml-5">months</div>
+                                    </div>
+                                    <div class=" Usage-reminders mt-30">Usage reminders</div>
+                                    <div class="layui-form layui-form-pane layui-form-item">
+                                        <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data limit notifications:</label>
+                                        <div class="layui-input-block pt-5">
+                                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                        </div>
+                                    </div>
+                                    <div class="Receive-notifications-when-the-data-limit-has-been-reached">Receive notifications when the data limit has been reached
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
 
-                    <div>> SIM management</div>
+                    <div class="body2">
+                        <div class="Data-usage mb-30"><span><img id="arrow2" class="up" src="images/icon-arrow-right.png"></span> SIM management</div>
+                        <div class="" style="position: relative;display: none;" id="content1">
+                            <div class="row">
+                                <div class="col-md-5 Active-SIM mt-30 mb-20" style="display: inline-block;">Active SIM:</div>
+                                <div class="col-md-7 mt-30" style="display: inline-block;">
+                                    <div class="layui-input-block" style="margin-left:-30px;">
+                                        <select name="SIM" lay-verify="required" class="Rectangle-1185-12">
+                                            <option value="0" class="SIM-1">SIM1</option>
+                                            <option value="1" class="SIM-1">SIM2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form layui-form-pane layui-form-item">
+                                <label class="layui-form-label Set-monthly-data-limit mt-20 mb-0">Auto SIM switching:</label>
+                                <div class="layui-input-block pt-5">
+                                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                </div>
+                            </div>
+                            <div class="Receive-notifications-when-the-data-limit-has-been-reached">Router will switch to the other SIM by defined SIM switching rules
+                            </div>
+                            <div class="layui-form layui-form-pane layui-form-item">
+                                <label class="layui-form-label Set-monthly-data-limit mt-30 mb-0">SIM switching rules:</label>
+                            </div>
+                            <div class="Receive-notifications-when-the-data-limit-has-been-reached">Conditions on when the SIM card will switch to the other
+                            </div>
+
+                            <div class="tab-wrapper content" id="content1">
+
+                                <ul class="tab-menu ml-20">
+                                    <li class="SIM1-SIM2 SIM1-to-SIM2  active">SIM1 to SIM2</li>
+                                    <li class="SIM1-SIM2 SIM1-to-SIM2 ">SIM2 to SIM1</li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div>
+                                        <div class="checkbox">
+                                            <label>
+                                              <input type="checkbox" value="">
+                                              <span class="pl30">Weak signal-1</span>
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                              <input type="checkbox" value="">
+                                              <span class="pl30">Data limit reached</span>
+                                              
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                              <input type="checkbox" value="">
+                                              <span class="pl30"> When roaming</span>
+                                             
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                              <input type="checkbox" value="">
+                                              <span class="pl30">No network</span>
+                                              
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="checkbox">
+                                            <label>
+                                              <input type="checkbox" value="">
+                                              <span class="pl30"> Weak signal-2</span>
+                                             
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                              <input type="checkbox" value="">
+                                              <span class="pl30">Data limit reached</span>
+                                              
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                              <input type="checkbox" value="">
+                                              <span class="pl30"> When roaming</span>
+                                             
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                              <input type="checkbox" value="">
+                                              <span class="pl30">No network</span>
+                                              
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="tab-wrapper content" id="content2">
+
+                                    <ul class="tab-menu ml-20" style="margin-top:-30px">
+                                        <li class="SIM1 active">SIM1</li>
+                                        <li class="SIM1">SIM2</li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div class="row">
+                                            <div class="z1">
+                                                <label class="Network-provider col-md-6">Network provider1:</label><span class="col-md-6">Vodaphone UK1</span>
+                                            </div>
+                                            <div class="z1">
+                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15">1234</span>
+                                            </div>
+                                            <div class="z1">
+                                                <label class="Network-provider col-md-6 mt-15">SIM telephone number:</label><span class="col-md-6 mt-15">1234567890</span>
+                                            </div>
+                                            <div class="z1">
+                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15">12345678</span>
+                                            </div>
+                                            <div style="clear:both;"></div>
+                                            <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div>
+                                            <div class="layui-form layui-form-pane layui-form-item" style="margin-top: -20px;">
+                                                <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin lock:</label>
+                                                <div class="layui-input-block mt-30">
+                                                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                                </div>
+                                            </div>
+                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin">Change SIM pin</span></button>
+                                        </div>
+                                        <div class="row">
+                                            <div class="z1">
+                                                <label class="Network-provider col-md-6">Network provider2:</label><span class="col-md-6">Vodaphone UK2</span>
+                                            </div>
+                                            <div class="z1">
+                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15">1234</span>
+                                            </div>
+                                            <div class="z1">
+                                                <label class="Network-provider col-md-6 mt-15">SIM telephone number:</label><span class="col-md-6 mt-15">1234567890</span>
+                                            </div>
+                                            <div class="z1">
+                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15">12345678</span>
+                                            </div>
+                                            <div style="clear:both;"></div>
+                                            <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div>
+                                            <div class="layui-form layui-form-pane layui-form-item" style="margin-top: -20px;">
+                                                <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin lock:</label>
+                                                <div class="layui-input-block mt-30">
+                                                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                                </div>
+                                            </div>
+                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin"><a href="#" id="ChangeSimPin">Change SIM pin</a></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <script>
-                $(function() {
-                    var images = ['images/icon-arrow-up.png', 'images/icon-arrow-down.png'];
-                    $('#arrow').click(function() {
-                        if ($('#arrow img').attr("class") == "up") {
-                            $('#arrow img').attr("src", images[1]);
-                            $('#arrow img').removeClass();
-                            $(".advanced").slideDown(500);
-                        } else {
-                            $('#arrow img').attr("src", images[0]);
-                            $('#arrow img').addClass("up");
-                            $(".advanced").slideUp(500);
-                        }
-                    });
-                    // $("#arrow").hover(function() {
-                    //     $("#arrow").show();
-                    //     $(".advanced").show();
 
-                    // }, function() {
-                    //     $(".advanced").hide();
-                    // });
-                });
-            </script>
         </div>
 
-
     </div>
+    <div id="enterPass1" class="Rectangle-1187" style="display:none">
+        <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Enter the password for network</h3>
+        <p class="Enter-the-admin-password-to-make-changes mt-20 Enter-the-password-for-network-Mynetwork1">"Mynetwork1"</p>
+        <div style="position:relative">
+            <label class="Password mt-30" style="display: inline-block;">password:</label>
+            <input type="password" value="" class="Rectangle-1188 pwd" style="display: inline-block;" />
+            <span class="SHOW" style="position:absolute; top:37px;left:378px;cursor: pointer;" onclick="change()">show</span>
+        </div>
+        <div class="row mt-40">
+            <div class="col-md-3 col-md-offset-3"><button class="Path-101 Cancel">Cancel</button></div>
+            <div class="col-md-5 col-md-offset-1 connected"><button class="Rectangle-1182 active OK">Connected</button></div>
+        </div>
+    </div>
+    <div id="bg1"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+    <script>
+        //弹出一个iframe层
+        $('.Change-SIM-pin').on('click', function() {
+            var changeSimPin = '<div id="enterPass1" class="Rectangle-1187"><h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Enter the password for network</h3><p class="Enter-the-admin-password-to-make-changes mt-20 Enter-the-password-for-network-Mynetwork1">"Mynetwork1"</p><div style="position:relative"><label class="Password mt-30" style="display: inline-block;">password:</label><input type="password" value="" class="Rectangle-1188 pwd" style="display: inline-block;" /><span class="SHOW" style="position:absolute; top:37px;left:378px;cursor: pointer;" onclick="change()">show</span></div><div class="row mt-40"><div class="col-md-3 col-md-offset-3"><button class="Path-101 Cancel">Cancel</button></div><div class="col-md-5 col-md-offset-1 connected"><button class="Rectangle-1182 active OK">Connected</button></div></div></div>';
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: 'Enter the password',
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['500px', '340px'],
+                //content: ['内容', '#id'] ,
+                // content: $('#enterPass1')
+
+                //content: changeSimPin
+                content: ['changeSimPin.html', 'no'],
+            });
+        });
+    </script>
+
+    <script>
+        $(".connected button").prop("disabled", true);
+        $(".connected button").css("opacity", "0.5");
+        // $('.Change-SIM-pin').click(function() {
+        //     if ($('#enterPass1').css('display') == 'none') {
+        //         // $('#bg1').show();
+        //         $('#enterPass1').show(500);
+        //         $('#bg1').css('display', 'table-cell');
+        //         //window.parent.document.getElementById("#bg1").style.display = "block";
+        //         //window.parent.bg1();
+        //         //$('#enterPass1').css('display', 'block');
+        //         //console.log(111)
+        //     } else {
+        //         //window.parent.document.getElementById("#bg1").style.display = "none";
+        //         //$('#enterPass1').css('display', 'none');
+        //         // $('##enterPass1').css('zIndex', 999999999, function() {
+        //         //     //$('##enterPass1').show();
+        //         //     $('#enterPass1').css('display', '');
+        //         // });
+
+        //         $('#bg1').css('display', 'none');
+        //         // $('#bg1').hide();
+        //         $('#enterPass1').hide(500);
+        //     }
+        // });
+
+        // $('.Change-SIM-pin').click(function() {
+        //     //var bh = $("body").height();
+        //     var bh = $(window.parent.document).height();
+        //     //var bw = $("body").width();
+        //     var bw = $(window.parent.document).width();
+
+        //     $(window.parent.document).find("#enterPass1").show();
+        //     //$(window.parent.document).find('#bg1').show();
+        //     //window.parent.document.getElementById("#bg1").style.display = "block";
+        //     console.log(111)
+        //     $(window.parent.document).find('#bg1').css({
+        //         height: bh,
+        //         width: bw,
+        //         display: "block"
+        //     });
+        //     // $("#bg1").css({
+        //     //     height: bh,
+        //     //     width: bw,
+        //     //     display: "block"
+        //     // });
+
+
+        // });
+        // function showBg() {
+        //     var bh = $("body").height();
+        //     var bw = $("body").width();
+        //     $("#bg1").css({
+        //         height: bh,
+        //         width: bw,
+        //         display: "block"
+        //     });
+        //     $("#enterPass1").show();
+        //     console.log(111)
+        // }
+
+        // $(document).click(function() {
+        //     $('#bg1').hide();
+        //     $('#enterPass1').hide(500);
+        // });
+    </script>
+    <!-- <script>
+        $(function() {
+            reSetSize();
+            window.onresize = reSetSize;
+
+            function reSetSize() {
+                var windowsHeight = window.innerHeight;
+                document.getElementById("main").style.height = (windowsHeight - 67) + "px";
+            }
+        });
+    </script> -->
+    <script>
+        $(function() {
+            var isShow = true;
+
+            change = function() {
+                var v = $(".pwd").get(0);
+
+                if (isShow) {
+                    v.type = "text";
+                    isShow = false;
+                } else {
+                    v.type = "password";
+                    isShow = true;
+                }
+            };
+            change();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            var $wrapper = $('.tab-wrapper'),
+                $allTabs = $wrapper.find('.tab-content > div'),
+                $tabMenu = $wrapper.find('.tab-menu li'),
+                $line = $('<div class="line"></div>').appendTo($tabMenu)
+
+            $allTabs.not(':first-of-type').hide();
+            $tabMenu.filter(':first-of-type').find(':first').width('90%')
+
+            $tabMenu.each(function(i) {
+                $(this).attr('data-tab', 'tab' + i);
+            });
+
+            $allTabs.each(function(i) {
+                $(this).attr('data-tab', 'tab' + i);
+            });
+
+            $tabMenu.on('click', function() {
+
+                var dataTab = $(this).data('tab'),
+                    $getWrapper = $(this).closest($wrapper);
+
+                $getWrapper.find($tabMenu).removeClass('active');
+                $(this).addClass('active');
+
+                $getWrapper.find('.line').width(0);
+                $(this).find($line).animate({
+                    'width': '90%'
+                }, 'fast');
+                $getWrapper.find($allTabs).hide();
+                $getWrapper.find($allTabs).filter('[data-tab=' + dataTab + ']').show();
+            });
+
+        });
+    </script>
+    <script>
+        $(function() {
+            var images = ['images/icon-arrow-up.png', 'images/icon-arrow-down.png'];
+            $('#arrow').click(function() {
+                if ($('#arrow').attr("class") == "up") {
+                    $('#arrow').attr("src", images[1]);
+                    $('#arrow').removeClass();
+                    $(".advancedContent").show();
+                } else {
+                    $('#arrow').attr("src", images[0]);
+                    $('#arrow').addClass("up");
+                    $(".advancedContent").hide();
+                }
+            });
+
+            var images1 = ['images/icon-arrow-right.png', 'images/icon-arrow-down-1.png'];
+            // $('#arrow1').click(function() {
+            //     if ($('#arrow1').attr("class") == "") {
+            //         $('#arrow1').attr("src", images1[0]);
+            //         $('#arrow1').removeClass();
+            //         $(".content").show();
+            //     } else {
+            //         $('#arrow1').attr("src", images1[1]);
+            //         $('#arrow1').addClass("up");
+            //         $(".content").hide();
+            //     }
+            // });
+            var images2 = ['images/icon-arrow-right.png', 'images/icon-arrow-down-1.png'];
+            $("#arrow1").click(function() {
+                var content = document.getElementById("content");
+                if (content.style.display == "none") {
+                    content.style.display = "block ";
+                    $('#arrow1').attr("src", images2[1]);
+                    $('#arrow1').removeClass();
+                } else {
+                    content.style.display = "none ";
+                    $('#arrow1').attr("src", images2[0]);
+                }
+            });
+
+            $("#arrow2").click(function() {
+                var content1 = document.getElementById("content1");
+                if (content1.style.display == "none") {
+                    content1.style.display = "block ";
+                    $('#arrow2').attr("src", images1[1]);
+                    $('#arrow2').removeClass();
+                } else {
+                    content1.style.display = "none ";
+                    $('#arrow2').attr("src", images1[0]);
+                }
+            });
+
+            // function SwitchMenu(obj) {
+            //     if (document.getElementById) {
+            //         var el = document.getElementById(obj);
+            //         var ar = document.getElementById("expand").getElementsByTagName("content ");
+            //         if (el.style.display != "block ") {
+            //             for (var i = 0; i < ar.length; i++) {
+            //                 if (ar[i].className == "content ")
+            //                     ar[i].style.display = "none ";
+            //             }
+            //             el.style.display = "block ";
+            //         } else {
+            //             el.style.display = "none ";
+            //         }
+            //     }
+            // }
+        });
+    </script>
+
     <!-- <script>
         $(function() {
             var data = {
                 "jsonrpc": "2.0",
                 "method": "lte_set_status",
-
                 "params": {},
                 "id": "9.1"
             };
@@ -240,7 +1222,7 @@
     </script> -->
 
     <script src="layui/layui.js" charset="utf-8"></script>
-
+    <script src="layui/lay/modules/laydate.js"></script>
     <script>
         layui.use(['form'], function() {
             var form = layui.form,
@@ -248,8 +1230,139 @@
                 layedit = layui.layedit,
                 laydate = layui.laydate;
 
+            laydate.render({
+                elem: '#test1', //指定元素
+            });
+            laydate.render({
+                elem: '#test2', //指定元素
+            });
+
+            // laydate.render({
+            //     elem: '#test2',
+            //     position: 'static',
+            //     change: function(value, date) { //监听日期被切换
+            //         lay('#testView').html(value);
+            //     }
+            // });
         });
     </script>
+    <script>
+        layui.use('form', function() {
+            var form = layui.form; //表单
+            form.on('switch', function(data) {
+                console.log(data.elem.checked); //开关是否开启，true或者false
+                console.log(data.value); //开关value值，也可以通过data.elem.value得到
+                console.log(data.othis); //得到美化后的DOM对象
+                var id = $(data.othis).next("input").val();
+
+                var json = data.result.wifi_config;
+                for (var index in json) {
+                    if (data.json[index].phy_enable != 1) {
+                        $("#mobileData1").attr("checked", "checked");
+                        $("#mobileData2").attr("checked", "checked");
+                    } else {
+                        $("#mobileData1").remove("checked");
+                        $("#mobileData2").remove("checked");
+                    }
+                }
+                // if (data.elem.checked == true) {
+                //     $.ajax({
+                //         type: "post",
+                //         async: false,
+                //         data: "id=" + id + "&state=" + 0,
+                //         url: "changeState",
+                //         success: function(data) {
+                //             flag = data
+                //         },
+                //     });
+                //     if (flag == "Ny") {
+                //         layer.msg("启用状态数不超过三个!");
+                //     } else {
+                //         layer.msg("已启用!");
+                //     }
+                // } else {
+                //     $.ajax({
+                //         type: "post",
+                //         async: false,
+                //         data: "id=" + id + "&state=" + 1,
+                //         url: "changeState",
+                //         success: function(data) {
+                //             flag = data
+                //         },
+                //     });
+                //     if (flag == "yes") {
+                //         layer.msg("已禁用!");
+                //     }
+                // }
+
+            });
+        })
+    </script>
+    <script>
+        // layui.use(['form'], function() {
+        //     var form = layui.form;
+        //     form.on('switch(switchTest)', function(data) {
+        //         //console.log(data.elem.checked); //开关是否开启，true或者false
+        //         //console.log(data.value); //开关value值，也可以通过data.elem.value得到
+        //         //console.log(data.elem); //得到checkbox原始DOM对象
+        //         console.log(data.othis); //得到美化后的DOM对象
+        //         var checked = data.elem.checked;
+        //         var serverStatus = 1;
+
+        //         if (serverStatus) {
+        //             data.elem.checked = checked;
+        //         } else {
+        //             data.elem.checked = !checked;
+        //         }
+        //         form.render();
+
+        //         var data = {
+        //             "jsonrpc": "2.0",
+        //             "method": "GetWlanSettings",
+        //             "params": {
+        //                 "vap_name": "ath2",
+        //                 "operate_code": 1,
+        //                 "switch1": $('.layui-input-block input[name="open"]').val(),
+        //             },
+        //             "id": "9.1"
+        //         };
+        //         //console.log($('.layui-input-block input[type="checkbox"]').val());
+        //         data = JSON.stringify(data);
+        //         // $.ajax({
+        //         //     type: "post",
+        //         //     url: "/action/action",
+        //         //     data: data,
+        //         //     dataType: "json",
+        //         //     contentType: "application/json;charset=utf-8",
+        //         //     success: function(res) {
+        //         //         var json = res.result.wifi_config;
+
+        //         //         for (var index in json) {
+        //         //             if (checked && json[index].phy_enable == '0') {
+        //         //                 $("#content").show();
+        //         //                 $('.onoff').prop("value", json[index].phy_enable);
+        //         //                 //$('.onoff').prop("value", '0');
+        //         //                 console.log("a" + json[index].phy_enable);
+        //         //             } else {
+        //         //                 if (!checked);
+        //         //                 $("#content").hide();
+        //         //                 $('.onoff').prop("value", [index].phy_enable);
+        //         //                 //$('.onoff').prop("value", "1");
+        //         //                 console.log("b" + json[index].phy_enable);
+        //         //             }
+
+        //         //         }
+        //         //     },
+        //         //     error: function(jqXHR) {
+        //         //         alert("An error occurred：" + jqXHR.status);
+
+        //         //     }
+        //         // });
+
+        //     });
+        // });
+    </script>
+
 </body>
 
 </html>

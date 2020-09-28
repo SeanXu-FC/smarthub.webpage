@@ -151,19 +151,48 @@
             color: #ffffff;
         }
         
-        .Continue a:link,
-        .Continue a:visited,
-        .Continue a:hover,
-        .Continue a:active {
+        .Connected-24GHz {
             font-family: OpenSans;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: normal;
             font-stretch: normal;
             font-style: normal;
-            line-height: 1.35;
+            line-height: 1.63;
             letter-spacing: normal;
-            text-align: center;
-            color: #ffffff;
+            text-align: left;
+            color: #26b167;
+        }
+        
+        .Rectangle-1185 {
+            width: 235px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            padding: 5px 10px;
+        }
+        
+        .Access-point-name {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Password {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
         }
         
         .Back a,
@@ -174,7 +203,19 @@
             color: #000000;
         }
         
+        .Continue a:visited {
+            color: #ffffff;
+        }
+        
+        .Back a,
+        .Continue a,
+        .Back a:link,
         .Back a:visited,
+        .Continue a:active,
+        .Back a:active {
+            color: #000000;
+        }
+        
         .Back a:hover {
             font-family: OpenSans;
             font-size: 20px;
@@ -193,99 +234,51 @@
     <div class="container-fluid">
         <div class="text-left mc ml-70">
             <h2 class="Set-up-wizard"> Set-up wizard </h2>
-            <p class="Choose-your-wireless-network mt-30">Choose your wireless network</p>
-            <p class="When-connected-your-SmartHub-will-distribute-wireless-data-to-all-devices-connected-to-its-access-point-If-there-are-no-wireless-networks-you-wish-to-connect-to-now-then-just-select-continue mt-20">When connected, your SmartHub will distribute wireless data to all devices connected to its access point. If there are no wireless networks you wish to connect to now then just select continue</p>
-            <div class="mCont" style="padding:28px 37px;">
-                <div class="row">
-                    <div class="col-md-10">
-                        <div>Mynetwork1</div>
-                        <div class="col-md-4 c9" style="padding-left:0">Encrypted</div>
-                    </div>
-                    <div class="col-md-2"><img src="images/icon-wifi01.png"></div>
-                </div>
-                <div class="row" style="margin-top:13px;">
-                    <div class="col-md-10">
-                        <div>SKY546H</div>
-                        <div class="col-md-4 c9" style="padding-left:0">Saved</div>
-                    </div>
-                    <div class="col-md-2"><img src="images/icon-wifi01.png"></div>
-                </div>
-                <div class="row" style="margin-top:13px;">
-                    <div class="col-md-10">
-                        <div>Dave's network</div>
-                        <div class="col-md-4 c9" style="padding-left:0">Saved</div>
-                    </div>
-                    <div class="col-md-2"><img src="images/icon-wifi01.png"></div>
-                </div>
-                <div class="row" style="margin-top:13px;">
-                    <div class="col-md-10">
-                        <div>Lanetwork</div>
-                        <!-- <div class="col-md-4 c9" style="padding-left:0">Encrypted</div> -->
-                    </div>
-                    <div class="col-md-2"><img src="images/icon-wifi01.png"></div>
-                </div>
-                <div class="row mt-40">
-                    <div class="col-md-2">
-                        <div><img src="images/icon-add.png"></div>
-                    </div>
-                    <div class="col-md-10"><span class="addN">Create network</span></div>
-                </div>
-
-                <!-- <table class="table-responsive">
-                    <tr>
-                        <td>
-                            <div>Mynetwork1</div>
-                            <div class="c9">Encrypted</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>Thenetwork</div>
-                            <div class="c9">Saved</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td><img src="images/icon-info.png"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>Dave's network</div>
-                            <div class="c9">Saved</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td><img src="images/icon-info.png"></td>
-                    </tr>
-                    <tr>
-                        <td>Lanetwork</td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><img src="images/icon-add.png">
-                            <span class="addN">Create network</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <div class="form-group form-line">
-                                <button type="submit" class="btn layui-btn w100">Next</button>
-                            </div>
-                        </td>
-                    </tr>
-                </table> -->
+            <p class="Choose-your-wireless-network mt-40">Configure your SmartHub access point</p>
+            <p class="When-connected-your-SmartHub-will-distribute-wireless-data-to-all-devices-connected-to-its-access-point-If-there-are-no-wireless-networks-you-wish-to-connect-to-now-then-just-select-continue mt-20">Your SmartHub access point allows other devices to connect to the SmartHub's cellular or wireless network data. You may update the name and password details other devices will use to connect to the access point</p>
+            <div class=""></div>
+            <div class="row mt-40">
+                <div class="col-md-6 Access-point-name">Access point name:</div>
+                <div class="col-md-6"><input type="text" value="My access point" class="Rectangle-1185" /></div>
             </div>
             <div class="row mt-40">
+                <div class="col-md-6 Password">Password:</div>
+                <div class="col-md-6" style="position:relative">
+                    <input type="password" value="" class="Rectangle-1185 pwd" />
+                    <span style="position:absolute; top:5px;left:210px;cursor: pointer;" onclick="change()">show</span>
+                </div>
+            </div>
+
+            <div class="row mt-40">
                 <div class="col-md-7">
-                    <button class="Rectangle-1182 Back">Back</button>
+                    <button class="Rectangle-1182 Back"><a href="setupWizard-1.html">Back</a></button>
                 </div>
                 <div class="col-md-5">
-                    <button class="Rectangle-1182 Continue active"><a href="setupWizard-1.html">Continue</a></button>
+                    <button class="Rectangle-1182 Continue active"><a href="setupWizard-3.html">Continue</a></button>
                 </div>
             </div>
         </div>
+
     </div>
+    </div>
+    <script>
+        $(function() {
+            var isShow = true;
+
+            change = function() {
+                var v = $(".pwd").get(0);
+
+                if (isShow) {
+                    v.type = "text";
+                    isShow = false;
+                } else {
+                    v.type = "password";
+                    isShow = true;
+                }
+            };
+            change();
+        });
+    </script>
 </body>
 
 </html>

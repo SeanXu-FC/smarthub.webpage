@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link href="css/style.css" rel="stylesheet" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        .Path-101 {
+            width: 114px;
+            height: 50px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        .Path-101:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        /* .Rectangle-1187 {
+            width: 534px;
+            height: 347px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+        } */
+        /* .Rectangle-1182 {
+        width: 124px;
+        height: 50px;
+        border-radius: 5px;
+        background-color: #861f41;
+        background-color: #f1f1f1;
+    } */
+        
+        .Rectangle-1182:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Rectangle-1182.active {
+            background-color: #861f41;
+        }
+        
+        .Cancel {
+            /* width: 62px;
+  height: 27px; */
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.45;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+        }
+        
+        .OK {
+            /* width: 28px;
+            height: 27px; */
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        #enterPass,
+        #enterPass1 {
+            /* position: absolute;
+            top: 50%;
+            left: 50%; */
+            width: 500px;
+            height: 318px;
+            /* margin-left: -250px;
+            margin-top: -152px; */
+            padding: 40px;
+            z-index: 999999;
+        }
+        
+        .Password-is-incorrect {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #ff002a;
+            margin-left: 90px;
+            margin-top: 10px;
+        }
+        
+        .Rectangle-1185 {
+            width: 235px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            padding: 5px 10px;
+        }
+        
+        .Enter-the-password-for-network-Mynetwork1 {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.42;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Password {
+            width: 86px;
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+            margin-left: 15px;
+        }
+        
+        .SHOW {
+            font-family: OpenSans;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.42;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+        }
+        
+        .Rectangle-1188 {
+            width: 281px;
+            height: 40px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+        }
+        
+        .Rectangle-1187 {
+            width: 500px;
+            height: 340px;
+            border-radius: 5px;
+            /* border: solid 1px #707070; */
+            background-color: #ffffff;
+        }
+        
+        .Rectangle-1182 {
+            /* width: 174px; */
+            height: 50px;
+            padding: 0 20px;
+            border-radius: 5px;
+            background-color: #861f41;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="enterPass1" class="Rectangle-1187">
+        <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Enter the password for network</h3>
+        <p class="Enter-the-admin-password-to-make-changes mt-20 Enter-the-password-for-network-Mynetwork1">"Mynetwork1"</p>
+        <div class="row " style="position:relative">
+            <label class="Password mt-30" style="display: inline-block;">password:</label>
+            <input type="password" id="pwd" value="" class="Rectangle-1188 pwd" style="display: inline-block;" />
+            <span class="SHOW" style="position:absolute; top:37px;left:393px;cursor: pointer;" onclick="change()">show</span>
+        </div>
+        <div class="row mt-40 ">
+            <button class="Path-101 Cancel" style="margin-left:120px">Cancel</button>
+            <span class="connected"><button class="connected Rectangle-1182 active OK" style="margin-left:30px">Connected</button></span>
+        </div>
+    </div>
+    <script>
+        $(function() {
+            // var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+            // parent.layer.title('新标题。。', index) //再改变当前层的标题
+            //parent.parent.$(".layui-layer-title")[0].innerText = "正在打开："+$("#f_title").val();
+
+            //去掉标题栏
+            parent.parent.$(".layui-layer-title")[0].style.display = "none";
+
+            // 按钮禁掉和灰掉
+            $(".connected button").prop("disabled", true);
+            $(".connected button").css("opacity", "0.5");
+
+
+            //密码输入正确把禁掉和灰掉去了
+            $('#pwd').on("keydown", function(e) {
+                var pwd = $('#pwd').val();
+                var reg = /\w{6,19}$/;
+
+                // if (reg.test(pwd) {
+                //     $(this).siblings()
+                //         .find('span')
+                //         .text('Correct password input!')
+                //         .removeClass()
+                //         .addClass('state4');
+                //     password = true;
+                // } else {
+                //     $(this).siblings()
+                //         .find('span')
+                //         .text('Password input error, please re-enter!')
+                //         .removeClass()
+                //         .addClass('state3');
+
+                // }
+
+                if (!reg.test(pwd) || pwd == null || pwd == "") {
+                    $(".connected button").prop("disabled", true);
+                    $(".connected button").css("opacity", "0.5");
+                } else {
+                    $(".connected button").prop("disabled", false);
+                    $(".connected button").css("opacity", "1");
+                }
+                // if (e.keyCode) {
+                //     console.log("Enter")
+                // }
+            });
+
+            // $('input[type="password"]').onchange = function() {
+            //     $(".connected button").prop("disabled", false);
+            //     $(".connected button").css("opacity", "0");
+            // };
+
+            // show
+            var isShow = true;
+
+            change = function() {
+                var v = $(".pwd").get(0);
+
+                if (isShow) {
+                    v.type = "text";
+                    isShow = false;
+                } else {
+                    v.type = "password";
+                    isShow = true;
+                }
+            };
+            change();
+        });
+    </script>
+</body>
+
+</html>
