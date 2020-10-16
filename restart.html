@@ -10,23 +10,99 @@
     <link href="layui/css/layui.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <title>Document</title>
+    <style>
+        .Restart-factory-reset {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            border-bottom: solid 1px #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .Rectangle-1182 {
+            width: 242px;
+            height: 54px;
+            border-radius: 5px;
+            background-color: #861f41;
+        }
+        
+        .Restart-SmartHub {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .Lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-Ut-enim-ad-minim-veniam {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #3a3a3a;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container-fluid" style="margin:30px 40px;">
+    <div class="container-fluid" style="margin:40px 70px;">
         <div class="row">
-            <h3 style="margin-bottom:40px;">Restart & factory reset</h3>
-            <p class="mb-20">Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod</p>
+            <h3 style="margin-bottom:40px;" class="Restart-factory-reset">Restart & factory reset</h3>
+            <p class="mb-20 Lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-Ut-enim-ad-minim-veniam">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
             <div class="layui-input-inline">
-                <button class="layui-btn" lay-submit>Restart SmartHub</button>
+                <button class="layui-btn Rectangle-1182 Restart-SmartHub restartSmartHub" lay-submit>Restart SmartHub</button>
             </div>
 
-            <p class="mt-50 mb-20">Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod</p>
+            <p class="mt-50 mb-20 Lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-Ut-enim-ad-minim-veniam">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
             <div class="layui-input-inline">
-                <button class="layui-btn" lay-submit>Reset to factory defaults</button>
+                <button class="layui-btn Rectangle-1182 Restart-SmartHub restartFactoryDefaults" lay-submit>Reset to factory defaults</button>
             </div>
         </div>
     </div>
+
+    <script src="layui/layui.js " charset="utf-8 "></script>
+    <script>
+        //弹出一个iframe层
+        $('.restartSmartHub').on('click', function() {
+
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: false,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['660px', '202px'],
+                content: ['restartSmartHub.html', 'no'],
+            });
+        });
+
+        $('.restartFactoryDefaults').on('click', function() {
+
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: false,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['660px', '297px'],
+                content: ['restartFactoryDefaults.html', 'no'],
+            });
+        });
+    </script>
 </body>
 
 </html>

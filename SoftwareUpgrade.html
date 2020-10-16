@@ -7,7 +7,7 @@
     <title>文件上传</title>
 
     <link href="layui/css/layui.css" rel="stylesheet" />
-
+    <link href="css/style.css" rel="stylesheet" />
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="layui/layui.js" type="text/javascript"></script>
     <script src="js/upload.js" type="text/javascript"></script>
@@ -30,13 +30,65 @@
             border-radius: 2px;
             cursor: pointer;
         }
+        
+        .Software-upgrade {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .Rectangle-1182 {
+            width: 221px;
+            height: 54px;
+            border-radius: 5px;
+            background-color: #861f41;
+        }
+        
+        .Browse-file-to-upload {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .Rectangle-1183 {
+            width: 126px;
+            height: 54px;
+            border-radius: 5px;
+            background-color: #861f41;
+        }
+        
+        .Upgrade {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
     </style>
 </head>
 
 <body>
     <div class="container" style="margin:40px 80px;">
         <div class="row">
-            <h2 class="col-md-12" style="margin-bottom:10px;">Software upgrade</h2>
+            <h2 class="col-md-12 Software-upgrade" style="margin-bottom:10px;">Software upgrade</h2>
         </div>
         <div class="row">
             <div class="col-md-12" style="margin-bottom:10px;">Current version:<span id="version" style="padding-left:10px;font-size:16px;font-weight:bold;"></span></div>
@@ -52,6 +104,7 @@
                     <div class="layui-upload-drag" id="upload">
                         <i class="layui-icon red"></i>
                         <p>Drag file here or...</p>
+                        <input type="button" class="layui-btn Rectangle-1182 Browse-file-to-upload mt-20" id="fileUpload" lay-submit value="Browse file to upload">
                     </div>
                 </div>
                 <div class="layui-inline" id="upload_preview"></div>
@@ -67,7 +120,7 @@
             </div>
             <div class="">
                 <div class="layui-input-inline">
-                    <input type="button" class="layui-btn" id="upgrade" lay-submit value="Upgrade">
+                    <input type="button" class="layui-btn Rectangle-1183 Upgrade" id="upgrade" lay-submit value="Upgrade">
                     <!-- <button class="layui-btn" lay-submit>Upgrade</button> -->
                 </div>
             </div>

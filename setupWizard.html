@@ -74,7 +74,7 @@
             letter-spacing: normal;
             text-align: left;
             color: #861f41;
-            border-bottom: 1px solid #e5e5e5;
+            border-bottom: solid 1px #ddd;
             padding-bottom: 10px;
         }
         
@@ -127,6 +127,14 @@
             background-color: #861f41;
         }
         
+        .Rectangle-1181 {
+            width: 137px;
+            height: 50px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+        }
+        
         .Back {
             font-family: OpenSans;
             font-size: 20px;
@@ -173,8 +181,7 @@
         .Back a:active {
             color: #000000;
         }
-        
-        .Back a:visited,
+        /* .Back a:visited,
         .Back a:hover {
             font-family: OpenSans;
             font-size: 20px;
@@ -185,7 +192,7 @@
             letter-spacing: normal;
             text-align: center;
             color: #ffffff;
-        }
+        } */
     </style>
 </head>
 
@@ -278,7 +285,7 @@
             </div>
             <div class="row mt-40">
                 <div class="col-md-7">
-                    <button class="Rectangle-1182 Back">Back</button>
+                    <button class="Rectangle-1181 Back" disabled>Back</button>
                 </div>
                 <div class="col-md-5">
                     <button class="Rectangle-1182 Continue active"><a href="setupWizard-1.html">Continue</a></button>
@@ -286,6 +293,10 @@
             </div>
         </div>
     </div>
+    <script>
+        $(".Back").prop("disabled", true);
+        $(".Back").css("opacity", "0.5");
+    </script>
 </body>
 
 </html>

@@ -5608,3 +5608,10 @@ body .layui-util-face .layui-layer-content {
     -webkit-animation-name: layui-fadeout;
     animation-name: layui-fadeout
 }
+
+
+/* .layui-layer {
+    border-radius: 20px;
+    overflow: hidden;
+    background: none
+} */

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link href="css/style.css" rel="stylesheet" />
+
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        .Path-101 {
+            width: 114px;
+            height: 50px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        .Path-101:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        /* .Rectangle-1187 {
+            width: 534px;
+            height: 347px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+        } */
+        /* .Rectangle-1182 {
+        width: 124px;
+        height: 50px;
+        border-radius: 5px;
+        background-color: #861f41;
+        background-color: #f1f1f1;
+    } */
+        
+        .Rectangle-1182:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Rectangle-1182.active {
+            background-color: #861f41;
+        }
+        
+        .Cancel {
+            /* width: 62px;
+  height: 27px; */
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.45;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+        }
+        
+        .OK {
+            /* width: 28px;
+            height: 27px; */
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        #enterPass,
+        #enterPass1 {
+            /* position: absolute;
+            top: 50%;
+            left: 50%; */
+            width: 500px;
+            height: 318px;
+            /* margin-left: -250px;
+            margin-top: -152px; */
+            padding: 40px;
+            z-index: 999999;
+            border-radius: 5px;
+        }
+        
+        .Password-is-incorrect {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #ff002a;
+            margin-left: 90px;
+            margin-top: 10px;
+        }
+        
+        .Rectangle-1185 {
+            width: 235px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            padding: 5px 10px;
+        }
+        
+        .Enter-the-password-for-network-Mynetwork1 {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.42;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Password {
+            /* width: 86px; */
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+            margin-left: 15px;
+        }
+        
+        .SHOW {
+            font-family: OpenSans;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.42;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            margin-left: -66px;
+        }
+        
+        .Rectangle-1188 {
+            width: 344px;
+            height: 40px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+        }
+        
+        .Rectangle-1187 {
+            width: 500px;
+            height: 440px;
+            border-radius: 5px;
+            /* border: solid 1px #707070; */
+            background-color: #ffffff;
+        }
+        
+        .Rectangle-1182 {
+            width: 124px;
+            height: 50px;
+            /* padding: 0 20px; */
+            border-radius: 5px;
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        #pwd {
+            padding: 5px 10px
+        }
+        
+        .error {
+            color: #f00;
+            display: none;
+            margin: 10px 0 10px 104px;
+            font-weight: bold;
+            /* visibility: hidden; */
+            /* height: 30px; */
+        }
+        
+        .correct {
+            display: none;
+            color: green;
+            margin: 10px 0 10px 104px;
+            font-weight: bold;
+            /* visibility: hidden; */
+            /* height: 30px; */
+        }
+        
+        .SKY546H {
+            /* width: 102px; */
+            height: 33px;
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.08;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+        }
+        
+        .wirelessInfo {
+            padding: 20px;
+        }
+        /* .layui-form-label {
+            width: 260px !important;
+        } */
+        /* .layui-input,
+        .layui-textarea {
+            display: block;
+            width: 88%;
+            padding-left: 10px;
+            border-radius: 5px;
+            border: 1px solid #333 !important
+        } */
+        
+        .layui-textarea {
+            display: block;
+            width: 88%;
+            padding-left: 10px;
+            border-radius: 5px;
+            border: 1px solid #333 !important
+        }
+        
+        .form-control-static {
+            padding-top: 12px;
+        }
+        
+        .Status {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Connected {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .layui-form-switch {
+            margin-top: 12px;
+        }
+        
+        .Path-97 {
+            /* width: 138.9px; */
+            height: 50px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+        }
+        
+        .Forget-network {
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: center;
+            color: #363636 !important;
+        }
+        
+        .Close {
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: center;
+            color: #f9f9f9;
+        }
+        /* .layui-input {
+            border-color: #707070;
+            border-radius: 5px !important;
+        } */
+        /* .layui-form-select .layui-edge {
+            position: absolute;
+            right: -75px;
+            top: 50%;
+            margin-top: -3px;
+            cursor: pointer;
+            border-width: 6px;
+            border-top-color: #707070;
+            border-top-style: solid;
+            transition: all .3s;
+            -webkit-transition: all .3s;
+        } */
+        
+        .form-control {
+            display: block;
+            width: 52%;
+            height: 40px;
+            padding: 6px 12px;
+            font-size: 18px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #707070;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        }
+        
+        #pwd {
+            padding: 5px 10px
+        }
+        
+        .error {
+            color: #f00;
+            display: none;
+            margin: 10px 0 10px 54px;
+            font-weight: bold;
+            /* visibility: hidden; */
+            /* height: 30px; */
+        }
+        
+        .correct {
+            display: none;
+            color: green;
+            margin: 10px 0 10px 54px;
+            font-weight: bold;
+            /* visibility: hidden; */
+            /* height: 30px; */
+        }
+        
+        .Edit-input {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Enable-if-you-want-this-input-to-wake-the-SmartHub {
+            width: 330px !important;
+            height: 19px;
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Channel-number {
+            font-family: OpenSans;
+            font-size: 18px !important;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333 !important;
+        }
+        
+        .Enable-if-you-want-this-input-to-wake-the-SmartHub {
+            opacity: 1;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333;
+        }
+        
+        .h18 {
+            font-family: OpenSans;
+            font-size: 18px !important;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        /* .layui-input {
+            display: block;
+            width: 100%;
+            font-size: 18px;
+            padding-left: 10px;
+        } */
+        
+        .Rectangle-1233 {
+            width: 21px;
+            height: 21px;
+            border-radius: 2px;
+            border: solid 1px #707070;
+            background-color: #26b167;
+        }
+        
+        .layui-form-checkbox[lay-skin=primary] i {
+            right: auto;
+            left: 0;
+            width: 21px;
+            height: 21px;
+            line-height: 21px;
+            border: 1px solid #d2d2d2;
+            font-size: 12px;
+            border-radius: 2px;
+            /* background-color: #fff; */
+            -webkit-transition: .1s linear;
+            transition: .1s linear;
+        }
+        
+        .Edit-Air-conditioner-notifications {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        /* .layui-input {
+            width: 100%
+        } */
+        
+        .Allow-notifications {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333 !important;
+        }
+        
+        .Channel-has {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .Rectangle-1185 {
+            /* width: 223px; */
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+        }
+        
+        .volts {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        /* .layui-form-item .layui-input-inline {
+            float: left !important;
+            width: 20%;
+            margin-right: 10px !important;
+        }
+
+        
+        .layui-form-select .layui-input {
+            width: 180px;
+        } */
+        /* .layui-form-select .layui-input {}
+        
+        .layui-form-select,
+        .layui-form-selected {
+            width: 180px;
+            cursor: pointer;
+            border: 1px solid #f00
+        } */
+        
+        .layui-form-select .layui-input {
+            padding-right: 30px;
+            width: 146px;
+            cursor: pointer;
+            border: 1px solid #333;
+            font-size: 18px;
+        }
+        
+        .layui-form-select .layui-edge {
+            position: absolute;
+            right: -6px;
+            top: 44%;
+            margin-top: -3px;
+            cursor: pointer !important;
+            border-width: 6px;
+            border-top-color: #c2c2c2;
+            border-top-style: solid;
+            transition: all .3s;
+            -webkit-transition: all .3s;
+        }
+        
+        .layui-form-select dl {
+            min-width: 100%;
+        }
+        
+        .layui-form-select,
+        .layui-form-selected {
+            min-width: 100%;
+            /* border: 1px solid #f00; */
+            width: 126px;
+            cursor: pointer !important;
+        }
+        
+        .layui-form-item .layui-input-inline {
+            float: left;
+            width: 120px;
+            margin-right: 10px;
+        }
+        
+        .layui-form-switch {
+            margin-top: 10px;
+            margin-left: -66px;
+        }
+        
+        .Value-below {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .layui-form-select dl dd.layui-this {
+            background-color: #5FB878;
+            color: #fff;
+            width: 144px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container wirelessInfo form-inline" id="wirelessInfo">
+        <form class="layui-form" action="" lay-filter="example">
+            <div class="Edit-Air-conditioner-notifications">Edit Bilge pump notifications</div>
+            <div class="layui-form-item mt-20">
+                <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number Allow-notifications">Allow notifications</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline mt-10">
+                    <label class="layui-form-label Allow-notifications" style="width:228px">Alert trigger condition:</label>
+                </div>
+                <div class="layui-inline" style="margin-left: 7px;margin-top:11px">
+                    <label class="layui-form-label Channel-has layui-select-title" style="width:160px !important">Channel has</label>
+                    <div class="layui-input-inline">
+                        <select name="modules" lay-verify="required" lay-search="" class=" Rectangle-1185 Value-below" id="security" onchange="show()">
+                        <option value=" ">Met</option>
+                        <option value="1 ">Not met</option>
+                      </select>
+                    </div>
+                    <div class="layui-input-inline" style="width:38px;">
+                        <input type="text " name="price_min " placeholder=" " autocomplete="off " class="layui-input " style="width: 30px;margin-left:24px ;border:1px solid #333">
+                    </div>
+                    <label class="layui-form-label volts " style="margin-left:-5px;width: 60px !important; ">volts</label>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item layui-form-text mt-20">
+                <label class=" layui-form-label Allow-notifications " style="margin-top:-14px;width:228px; ">Notification message:</label>
+                <div class="layui-input-block " style="margin-left:262px; ">
+                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="100" class="layui-textarea "></textarea>
+                </div>
+            </div>
+
+            <div class="row mt-60 ">
+                <span class="col-md-4 col-md-offset-2 " style="display: inline-block;margin-left:460px "><button id="cancel" class="Path-97 layui-btn Forget-network ">Cancel</button></span>
+                <span class="col-md-2 col-md-offset-4 connected " id="layerDemo " style="display: inline-block;margin-left:-10px; "><button data-method="notice " id="btn " class="Rectangle-1182 active Close " style="margin-top:-3px ">Save</button></span>
+            </div>
+        </form>
+
+
+    </div>
+    <script src="layui/layui.js " charset="utf-8 "></script>
+    <script>
+        $(function() {
+            var isShow = true;
+            change = function() {
+                var v = $(".pwd ").get(0);
+
+                if (isShow) {
+                    v.type = "text ";
+                    isShow = false;
+                } else {
+                    v.type = "password ";
+                    isShow = true;
+                }
+            };
+            //change();
+
+
+        });
+
+        // 按钮禁掉和灰掉
+        // $(".connected button ").prop("disabled ", true);
+        // $(".connected button ").css("opacity ", "0.5 ");
+
+        $('#pwd').keyup(function() {
+            //var reg = /\w{6,19}$/;
+            var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
+            var val = reg.test($('#pwd').val());
+            var len = val.length;
+            if (len <= 6 || len >= 16 || val == " " || val == null) {
+                $("#btn ").attr("disabled ", "true ");
+                $("#btn ").css("opacity ", "0.5 ");
+                $('.error').show();
+                $('.correct').hide();
+            } else {
+                $("#btn ").removeAttr("disabled ");
+                $("#btn ").css("opacity ", "1 ");
+                $('.correct').show();
+                $('.error').hide();
+            }
+        });
+
+        function show() {
+            var oSecurity = document.getElementById("security ").value;
+            var oAdd = document.getElementById("add ");
+            //var oCreate = document.getElementById("create ");
+            var oWpa = document.getElementById("wpa ");
+
+            $('#security').click(function() {
+                if (oSecurity == 0) {
+                    $("#wpa ").hide();
+                }
+
+                if (oSecurity == 1) {
+                    $("#wpa ").show();
+                }
+            });
+
+
+        }
+
+        layui.use(['form', 'layedit', 'laydate'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate;
+
+
+        });
+
+
+
+        $('#cancel').click(function() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index); //关闭当前页
+        });
+    </script>
+</body>
+
+</html>

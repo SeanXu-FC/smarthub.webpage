@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jquery.myProgress.js"></script>
+    <link rel="stylesheet" href="css/myProgress.css" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        .Restart-factory-reset {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+        }
+        
+        .Restarting-SmartHub {
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.18;
+            letter-spacing: normal;
+            text-align: left;
+            color: #3a3a3a;
+        }
+        
+        .Rectangle-1286 {
+            border-radius: 12px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" style="margin:40px 70px;">
+        <div class="row">
+            <h3 style="margin-bottom:40px;" class="Restart-factory-reset">Restart & factory reset</h3>
+            <div class="Restarting-SmartHub">Restarting SmartHub...</div>
+            <div class="progress-out Rectangle-1286 mt-20" id="div3">
+                <div class="percent-show"><span>0</span>%</div>
+                <div class="progress-in"></div>
+            </div>
+        </div>
+    </div>
+    <script src="layui/layui.js " charset="utf-8 "></script>
+    <script>
+        $('#btn').click(function() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index); //关闭当前页
+        });
+        layui.use(['form'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+
+                laydate = layui.laydate;
+        });
+    </script>
+    <script>
+        $(function() {
+            $("#div3").myProgress({
+                speed: 4000,
+                percent: 50,
+                width: "100%",
+            });
+        })
+    </script>
+</body>
+
+</html>

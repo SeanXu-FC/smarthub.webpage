@@ -11,31 +11,210 @@
     <link href="css/style.css" rel="stylesheet" />
     <title>Document</title>
     <style>
-        .an-content {
-            border: 1px solid #ccc;
-            padding: 20px;
+        body {
+            margin: 0;
+            padding: 0;
         }
         
-        .an-content p {
+        .lan {
+            position: relative;
+            width: 600px;
+        }
+        
+        .lanBt {
             font-weight: bold;
+            font-size: 18px;
+        }
+        /* .lan-content {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            position: relative;
+        } */
+        
+        .lan-h {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .lan-edit {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            top: 48px;
+            right: 45px;
+            padding-right: 20px;
+            vertical-align: middle;
+        }
+        
+        .edit-first {
+            position: absolute;
+            top: 107px;
+            right: 45px;
+        }
+        
+        .lan-edit a {
+            color: #007de9
+        }
+        
+        .Channels-configuration {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            border-bottom: solid 1px #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .Inputs {
+            font-family: OpenSans;
+            font-size: 28px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Rectangle-1234 {
+            /* width: 378px; */
+            height: 128px;
+            border-radius: 10px;
+            border: solid 1px #707070;
+            padding: 10px;
+        }
+        
+        .Edit {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: left;
+            color: #007de9;
+            vertical-align: middle;
+        }
+        
+        .Bilge-pump {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Channel {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Digital-input {
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #666666;
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid" style="padding:30px 40px;">
-        <h3>Alert notifications</h3>
-        <div class="row">
-            <div class="an-content mt-30 col-sm-10">
-                <p>-Set per channel</p>
-                <p>-Set whether channel has alarm or not(on/off)</p>
-                <p>-Set condition for triggering an alert notification(digital:met or not met,analogue:above or below value)</p>
-                <p>-Set text for alert notification</p>
-                <br>
-                <p>Notifications will just be sent to the cloud(push notifications on app)</p>
+    <div class="container-fluid" style="padding:30px 70px;">
+        <h3 class="Channels-configuration">Alert notifications</h3>
+        <div class="mt-40">
+            <div class="lan">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Bilge pump</p>
+                    <p class="mt-10 Channel">Channel 1 </p>
+                    <p class="Digital-input mt-10">Notifications disabled</p>
+                    <span class="lan-edit Edit inputsEdit-0"><a href="#">edit</a></span>
+                </div>
             </div>
+
+            <div class="lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Air conditioning</p>
+                    <p class="mt-10 Channel">Channel 2 </p>
+                    <p class="Digital-input mt-10">Notifications disabled</p>
+                    <span class="lan-edit Edit inputsEdit-1"><a href="#">edit</a></span>
+                </div>
+            </div>
+
+            <div class="lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Cabin lights</p>
+                    <p class="mt-10 Channel">Channel 3 </p>
+                    <p class="Digital-input mt-10">Notifications enabled</p>
+                    <span class="lan-edit Edit inputsEdit"><a href="#">edit</a></span>
+                </div>
+            </div>
+
+            <div class="lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Deck lights</p>
+                    <p class="mt-10 Channel">Channel 4 </p>
+                    <p class="Digital-input mt-10">Notifications disabled</p>
+                    <span class="lan-edit Edit inputsEdit"><a href="#">edit</a></span>
+                </div>
+            </div>
+
         </div>
     </div>
+    <script src="layui/layui.js " charset="utf-8 "></script>
+    <script>
+        //弹出一个iframe层
+        $('.inputsEdit-1 a').on('click', function() {
+
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: false,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['761px', '475px'],
+                content: ['editNotifications.html', 'no'],
+            });
+        });
+
+        $('.inputsEdit-0 a').on('click', function() {
+
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: false,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['761px', '475px'],
+                content: ['editNotifications-1.html', 'no'],
+            });
+        });
+
+        $(".layui-layer").css("background", "none");
+    </script>
 </body>
 
 </html>

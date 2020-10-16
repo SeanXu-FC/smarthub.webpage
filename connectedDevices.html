@@ -8,60 +8,116 @@
     <script src="js/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="js/connectedDevices.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
     <title>Document</title>
     <style>
         .align {
             vertical-align: middle !important;
+        }
+        
+        .Connected-devices {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            border-bottom: solid 1px #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .All-devices-currently-connected-to-your-SmartHub-device {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #666666;
+        }
+        
+        .Device-name {
+            padding: 20px 0 !important;
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: center;
+            color: #333333;
+        }
+        /* .pd20 {
+            padding: 20px 0 !important;
+        } */
+        
+        .main table tr td {
+            padding: 20px 0 !important;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: center;
+            color: #555555;
         }
     </style>
 </head>
 
 <body>
     <div class="container-fluid" style="margin:10px 40px;">
-        <div class="row">
-            <h3>Connected devices</h3>
-            <h6>All devices currently connected to your SmartHub device:</h6>
+        <div class="row main">
+            <h3 class="Connected-devices mt-20">Connected devices</h3>
+            <h6 class="All-devices-currently-connected-to-your-SmartHub-device mt-20" style="margin-bottom:20px;">All devices currently connected to your SmartHub device:</h6>
             <table class="table table-bordered table-responsive table-condensed table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center active">Device</th>
-                        <th class="text-center active">Device name</th>
-                        <th class="text-center active">Type </th>
-                        <th class="text-center active">IP address</th>
-                        <th class="text-center active">Connection type</th>
+                        <th class="text-center Device-name active">Device</th>
+                        <th class="text-center Device-name active">Device name</th>
+                        <th class="text-center Device-name active">Type </th>
+                        <th class="text-center Device-name active">IP address</th>
+                        <th class="text-center Device-name active">Connection type</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="text-center">
-                        <td class="align"><img src="images/img-mobile.png"></td>
+                        <td class="align"><img src="images/Group 2901.png"></td>
                         <td class="align"><span id="DeviceName"></span>Dave's iPhone </td>
                         <td class="align"><span id="Mobile"></span>Mobile </td>
                         <td class="align"><span id="IPAddress"></span>192.143.1.1 </td>
                         <td class="align"><span id="ConnectMode"></span>Wireless</td>
                     </tr>
                     <tr class="text-center">
-                        <td class="align"><img src="images/img-mobile.png"></td>
+                        <td class="align"><img src="images/Group 2901.png"></td>
                         <td class="align">Dave's Samsung </td>
                         <td class="align">Mobile </td>
                         <td class="align">192.143.1.1 </td>
                         <td class="align">Wireless</td>
                     </tr>
                     <tr class="text-center">
-                        <td class="align"><img src="images/img-mobile.png"></td>
+                        <td class="align"><img src="images/Group 2901.png"></td>
                         <td class="align">Daves's Gphone </td>
                         <td class="align">Mobile </td>
                         <td class="align">192.143.1.1 </td>
                         <td class="align">Wireless</td>
                     </tr>
                     <tr class="text-center">
-                        <td class="align"><img src="images/img-pc.png"></td>
+                        <td class="align"><img src="images/Group 2902.png"></td>
                         <td class="align">Daves's laptop </td>
                         <td class="align">PC </td>
                         <td class="align">192.143.1.1 </td>
                         <td class="align">Ethernet</td>
                     </tr>
                     <tr class="text-center">
-                        <td class="align"><img src="images/img-mfd.png"></td>
+                        <td class="align"><img src="images/Group 2903.png"></td>
                         <td class="align">Dave's Axiom </td>
                         <td class="align">MFD </td>
                         <td class="align">192.143.1.1 </td>

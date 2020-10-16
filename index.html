@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/xadmin.css">
     <link href="css/style.css" rel="stylesheet" />
     <script type="text/javascript" src="js/jquery/3.2.1/jquery.min.js"></script>
-    <script src="layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/xadmin.js"></script>
     <script type="text/javascript" src="js/SmartHubPointSave.js"></script>
     <style>
@@ -217,7 +217,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 1;
         }
         
@@ -225,9 +225,9 @@
             width: 100%;
             height: 100%;
             background-color: #000;
-            filter: alpha(opacity=50);
-            -moz-opacity: 0.5;
-            opacity: 0.5;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            opacity: 0.8;
             position: absolute;
             left: 0px;
             top: 0px;
@@ -515,7 +515,7 @@
             </div>
         </div>
     </div>
-    <div id="enterPass" class="Rectangle-1187" style="display: none;">
+    <!-- <div id="enterPass" class="Rectangle-1187" style="display: none;">
         <h3 class="Enter-admin-password">Enter admin password</h3>
         <p class="Enter-the-admin-password-to-make-changes mt-20">Enter admin password to make change</p>
         <label class="Password mt-40">password:</label>
@@ -523,7 +523,7 @@
         <div class="Forgot-password mt-20">Forgot password?</div>
         <div style="margin-left:192px;" class="mt-40"><button class="Path-101 Cancel">Cancel</button><button class="Rectangle-1187 Rectangle-1182 active OK" style="margin-left:20px;">OK</button></div>
     </div>
-    <div id="bg1"></div>
+    <div id="bg1"></div> -->
     <!-- <div id="enterPass1" class="Rectangle-1187">
         <h3 class="Enter-admin-password">Enter admin password</h3>
         <p class="Enter-the-admin-password-to-make-changes mt-20">Enter admin password to make change</p>
@@ -621,29 +621,32 @@
         });
     </script> -->
 
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+    <script type="text/javascript" src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
     <script>
         $(function() {
-            $('#enterPass').hide();
+            // $('#enterPass').hide();
             $('.sub-menu li a').click(function() {
                 $('#bg1').show();
                 $('#enterPass').show(500);
             });
 
-            $('#enterPass1').hide();
-            $('.sub-menu li a').click(function() {
-                $('#bg1').show();
-                $('#enterPass').show(500);
-            });
+            // $('#enterPass1').hide();
+            // $('.sub-menu li a').click(function() {
+            //     $('#bg1').show();
+            //     $('#enterPass').show(500);
+            // });
 
-
-
-            $(document).click(function() {
+            // $('.sub-menu li a').on("mouseenter", function() {
+            //     $('#bg1').show();
+            //     $('#enterPass').show(500);
+            // });
+            $('#bg1').on("click", function() {
                 $('#bg1').hide();
                 $('#enterPass').hide(500);
             });
+
         });
 
         // bg1 = function() {

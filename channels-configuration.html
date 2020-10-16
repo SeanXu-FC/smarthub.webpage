@@ -24,13 +24,12 @@
             font-weight: bold;
             font-size: 18px;
         }
-        
-        .lan-content {
+        /* .lan-content {
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
             position: relative;
-        }
+        } */
         
         .lan-h {
             font-weight: bold;
@@ -41,88 +40,212 @@
             position: absolute;
             width: 30px;
             height: 20px;
-            top: 24px;
-            right: 10px;
-            padding-right: 10px;
+            top: 66px;
+            right: 45px;
+            padding-right: 20px;
+            vertical-align: middle;
+        }
+        
+        .edit-first {
+            position: absolute;
+            top: 107px;
+            right: 45px;
         }
         
         .lan-edit a {
             color: #007de9
         }
+        
+        .Channels-configuration {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            border-bottom: solid 1px #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .Inputs {
+            font-family: OpenSans;
+            font-size: 28px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Bilge-pump {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Channel {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Digital-input {
+            opacity: 0.7;
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Rectangle-1234 {
+            /* width: 378px; */
+            height: 128px;
+            border-radius: 10px;
+            border: solid 1px #707070;
+            padding: 10px;
+        }
+        
+        .Edit {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: left;
+            color: #007de9;
+            vertical-align: middle;
+        }
+        
+        .col-sm-5 {
+            border: 1px solid #000
+        }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid" style="padding:30px 40px;">
-        <h3>LAN configuration</h3>
+    <div class="container-fluid" style="padding:30px 70px;">
+        <h3 class="Channels-configuration">LAN configuration</h3>
         <div class="row mt-40">
-            <div class="col-sm-5 col-sm-offset-1  lan">
-                <h4 class="lanBt">Inputs</h4>
-                <div class="mt-20 lan-content">
-                    <p class="lan-h">Bilge pump</p>
-                    <p class="mt-10">Channel 1 </p>
-                    <span class="lan-edit"><a href="#">edit</a></span>
+            <div class="col-sm-6 lan">
+                <h4 class="lanBt Inputs">Inputs</h4>
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Bilge pump</p>
+                    <p class="mt-10 Channel">Channel 1 </p>
+                    <p class="Digital-input">Digital input</p>
+                    <span class="lan-edit Edit edit-first inputsEdit"><a href="#">edit</a></span>
                 </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-1 lan">
-                <h4 class="lanBt">Outputs</h4>
-                <div class="mt-20 lan-content">
-                    <p class="lan-h">Wipers</p>
-                    <p class="mt-10">Channel 5 </p>
-                    <span class="lan-edit"><a href="#">edit</a></span>
+            <div class="col-sm-6 col-sm-offset-1 lan">
+                <h4 class="lanBt Inputs">Outputs</h4>
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Wipers</p>
+                    <p class="mt-10 Channel">Channel 5 </p>
+                    <span class="lan-edit Edit edit-first outputsEdit"><a href="#">edit</a></span>
                 </div>
             </div>
 
-            <div class="col-sm-5 col-sm-offset-1 lan mt-10">
-
-                <div class="mt-20 lan-content">
-                    <p class="lan-h">Air conditioning</p>
-                    <p class="mt-10">Channel 2 </p>
-                    <span class="lan-edit"><a href="#">edit</a></span>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Air conditioning</p>
+                    <p class="mt-10 Channel">Channel 2 </p>
+                    <p class="Digital-input">Digital input</p>
+                    <span class="lan-edit Edit inputsEdit"><a href="#">edit</a></span>
                 </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-1 lan mt-10">
-
-                <div class="mt-20 lan-content">
-                    <p class="lan-h">Klaxon</p>
-                    <p class="mt-10">Channel 6 </p>
-                    <span class="lan-edit"><a href="#">edit</a></span>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Klaxon</p>
+                    <p class="mt-10 Channel">Channel 6 </p>
+                    <span class="lan-edit Edit outputsEdit"><a href="#">edit</a></span>
                 </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-1 lan mt-10">
-
-                <div class="mt-20 lan-content">
-                    <p class="lan-h">Cabin lights</p>
-                    <p class="mt-10">Channel 3 </p>
-                    <span class="lan-edit"><a href="#">edit</a></span>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Cabin lights</p>
+                    <p class="mt-10 Channel">Channel 3 </p>
+                    <p class="Digital-input">Digital input</p>
+                    <span class="lan-edit Edit inputsEdit"><a href="#">edit</a></span>
                 </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-1 lan mt-10">
-
-                <div class="mt-20 lan-content">
-                    <p class="lan-h">Heating</p>
-                    <p class="mt-10">Channel 7 </p>
-                    <span class="lan-edit"><a href="#">edit</a></span>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Heating</p>
+                    <p class="mt-10 Channel">Channel 7 </p>
+                    <span class="lan-edit Edit outputsEdit"><a href="#">edit</a></span>
                 </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-1 lan mt-10">
-
-                <div class="mt-20 lan-content">
-                    <p class="lan-h">Deck lights</p>
-                    <p class="mt-10">Channel 4 </p>
-                    <span class="lan-edit"><a href="#">edit</a></span>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Deck lights</p>
+                    <p class="mt-10 Channel">Channel 4 </p>
+                    <p class="Digital-input">Digital input</p>
+                    <span class="lan-edit Edit inputsEdit"><a href="#">edit</a></span>
                 </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-1 lan mt-10">
-
-                <div class="mt-20 lan-content">
-                    <p class="lan-h">Navigation lights</p>
-                    <p class="mt-10">Channel 8 </p>
-                    <span class="lan-edit"><a href="#">edit</a></span>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump">Navigation lights</p>
+                    <p class="mt-10 Channel">Channel 8 </p>
+                    <span class="lan-edit Edit outputsEdit"><a href="#">edit</a></span>
                 </div>
             </div>
         </div>
     </div>
+    <script src="layui/layui.js " charset="utf-8 "></script>
+    <script>
+        //弹出一个iframe层
+        $('.inputsEdit a').on('click', function() {
+
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: false,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['761px', '418px'],
+                content: ['editInput.html', 'no'],
+            });
+        });
+
+        $('.outputsEdit a').on('click', function() {
+
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: false,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['761px', '339px'],
+                content: ['editOutput.html', 'no'],
+            });
+        });
+
+        $(".layui-layer").css("background", "none");
+    </script>
 </body>
 
 </html>

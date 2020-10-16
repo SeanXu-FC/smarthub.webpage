@@ -714,6 +714,10 @@
             border: solid 1px #707070;
             background-color: #ffffff;
         }
+        /* .layui-layer-iframe {
+            border-radius: 20px;
+            overflow: hidden;
+        } */
     </style>
 </head>
 
@@ -737,7 +741,7 @@
             <div class="Rectangle-1205 mt-20" style="margin-left:120px;">
                 <table class="table table-responsive table-borderless">
                     <tr>
-                        <td class="col-md-8">
+                        <td class="col-md-8 wifi">
                             <div class="SKY546H">SKY546H</div>
                             <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
                         </td>
@@ -745,14 +749,16 @@
                             <div class="col-md-2"><img src="images/icon-wifi.png"></div>
                         </td>
                         <td>
-                            <div class="col-md-2"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
+                            <div class="col-md-2 wireless">
+                                <img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;">
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" class="Available-networks">Available networks</td>
                     </tr>
-                    <tr class="wifi">
-                        <td class="col-md-8">
+                    <tr>
+                        <td class="col-md-8 wifi">
                             <div class="SKY546H">SKY546H</div>
                             <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
                         </td>
@@ -760,11 +766,11 @@
                             <div class="col-md-2"><img src="images/icon-wifi.png"></div>
                         </td>
                         <td>
-                            <div class="col-md-2"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
+                            <div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
                         </td>
                     </tr>
                     <tr>
-                        <td class="col-md-8">
+                        <td class="col-md-8 wifi">
                             <div class="SKY546H">SKY546H</div>
                             <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
                         </td>
@@ -772,11 +778,11 @@
                             <div class="col-md-2"><img src="images/icon-wifi.png"></div>
                         </td>
                         <td>
-                            <div class="col-md-2"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
+                            <div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
                         </td>
                     </tr>
                     <tr>
-                        <td class="col-md-8">
+                        <td class="col-md-8 wifi">
                             <div class="SKY546H">SKY546H</div>
                             <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
                         </td>
@@ -784,11 +790,11 @@
                             <div class="col-md-2"><img src="images/icon-wifi.png"></div>
                         </td>
                         <td>
-                            <div class="col-md-2"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
+                            <div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
                         </td>
                     </tr>
                     <tr>
-                        <td class="col-md-8">
+                        <td class="col-md-8 wifi">
                             <div class="SKY546H">SKY546H</div>
                             <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
                         </td>
@@ -796,7 +802,7 @@
                             <div class="col-md-2"><img src="images/icon-wifi.png"></div>
                         </td>
                         <td>
-                            <div class="col-md-2"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
+                            <div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
                         </td>
                     </tr>
                     <tr>
@@ -959,6 +965,47 @@
     </div>
     <div id="bg1"></div>
     <script>
+        //弹出一个iframe层
+        $('.Rectangle-1205 .wifi').on('click', function() {
+
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: false,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['521px', '360px'],
+                content: ['EnterPassword.html', 'no'],
+            });
+        });
+        $('.wireless img').on('click', function() {
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: false,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['534px', '715px'],
+                content: ['WirelessNameInfo.html', 'no'],
+            });
+        });
+        $('.addN').on('click', function() {
+            $(".layui-layer").css("background", "none");
+
+            //iframe层
+            parent.layer.open({
+                type: 2,
+                title: false,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['541px', '361px'],
+                content: ['AddNetwork.html', 'no'],
+            });
+
+        });
+        $(".layui-layer").css("background", "none");
+    </script>
+    <script>
         // $('.wifi').click(function() {
         //     $('#bg1').show();
         //     $('#enterPass').show(500);
@@ -1086,20 +1133,11 @@
                 layer = layui.layer,
                 layedit = layui.layedit,
                 laydate = layui.laydate;
+
         });
 
-        layui.use('layer', function() {
-            var layer = layui.layer;
 
-            //layer.msg('hello');
-            // layer.open({
-            //     type: 1,
-            //     //skin: 'layui-layer-rim', //加上边框
-            //     skin: '', //加上边框
-            //     area: ['420px', '240px'], //宽高
-            //     content: $('#enterPass')
-            // });
-        });
+
 
         // *如果是页面层*
         // layer.open({
