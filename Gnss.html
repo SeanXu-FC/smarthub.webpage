@@ -8,6 +8,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css">
+    <link href="css/style.css" rel="stylesheet" />
     <title>Document</title>
     <style>
         .mc {
@@ -47,24 +48,105 @@
             border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
         }
+        
+        .Rectangle-1182 {
+            width: 242px;
+            height: 54px;
+            border-radius: 5px;
+            background-color: #861f41;
+        }
+        
+        .Restart-GNSS {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .GNSS-Fix-status {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .table>tbody>tr>td {
+            border-top: 0px solid #ddd;
+        }
+        
+        .Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data {
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .layui-input-block {
+            margin-left: 0px !important;
+            min-height: 36px;
+        }
+        
+        .Satellite-IDPRN {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .GLONASS {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Rectangle-1228 {
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-bottom:30px;">
         <div class="mc">
             <h2 class="GNSS">GNSS</h2>
-            <table class="table table-hover table-responsive">
+            <table class="table table-hover table-responsive mt-30">
                 <tr>
-                    <td class="col-sm-3">GNSS Fix status: </td>
-                    <td class="col-sm-9">Fix</td>
+                    <td class="col-sm-3 GNSS-Fix-status">GNSS Fix status: </td>
+                    <td class="col-sm-7 col-sm-offset-2 GNSS-Fix-status" style="padding-left: 22px !important;">Fix</td>
                 </tr>
                 <tr>
-                    <td>Internal GNSS:
-                        <div>Disable if you do not want to use the router's internal GNSS receiver as a source for positioning data</div>
+                    <td class="col-sm-3 GNSS-Fix-status">Internal GNSS:
+                        <div class="Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data">Disable if you do not want to use the router's internal GNSS receiver as a source for positioning data</div>
                     </td>
-                    <td>
-                        <div class="layui-form layui-form-pane layui-form-item">
+                    <td class="col-sm-7 col-sm-offset-2">
+                        <div class="layui-form layui-form-pane layui-form-item" style="padding-left:6px !important">
                             <div class="layui-input-block">
                                 <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </div>
@@ -74,30 +156,37 @@
                 </tr>
                 <tr>
                     <td>
-                        <div class="form-group form-line">
-                            <button type="submit" class="btn layui-btn">Restart GNSS</button>
+                        <div class="form-group form-line mt-20">
+                            <button type="submit" class="btn layui-btn Rectangle-1182 Restart-GNSS">Restart GNSS</button>
                         </div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>GNSS Constellations:
+                    <td class="col-sm-3 GNSS-Fix-status">GNSS Constellations:
 
                     </td>
-                    <td>
-                        GLONASS
+                    <td class="col-sm-7 col-sm-offset-2">
+                        <div class="layui-form" style="padding-left: 15px !important;">
+                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="GLONASS" value="1" checked>
+                            <!-- <div class="GNSS-Fix-status">GLONASS</div> -->
+                        </div>
+
                     </td>
                 </tr>
                 <tr>
-                    <td>Select which other satellite constellations are used to determine position,in addition to the GPS system </td>
-                    <td>
-                        BEIDOU
+                    <td class="col-sm-3 Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data">Select which other satellite constellations are used to determine position,in addition to the GPS system </td>
+                    <td class="col-sm-7 col-sm-offset-2">
+                        <div class="layui-form" style="padding-left: 15px !important;">
+                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="BEIDOU" value="1">
+                        </div>
+
                     </td>
                 </tr>
                 <tr>
-                    <td>Differential positioning:</td>
-                    <td>
-                        <div class="layui-form layui-form-pane layui-form-item">
+                    <td class="col-sm-3 GNSS-Fix-status">Differential positioning:</td>
+                    <td class="col-sm-7 col-sm-offset-2">
+                        <div class="layui-form layui-form-pane layui-form-item" style="padding-left: 6px !important;">
                             <div class="layui-input-block">
                                 <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </div>
@@ -105,18 +194,15 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Activating differential positioning provides more accurate positioning in regions covered by Satellite Based Augmentation Systems(SBAS)</td>
+                    <td class="Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data">Activating differential positioning provides more accurate positioning in regions covered by Satellite Based Augmentation Systems(SBAS)</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Differential positioning systems:</td>
-                    <td>
+                    <td class="col-sm-3 GNSS-Fix-status">Differential positioning systems:</td>
+                    <td class="col-sm-7 col-sm-offset-2" style="padding-left: 22px !important;">
                         <div id="test2" class="demo-transfer"></div>
-
-
                         <div class="layui-transfer-box" data-index="0" style="width: 300px; height: 150px;">
-
-                            <ul class="layui-transfer-data layui-form" style="height: 130px;overflow-y:auto">
+                            <ul class="layui-transfer-data layui-form" style="height: 130px;overflow-y:auto;">
                                 <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Alcomsat(Algeria)" value="1">
                                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>Alcomsat(Algeria)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
@@ -143,43 +229,43 @@
                 </tr>
 
             </table>
-            <h4>Satellites in use:</h4>
+            <h4 class="GNSS-Fix-status">Satellites in use:</h4>
             <table class="table table-hover table-responsive">
                 <thead>
-                    <th>Satellite ID/PRN</th>
-                    <th>Constellation</th>
-                    <th>Used in fix flag</th>
-                    <th>HDOP</th>
-                    <th>Azimut</th>
+                    <th class="Satellite-IDPRN">Satellite ID/PRN</th>
+                    <th class="Satellite-IDPRN">Constellation</th>
+                    <th class="Satellite-IDPRN">Used in fix flag</th>
+                    <th class="Satellite-IDPRN">1.2</th>
+                    <th class="Satellite-IDPRN">Azimuth</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Satellite ID/PRN</td>
-                        <td>Constellation</td>
-                        <td>yes</td>
-                        <td>HDOP</td>
-                        <td>Azimut</td>
+                        <td class="GLONASS">40</td>
+                        <td class="GLONASS">Constellation</td>
+                        <td class="GLONASS">Yes</td>
+                        <td class="GLONASS">2.0</td>
+                        <td class="GLONASS">137.3 SE</td>
+                    </tr>
+                    <tr class="Rectangle-1228">
+                        <td class="GLONASS">41</td>
+                        <td class="GLONASS">Constellation</td>
+                        <td class="GLONASS">No</td>
+                        <td class="GLONASS">5.2</td>
+                        <td class="GLONASS">120.4 SE</td>
                     </tr>
                     <tr>
-                        <td>Satellite ID/PRN</td>
-                        <td>Constellation</td>
-                        <td>yes</td>
-                        <td>HDOP</td>
-                        <td>Azimut</td>
+                        <td class="GLONASS">50</td>
+                        <td class="GLONASS">Constellation</td>
+                        <td class="GLONASS">No</td>
+                        <td class="GLONASS">7.3</td>
+                        <td class="GLONASS">180.1 NE</td>
                     </tr>
-                    <tr>
-                        <td>Satellite ID/PRN</td>
-                        <td>Constellation</td>
-                        <td>yes</td>
-                        <td>HDOP</td>
-                        <td>Azimut</td>
-                    </tr>
-                    <tr>
-                        <td>Satellite ID/PRN</td>
-                        <td>Constellation</td>
-                        <td>yes</td>
-                        <td>HDOP</td>
-                        <td>Azimut</td>
+                    <tr class="Rectangle-1228">
+                        <td class="GLONASS">62</td>
+                        <td class="GLONASS">Constellation</td>
+                        <td class="GLONASS">Yes</td>
+                        <td class="GLONASS">HDOP</td>
+                        <td class="GLONASS">130.3 SE</td>
                     </tr>
                 </tbody>
             </table>
