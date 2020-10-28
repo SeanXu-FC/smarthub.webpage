@@ -28,8 +28,8 @@ $(function() {
                 str += '<tr><th colspan="2" class="Access-point-connection-settings mt-20">Access point connection settings</th></tr>';
                 str += '<tr><th colspan="2" class="Use-these-details-when-connecting-a-device-to-the-SmartHubs-access-point">Use these details when connecting a device to the SmartHub\'s access point</th></tr>';
                 str += '<tr><td class="col-sm-3 czjz Access-point-name mt-20">Access point name:</td><td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="' + json[index].vap_config[index].Ssid + '" style="width:80%"></td></tr>';
-                str += '<tr id="pwd"> <td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd  My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye"  onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                str += '<tr id="pwd"> <td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye"  onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" id="pw1" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
                 // str += '<tr id="pwd" style="display: table-row;"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
                 // str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
                 // str += '<tr id="pw"><td id="pwd" class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
@@ -233,16 +233,16 @@ $(function() {
                     $('.EncryptionType option:selected').text(encryptionTypeArr[5]);
                     $('.EncryptionType option[value=5]').hide();
                 }
-                $('.EncryptionType').change(function() {
-                    if ($(this).find("option:selected")) {
-                        var _thisVal = $(this).find('option:selected').val();
-                        oldVal = $(this).attr("old", _thisVal);
-                        $('.EncryptionType').find("option[value=" + _thisVal + "]").show();
-                        $('.EncryptionType option[value=5]').hide();
-                        $('.EncryptionType option[value=0]').show();
+                // $('.EncryptionType').change(function() {
+                //     if ($(this).find("option:selected")) {
+                //         var _thisVal = $(this).find('option:selected').val();
+                //         oldVal = $(this).attr("old", _thisVal);
+                //         $('.EncryptionType').find("option[value=" + _thisVal + "]").show();
+                //         $('.EncryptionType option[value=5]').hide();
+                //         $('.EncryptionType option[value=0]').show();
 
-                    }
-                })
+                //     }
+                // })
 
                 // countryCode
                 var optionCountryCode = document.createElement("option");
@@ -282,12 +282,12 @@ $(function() {
                 $("#content select,#content input,#content button").removeAttr("disabled");
             })
 
-            // if ($(".pwd1").val()) {
-            //     $(".pwd1").val("")
-            // }
-            // if ($(".pwd").val()) {
-            //     $(".pwd").val("")
-            // }
+            if ($(".pwd1").val()) {
+                $(".pwd1").val("")
+            }
+            if ($(".pwd").val()) {
+                $(".pwd").val("")
+            }
             // $('#cancel').click(function() {
             //     $('#pwd').hide();
             //     $('#pwd1').hide();
@@ -326,11 +326,65 @@ $(function() {
 
             })
 
-            console.log($('#EncryptionType option[value=1]').text());
-            if ($('#EncryptionType option[value=1]').text() == "WEP") {
+            //console.log($('#EncryptionType option[value=1]').text() == "WEP");
+            //console.log(json[index].vap_config[index].SecurityMode);
+            if (json[index].vap_config[index].SecurityMode == "1") {
                 $("#pwd").hide();
                 $("#pwd1").show();
+                $(".pwd1").val(json[index].vap_config[index].WepKey);
+                $(".pwd").val("");
             }
+            if (json[index].vap_config[index].SecurityMode == "2") {
+                $("#pwd").show();
+                $("#pwd1").hide();
+                $('.pwd').val(json[index].vap_config[index].WpaKey)
+                $(".pwd1").val("");
+                //console.log($('#EncryptionType option[value=2]').text())
+            }
+            if (json[index].vap_config[index].SecurityMode == "3") {
+                $("#pwd").show();
+                $("#pwd1").hide();
+                $('.pwd').val(json[index].vap_config[index].WpaKey)
+                $(".pwd1").val("");
+            }
+            if (json[index].vap_config[index].SecurityMode == "4") {
+                $("#pwd").show();
+                $("#pwd1").hide();
+                $('.pwd').val(json[index].vap_config[index].WpaKey)
+                $(".pwd1").val("");
+            }
+            if (json[index].vap_config[index].SecurityMode == "0") {
+                $("#pwd").hide();
+                $("#pwd1").hide();
+
+            }
+            // if ($('#EncryptionType option[value=1]').text() == "WEP") {
+            //     $("#pwd").hide();
+            //     $("#pwd1").show();
+            //     $(".pwd1").val(json[index].vap_config[index].SecurityMode);
+            //     $(".pwd").val("");
+            // }
+            // if ($('#EncryptionType option[value=2]').text() == "WPA-PSA") {
+            //     $("#pwd").show();
+            //     $("#pwd1").hide();
+            //     $(".pwd1").val("");
+            //     //console.log($('#EncryptionType option[value=2]').text())
+            // }
+            // if ($('#EncryptionType option[value=3]').text() == "WPA2-PSA") {
+            //     $("#pwd").show();
+            //     $("#pwd1").hide();
+            //     $(".pwd1").val("");
+            // }
+            // if ($('#EncryptionType option[value=4]').text() == "psk-mixed") {
+            //     $("#pwd").show();
+            //     $("#pwd1").hide();
+            //     $(".pwd1").val("");
+            // }
+            // if ($('#EncryptionType option[value=0]').text() == "No Encryption") {
+            //     $("#pwd").hide();
+            //     $("#pwd1").hide();
+
+            // }
             // $('#EncryptionType').change(function() {
 
             //     if (json[index].vap_config[index].SecurityMode == "4") {
