@@ -24,6 +24,80 @@
             border-radius: 2px;
             cursor: pointer
         }
+        
+        .Info {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41
+        }
+        
+        .Product-info {
+            height: 30px;
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .Model {
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .My-SmartHub {
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .Rectangle-1182 {
+            width: 242px;
+            height: 54px;
+            border-radius: 5px;
+            background-color: #861f41
+        }
+        
+        .Save-crash-logs-12 {
+            width: 182px;
+            height: 27px;
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .table>tbody>tr>td {
+            border: 0px;
+        }
     </style>
     <title>Document</title>
 </head>
@@ -31,7 +105,7 @@
 <body>
     <div class="container-fluid">
         <div style="margin-left:10px">
-            <h2 style="color:#333;border-bottom: solid 1px #ddd;padding-bottom: 10px;">Hub information</h2>
+            <h2 style="border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="Info">Hub information</h2>
             <div id="main"></div>
             <!-- <table class="table table-hover table-responsive">
                 <tr>
@@ -105,11 +179,11 @@
                 </tr>
             </table> -->
         </div>
-        <!-- <div style="margin-left:20px">
+        <div style="margin-left:20px">
             <div class="layui-input-inline">
-                <button class="layui-btn" id="btnSave" lay-submit>Save crash log(12)</button>
+                <button class="layui-btn Rectangle-1182 Save-crash-logs-12" id="btnSave" lay-submit>Save crash log(12)</button>
             </div>
-        </div> -->
+        </div>
     </div>
 </body>
 

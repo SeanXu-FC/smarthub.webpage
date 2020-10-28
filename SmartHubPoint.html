@@ -85,10 +85,9 @@
             margin-top: 0px;
             margin-left: 10px;
         }
-        
-        .layui-form-switch em {
+        /* .layui-form-switch em {
             top: -1px;
-        }
+        } */
         
         .layui-btn {
             display: inline-block;
@@ -133,6 +132,7 @@
         
         #pwd {
             display: none;
+            /* display: table-row; */
             /* border: 1px solid #000 !important; */
         }
         
@@ -146,15 +146,166 @@
             background-color: #03387f !important;
             border-color: #03387f !important;
         }
+        
+        .SmartHub-access-point {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41
+        }
+        
+        .Your-SmartHub-access-point-allows-other-devices-to-connect-to-the-SmartHubs-cellular-or-wireless-network-data {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #2e2e2e;
+        }
+        
+        .Allow-devices-to-connect-to-SmartHub-access-point {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Access-point-connection-settings {
+            font-family: OpenSans;
+            font-size: 26px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Use-these-details-when-connecting-a-device-to-the-SmartHubs-access-point {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Access-point-name {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .My-access-point {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .form-control {
+            height: 42px !important;
+        }
+        
+        .table>tbody>tr>th,
+        .table>tbody>tr>td {
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 0px solid #ddd;
+        }
+        
+        .Path-101 {
+            width: 87px;
+            height: 42px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        .Path-101:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Cancel {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.45;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+        }
+        
+        .Rectangle-1182:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Rectangle-1182.active {
+            background-color: #861f41;
+        }
+        
+        .Rectangle-1182 {
+            width: 87px;
+            height: 42px;
+            /* padding: 0 20px; */
+            border-radius: 5px;
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .OK {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="mc">
-            <h2 style="margin-top:10px;border-bottom: solid 1px #ddd;padding-bottom: 10px;"> SmartHub access point </h2>
-            <p class="red" style="margin-top:20px;">Your SmartHub access point allows other devices to connect to the SmartHub's cellular or WiFi data</p>
-            <p style="margin-top:30px;">Allow devices to connect to SmartHub access point:</p>
+            <h2 style="margin-top:10px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="SmartHub-access-point"> SmartHub access point </h2>
+            <p class="red Your-SmartHub-access-point-allows-other-devices-to-connect-to-the-SmartHubs-cellular-or-wireless-network-data" style="margin-top:20px">Your SmartHub access point allows other devices to connect to the SmartHub's cellular or WiFi data</p>
+            <!-- <p style="margin-top:30px;" class="Allow-devices-to-connect-to-SmartHub-access-point">Allow devices to connect to SmartHub access point:</p> -->
 
             <div class="row">
                 <div id="outer" style="margin-top:20px;">

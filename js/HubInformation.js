@@ -62,45 +62,45 @@ $(function() {
             <table class="table table-hover table-responsive">
             <tr>
                 <td colspan="2">
-                    <h4 style="color:#333">Product info</h4>
+                    <h4 style="color:#333" class="Product-info">Product info</h4>
                 </td>
             </tr>
             <tr>
-                <td width="30%">Model:</td>
-                <td><span id="model" class="title">${res.result.Model}</span></td>
+                <td width="30%" class="Model">Model:</td>
+                <td><span id="model" class="title My-SmartHub">${res.result.Model}</span></td>
             </tr>
             <tr>
-                <td>ipq version:</td>
-                <td><span id="iv" class="title">${res.result.ipq_version}</span></td>
+                <td class="Model">ipq version:</td>
+                <td><span id="iv" class="title My-SmartHub">${res.result.ipq_version}</span></td>
             </tr>
             <tr>
-                <td>nxp version:</td>
-                <td><span id="nv" class="title">${res.result.nxp_version}</span></td>
+                <td class="Model">nxp version:</td>
+                <td><span id="nv" class="title My-SmartHub">${res.result.nxp_version}</span></td>
             </tr>
             <tr>
-                <td>Serial number:</td>
-                <td><span id="sn" class="title">${res.result.serial_number}</span></td>
+                <td class="Model">Serial number:</td>
+                <td><span id="sn" class="title My-SmartHub">${res.result.serial_number}</span></td>
             </tr>
 
             <tr>
-                <td>IMEI:</td>
-                <td><span id="iMeiInfo" class="title">${res.result.IMEI}</span></td>
+                <td class="Model">IMEI:</td>
+                <td><span id="iMeiInfo" class="title My-SmartHub">${res.result.IMEI}</span></td>
             </tr>
             <tr>
-                <td>Voltage:</td>
-                <td><span id="voltage" class="title">${res.result.Voltage}</span></td>
+                <td class="Model">Voltage:</td>
+                <td><span id="voltage" class="title My-SmartHub">${res.result.Voltage}</span></td>
             </tr>
             <tr>
-                <td>Current draw:</td>
-                <td><span id="cd" class="title">${res.result.Current_draw}</span></td>
+                <td class="Model">Current draw:</td>
+                <td><span id="cd" class="title My-SmartHub">${res.result.Current_draw}</span></td>
             </tr>
             <tr>
-                <td>Temperature:</td>
-                <td><span id="temperature" class="title">${wd(res.result.Temperature)}℃</span></td>
+                <td class="Model">Temperature:</td>
+                <td><span id="temperature" class="title My-SmartHub">${wd(res.result.Temperature)}℃</span></td>
             </tr>
             <tr>
-                <td>Operating hours:</td>
-                <td><span id="oh" class="title">${timeConversion(res.result.Operating_hours)}</span></td>
+                <td class="Model">Operating hours:</td>
+                <td><span id="oh" class="title My-SmartHub">${timeConversion(res.result.Operating_hours)}</span></td>
             </tr>
 
         </table>
@@ -108,25 +108,25 @@ $(function() {
 
             <tr>
                 <td colspan="2">
-                    <h4 style="color:#333">Network info</h4>
+                    <h4 style="color:#333" class="Product-info">Network info</h4>
                 </td>
             </tr>
             <tr>
-                <td width="30%">MAC address 1:</td>
-                <td><span id="macAddress1" class="title">${res.result.imax_mac}</span></td>
+                <td width="30%" class="Model">MAC address 1:</td>
+                <td><span id="macAddress1" class="title My-SmartHub">${res.result.imax_mac}</span></td>
             </tr>
             <tr>
-                <td>MAC address 2:</td>
-                <td><span id="macAddress2" class="title">${res.result.ipq_ether_mac}</span></td>
+                <td class="Model">MAC address 2:</td>
+                <td><span id="macAddress2" class="title My-SmartHub">${res.result.ipq_ether_mac}</span></td>
             </tr>
             <tr>
-                <td>Access point MAC address:</td>
-                <td><span id="aPma" class="title">${res.result.ipq_wifi1_mac}</span></td>
+                <td class="Model">Access point MAC address:</td>
+                <td><span id="aPma" class="title My-SmartHub">${res.result.ipq_wifi1_mac}</span></td>
             </tr>
             <tr>
-                <td>IPQ address:</td>
+                <td class="Model">IPQ address:</td>
                 <td>
-                    <a id="ipqAddress" class="title" href="http://10.88.11.179" target="_blank">${res.result.ipq_ipaddr}</a>
+                    <a id="ipqAddress" class="title My-SmartHub" href="http://${res.result.ipq_ipaddr}" target="_blank">${res.result.ipq_ipaddr}</a>
                 </td>
             </tr>
         </table>

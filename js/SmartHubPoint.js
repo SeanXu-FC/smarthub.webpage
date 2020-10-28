@@ -15,26 +15,29 @@ $(function() {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             var json = res.result.wifi_config;
-
+            //console.log(json[0].vap_config[0].WpaKey);
             var str = "";
             var str0 = "";
 
             for (var index in json) {
-                str0 += '<li class="current"><span">' + json[index].phy_name + '</span><span> :' + json[index].vap_config[index].Ssid + '</span><span class="layui-form layui-form-pane layui-form-item"><i><input type="checkbox" checked="" class="onoff" value="' + json[index].phy_enable + '" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF"></i></span></li>';
+                str0 += '<div class="layui-form layui-form-pane layui-form-item"><div class="col-md-3 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div><div class="col-md-9 current" style="margin-top: 36px"><input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div></div></div>';
 
                 str += "<form>"
                 str += '<ul style="display:none;">';
                 str += '<table class="table table-hover table-responsive">';
-                str += '<tr><th colspan="2">Access point connection settings</th></tr>';
-                str += '<tr><th colspan="2">Use these details when connecting a device to the SmartHub\'s access point</th></tr>';
-                str += '<tr><td class="col-sm-3 czjz">Access point name:</td><td class="col-sm-9"><input type="text" class="form-control ssid" value="' + json[index].vap_config[index].Ssid + '" style="width:80%"></td></tr>';
-                str += '<tr><td class="czjz">Mode:</td><td><select name="type" class="form-control select_01 hwmode" style="width:80%"></select></td></tr>';
-                str += '<tr><td class="czjz">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel" style="width:80%"></select></td></tr>';
-                str += '<tr><td class="czjz">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType"  style="width:80%"></select></td></tr>';
-                str += '<tr id="pwd"><td class="col-sm-3 czjz">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                str += '<tr id="pwd1"><td class="col-sm-3 czjz">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                str += '<tr><td class="czjz">country Code:</td><td><select name="type" class="form-control select_03 countryCode" style="width:80%"></select></td></tr>';
-                str += ' <tr><td></td><td><div class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="btn btn-primary active">Edit</button><button type="button" id="btn1" class="btn btn-primary active ml-10" onclick="save()">Save</button></div></td></tr>';
+                str += '<tr><th colspan="2" class="Access-point-connection-settings mt-20">Access point connection settings</th></tr>';
+                str += '<tr><th colspan="2" class="Use-these-details-when-connecting-a-device-to-the-SmartHubs-access-point">Use these details when connecting a device to the SmartHub\'s access point</th></tr>';
+                str += '<tr><td class="col-sm-3 czjz Access-point-name mt-20">Access point name:</td><td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="' + json[index].vap_config[index].Ssid + '" style="width:80%"></td></tr>';
+                str += '<tr id="pwd"> <td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd  My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye"  onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                // str += '<tr id="pwd" style="display: table-row;"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                // str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                // str += '<tr id="pw"><td id="pwd" class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                // str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                str += '<tr><td class="czjz Access-point-name">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td></tr>';
+                str += '<tr><td class="czjz Access-point-name">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point"  style="width:80%"></select></td></tr>';
+                str += '<tr style="display:none;"><td class="czjz Access-point-name">country Code:</td><td><select name="type" class="form-control select_03 countryCode My-access-point" style="width:80%"></select></td></tr>';
+                str += ' <tr><td></td><td><div class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Edit</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
                 str += '</ul>';
                 str += '</form>';
@@ -273,24 +276,24 @@ $(function() {
 
             $("#content ul").eq(0).show();
 
-            $("#content select,#content input,#content button").prop("disabled", true);
+            // $("#content select,#content input,#content button").prop("disabled", true);
 
-            $(document).on("click", ".edit", function() {
-                $("#content select,#content input,#content button").removeAttr("disabled");
-            })
+            // $(document).on("click", ".edit", function() {
+            //     $("#content select,#content input,#content button").removeAttr("disabled");
+            // })
 
-            if ($(".pwd1").val()) {
-                $(".pwd1").val("")
-            }
-            if ($(".pwd").val()) {
-                $(".pwd").val("")
-            }
-            $('#cancel').click(function() {
-                $('#pwd').hide();
-                $('#pwd1').hide();
-            })
+            // if ($(".pwd1").val()) {
+            //     $(".pwd1").val("")
+            // }
+            // if ($(".pwd").val()) {
+            //     $(".pwd").val("")
+            // }
+            // $('#cancel').click(function() {
+            //     $('#pwd').hide();
+            //     $('#pwd1').hide();
+            // })
 
-            document.body.addEventListener('touchstart,touchend', function() {});
+            //document.body.addEventListener('touchstart,touchend', function() {});
             //document.getElementById('edit').addEventListener('touchstart,touchend', function() {});
             $('#EncryptionType').change(function() {
 
@@ -309,7 +312,7 @@ $(function() {
                 } else if (this.value == "1") {
                     $("#pwd1").show();
                     $("#pwd").hide();
-                    $(".pwd1").val("");
+                    $(".pwd").val("");
                 } else if (this.value == "0") {
                     $("#pwd1").hide();
                     $("#pwd").hide();
@@ -322,6 +325,42 @@ $(function() {
                 }
 
             })
+
+            console.log($('#EncryptionType option[value=1]').text());
+            if ($('#EncryptionType option[value=1]').text() == "WEP") {
+                $("#pwd").hide();
+                $("#pwd1").show();
+            }
+            // $('#EncryptionType').change(function() {
+
+            //     if (json[index].vap_config[index].SecurityMode == "4") {
+            //         $("#pwd1").hide();
+            //         $("#pwd").show();
+            //         $(".pwd1").val("");
+            //     } else if (json[index].vap_config[index].SecurityMode == "3") {
+            //         $("#pwd1").hide();
+            //         $("#pwd").show();
+            //         $(".pwd1").val("");
+            //     } else if (json[index].vap_config[index].SecurityMode == "2") {
+            //         $("#pwd1").hide();
+            //         $("#pwd").show();
+            //         $(".pwd1").val("");
+            //     } else if (json[index].vap_config[index].SecurityMode == "1") {
+            //         $("#pwd1").show();
+            //         $("#pwd").hide();
+            //         $(".pwd").val("");
+            //     } else if (json[index].vap_config[index].SecurityMode == "0") {
+            //         $("#pwd1").hide();
+            //         $("#pwd").hide();
+            //         $(".pwd").val("");
+            //         $(".pwd1").val("");
+            //     } else {
+            //         $("#pwd").show();
+            //         $("#pwd1").hide();
+            //         $(".pwd1").val("");
+            //     }
+
+            // })
 
             var isShow = true;
 
@@ -340,11 +379,11 @@ $(function() {
             };
             change();
 
-            $("#content").mouseenter(function() {
-                //$('#edit').removeAttr("disabled");
-                $('#edit').prop("disabled", false);
-                // $('#cancel').attr("disabled", false);
-            })
+            // $("#content").mouseenter(function() {
+            //     //$('#edit').removeAttr("disabled");
+            //     $('#edit').prop("disabled", false);
+            //     // $('#cancel').attr("disabled", false);
+            // })
 
             $('.pwd, .pwd1').focus(function() {
                 var pwd = $("#pwd").val();
@@ -383,6 +422,12 @@ $(function() {
             var checked = data.elem.checked;
             var serverStatus = 1;
 
+            var onoff = this.checked ? 1 : 0;
+            console.log(data.value);
+            // console.log(data.elem); // 得到checkbox原始DOM对象
+            // console.log(data.elem.checked); // 开关是否开启，true或者false
+            // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
+            // console.log(data.othis); // 得到美化后的DOM对象
             if (serverStatus) {
                 data.elem.checked = checked;
             } else {
@@ -392,15 +437,32 @@ $(function() {
 
             var data = {
                 "jsonrpc": "2.0",
-                "method": "GetWlanSettings",
+                "method": "SetWlanSettings",
                 "params": {
-                    "vap_name": "ath2",
-                    "operate_code": 1
-                },
-                "id": "9.1"
-            };
+                    "wifi_config": [{
+                        //"phy_enable": Number($('.current input[type="checkbox"]').val()), //对于开关，0是关，1是开
+                        "phy_enable": onoff, //对于开关，0是关，1是开
+                        // "hwmode": parseInt($(".hwmode option:selected").text()), //可变
+                        "htmode": 3, //固定
+                        "Channel": parseInt($(".channel option:selected").text()), //可变
+                        "CountryCode": $(".countryCode option:selected").val(), //可变
+                        "vap_config": [{
+                            "Ssid": $(".ssid").val(), //可变
+                            "SecurityMode": Number($(".EncryptionType option:selected").val()), //可变
+                            "WepType": 0, //可变
+                            "WpaType": 2, //可变
+                            "WepKey": $(".pwd1").val(), //可变
+                            "WpaKey": $(".pwd").val(), //可变
 
+                        }]
+                    }]
+                },
+
+                "id": "9.1",
+
+            };
             data = JSON.stringify(data);
+            console.log(data);
             $.ajax({
                 type: "post",
                 url: "/action/action",
@@ -411,18 +473,38 @@ $(function() {
                     var json = res.result.wifi_config;
 
                     for (var index in json) {
-                        if (checked && json[index].phy_enable == '0') {
+                        console.log(json[index].phy_enable);
+                        if (onoff == 1) {
                             $("#content").show();
-                            $('.onoff').prop("value", json[index].phy_enable);
-                            //$('.onoff').prop("value", '0');
-                            //console.log("a" + json[index].phy_enable);
+                            //$('.onoff').prop("value", json[index].phy_enable);
+
+                            //serverStatus = 1;
+                            //json[index].phy_enable == serverStatus;
+                            //json[index].phy_enable == '0';
+                            //$('.current input[type="checkbox"]').val(json[index].phy_enable)
+                            //$('.onoff').prop("value", 0);
+                            //serverStatus = 0;
+                            //console.log(serverStatus);
+                            //console.log("a" + serverStatus);
                             //console.log(serverStatus);
                         } else {
-                            if (!checked);
-                            $("#content").hide();
-                            $('.onoff').prop("value", [index].phy_enable);
-                            //$('.onoff').prop("value", "1");
-                            //console.log("b" + json[index].phy_enable);
+                            if (!onoff);
+                            //if (checked && json[index].phy_enable == 1)
+                            //$("#content").hide();
+                            $("#content select,#content input,#content button").prop("disabled", true);
+                            //console.log(json[index].phy_enable);
+
+                            //serverStatus = 0;
+                            //json[index].phy_enable == serverStatus;
+                            //console.log(serverStatus);
+                            //$('.current input[type="checkbox"]').val(json[index].phy_enable)
+
+                            //$('.onoff').prop("value", [index].phy_enable);
+
+
+                            //$('.onoff').prop("value", 1);
+                            //$('.onoff').prop("checked", "");
+                            //console.log("b" + serverStatus);
                             //console.log(!serverStatus);
                         }
 

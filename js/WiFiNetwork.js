@@ -8,7 +8,7 @@ $(function() {
         },
         "id": "9.1"
     };
-
+    alert(1)
     data = JSON.stringify(data);
     $.ajax({
         type: "post",

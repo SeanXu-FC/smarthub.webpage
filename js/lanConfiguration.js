@@ -1,19 +1,32 @@
 $(function() {
     //$(":disabled");
     var map = {
-        "Raymarine auto": "d1",
-        "Static IP": "d2",
-        "DHCP server": "d3",
+        "Automatically (DHCP on)": "d1",
+        "Manually (DHCP on)": "d2",
+        "Manually (DHCP off)": "d3"
     };
 
-    // 方法1：
-    // $("#rsd").bind("change", function() {
-    //     var divId = map[this.value];
-    //     $("#" + divId).show().siblings().hide();
-    //     $("#" + divId).eq(0).slideDown();;
-    //     $("#ipMode").slideDown();
-    //     $("#btn").slideDown();
-    // });
+    //方法1：
+    $("#rsd").bind("change", function() {
+        var divId = map[this.value];
+        //console.log(divId)
+        if (divId === "d1") {
+            $("#d1").slideDown(500);
+            $("#d2").hide();
+            $("#d3").hide();
+        } else if (divId === "d2") {
+            $("#d2").slideDown(500);
+            $("#d1").hide();
+            $("#d3").hide();
+        } else if (divId === "d3") {
+            $("#d3").slideDown(500);
+            $("#d1").hide();
+            $("#d2").hide();
+        }
+
+        $("#ipMode").slideDown();
+        $("#btn").slideDown();
+    });
 
     // $('#rsd').each(function() {
     //     if ($(this).find("option:selected")) {
@@ -26,20 +39,20 @@ $(function() {
     // })
 
     //方法2：
-    $('#rsd').change(function() {
-        if ($(this).find("option:selected")) {
-            var _thisVal = $(this).find('option').val();
-            //console.log(this.value);
-            oldVal = $(this).attr("value", _thisVal);
-            //console.log(oldVal);
-            $('#rsd option').find('option[value=" + _thisVal + "]').not("option[value=0]").hide();
-            var divId = map[this.value];
-            $("#" + divId).show().siblings().hide();
-            $("#" + divId).eq(0).slideDown();
-            $("#ipMode").slideDown();
-            $("#btn").slideDown();
-        }
-    })
+    // $('#rsd').change(function() {
+    //     if ($(this).find("option:selected")) {
+    //         var _thisVal = $(this).find('option').val();
+    //         //console.log(this.value);
+    //         oldVal = $(this).attr("value", _thisVal);
+    //         //console.log(oldVal);
+    //         $('#rsd option').find('option[value=" + _thisVal + "]').not("option[value=0]").hide();
+    //         var divId = map[this.value];
+    //         $("#" + divId).show().siblings().hide();
+    //         $("#" + divId).eq(0).slideDown();
+    //         $("#ipMode").slideDown();
+    //         $("#btn").slideDown();
+    //     }
+    // })
 
     $("#d1 input,#btn button").prop("disabled", true);
     $("#edit").click(function() {

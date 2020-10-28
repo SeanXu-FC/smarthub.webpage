@@ -603,17 +603,27 @@ table td {
     position: fixed;
     bottom: 0px;
     width: 100%;
-    background-color: #03387f;
+    z-index: 2;
+    /* background-color: #03387f; */
+    background-color: #fff;
     border-top: 1px solid rgba(3, 56, 127, 0.2);
     line-height: 41px;
-    color: #fff;
+    color: #333 !important;
+    font-size: 14px;
     /*padding-left: 10px;*/
 }
 
 .footer .copyright {
     margin-left: 10px;
-    color: rgba(255, 255, 255, .7);
+    /* color: rgba(255, 255, 255, .7); */
     text-align: center;
+}
+
+.footer span {
+    color: #f00;
+    color: #861f41;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 .mCont {

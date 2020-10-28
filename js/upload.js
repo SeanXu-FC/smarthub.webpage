@@ -96,7 +96,7 @@
                         setTimeout(function() {
                             window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
                             //window.location.href = "http://10.88.11.238/flashops.html";
-                        }, 2000);
+                        }, 6000);
                         //console.log(res.id);
                         $("#version").html(res.id);
                         //console.log(res.src); //回调内容src
