@@ -37,7 +37,7 @@ $(function() {
                 str += '<tr><td class="czjz Access-point-name">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td></tr>';
                 str += '<tr><td class="czjz Access-point-name">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point"  style="width:80%"></select></td></tr>';
                 str += '<tr style="display:none;"><td class="czjz Access-point-name">country Code:</td><td><select name="type" class="form-control select_03 countryCode My-access-point" style="width:80%"></select></td></tr>';
-                str += ' <tr><td></td><td><div class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Edit</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px" onclick="save()">Save</button></div></td></tr>';
+                str += ' <tr><td></td><td><div class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Cancel</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
                 str += '</ul>';
                 str += '</form>';
@@ -278,9 +278,9 @@ $(function() {
 
             // $("#content select,#content input,#content button").prop("disabled", true);
 
-            // $(document).on("click", ".edit", function() {
-            //     $("#content select,#content input,#content button").removeAttr("disabled");
-            // })
+            $(document).on("click", ".edit", function() {
+                $("#content select,#content input,#content button").removeAttr("disabled");
+            })
 
             // if ($(".pwd1").val()) {
             //     $(".pwd1").val("")
@@ -379,11 +379,11 @@ $(function() {
             };
             change();
 
-            // $("#content").mouseenter(function() {
-            //     //$('#edit').removeAttr("disabled");
-            //     $('#edit').prop("disabled", false);
-            //     // $('#cancel').attr("disabled", false);
-            // })
+            $("#content").mouseenter(function() {
+                //$('#edit').removeAttr("disabled");
+                $('#edit').prop("disabled", false);
+                // $('#cancel').attr("disabled", false);
+            })
 
             $('.pwd, .pwd1').focus(function() {
                 var pwd = $("#pwd").val();
@@ -428,13 +428,25 @@ $(function() {
             // console.log(data.elem.checked); // 开关是否开启，true或者false
             // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
             // console.log(data.othis); // 得到美化后的DOM对象
+            if (this.checked == 1) {
+                $("#content select,#content input,#content button").prop("disabled", true);
+            } else if (this.checked == 0) {
+                $("#content").removeAttr("disabled");
+            }
             if (serverStatus) {
                 data.elem.checked = checked;
+
+
             } else {
                 data.elem.checked = !checked;
+
+                //$("#content select,#content input,#content button").prop("disabled", false);
             }
             form.render();
 
+            // $(document).on("click", ".edit", function() {
+            //     $("#content select,#content input,#content button").removeAttr("disabled");
+            // })
             var data = {
                 "jsonrpc": "2.0",
                 "method": "SetWlanSettings",
@@ -476,6 +488,7 @@ $(function() {
                         console.log(json[index].phy_enable);
                         if (onoff == 1) {
                             $("#content").show();
+
                             //$('.onoff').prop("value", json[index].phy_enable);
 
                             //serverStatus = 1;
@@ -489,9 +502,10 @@ $(function() {
                             //console.log(serverStatus);
                         } else {
                             if (!onoff);
+
                             //if (checked && json[index].phy_enable == 1)
                             //$("#content").hide();
-                            $("#content select,#content input,#content button").prop("disabled", true);
+
                             //console.log(json[index].phy_enable);
 
                             //serverStatus = 0;
