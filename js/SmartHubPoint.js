@@ -37,7 +37,7 @@ $(function() {
                 str += '<tr><td class="czjz Access-point-name">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td></tr>';
                 str += '<tr><td class="czjz Access-point-name">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point"  style="width:80%"></select></td></tr>';
                 str += '<tr style="display:none;"><td class="czjz Access-point-name">country Code:</td><td><select name="type" class="form-control select_03 countryCode My-access-point" style="width:80%"></select></td></tr>';
-                str += ' <tr><td></td><td><div id="btnGroup" class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Cancel</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px;cursor: pointer;" onclick="save()">Save</button></div></td></tr>';
+                str += ' <tr><td></td><td><div id="btnGroup" class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Edit</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px;cursor: pointer;" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
                 str += '</ul>';
                 str += '</form>';
@@ -433,11 +433,7 @@ $(function() {
             };
             change();
 
-            // $("#content").mouseenter(function() {
-            //     //$('#edit').removeAttr("disabled");
-            //     $('#edit').prop("disabled", false);
-            //     // $('#cancel').attr("disabled", false);
-            // })
+
 
             $('.pwd, .pwd1').focus(function() {
                 var pwd = $("#pwd").val();
@@ -484,12 +480,24 @@ $(function() {
             // console.log(data.othis); // 得到美化后的DOM对象
             if (this.checked == 0) {
                 $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
-                $("#content select,#content input,#content button,#btnGroup button").css("opacity", "0.5");
+                //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "0.5");
             } else if (this.checked == 1) {
                 $("#content").removeAttr("disabled");
                 $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
-                $("#content select,#content input,#content button,#btnGroup button").css("opacity", "1");
+                //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "1");
             }
+            $("#content").mouseenter(function() {
+                $('#edit').removeAttr("disabled");
+
+                if (this.checked == 0) {
+                    $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
+                    //$('.current input[type="checkbox"]').attr("checked", true)
+                    //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "0.5");
+                }
+                //$("#btnGroup button").css("opacity", "1");
+                //$('#edit').prop("disabled", false);
+                // $('#cancel').attr("disabled", false);
+            })
             if (serverStatus) {
                 data.elem.checked = checked;
             } else {
@@ -542,38 +550,8 @@ $(function() {
                         console.log(json[index].phy_enable);
                         if (onoff == 1) {
                             $("#content").show();
-
-                            //$('.onoff').prop("value", json[index].phy_enable);
-
-                            //serverStatus = 1;
-                            //json[index].phy_enable == serverStatus;
-                            //json[index].phy_enable == '0';
-                            //$('.current input[type="checkbox"]').val(json[index].phy_enable)
-                            //$('.onoff').prop("value", 0);
-                            //serverStatus = 0;
-                            //console.log(serverStatus);
-                            //console.log("a" + serverStatus);
-                            //console.log(serverStatus);
                         } else {
                             if (!onoff);
-
-                            //if (checked && json[index].phy_enable == 1)
-                            //$("#content").hide();
-
-                            //console.log(json[index].phy_enable);
-
-                            //serverStatus = 0;
-                            //json[index].phy_enable == serverStatus;
-                            //console.log(serverStatus);
-                            //$('.current input[type="checkbox"]').val(json[index].phy_enable)
-
-                            //$('.onoff').prop("value", [index].phy_enable);
-
-
-                            //$('.onoff').prop("value", 1);
-                            //$('.onoff').prop("checked", "");
-                            //console.log("b" + serverStatus);
-                            //console.log(!serverStatus);
                         }
 
                     }

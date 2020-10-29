@@ -30,12 +30,12 @@ $(function() {
                 if (json[i].DType == 0) {
                     $('.ConnectMode').text(arr[0]);
                     // $(".img_a").attr("src", "images/Group 2901.png");
-                    $(".img_a").attr("src", 'images/' + arrImg[i] + '.png');
+                    $(".img_a").attr("src", 'images/' + arrImg[1] + '.png');
                 };
                 if (json[i].DType == 1) {
                     $('.ConnectMode').text(arr[1]);
                     //$(".img_a").attr("src", "images/Group 2902.png");
-                    $(".img_a").attr("src", 'images/' + arrImg[i] + '.png');
+                    $(".img_a").attr("src", 'images/' + arrImg[0] + '.png');
                 }
             }
 
