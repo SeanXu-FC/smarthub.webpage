@@ -37,7 +37,7 @@ $(function() {
                 str += '<tr><td class="czjz Access-point-name">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td></tr>';
                 str += '<tr><td class="czjz Access-point-name">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point"  style="width:80%"></select></td></tr>';
                 str += '<tr style="display:none;"><td class="czjz Access-point-name">country Code:</td><td><select name="type" class="form-control select_03 countryCode My-access-point" style="width:80%"></select></td></tr>';
-                str += ' <tr><td></td><td><div class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Cancel</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px" onclick="save()">Save</button></div></td></tr>';
+                str += ' <tr><td></td><td><div id="btnGroup" class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Cancel</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px;cursor: pointer;" onclick="save()">Save</button></div></td></tr>';
                 str += '</table>';
                 str += '</ul>';
                 str += '</form>';
@@ -433,11 +433,11 @@ $(function() {
             };
             change();
 
-            $("#content").mouseenter(function() {
-                //$('#edit').removeAttr("disabled");
-                $('#edit').prop("disabled", false);
-                // $('#cancel').attr("disabled", false);
-            })
+            // $("#content").mouseenter(function() {
+            //     //$('#edit').removeAttr("disabled");
+            //     $('#edit').prop("disabled", false);
+            //     // $('#cancel').attr("disabled", false);
+            // })
 
             $('.pwd, .pwd1').focus(function() {
                 var pwd = $("#pwd").val();
@@ -483,10 +483,12 @@ $(function() {
             // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
             // console.log(data.othis); // 得到美化后的DOM对象
             if (this.checked == 0) {
-                $("#content select,#content input,#content button").prop("disabled", true);
+                $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
+                $("#content select,#content input,#content button,#btnGroup button").css("opacity", "0.5");
             } else if (this.checked == 1) {
                 $("#content").removeAttr("disabled");
-                $("#content select,#content input,#content button").prop("disabled", false);
+                $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
+                $("#content select,#content input,#content button,#btnGroup button").css("opacity", "1");
             }
             if (serverStatus) {
                 data.elem.checked = checked;
