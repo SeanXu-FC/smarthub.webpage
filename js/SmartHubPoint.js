@@ -20,7 +20,7 @@ $(function() {
             var str0 = "";
 
             for (var index in json) {
-                str0 += '<div class="layui-form layui-form-pane layui-form-item"><div class="col-md-3 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div><div class="col-md-9 current" style="margin-top: 36px"><input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div></div></div>';
+                str0 += '<div class="layui-form layui-form-pane layui-form-item"><div class="col-md-3 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div><div class="col-md-9 current" style="margin-top: 22px"><input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div></div></div>';
 
                 str += "<form>"
                 str += '<ul style="display:none;">';
@@ -476,24 +476,22 @@ $(function() {
             var checked = data.elem.checked;
             var serverStatus = 1;
 
-            var onoff = this.checked ? 1 : 0;
-            console.log(data.value);
+            var onoff = this.checked ? 0 : 1;
+            //console.log(data.value);
             // console.log(data.elem); // 得到checkbox原始DOM对象
             // console.log(data.elem.checked); // 开关是否开启，true或者false
             // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
             // console.log(data.othis); // 得到美化后的DOM对象
-            if (this.checked == 1) {
+            if (this.checked == 0) {
                 $("#content select,#content input,#content button").prop("disabled", true);
-            } else if (this.checked == 0) {
+            } else if (this.checked == 1) {
                 $("#content").removeAttr("disabled");
+                $("#content select,#content input,#content button").prop("disabled", false);
             }
             if (serverStatus) {
                 data.elem.checked = checked;
-
-
             } else {
                 data.elem.checked = !checked;
-
                 //$("#content select,#content input,#content button").prop("disabled", false);
             }
             form.render();
