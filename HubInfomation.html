@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/global.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <script src="js/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
@@ -104,51 +105,51 @@
 
 <body>
     <div class="container-fluid">
-        <div style="margin-left:10px">
+        <div class="ml-70">
             <h2 style="border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="Info">Hub information</h2>
             <div id="main"></div>
-            <!-- <table class="table table-hover table-responsive">
+            <table class="table table-hover table-responsive">
                 <tr>
                     <td colspan="2">
                         <h4 style="color:#333">Product info</h4>
                     </td>
                 </tr>
                 <tr>
-                    <td width="30%">Model:</td>
-                    <td><span id="model" class="title"></span></td>
+                    <td width="30%" class="Model">Model:</td>
+                    <td><span id="model" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>ipq version:</td>
-                    <td><span id="iv" class="title"></span></td>
+                    <td class="Model">ipq version:</td>
+                    <td><span id="iv" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>nxp version:</td>
-                    <td><span id="nv" class="title"></span></td>
+                    <td class="Model">nxp version:</td>
+                    <td><span id="nv" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>Serial number:</td>
-                    <td><span id="sn" class="title"></span></td>
+                    <td class="Model">Serial number:</td>
+                    <td><span id="sn" class="title My-SmartHub"></span></td>
                 </tr>
 
                 <tr>
-                    <td>IMEI:</td>
-                    <td><span id="iMeiInfo" class="title"></span></td>
+                    <td class="Model">IMEI:</td>
+                    <td><span id="iMeiInfo" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>Voltage:</td>
-                    <td><span id="voltage" class="title"></span></td>
+                    <td class="Model">Voltage:</td>
+                    <td><span id="voltage" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>Current draw:</td>
-                    <td><span id="cd" class="title"></span></td>
+                    <td class="Model">Current draw:</td>
+                    <td><span id="cd" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>Temperature:</td>
-                    <td><span id="temperature" class="title"></span></td>
+                    <td class="Model">Temperature:</td>
+                    <td><span id="temperature" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>Operating hours:</td>
-                    <td><span id="oh" class="title"></span></td>
+                    <td class="Model">Operating hours:</td>
+                    <td><span id="oh" class="title My-SmartHub"></span></td>
                 </tr>
 
             </table>
@@ -160,30 +161,31 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="30%">MAC address 1:</td>
-                    <td><span id="macAddress1" class="title"></span></td>
+                    <td width="30%" class="Model">MAC address 1:</td>
+                    <td><span id="macAddress1" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>MAC address 2:</td>
-                    <td><span id="macAddress2" class="title"></span></td>
+                    <td class="Model">MAC address 2:</td>
+                    <td><span id="macAddress2" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>Access point MAC address:</td>
-                    <td><span id="aPma" class="title"></span></td>
+                    <td class="Model">Access point MAC address:</td>
+                    <td><span id="aPma" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
-                    <td>IPQ address:</td>
+                    <td class="Model">IPQ address:</td>
                     <td>
-                        <a id="ipqAddress" class="title" href="http://10.88.11.179" target="_blank"></a>
+                        <a id="ipqAddress" class="title My-SmartHub" href="" target="_blank"></a>
                     </td>
                 </tr>
-            </table> -->
-        </div>
-        <div style="margin-left:20px">
-            <div class="layui-input-inline">
-                <button class="layui-btn Rectangle-1182 Save-crash-logs-12" id="btnSave" lay-submit>Save crash log(12)</button>
+            </table>
+            <div>
+                <div class="layui-input-inline">
+                    <button class="layui-btn Rectangle-1182 Save-crash-logs-12" id="btnSave" lay-submit>Save crash log(12)</button>
+                </div>
             </div>
         </div>
+
     </div>
 </body>
 

@@ -302,7 +302,7 @@
 
 <body>
     <div class="container-fluid">
-        <div class="mc">
+        <div class="mc ml-70">
             <h2 style="margin-top:10px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="SmartHub-access-point"> SmartHub access point </h2>
             <p class="red Your-SmartHub-access-point-allows-other-devices-to-connect-to-the-SmartHubs-cellular-or-wireless-network-data" style="margin-top:20px">Your SmartHub access point allows other devices to connect to the SmartHub's cellular or WiFi data</p>
             <!-- <p style="margin-top:30px;" class="Allow-devices-to-connect-to-SmartHub-access-point">Allow devices to connect to SmartHub access point:</p> -->
@@ -310,10 +310,61 @@
             <div class="row">
                 <div id="outer" style="margin-top:20px;">
                     <ul id="tab">
-
+                        <div class="layui-form layui-form-pane layui-form-item">
+                            <div class="col-md-3 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div>
+                            <div class="col-md-9 current" style="margin-top: 22px"><input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div>
+                            </div>
+                        </div>
                     </ul>
                     <div id="content">
-
+                        <form>
+                            <ul style="display:block;">
+                                <table class="table table-hover table-responsive">
+                                    <tr>
+                                        <th colspan="2" class="Access-point-connection-settings mt-20">Access point connection settings</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2" class="Use-these-details-when-connecting-a-device-to-the-SmartHubs-access-point">Use these details when connecting a device to the SmartHub's access point</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-3 czjz Access-point-name mt-20">Access point name:</td>
+                                        <td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="" style="width:80%"></td>
+                                    </tr>
+                                    <tr id="pwd">
+                                        <td class="col-sm-3 czjz Access-point-name">Password:</td>
+                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point" value="" style="width:80%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span>
+                                            <div><span></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr id="pwd1">
+                                        <td class="col-sm-3 czjz Access-point-name">Password:</td>
+                                        <td class="col-sm-9"><input type="password" id="pw1" class="form-control pwd1 My-access-point" value="" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span>
+                                            <div><span></span></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="czjz Access-point-name">Preferred Wi-Fi channel:</td>
+                                        <td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="czjz Access-point-name">Encryption type:</td>
+                                        <td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point" style="width:80%"></select></td>
+                                    </tr>
+                                    <tr style="display:none;">
+                                        <td class="czjz Access-point-name">country Code:</td>
+                                        <td><select name="type" class="form-control select_03 countryCode My-access-point" style="width:80%"></select></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <div id="btnGroup" class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Edit</button><button type="button" id="btn1" class="Rectangle-1182 active OK"
+                                                    style="margin-left:10px;cursor: pointer;" onclick="save()">Save</button></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </ul>
+                        </form>
                     </div>
                 </div>
             </div>

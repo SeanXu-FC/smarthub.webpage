@@ -20,31 +20,33 @@ $(function() {
             var str0 = "";
 
             for (var index in json) {
-                str0 += '<div class="layui-form layui-form-pane layui-form-item"><div class="col-md-3 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div><div class="col-md-9 current" style="margin-top: 22px"><input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div></div></div>';
+                $('.ssid').val(json[index].vap_config[index].Ssid);
+                $('.pwd').val(json[index].vap_config[index].WpaKey);
+                $('.pwd1').val(json[index].vap_config[index].WepKey);
+                // str0 += '<div class="layui-form layui-form-pane layui-form-item"><div class="col-md-3 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div><div class="col-md-9 current" style="margin-top: 22px"><input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div></div></div>';
 
-                str += "<form>"
-                str += '<ul style="display:none;">';
-                str += '<table class="table table-hover table-responsive">';
-                str += '<tr><th colspan="2" class="Access-point-connection-settings mt-20">Access point connection settings</th></tr>';
-                str += '<tr><th colspan="2" class="Use-these-details-when-connecting-a-device-to-the-SmartHubs-access-point">Use these details when connecting a device to the SmartHub\'s access point</th></tr>';
-                str += '<tr><td class="col-sm-3 czjz Access-point-name mt-20">Access point name:</td><td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="' + json[index].vap_config[index].Ssid + '" style="width:80%"></td></tr>';
-                str += '<tr id="pwd"> <td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye"  onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" id="pw1" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                // str += '<tr id="pwd" style="display: table-row;"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                // str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                // str += '<tr id="pw"><td id="pwd" class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                // str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
-                str += '<tr><td class="czjz Access-point-name">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td></tr>';
-                str += '<tr><td class="czjz Access-point-name">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point"  style="width:80%"></select></td></tr>';
-                str += '<tr style="display:none;"><td class="czjz Access-point-name">country Code:</td><td><select name="type" class="form-control select_03 countryCode My-access-point" style="width:80%"></select></td></tr>';
-                str += ' <tr><td></td><td><div id="btnGroup" class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Edit</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px;cursor: pointer;" onclick="save()">Save</button></div></td></tr>';
-                str += '</table>';
-                str += '</ul>';
-                str += '</form>';
+                // str += "<form>"
+                // str += '<ul style="display:none;">';
+                // str += '<table class="table table-hover table-responsive">';
+                // str += '<tr><th colspan="2" class="Access-point-connection-settings mt-20">Access point connection settings</th></tr>';
+                // str += '<tr><th colspan="2" class="Use-these-details-when-connecting-a-device-to-the-SmartHubs-access-point">Use these details when connecting a device to the SmartHub\'s access point</th></tr>';
+                // str += '<tr><td class="col-sm-3 czjz Access-point-name mt-20">Access point name:</td><td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="' + json[index].vap_config[index].Ssid + '" style="width:80%"></td></tr>';
+                // str += '<tr id="pwd"> <td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point" value="' + json[index].vap_config[index].WpaKey + '" style="width:80%"><span id="eye"  onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                // str += '<tr id="pwd1"><td class="col-sm-3 czjz Access-point-name">Password:</td><td class="col-sm-9"><input type="password" id="pw1" class="form-control pwd1 My-access-point" value="' + json[index].vap_config[index].WepKey + '" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span><div><span></span></div></td></tr>';
+                // str += '<tr><td class="czjz Access-point-name">Preferred Wi-Fi channel:</td><td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td></tr>';
+                // str += '<tr><td class="czjz Access-point-name">Encryption type:</td><td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point"  style="width:80%"></select></td></tr>';
+                // str += '<tr style="display:none;"><td class="czjz Access-point-name">country Code:</td><td><select name="type" class="form-control select_03 countryCode My-access-point" style="width:80%"></select></td></tr>';
+                // str += ' <tr><td></td><td><div id="btnGroup" class="form-group form-line btn-group edit"><button type="button" id="edit" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="Rectangle-1182 active OK">Edit</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px;cursor: pointer;" onclick="save()">Save</button></div></td></tr>';
+                // str += '</table>';
+                // str += '</ul>';
+                // str += '</form>';
 
             }
-            $("#tab").html(str0);
-            $("#content").html(str);
+            // $("#tab").html(str0);
+            // $("#content").html(str);
+
+
+
 
             for (var i = 0; i < json.length; i++) {
                 //channel
@@ -472,7 +474,7 @@ $(function() {
             var checked = data.elem.checked;
             var serverStatus = 1;
 
-            var onoff = this.checked ? 0 : 1;
+            var onoff = this.checked ? 1 : 0;
             //console.log(data.value);
             // console.log(data.elem); // 得到checkbox原始DOM对象
             // console.log(data.elem.checked); // 开关是否开启，true或者false
@@ -481,18 +483,28 @@ $(function() {
             if (this.checked == 0) {
                 $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
                 //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "0.5");
-            } else if (this.checked == 1) {
+            } else {
                 $("#content").removeAttr("disabled");
                 $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
                 //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "1");
             }
             $("#content").mouseenter(function() {
+                //this.checked = 0;
+                //form.render();
                 $('#edit').removeAttr("disabled");
-
                 if (this.checked == 0) {
                     $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
-                    //$('.current input[type="checkbox"]').attr("checked", true)
-                    //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "0.5");
+
+                    // var o = $(".layui-form-switch");
+                    // o.find("em").text("OFF")
+                    // o.prop("class", "layui-unselect layui-form-switch")
+                    // o.removeClass("class", "layui-form-switch")
+                } else if (this.checked == 1) {
+                    $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
+
+                    // var o = $(".layui-form-switch");
+                    // o.find("em").text("ON")
+                    // o.prop("class", "layui-unselect layui-form-switch")
                 }
                 //$("#btnGroup button").css("opacity", "1");
                 //$('#edit').prop("disabled", false);
@@ -502,11 +514,10 @@ $(function() {
                 data.elem.checked = checked;
             } else {
                 data.elem.checked = !checked;
-                //$("#content select,#content input,#content button").prop("disabled", false);
             }
             form.render();
 
-            // $(document).on("click", ".edit", function() {
+            // $(document).delegate("click", ".edit", function() {
             //     $("#content select,#content input,#content button").removeAttr("disabled");
             // })
             var data = {
@@ -544,17 +555,17 @@ $(function() {
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
-                    var json = res.result.wifi_config;
+                    //var json = res.result.wifi_config;
 
-                    for (var index in json) {
-                        console.log(json[index].phy_enable);
-                        if (onoff == 1) {
-                            $("#content").show();
-                        } else {
-                            if (!onoff);
-                        }
+                    // for (var index in json) {
+                    //     console.log(json[index].phy_enable);
+                    //     if (onoff == 1) {
+                    //         //$("#content").show();
+                    //     } else {
+                    //         if (!onoff);
+                    //     }
 
-                    }
+                    // }
                 },
                 error: function(jqXHR) {
                     alert("An error occurred：" + jqXHR.status);
