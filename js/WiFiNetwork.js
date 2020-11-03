@@ -1,15 +1,15 @@
 $(function() {
-    var data = {
-        "jsonrpc": "2.0",
-        "method": "triger_scan_wifi",
-        "params": {
-            "vap_name": "ath2",
-            "operate_code": 1
-        },
-        "id": "9.1"
-    };
+    // var data = {
+    //     "jsonrpc": "2.0",
+    //     "method": "triger_scan_wifi",
+    //     "params": {
+    //         "vap_name": "ath2",
+    //         "operate_code": 1
+    //     },
+    //     "id": "9.1"
+    // };
 
-    data = JSON.stringify(data);
+    // data = JSON.stringify(data);
     // $.ajax({
     //     type: "post",
     //     url: "/action/action",

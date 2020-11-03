@@ -520,27 +520,72 @@
             <div class="col-md-6 col-sm-6 col-lg-6">
                 <div class="mt-30 mb-10 bb1c w80 ">
                     <h3 class="fw26 ">Cloud</h3>
-                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected red ">Connected</span></div>
+                    <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected red"></span></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26 ">WiFi</h3>
-                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg ">connected(2.4GHz)</span></div>
-                    <div class="mb-10 mt-10 font18 ">Network:<span class="ml-85 MyText ">SKY54MD</span></div>
+                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg connected24"></span></div>
+                    <div class="mb-10 mt-10 font18 ">Network:<span class="ml-85 MyText ssid"></span></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26 ">Mobile network</h3>
-                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg ">Connected(4G)</span></div>
-                    <div class="mb-10 mt-10 font18 ">Network provider:<span class="ml-16 MyText ">Vodaphone UK</span></div>
-                    <div class="mb-10 mt-10 font18 ">SIM card(in use):<span class="ml-18 MyText ">1</span></div>
+                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg Connected4G"></span></div>
+                    <div class="mb-10 mt-10 font18 ">Network provider:<span class="ml-16 MyText NetworkProvider"></span></div>
+                    <div class="mb-10 mt-10 font18 ">SIM card(in use):<span class="ml-18 MyText active_sim"></span></div>
                 </div>
                 <div class="mb-10 mt-20 bb1c w80 ">
                     <h3 class="fw26 ">SmartHub access point</h3>
-                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg ">On</span></div>
-                    <div class="mb-10 mt-10 font18 ">Name:<span class="ml-103 MyText ">My access point</span></div>
+                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg Status">On</span></div>
+                    <div class="mb-10 mt-10 font18 ">Name:<span class="ml-103 MyText Name">My access point</span></div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+    $(function() {
+        var data = {
+            "jsonrpc": "2.0",
+            "method": "HomeStatus",
+            "params": {},
+            "id": "9.1"
+        }
+        data = JSON.stringify(data);
+        $.ajax({
+            type: "post",
+            url: "/action/action",
+            data: data,
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function(res) {
+                var json = res.result;
+                console.log(json)
+                var arr = ['Connected', 'connected(2.4GHz)', 'Connected(4G)', 'On']
+                    // for (var i = 0; i < json.length; i++) {
+                if (json.cloud.status == 0) {
+                    $('.Connected').eq(0).text(arr[0]);
+                }
+                if (json.sta.status == 0) {
+                    $('.connected24').eq(0).text(arr[1]);
+                    $('.ssid').eq(0).text(json.sta.ssid);
+                }
+                if (json.mobile.status == 0) {
+                    ($('.Connected4G').eq(0).text(arr[2]));
+                    $('.NetworkProvider').eq(0).text(json.mobile.provider);
+                    $('.active_sim').eq(0).text(json.mobile.active_sim);
+                }
+                if (json.ap.status == 0) {
+                    $('.Status').eq(0).text(arr[3]);
+                    $('.Name').eq(0).text(json.ap.name);
+                }
+                // }
+            },
+            error: function(jqXHR) {
+                alert("An error occurred：" + jqXHR.status);
+
+            }
+        });
+    });
+</script>
 
 </html>
