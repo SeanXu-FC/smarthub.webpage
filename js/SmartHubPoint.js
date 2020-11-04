@@ -480,12 +480,14 @@ $(function() {
             // console.log(data.elem.checked); // 开关是否开启，true或者false
             // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
             // console.log(data.othis); // 得到美化后的DOM对象
-            if (this.checked == 0) {
-                $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
+
+            if (this.checked == 1) {
+                $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
                 //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "0.5");
+                $('.current input').eq(0).removeAttr("checked");
             } else {
                 $("#content").removeAttr("disabled");
-                $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
+                $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
                 //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "1");
             }
             $("#content").mouseenter(function() {
@@ -494,14 +496,14 @@ $(function() {
                 $('#edit').removeAttr("disabled");
                 if (this.checked == 0) {
                     $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
-
-                    // var o = $(".layui-form-switch");
-                    // o.find("em").text("OFF")
-                    // o.prop("class", "layui-unselect layui-form-switch")
-                    // o.removeClass("class", "layui-form-switch")
+                    console.log(data.elem.checked)
+                        // var o = $(".layui-form-switch");
+                        // o.find("em").text("OFF")
+                        // o.prop("class", "layui-unselect layui-form-switch")
+                        // o.removeClass("class", "layui-form-switch")
                 } else if (this.checked == 1) {
                     $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
-
+                    data.elem.checked = !data.elem.checked;
                     // var o = $(".layui-form-switch");
                     // o.find("em").text("ON")
                     // o.prop("class", "layui-unselect layui-form-switch")
@@ -548,30 +550,33 @@ $(function() {
             };
             data = JSON.stringify(data);
             console.log(data);
-            $.ajax({
-                type: "post",
-                url: "/action/action",
-                data: data,
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(res) {
-                    //var json = res.result.wifi_config;
 
-                    // for (var index in json) {
-                    //     console.log(json[index].phy_enable);
-                    //     if (onoff == 1) {
-                    //         //$("#content").show();
-                    //     } else {
-                    //         if (!onoff);
-                    //     }
+            // $.ajax({
+            //     type: "post",
+            //     url: "/action/action",
+            //     data: data,
+            //     dataType: "json",
+            //     contentType: "application/json;charset=utf-8",
+            //     success: function(res) {
 
-                    // }
-                },
-                error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR.status);
+            //         //var json = res.result.wifi_config;
 
-                }
-            });
+
+            //         // for (var index in json) {
+            //         //     console.log(json[index].phy_enable);
+            //         //     if (onoff == 1) {
+            //         //         //$("#content").show();
+            //         //     } else {
+            //         //         if (!onoff);
+            //         //     }
+
+            //         // }
+            //     },
+            //     error: function(jqXHR) {
+            //         alert("An error occurred：" + jqXHR.status);
+
+            //     }
+            // });
 
         });
     });

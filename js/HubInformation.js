@@ -140,7 +140,8 @@ $(function() {
             $("#model").html(res.result.Model);
             $("#iv").html(res.result.ipq_version);
             $("#nv").html(res.result.nxp_version);
-            $("#sn").html(res.result.serial_number);
+            $("#stm8").html(res.result.stm8_version);
+            $("#sn").html(res.result.serial_num);
             $("#iMeiInfo").html(res.result.IMEI);
             $("#voltage").html(res.result.Voltage);
             $("#cd").html(res.result.Current_draw);

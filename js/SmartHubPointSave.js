@@ -78,6 +78,7 @@ $(function() {
             success: function(res) {
                 console.log(data);
 
+
             },
             error: function(jqXHR) {
                 alert("An error occurred：" + jqXHR.status);
@@ -151,21 +152,8 @@ $(function() {
         //             dataType: "json",
         //             contentType: "application/json;charset=utf-8",
         //             success: function(res) {
-        //                 var json = res.result.wifi_config;
-        //                 //console.log(json[0].phy_enable)
-        //                 //onoff = this.checked ? 1 : 0;
-        //                 //alert(111)
-        //                 // for (var index in json) {
-        //                 //     //console.log(json[index].phy_enable);
-        //                 // if (this.checked) {
-        //                 //     json[index].phy_enable == 1
-        //                 //         //$("#content").show();
-        //                 // } else if (!checked) {
-        //                 //     //if (!checked);
-        //                 //     //$("#content").hide();
-        //                 // }
 
-        //                 // }
+
 
         //             },
         //             error: function(jqXHR) {
@@ -176,5 +164,8 @@ $(function() {
 
         //     });
         // });
+
+
+
     }
 });
