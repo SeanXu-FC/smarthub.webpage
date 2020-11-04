@@ -551,32 +551,32 @@ $(function() {
             data = JSON.stringify(data);
             console.log(data);
 
-            // $.ajax({
-            //     type: "post",
-            //     url: "/action/action",
-            //     data: data,
-            //     dataType: "json",
-            //     contentType: "application/json;charset=utf-8",
-            //     success: function(res) {
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
 
-            //         //var json = res.result.wifi_config;
+                    //var json = res.result.wifi_config;
 
 
-            //         // for (var index in json) {
-            //         //     console.log(json[index].phy_enable);
-            //         //     if (onoff == 1) {
-            //         //         //$("#content").show();
-            //         //     } else {
-            //         //         if (!onoff);
-            //         //     }
+                    // for (var index in json) {
+                    //     console.log(json[index].phy_enable);
+                    //     if (onoff == 1) {
+                    //         //$("#content").show();
+                    //     } else {
+                    //         if (!onoff);
+                    //     }
 
-            //         // }
-            //     },
-            //     error: function(jqXHR) {
-            //         alert("An error occurred：" + jqXHR.status);
+                    // }
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
 
-            //     }
-            // });
+                }
+            });
 
         });
     });
