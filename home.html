@@ -563,8 +563,8 @@
                 </div>
                 <div class="mb-10 mt-20 bb1c w80 ">
                     <h3 class="fw26 "><a href="SmartHubPoint.html" target="_self">SmartHub access point</a></h3>
-                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg Status">On</span></div>
-                    <div class="mb-10 mt-10 font18 ">Name:<span class="ml-103 MyText Name">My access point</span></div>
+                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg Status"></span></div>
+                    <div class="mb-10 mt-10 font18 ">Name:<span class="ml-103 MyText Name"></span></div>
                 </div>
             </div>
         </div>
@@ -588,10 +588,10 @@
             success: function(res) {
                 var json = res.result;
 
-                var arr = ['Connected', 'connected(2.4GHz)', 'Connected(4G)', 'On', 'Error'];
+                var arr = ['Connected', 'connected(2.4GHz)', 'Connected(4G)', 'On', 'Off', 'Error'];
 
                 if (json.cloud.status == 0) {
-                    $('.Connected').eq(0).text(arr[4]);
+                    $('.Connected').eq(0).text(arr[5]);
                     $('.r_01').attr("src", "images/r_01_gray.png");
                     $('.red').css({
                         'color': 'red'
@@ -600,13 +600,16 @@
                     $('.Connected').eq(0).text(arr[0]);
                     $('.r_01').attr("src", "images/r_01.png");
                     $('.red').css({
-                        'color': '#000'
+                        'color': '#26b167'
                     })
                 }
                 if (json.sta.status == 0) {
                     $('.connected24').eq(0).text(arr[4]);
                     $('.r_06').attr("src", "images/r_06_gray.png");
                     $('.imgIcon').attr("src", "images/s_wifi_nonea.png");
+                    $('.connected24').css({
+                        'color': 'red'
+                    })
 
 
                 } else {
@@ -633,10 +636,11 @@
 
 
                 if (json.ap.status == 0) {
-                    $('.Status').eq(0).text(arr[3]);
+                    $('.Status').eq(0).text(arr[4]);
                     $('.Name').eq(0).text(json.ap.name);
                 } else {
-
+                    $('.Status').eq(0).text(arr[3]);
+                    $('.Name').eq(0).text(json.ap.name);
                 }
 
                 var wirelessLen = $('.Group2901').length;
