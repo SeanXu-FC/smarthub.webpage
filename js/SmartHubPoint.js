@@ -280,9 +280,7 @@ $(function() {
 
             // $("#content select,#content input,#content button").prop("disabled", true);
 
-            $(document).on("click", ".edit", function() {
-                $("#content select,#content input,#content button").removeAttr("disabled");
-            })
+
 
             if ($(".pwd1").val()) {
                 $(".pwd1").val("")
@@ -497,6 +495,7 @@ $(function() {
             if (this.checked == 0) {
                 //$("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
                 $("#content select,#content input").prop("disabled", true);
+                $("#onoff").removeAttr("checked");
 
                 // var o = $(".layui-form-switch");
                 // o.find("em").text("OFF")
@@ -504,6 +503,7 @@ $(function() {
                 // o.removeClass("class", "layui-form-switch")
             } else if (this.checked == 1) {
                 $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
+                $("#onoff").prop("checked", true);
                 //$("#content select,#content input").prop("disabled", true);
 
                 // var o = $(".layui-form-switch");
@@ -563,27 +563,23 @@ $(function() {
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
-                    // if (data == "true") {
-                    //     layer.msg("状态修改成功");
-                    //     active.reload();
-                    // } else {
-                    //     layer.msg(data);
-                    //     alert(data)
-                    //     console.log(res)
-                    // }
+                    $(document).on("click", ".cancel", function() {
+                            $("#content select,#content input,#content button").removeAttr("disabled");
+                            $("#onoff").prop("checked", true);
+                            var o = $(".layui-form-switch");
+                            o.find("em").text("ON");
+                            o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
 
-                    //var json = res.result.wifi_config;
+                        })
+                        // if (data == "true") {
+                        //     layer.msg("状态修改成功");
+                        //     active.reload();
+                        // } else {
+                        //     layer.msg(data);
+                        //     alert(data)
+                        //     console.log(res)
+                        // }
 
-
-                    // for (var index in json) {
-                    //     console.log(json[index].phy_enable);
-                    //     if (onoff == 1) {
-                    //         //$("#content").show();
-                    //     } else {
-                    //         if (!onoff);
-                    //     }
-
-                    // }
                 },
                 error: function(jqXHR) {
                     alert("An error occurred：" + jqXHR.status);

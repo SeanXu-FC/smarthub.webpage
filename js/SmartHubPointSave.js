@@ -83,8 +83,20 @@ $(function() {
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
-
-
+                    if (data == "true") {
+                        //layer.msg("状态修改成功");
+                        $("#onoff").prop("checked", false);
+                        var o = $(".layui-form-switch");
+                        o.find("em").text("OFF");
+                        o.prop("class", "layui-unselect layui-form-switch");
+                        active.reload();
+                    } else {
+                        //layer.msg(data);
+                        $("#onoff").prop("checked", true);
+                        var o = $(".layui-form-switch");
+                        o.find("em").text("ON");
+                        o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                    }
 
                 },
                 error: function(jqXHR) {
