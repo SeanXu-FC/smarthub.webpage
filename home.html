@@ -33,7 +33,7 @@
             line-height: 1.14;
             letter-spacing: normal;
             text-align: left;
-            color: #26b167;
+            /* color: #26b167; */
         }
         
         .MyText {
@@ -549,12 +549,12 @@
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="WiFiNetwork-info1.html" target="_self">WiFi</a></h3>
-                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected clg connected24"></span><img class="imgIcon"></div>
+                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected clg connected24 red"></span><img class="imgIcon"></div>
                     <div class="mb-10 mt-10 font18 ">Network:<span class="ml-85 MyText ssid"></span></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="MobileData.html" target="_self">Mobile network</a></h3>
-                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected clg Connected4G"></span><img class="imgIcon"></div>
+                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected Connected4G red"></span><img class="imgIcon"></div>
                     <div class="mb-10 mt-10 font18 ">Network provider:<span class="ml-16 MyText NetworkProvider"></span></div>
                     <div class="mb-10 mt-10 font18 ">SIM card(in use):<span class="ml-18 MyText active_sim"></span></div>
                     <div class="mb-10 mt-10 font18 ">IMSI:<span class="ml-18 MyText imsi"></span></div>
@@ -599,32 +599,28 @@
                 } else {
                     $('.Connected').eq(0).text(arr[0]);
                     $('.r_01').attr("src", "images/r_01.png");
-                    $('.red').css({
-                        'color': '#26b167'
-                    })
+                    $('.red').css('color', '#26b167')
                 }
                 if (json.sta.status == 0) {
                     $('.connected24').eq(0).text(arr[4]);
                     $('.r_06').attr("src", "images/r_06_gray.png");
                     $('.imgIcon').attr("src", "images/s_wifi_nonea.png");
-                    $('.connected24').css({
+                    $('.red').css({
                         'color': 'red'
                     })
-
-
                 } else {
                     $('.connected24').eq(0).text(arr[1]);
                     $('.r_06').attr("src", "images/r_06.png");
                     $('.ssid').eq(0).text(json.sta.ssid);
+                    $('.connected24').css('color', '#26b167')
                 }
 
 
                 if (json.mobile.status == 0) {
                     $('.Connected4G').eq(0).text(arr[4]);
-                    //$('.Connected4G').css("color", "#ddd")
-
-                    //$('.r_06').attr("src", "images/r_06_gray.png");
-
+                    $('.red').css({
+                        'color': 'red'
+                    })
                 } else {
                     $('.Connected4G').eq(0).text(arr[2]);
                     $('.NetworkProvider').eq(0).text(json.mobile.provider);
@@ -632,15 +628,22 @@
                     $('.imsi').eq(0).text(json.mobile.imsi);
                     $('.plmn').eq(0).text(json.mobile.plmn);
                     $('.csq').eq(0).text(json.mobile.csq);
+                    $('.connected').css('color', '#26b167')
                 }
 
 
                 if (json.ap.status == 0) {
                     $('.Status').eq(0).text(arr[4]);
                     $('.Name').eq(0).text(json.ap.name);
+                    $('.Status').css({
+                        'color': 'red'
+                    })
                 } else {
                     $('.Status').eq(0).text(arr[3]);
                     $('.Name').eq(0).text(json.ap.name);
+                    $('.Status').css({
+                        'color': '#26b167'
+                    })
                 }
 
                 var wirelessLen = $('.Group2901').length;
