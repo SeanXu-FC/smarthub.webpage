@@ -545,7 +545,7 @@
             <div class="col-md-7 col-sm-7 col-lg-7 ">
                 <div class="mt-30 mb-10 bb1c w80 ">
                     <h3 class="fw26 ">Cloud</h3>
-                    <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected red"></span></div>
+                    <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected red cloud"></span></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="WiFiNetwork-info1.html" target="_self">WiFi</a></h3>
@@ -591,7 +591,7 @@
                 var arr = ['Connected', 'connected(2.4GHz)', 'Connected(4G)', 'On', 'Off', 'Error'];
 
                 if (json.cloud.status == 0) {
-                    $('.Connected').eq(0).text(arr[5]);
+                    $('.cloud').eq(0).text(arr[5]);
                     $('.r_01').attr("src", "images/r_01_gray.png");
                     $('.red').css({
                         'color': 'red'
@@ -599,7 +599,7 @@
                 } else {
                     $('.Connected').eq(0).text(arr[0]);
                     $('.r_01').attr("src", "images/r_01.png");
-                    $('.red').css('color', '#26b167')
+                    $('.cloud').css('color', '#26b167')
                 }
                 if (json.sta.status == 0) {
                     $('.connected24').eq(0).text(arr[4]);
@@ -628,7 +628,7 @@
                     $('.imsi').eq(0).text(json.mobile.imsi);
                     $('.plmn').eq(0).text(json.mobile.plmn);
                     $('.csq').eq(0).text(json.mobile.csq);
-                    $('.connected').css('color', '#26b167')
+                    $('.Connected4G').css('color', '#26b167')
                 }
 
 
