@@ -46,9 +46,10 @@ $(function() {
             // $("#content").html(str);
 
 
-
+            if (json == '' || json == undefined || json == null || json.length < 1) return;
 
             for (var i = 0; i < json.length; i++) {
+
                 //channel
                 var optionChannel = document.createElement("option");
                 $(optionChannel).val(json[index].channel).attr("selected", "selected");

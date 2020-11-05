@@ -205,7 +205,7 @@
             <div class="mCont" style="padding:28px 37px;">
                 <div class="row">
                     <div class="col-md-10">
-                        <div>Mynetwork1</div>
+                        <div class="myAp">Mynetwork1</div>
                         <div class="col-md-4 c9" style="padding-left:0">Encrypted</div>
                     </div>
                     <div class="col-md-2"><img src="images/icon-wifi01.png"></div>
@@ -294,6 +294,34 @@
         </div>
     </div>
     <script>
+        $(function() {
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "GetSmartMode",
+                "params": {
+                    // "SmartSSID": "Ray_88888888",
+                    // "PassWord": "88888888"
+                },
+                "id": "9.1"
+            }
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    console.log(res.result.SmartSSID)
+                    $('.myAp').text(res.result.SmartSSID);
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+
+                }
+            })
+
+        });
         $(".Back").prop("disabled", true);
         $(".Back").css("opacity", "0.5");
     </script>

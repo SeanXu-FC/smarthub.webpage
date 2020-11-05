@@ -196,25 +196,32 @@
         }
         
         .Back a,
-        .Continue a,
-        .Back a:link,
-        .Continue a:active,
+        .Back a:link {
+            color: #000;
+        }
+        
+        .Back a:hover,
         .Back a:active {
-            color: #000000;
+            color: #fff;
+        }
+        
+        .Continue a,
+        .Continue a:link,
+        .Continue a:active {
+            color: #fff;
         }
         
         .Continue a:visited {
             color: #ffffff;
         }
-        
-        .Back a,
+        /* .Back a,
         .Continue a,
         .Back a:link,
         .Back a:visited,
         .Continue a:active,
         .Back a:active {
             color: #000000;
-        }
+        } */
         
         .Back a:hover {
             font-family: OpenSans;
@@ -239,13 +246,13 @@
             <div class=""></div>
             <div class="row mt-40">
                 <div class="col-md-6 Access-point-name">Access point name:</div>
-                <div class="col-md-6"><input type="text" value="My access point" class="Rectangle-1185" /></div>
+                <div class="col-md-6"><input type="text" value="My access point" class="Rectangle-1185 apName" /></div>
             </div>
             <div class="row mt-40">
                 <div class="col-md-6 Password">Password:</div>
                 <div class="col-md-6" style="position:relative">
                     <input type="password" value="" class="Rectangle-1185 pwd" />
-                    <span style="position:absolute; top:5px;left:210px;cursor: pointer;" onclick="change()">show</span>
+                    <span style="position:absolute; top:5px;left:200px;cursor: pointer;" onclick="change()">show</span>
                 </div>
             </div>
 
@@ -254,7 +261,7 @@
                     <button class="Rectangle-1182 Back"><a href="setupWizard-1.html">Back</a></button>
                 </div>
                 <div class="col-md-5">
-                    <button class="Rectangle-1182 Continue active"><a href="setupWizard-3.html">Continue</a></button>
+                    <button class="Rectangle-1182 Continue active"><a href="setupWizard-3.html" onclick="save()">Continue</a></button>
                 </div>
             </div>
         </div>
@@ -263,6 +270,73 @@
     </div>
     <script>
         $(function() {
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "GetSmartMode",
+                "params": {
+                    // "SmartSSID": "Ray_88888888",
+                    // "PassWord": "88888888"
+                },
+                "id": "9.1"
+            }
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    console.log(res)
+                    $('.apName').val(res.result.SmartSSID);
+                    $('.pwd').val(res.result.PassWord);
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+
+                }
+            })
+
+            save = function() {
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "SetSmartMode",
+                    "params": {
+                        "SmartSSID": $('.apName').val(),
+                        "PassWord": $('.pwd').val()
+                    },
+                    "id": "9.1"
+                }
+                data = JSON.stringify(data);
+                $.ajax({
+                    type: "post",
+                    url: "/action/action",
+                    data: data,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function(res) {
+                        console.log(data)
+
+                    },
+                    error: function(jqXHR) {
+                        alert("An error occurred：" + jqXHR.status);
+
+                    }
+                })
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
             var isShow = true;
 
             change = function() {

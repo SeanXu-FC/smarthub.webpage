@@ -45,6 +45,7 @@ $(function() {
             //     console.log($img[i]);
             // }
 
+            if (json == '' || json == undefined || json == null || json.length < 1) return;
             for (let i = 0; i < json.length; i++) {
                 var signal = json[i].signal;
                 // console.log(signal);
