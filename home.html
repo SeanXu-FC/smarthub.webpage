@@ -285,6 +285,22 @@
         .ml85 {
             margin-left: -85px;
         }
+        
+        .red {
+            color: red
+        }
+        
+        .green {
+            color: green;
+        }
+        
+        .ml-16 {
+            margin-left: 16px;
+        }
+        
+        .ml-20 {
+            margin-left: 20px;
+        }
         /* @media (max-width: 1920px) {
             .bd1 {
                 width: 560px;
@@ -545,21 +561,21 @@
             <div class="col-md-7 col-sm-7 col-lg-7 ">
                 <div class="mt-30 mb-10 bb1c w80 ">
                     <h3 class="fw26 ">Cloud</h3>
-                    <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected red cloud"></span></div>
+                    <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected cloud"></span></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="WiFiNetwork-info1.html" target="_self">WiFi</a></h3>
-                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected clg connected24 red"></span><img class="imgIcon"></div>
+                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected clg connected24"></span><img class="imgIcon"></div>
                     <div class="mb-10 mt-10 font18 ">Network:<span class="ml-85 MyText ssid"></span></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="MobileData.html" target="_self">Mobile network</a></h3>
-                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected Connected4G red"></span><img class="imgIcon"></div>
+                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected Connected4G"></span><img class="imgIcon"></div>
                     <div class="mb-10 mt-10 font18 ">Network provider:<span class="ml-16 MyText NetworkProvider"></span></div>
-                    <div class="mb-10 mt-10 font18 ">SIM card(in use):<span class="ml-18 MyText active_sim"></span></div>
-                    <div class="mb-10 mt-10 font18 ">IMSI:<span class="ml-18 MyText imsi"></span></div>
-                    <div class="mb-10 mt-10 font18 ">PLMN:<span class="ml-18 MyText plmn"></span></div>
-                    <div class="mb-10 mt-10 font18 ">CSQ:<span class="ml-18 MyText csq"></span></div>
+                    <div class="mb-10 mt-10 font18 ">SIM card(in use):<span class="ml-20 MyText active_sim"></span></div>
+                    <div class="mb-10 mt-10 font18 ">IMSI:<span class=" MyText imsi" style="margin-left: 115px;"></span></div>
+                    <div class="mb-10 mt-10 font18 ">PLMN:<span class=" MyText plmn" style="margin-left: 102px;"></span></div>
+                    <div class="mb-10 mt-10 font18 ">CSQ:<span class=" MyText csq" style="margin-left: 112px;"></span></div>
                 </div>
                 <div class="mb-10 mt-20 bb1c w80 ">
                     <h3 class="fw26 "><a href="SmartHubPoint.html" target="_self">SmartHub access point</a></h3>
@@ -593,9 +609,7 @@
                 if (json.cloud.status == 0) {
                     $('.cloud').eq(0).text(arr[5]);
                     $('.r_01').attr("src", "images/r_01_gray.png");
-                    $('.red').css({
-                        'color': 'red'
-                    })
+                    $('.ml-100').addClass("red");
                 } else {
                     $('.Connected').eq(0).text(arr[0]);
                     $('.r_01').attr("src", "images/r_01.png");
@@ -605,7 +619,7 @@
                     $('.connected24').eq(0).text(arr[4]);
                     $('.r_06').attr("src", "images/r_06_gray.png");
                     $('.imgIcon').attr("src", "images/s_wifi_nonea.png");
-                    $('.red').css({
+                    $('.connected24').css({
                         'color': 'red'
                     })
                 } else {
