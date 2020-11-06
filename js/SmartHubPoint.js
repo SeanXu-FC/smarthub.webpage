@@ -93,6 +93,7 @@ $(function() {
                         o.find("em").text("OFF");
                         o.prop("class", "layui-unselect layui-form-switch");
 
+
                         //$("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
                         // $("#content select,#content input").prop("disabled", true);
                         // $("#onoff").removeAttr("checked");
