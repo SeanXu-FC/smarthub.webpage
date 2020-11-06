@@ -49,8 +49,6 @@ $(function() {
             layui.use(['form'], function() {
                 var form = layui.form;
                 for (var i = 0; i < json.length; i++) {
-
-
                     if (json[i].phy_enable == 0) {
                         //console.log(json[i].phy_enable);
                         $("#content select,#content input,#content button").prop("disabled", true);
@@ -66,7 +64,6 @@ $(function() {
                         o.find("em").text("ON");
                         o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
                     }
-
 
                     //channel
                     var optionChannel = document.createElement("option");
