@@ -15,40 +15,6 @@ $(function() {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             var json = res.result.wifi_config;
-
-
-
-            // $("#content select,#content input,#content button").removeAttr("disabled");
-            // $("#onoff").prop("checked", true);
-            // var o = $(".layui-form-switch");
-            // o.find("em").text("ON");
-            // o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-
-
-            // if (json.phy_enable == 1) {
-            //     alert(1)
-            //         //layer.msg(data);
-            //     $("#onoff").prop("checked", true);
-            //     var o = $(".layui-form-switch");
-            //     o.find("em").text("ON");
-            //     o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-            // } else {
-            //     alert(0)
-            //         //layer.msg("状态修改成功");
-            //         // $("#onoff").prop("checked", false);
-            //         // var o = $(".layui-form-switch");
-            //         // o.find("em").text("OFF");
-            //         // o.prop("class", "layui-unselect layui-form-switch");
-            //         // o.removeClass("layui-form-onswitch")
-            //         //active.reload();
-            //         // $("#content select,#content input,#content button").removeAttr("disabled");
-            //         // $("#onoff").prop("checked", true);
-            //         // var o = $(".layui-form-switch");
-            //         // o.find("em").text("ON");
-            //         // o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-
-            // }
-            //console.log(json[0].vap_config[0].WpaKey);
             var str = "";
             var str0 = "";
 
@@ -86,36 +52,19 @@ $(function() {
 
 
                     if (json[i].phy_enable == 0) {
-                        console.log(json[i].phy_enable);
+                        //console.log(json[i].phy_enable);
                         $("#content select,#content input,#content button").prop("disabled", true);
                         $("#onoff").prop("checked", false);
                         var o = $(".layui-form-switch");
                         o.find("em").text("OFF");
                         o.prop("class", "layui-unselect layui-form-switch");
-
-
-                        //$("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
-                        // $("#content select,#content input").prop("disabled", true);
-                        // $("#onoff").removeAttr("checked");
-
-                        // var o = $(".layui-form-switch");
-                        // o.find("em").text("OFF")
-                        // o.prop("class", "layui-unselect layui-form-switch")
-                        //     o.removeClass("class", "layui-form-switch")
                     } else {
-                        console.log(json[i].phy_enable);
+                        //console.log(json[i].phy_enable);
                         $("#content select,#content input,#content button").removeAttr("disabled");
                         $("#onoff").prop("checked", true);
                         var o = $(".layui-form-switch");
                         o.find("em").text("ON");
                         o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-                        // $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
-                        // $("#onoff").prop("checked", true);
-                        //$("#content select,#content input").prop("disabled", true);
-
-                        // var o = $(".layui-form-switch");
-                        // o.find("em").text("ON")
-                        // o.prop("class", "layui-unselect layui-form-switch")
                     }
 
 
@@ -551,44 +500,14 @@ $(function() {
             // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
             // console.log(data.othis); // 得到美化后的DOM对象
 
-            // if (this.checked == 1) {
-            //     $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
-            //     //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "0.5");
-            //     $('.current input').eq(0).removeAttr("checked");
-            // } else {
-            //     $("#content").removeAttr("disabled");
-            //     $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
-            //     //$("#content select,#content input,#content button,#btnGroup button").css("opacity", "1");
-            // }
-
-            //this.checked = 0;
-            //form.render();
-
             if (this.checked == 1) {
-                //$("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
-
                 $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
                 $("#onoff").prop("checked", true);
-                // var o = $(".layui-form-switch");
-                // o.find("em").text("OFF")
-                // o.prop("class", "layui-unselect layui-form-switch")
-                // o.removeClass("class", "layui-form-switch")
             } else if (this.checked == 0) {
                 $("#content select,#content input").prop("disabled", true);
                 $("#onoff").removeAttr("checked");
-                //$("#content select,#content input").prop("disabled", true);
-
-                // var o = $(".layui-form-switch");
-                // o.find("em").text("ON")
-                // o.prop("class", "layui-unselect layui-form-switch")
             }
-            //$("#btnGroup button").css("opacity", "1");
-            //$('#edit').prop("disabled", false);
-            // $('#cancel').attr("disabled", false);
-            //$('#cancel').removeAttr("disabled");
-            // $('#cancel').click(function() {
-            //     alert(111)
-            // });
+
             if (serverStatus) {
                 data.elem.checked = checked;
             } else {
@@ -596,9 +515,7 @@ $(function() {
             }
             form.render();
 
-            // $(document).delegate("click", ".edit", function() {
-            //     $("#content select,#content input,#content button").removeAttr("disabled");
-            // })
+
             var data = {
                 "jsonrpc": "2.0",
                 "method": "SetWlanSettings",
@@ -647,14 +564,7 @@ $(function() {
                         //layer.msg("状态修改成功");
                         active.reload();
                     } else {
-                        //layer.msg(data);
-                        //alert(data)
-                        //console.log(res)
-                        // $("#content select,#content input,#content button").removeAttr("disabled");
-                        // $("#onoff").prop("checked", true);
-                        // var o = $(".layui-form-switch");
-                        // o.find("em").text("ON");
-                        // o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+
                     }
 
                 },
