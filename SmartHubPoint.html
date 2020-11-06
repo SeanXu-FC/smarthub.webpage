@@ -297,6 +297,47 @@
             text-align: center;
             color: #ffffff;
         }
+        
+        .Rectangle-1269 {
+            width: 204px;
+            height: 41px;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+            border: solid 2px #26b167;
+            background-color: #f9fffc;
+            background: url("images/correct.png") no-repeat 5px 4px
+        }
+        
+        .Password-successfully-changed {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+            padding: 5px 10px 5px 40px;
+        }
+        
+        .Changes-saved {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        #success {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 500px;
+        }
     </style>
 </head>
 
@@ -318,6 +359,7 @@
                         </div>
                     </ul>
                     <div id="content">
+                        <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">Changes-saved</div>
                         <form>
                             <ul style="display:block;">
                                 <table class="table table-hover table-responsive">
@@ -404,6 +446,26 @@
         });
     </script>
     <script>
+        $("#btn1").on("click", function() {
+            $('#success').show(1000).delay(6000).hide(0);
+            // setTimeout(function() {
+            //     $('#success').hide();
+            // }, 6000);
+            // $("#btn1").removeAttr("disabled");
+            // $("#btn1").css("opacity", "1");
+            // $("#cancel").removeAttr("disabled");
+            // $("#cancel").css("opacity", "1");
+
+            return false;
+        });
+
+        $("#cancel").on("click", function() {
+            $('#success').hide(1000);
+            // $(".Path-101").attr("disabled", true);
+            // $(".Path-101").css("opacity", "0.5");
+            // $('.qx button').removeClass("Pah-101 Cancel")
+            return false;
+        });
         // window.onload = function() {
         //     console.log($(".hwmode option:selected").val()); //4
         //     console.log($(".channel option:selected").val()); //12
