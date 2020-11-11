@@ -1,5 +1,8 @@
 $(function() {
-
+    //console.log($('#date input[type="text"]').eq(0).val())
+    $('.formonth').change(function() {
+        console.log($('.formonth option').val())
+    });
     save = function() {
 
         layui.use(['form'], function() {
@@ -46,11 +49,11 @@ $(function() {
                             "start_date": "2020-11-04",
                             "last_month": 12,
                             "usage_reminder_flag": 1,
-                            "sim_data_limt": 1024000,
-                            "rule_weak_signal": 1,
-                            "rule_dlimit": 1,
-                            "rule_roamming": 1,
-                            "rule_noservice": 1,
+                            "sim_data_limt": $('#dataLimit input[type="text"]').eq(0).val(),
+                            "rule_weak_signal": $('#tab-content1 input[type="checkbox"]').eq(0).val(),
+                            "rule_dlimit": $('#tab-content1 input[type="checkbox"]').eq(1).val(),
+                            "rule_roamming": $('#tab-content1 input[type="checkbox"]').eq(2).val(),
+                            "rule_noservice": $('#tab-content1 input[type="checkbox"]').eq(3).val(),
                             "pinlock": 0,
                             "pincode": 0,
                             "apn": []
@@ -61,9 +64,9 @@ $(function() {
             };
 
             data = JSON.stringify(data);
-            //console.log(data.wifi_config.phy_enable);
+            console.log(data);
             //console.log(this.checked)
-            console.log(data)
+
             $.ajax({
                 type: "post",
                 url: "/action/action",
@@ -73,17 +76,17 @@ $(function() {
                 success: function(res) {
                     if (data == "true") {
                         //layer.msg("状态修改成功");
-                        $("#onoff").prop("checked", false);
-                        var o = $(".layui-form-switch");
-                        o.find("em").text("OFF");
-                        o.prop("class", "layui-unselect layui-form-switch");
-                        active.reload();
+                        // $("#onoff").prop("checked", false);
+                        // var o = $(".layui-form-switch");
+                        // o.find("em").text("OFF");
+                        // o.prop("class", "layui-unselect layui-form-switch");
+                        // active.reload();
                     } else {
                         //layer.msg(data);
-                        $("#onoff").prop("checked", true);
-                        var o = $(".layui-form-switch");
-                        o.find("em").text("ON");
-                        o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                        // $("#onoff").prop("checked", true);
+                        // var o = $(".layui-form-switch");
+                        // o.find("em").text("ON");
+                        // o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
                     }
 
                 },

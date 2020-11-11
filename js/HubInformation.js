@@ -152,6 +152,9 @@ $(function() {
             $("#aPma").html(res.result.ipq_wifi1_mac);
             $("#ipqAddress").html(res.result.ipq_ipaddr);
             $("#ipqAddress").attr("href", "http://" + res.result.ipq_ipaddr);
+            $("#btnSave").click(function() {
+                window.open("http://198.18.248.1/action/down", "_self");
+            });
         },
         error: function(jqXHR) {
             alert("An error occurred：" + jqXHR.status);

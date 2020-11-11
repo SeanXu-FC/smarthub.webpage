@@ -13,7 +13,7 @@ $(function() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            console.log(res.result)
+            //console.log(res.result)
             var json = res.result;
 
             if (json == '' || json == undefined || json == null || json.length < 1) return;
@@ -36,11 +36,11 @@ $(function() {
                 $('#SIM option:selected').text(SIMArr[0]);
                 $('#SIM option[value=0]').attr("selected", "selected");
 
-                console.log('SIM1')
+                //console.log('SIM1')
             } else {
                 $('#SIM option:selected').text(SIMArr[1]);
                 $('#SIM option[value=1]').attr("selected", "selected");
-                console.log('SIM2')
+                //console.log('SIM2')
             }
 
 

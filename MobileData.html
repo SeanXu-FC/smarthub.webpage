@@ -13,6 +13,7 @@
     <link href="layui/css/modules/laydate/default/laydate.css" rel="stylesheet" media="all">
     <link href="css/style.css" rel="stylesheet" />
     <script type="text/javascript" src="js/MobileData.js"></script>
+    <script type="text/javascript" src="js/MobileSetData.js"></script>
     <title>Document</title>
     <style type="text/css">
         table {
@@ -680,17 +681,23 @@
                                         <div style="display: inline-block;">
                                             <div class="The-remaining-data-allowance-threshold-below-which-the-router-will-switch-to-the-other-SIM">The remaining data allowance threshold below which the router will switch to the other SIM</div>
                                         </div>
-                                        <div class="layui-input-inline" style="display: inline-block;margin-left:56px;margin-top: -40px;">
-                                            <input type="text" name="text" value="800" class="Rectangle-1185 pl-10">
-                                        </div>
-                                        <div class="" style="display: inline-block;margin-top: -40px;position:absolute;top:60px;">
-                                            <div class="layui-input-block" style="margin-left: 7px;">
+                                        <div class="layui-input-inline" id="dataLimit" style="display: inline-block;margin-left:56px;margin-top: -40px;">
+                                            <input type="text" name="text" value="800" class="Rectangle-1185 pl-10" style="display: inline-block;">
+                                            <div class="layui-input-block" style="margin-left: 78px;margin-top: -31px;">
                                                 <select name="city" lay-verify="required" style="border:0">
-                                            <option value="0" class="MB">MB</option>
-                                            <option value="1" class="MB">GB</option>
-                                      </select>
+                                                    <option value="0" class="MB">MB</option>
+                                                    <option value="1" class="MB">GB</option>
+                                                </select>
                                             </div>
                                         </div>
+                                        <!-- <div class="" style="display: inline-block;margin-top: -40px;position:absolute;top:60px;">
+                                            <div class="layui-input-block" style="margin-left: 7px;">
+                                                <select name="city" lay-verify="required" style="border:0">
+                                                    <option value="0" class="MB">MB</option>
+                                                    <option value="1" class="MB">GB</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
                                     </div>
 
                                     <div class="" style="position: relative;">
@@ -698,16 +705,15 @@
                                         <div style="display: inline-block;">
                                             <div class="Start-data-limit-on">Start data limit on</div>
                                         </div>
-                                        <div class="layui-input-inline" style="display: inline-block;margin-left:56px;">
+                                        <div class="layui-input-inline" style="display: inline-block;margin-left:56px;" id="date">
                                             <input type="text" id="test1" name="text" value="01/01/2021" class="Rectangle-1185-2021 pl-10 test1">
 
                                         </div>
 
                                         <div style="display: inline-block;margin-left: 23px;" class="for">for</div>
-                                        <div class="" style="display: inline-block;">
+                                        <div class="" style="display: inline-block;" id="formonth">
                                             <div class="layui-input-block" style="margin-left:30px;">
-                                                <select name="city" lay-verify="required" class="Rectangle-1185-12">
-                                                <option value="12" class="MB">12</option>
+                                                <select name="city" lay-verify="required" class="Rectangle-1185-12 formonth">
                                                 <option value="1" class="MB">1</option>
                                                 <option value="2" class="MB">2</option>
                                                 <option value="3" class="MB">3</option>
@@ -719,6 +725,7 @@
                                                 <option value="9" class="MB">9</option>
                                                 <option value="10" class="MB">10</option>
                                                 <option value="11" class="MB">11</option>
+                                                <option value="12" selected class="MB">12</option>
                                             </select>
                                             </div>
                                         </div>
@@ -846,22 +853,22 @@
                                     <li class="SIM1-SIM2 SIM1-to-SIM2 ">SIM2 to SIM1</li>
                                 </ul>
 
-                                <div class="tab-content">
-                                    <div class="layui-transfer-data layui-form">
+                                <div class="tab-content" id="tab-content1">
+                                    <div class="layui-transfer-data layui-form" id="Sim1ToSim2">
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Weak signal-1" value="1">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Weak signal-1" value="Weak signal-1">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal-1</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Data limit reached" value="1">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Data limit reached" value="Data limit reached">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="When roaming" value="1">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="When roaming" value="hen roaming">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="No network" value="1">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="No network" value="No network">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <!-- <div class="checkbox">
@@ -894,19 +901,19 @@
                                     </div>
                                     <div class="layui-transfer-data layui-form">
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Weak signal-2" value="1">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Weak signal-2" value="Weak signal-2">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal-2</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Data limit reached" value="1">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Data limit reached" value="Data limit reached">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="When roaming" value="1">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="When roaming" value="When roaming">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="No network" value="1">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="No network" value="No network">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                     </div>
@@ -966,7 +973,8 @@
                                                     <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                                 </div>
                                             </div>
-                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin">Change SIM pin</span></button>
+                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin" onclick="save()">Save</span></button>
+
                                         </div>
                                     </div>
                                 </div>
