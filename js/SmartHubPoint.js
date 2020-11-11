@@ -47,6 +47,11 @@ $(function() {
 
             if (json == '' || json == undefined || json == null || json.length < 1) return;
             layui.use(['form'], function() {
+                //console.log(data.value);
+                // console.log(data.elem); // 得到checkbox原始DOM对象
+                // console.log(data.elem.checked); // 开关是否开启，true或者false
+                // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
+                // console.log(data.othis); // 得到美化后的DOM对象
                 var form = layui.form;
                 for (var i = 0; i < json.length; i++) {
                     if (json[i].phy_enable == 0) {
@@ -505,11 +510,11 @@ $(function() {
                 $("#onoff").removeAttr("checked");
             }
 
-            if (serverStatus) {
-                data.elem.checked = checked;
-            } else {
-                data.elem.checked = !checked;
-            }
+            // if (serverStatus) {
+            //     data.elem.checked = checked;
+            // } else {
+            //     data.elem.checked = !checked;
+            // }
             form.render();
 
 
@@ -549,20 +554,20 @@ $(function() {
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
-                    $(document).on("click", ".cancel", function() {
-                        $("#content select,#content input,#content button").removeAttr("disabled");
-                        $("#onoff").prop("checked", true);
-                        var o = $(".layui-form-switch");
-                        o.find("em").text("ON");
-                        o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                    // $(document).on("click", ".cancel", function() {
+                    //     $("#content select,#content input,#content button").removeAttr("disabled");
+                    //     $("#onoff").prop("checked", true);
+                    //     var o = $(".layui-form-switch");
+                    //     o.find("em").text("ON");
+                    //     o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
 
-                    })
-                    if (data == "true") {
-                        //layer.msg("状态修改成功");
-                        active.reload();
-                    } else {
+                    // })
+                    // if (data == "true") {
+                    //     //layer.msg("状态修改成功");
+                    //     active.reload();
+                    // } else {
 
-                    }
+                    // }
 
                 },
                 error: function(jqXHR) {

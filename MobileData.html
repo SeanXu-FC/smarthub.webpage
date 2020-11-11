@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link href="layui/css/modules/laydate/default/laydate.css" rel="stylesheet" media="all">
     <link href="css/style.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/MobileData.js"></script>
     <title>Document</title>
     <style type="text/css">
         table {
@@ -602,6 +603,14 @@
             background-color: #861f41;
             color: #fff;
         }
+        
+        .layui-form-switch em {
+            top: 0px !important;
+        }
+        
+        .layui-form-switch i {
+            top: 2px !important;
+        }
     </style>
 </head>
 
@@ -609,7 +618,7 @@
     <div class="container-fluid">
         <div class="mc ml-70">
             <h2 class="Mobile-data-big"> Mobile data</h2>
-            <table class=" table-responsive">
+            <table class="mt-20 table-responsive">
                 <tr>
                     <td>
                         <div class="Mobile-data">Mobile data:</div>
@@ -618,7 +627,7 @@
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
                             <div class="layui-input-block">
-                                <input id="mobileData1" type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <input id="mobileData" type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
@@ -631,7 +640,7 @@
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
                             <div class="layui-input-block">
-                                <input id="mobileData2" type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <input id="DataRoaming" type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
@@ -642,7 +651,7 @@
 
             </table>
 
-            <div class="main">
+            <div class="main mb-30">
                 <div class="Advanced">Advanced <span><img id="arrow" class="up" src="images/icon-arrow-up.png"></span></div>
                 <div class="advancedContent" style="overflow: hidden;zoom:1;">
                     <div class="body1 mb-15">
@@ -809,7 +818,7 @@
                                 <div class="col-md-5 Active-SIM mt-30 mb-20" style="display: inline-block;">Active SIM:</div>
                                 <div class="col-md-7 mt-30" style="display: inline-block;">
                                     <div class="layui-input-block" style="margin-left:-30px;">
-                                        <select name="SIM" lay-verify="required" class="Rectangle-1185-12">
+                                        <select name="SIM" id="SIM" lay-verify="required" class="Rectangle-1185-12">
                                             <option value="0" class="SIM-1">SIM1</option>
                                             <option value="1" class="SIM-1">SIM2</option>
                                         </select>
@@ -819,7 +828,7 @@
                             <div class="layui-form layui-form-pane layui-form-item">
                                 <label class="layui-form-label Set-monthly-data-limit mt-20 mb-0">Auto SIM switching:</label>
                                 <div class="layui-input-block pt-5">
-                                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                    <input type="checkbox" id="AutoSim" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                 </div>
                             </div>
                             <div class="Receive-notifications-when-the-data-limit-has-been-reached">Router will switch to the other SIM by defined SIM switching rules
@@ -838,8 +847,24 @@
                                 </ul>
 
                                 <div class="tab-content">
-                                    <div>
-                                        <div class="checkbox">
+                                    <div class="layui-transfer-data layui-form">
+                                        <div>
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Weak signal-1" value="1">
+                                            <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal-1</span><i class="layui-icon layui-icon-ok"></i></div>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Data limit reached" value="1">
+                                            <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="When roaming" value="1">
+                                            <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="No network" value="1">
+                                            <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
+                                        </div>
+                                        <!-- <div class="checkbox">
                                             <label>
                                               <input type="checkbox" value="">
                                               <span class="pl30">Weak signal-1</span>
@@ -865,36 +890,24 @@
                                               <span class="pl30">No network</span>
                                               
                                             </label>
-                                        </div>
+                                        </div> -->
                                     </div>
-                                    <div>
-                                        <div class="checkbox">
-                                            <label>
-                                              <input type="checkbox" value="">
-                                              <span class="pl30"> Weak signal-2</span>
-                                             
-                                            </label>
+                                    <div class="layui-transfer-data layui-form">
+                                        <div>
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Weak signal-2" value="1">
+                                            <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal-2</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
-                                        <div class="checkbox">
-                                            <label>
-                                              <input type="checkbox" value="">
-                                              <span class="pl30">Data limit reached</span>
-                                              
-                                            </label>
+                                        <div>
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Data limit reached" value="1">
+                                            <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
-                                        <div class="checkbox">
-                                            <label>
-                                              <input type="checkbox" value="">
-                                              <span class="pl30"> When roaming</span>
-                                             
-                                            </label>
+                                        <div>
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="When roaming" value="1">
+                                            <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
-                                        <div class="checkbox">
-                                            <label>
-                                              <input type="checkbox" value="">
-                                              <span class="pl30">No network</span>
-                                              
-                                            </label>
+                                        <div>
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="No network" value="1">
+                                            <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                     </div>
                                 </div>
@@ -909,18 +922,18 @@
                                     </ul>
 
                                     <div class="tab-content">
-                                        <div class="row">
-                                            <div class="z1">
-                                                <label class="Network-provider col-md-6">Network provider1:</label><span class="col-md-6">Vodaphone UK1</span>
+                                        <div class="z1">
+                                            <div class="row">
+                                                <label class="Network-provider col-md-6">Network provider1:</label><span class="col-md-6" id="provider1">Vodaphone UK1</span>
                                             </div>
-                                            <div class="z1">
-                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15">1234</span>
+                                            <div class="row">
+                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15" id="sim_imsi1">1234</span>
                                             </div>
-                                            <div class="z1">
-                                                <label class="Network-provider col-md-6 mt-15">SIM telephone number:</label><span class="col-md-6 mt-15">1234567890</span>
+                                            <div class="row">
+                                                <label class="Network-provider col-md-6 mt-15" style="display:inline-block">SIM telephone number:</label><span class="col-md-6 mt-15" id="sim_tele_num1">1234567890</span>
                                             </div>
-                                            <div class="z1">
-                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15">12345678</span>
+                                            <div class="row">
+                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15" id="sim_puk_num1">12345678</span>
                                             </div>
                                             <div style="clear:both;"></div>
                                             <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div>
@@ -932,18 +945,18 @@
                                             </div>
                                             <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin">Change SIM pin</span></button>
                                         </div>
-                                        <div class="row">
-                                            <div class="z1">
-                                                <label class="Network-provider col-md-6">Network provider2:</label><span class="col-md-6">Vodaphone UK2</span>
+                                        <div class="z1">
+                                            <div class="row">
+                                                <label class="Network-provider col-md-6">Network provider2:</label><span class="col-md-6" id="provider2">Vodaphone UK2</span>
                                             </div>
-                                            <div class="z1">
-                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15">1234</span>
+                                            <div class="row">
+                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15" id="sim_imsi2">1234</span>
                                             </div>
-                                            <div class="z1">
-                                                <label class="Network-provider col-md-6 mt-15">SIM telephone number:</label><span class="col-md-6 mt-15">1234567890</span>
+                                            <div class="row">
+                                                <label class="Network-provider col-md-6 mt-15">SIM telephone number:</label><span class="col-md-6 mt-15" id="sim_tele_num2">1234567890</span>
                                             </div>
-                                            <div class="z1">
-                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15">12345678</span>
+                                            <div class="row">
+                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15" id="sim_puk_num2">12345678</span>
                                             </div>
                                             <div style="clear:both;"></div>
                                             <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div>
@@ -1263,21 +1276,22 @@
         layui.use('form', function() {
             var form = layui.form; //表单
             form.on('switch', function(data) {
-                console.log(data.elem.checked); //开关是否开启，true或者false
-                console.log(data.value); //开关value值，也可以通过data.elem.value得到
-                console.log(data.othis); //得到美化后的DOM对象
-                var id = $(data.othis).next("input").val();
+                // console.log(data.elem.checked); //开关是否开启，true或者false
+                // console.log(data.value); //开关value值，也可以通过data.elem.value得到
+                // console.log(data.othis); //得到美化后的DOM对象
+                // var id = $(data.othis).next("input").val();
 
-                var json = data.result.wifi_config;
-                for (var index in json) {
-                    if (data.json[index].phy_enable != 1) {
-                        $("#mobileData1").attr("checked", "checked");
-                        $("#mobileData2").attr("checked", "checked");
-                    } else {
-                        $("#mobileData1").remove("checked");
-                        $("#mobileData2").remove("checked");
-                    }
-                }
+                // var json = data.result;
+                // console.log(json)
+                // for (var index in json) {
+                //     if (data.json[index].phy_enable != 1) {
+                //         $("#mobileData1").attr("checked", "checked");
+                //         $("#mobileData2").attr("checked", "checked");
+                //     } else {
+                //         $("#mobileData1").remove("checked");
+                //         $("#mobileData2").remove("checked");
+                //     }
+                // }
                 // if (data.elem.checked == true) {
                 //     $.ajax({
                 //         type: "post",
