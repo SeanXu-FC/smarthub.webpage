@@ -565,12 +565,12 @@
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="WiFiNetwork-info1.html" target="_self">WiFi</a></h3>
-                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected clg connected24"></span><img class="imgIcon"></div>
+                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected clg connected24"></span><img id="connected24" class="imgIcon"></div>
                     <div class="mb-10 mt-10 font18 ">Network:<span class="ml-85 MyText ssid"></span></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="MobileData.html" target="_self">Mobile network</a></h3>
-                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected Connected4G"></span><img class="imgIcon"></div>
+                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected Connected4G"></span><img id="Connected4G" class="imgIcon"></div>
                     <div class="mb-10 mt-10 font18 ">Network provider:<span class="ml-16 MyText NetworkProvider"></span></div>
                     <div class="mb-10 mt-10 font18 ">SIM card(in use):<span class="ml-20 MyText active_sim"></span></div>
                     <div class="mb-10 mt-10 font18 ">IMSI:<span class=" MyText imsi" style="margin-left: 115px;"></span></div>
@@ -618,10 +618,11 @@
                 if (json.sta.status == 0) {
                     $('.connected24').eq(0).text(arr[4]);
                     $('.r_06').attr("src", "images/r_06_gray.png");
-                    $('.imgIcon').attr("src", "images/s_wifi_nonea.png");
-                    $('.connected24').css({
-                        'color': 'red'
-                    })
+                    $('#connected24').attr("src", "images/s_wifi_nonea.png");
+                    $('.ml-100').addClass("red");
+                    // $('.connected24').css({
+                    //     'color': 'red'
+                    // })
                 } else {
                     $('.connected24').eq(0).text(arr[1]);
                     $('.r_06').attr("src", "images/r_06.png");
@@ -632,6 +633,7 @@
 
                 if (json.mobile.status == 0) {
                     $('.Connected4G').eq(0).text(arr[4]);
+                    $('#Connected4G').attr("src", "images/mobileSignal-none.png");
                     $('.red').css({
                         'color': 'red'
                     })
@@ -669,39 +671,34 @@
 
                 var $img = $(".imgIcon1 img");
                 //var img0 = $('<img class="">');
-                var MobileSignalArr = ['mobileSignal-0.png', 'mobileSignal-0-20.png', 'mobileSignal-20-40.png', 'mobileSignal-40-60.png', 'mobileSignal-60-80.png', 'mobileSignal-80-100.png', 'mobileSignal-none.png'];
-                var WiFiSignalArr = ['s_wifi_01a.png', 's_wifi_02a.png', 's_wifi_03a.png', 's_wifi_04a.png', 's_wifi_05a.png', 's_wifi_nonea.png'];
+                var MobileSignalArr = ['mobileSignal-none.png', 'mobileSignal-0-20.png', 'mobileSignal-20-40.png', 'mobileSignal-40-60.png', 'mobileSignal-60-80.png', 'mobileSignal-80-100.png'];
+                var WiFiSignalArr = ['s_wifi_nonea.png', 's_wifi_02a.png', 's_wifi_03a.png', 's_wifi_04a.png', 's_wifi_05a.png'];
 
-                //if (json.sta.signal);
-                // if (json.sta.signal == 0) {
-                //     $img.eq(0).attr("src", 'images/' + WiFiSignalArr[0]);
-                // } else if (json.sta.signal <= 25) {
-                //     $img.eq(0).attr("src", 'images/' + WiFiSignalArr[1]);
-                // } else if (json.sta.signal <= 50) {
-                //     $img.eq(0).attr("src", 'images/' + WiFiSignalArr[2]);
-                // } else if (json.sta.signal <= 75) {
-                //     $img.eq(0).attr("src", 'images/' + WiFiSignalArr[3]);
-                // } else if (json.sta.signal <= 100) {
-                //     $img.eq(0).attr("src", 'images/' + WiFiSignalArr[4]);
-                // }
-                // else {
-                //     $img.eq(0).attr("src", 'images/' + WiFiSignalArr[5]);
-                // }
 
-                //if (json.mobile.signal);
-                if (json.mobile.signal == 0) {
-                    $img.eq(1).attr("src", 'images/' + MobileSignalArr[0]);
-                } else if (json.mobile.signal <= 7) {
+
+                if (json.sta.signal);
+                if (json.sta.signal > 0 && json.sta.signal <= 25) {
+                    $img.eq(0).attr("src", 'images/' + WiFiSignalArr[1]);
+                } else if (json.sta.signal > 25 && json.sta.signal <= 50) {
+                    $img.eq(0).attr("src", 'images/' + WiFiSignalArr[2]);
+                } else if (json.sta.signal > 50 && json.sta.signal <= 75) {
+                    $img.eq(0).attr("src", 'images/' + WiFiSignalArr[3]);
+                } else if (json.sta.signal > 75 && json.sta.signal <= 100) {
+                    $img.eq(0).attr("src", 'images/' + WiFiSignalArr[4]);
+                }
+
+                if (json.mobile.signal);
+                if (json.mobile.signal > 0 && json.mobile.signal <= 6) {
                     $img.eq(1).attr("src", 'images/' + MobileSignalArr[1]);
-                } else if (json.mobile.signal <= 14) {
+                } else if (json.mobile.signal > 6 && json.mobile.signal <= 12) {
                     $img.eq(1).attr("src", 'images/' + MobileSignalArr[2]);
-                } else if (json.mobile.signal <= 21) {
+                } else if (json.mobile.signal > 12 && json.mobile.signal <= 18) {
                     $img.eq(1).attr("src", 'images/' + MobileSignalArr[3]);
-                } else if (json.mobile.signal <= 30) {
+                } else if (json.mobile.signal > 18 && json.mobile.signal <= 24) {
                     $img.eq(1).attr("src", 'images/' + MobileSignalArr[4]);
-                } else {
+                } else if (json.mobile.signal > 24 && json.mobile.signal <= 30) {
                     $img.eq(1).attr("src", 'images/' + MobileSignalArr[5]);
-                } 
+                }
 
 
             },

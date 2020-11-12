@@ -619,6 +619,7 @@
     <div class="container-fluid">
         <div class="mc ml-70">
             <h2 class="Mobile-data-big"> Mobile data</h2>
+            <div style="position:absolute;top:0px;right:200px;font-size: 18px;"><button class="Rectangle-1182 mt-10"><span class="" onclick="save()">Save</span></button></div>
             <table class="mt-20 table-responsive">
                 <tr>
                     <td>
@@ -627,8 +628,8 @@
                     </td>
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
-                            <div class="layui-input-block">
-                                <input id="mobileData" type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            <div class="layui-input-block" id="mobileData">
+                                <input type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
@@ -640,8 +641,8 @@
                     </td>
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
-                            <div class="layui-input-block">
-                                <input id="DataRoaming" type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                            <div class="layui-input-block" id="DataRoaming">
+                                <input type="checkbox" checked="" name="open" value="0" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
@@ -835,7 +836,7 @@
                             <div class="layui-form layui-form-pane layui-form-item">
                                 <label class="layui-form-label Set-monthly-data-limit mt-20 mb-0">Auto SIM switching:</label>
                                 <div class="layui-input-block pt-5">
-                                    <input type="checkbox" id="AutoSim" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                    <input type="checkbox" id="AutoSim" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                 </div>
                             </div>
                             <div class="Receive-notifications-when-the-data-limit-has-been-reached">Router will switch to the other SIM by defined SIM switching rules
@@ -973,8 +974,8 @@
                                                     <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                                 </div>
                                             </div>
-                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin" onclick="save()">Save</span></button>
 
+                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin">Change SIM pin</span></button>
                                         </div>
                                     </div>
                                 </div>

@@ -152,8 +152,11 @@ $(function() {
             $("#aPma").html(res.result.ipq_wifi1_mac);
             $("#ipqAddress").html(res.result.ipq_ipaddr);
             $("#ipqAddress").attr("href", "http://" + res.result.ipq_ipaddr);
+            var domain = window.location.host;
             $("#btnSave").click(function() {
-                window.open("http://198.18.248.1/action/down", "_self");
+                self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
+                //console.log(self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down")
+                //window.open("http://198.18.248.1/action/down", "_self");
             });
         },
         error: function(jqXHR) {
