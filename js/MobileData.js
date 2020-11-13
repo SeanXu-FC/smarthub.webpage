@@ -15,24 +15,7 @@ $(function() {
         success: function(res) {
             console.log(res.result)
             var json = res.result;
-            // if (json.moblie_data == -1 || json.roam_data == -1) {
-            //     //alert(1)
-            //     $("#mobileData").prop("checked", false);
-            //     var mobileData = $("#mobileData .layui-form-switch");
-            //     mobileData.find("em").text("OFF");
-            //     mobileData.prop("class", "layui-unselect layui-form-switch");
 
-            //     $("#DataRoaming").prop("checked", false);
-            //     var dataRoaming = $("#DataRoaming .layui-form-switch");
-            //     dataRoaming.find("em").text("OFF");
-            //     dataRoaming.prop("class", "layui-unselect layui-form-switch");
-            //     //layer.msg("状态修改成功");
-            //     // $("#onoff").prop("checked", false);
-            //     // var o = $(".layui-form-switch");
-            //     // o.find("em").text("OFF");
-            //     // o.prop("class", "layui-unselect layui-form-switch");
-            //     // active.reload();
-            // }
             if (json.moblie_data == 1) {
                 $("#mobileData input").prop("checked", true);
                 var mobileData = $("#mobileData .layui-form-switch");
@@ -137,7 +120,7 @@ $(function() {
 
 
 
-            var json = res.result;
+            //var json = res.result;
 
             if (json == '' || json == undefined || json == null || json.length < 1) return;
 

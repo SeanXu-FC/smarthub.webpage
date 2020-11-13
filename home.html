@@ -576,6 +576,8 @@
                     <div class="mb-10 mt-10 font18 ">IMSI:<span class=" MyText imsi" style="margin-left: 115px;"></span></div>
                     <div class="mb-10 mt-10 font18 ">PLMN:<span class=" MyText plmn" style="margin-left: 102px;"></span></div>
                     <div class="mb-10 mt-10 font18 ">CSQ:<span class=" MyText csq" style="margin-left: 112px;"></span></div>
+                    <div class="mb-10 mt-10 font18 ">LOCATION:<span class=" MyText location" style="margin-left: 63px;"></span></div>
+                    <div class="mb-10 mt-10 font18 ">CELL:<span class=" MyText cell" style="margin-left: 108px;"></span></div>
                 </div>
                 <div class="mb-10 mt-20 bb1c w80 ">
                     <h3 class="fw26 "><a href="SmartHubPoint.html" target="_self">SmartHub access point</a></h3>
@@ -644,6 +646,8 @@
                     $('.imsi').eq(0).text(json.mobile.imsi);
                     $('.plmn').eq(0).text(json.mobile.plmn);
                     $('.csq').eq(0).text(json.mobile.csq);
+                    $('.location').eq(0).text(json.mobile.lca);
+                    $('.cell').eq(0).text(json.mobile.Cell_id);
                     $('.Connected4G').css('color', '#26b167')
                 }
 
