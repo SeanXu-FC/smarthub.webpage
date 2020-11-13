@@ -218,7 +218,7 @@ $(function() {
                     var optionEncryptionType = document.createElement("option");
                     $(optionEncryptionType).val(json[index].vap_config[index].SecurityMode).attr("selected", "selected");
                     $(optionEncryptionType).text(json[index].vap_config[index].SecurityMode);
-                    var encryptionTypeArr = ['No Encryption', 'WEP', 'WPA-PSA', 'WPA2-PSA', 'psk-mixed'];
+                    var encryptionTypeArr = ['No Encryption', 'WPA-PSA', 'WPA2-PSA', 'psk-mixed'];
                     for (var i = 0; i < encryptionTypeArr.length; i++) {
                         var EncryptionType = "<option value=" + i + ">" + encryptionTypeArr[i] + "</option>";
                         $('.EncryptionType').append(EncryptionType);
@@ -228,12 +228,12 @@ $(function() {
                     $('.EncryptionType').append(encryptionTypeSelected);
 
                     if (json[index].vap_config[index].SecurityMode == 4) {
-                        $('.EncryptionType option:selected').text(encryptionTypeArr[4]);
+                        $('.EncryptionType option:selected').text(encryptionTypeArr[3]);
                         $('.EncryptionType option:selected').hide();
                         $('.EncryptionType option[value=4]').attr("selected", "selected");
                     }
                     if (json[index].vap_config[index].SecurityMode == 3) {
-                        $('.EncryptionType option:selected').text(encryptionTypeArr[3]);
+                        console.log($('.EncryptionType option:selected').text(encryptionTypeArr[3]));
                         $('.EncryptionType option:selected').hide();
                         $('.EncryptionType option[value=3]').attr("selected", "selected");
                     }
@@ -251,10 +251,6 @@ $(function() {
                         $('.EncryptionType option:selected').text(encryptionTypeArr[0]);
                         $('.EncryptionType option:selected').hide();
                         $('.EncryptionType option[value=0]').attr("selected", "selected");
-                    }
-                    if (!json[index].vap_config[index].SecurityMode) {
-                        $('.EncryptionType option:selected').text(encryptionTypeArr[5]);
-                        $('.EncryptionType option[value=5]').hide();
                     }
                     // $('.EncryptionType').change(function() {
                     //     if ($(this).find("option:selected")) {

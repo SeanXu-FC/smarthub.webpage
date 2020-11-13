@@ -33,33 +33,110 @@ $(function() {
             //     // o.prop("class", "layui-unselect layui-form-switch");
             //     // active.reload();
             // }
-            if (json.moblie_data == 1 || json.roam_data == 1) {
-                $("#mobileData").prop("checked", true);
+            if (json.moblie_data == 1) {
+                $("#mobileData input").prop("checked", true);
                 var mobileData = $("#mobileData .layui-form-switch");
                 mobileData.find("em").text("ON");
                 mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                console.log('mobileData on')
 
-                $("#DataRoaming").prop("checked", true);
-                var dataRoaming = $("#DataRoaming .layui-form-switch");
-                dataRoaming.find("em").text("ON");
-                dataRoaming.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-            } else {
-                //alert(2)
+                $("#monthlydatalimit input").prop("checked", true);
+                var mobileData = $("#monthlydatalimit .layui-form-switch");
+                mobileData.find("em").text("ON");
+                mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                console.log('monthly_data_limit on')
+
+                $("#usagereminders input").prop("checked", true);
+                var mobileData = $("#usagereminders .layui-form-switch");
+                mobileData.find("em").text("ON");
+                mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                console.log('usagereminders on')
+            }
+            if (json.moblie_data == 0) {
                 $("#mobileData").prop("checked", false);
                 var mobileData = $("#mobileData .layui-form-switch");
                 mobileData.find("em").text("OFF");
                 mobileData.prop("class", "layui-unselect layui-form-switch");
+                console.log('mobileData off')
 
+                $("#monthlydatalimit input").prop("checked", false);
+                var mobileData = $("#monthlydatalimit .layui-form-switch");
+                mobileData.find("em").text("OFF");
+                mobileData.prop("class", "layui-unselect layui-form-switch");
+                console.log('monthlydatalimit off')
+
+                $("#usagereminders input").prop("checked", false);
+                var mobileData = $("#usagereminders .layui-form-switch");
+                mobileData.find("em").text("OFF");
+                mobileData.prop("class", "layui-unselect layui-form-switch");
+                console.log('usagereminders off')
+            }
+
+            if (json.roam_data == 1) {
+                $("#DataRoaming input").prop("checked", true);
+                var dataRoaming = $("#DataRoaming .layui-form-switch");
+                dataRoaming.find("em").text("ON");
+                dataRoaming.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                console.log('DataRoaming on')
+            }
+            if (json.roam_data == 0) {
                 $("#DataRoaming").prop("checked", false);
                 var dataRoaming = $("#DataRoaming .layui-form-switch");
                 dataRoaming.find("em").text("OFF");
                 dataRoaming.prop("class", "layui-unselect layui-form-switch");
-                //layer.msg(data);
-                // $("#onoff").prop("checked", true);
-                // var o = $(".layui-form-switch");
-                // o.find("em").text("ON");
-                // o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                console.log('DataRoaming off')
             }
+            if (json.auo_switch == 1) {
+                $("#AutoSim input").prop("checked", true);
+                var dataRoaming = $("#AutoSim .layui-form-switch");
+                dataRoaming.find("em").text("ON");
+                dataRoaming.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                console.log('AutoSim on')
+            }
+            if (json.auo_switch == 0) {
+                $("#AutoSim input").prop("checked", false);
+                var dataRoaming = $("#AutoSim .layui-form-switch");
+                dataRoaming.find("em").text("OFF");
+                dataRoaming.prop("class", "layui-unselect layui-form-switch");
+                console.log('AutoSim off')
+            }
+            // if (json.moblie_data == 1 && json.roam_data == 1 && json.monthly_data_limit_flag == 1) {
+            //     $("#monthlydatalimit input").prop("checked", true);
+            //     var mobileData = $("#monthlydatalimit .layui-form-switch");
+            //     mobileData.find("em").text("ON");
+            //     mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+            //     console.log('monthly_data_limit on')
+            // }
+            // if (json.moblie_data == 0 && json.roam_data == 0 && json.monthly_data_limit_flag == 0) {
+            //     $("#monthlydatalimit input").prop("checked", false);
+            //     var mobileData = $("#monthlydatalimit .layui-form-switch");
+            //     mobileData.find("em").text("OFF");
+            //     mobileData.prop("class", "layui-unselect layui-form-switch");
+            //     console.log('monthlydatalimit off')
+            // }
+            // if (json.usage_reminder_flag == 1) {
+            //     $("#usagereminders input").prop("checked", true);
+            //     var mobileData = $("#usagereminders .layui-form-switch");
+            //     mobileData.find("em").text("ON");
+            //     mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+            //     console.log('usagereminders on')
+            // }
+            // if (json.usage_reminder_flag == 0) {
+            //     $("#usagereminders input").prop("checked", false);
+            //     var mobileData = $("#usagereminders .layui-form-switch");
+            //     mobileData.find("em").text("OFF");
+            //     mobileData.prop("class", "layui-unselect layui-form-switch");
+            //     console.log('usagereminders off')
+            // }
+
+            //     //layer.msg(data);
+            //     // $("#onoff").prop("checked", true);
+            //     // var o = $(".layui-form-switch");
+            //     // o.find("em").text("ON");
+            //     // o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+
+
+
             var json = res.result;
 
             if (json == '' || json == undefined || json == null || json.length < 1) return;
@@ -83,7 +160,7 @@ $(function() {
                 $('#SIM option[value=0]').attr("selected", "selected");
 
                 //console.log('SIM1')
-            } else {
+            } else if (json.active_sim == 0) {
                 $('#SIM option:selected').text(SIMArr[1]);
                 $('#SIM option[value=1]').attr("selected", "selected");
                 //console.log('SIM2')
