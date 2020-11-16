@@ -154,9 +154,14 @@ $(function() {
             $("#ipqAddress").attr("href", "http://" + res.result.ipq_ipaddr);
             var domain = window.location.host;
             $("#btnSave").click(function() {
-                self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
+                // self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
+                //console.log(self.location.href + "/action/down");
+                //console.log(('https:' == document.location.protocol ? 'https://' : 'http://') + domain);
+                //console.log(('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down");
+                window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
                 //console.log(self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down")
                 //window.open("http://198.18.248.1/action/down", "_self");
+                //console.log(window.open("/action/down", "_self"))
             });
         },
         error: function(jqXHR) {
