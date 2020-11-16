@@ -183,10 +183,10 @@
         
         .mobiledataImg {
             position: absolute;
-            top: 290px;
-            left: 265px;
+            top: 274px;
+            left: 256px;
             z-index: 2;
-            width: 56px;
+            /* width: 56px; */
             max-width: 100%;
             height: auto;
             display: block;
@@ -301,7 +301,12 @@
         .ml-20 {
             margin-left: 20px;
         }
-        /* @media (max-width: 1920px) {
+        
+        .mb-10 {
+            margin-bottom: 0px
+        }
+        
+        @media (min-width:1368px) {
             .bd1 {
                 width: 560px;
                 height: auto;
@@ -321,7 +326,7 @@
             }
             .mobiledataImg {
                 position: absolute;
-                top: 196px;
+                top: 260px;
                 left: 261px;
                 z-index: 2;
                 width: 56px;
@@ -331,7 +336,7 @@
             }
             .WiFiNetwork {
                 position: absolute;
-                top: 120px;
+                top: 130px;
                 left: 197px;
                 z-index: 1;
                 width: 69px;
@@ -341,7 +346,8 @@
             }
             .w520 {
                 position: relative;
-                width: 520px
+                width: 520px;
+                max-width: 100%;
             }
             .r_01 {
                 display: block;
@@ -398,7 +404,13 @@
                 height: auto;
                 display: inline-block;
             }
-        } */
+            #EthernetConnections {
+                font-size: 18px;
+            }
+            #WirelessConnections {
+                font-size: 18px;
+            }
+        }
         
         @media (max-width: 1366px) {
             .left-nav {
@@ -431,7 +443,7 @@
             .mobiledataImg {
                 position: absolute;
                 top: 180px !important;
-                left: 261px;
+                left: 264px;
                 z-index: 2;
                 width: 42px;
                 max-width: 100%;
@@ -441,7 +453,7 @@
             .WiFiNetwork {
                 position: absolute;
                 top: 120px;
-                left: 215px;
+                left: 211px;
                 z-index: 1;
                 width: 50px;
                 max-width: 100%;
@@ -462,7 +474,7 @@
             .r_02 {
                 display: block;
                 margin: 0 auto;
-                width: 50px;
+                width: 60px;
                 max-width: 100%;
                 height: auto;
             }
@@ -483,19 +495,22 @@
             .r_07 {
                 display: block;
                 margin: 0 auto;
-                width: 300px;
+                width: 220px;
                 max-width: 100%;
                 height: auto;
             }
+            #EthernetConnections {
+                margin-right: 90px;
+            }
             .Group2901 {
                 margin-left: 21px;
-                width: 30px;
+                width: 20px;
                 max-width: 100%;
                 height: auto;
                 display: inline-block;
             }
             .Group2902 {
-                width: 80px;
+                width: 60px;
                 max-width: 100%;
                 height: auto;
                 display: inline-block;
@@ -540,15 +555,15 @@
                     </div>
                     <div class="w520">
                         <div style="float:left;margin-left:20px; ">
-                            <div style="font-size:18px;" id="WirelessConnections">Wireless connections <span></span></div>
-                            <div class="mt-10" id="wirelessConnections">
+                            <div id="WirelessConnections">Wireless connections <span></span></div>
+                            <div class="mt-10" id="">
                                 <a href="connectedDevices.html" target="_self"><img src="images/Group 2901.png " title="Wireless" class="Group2901"></a>
                                 <a href="connectedDevices.html" target="_self"><img src="images/Group 2901.png " title="Wireless" class="Group2901"></a>
                                 <a href="connectedDevices.html" target="_self"><img src="images/Group 2901.png " title="Wireless" class="Group2901"></a>
                             </div>
                         </div>
                         <div style="float:right ">
-                            <div style="font-size:18px;" id="EthernetConnections">Ethernet connections <span></span></div>
+                            <div id="EthernetConnections">Ethernet connections <span></span></div>
                             <div class="mt-10 ">
                                 <a href="connectedDevices.html" target="_self"><img src="images/Group 2902.png " title="Ethernet" class="Group2902"></a>
                                 <a href="connectedDevices.html" target="_self"><img src="images/Group 2903.png " title="Ethernet" class="Group2902"></a>
@@ -558,7 +573,7 @@
                 </div>
                 <!-- <img class="img-responsive " src="img/home001.png "> -->
             </div>
-            <div class="col-md-7 col-sm-7 col-lg-7 ">
+            <div class="col-md-6 col-md-offset-1 col-sm-6 col-lg-6 " style="float:right">
                 <div class="mt-30 mb-10 bb1c w80 ">
                     <h3 class="fw26 ">Cloud</h3>
                     <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected cloud"></span></div>
@@ -579,7 +594,7 @@
                     <div class="mb-10 mt-10 font18 ">LOCATION:<span class=" MyText location" style="margin-left: 63px;"></span></div>
                     <div class="mb-10 mt-10 font18 ">CELL:<span class=" MyText cell" style="margin-left: 108px;"></span></div>
                 </div>
-                <div class="mb-10 mt-20 bb1c w80 ">
+                <div class="mb-10 mt-20 bb1c w80 " style="border-bottom: 0px solid #ccc;">
                     <h3 class="fw26 "><a href="SmartHubPoint.html" target="_self">SmartHub access point</a></h3>
                     <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg Status"></span></div>
                     <div class="mb-10 mt-10 font18 ">Name:<span class="ml-103 MyText Name"></span></div>

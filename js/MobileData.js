@@ -13,7 +13,7 @@ $(function() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            console.log(res.result)
+            //console.log(res.result)
             var json = res.result;
 
             if (json.moblie_data == 1) {

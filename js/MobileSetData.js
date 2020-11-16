@@ -53,7 +53,7 @@ $(function() {
         data = JSON.stringify(data);
 
         //console.log(this.checked)
-        var mobileDataOnoff = [0, 1];
+        //var mobileDataOnoff = [0, 1];
         $.ajax({
             type: "post",
             url: "/action/action",
@@ -61,7 +61,7 @@ $(function() {
             dataType: "json",
             contentType: "application/json;charset=utf-8",
             success: function(res) {
-                console.log(data);
+                //console.log(data);
                 if (data == "true") {
                     alert(1)
                         // $("#mobileData").prop("checked", true);
