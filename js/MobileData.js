@@ -16,25 +16,46 @@ $(function() {
             //console.log(res.result)
             var json = res.result;
 
+            //for (var index in json) {
             if (json.moblie_data == 1) {
+
                 $("#mobileData input").prop("checked", true);
                 var mobileData = $("#mobileData .layui-form-switch");
                 mobileData.find("em").text("ON");
                 mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
                 console.log('mobileData on')
 
-                $("#monthlydatalimit input").prop("checked", true);
-                var mobileData = $("#monthlydatalimit .layui-form-switch");
-                mobileData.find("em").text("ON");
-                mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-                console.log('monthly_data_limit on')
+                if (json.sim[0].monthly_data_limit_flag == 1 || json.sim[1].monthly_data_limit_flag == 1) {
+                    $("#monthlydatalimit input").prop("checked", true);
+                    var mobileData = $("#monthlydatalimit .layui-form-switch");
+                    mobileData.find("em").text("ON");
+                    mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                    console.log('monthly_data_limit on')
 
-                $("#usagereminders input").prop("checked", true);
-                var mobileData = $("#usagereminders .layui-form-switch");
-                mobileData.find("em").text("ON");
-                mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-                console.log('usagereminders on')
+                    $("#monthlydatalimit1 input").prop("checked", true);
+                    var mobileData = $("#monthlydatalimit1 .layui-form-switch");
+                    mobileData.find("em").text("ON");
+                    mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                    console.log('monthly_data_limit1 on')
+                }
+                if (json.sim[0].usage_reminder_flag == 1 || json.sim[1].usage_reminder_flag == 1) {
+                    $("#usagereminders input").prop("checked", true);
+                    var mobileData = $("#usagereminders .layui-form-switch");
+                    mobileData.find("em").text("ON");
+                    mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                    console.log('usagereminders on')
+
+                    $("#usagereminders1 input").prop("checked", true);
+                    var mobileData = $("#usagereminders1 .layui-form-switch");
+                    mobileData.find("em").text("ON");
+                    mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                    console.log('usagereminders1 on')
+                }
+
             }
+
+            //console.log(json.moblie_data)
+            //console.log(json.sim[0].monthly_data_limit_flag)
             if (json.moblie_data == 0) {
                 $("#mobileData").prop("checked", false);
                 var mobileData = $("#mobileData .layui-form-switch");
@@ -42,17 +63,37 @@ $(function() {
                 mobileData.prop("class", "layui-unselect layui-form-switch");
                 console.log('mobileData off')
 
-                $("#monthlydatalimit input").prop("checked", false);
-                var mobileData = $("#monthlydatalimit .layui-form-switch");
-                mobileData.find("em").text("OFF");
-                mobileData.prop("class", "layui-unselect layui-form-switch");
-                console.log('monthlydatalimit off')
+                if (json.sim[0].monthly_data_limit_flag == 0 || json.sim[1].monthly_data_limit_flag == 0) {
+                    $("#monthlydatalimit input").prop("checked", false);
+                    var mobileData = $("#monthlydatalimit .layui-form-switch");
+                    mobileData.find("em").text("OFF");
+                    mobileData.prop("class", "layui-unselect layui-form-switch");
+                    console.log('monthlydatalimit off')
 
-                $("#usagereminders input").prop("checked", false);
-                var mobileData = $("#usagereminders .layui-form-switch");
-                mobileData.find("em").text("OFF");
-                mobileData.prop("class", "layui-unselect layui-form-switch");
-                console.log('usagereminders off')
+                    $("#monthlydatalimit1 input").prop("checked", false);
+                    var mobileData = $("#monthlydatalimit1 .layui-form-switch");
+                    mobileData.find("em").text("OFF");
+                    mobileData.prop("class", "layui-unselect layui-form-switch");
+                    console.log('monthlydatalimit1 off')
+                }
+                if (json.sim[0].usage_reminder_flag == 0 || json.sim[1].usage_reminder_flag == 0) {
+                    $("#usagereminders input").prop("checked", false);
+                    var mobileData = $("#usagereminders .layui-form-switch");
+                    mobileData.find("em").text("OFF");
+                    mobileData.prop("class", "layui-unselect layui-form-switch");
+                    console.log('usagereminders off')
+
+                    $("#usagereminders1 input").prop("checked", false);
+                    var mobileData = $("#usagereminders1 .layui-form-switch");
+                    mobileData.find("em").text("OFF");
+                    mobileData.prop("class", "layui-unselect layui-form-switch");
+                    console.log('usagereminders1 off')
+                }
+                // $("#usagereminders input").prop("checked", false);
+                // var mobileData = $("#usagereminders .layui-form-switch");
+                // mobileData.find("em").text("OFF");
+                // mobileData.prop("class", "layui-unselect layui-form-switch");
+                // console.log('usagereminders off')
             }
 
             if (json.roam_data == 1) {
@@ -83,28 +124,29 @@ $(function() {
                 dataRoaming.prop("class", "layui-unselect layui-form-switch");
                 console.log('AutoSim off')
             }
-            // if (json.moblie_data == 1 && json.roam_data == 1 && json.monthly_data_limit_flag == 1) {
+            // if (json.moblie_data == 1 && json.sim.monthly_data_limit_flag == 1) {
             //     $("#monthlydatalimit input").prop("checked", true);
             //     var mobileData = $("#monthlydatalimit .layui-form-switch");
             //     mobileData.find("em").text("ON");
             //     mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
             //     console.log('monthly_data_limit on')
             // }
-            // if (json.moblie_data == 0 && json.roam_data == 0 && json.monthly_data_limit_flag == 0) {
+            // if (json.moblie_data == 0 && json.sim.monthly_data_limit_flag == 0) {
             //     $("#monthlydatalimit input").prop("checked", false);
             //     var mobileData = $("#monthlydatalimit .layui-form-switch");
             //     mobileData.find("em").text("OFF");
             //     mobileData.prop("class", "layui-unselect layui-form-switch");
             //     console.log('monthlydatalimit off')
+            //     alert(0)
             // }
-            // if (json.usage_reminder_flag == 1) {
+            // if (json.sim.usage_reminder_flag == 1) {
             //     $("#usagereminders input").prop("checked", true);
             //     var mobileData = $("#usagereminders .layui-form-switch");
             //     mobileData.find("em").text("ON");
             //     mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
             //     console.log('usagereminders on')
             // }
-            // if (json.usage_reminder_flag == 0) {
+            // if (json.sim.usage_reminder_flag == 0) {
             //     $("#usagereminders input").prop("checked", false);
             //     var mobileData = $("#usagereminders .layui-form-switch");
             //     mobileData.find("em").text("OFF");
@@ -149,7 +191,7 @@ $(function() {
                 //console.log('SIM2')
             }
 
-
+            //}
         },
         error: function(jqXHR) {
             alert("An error occurred：" + jqXHR.status);

@@ -321,7 +321,7 @@
                 font-weight: 600;
                 color: #861f41;
                 border-bottom: solid 1px #d2d2d2;
-                padding-bottom: 20px;
+                padding-bottom: 10px !important;
                 width: 92%
             }
             .mobiledataImg {
@@ -437,7 +437,7 @@
                 font-weight: 600;
                 color: #861f41;
                 border-bottom: solid 1px #d2d2d2;
-                padding-bottom: 20px;
+                padding-bottom: 10px;
                 width: 92%
             }
             .mobiledataImg {
@@ -532,8 +532,8 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <h4 class="ml-40 mt-20 status">Status</h4>
-            <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-1 mt-30">
+            <h4 class="ml-40 mt-10 status">Status</h4>
+            <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-1 mt-20">
                 <div class="bd bd1">
                     <a href=" WiFiNetwork.html " title="Wi-Fi network "><img src="images/r_03.png " class="WiFiNetwork"></a>
                     <a href="MobileData.html " title="Mobile data "><img src="images/r_04.png " class="mobiledataImg"></a>
@@ -574,7 +574,7 @@
                 <!-- <img class="img-responsive " src="img/home001.png "> -->
             </div>
             <div class="col-md-6 col-md-offset-1 col-sm-6 col-lg-6 " style="float:right">
-                <div class="mt-30 mb-10 bb1c w80 ">
+                <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26 ">Cloud</h3>
                     <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected cloud"></span></div>
                 </div>
@@ -593,6 +593,8 @@
                     <div class="mb-10 mt-10 font18 ">CSQ:<span class=" MyText csq" style="margin-left: 112px;"></span></div>
                     <div class="mb-10 mt-10 font18 ">LOCATION:<span class=" MyText location" style="margin-left: 63px;"></span></div>
                     <div class="mb-10 mt-10 font18 ">CELL:<span class=" MyText cell" style="margin-left: 108px;"></span></div>
+                    <div class="mb-10 mt-10 font18 ">ACT:<span class=" MyText act" style="margin-left: 119px;"></span></div>
+                    <div class="mb-10 mt-10 font18 ">REGISTER:<span class=" MyText register" style="margin-left: 60px;"></span></div>
                 </div>
                 <div class="mb-10 mt-20 bb1c w80 " style="border-bottom: 0px solid #ccc;">
                     <h3 class="fw26 "><a href="SmartHubPoint.html" target="_self">SmartHub access point</a></h3>
@@ -662,6 +664,8 @@
                     $('.plmn').eq(0).text(json.mobile.plmn);
                     $('.csq').eq(0).text(json.mobile.csq);
                     $('.location').eq(0).text(json.mobile.lca);
+                    $('.act').eq(0).text(json.mobile.act);
+                    $('.register').eq(0).text(json.mobile.cgreg);
                     $('.cell').eq(0).text(json.mobile.Cell_id);
                     $('.Connected4G').css('color', '#26b167')
                 }
