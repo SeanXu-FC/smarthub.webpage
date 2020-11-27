@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script type="text/javascript" src="js/common.js"></script>
+    <script src="js/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/jquery.ipinput.css" rel="stylesheet" />
+    <script src="js/lanConfiguration.js"></script>
+    <script src="js/jquery.ipinput.js"></script>
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <title>Document</title>
+    <style>
+        .btn-primary.active {
+            color: #fff;
+            background-color: #03387f !important;
+            border-color: #03387f !important;
+        }
+        
+        .LAN-configuration {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41
+        }
+        
+        .btn1 {
+            position: absolute;
+            top: 48px;
+            right: 80px;
+        }
+        
+        .Path-101 {
+            width: 87px;
+            height: 42px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        .Path-101:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Cancel {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.45;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+        }
+        
+        .Rectangle-1182:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Rectangle-1182.active {
+            background-color: #861f41;
+        }
+        
+        .Rectangle-1182 {
+            width: 87px;
+            height: 42px;
+            /* padding: 0 20px; */
+            border-radius: 5px;
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .OK {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        .form-group div p {
+            padding-top: 7px;
+        }
+        
+        .Automatically-DHCP-on {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #3a3a3a;
+        }
+        
+        .form-control {
+            padding: 3px 10px;
+        }
+        
+        .Configure-IP {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #3a3a3a;
+        }
+        
+        .For-correct-operation-with-Raymarine-MFDs-ensure-that-IP-configuration-is-set-to-automatic {
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .form-horizontal .control-label {
+            padding-top: 7px;
+            margin-bottom: 0;
+            text-align: left;
+        }
+        
+        .DHCP-server {
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .ip_input {
+            width: 38px;
+            height: 32px;
+            line-height: 32px;
+            /* color: #000000; */
+            border: 0px;
+            text-align: center;
+            position: relative;
+            top: -3px;
+        }
+        
+        .all_input {
+            position: relative;
+            width: 202px;
+            width: 40%;
+            /* height: 20px; */
+            /* font: normal 8px 宋体; */
+            /* color: #000000; */
+            /* border: 1px solid #000000; */
+            text-align: center;
+        }
+        /* .all_input span {
+            width: 12px;
+            height: 32px;
+            position: relative;
+            display: inline-block;
+            border: 1px solid #f00
+        } */
+        
+        .w358 {
+            width: 358px;
+        }
+        
+        .width40 {
+            width: 40% !important
+        }
+        
+        .Rectangle-1282 {
+            width: 63px !important;
+            height: 34px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+        }
+        
+        .Rectangle-1269 {
+            width: 204px;
+            height: 41px;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+            border: solid 2px #26b167;
+            background-color: #f9fffc;
+            background: url("images/correct.png") no-repeat 5px 4px
+        }
+        
+        .error-icon {
+            width: auto;
+            height: 41px;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+            border: solid 2px #b12626;
+            background-color: #f9fffc;
+            background: url("images/icon-info.png") no-repeat 5px 4px
+        }
+        
+        .Password-successfully-changed {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+            padding: 5px 10px 5px 40px;
+        }
+        
+        .Changes-saved {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        #success {
+            display: none;
+            position: absolute;
+            top: 20%;
+            right: 500px;
+        }
+        
+        #error {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" style="margin:30px 70px;">
+        <div class="row">
+            <div style="position:relative;margin-bottom:40px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="LAN-configuration">LAN configuration
+            </div>
+            <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">Changes-saved</div>
+            <div id="error" class="error-icon Password-successfully-changed Changes-saved"></div>
+            <div class="form-horizontal" name="formdata" id="content">
+                <div class="form-group" id="ipMode">
+                    <label for="" class="col-sm-4 control-label Configure-IP">Configure IP:
+                        <div
+                            class="For-correct-operation-with-Raymarine-MFDs-ensure-that-IP-configuration-is-set-to-automatic">
+                            For correct operation with Raymarine MFDs ensure that IP configuration is set to automatic
+                        </div>
+                    </label>
+
+                    <div class="col-sm-8 selectContent">
+                        <select class="form-control width100 Automatically-DHCP-on" id="rsd" style="width:358px;border: solid 1px #707070;">
+                            <option value="Automatically (DHCP on)">Automatically (DHCP on)</option>
+                            <option value="Manually (DHCP on)">Manually (DHCP on)</option>
+                            <option value="Manually (DHCP off)">Manually (DHCP off)</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="main">
+                    <div id="d1">
+                        <!-- <div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">IP address1:</label>
+                                <div class="col-sm-8">
+                                    <p class="Configure-IP" id="ip_1">192.143.1.1</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">IP address2:</label>
+                                <div class="col-sm-8">
+                                    <p class="Configure-IP" id="ip_2">192.143.1.1</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">IP netmask:</label>
+                                <div class="col-sm-8">
+                                    <p class="Configure-IP" id="netmask">255.255.255.0</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">Gateway:</label>
+                                <div class="col-sm-8">
+                                    <p class="Configure-IP" id="gateway">255.255.255.0</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <div class="col-sm-4">
+                                    <h4 class="DHCP-server">DHCP server settings</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">Start IP address:</label>
+                                <div class="col-sm-8">
+                                    <p class="Configure-IP" id="start_ip">255.255.255.0</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">End IP address:</label>
+                                <div class="col-sm-8">
+                                    <p class="Configure-IP" id="end_ip">255.255.255.0</p>
+                                </div>
+                            </div>
+                            <div class="form-group form-inline">
+                                <label for="" class="col-sm-4 control-label Configure-IP">DHCP lease time:</label>
+                                <div class="col-sm-8">
+                                    <p class="Configure-IP"><span id="lease_time"></span></p>
+                                </div>
+                            </div>
+                            <div class="btn1" id="btn01">
+                                <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel" class="Path-101 Cancel">Cancel</button></span>
+                                <span class="connected" style="display: inline-block;"><button id="btn" class="Rectangle-1182 active OK">Save</button></span>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div id="d2" style="display: none;">
+                        <div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">IP address:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control Configure-IP" id="ip1" type="text" name="ip" />
+                                </div>
+                            </div>
+                            <div class="form-group" style="display: none;">
+                                <label for="" class="col-sm-4 control-label Configure-IP">IP address2:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control Configure-IP" id="ip2" type="text" name="ip" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">IP netmask:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control Configure-IP" id="net_mask" type="text" name="ip" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">Gateway:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control Configure-IP" id="Gate_way" type="text" name="ip" />
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <div class="col-sm-4">
+                                    <h4 class="DHCP-server">DHCP server settings</h4>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">Start IP address:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control Configure-IP" id="startip" type="text" name="ip" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label Configure-IP">End IP address:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control Configure-IP" id="endip" type="text" name="ip" />
+                                </div>
+                            </div>
+                            <div class="form-group form-inline">
+                                <label for="" class="col-sm-4 control-label Configure-IP">DHCP lease time:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="leasetime" class="form-control Rectangle-1282 Configure-IP" name="sec" placeholder="" style="border: solid 1px #707070;"><span style="margin-left:10px;">seconds</span>
+                                </div>
+                            </div>
+                            <div class="btn1" id="btn02">
+                                <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel"
+                                        class="Path-101 Cancel">Cancel</button></span>
+                                <span class="connected" style="display: inline-block;"><button id="btn2"
+                                        class="Rectangle-1182 active OK">Save</button></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="d3" style="display: none;">
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">IP address1:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control Configure-IP" id="ipaddress1" type="text" name="ip" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">IP address2:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control Configure-IP" id="ipaddress2" type="text" name="ip" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">IP netmask:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control Configure-IP" id="ipnetmask" type="text" name="ip" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">Gateway:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control Configure-IP" id="Gateway1" type="text" name="ip" />
+                            </div>
+                        </div>
+                        <div class="btn1" id="btn03">
+                            <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel"
+                                    class="Path-101 Cancel">Cancel</button></span>
+                            <span class="connected" style="display: inline-block;"><button id="btn3"
+                                    class="Rectangle-1182 active OK">Save</button></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#btn3").on("click", function() {
+            $('#success').show(1000);
+            setTimeout(function() {
+                $('#success').hide();
+            }, 6000);
+            $("#btn3").removeAttr("disabled");
+            $("#btn3").css("opacity", "1");
+            $("#cancel").removeAttr("disabled");
+            $("#cancel").css("opacity", "1");
+
+            return false;
+        });
+        $("#cancel").on("click", function() {
+            $('#success').hide(1000);
+            $(".Path-101").attr("disabled", true);
+            $(".Path-101").css("opacity", "0.5");
+            // $('.qx button').removeClass("Pah-101 Cancel")
+            return false;
+        });
+    </script>
+    <script>
+        $(function() {
+
+            function timeConversion(millisec) {
+                var seconds = (millisec / 1000).toFixed(1);
+                //return seconds + " seconds";
+                return seconds;
+            }
+
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "lan_conf",
+                "params": {
+                    "mode": 3,
+                    "ip_1": "",
+                    "ip_2": "",
+                    "netmask": "",
+                    "gateway": "",
+                    "start_ip": "",
+                    "end_ip": "",
+                    "lease_time": ""
+                },
+                "id": "9.1"
+            }
+
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: req + "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    var json = res.result;
+                    //console.log(data);
+                    var str = "";
+                    //var channelArr = ["Automatically (DHCP on)", "Manually (DHCP on)", "Manually (DHCP off)"];
+                    if (json.mode == '0') {
+                        $('#d1').show();
+                        $('#d2').hide();
+                        $('#d3').hide();
+                        $('#btn').show();
+                        $('.selectContent option[value="Automatically (DHCP on)"]').prop("selected", "selected");
+                        //console.log(0);
+                    }
+                    if (json.mode == '1') {
+                        $('#d2').show();
+                        $('#d1').hide();
+                        $('#d3').hide();
+                        $('.selectContent option[value="Manually (DHCP on)"]').prop("selected", "selected");
+                        // console.log(1);
+                    }
+
+                    if (json.mode == '2') {
+                        $('#d3').show();
+                        $('#d2').hide();
+                        $('#d1').hide();
+                        //alert(2);
+                        $('.selectContent option[value="Manually (DHCP off)"]').prop("selected", "selected");
+                        //console.log(2);
+                    }
+
+
+                    $('input[name="ip"]').eq(0).ipinput({
+                        value: json.ip_1
+                    });
+                    $('input[name="ip"]').eq(1).ipinput({
+                        value: json.ip_2
+                    });
+                    $('input[name="ip"]').eq(2).ipinput({
+                        value: json.netmask
+                    });
+                    $('input[name="ip"]').eq(3).ipinput({
+                        value: json.gateway
+                    });
+                    $('input[name="ip"]').eq(4).ipinput({
+                        value: json.start_ip
+                    });
+                    $('input[name="ip"]').eq(5).ipinput({
+                        value: json.end_ip
+                    });
+                    var lease = $('input[name="sec"]').eq(0).val(timeConversion(json.lease_time));
+                    //console.log(lease.val());
+                    //console.log(json);
+
+                    $('input[name="ip"]').eq(6).ipinput({
+                        value: json.ip_1
+                    });
+                    $('input[name="ip"]').eq(7).ipinput({
+                        value: json.ip_2
+                    });
+                    $('input[name="ip"]').eq(8).ipinput({
+                        value: json.netmask
+                    });
+                    $('input[name="ip"]').eq(9).ipinput({
+                        value: json.gateway
+                    });
+
+                    for (var index in json) {
+                        str = `
+                     
+                            <div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">IP address1:</label>
+                            <div class="col-sm-8">
+                                <p class="Configure-IP" id="ip_1">${json.ip_1}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">IP address2:</label>
+                            <div class="col-sm-8">
+                                <p class="Configure-IP" id="ip_2">${json.ip_2}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">IP netmask:</label>
+                            <div class="col-sm-8">
+                                <p class="Configure-IP" id="netmask">${json.netmask}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">Gateway:</label>
+                            <div class="col-sm-8">
+                                <p class="Configure-IP" id="gateway">${json.gateway}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <div class="col-sm-4">
+                                <h4 class="DHCP-server">DHCP server settings</h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">Start IP address:</label>
+                            <div class="col-sm-8">
+                                <p class="Configure-IP" id="start_ip">${json.start_ip}</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label Configure-IP">End IP address:</label>
+                            <div class="col-sm-8">
+                                <p class="Configure-IP" id="end_ip">${json.end_ip}</p>
+                            </div>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label for="" class="col-sm-4 control-label Configure-IP">DHCP lease time:</label>
+                            <div class="col-sm-8">
+                                <p class="Configure-IP"><span id="lease_time">${timeConversion(json.lease_time)}</span></p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                   
+                    `
+
+
+                    }
+
+                    $("#d1").html(str);
+
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+
+                }
+            });
+
+            $("#btn2").on("click", function() {
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "lan_conf",
+                    "params": {
+                        "mode": 1,
+
+                        "ip_1": $('#ip1_ipinput input[name="ipOne"]').val() + '.' + $('#ip1_ipinput input[name="ipTwo"]').val() + '.' + $('#ip1_ipinput input[name="ipThree"]').val() + '.' + $('#ip1_ipinput input[name="ipFour"]').val(),
+                        "ip_2": "",
+                        "netmask": $('#net_mask_ipinput input[name="ipOne"]').val() + '.' + $('#net_mask_ipinput input[name="ipTwo"]').val() + '.' + $('#net_mask_ipinput input[name="ipThree"]').val() + '.' + $('#net_mask_ipinput input[name="ipFour"]').val(),
+                        "gateway": $('#Gate_way_ipinput input[name="ipOne"]').val() + '.' + $('#Gate_way_ipinput input[name="ipTwo"]').val() + '.' + $('#Gate_way_ipinput input[name="ipThree"]').val() + '.' + $('#Gate_way_ipinput input[name="ipFour"]').val(),
+                        "start_ip": $('#startip_ipinput input[name="ipOne"]').val() + '.' + $('#startip_ipinput input[name="ipTwo"]').val() + '.' + $('#startip_ipinput input[name="ipThree"]').val() + '.' + $('#startip_ipinput input[name="ipFour"]').val(),
+                        "end_ip": $('#endip_ipinput input[name="ipOne"]').val() + '.' + $('#endip_ipinput input[name="ipTwo"]').val() + '.' + $('#endip_ipinput input[name="ipThree"]').val() + '.' + $('#endip_ipinput input[name="ipFour"]').val(),
+                        "lease_time": $('#leasetime').val()
+                    },
+                    "id": "9.1"
+                }
+
+                data = JSON.stringify(data);
+                //console.log(data);
+                $.ajax({
+                    type: "post",
+                    url: req + "/action/action",
+                    data: data,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function(res) {
+                        if (res.result) {
+                            // layui.use('layer', function () {
+                            //     var layer = layui.layer;
+                            //     layer.msg('不开心。。', {icon: 1});
+                            // });
+                            $('#success').show(1000).delay(6000).hide(0);
+                            $("#btn2").removeAttr("disabled");
+                            $("#btn2").css("opacity", "1");
+                            $("#cancel").removeAttr("disabled");
+                            $("#cancel").css("opacity", "1");
+                        } else if (res.error) {
+                            $("#error").text(res.error.message)
+                            $("#error").show(1000).delay(6000).hide(0);
+                            $("#btn2").removeAttr("disabled");
+                            $("#btn2").css("opacity", "1");
+                            $("#cancel").removeAttr("disabled");
+                            $("#cancel").css("opacity", "1");
+                        }
+
+                    },
+                    error: function(jqXHR) {
+                        alert("An error occurred：" + jqXHR.status);
+                    }
+                });
+            })
+
+
+            $("#btn3").on("click", function() {
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "lan_conf",
+                    "params": {
+                        "mode": 2,
+                        "ip_1": $('#ipaddress1_ipinput input[name="ipOne"]').val() + '.' + $('#ipaddress1_ipinput input[name="ipTwo"]').val() + '.' + $('#ipaddress1_ipinput input[name="ipThree"]').val() + '.' + $('#ipaddress1_ipinput input[name="ipFour"]').val(),
+                        "ip_2": $('#ipaddress2_ipinput input[name="ipOne"]').val() + '.' + $('#ipaddress2_ipinput input[name="ipTwo"]').val() + '.' + $('#ipaddress2_ipinput input[name="ipThree"]').val() + '.' + $('#ipaddress2_ipinput input[name="ipFour"]').val(),
+                        "netmask": $('#net_mask_ipinput input[name="ipOne"]').val() + '.' + $('#net_mask_ipinput input[name="ipTwo"]').val() + '.' + $('#net_mask_ipinput input[name="ipThree"]').val() + '.' + $('#net_mask_ipinput input[name="ipFour"]').val(),
+                        "gateway": $('#Gate_way_ipinput input[name="ipOne"]').val() + '.' + $('#Gate_way_ipinput input[name="ipTwo"]').val() + '.' + $('#Gate_way_ipinput input[name="ipThree"]').val() + '.' + $('#Gate_way_ipinput input[name="ipFour"]').val(),
+                        "start_ip": "",
+                        "end_ip": "",
+                        "lease_time": "",
+                    },
+                    "id": "9.1"
+                }
+
+                data = JSON.stringify(data);
+                $.ajax({
+                    type: "post",
+                    url: req + "/action/action",
+                    data: data,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function(res) {
+                        console.log(data);
+                        if (res.result) {
+                            $('#success').show(1000).delay(6000).hide(0);
+                            $("#btn3").removeAttr("disabled");
+                            $("#btn3").css("opacity", "1");
+                            $("#cancel").removeAttr("disabled");
+                            $("#cancel").css("opacity", "1");
+                        } else if (res.error) {
+                            $("#error").text(res.error.message)
+                            $("#error").show(1000).delay(6000).hide(0);
+                            $("#btn3").removeAttr("disabled");
+                            $("#btn3").css("opacity", "1");
+                            $("#cancel").removeAttr("disabled");
+                            $("#cancel").css("opacity", "1");
+                        }
+
+                    },
+                    error: function(jqXHR) {
+                        alert("An error occurred：" + jqXHR.status);
+                    }
+                });
+            })
+
+        });
+    </script>
+
+</body>
+
+</html>

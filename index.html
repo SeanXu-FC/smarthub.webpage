@@ -252,6 +252,7 @@
 </head>
 
 <body>
+
     <!-- Top start -->
     <div class="main">
         <div class="logo">
@@ -411,6 +412,12 @@
                             <a href="LanConfiguration.html" target="my-iframe">
                                 <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">LAN configuration</cite>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="WLANConfiguration.html" target="my-iframe">
+                                <!-- <i class="iconfont ">&#xe6b6;</i> -->
+                                <cite class="hd">WLAN configuration</cite>
                             </a>
                         </li>
                         <li>
@@ -625,6 +632,7 @@
     <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
     <script>
+        var reqUrl = "/proxy"
         $(function() {
             // $('#enterPass').hide();
             $('.sub-menu li a').click(function() {

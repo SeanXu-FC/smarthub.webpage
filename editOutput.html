@@ -447,12 +447,27 @@
             -webkit-transition: .1s linear;
             transition: .1s linear;
         }
+        .layui-form-select dl {
+            position: absolute;
+            left: 270px;
+            top: 42px;
+            padding: 5px 0;
+            z-index: 899;
+            min-width: 52%;
+            border: 1px solid #d2d2d2;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .12);
+            box-sizing: border-box;
+        }
     </style>
 </head>
 
 <body>
     <div class="container wirelessInfo form-inline" id="wirelessInfo">
-        <form class="layui-form" action="" lay-filter="example">
+        <div class="layui-form"  lay-filter="example">
             <div class="Edit-input">Edit output</div>
             <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel number:</label>
@@ -463,7 +478,16 @@
             <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel name:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="Wipers" class="Rectangle-1188 layui-input form-control h18">
+                    <input id="output_name" type="text" name="" lay-verify="title" autocomplete="off" placeholder="Wipers" class="Rectangle-1188 layui-input form-control h18" onkeyup="WidthCheck(this,64);">
+                </div>
+            </div>
+            <div class="layui-form-item mt-20">
+                <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Input type:</label>
+                <div class="layui-input-block">
+                    <select class="form-control " id="security" onchange="show()">
+                        <option value="0">active low</option>
+                        <option value="1">active high</option>
+                    </select>
                 </div>
             </div>
 
@@ -471,91 +495,42 @@
                 <span class="col-md-4 col-md-offset-2" style="display: inline-block;margin-left:460px"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button></span>
                 <span class="col-md-2 col-md-offset-4 connected" id="layerDemo" style="display: inline-block;margin-left:-10px;"><button data-method="notice" id="btn" class="Rectangle-1182 active Close" style="margin-top:-3px">Save</button></span>
             </div>
-        </form>
+        </div>
 
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script>
         $(function() {
-            var isShow = true;
-            change = function() {
-                var v = $(".pwd").get(0);
-
-                if (isShow) {
-                    v.type = "text";
-                    isShow = false;
-                } else {
-                    v.type = "password";
-                    isShow = true;
-                }
-            };
-            //change();
-
-
-        });
-
-        // 按钮禁掉和灰掉
-        // $(".connected button").prop("disabled", true);
-        // $(".connected button").css("opacity", "0.5");
-
-        $('#pwd').keyup(function() {
-            //var reg = /\w{6,19}$/;
-            var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
-            var val = reg.test($('#pwd').val());
-            var len = val.length;
-            if (len <= 6 || len >= 16 || val == "" || val == null) {
-                $("#btn").attr("disabled", "true");
-                $("#btn").css("opacity", "0.5");
-                $('.error').show();
-                $('.correct').hide();
-            } else {
-                $("#btn").removeAttr("disabled");
-                $("#btn").css("opacity", "1");
-                $('.correct').show();
-                $('.error').hide();
-            }
-        });
-
-        function show() {
-            var oSecurity = document.getElementById("security").value;
-            var oAdd = document.getElementById("add");
-            //var oCreate = document.getElementById("create");
-            var oWpa = document.getElementById("wpa");
-
-            $('#security').click(function() {
-                if (oSecurity == 0) {
-                    $("#wpa").hide();
-                }
-
-                if (oSecurity == 1) {
-                    $("#wpa").show();
-                }
+            var name = GetUrlParam("name");
+            var ChannelID = GetUrlParam("ChannelID");
+            var types = GetUrlParam("types");
+            console.log("types",types)
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                $("#security option[value='"+types+"']").prop("selected", true);
+                $("#output_name").attr("placeholder", name);
+            })
+            layui.use(['form'], function () {
+                var form = layui.form;
+                form.render();
             });
+            
+            $("#btn").on("click", function () {
+                var security = $("#security").val();
+                name = $("#output_name").val();
+                saveData(name, ChannelID,security)
+                console.log(name,security)
+            })
+        });
 
-
-        }
-
+        
         layui.use(['form', 'layedit', 'laydate'], function() {
             var form = layui.form,
                 layer = layui.layer,
                 layedit = layui.layedit,
                 laydate = layui.laydate;
-
-
-
-            //表单赋值
-            layui.$('#LAY-component-form-setval').on('click', function() {
-                form.val('example', {
-                    "interest": 1,
-                    "like[write]": true //复选框选中状态
-                        ,
-                    "close": true //开关状态
-
-                });
-            });
-
-
         });
 
 
@@ -565,19 +540,42 @@
             parent.layer.close(index); //关闭当前页
         });
 
+        //保存数据
+        function saveData(name, ChannelID,security) {
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "io_conf",
+                "params": {
+                    "mode": 2,
+                    "id": Number(ChannelID),
+                    "name": name,
+                    "types":Number(security),
+                },
+                "id": "9.1"
+            }
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: req + "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function (res) {
+                    if (res.result && res.result) {
+                     
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index); //关闭当前页
 
-        // $('#layerDemo .layui-btn').on('click', function() {
+                    } else {
+                        layer.msg(res.error.message);
+                    }
+                },
+                error: function (jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+                }
+            })
+        }
 
-        //     //iframe层
-        //     parent.layer.open({
-        //         type: 2,
-        //         title: false,
-        //         //shadeClose: true,
-        //         shade: 0.8,
-        //         area: ['534px', '380px'],
-        //         content: ['ForgetNetwork.html', 'no'],
-        //     });
-        // });
     </script>
 </body>
 

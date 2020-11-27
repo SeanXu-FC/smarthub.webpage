@@ -1,4 +1,4 @@
-<!DOCTYPE  html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -612,6 +612,28 @@
         .layui-form-switch i {
             top: 2px !important;
         }
+        
+        .save-btn {
+            margin: 20px 60px 40px;
+            margin-right: 20%;
+            text-align: right;
+        }
+        
+        .save-btn1 {
+            margin: 40px;
+            margin-right: 20%;
+            text-align: right;
+        }
+        
+        .Path-97 {
+            /* width: 138.9px; */
+            height: 50px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+            color: #434343 !important;
+            margin-right: 20px;
+        }
     </style>
 </head>
 
@@ -619,12 +641,13 @@
     <div class="container-fluid">
         <div class="mc ml-70">
             <h2 class="Mobile-data-big"> Mobile data</h2>
-            <div style="position:absolute;top:0px;right:200px;font-size: 18px;"><button class="Rectangle-1182 mt-10"><span class="" onclick="save()">Save</span></button></div>
+
             <table class="mt-20 table-responsive">
                 <tr>
                     <td>
                         <div class="Mobile-data">Mobile data:</div>
-                        <div class="sm Use-cellular-network-for-data-connection">Use cellular network for data connection</div>
+                        <div class="sm Use-cellular-network-for-data-connection">Use cellular network for data connection
+                        </div>
                     </td>
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
@@ -654,10 +677,12 @@
             </table>
 
             <div class="main mb-30">
-                <div class="Advanced">Advanced <span><img id="arrow" class="up" src="images/icon-arrow-up.png"></span></div>
+                <div class="Advanced" id="arrow_tab">Advanced <span><img id="arrow" class="up" src="images/icon-arrow-up.png"></span>
+                </div>
                 <div class="advancedContent" style="overflow: hidden;zoom:1;">
                     <div class="body1 mb-15">
-                        <div class="Data-usage mt-30"><span><img id="arrow1" class="up" src="images/icon-arrow-right.png"></span> Data usage</div>
+                        <div class="Data-usage mt-30"><span><img id="arrow1" class="up"
+                                    src="images/icon-arrow-right.png"></span> Data usage</div>
                         <div class="tab-wrapper content" id="content" style="display: none;">
 
                             <ul class="tab-menu ml-20">
@@ -669,9 +694,14 @@
                                 <div>
                                     <h3>Usage for this month -1</h3>
                                     <div><img src="images/usage.png"></div>
-                                    <p class="widthper50 mt-40 mb-40 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600"><e style="font-size:26px;font-weight:600">500</e>MB</span> total used, <span style="font-size:18px;font-weight:600"><e style="font-size:26px;font-weight:600">300</e>MB</span>                                        remaining</p>
+                                    <p class="widthper50 mt-40 mb-40 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
+                                            <e style="font-size:26px;font-weight:600">500</e>MB
+                                        </span> total used, <span style="font-size:18px;font-weight:600">
+                                            <e style="font-size:26px;font-weight:600">300</e>MB
+                                        </span> remaining</p>
                                     <div class="layui-form layui-form-pane layui-form-item">
-                                        <label class="layui-form-label Set-monthly-data-limit">Set monthly data limit:</label>
+                                        <label class="layui-form-label Set-monthly-data-limit">Set monthly data
+                                            limit:</label>
                                         <div class="layui-input-block" id="monthlydatalimit">
                                             <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                         </div>
@@ -680,7 +710,8 @@
                                     <div class="mt-30" style="position: relative;">
                                         <div class="Set-monthly-data-limit">Data limit:</div>
                                         <div style="display: inline-block;">
-                                            <div class="The-remaining-data-allowance-threshold-below-which-the-router-will-switch-to-the-other-SIM">The remaining data allowance threshold below which the router will switch to the other SIM</div>
+                                            <div class="The-remaining-data-allowance-threshold-below-which-the-router-will-switch-to-the-other-SIM">
+                                                The remaining data allowance threshold below which the router will switch to the other SIM</div>
                                         </div>
                                         <div class="layui-input-inline" id="dataLimit" style="display: inline-block;margin-left:56px;margin-top: -40px;">
                                             <input type="text" name="text" value="800" class="Rectangle-1185 pl-10" style="display: inline-block;">
@@ -702,7 +733,8 @@
                                     </div>
 
                                     <div class="" style="position: relative;">
-                                        <div class="Set-monthly-data-limit mt-30 mb-20">Data limit start date and duration:</div>
+                                        <div class="Set-monthly-data-limit mt-30 mb-20">Data limit start date and duration:
+                                        </div>
                                         <div style="display: inline-block;">
                                             <div class="Start-data-limit-on">Start data limit on</div>
                                         </div>
@@ -715,19 +747,19 @@
                                         <div class="" style="display: inline-block;" id="formonth">
                                             <div class="layui-input-block" style="margin-left:30px;">
                                                 <select name="city" lay-verify="required" class="Rectangle-1185-12 formonth">
-                                                <option value="1" class="MB">1</option>
-                                                <option value="2" class="MB">2</option>
-                                                <option value="3" class="MB">3</option>
-                                                <option value="4" class="MB">4</option>
-                                                <option value="5" class="MB">5</option>
-                                                <option value="6" class="MB">6</option>
-                                                <option value="7" class="MB">7</option>
-                                                <option value="8" class="MB">8</option>
-                                                <option value="9" class="MB">9</option>
-                                                <option value="10" class="MB">10</option>
-                                                <option value="11" class="MB">11</option>
-                                                <option value="12" selected class="MB">12</option>
-                                            </select>
+                                                    <option value="1" class="MB">1</option>
+                                                    <option value="2" class="MB">2</option>
+                                                    <option value="3" class="MB">3</option>
+                                                    <option value="4" class="MB">4</option>
+                                                    <option value="5" class="MB">5</option>
+                                                    <option value="6" class="MB">6</option>
+                                                    <option value="7" class="MB">7</option>
+                                                    <option value="8" class="MB">8</option>
+                                                    <option value="9" class="MB">9</option>
+                                                    <option value="10" class="MB">10</option>
+                                                    <option value="11" class="MB">11</option>
+                                                    <option value="12" selected class="MB">12</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div style="display: inline-block;" class="months ml-5">months</div>
@@ -735,7 +767,8 @@
 
                                     <div class=" Usage-reminders mt-30">Usage reminders</div>
                                     <div class="layui-form layui-form-pane layui-form-item">
-                                        <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data limit notifications:</label>
+                                        <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data
+                                            limit notifications:</label>
                                         <div class="layui-input-block pt-5" id="usagereminders">
                                             <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                         </div>
@@ -748,9 +781,14 @@
                                 <div>
                                     <h3>Usage for this month -2</h3>
                                     <div><img src="images/usage.png"></div>
-                                    <p class="widthper50 mt-40 mb-40 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600"><e style="font-size:26px;font-weight:600">500</e>MB</span> total used, <span style="font-size:18px;font-weight:600"><e style="font-size:26px;font-weight:600">300</e>MB</span>                                        remaining</p>
+                                    <p class="widthper50 mt-40 mb-40 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
+                                            <e style="font-size:26px;font-weight:600">500</e>MB
+                                        </span> total used, <span style="font-size:18px;font-weight:600">
+                                            <e style="font-size:26px;font-weight:600">300</e>MB
+                                        </span> remaining</p>
                                     <div class="layui-form layui-form-pane layui-form-item">
-                                        <label class="layui-form-label Set-monthly-data-limit">Set monthly data limit:</label>
+                                        <label class="layui-form-label Set-monthly-data-limit">Set monthly data
+                                            limit:</label>
                                         <div class="layui-input-block" id="monthlydatalimit1">
                                             <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                         </div>
@@ -759,7 +797,8 @@
                                     <div class="mt-30" style="position: relative;">
                                         <div class="Set-monthly-data-limit">Data limit:</div>
                                         <div style="display: inline-block;">
-                                            <div class="The-remaining-data-allowance-threshold-below-which-the-router-will-switch-to-the-other-SIM">The remaining data allowance threshold below which the router will switch to the other SIM</div>
+                                            <div class="The-remaining-data-allowance-threshold-below-which-the-router-will-switch-to-the-other-SIM">
+                                                The remaining data allowance threshold below which the router will switch to the other SIM</div>
                                         </div>
                                         <div class="layui-input-inline" style="display: inline-block;margin-left:56px;margin-top: -40px;">
                                             <input type="text" name="text" value="800" class="Rectangle-1185 pl-10">
@@ -767,15 +806,16 @@
                                         <div class="" style="display: inline-block;margin-top: -40px;position:absolute;top:60px;">
                                             <div class="layui-input-block" style="margin-left: 7px;">
                                                 <select name="city" lay-verify="required" style="border:0">
-                                            <option value="0" class="MB">MB</option>
-                                            <option value="1" class="MB">GB</option>
-                                      </select>
+                                                    <option value="0" class="MB">MB</option>
+                                                    <option value="1" class="MB">GB</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="" style="position: relative;">
-                                        <div class="Set-monthly-data-limit mt-30 mb-20">Data limit start date and duration:</div>
+                                        <div class="Set-monthly-data-limit mt-30 mb-20">Data limit start date and duration:
+                                        </div>
                                         <div style="display: inline-block;">
                                             <div class="Start-data-limit-on">Start data limit on</div>
                                         </div>
@@ -786,26 +826,27 @@
                                         <div class="" style="display: inline-block;">
                                             <div class="layui-input-block" style="margin-left:30px;">
                                                 <select name="city" lay-verify="required" class="Rectangle-1185-12">
-                                                <option value="12" class="MB">12</option>
-                                                <option value="1" class="MB">1</option>
-                                                <option value="2" class="MB">2</option>
-                                                <option value="3" class="MB">3</option>
-                                                <option value="4" class="MB">4</option>
-                                                <option value="5" class="MB">5</option>
-                                                <option value="6" class="MB">6</option>
-                                                <option value="7" class="MB">7</option>
-                                                <option value="8" class="MB">8</option>
-                                                <option value="9" class="MB">9</option>
-                                                <option value="10" class="MB">10</option>
-                                                <option value="11" class="MB">11</option>
-                                            </select>
+                                                    <option value="12" class="MB">12</option>
+                                                    <option value="1" class="MB">1</option>
+                                                    <option value="2" class="MB">2</option>
+                                                    <option value="3" class="MB">3</option>
+                                                    <option value="4" class="MB">4</option>
+                                                    <option value="5" class="MB">5</option>
+                                                    <option value="6" class="MB">6</option>
+                                                    <option value="7" class="MB">7</option>
+                                                    <option value="8" class="MB">8</option>
+                                                    <option value="9" class="MB">9</option>
+                                                    <option value="10" class="MB">10</option>
+                                                    <option value="11" class="MB">11</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div style="display: inline-block;" class="months ml-5">months</div>
                                     </div>
                                     <div class=" Usage-reminders mt-30">Usage reminders</div>
                                     <div class="layui-form layui-form-pane layui-form-item">
-                                        <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data limit notifications:</label>
+                                        <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data
+                                            limit notifications:</label>
                                         <div class="layui-input-block pt-5" id="usagereminders1">
                                             <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                         </div>
@@ -816,14 +857,18 @@
 
                             </div>
 
+                            <div class="save-btn" style="font-size: 18px;"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button><button class="Rectangle-1182 mt-10"><span class="" onclick="save()">Save</span></button>
+                            </div>
                         </div>
                     </div>
 
                     <div class="body2">
-                        <div class="Data-usage mb-30"><span><img id="arrow2" class="up" src="images/icon-arrow-right.png"></span> SIM management</div>
+                        <div class="Data-usage mb-30"><span><img id="arrow2" class="up"
+                                    src="images/icon-arrow-right.png"></span> SIM management</div>
                         <div class="" style="position: relative;display: none;" id="content1">
                             <div class="row">
-                                <div class="col-md-5 Active-SIM mt-30 mb-20" style="display: inline-block;">Active SIM:</div>
+                                <div class="col-md-5 Active-SIM mt-30 mb-20" style="display: inline-block;">Active SIM:
+                                </div>
                                 <div class="col-md-7 mt-30" style="display: inline-block;">
                                     <div class="layui-input-block" style="margin-left:-30px;">
                                         <select name="SIM" id="SIM" lay-verify="required" class="Rectangle-1185-12">
@@ -834,7 +879,8 @@
                                 </div>
                             </div>
                             <div class="layui-form layui-form-pane layui-form-item">
-                                <label class="layui-form-label Set-monthly-data-limit mt-20 mb-0">Auto SIM switching:</label>
+                                <label class="layui-form-label Set-monthly-data-limit mt-20 mb-0">Auto SIM
+                                    switching:</label>
                                 <div class="layui-input-block pt-5" id="AutoSim">
                                     <input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                 </div>
@@ -842,7 +888,8 @@
                             <div class="Receive-notifications-when-the-data-limit-has-been-reached">Router will switch to the other SIM by defined SIM switching rules
                             </div>
                             <div class="layui-form layui-form-pane layui-form-item">
-                                <label class="layui-form-label Set-monthly-data-limit mt-30 mb-0">SIM switching rules:</label>
+                                <label class="layui-form-label Set-monthly-data-limit mt-30 mb-0">SIM switching
+                                    rules:</label>
                             </div>
                             <div class="Receive-notifications-when-the-data-limit-has-been-reached">Conditions on when the SIM card will switch to the other
                             </div>
@@ -935,50 +982,62 @@
                                                 <label class="Network-provider col-md-6">Network provider1:</label><span class="col-md-6" id="provider1">Vodaphone UK1</span>
                                             </div>
                                             <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15" id="sim_imsi1">1234</span>
+                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International
+                                                    Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15" id="sim_imsi1">1234</span>
                                             </div>
                                             <div class="row">
                                                 <label class="Network-provider col-md-6 mt-15" style="display:inline-block">SIM telephone number:</label><span class="col-md-6 mt-15" id="sim_tele_num1">1234567890</span>
                                             </div>
                                             <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15" id="sim_puk_num1">12345678</span>
+                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit
+                                                        code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15" id="sim_puk_num1">12345678</span>
                                             </div>
                                             <div style="clear:both;"></div>
                                             <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div>
                                             <div class="layui-form layui-form-pane layui-form-item" style="margin-top: -20px;">
-                                                <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin lock:</label>
+                                                <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin
+                                                    lock:</label>
                                                 <div class="layui-input-block mt-30">
                                                     <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                                 </div>
                                             </div>
-                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin">Change SIM pin</span></button>
+                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin">Change SIM
+                                                    pin</span></button>
                                         </div>
                                         <div class="z1">
                                             <div class="row">
                                                 <label class="Network-provider col-md-6">Network provider2:</label><span class="col-md-6" id="provider2">Vodaphone UK2</span>
                                             </div>
                                             <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15" id="sim_imsi2">1234</span>
+                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International
+                                                    Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15" id="sim_imsi2">1234</span>
                                             </div>
                                             <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">SIM telephone number:</label><span class="col-md-6 mt-15" id="sim_tele_num2">1234567890</span>
+                                                <label class="Network-provider col-md-6 mt-15">SIM telephone
+                                                    number:</label><span class="col-md-6 mt-15" id="sim_tele_num2">1234567890</span>
                                             </div>
                                             <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15" id="sim_puk_num2">12345678</span>
+                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:<e>8 digit
+                                                        code to reset a forgotten or lost pin</e></label><span class="col-md-6 mt-15" id="sim_puk_num2">12345678</span>
                                             </div>
                                             <div style="clear:both;"></div>
                                             <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div>
                                             <div class="layui-form layui-form-pane layui-form-item" style="margin-top: -20px;">
-                                                <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin lock:</label>
+                                                <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin
+                                                    lock:</label>
                                                 <div class="layui-input-block mt-30">
                                                     <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                                 </div>
                                             </div>
 
-                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin">Change SIM pin</span></button>
+                                            <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin">Change SIM
+                                                    pin</span></button>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="save-btn1" style="font-size: 18px;"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button><button class="Rectangle-1182 mt-10"><span class="" onclick="save()">Save</span></button>
                             </div>
                         </div>
                     </div>
@@ -991,7 +1050,8 @@
     </div>
     <div id="enterPass1" class="Rectangle-1187" style="display:none">
         <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Enter the password for network</h3>
-        <p class="Enter-the-admin-password-to-make-changes mt-20 Enter-the-password-for-network-Mynetwork1">"Mynetwork1"</p>
+        <p class="Enter-the-admin-password-to-make-changes mt-20 Enter-the-password-for-network-Mynetwork1">"Mynetwork1"
+        </p>
         <div style="position:relative">
             <label class="Password mt-30" style="display: inline-block;">password:</label>
             <input type="password" value="" class="Rectangle-1188 pwd" style="display: inline-block;" />
@@ -999,7 +1059,8 @@
         </div>
         <div class="row mt-40">
             <div class="col-md-3 col-md-offset-3"><button class="Path-101 Cancel">Cancel</button></div>
-            <div class="col-md-5 col-md-offset-1 connected"><button class="Rectangle-1182 active OK">Connected</button></div>
+            <div class="col-md-5 col-md-offset-1 connected"><button class="Rectangle-1182 active OK">Connected</button>
+            </div>
         </div>
     </div>
     <div id="bg1"></div>
@@ -1162,7 +1223,7 @@
     <script>
         $(function() {
             var images = ['images/icon-arrow-up.png', 'images/icon-arrow-down.png'];
-            $('#arrow').click(function() {
+            $('#arrow_tab').click(function() {
                 if ($('#arrow').attr("class") == "up") {
                     $('#arrow').attr("src", images[1]);
                     $('#arrow').removeClass();

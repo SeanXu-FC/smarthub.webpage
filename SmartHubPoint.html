@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script type="text/javascript" src="js/common.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
@@ -230,6 +231,17 @@
             text-align: left;
             color: #343434;
         }
+        .My-access-pointHZ {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
         
         .form-control {
             height: 42px !important;
@@ -379,10 +391,19 @@
                                             <div><span></span></div>
                                         </td>
                                     </tr>
-                                    <tr id="pwd1">
+                                    <!-- <tr id="pwd1">
                                         <td class="col-sm-3 czjz Access-point-name">Password:</td>
                                         <td class="col-sm-9"><input type="password" id="pw1" class="form-control pwd1 My-access-point" value="" style="width:80%"><span id="eye1" onclick="change()" style="margin-left:10px;">SHOW</span>
                                             <div><span></span></div>
+                                        </td>
+                                    </tr> -->
+                                    <tr>
+                                        <td class="czjz Access-point-name">HT mode:</td>
+                                        <td>
+                                            <select name="type" id="HTmode" class="form-control  My-access-pointHZ" style="width:80%">
+                                               <option value="1">20MHz</option>
+                                               <option value="2">40MHz</option>
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>

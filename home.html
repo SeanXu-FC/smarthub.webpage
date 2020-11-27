@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script type="text/javascript" src="js/common.js"></script>
     <script src="js/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
@@ -607,6 +608,7 @@
 </body>
 <script>
     $(function() {
+        console.log("req", req)
         var data = {
             "jsonrpc": "2.0",
             "method": "HomeStatus",
@@ -616,7 +618,7 @@
         data = JSON.stringify(data);
         $.ajax({
             type: "post",
-            url: "/action/action",
+            url: req + "/action/action",
             data: data,
             dataType: "json",
             contentType: "application/json;charset=utf-8",
@@ -636,7 +638,7 @@
                 }
                 if (json.sta.status == 0) {
                     $('.connected24').eq(0).text(arr[4]);
-                    $('.r_06').attr("src", "images/r_06_gray.png");
+                    //$('.r_06').attr("src", "images/r_06_gray.png");
                     $('#connected24').attr("src", "images/s_wifi_nonea.png");
                     $('.ml-100').addClass("red");
                     // $('.connected24').css({
@@ -656,6 +658,15 @@
                     $('.red').css({
                         'color': 'red'
                     })
+                    $('.NetworkProvider').eq(0).text(json.mobile.provider);
+                    $('.active_sim').eq(0).text(json.mobile.active_sim);
+                    $('.imsi').eq(0).text(json.mobile.imsi);
+                    $('.plmn').eq(0).text(json.mobile.plmn);
+                    $('.csq').eq(0).text(json.mobile.csq);
+                    $('.location').eq(0).text(json.mobile.lca);
+                    $('.act').eq(0).text(json.mobile.act);
+                    $('.register').eq(0).text(json.mobile.cgreg);
+                    $('.cell').eq(0).text(json.mobile.Cell_id);
                 } else {
                     $('.Connected4G').eq(0).text(arr[2]);
                     $('.NetworkProvider').eq(0).text(json.mobile.provider);
@@ -677,6 +688,7 @@
                     $('.Status').css({
                         'color': 'red'
                     })
+                    $('.r_06').attr("src", "images/r_06_gray.png");
                 } else {
                     $('.Status').eq(0).text(arr[3]);
                     $('.Name').eq(0).text(json.ap.name);

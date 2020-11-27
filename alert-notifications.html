@@ -114,6 +114,10 @@
             letter-spacing: normal;
             text-align: left;
             color: #000000;
+            max-width: 88%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
         
         .Channel {
@@ -138,6 +142,11 @@
             letter-spacing: normal;
             text-align: left;
             color: #666666;
+            cursor: pointer
+        }
+        
+        .text-green {
+            color: #26b167;
         }
     </style>
 </head>
@@ -147,71 +156,142 @@
         <h3 class="Channels-configuration">Alert notifications</h3>
         <div class="mt-40">
             <div class="lan">
-                <div class="mt-20 Rectangle-1234">
-                    <p class="lan-h Bilge-pump">Bilge pump</p>
+                <div class="mt-20 Rectangle-1234 inputsEdit" dataId="1">
+                    <p class="lan-h Bilge-pump" id="name1">--</p>
                     <p class="mt-10 Channel">Channel 1 </p>
-                    <p class="Digital-input mt-10">Notifications disabled</p>
-                    <span class="lan-edit Edit inputsEdit-0"><a href="#">edit</a></span>
+                    <p class="Digital-input mt-10 mytooltip" id="Notifications1">Notifications --</p>
+                    <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
+
             </div>
 
             <div class="lan mt-10">
-                <div class="mt-20 Rectangle-1234">
-                    <p class="lan-h Bilge-pump">Air conditioning</p>
+                <div class="mt-20 Rectangle-1234 inputsEdit" dataId="2">
+                    <p class="lan-h Bilge-pump" id="name2">--</p>
                     <p class="mt-10 Channel">Channel 2 </p>
-                    <p class="Digital-input mt-10">Notifications disabled</p>
-                    <span class="lan-edit Edit inputsEdit-1"><a href="#">edit</a></span>
+                    <p class="Digital-input mt-10 mytooltip" id="Notifications2">Notifications --</p>
+                    <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
 
             <div class="lan mt-10">
-                <div class="mt-20 Rectangle-1234">
-                    <p class="lan-h Bilge-pump">Cabin lights</p>
+                <div class="mt-20 Rectangle-1234 inputsEdit" dataId="3">
+                    <p class="lan-h Bilge-pump" id="name3">--</p>
                     <p class="mt-10 Channel">Channel 3 </p>
-                    <p class="Digital-input mt-10">Notifications enabled</p>
-                    <span class="lan-edit Edit inputsEdit"><a href="#">edit</a></span>
+                    <p class="Digital-input mt-10 mytooltip" id="Notifications3">Notifications --</p>
+                    <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
 
             <div class="lan mt-10">
-                <div class="mt-20 Rectangle-1234">
-                    <p class="lan-h Bilge-pump">Deck lights</p>
+                <div class="mt-20 Rectangle-1234 inputsEdit" dataId="4">
+                    <p class="lan-h Bilge-pump" id="name4">--</p>
                     <p class="mt-10 Channel">Channel 4 </p>
-                    <p class="Digital-input mt-10">Notifications disabled</p>
-                    <span class="lan-edit Edit inputsEdit"><a href="#">edit</a></span>
+                    <p class="Digital-input mt-10 mytooltip" id="Notifications4">Notifications --</p>
+                    <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
 
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script>
-        //弹出一个iframe层
-        $('.inputsEdit-1 a').on('click', function() {
-
-            //iframe层
-            parent.layer.open({
-                type: 2,
-                title: false,
-                //shadeClose: true,
-                shade: 0.8,
-                area: ['761px', '475px'],
-                content: ['editNotifications.html', 'no'],
+        $(function() {
+            layui.use('layer', function() {
+                var layer = layui.layer;
+                getMonitoringData(layer);
             });
-        });
-
-        $('.inputsEdit-0 a').on('click', function() {
-
-            //iframe层
-            parent.layer.open({
-                type: 2,
-                title: false,
-                //shadeClose: true,
-                shade: 0.8,
-                area: ['761px', '475px'],
-                content: ['editNotifications-1.html', 'no'],
+            //弹出一个iframe层
+            $('.inputsEdit').on('click', function() {
+                var dataId = $(this).attr("dataId");
+                var Notifications = $(this).children(".Digital-input").attr("Notifications");
+                var trigType = $(this).children(".Digital-input").attr("trigType");
+                var volt = $(this).children(".Digital-input").attr("volt");
+                var noti_msg = $(this).children(".Digital-input").attr("noti_msg");
+                var wake_func = $(this).children(".Digital-input").attr("wake_func");
+                //iframe层
+                parent.layer.open({
+                    type: 2,
+                    title: false,
+                    //shadeClose: true,
+                    shade: 0.8,
+                    area: ['761px', '520px'],
+                    content: ['editNotifications.html?dataId=' + dataId + '&Notifications=' + Notifications + '&trigType=' + trigType + '&volt=' + volt + '&noti_msg=' + noti_msg + '&wake_func=' + wake_func, 'no'],
+                    end: function() {
+                        location.reload();
+                    }
+                });
             });
-        });
+
+        })
+
+        function getMonitoringData(layer) {
+            var loading = layer.load(0, {
+                shade: false
+            });
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "io_conf",
+                "params": {
+                    "mode": "0",
+                },
+                "id": "9.1"
+            }
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: req + "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    layer.close(loading);
+                    if (res.result && res.result.io_date) {
+                        var json = res.result.io_date;
+
+                        for (var i = 0; i < json.length; i++) {
+                            if (i < 4) {
+                                $("#name" + (i + 1)).text(json[i].name);
+                                $("#Notifications" + (i + 1)).attr("Notifications", json[i].notification);
+                                $("#Notifications" + (i + 1)).attr("trigType", json[i].trig_cond_type);
+                                $("#Notifications" + (i + 1)).attr("volt", json[i].trig_cond_value);
+                                $("#Notifications" + (i + 1)).attr("noti_msg", json[i].noti_msg);
+                                $("#Notifications" + (i + 1)).attr("wake_func", json[i].wake_func);
+                                if (json[i].notification == 0) {
+                                    $("#Notifications" + (i + 1)).text("Notifications disabled");
+                                    $("#Notifications" + (i + 1)).removeClass("text-green")
+                                } else {
+                                    $("#Notifications" + (i + 1)).text("Notifications enabled");
+                                    $("#Notifications" + (i + 1)).addClass("text-green")
+                                }
+                                var titleStr = "";
+                                if (json[i].notification == 1) {
+                                    titleStr += "Alert trigger condition: Value above, " + json[i].volt + "v" + "\n";
+                                } else {
+                                    titleStr += "Alert trigger condition: Value below, " + json[i].volt + "v" + "\n";
+                                }
+                                titleStr += "Notification message: " + json[i].noti_msg + "\n";
+                                if (json[i].wake_func == 1) {
+                                    titleStr += "Wake function: ON";
+                                } else {
+                                    titleStr += "Wake function: OFF";
+                                }
+
+                                $("#Notifications" + (i + 1)).attr("title", titleStr)
+
+                            }
+                        }
+
+
+                    }
+
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+                }
+            })
+        }
 
         $(".layui-layer").css("background", "none");
     </script>

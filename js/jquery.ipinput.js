@@ -9,6 +9,7 @@
         }
 
         // 传递的参数  
+        console.log("options",options)
         var options = $.extend(defaults, options);
 
         // 输入框对象及父级对象  

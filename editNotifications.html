@@ -173,7 +173,7 @@
         }
         
         .Rectangle-1182 {
-            width: 124px;
+            width: 94px;
             height: 50px;
             /* padding: 0 20px; */
             border-radius: 5px;
@@ -590,36 +590,53 @@
             color: #fff;
             width: 144px;
         }
+        
+        .Wake-function {
+            width: 380px !important;
+            height: 19px;
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
     </style>
 </head>
 
 <body>
     <div class="container wirelessInfo form-inline" id="wirelessInfo">
-        <form class="layui-form" action="" lay-filter="example">
-            <div class="Edit-Air-conditioner-notifications">Edit Air conditioner notifications</div>
+        <div class="layui-form" lay-filter="example">
+            <div class="Edit-Air-conditioner-notifications">Edit Bilge pump notifications</div>
             <div class="layui-form-item mt-20">
-                <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number Allow-notifications">Allow notifications</label>
+                <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number Allow-notifications">Allow
+                    notifications</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                    <input id="Notifications" type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-inline mt-10">
-                    <label class="layui-form-label Allow-notifications" style="width:228px">Alert trigger condition:</label>
+                    <label class="layui-form-label Allow-notifications" style="width:228px">Alert trigger
+                        condition:</label>
                 </div>
                 <div class="layui-inline" style="margin-left: 7px;margin-top:11px">
                     <label class="layui-form-label Channel-has layui-select-title" style="width:160px !important">Channel has</label>
                     <div class="layui-input-inline">
-                        <select name="modules" lay-verify="required" lay-search="" class=" Rectangle-1185 Value-below" id="security" onchange="show()">
-                        <option value=" ">Value below</option>
-                        <option value="1 ">Value above</option>
-                      </select>
+                        <select name="modules" lay-verify="required" lay-search="" class=" Rectangle-1185 Value-below" id="security">
+                            <option value="0">Value below</option>
+                            <option value="1">Value above</option>
+                        </select>
                     </div>
                     <div class="layui-input-inline" style="width:38px;">
-                        <input type="text " name="price_min " placeholder=" " autocomplete="off " class="layui-input " style="width: 30px;margin-left:24px ;border:1px solid #333">
+                        <input type="text" id="volts_input" name="price_min " placeholder=" " autocomplete="off " class="layui-input" style="width: 40px;margin-left:24px ;border:1px solid #333">
                     </div>
-                    <label class="layui-form-label volts " style="margin-left:-5px;width: 60px !important; ">volts</label>
+                    <label class="layui-form-label volts " style="margin-left:8px;width: 60px !important; ">volts</label>
                 </div>
             </div>
 
@@ -627,85 +644,161 @@
             <div class="layui-form-item layui-form-text mt-20">
                 <label class=" layui-form-label Allow-notifications " style="margin-top:-14px;width:228px; ">Notification message:</label>
                 <div class="layui-input-block " style="margin-left:262px; ">
-                    <textarea placeholder="Please enter the content，You can enter up to 100 characters" maxlength="100" class="layui-textarea "></textarea>
+                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="100" class="layui-textarea" onkeyup="WidthCheck(this,256);"></textarea>
                 </div>
             </div>
 
-            <div class="row mt-60 ">
-                <span class="col-md-4 col-md-offset-2 " style="display: inline-block;margin-left:460px "><button id="cancel" class="Path-97 layui-btn Forget-network ">Cancel</button></span>
-                <span class="col-md-2 col-md-offset-4 connected " id="layerDemo " style="display: inline-block;margin-left:-10px; "><button data-method="notice " id="btn " class="Rectangle-1182 active Close " style="margin-top:-3px ">Save</button></span>
+            <div class="layui-form-item mt-20">
+                <div>
+                    <label class="layui-form-label Status Wake-function Channel-number">Wake function:</label>
+                    <label class="Wake-function" style="text-indent: 15px;margin-top: 10px;">Enable if you want this
+                        input to wake the SmartHub</label>
+                </div>
+
+                <div class="layui-input-block" style="margin-top:-34px;margin-left: 381px;">
+                    <input type="checkbox" name="like1[write]" lay-skin="primary" title="" class="Rectangle-1233" id="func_check">
+                </div>
             </div>
-        </form>
+
+            <div class="row mt-20 ">
+                <span class="col-md-4 col-md-offset-2 " style="display: inline-block;margin-left:460px "><button
+                        id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button></span>
+                <span class="col-md-2 col-md-offset-4 connected " id="layerDemo" style="display: inline-block;margin-left:-10px; "><button data-method="notice" id="btn"
+                        class="Rectangle-1182 active Close " style="margin-top:-3px ">Save</button></span>
+            </div>
+        </div>
 
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script>
+        var oldTrigType, oldVolt, oldNoti_msg;
         $(function() {
-            var isShow = true;
-            change = function() {
-                var v = $(".pwd ").get(0);
-
-                if (isShow) {
-                    v.type = "text ";
-                    isShow = false;
+            var dataId = GetUrlParam("dataId");
+            var Notifications = GetUrlParam("Notifications");
+            var trigType = GetUrlParam("trigType");
+            oldTrigType = trigType;
+            var volt = GetUrlParam("volt");
+            oldVolt = volt;
+            var noti_msg = GetUrlParam("noti_msg");
+            oldNoti_msg = noti_msg;
+            var wake_func = GetUrlParam("wake_func");
+            console.log(dataId, Notifications, trigType, volt, noti_msg, wake_func)
+            layui.use(['form', 'layer'], function() {
+                var layer = layui.layer;
+                var form = layui.form;
+                if (Notifications == 1) {
+                    $("#Notifications").attr("checked", "checked");
+                    $("#func_check").removeAttr("disabled");
                 } else {
-                    v.type = "password ";
-                    isShow = true;
-                }
-            };
-            //change();
-
-
-        });
-
-        // 按钮禁掉和灰掉
-        // $(".connected button ").prop("disabled ", true);
-        // $(".connected button ").css("opacity ", "0.5 ");
-
-        $('#pwd').keyup(function() {
-            //var reg = /\w{6,19}$/;
-            var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
-            var val = reg.test($('#pwd').val());
-            var len = val.length;
-            if (len <= 6 || len >= 16 || val == " " || val == null) {
-                $("#btn ").attr("disabled ", "true ");
-                $("#btn ").css("opacity ", "0.5 ");
-                $('.error').show();
-                $('.correct').hide();
-            } else {
-                $("#btn ").removeAttr("disabled ");
-                $("#btn ").css("opacity ", "1 ");
-                $('.correct').show();
-                $('.error').hide();
-            }
-        });
-
-        function show() {
-            var oSecurity = document.getElementById("security ").value;
-            var oAdd = document.getElementById("add ");
-            var oWpa = document.getElementById("wpa ");
-
-            $('#security').click(function() {
-                if (oSecurity == 0) {
-                    $("#wpa ").hide();
+                    $("#Notifications").removeAttr("checked");
+                    $("#func_check").attr("disabled", "disabled");
                 }
 
-                if (oSecurity == 1) {
-                    $("#wpa ").show();
+                $("#volts_input").val(volt);
+                $(".layui-textarea").val(noti_msg);
+                if (wake_func == 1) {
+                    $("#func_check").attr("checked", "checked");
+                } else {
+                    $("#func_check").removeAttr("checked");
                 }
+                $("#security option[value='" + trigType + "']").prop("selected", true);
+                form.render();
+
+                //var select = 'dd[lay-value=' + trigType + ']';
+                //$('#security').siblings("div.layui-form-select").find('dl').find(select).addClass("layui-this");
+                form.on('switch(switchTest)', function(data) {
+                    //开关是否开启，true或者false
+                    var checked = data.elem.checked;
+                    console.log("checked", checked)
+                    if (checked) { //开启用户才可以操作
+                        $("#func_check").removeAttr("disabled");
+                    } else {
+                        $("#func_check").attr("disabled", "disabled");
+
+                    }
+                    form.render();
+                })
+
             });
 
-        }
 
-        layui.use(['form', 'layedit', 'laydate'], function() {
-            var form = layui.form,
-                layer = layui.layer,
-                layedit = layui.layedit,
-                laydate = layui.laydate;
+
+            $("#btn").on("click", function() {
+                var Notifications = $("#Notifications").is(":checked") == true ? 1 : 0;
+                var trigType = $("#security").val();
+                var volt = $("#volts_input").val();
+                var noti_msg = $(".layui-textarea").val();
+                var wake_func = $("#func_check").is(":checked") == true ? 1 : 0;;
+                saveData(dataId, Notifications, trigType, volt, noti_msg, wake_func)
+                console.log(dataId, Notifications, trigType, volt, noti_msg, wake_func)
+            })
+
+
 
         });
 
+        //保存数据
+        function saveData(dataId, Notifications, trigType, volt, noti_msg, wake_func) {
+            if (Notifications == 1) { //如果是打开的才传用户操作的
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "io_conf",
+                    "params": {
+                        "mode": 3,
+                        "id": Number(dataId),
+                        "notification": Number(Notifications),
+                        "trig_cond_type": Number(trigType),
+                        "trig_cond_value": Number(volt),
+                        "noti_msg": noti_msg,
+                        "wake_func": Number(wake_func),
+                    },
+                    "id": "9.1"
+                }
+            } else { //否则oldTrigType，oldVolt，oldNoti_msg传之前的
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "io_conf",
+                    "params": {
+                        "mode": 3,
+                        "id": Number(dataId),
+                        "notification": Number(Notifications),
+                        "trig_cond_type": Number(oldTrigType),
+                        "trig_cond_value": Number(oldVolt),
+                        "noti_msg": oldNoti_msg,
+                        "wake_func": Number(wake_func),
+                    },
+                    "id": "9.1"
+                }
+            }
+
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: req + "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    if (res.result && res.result) {
+
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index); //关闭当前页
+
+                    } else {
+                        layer.msg(res.error.message);
+                    }
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+                }
+            })
+        }
+
+        function isInteger(obj) {
+            return obj % 1 === 0
+        }
 
         $('#cancel').click(function() {
             var index = parent.layer.getFrameIndex(window.name);

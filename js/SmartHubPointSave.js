@@ -3,7 +3,7 @@ $(function() {
     // $(".pwd").val("");
 
 
-
+    
     save = function() {
 
         layui.use(['form'], function() {
@@ -42,7 +42,15 @@ $(function() {
             //     data.elem.checked = !checked;
             // }
             form.render();
-
+            var select=$("#EncryptionType").val();
+            console.log(select)
+            var WpaKey=$(".pwd").val(); 
+            // if(select==1){
+            //     WpaKey=$(".pwd1").val()
+            // }else {
+            //     WpaKey=$(".pwd").val(); 
+            // }
+            
             var data = {
                 "jsonrpc": "2.0",
 
@@ -52,7 +60,7 @@ $(function() {
                         //"phy_enable": Number($('.current input[type="checkbox"]').val()), //对于开关，0是关，1是开
                         "phy_enable": onoff, //对于开关，0是关，1是开
                         // "hwmode": parseInt($(".hwmode option:selected").text()), //可变
-                        "htmode": 3, //固定
+                        "htmode": $("#HTmode").val(), //可变
                         "Channel": parseInt($(".channel option:selected").text()), //可变
                         "CountryCode": $(".countryCode option:selected").val(), //可变
                         "vap_config": [{
@@ -61,7 +69,7 @@ $(function() {
                             "WepType": 0, //可变
                             "WpaType": 2, //可变
                             "WepKey": $(".pwd1").val(), //可变
-                            "WpaKey": $(".pwd").val(), //可变
+                            "WpaKey": WpaKey, //可变
 
                         }]
                     }]
@@ -76,9 +84,10 @@ $(function() {
             //console.log(data.wifi_config.phy_enable);
             //console.log(this.checked)
             console.log(data)
+            console.log(req)
             $.ajax({
                 type: "post",
-                url: "/action/action",
+                url: req+"/action/action",
                 data: data,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",

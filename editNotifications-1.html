@@ -590,6 +590,20 @@
             color: #fff;
             width: 144px;
         }
+        .Wake-function {
+            width: 380px !important;
+            height: 19px;
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;            
+        }
     </style>
 </head>
 
@@ -617,9 +631,9 @@
                       </select>
                     </div>
                     <div class="layui-input-inline" style="width:38px;">
-                        <input type="text " name="price_min " placeholder=" " autocomplete="off " class="layui-input " style="width: 30px;margin-left:24px ;border:1px solid #333">
+                        <input type="text " name="price_min " placeholder=" " autocomplete="off " class="layui-input " style="width: 40px;margin-left:24px ;border:1px solid #333">
                     </div>
-                    <label class="layui-form-label volts " style="margin-left:-5px;width: 60px !important; ">volts</label>
+                    <label class="layui-form-label volts " style="margin-left:8px;width: 60px !important; ">volts</label>
                 </div>
             </div>
 
@@ -631,7 +645,18 @@
                 </div>
             </div>
 
-            <div class="row mt-60 ">
+            <div class="layui-form-item mt-20">
+                <div>
+                    <label class="layui-form-label Status Wake-function Channel-number">Wake function:</label>
+                    <label class="Wake-function" style="text-indent: 15px;margin-top: 10px;">Enable if you want this input to wake the SmartHub</label>
+                </div>
+
+                <div class="layui-input-block" style="margin-top:-34px;margin-left: 381px;">
+                    <input type="checkbox" name="like1[write]" lay-skin="primary" title="" checked="" class="Rectangle-1233">
+                </div>
+            </div>
+
+            <div class="row mt-20 ">
                 <span class="col-md-4 col-md-offset-2 " style="display: inline-block;margin-left:460px "><button id="cancel" class="Path-97 layui-btn Forget-network ">Cancel</button></span>
                 <span class="col-md-2 col-md-offset-4 connected " id="layerDemo " style="display: inline-block;margin-left:-10px; "><button data-method="notice " id="btn " class="Rectangle-1182 active Close " style="margin-top:-3px ">Save</button></span>
             </div>
