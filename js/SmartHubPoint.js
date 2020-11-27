@@ -9,7 +9,7 @@ $(function() {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req+"/action/action",
+        url: req + "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -22,14 +22,14 @@ $(function() {
                 $('.ssid').val(json[index].vap_config[index].Ssid);
                 $('.pwd').val(json[index].vap_config[index].WpaKey);
                 $('.pwd1').val(json[index].vap_config[index].WpaKey);
-                if(json[index].htmode==1){
+                if (json[index].htmode == 1) {
                     $("#HTmode option[value='1']").prop("selected", true);
-                }else if(json[index].htmode==2){
+                } else if (json[index].htmode == 2) {
                     $("#HTmode option[value='2']").prop("selected", true);
                 }
-                
+
                 console.log($('.pwd1').val())
-                // str0 += '<div class="layui-form layui-form-pane layui-form-item"><div class="col-md-3 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div><div class="col-md-9 current" style="margin-top: 22px"><input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div></div></div>';
+                    // str0 += '<div class="layui-form layui-form-pane layui-form-item"><div class="col-md-3 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div><div class="col-md-9 current" style="margin-top: 22px"><input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div></div></div>';
 
                 // str += "<form>"
                 // str += '<ul style="display:none;">';
@@ -306,11 +306,11 @@ $(function() {
             // $("#content select,#content input,#content button").prop("disabled", true);
 
 
-            
+
             // if ($(".pwd1").val()) {
             //     $(".pwd1").val("")
             // }
-            
+
             // if ($(".pwd").val()) {
             //     $(".pwd").val("")
             // }
@@ -327,19 +327,19 @@ $(function() {
                     //$("#pwd1").hide();
                     $("#pwd").show();
                     //$(".pwd1").val("");
-                // } else if (this.value == "3") {
-                //     $("#pwd1").hide();
-                //     $("#pwd").show();
-                //     //$(".pwd1").val("");
-                // } else if (this.value == "2") {
-                //     $("#pwd1").hide();
-                //     $("#pwd").show();
-                //     //$(".pwd1").val("");
-                // } else if (this.value == "1") {
-                //     $("#pwd1").show();
-                //     $("#pwd").hide();
-                //     //$(".pwd").val("");
-                 } else if (this.value == "0") {
+                    // } else if (this.value == "3") {
+                    //     $("#pwd1").hide();
+                    //     $("#pwd").show();
+                    //     //$(".pwd1").val("");
+                    // } else if (this.value == "2") {
+                    //     $("#pwd1").hide();
+                    //     $("#pwd").show();
+                    //     //$(".pwd1").val("");
+                    // } else if (this.value == "1") {
+                    //     $("#pwd1").show();
+                    //     $("#pwd").hide();
+                    //     //$(".pwd").val("");
+                } else if (this.value == "0") {
                     //$("#pwd1").hide();
                     $("#pwd").hide();
                     $(".pwd").val("");
@@ -351,17 +351,17 @@ $(function() {
                 }
 
             })
-            
+
             //console.log($('#EncryptionType option[value=1]').text() == "WEP");
             //console.log(json[index].vap_config[index].SecurityMode);
             if (json[index].vap_config[index].SecurityMode == "1") {
                 console.log($(".pwd1").val())
-               
+
                 $("#pwd").show();
                 //$("#pwd1").show();
-                for (var index in json) {                   
+                for (var index in json) {
                     $('.pwd').val(json[index].vap_config[index].WpaKey);
-                }              
+                }
                 //$(".pwd").val("");
             }
             if (json[index].vap_config[index].SecurityMode == "2") {
@@ -388,7 +388,7 @@ $(function() {
                 $("#pwd1").hide();
 
             }
-            
+
             // if ($('#EncryptionType option[value=1]').text() == "WEP") {
             //     $("#pwd").hide();
             //     $("#pwd1").show();
@@ -535,7 +535,7 @@ $(function() {
                         //"phy_enable": Number($('.current input[type="checkbox"]').val()), //对于开关，0是关，1是开
                         "phy_enable": onoff, //对于开关，0是关，1是开
                         // "hwmode": parseInt($(".hwmode option:selected").text()), //可变
-                        "htmode": 3, //固定
+                        "htmode": Number($("#HTmode").val()), //固定
                         "Channel": parseInt($(".channel option:selected").text()), //可变
                         "CountryCode": $(".countryCode option:selected").val(), //可变
                         "vap_config": [{
