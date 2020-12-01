@@ -94,9 +94,11 @@
                 percent: length,
                 width: "100%",
             });
+            clearInterval(timer);
             timer = setInterval(function() {
                 if (successFlag) {
                     length = 100;
+                    var domain = window.location.host;
                     $("#div3").myProgress({
                         speed: 100,
                         percent: 100,
@@ -108,6 +110,10 @@
                     $(".progress-in").css("background-color", "green");
                     $(".progress-in").css("background-image", "-webkit-linear-gradient(top, green 0%, green 40%, green 100%)");
                     clearInterval(timer);
+                    setTimeout(function() {
+                        window.location.href = ('https:' == document.location.protocol ?
+                            'https://' : 'http://') + domain + "/home.html";
+                    }, 500);
                 } else {
                     if (length <= 60) {
                         length += 20;
@@ -124,6 +130,12 @@
         })
 
         function reStarting(flag) {
+            var timeout0;
+            if (flag == 0 || flag == "0") {                
+                timeout0 = 1000;
+            } else {
+                timeout0 = 3000;
+            }
             data = {
                 "jsonrpc": "2.0",
                 "method": "restart_and_reset",
@@ -140,12 +152,22 @@
             $.ajax({
                 type: "post",
                 url: "/action/action",
+                timeout: timeout0,
                 data: data,
                 dataType: "json",
                 contentType: "application/json",
                 success: function(res) {
                     if (res.result.status == 1) {
                         successFlag = true;
+                    }
+                },
+                complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+                    if (status == 'timeout') { //超时,status还有success,error等值的情况
+                        ajaxTimeout.abort();
+                        // layui.use(['layer'], function() {
+                        //     var layer = layui.layer;
+                        //     layer.msg("请求超时")
+                        // });
                     }
                 },
                 error: function(jqXHR) {
