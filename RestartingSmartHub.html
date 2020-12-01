@@ -94,10 +94,11 @@
                 percent: length,
                 width: "100%",
             });
+            clearInterval(timer);
             timer = setInterval(function() {
                 if (successFlag) {
                     length = 100;
-
+                    var domain = window.location.host;
                     $("#div3").myProgress({
                         speed: 100,
                         percent: 100,
@@ -107,15 +108,18 @@
                     $(".Restarting-SmartHub").text("Restart SmartHub Successful")
                     $(".progress-out").css("border", "1px solid green");
                     $(".progress-in").css("background-color", "green");
-                    $(".progress-in").css("background-image", "-webkit-linear-gradient(top, green 0%, green 40%, green 100%)");
+                    $(".progress-in").css("background-image",
+                        "-webkit-linear-gradient(top, green 0%, green 40%, green 100%)");
                     clearInterval(timer);
-                    console.log(timer)
+                    setTimeout(function() {
+                        window.location.href = ('https:' == document.location.protocol ?
+                            'https://' : 'http://') + domain + "/home.html";
+                        //window.location.href = "http://10.88.11.238/flashops.html";
+                    }, 500);
                 } else {
-                    console.log("length", length)
                     if (length <= 60) {
                         length += 20;
                     }
-                    console.log(length)
                     $("#div3").myProgress({
                         speed: 6000,
                         percent: length,
@@ -129,6 +133,17 @@
 
         function reStarting(flag) {
             console.log(1111111)
+            var timeout0;
+            if (flag == 0 || flag == "0") {
+                if (restart0 == true) {
+                    restart0 = false;
+                } else if (restart0 == false) {
+                    return;
+                }
+                timeout0 = 1000;
+            } else {
+                timeout0 = 3000;
+            }
             data = {
                 "jsonrpc": "2.0",
                 "method": "restart_and_reset",
@@ -138,21 +153,31 @@
                 "id": "1.1"
             }
             data = JSON.stringify(data);
-            console.log(data)
-            $.ajax({
+            var ajaxTimeout = $.ajax({
                 type: "post",
-                url: "/action/action",
+                url: req + "/action/action",
+                timeout: timeout0,
                 data: data,
                 dataType: "json",
                 contentType: "application/json",
                 success: function(res) {
-                    console.log(data);
+
                     if (res.result.status == 1) {
                         successFlag = true;
                     }
                 },
+                complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+                    if (status == 'timeout') { //超时,status还有success,error等值的情况
+                        ajaxTimeout.abort();
+                        // layui.use(['layer'], function() {
+                        //     var layer = layui.layer;
+                        //     layer.msg("请求超时")
+                        // });
+                    }
+                },
                 error: function(jqXHR) {
-                    //alert("An error occurred：" + jqXHR.status);
+                    console.log(jqXHR)
+                        //alert("An error occurred：" + jqXHR.status);
                 }
 
             });
