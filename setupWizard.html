@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
     <title>Document</title>
     <style>
@@ -29,9 +27,9 @@
             /* top: 150px;
             left: 0px; */
             width: 272px;
-            height: 320px;
+            height: auto;
             margin-top: 40px;
-            border: 1px solid #333;
+            border: 1px solid #707070;
             border-radius: 5px;
             background-color: #fff
         }
@@ -193,6 +191,37 @@
             text-align: center;
             color: #ffffff;
         } */
+        
+        .connecting-img {
+            width: 16px;
+            margin-right: 3px;
+            display: none;
+        }
+        
+        .connecting-img1 {
+            width: 16px;
+            margin-right: 3px;
+        }
+        
+        .color-green {
+            color: #26b167;
+        }
+        
+        .wifi-icon {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .wifi {
+            cursor: pointer;
+        }
+        
+        .wifi-name-set {
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     </style>
 </head>
 
@@ -200,131 +229,50 @@
     <div class="container-fluid">
         <div class="text-left mc ml-70">
             <h2 class="Set-up-wizard"> Set-up wizard </h2>
+            <input style="display: none" id="saved_id" name="saved_id" />
             <p class="Choose-your-wireless-network mt-30">Choose your wireless network</p>
             <p class="When-connected-your-SmartHub-will-distribute-wireless-data-to-all-devices-connected-to-its-access-point-If-there-are-no-wireless-networks-you-wish-to-connect-to-now-then-just-select-continue mt-20">When connected, your SmartHub will distribute wireless data to all devices connected to its access point. If there are no wireless networks you wish to connect to now then just select continue</p>
-            <div class="mCont" style="padding:28px 37px;">
-                <div class="row">
-                    <div class="col-md-10">
+            <div class="mCont" style="padding:28px 37px;" id="set_wizard_c">
+                <div id="none_wifiList"><img class="connecting-img1" src="images/loading.gif" /><span class="none-wifi-info">Loadding</span></div>
+                <!-- <div class="row -flex-display -justify-box">
+                    <div class="-radio-flex">
                         <div class="myAp">Mynetwork1</div>
-                        <div class="col-md-4 c9" style="padding-left:0">Encrypted</div>
+                        <div class="col-md-4 c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">ConnectedStr</span></div>
                     </div>
-                    <div class="col-md-2"><img src="images/icon-wifi01.png"></div>
+                    <div class=""><img src="images/icon-wifi01.png"></div>
                 </div>
-                <div class="row" style="margin-top:13px;">
-                    <div class="col-md-10">
+                <div class="row -flex-display -justify-box" style="margin-top:13px;">
+                    <div class="-radio-flex pl-15">
                         <div>SKY546H</div>
                         <div class="col-md-4 c9" style="padding-left:0">Saved</div>
                     </div>
-                    <div class="col-md-2"><img src="images/icon-wifi01.png"></div>
+                    <div class=""><img src="images/icon-wifi01.png"></div>
                 </div>
-                <div class="row" style="margin-top:13px;">
-                    <div class="col-md-10">
-                        <div>Dave's network</div>
-                        <div class="col-md-4 c9" style="padding-left:0">Saved</div>
-                    </div>
-                    <div class="col-md-2"><img src="images/icon-wifi01.png"></div>
-                </div>
-                <div class="row" style="margin-top:13px;">
-                    <div class="col-md-10">
-                        <div>Lanetwork</div>
-                        <!-- <div class="col-md-4 c9" style="padding-left:0">Encrypted</div> -->
-                    </div>
-                    <div class="col-md-2"><img src="images/icon-wifi01.png"></div>
-                </div>
-                <div class="row mt-40">
+
+                <div class="row mt-40" style="display: flex;">
                     <div class="col-md-2">
                         <div><img src="images/icon-add.png"></div>
                     </div>
                     <div class="col-md-10"><span class="addN">Create network</span></div>
-                </div>
+                </div> -->
 
-                <!-- <table class="table-responsive">
-                    <tr>
-                        <td>
-                            <div>Mynetwork1</div>
-                            <div class="c9">Encrypted</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>Thenetwork</div>
-                            <div class="c9">Saved</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td><img src="images/icon-info.png"></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>Dave's network</div>
-                            <div class="c9">Saved</div>
-                        </td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td><img src="images/icon-info.png"></td>
-                    </tr>
-                    <tr>
-                        <td>Lanetwork</td>
-                        <td><img src="images/icon-wifi01.png"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><img src="images/icon-add.png">
-                            <span class="addN">Create network</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <div class="form-group form-line">
-                                <button type="submit" class="btn layui-btn w100">Next</button>
-                            </div>
-                        </td>
-                    </tr>
-                </table> -->
             </div>
-            <div class="row mt-40">
+            <div class="row mt-40" style="display: flex;margin-bottom: 60px;">
                 <div class="col-md-7">
                     <button class="Rectangle-1181 Back" disabled>Back</button>
                 </div>
-                <div class="col-md-5">
-                    <button class="Rectangle-1182 Continue active"><a href="setupWizard-1.html">Continue</a></button>
+                <div class="col-md-5" style="margin-left:300px;">
+                    <button class="Rectangle-1182 Continue active"><a href="setupWizard-2.html">Continue</a></button>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        $(function() {
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "GetSmartMode",
-                "params": {
-                    // "SmartSSID": "Ray_88888888",
-                    // "PassWord": "88888888"
-                },
-                "id": "9.1"
-            }
-            data = JSON.stringify(data);
-            $.ajax({
-                type: "post",
-                url: "/action/action",
-                data: data,
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(res) {
-                    console.log(res.result.SmartSSID)
-                    $('.myAp').text(res.result.SmartSSID);
-                },
-                error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR.status);
+    <script type="text/javascript" src="js/common.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/setWizard/setWizard.js"></script>
 
-                }
-            })
-
-        });
-        $(".Back").prop("disabled", true);
-        $(".Back").css("opacity", "0.5");
-    </script>
 </body>
 
 </html>

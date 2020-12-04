@@ -6,9 +6,7 @@ document.onkeydown = function(e) {
     }
 }
 
-$("#login_btn").click(function() {
-    login();
-});
+
 
 // function showTips(id, info) {
 //     document.getElementById(id + "span").innerHTML = "<span style=\"color:#f00;\">" + info + "</span>"
@@ -26,8 +24,8 @@ $("#login_btn").click(function() {
 // }
 
 function login() {
-    // var $userId = $("#userId");
-    // var $pwd = $("#pwd");
+    var $userId = $("#userId");
+    var $pwd = $("#pwd");
     // if ($userId.val() == "") {
     //     showTips(id, info);
     //     checkUser(id, info);
@@ -35,7 +33,7 @@ function login() {
     //     showTips(id, info);
     //     checkUser(id, info);
     // } else {
-
+    console.log(123456)
     $.ajax({
         url: "/action/login",
         type: "post",
@@ -44,14 +42,12 @@ function login() {
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         success: function(res) {
             if (res.result.login == "0") {
-                $userId.next().text("Wrong user name or password").css({
-                    "font-weight": "bold",
-                    "color": "red"
-                });
-                $pwd.next().text("Wrong user name or password").css({
-                    "font-weight": "bold",
-                    "color": "red"
-                });
+                // $userId.next().text("Wrong user name or password").css({
+                //     "font-weight": "bold",
+                //     "color": "red"
+                // });
+                $(".state2").hide();
+                $(".state4").text("Wrong user name or password").addClass('state3');
             } else {
                 top.location.href = "/index.html";
             }

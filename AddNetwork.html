@@ -9,7 +9,7 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link href="css/style.css" rel="stylesheet" />
-
+    <script type="text/javascript" src="js/common.js"></script>
     <title>Document</title>
     <style>
         * {
@@ -213,7 +213,7 @@
             font-style: normal;
             line-height: 1.08;
             letter-spacing: normal;
-            text-align: center;
+            text-align: left;
             color: #343434;
         }
         
@@ -359,20 +359,20 @@
 
 <body>
     <div class="container wirelessInfo form-inline" id="wirelessInfo">
-        <form class="form-horizontal" action="">
+        <div class="form-horizontal">
             <div class="SKY546H">Add network</div>
             <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status">Network name:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="Rectangle-1188 layui-input form-control">
+                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="Rectangle-1188 layui-input form-control Network_name">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Security:</label>
                 <div class="layui-input-block">
-                    <select class="form-control " id="security" onchange="show()">
-                        <option value="0">none</option>
-                        <option value="1 ">WPA</option>
+                    <select class="form-control " id="security">
+                        <option value="None">None</option>
+                        <option value="WPA2-PSK">WPA</option>
                     </select>
                 </div>
             </div>
@@ -389,10 +389,12 @@
                 </div>
             </div>
             <div class="row mb-20">
-                <span class="col-md-4 col-md-offset-2" style="display: inline-block;margin-left:206px"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button></span>
-                <span class="col-md-2 col-md-offset-4 connected" id="layerDemo" style="display: inline-block;margin-left:10px;"><button data-method="notice" id="btn" class="Rectangle-1182 active Close" style="margin-top:-3px">Connect</button></span>
+                <span class="col-md-4 col-md-offset-2" style="display: inline-block;margin-left:206px"><button
+                        id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button></span>
+                <span class="col-md-2 col-md-offset-4 connected" id="layerDemo" style="display: inline-block;margin-left:10px;"><button data-method="notice" id="save_btn"
+                        class="Rectangle-1182 active Close" style="margin-top:-3px">Connect</button></span>
             </div>
-        </form>
+        </div>
 
 
     </div>
@@ -412,50 +414,88 @@
                 }
             };
             //change();
+            // 按钮禁掉和灰掉
+            $(".connected button").prop("disabled", true);
+            $(".connected button").css("opacity", "0.5");
+            $('#cancel').click(function() {
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index); //关闭当前页
+            });
+            $('#save_btn').click(function() {
+                addWifi();
+            });
 
+            //输入名称按钮可点
+            $(".Network_name").on("input", function() {
+                var security = $("#security").val();
+                if (security == "None") {
+                    if ($(this).val()) {
+                        $(".connected button").prop("disabled", false);
+                        $(".connected button").css("opacity", "1");
+                    } else {
+                        $(".connected button").prop("disabled", true);
+                        $(".connected button").css("opacity", "0.5");
+                    }
 
-        });
+                }
+            })
 
-        // 按钮禁掉和灰掉
-        $(".connected button").prop("disabled", true);
-        $(".connected button").css("opacity", "0.5");
-
-        $('#pwd').keyup(function() {
-            //var reg = /\w{6,19}$/;
-            var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
-            var val = reg.test($('#pwd').val());
-            var len = val.length;
-            if (len <= 6 || len >= 16 || val == "" || val == null) {
-                $("#btn").attr("disabled", "true");
-                $("#btn").css("opacity", "0.5");
-                $('.error').show();
-                $('.correct').hide();
-            } else {
-                $("#btn").removeAttr("disabled");
-                $("#btn").css("opacity", "1");
-                $('.correct').show();
-                $('.error').hide();
-            }
-        });
-
-        function show() {
-            var oSecurity = document.getElementById("security").value;
-            var oAdd = document.getElementById("add");
-            //var oCreate = document.getElementById("create");
-            var oWpa = document.getElementById("wpa");
-
-            $('#security').click(function() {
-                if (oSecurity == 0) {
+            $('#security').change(function() {
+                if ($(this).val() == "None") {
                     $("#wpa").hide();
+                    if ($(".Network_name").val()) {
+                        $(".connected button").prop("disabled", false);
+                        $(".connected button").css("opacity", "1");
+                    } else {
+                        $(".connected button").prop("disabled", true);
+                        $(".connected button").css("opacity", "0.5");
+                    }
                 }
 
-                if (oSecurity == 1) {
+                if ($(this).val() == "WPA2-PSK") {
                     $("#wpa").show();
+                    $(".connected button").prop("disabled", true);
+                    $(".connected button").css("opacity", "0.5");
                 }
             });
 
+            //输入密码按钮可点
+            $("#pwd").on("input", function() {
+                var security = $("#security").val();
+                if (security == "WPA2-PSK") {
+                    if ($(this).val()) {
+                        $(".connected button").prop("disabled", false);
+                        $(".connected button").css("opacity", "1");
+                    } else {
+                        $(".connected button").prop("disabled", true);
+                        $(".connected button").css("opacity", "0.5");
+                    }
+                }
+            })
 
-        }
+        });
+
+
+
+        // $('#pwd').keyup(function() {
+        //     //var reg = /\w{6,19}$/;
+        //     var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
+        //     var val = reg.test($('#pwd').val());
+        //     var len = val.length;
+        //     if (len <= 6 || len >= 16 || val == "" || val == null) {
+        //         $("#btn").attr("disabled", "true");
+        //         $("#btn").css("opacity", "0.5");
+        //         $('.error').show();
+        //         $('.correct').hide();
+        //     } else {
+        //         $("#btn").removeAttr("disabled");
+        //         $("#btn").css("opacity", "1");
+        //         $('.correct').show();
+        //         $('.error').hide();
+        //     }
+        // });
+
+
 
         layui.use(['form'], function() {
             var form = layui.form,
@@ -465,24 +505,64 @@
         });
 
 
-        $('#cancel').click(function() {
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index); //关闭当前页
-        });
+        function addWifi() {
+            var ssid = $(".Network_name").val();
+            var security = $("#security").val();
+            var pwd = $("#pwd").val();
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "wlan_config",
+                "params": {
+                    "operate_code": 4,
+                    "ssid": ssid,
+                    "encrypt": security,
+                    "psk": pwd ? pwd : '',
+                    "bssid": "",
+                },
+                "id": "9.1"
+            };
+
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: req + "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    console.log("res", res)
+                    if (res.result) {
+                        if (res.result.status == "Scanning") {
+                            $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr("encrypt", security);
+                            setTimeout(() => {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index); //关闭当前页
+                            }, 500);
+                        } else {
+                            layui.use(['form', 'layer'], function() {
+                                var layer = layui.layer;
+                                layer.msg(res.result.status);
+                            })
+                        }
+
+                    } else if (res.error) {
+                        $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt", "");
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
+
+                    }
 
 
-        // $('#layerDemo .layui-btn').on('click', function() {
+                },
+                error: function(jqXHR) {
+                    $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt", "");
+                    alert("An error occurred：" + jqXHR.status);
 
-        //     //iframe层
-        //     parent.layer.open({
-        //         type: 2,
-        //         title: false,
-        //         //shadeClose: true,
-        //         shade: 0.8,
-        //         area: ['534px', '380px'],
-        //         content: ['ForgetNetwork.html', 'no'],
-        //     });
-        // });
+                }
+            });
+        }
     </script>
 </body>
 

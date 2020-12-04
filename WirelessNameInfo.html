@@ -9,7 +9,7 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link href="css/style.css" rel="stylesheet" />
-
+    <script type="text/javascript" src="js/common.js"></script>
     <title>Document</title>
     <style>
         * {
@@ -204,7 +204,6 @@
         }
         
         .SKY546H {
-            width: 102px;
             height: 33px;
             font-family: OpenSans;
             font-size: 24px;
@@ -213,8 +212,10 @@
             font-style: normal;
             line-height: 1.08;
             letter-spacing: normal;
-            text-align: center;
+            text-align: left;
             color: #343434;
+            padding-left: 16px;
+            margin-bottom: 12px;
         }
         
         .wirelessInfo {
@@ -222,7 +223,7 @@
         }
         
         .layui-form-label {
-            width: 300px !important;
+            width: 270px !important;
         }
         
         .form-control-static {
@@ -251,6 +252,9 @@
             letter-spacing: normal;
             text-align: left;
             color: #343434;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
         }
         
         .layui-form-switch {
@@ -288,97 +292,298 @@
             text-align: center;
             color: #f9f9f9;
         }
+        
+        .bottom-btn {
+            text-align: right;
+            margin-right: 0px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container wirelessInfo form-inline" id="wirelessInfo">
-        <form class="layui-form" action="">
-            <div class="SKY546H">SKY546H</div>
+        <div class="layui-form">
+            <div class="SKY546H">--</div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Status:</label>
                 <div class="layui-input-block">
-                    <p class="form-control-static Connected">Connected</p>
+                    <p class="form-control-static Connected Connected-Status">--</p>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Signal strength:</label>
                 <div class="layui-input-block">
-                    <p class="form-control-static Connected">Good</p>
+                    <p class="form-control-static Connected Signal-strength" id="Signal_strength">--</p>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Link speed:</label>
                 <div class="layui-input-block">
-                    <p class="form-control-static Connected">50Mbps</p>
+                    <p class="form-control-static Connected Link-speed">--Mbps</p>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Frequency band:</label>
                 <div class="layui-input-block">
-                    <p class="form-control-static Connected">2.4GHz</p>
+                    <p class="form-control-static Connected Frequency-band">--GHz</p>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Channel:</label>
                 <div class="layui-input-block">
-                    <p class="form-control-static Connected">12</p>
+                    <p class="form-control-static Connected Channel">--</p>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Security:</label>
                 <div class="layui-input-block">
-                    <p class="form-control-static Connected">None</p>
+                    <p class="form-control-static Connected Security">--</p>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label Status">MAC address:</label>
                 <div class="layui-input-block">
-                    <p class="form-control-static Connected">00:11:c4:1d:ef:45</p>
+                    <p class="form-control-static Connected MAC-address">--</p>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Connect automatically:</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
-                    <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div>
+                    <input id="WLAN_auto_swtich" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                    <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch">
+                        <em>ON</em><i></i></div>
                 </div>
             </div>
-            <div class="row pt-30">
-                <span class="col-md-2 col-md-offset-4" id="layerDemo" style="display: inline-block;margin-left:148px;"><button data-method="notice" class="Path-97 layui-btn Forget-network">Forget network</button></span>
-                <span class="col-md-4 col-md-offset-2 connected" style="display: inline-block;"><button id="btn" class="Rectangle-1182 active Close">Close</button></span>
+            <div class="row pt-30 bottom-btn">
+                <span class="col-md-2 col-md-offset-4" id="layerDemo" style="display: inline-block;margin-left:148px;"><button data-method="notice"
+                        class="Path-97 layui-btn Forget-network">Forget network</button></span>
+                <span class="col-md-4 col-md-offset-2 connected" style="display: inline-block;"><button id="btn"
+                        class="Rectangle-1182 active Close">Close</button></span>
             </div>
-        </form>
+        </div>
 
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
     <script>
-        layui.use(['form'], function() {
-            var form = layui.form,
-                layer = layui.layer,
-                layedit = layui.layedit,
-                laydate = layui.laydate;
-        });
-
-
-        $('#btn').click(function() {
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index); //关闭当前页
-        });
-
-        $('#layerDemo .layui-btn').on('click', function() {
-
-            //iframe层
-            parent.layer.open({
-                type: 2,
-                title: false,
-                //shadeClose: true,
-                shade: 0.8,
-                area: ['534px', '260px'],
-                content: ['ForgetNetwork.html', 'no'],
+        var ssid, bssid, encrypt, is_saved;
+        $(function() {
+            ssid = GetUrlParam("ssid");
+            bssid = GetUrlParam("bssid");
+            encrypt = GetUrlParam("bssid");
+            is_saved = GetUrlParam("is_saved");
+            layui.use(['layer', 'form'], function() {
+                var form = layui.form,
+                    layer = layui.layer;
+                getWifiDetail(form);
+                form.on('switch(switchTest)', function(data) {
+                    var checked = data.elem.checked;
+                    console.log(checked)
+                    changeSwitchStatus(layer, form, checked)
+                });
             });
-        });
+
+            $('#btn').click(function() {
+                $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("bssid", "");
+                setTimeout(() => {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index); //关闭当前页
+                }, 500);
+
+            });
+
+            $('#layerDemo .layui-btn').on('click', function() {
+                //iframe层
+                parent.layer.open({
+                    id: "forget",
+                    type: 2,
+                    title: false,
+                    //shadeClose: true,
+                    shade: 0.8,
+                    area: ['534px', '260px'],
+                    content: ['ForgetNetwork.html?ssid=' + ssid + "&bssid=" + bssid + "&is_saved=" + is_saved, 'no'],
+                    end: function() {
+                        var flag = $(parent.frames["my-iframe"].document).find("#wifiDetai_info").val();
+                        console.log(flag)
+                        if (!flag) {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index); //关闭当前页
+                        }
+
+                    }
+                });
+            });
+        })
+
+        function getWifiDetail(form) {
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "wlan_config",
+                "params": {
+                    "operate_code": 5,
+                    "ssid": ssid,
+                    "bssid": bssid ? bssid : "",
+                },
+                "id": "9.1"
+            };
+
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: req + "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    if (res.result) {
+                        $(".SKY546H").text(res.result.ssid);
+                        $(".Link-speed").text(res.result.rate + "Mbps");
+
+
+                        $(".Security").text(res.result.encrypt);
+                        $(".Security").attr("title", res.result.encrypt);
+                        $(".MAC-address").text(res.result.bssid);
+                        $(".Connected-Status").text(res.result.status);
+                        if (res.result.is_saved == 0) {
+                            $('#layerDemo').hide();
+                        }
+
+
+                        var signal = Math.abs(res.result.rssi);
+                        console.log(signal)
+                        if (signal < 70) {
+                            console.log(11)
+                            $("#Signal_strength").text("Good");
+                        } else if (signal > 70) {
+                            console.log(22)
+                            $("#Signal_strength").text("Weak");
+                        }
+                        var Channel;
+                        if (2400 < res.result.freq && res.result.freq < 2900) {
+                            $(".Frequency-band").text("2.4GHz");
+                            Channel = freq2Gchannel(res.result.freq);
+                            $(".Channel").text(Channel);
+                        } else if (5030 < res.result.freq && res.result.freq < 5900) {
+                            $(".Frequency-band").text("5GHz");
+                            Channel = freq5Gchannel(res.result.freq);
+                            console.log("Channel", Channel)
+                            $(".Channel").text(Channel);
+                        }
+
+                        if (res.result.auto_connect == 1) {
+                            $("#WLAN_auto_swtich").attr("checked", "checked");
+                        } else {
+                            $("#WLAN_auto_swtich").removeAttr("checked");
+                        }
+                        form.render();
+
+                    } else if (res.error) {
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
+
+                    }
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+                }
+            });
+        }
+
+        function changeSwitchStatus(layer, form, checked) {
+            var mode;
+            if (checked == false) {
+                mode = 7;
+            } else if (checked == true) {
+                mode = 6;
+            }
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "wlan_config",
+                "params": {
+                    "operate_code": mode,
+                    "ssid": ssid,
+                    "bssid": bssid ? bssid : "",
+                    "encrypt": encrypt,
+                },
+                "id": "9.1"
+            };
+
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: req + "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    console.log("res", res)
+                    if (res.result) {
+                        layer.msg(res.result.status);
+                    } else if (res.error) {
+                        layer.msg("An error occurred：" + res.error.message);
+                    }
+
+
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+
+                }
+            });
+        }
+        //2G转channel
+        function freq2Gchannel(freq) {
+            var channel = (freq - 2412) / 5 + 1;
+            return channel;
+        }
+        //5G转channel
+        function freq5Gchannel(freq) {
+            var channel;
+            if (5035 <= freq && freq <= 5080) {
+                switch (freq) {
+                    case 5035:
+                        channel = 7;
+                        break;
+                    case 5040:
+                        channel = 8;
+                        break;
+                    case 5045:
+                        channel = 9;
+                        break;
+                    case 5055:
+                        channel = 11;
+                        break;
+                    case 5060:
+                        channel = 12;
+                        break;
+                    case 5080:
+                        channel = 16;
+                        break;
+                }
+            } else if (5170 <= freq && freq <= 5320) {
+                channel = (freq - 5170) / 10 * 2 + 34;
+            } else if (5500 <= freq && freq <= 5640) {
+                channel = (freq - 5500) / 10 * 2 + 100;
+            } else if (5660 <= freq && freq <= 5720) {
+                channel = (freq - 5660) / 10 * 2 + 132;
+            } else if (5745 <= freq && freq <= 5805) {
+                channel = (freq - 5745) / 10 * 2 + 149;
+            } else if (5825 == freq) {
+                channel = 165;
+            } else if (4915 <= freq && freq <= 4925) {
+                channel = (freq - 4915) / 5 + 183;
+            } else if (4935 <= freq && freq <= 4945) {
+                channel = (freq - 4935) / 5 + 187;
+            } else if (4960 == freq) {
+                channel = 192;
+            } else if (4980 == freq) {
+                channel = 196;
+            }
+            return channel;
+        }
     </script>
 </body>
 

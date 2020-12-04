@@ -132,7 +132,7 @@
         }
         
         #pwd {
-            display: none;
+            /* display: none; */
             /* display: table-row; */
             /* border: 1px solid #000 !important; */
         }
@@ -231,6 +231,7 @@
             text-align: left;
             color: #343434;
         }
+        
         .My-access-pointHZ {
             font-family: OpenSans;
             font-size: 18px;
@@ -277,6 +278,11 @@
             line-height: 1.45;
             letter-spacing: normal;
             text-align: center;
+            color: #343434;
+        }
+        
+        .Cancel:hover {
+            background-color: #f1f1f1 !important;
             color: #343434;
         }
         
@@ -349,6 +355,12 @@
             position: absolute;
             top: 50px;
             right: 500px;
+            z-index: 999;
+            background-color: #fff;
+        }
+        
+        #onoffFlag {
+            display: none;
         }
     </style>
 </head>
@@ -365,13 +377,22 @@
                     <ul id="tab">
                         <div class="layui-form layui-form-pane layui-form-item">
                             <div class="col-md-3 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div>
-                            <div class="col-md-9 current" style="margin-top: 22px"><input type="checkbox" checked id="onoff" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
-                                <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div>
+                            <div class="col-md-9 current" style="margin-top: 22px" id="onoffFlag">
+                                <!-- <input type="checkbox" checked id="onoff" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch">
+                                    <em>ON</em><i></i></div> -->
+                                <input id="onoff" type="checkbox" name="yyy" lay-filter="switchTest" lay-skin="switch" lay-text="ON|OFF" checked>
                             </div>
+                            <!-- <div class="layui-form layui-form-pane layui-form-item aa">
+                                <div class="layui-input-block">
+                                    <input id="onoff" type="checkbox" name="yyy" lay-filter="switchTest" lay-skin="switch" lay-text="ON|OFF" checked>
+                                </div>
+                            </div> -->
                         </div>
                     </ul>
                     <div id="content">
-                        <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">Changes-saved</div>
+                        <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">
+                            Changes-saved</div>
                         <form>
                             <ul style="display:block;">
                                 <table class="table table-hover table-responsive">
@@ -379,15 +400,18 @@
                                         <th colspan="2" class="Access-point-connection-settings mt-20">Access point connection settings</th>
                                     </tr>
                                     <tr>
-                                        <th colspan="2" class="Use-these-details-when-connecting-a-device-to-the-SmartHubs-access-point">Use these details when connecting a device to the SmartHub's access point</th>
+                                        <th colspan="2" class="Use-these-details-when-connecting-a-device-to-the-SmartHubs-access-point">
+                                            Use these details when connecting a device to the SmartHub's access point
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td class="col-sm-3 czjz Access-point-name mt-20">Access point name:</td>
-                                        <td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="" style="width:80%"></td>
+                                        <td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="" style="width:80%">
+                                        </td>
                                     </tr>
                                     <tr id="pwd">
                                         <td class="col-sm-3 czjz Access-point-name">Password:</td>
-                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point" value="" style="width:80%"><span id="eye" onclick="change()" style="margin-left:10px;">SHOW</span>
+                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point" value="" style="width:80%"><span id="eye" style="margin-left:10px;">SHOW</span>
                                             <div><span></span></div>
                                         </td>
                                     </tr>
@@ -401,8 +425,8 @@
                                         <td class="czjz Access-point-name">HT mode:</td>
                                         <td>
                                             <select name="type" id="HTmode" class="form-control  My-access-pointHZ" style="width:80%">
-                                               <option value="1">20MHz</option>
-                                               <option value="2">40MHz</option>
+                                                <option value="1">20MHz</option>
+                                                <option value="2">40MHz</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -421,8 +445,7 @@
                                     <tr>
                                         <td></td>
                                         <td>
-                                            <div id="btnGroup" class="form-group form-line btn-group edit"><button type="button" id="cancel" style="cursor:pointer; -webkit-tap-highlight-color: transparent;" class="cancel Rectangle-1182 active OK">Cancel</button><button type="button" id="btn1" class="Rectangle-1182 active OK"
-                                                    style="margin-left:10px;cursor: pointer;" onclick="save()">Save</button></div>
+                                            <div id="btnGroup" class="form-group form-line btn-group edit"><button id="cancel" class="Path-101 Cancel">Cancel</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px;cursor: pointer;" onclick="save()">Save</button></div>
                                         </td>
                                     </tr>
                                 </table>

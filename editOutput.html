@@ -447,6 +447,7 @@
             -webkit-transition: .1s linear;
             transition: .1s linear;
         }
+        
         .layui-form-select dl {
             position: absolute;
             left: 270px;
@@ -467,12 +468,12 @@
 
 <body>
     <div class="container wirelessInfo form-inline" id="wirelessInfo">
-        <div class="layui-form"  lay-filter="example">
+        <div class="layui-form" lay-filter="example">
             <div class="Edit-input">Edit output</div>
             <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel number:</label>
                 <div class="layui-input-block">
-                    <p class="h18">5</p>
+                    <p id="channel-number" class="h18">5</p>
                 </div>
             </div>
             <div class="layui-form-item mt-20">
@@ -506,26 +507,27 @@
             var name = GetUrlParam("name");
             var ChannelID = GetUrlParam("ChannelID");
             var types = GetUrlParam("types");
-            console.log("types",types)
-            layui.use('layer', function () {
+            $("#channel-number").text(ChannelID)
+            console.log("types", types)
+            layui.use('layer', function() {
                 var layer = layui.layer;
-                $("#security option[value='"+types+"']").prop("selected", true);
+                $("#security option[value='" + types + "']").prop("selected", true);
                 $("#output_name").attr("placeholder", name);
             })
-            layui.use(['form'], function () {
+            layui.use(['form'], function() {
                 var form = layui.form;
                 form.render();
             });
-            
-            $("#btn").on("click", function () {
+
+            $("#btn").on("click", function() {
                 var security = $("#security").val();
                 name = $("#output_name").val();
-                saveData(name, ChannelID,security)
-                console.log(name,security)
+                saveData(name, ChannelID, security)
+                console.log(name, security)
             })
         });
 
-        
+
         layui.use(['form', 'layedit', 'laydate'], function() {
             var form = layui.form,
                 layer = layui.layer,
@@ -541,7 +543,7 @@
         });
 
         //保存数据
-        function saveData(name, ChannelID,security) {
+        function saveData(name, ChannelID, security) {
             var data = {
                 "jsonrpc": "2.0",
                 "method": "io_conf",
@@ -549,7 +551,7 @@
                     "mode": 2,
                     "id": Number(ChannelID),
                     "name": name,
-                    "types":Number(security),
+                    "types": Number(security),
                 },
                 "id": "9.1"
             }
@@ -560,9 +562,9 @@
                 data: data,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
-                success: function (res) {
+                success: function(res) {
                     if (res.result && res.result) {
-                     
+
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index); //关闭当前页
 
@@ -570,12 +572,11 @@
                         layer.msg(res.error.message);
                     }
                 },
-                error: function (jqXHR) {
+                error: function(jqXHR) {
                     alert("An error occurred：" + jqXHR.status);
                 }
             })
         }
-
     </script>
 </body>
 

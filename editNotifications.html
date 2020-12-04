@@ -611,7 +611,7 @@
 <body>
     <div class="container wirelessInfo form-inline" id="wirelessInfo">
         <div class="layui-form" lay-filter="example">
-            <div class="Edit-Air-conditioner-notifications">Edit Bilge pump notifications</div>
+            <div class="Edit-Air-conditioner-notifications">Edit -- notifications</div>
             <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number Allow-notifications">Allow
                     notifications</label>
@@ -676,6 +676,8 @@
         var oldTrigType, oldVolt, oldNoti_msg;
         $(function() {
             var dataId = GetUrlParam("dataId");
+            var name = GetUrlParam("name");
+
             var Notifications = GetUrlParam("Notifications");
             var trigType = GetUrlParam("trigType");
             oldTrigType = trigType;
@@ -685,6 +687,7 @@
             oldNoti_msg = noti_msg;
             var wake_func = GetUrlParam("wake_func");
             console.log(dataId, Notifications, trigType, volt, noti_msg, wake_func)
+            $(".Edit-Air-conditioner-notifications").text("Edit " + name + " notifications");
             layui.use(['form', 'layer'], function() {
                 var layer = layui.layer;
                 var form = layui.form;
@@ -729,15 +732,32 @@
                 var Notifications = $("#Notifications").is(":checked") == true ? 1 : 0;
                 var trigType = $("#security").val();
                 var volt = $("#volts_input").val();
+                volt = toDecimal(volt, 1);
+                volt = parseFloat(volt).toFixed(1);
+                volt = Number(volt)
+                volt = Number(volt).toFixed(1)
                 var noti_msg = $(".layui-textarea").val();
                 var wake_func = $("#func_check").is(":checked") == true ? 1 : 0;;
                 saveData(dataId, Notifications, trigType, volt, noti_msg, wake_func)
-                console.log(dataId, Notifications, trigType, volt, noti_msg, wake_func)
+
             })
 
 
 
         });
+
+        function toDecimal(value, n) {
+            var f = Math.round(value * Math.pow(10, n)) / Math.pow(10, n);
+            var s = f.toString();
+            var rs = s.indexOf('.');
+            if (rs < 0) {
+                s += '.';
+            }
+            for (var i = s.length - s.indexOf('.'); i <= n; i++) {
+                s += "0";
+            }
+            return s;
+        }
 
         //保存数据
         function saveData(dataId, Notifications, trigType, volt, noti_msg, wake_func) {
@@ -750,7 +770,7 @@
                         "id": Number(dataId),
                         "notification": Number(Notifications),
                         "trig_cond_type": Number(trigType),
-                        "trig_cond_value": Number(volt),
+                        "trig_cond_value": volt,
                         "noti_msg": noti_msg,
                         "wake_func": Number(wake_func),
                     },

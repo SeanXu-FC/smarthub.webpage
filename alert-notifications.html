@@ -205,6 +205,7 @@
             //弹出一个iframe层
             $('.inputsEdit').on('click', function() {
                 var dataId = $(this).attr("dataId");
+                var name = $(this).children(".Bilge-pump").text();
                 var Notifications = $(this).children(".Digital-input").attr("Notifications");
                 var trigType = $(this).children(".Digital-input").attr("trigType");
                 var volt = $(this).children(".Digital-input").attr("volt");
@@ -217,7 +218,7 @@
                     //shadeClose: true,
                     shade: 0.8,
                     area: ['761px', '520px'],
-                    content: ['editNotifications.html?dataId=' + dataId + '&Notifications=' + Notifications + '&trigType=' + trigType + '&volt=' + volt + '&noti_msg=' + noti_msg + '&wake_func=' + wake_func, 'no'],
+                    content: ['editNotifications.html?dataId=' + dataId + '&name=' + name + '&Notifications=' + Notifications + '&trigType=' + trigType + '&volt=' + volt + '&noti_msg=' + noti_msg + '&wake_func=' + wake_func, 'no'],
                     end: function() {
                         location.reload();
                     }

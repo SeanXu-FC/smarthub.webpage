@@ -1,4 +1,115 @@
 $(function() {
+    layui.use('layer', function() {
+        var layer = layui.layer;
+        var loading = layer.load(0, {
+            shade: false
+        });
+        getData(layer, loading);
+    });
+    $("#eye").on("click", function() {
+        var type = $("#pw").attr("type");
+        console.log(type)
+        if (type == "password") {
+            $("#pw").attr("type", "text");
+        } else if (type == "text") {
+            $("#pw").attr("type", "password");
+        }
+    })
+
+
+
+
+    layui.use(['form'], function() {
+        var form = layui.form;
+        form.on('switch(switchTest)', function(data) {
+            var checked = data.elem.checked;
+            var serverStatus = 1;
+
+            var onoff = this.checked ? 1 : 0;
+            //console.log(data.value);
+            // console.log(data.elem); // 得到checkbox原始DOM对象
+            // console.log(data.elem.checked); // 开关是否开启，true或者false
+            // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
+            // console.log(data.othis); // 得到美化后的DOM对象
+
+            if (this.checked == 1) {
+                $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
+                $("#onoff").prop("checked", true);
+                $("#btn1").removeAttr("disabled")
+            } else if (this.checked == 0) {
+                $("#content select,#content input").prop("disabled", true);
+                $("#onoff").removeAttr("checked");
+                $("#btn1").attr("disabled", true)
+            }
+
+            // if (serverStatus) {
+            //     data.elem.checked = checked;
+            // } else {
+            //     data.elem.checked = !checked;
+            // }
+            form.render();
+
+
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "SetWlanSettings",
+                "params": {
+                    "wifi_config": [{
+                        //"phy_enable": Number($('.current input[type="checkbox"]').val()), //对于开关，0是关，1是开
+                        "PhyEnable": onoff, //对于开关，0是关，1是开
+                        // "hwmode": parseInt($(".hwmode option:selected").text()), //可变
+                        "HtMode": Number($("#HTmode").val()), //固定
+                        "Channel": parseInt($(".channel option:selected").text()), //可变
+                        "vap_config": [{
+                            "Ssid": $(".ssid").val(), //可变
+                            "SecurityMode": Number($(".EncryptionType option:selected").val()), //可变
+                            "WpaKey": $(".pwd").val(), //可变
+
+                        }]
+                    }]
+                },
+
+                "id": "9.1",
+
+            };
+            data = JSON.stringify(data);
+            console.log(data);
+
+            $.ajax({
+                type: "post",
+                url: req + "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    // $(document).on("click", ".cancel", function() {
+                    //     $("#content select,#content input,#content button").removeAttr("disabled");
+                    //     $("#onoff").prop("checked", true);
+                    //     var o = $(".layui-form-switch");
+                    //     o.find("em").text("ON");
+                    //     o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+
+                    // })
+                    // if (data == "true") {
+                    //     //layer.msg("状态修改成功");
+                    //     active.reload();
+                    // } else {
+
+                    // }
+
+                },
+                error: function(jqXHR) {
+                    alert("An error occurred：" + jqXHR.status);
+
+                }
+            });
+
+        });
+    });
+
+});
+
+function getData(layer, loading) {
     var data = {
         "jsonrpc": "2.0",
         "method": "GetWlanSettings",
@@ -14,6 +125,7 @@ $(function() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            layer.close(loading);
             var json = res.result.wifi_config;
             var str = "";
             var str0 = "";
@@ -22,9 +134,9 @@ $(function() {
                 $('.ssid').val(json[index].vap_config[index].Ssid);
                 $('.pwd').val(json[index].vap_config[index].WpaKey);
                 $('.pwd1').val(json[index].vap_config[index].WpaKey);
-                if (json[index].htmode == 1) {
+                if (json[index].HtMode == 1) {
                     $("#HTmode option[value='1']").prop("selected", true);
-                } else if (json[index].htmode == 2) {
+                } else if (json[index].HtMode == 2) {
                     $("#HTmode option[value='2']").prop("selected", true);
                 }
 
@@ -61,26 +173,31 @@ $(function() {
                 // console.log(data.othis); // 得到美化后的DOM对象
                 var form = layui.form;
                 for (var i = 0; i < json.length; i++) {
-                    if (json[i].phy_enable == 0) {
+
+                    if (json[i].PhyEnable == 0) {
                         //console.log(json[i].phy_enable);
                         $("#content select,#content input,#content button").prop("disabled", true);
-                        $("#onoff").prop("checked", false);
-                        var o = $(".layui-form-switch");
-                        o.find("em").text("OFF");
-                        o.prop("class", "layui-unselect layui-form-switch");
+                        $("#onoff").removeAttr("checked");
+                        // $("#onoff").prop("checked", false);
+                        // var o = $(".layui-form-switch");
+                        // o.find("em").text("OFF");
+                        // o.prop("class", "layui-unselect layui-form-switch");
                     } else {
                         //console.log(json[i].phy_enable);
                         $("#content select,#content input,#content button").removeAttr("disabled");
-                        $("#onoff").prop("checked", true);
-                        var o = $(".layui-form-switch");
-                        o.find("em").text("ON");
-                        o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-                    }
 
+                        $("#onoff").attr("checked", "checked");
+                        // $("#onoff").prop("checked", true);
+                        // var o = $(".layui-form-switch");
+                        // o.find("em").text("ON");
+                        // o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                    }
+                    form.render();
+                    $("#onoffFlag").show();
                     //channel
                     var optionChannel = document.createElement("option");
-                    $(optionChannel).val(json[index].channel).attr("selected", "selected");
-                    $(optionChannel).text(json[index].channel);
+                    $(optionChannel).val(json[index].Channel).attr("selected", "selected");
+                    $(optionChannel).text(json[index].Channel);
                     var channelArr = ['0 auto', '1 (2.412 GHz)', '2 (2.417 GHz)', '3 (2.422 GHz)', '4 (2.427 GHz)', '5 (2.432 GHz)', '6 (2.437 GHz)', '7 (2.442 GHz)', '8 (2.447 GHz)', '9 (2.452 GHz)', '10 (2.457 GHz)', '11 (2.462 GHz)']
                     for (var i = 0; i < channelArr.length; i++) {
                         var channel = "<option value=" + i + ">" + channelArr[i] + "</option>";
@@ -88,7 +205,7 @@ $(function() {
                         //$channelText = $(channel).get(0).text;
                         $('.channel').append(channel);
                     }
-                    var channelSelected = "<option value=" + i + " selected='selected' >" + json[index].channel + " </option>"
+                    var channelSelected = "<option value=" + i + " selected='selected' >" + json[index].Channel + " </option>"
                     $('.channel').prepend(channelSelected);
 
                     var oldVal = "";
@@ -104,67 +221,67 @@ $(function() {
 
                         }
                     })
-                    if (json[index].channel == 11) {
+                    if (json[index].Channel == 11) {
                         $('.channel option:selected').text(channelArr[11]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=11]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 10) {
+                    if (json[index].Channel == 10) {
                         $('.channel option:selected').text(channelArr[10]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=10]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 9) {
+                    if (json[index].Channel == 9) {
                         $('.channel option:selected').text(channelArr[9]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=9]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 8) {
+                    if (json[index].Channel == 8) {
                         $('.channel option:selected').text(channelArr[8]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=8]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 7) {
+                    if (json[index].Channel == 7) {
                         $('.channel option:selected').text(channelArr[7]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=7]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 6) {
+                    if (json[index].Channel == 6) {
                         $('.channel option:selected').text(channelArr[6]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=6]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 5) {
+                    if (json[index].Channel == 5) {
                         $('.channel option:selected').text(channelArr[5]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=5]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 4) {
+                    if (json[index].Channel == 4) {
                         $('.channel option:selected').text(channelArr[4]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=4]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 3) {
+                    if (json[index].Channel == 3) {
                         $('.channel option:selected').text(channelArr[3]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=3]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 2) {
+                    if (json[index].Channel == 2) {
                         $('.channel option:selected').text(channelArr[2]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=2]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 1) {
+                    if (json[index].Channel == 1) {
                         $('.channel option:selected').text(channelArr[1]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=1]').attr("selected", "selected");
                     }
-                    if (json[index].channel == 0) {
+                    if (json[index].Channel == 0) {
                         $('.channel option:selected').text(channelArr[0]);
                         $('.channel option:selected').hide();
                         $('.channel option[value=0]').attr("selected", "selected");
                     }
-                    if (!json[index].channel) {
+                    if (!json[index].Channel) {
                         $('.channel option:selected').text(channelArr[0]);
                         $('.channel option[value=0]').hide();
                     }
@@ -172,14 +289,14 @@ $(function() {
 
                     //hwmode
                     var optionHWMode = document.createElement("option");
-                    $(optionHWMode).val(json[index].hwmode).attr("selected", "selected");
-                    $(optionHWMode).text(json[index].hwmode);
+                    $(optionHWMode).val(json[index].HtMode).attr("selected", "selected");
+                    $(optionHWMode).text(json[index].HtMode);
                     var hwmodeArr = ['0 auto', '1 (802.11b)', '2 (802.11g)', '3 (802.11g+n)'];
                     for (var i = 0; i < hwmodeArr.length; i++) {
                         var hwmode = "<option value=" + i + ">" + hwmodeArr[i] + "</option>";
                         $('.hwmode').append(hwmode);
                     }
-                    var hwmodeSelected = "<option value=" + i + " selected='selected'>" + json[index].hwmode + " </option>"
+                    var hwmodeSelected = "<option value=" + i + " selected='selected'>" + json[index].HtMode + " </option>"
                     $('.hwmode').append(hwmodeSelected);
 
                     $('.hwmode').change(function() {
@@ -192,31 +309,31 @@ $(function() {
                         }
                     })
 
-                    if (json[index].hwmode == 3) {
+                    if (json[index].HtMode == 3) {
                         $('.hwmode option:selected').text(hwmodeArr[3]);
                         $('.hwmode option:selected').hide();
                         $('.hwmode option[value=3]').attr("selected", "selected");
                     }
 
-                    if (json[index].hwmode == 2) {
+                    if (json[index].HtMode == 2) {
                         $('.hwmode option:selected').text(hwmodeArr[2]);
                         $('.hwmode option:selected').hide();
                         $('.hwmode option[value=2]').attr("selected", "selected");
                     }
 
-                    if (json[index].hwmode == 1) {
+                    if (json[index].HtMode == 1) {
                         $('.hwmode option:selected').text(hwmodeArr[1]);
                         $('.hwmode option:selected').hide();
                         $('.hwmode option[value=1]').attr("selected", "selected");
                     }
 
-                    if (json[index].hwmode == 0) {
+                    if (json[index].HtMode == 0) {
                         $('.hwmode option:selected').text(hwmodeArr[0]);
                         $('.hwmode option:selected').hide();
                         $('.hwmode option[value=0]').attr("selected", "selected");
                     }
 
-                    if (!json[index].hwmode) {
+                    if (!json[index].HtMode) {
                         $('.hwmode option:selected').text(hwmodeArr[0]);
                         $('.hwmode option[value=0]').hide();
                     }
@@ -259,44 +376,34 @@ $(function() {
                         $('.EncryptionType option:selected').hide();
                         $('.EncryptionType option[value=0]').attr("selected", "selected");
                     }
-                    // $('.EncryptionType').change(function() {
+
+                    // countryCode
+                    // var optionCountryCode = document.createElement("option");
+                    // $(optionCountryCode).val(json[index].CountryCode).attr("selected", "selected");
+                    // $(optionCountryCode).text(json[index].CountryCode);
+                    // var countryCodeArr = [
+                    //     "00 - World", "AE - United Arab Emirates", "AL - Albania", "AM - Armenia", "AR - Argentina", "AT - Austria", "AU - Australia", "AZ - Azerbaijan", "BE - Belgium", "BG - Bulgaria", "BH - Bahrain", "BN - Brunei Darussalam", "BO - Bolivia", "BR - Brazil", "BY - Belarus", "BZ - Belize", "CA - Canada", "CH - Switzerland ", "CL - Chile", "CN - China", "CO - Colombia", "CR - Costa Rica", "CY - Cyprus", "CZ - Czech Republic", "DE - Germany", "DK - Denmark", "DO - Dominican Republic", "DZ - Algeria", "EC - Ecuador", "EE - Estonia", "EG - Egypt", "ES - Spain", "FI - Finland", "FO - Faroe Islands", "FR - France", "GB - United Kingdom", "GE - Georgia", "GR - Greece", "GT - Guatemala", "HK - Hong Kong", "HN - Honduras", "HR - Croatia", "HU - Hungary ", "ID - Indonesia", "IE - Ireland", "IL - Israel", "IN - India", "IQ - Iraq", "IR - Iran", "IS - Iceland", "IT - Italy", "JM - Jamaica", "JO - Jordan", "JP - Japan", "KE - Kenya", "KP - North Korea", "KR - South Korea", "KW - Kuwait", "KZ - Kazakhstan", "LB - Lebanon", "LI - Liechtenstein", "LT - Lithuania", "LU - Luxembourg", "LV - Latvia", "LY - Libyan Arab Jamahiriya", "MA - Morocco", "MC - Monaco", "MK - Macedonia", "MO - Macao", "MX - Mexico", "MY - Malaysia", "NI - Nicaragua", "NL - Netherlands", "NO - Norway", "NZ - New Zealand", "OM - Oman", "PA - Panama", "PE - Peru", "PH - Philippines", "PK - Pakistan", "PL - Poland", "PR - Puerto Rico", "PT - Portugal", "PY - Paraguay", "QA - Qatar", "RO - Romania", "RU - Russian Federation", "SA - Saudi Arabia", "SE - Sweden", "SG - Singapore", "SI - Slovenia", "SK - Slovakia", "SV - El Salvador", "SY - Syrian Arab Republic", "TH - Thailand", "TN - Tunisia", "TR - Turkey", "TT - Trinidad and Tobago", "TW - China Taiwan", "UA - Ukraine", "US - United States", "UY - Uruguay", "UZ - Uzbekistan", "VE - Venezuela", "VN - Viet Nam", "YE - Yemen", "ZA - South Africa", "ZW - Zimbabwe"
+                    // ];
+
+                    // for (var i = 0; i < countryCodeArr.length; i++) {
+                    //     var countryCode = "<option value=" + countryCodeArr[i].slice(0, 2) + ">" + countryCodeArr[i] + "</option>"
+                    //     $('.countryCode').append(countryCode);
+                    // }
+                    // var countryCodeSelected = "<option value=" + json[index].CountryCode + " selected='selected'>" + json[index].CountryCode + " </option>"
+                    // $('.countryCode').append(countryCodeSelected);
+
+                    // $('.countryCode option:last').hide();
+                    // $('.countryCode').find("option[value=" + json[index].CountryCode + "]").attr("selected", "selected");
+
+                    // $('.countryCode').change(function() {
                     //     if ($(this).find("option:selected")) {
                     //         var _thisVal = $(this).find('option:selected').val();
                     //         oldVal = $(this).attr("old", _thisVal);
-                    //         $('.EncryptionType').find("option[value=" + _thisVal + "]").show();
-                    //         $('.EncryptionType option[value=5]').hide();
-                    //         $('.EncryptionType option[value=0]').show();
-
+                    //         $('.countryCode').find("option[value=" + _thisVal + "]").show();
+                    //         $('.countryCode option[value=00]').show();
+                    //         $('.countryCode option:last').hide();
                     //     }
                     // })
-
-                    // countryCode
-                    var optionCountryCode = document.createElement("option");
-                    $(optionCountryCode).val(json[index].CountryCode).attr("selected", "selected");
-                    $(optionCountryCode).text(json[index].CountryCode);
-                    var countryCodeArr = [
-                        "00 - World", "AE - United Arab Emirates", "AL - Albania", "AM - Armenia", "AR - Argentina", "AT - Austria", "AU - Australia", "AZ - Azerbaijan", "BE - Belgium", "BG - Bulgaria", "BH - Bahrain", "BN - Brunei Darussalam", "BO - Bolivia", "BR - Brazil", "BY - Belarus", "BZ - Belize", "CA - Canada", "CH - Switzerland ", "CL - Chile", "CN - China", "CO - Colombia", "CR - Costa Rica", "CY - Cyprus", "CZ - Czech Republic", "DE - Germany", "DK - Denmark", "DO - Dominican Republic", "DZ - Algeria", "EC - Ecuador", "EE - Estonia", "EG - Egypt", "ES - Spain", "FI - Finland", "FO - Faroe Islands", "FR - France", "GB - United Kingdom", "GE - Georgia", "GR - Greece", "GT - Guatemala", "HK - Hong Kong", "HN - Honduras", "HR - Croatia", "HU - Hungary ", "ID - Indonesia", "IE - Ireland", "IL - Israel", "IN - India", "IQ - Iraq", "IR - Iran", "IS - Iceland", "IT - Italy", "JM - Jamaica", "JO - Jordan", "JP - Japan", "KE - Kenya", "KP - North Korea", "KR - South Korea", "KW - Kuwait", "KZ - Kazakhstan", "LB - Lebanon", "LI - Liechtenstein", "LT - Lithuania", "LU - Luxembourg", "LV - Latvia", "LY - Libyan Arab Jamahiriya", "MA - Morocco", "MC - Monaco", "MK - Macedonia", "MO - Macao", "MX - Mexico", "MY - Malaysia", "NI - Nicaragua", "NL - Netherlands", "NO - Norway", "NZ - New Zealand", "OM - Oman", "PA - Panama", "PE - Peru", "PH - Philippines", "PK - Pakistan", "PL - Poland", "PR - Puerto Rico", "PT - Portugal", "PY - Paraguay", "QA - Qatar", "RO - Romania", "RU - Russian Federation", "SA - Saudi Arabia", "SE - Sweden", "SG - Singapore", "SI - Slovenia", "SK - Slovakia", "SV - El Salvador", "SY - Syrian Arab Republic", "TH - Thailand", "TN - Tunisia", "TR - Turkey", "TT - Trinidad and Tobago", "TW - China Taiwan", "UA - Ukraine", "US - United States", "UY - Uruguay", "UZ - Uzbekistan", "VE - Venezuela", "VN - Viet Nam", "YE - Yemen", "ZA - South Africa", "ZW - Zimbabwe"
-                    ];
-
-                    for (var i = 0; i < countryCodeArr.length; i++) {
-                        var countryCode = "<option value=" + countryCodeArr[i].slice(0, 2) + ">" + countryCodeArr[i] + "</option>"
-                        $('.countryCode').append(countryCode);
-                    }
-                    var countryCodeSelected = "<option value=" + json[index].CountryCode + " selected='selected'>" + json[index].CountryCode + " </option>"
-                    $('.countryCode').append(countryCodeSelected);
-
-                    $('.countryCode option:last').hide();
-                    $('.countryCode').find("option[value=" + json[index].CountryCode + "]").attr("selected", "selected");
-
-                    $('.countryCode').change(function() {
-                        if ($(this).find("option:selected")) {
-                            var _thisVal = $(this).find('option:selected').val();
-                            oldVal = $(this).attr("old", _thisVal);
-                            $('.countryCode').find("option[value=" + _thisVal + "]").show();
-                            $('.countryCode option[value=00]').show();
-                            $('.countryCode option:last').hide();
-                        }
-                    })
 
                 }
             });
@@ -307,20 +414,7 @@ $(function() {
 
 
 
-            // if ($(".pwd1").val()) {
-            //     $(".pwd1").val("")
-            // }
 
-            // if ($(".pwd").val()) {
-            //     $(".pwd").val("")
-            // }
-            // $('#cancel').click(function() {
-            //     $('#pwd').hide();
-            //     $('#pwd1').hide();
-            // })
-
-            //document.body.addEventListener('touchstart,touchend', function() {});
-            //document.getElementById('edit').addEventListener('touchstart,touchend', function() {});
             $('#EncryptionType').change(function() {
 
                 if (this.value == "4") {
@@ -342,8 +436,8 @@ $(function() {
                 } else if (this.value == "0") {
                     //$("#pwd1").hide();
                     $("#pwd").hide();
-                    $(".pwd").val("");
-                    $(".pwd1").val("");
+                    //$(".pwd").val("");
+                    //$(".pwd1").val("");
                 } else {
                     $("#pwd").show();
                     //$("#pwd1").hide();
@@ -389,80 +483,9 @@ $(function() {
 
             }
 
-            // if ($('#EncryptionType option[value=1]').text() == "WEP") {
-            //     $("#pwd").hide();
-            //     $("#pwd1").show();
-            //     $(".pwd1").val(json[index].vap_config[index].SecurityMode);
-            //     $(".pwd").val("");
-            // }
-            // if ($('#EncryptionType option[value=2]').text() == "WPA-PSA") {
-            //     $("#pwd").show();
-            //     $("#pwd1").hide();
-            //     $(".pwd1").val("");
-            //     //console.log($('#EncryptionType option[value=2]').text())
-            // }
-            // if ($('#EncryptionType option[value=3]').text() == "WPA2-PSA") {
-            //     $("#pwd").show();
-            //     $("#pwd1").hide();
-            //     $(".pwd1").val("");
-            // }
-            // if ($('#EncryptionType option[value=4]').text() == "psk-mixed") {
-            //     $("#pwd").show();
-            //     $("#pwd1").hide();
-            //     $(".pwd1").val("");
-            // }
-            // if ($('#EncryptionType option[value=0]').text() == "No Encryption") {
-            //     $("#pwd").hide();
-            //     $("#pwd1").hide();
 
-            // }
-            // $('#EncryptionType').change(function() {
 
-            //     if (json[index].vap_config[index].SecurityMode == "4") {
-            //         $("#pwd1").hide();
-            //         $("#pwd").show();
-            //         $(".pwd1").val("");
-            //     } else if (json[index].vap_config[index].SecurityMode == "3") {
-            //         $("#pwd1").hide();
-            //         $("#pwd").show();
-            //         $(".pwd1").val("");
-            //     } else if (json[index].vap_config[index].SecurityMode == "2") {
-            //         $("#pwd1").hide();
-            //         $("#pwd").show();
-            //         $(".pwd1").val("");
-            //     } else if (json[index].vap_config[index].SecurityMode == "1") {
-            //         $("#pwd1").show();
-            //         $("#pwd").hide();
-            //         $(".pwd").val("");
-            //     } else if (json[index].vap_config[index].SecurityMode == "0") {
-            //         $("#pwd1").hide();
-            //         $("#pwd").hide();
-            //         $(".pwd").val("");
-            //         $(".pwd1").val("");
-            //     } else {
-            //         $("#pwd").show();
-            //         $("#pwd1").hide();
-            //         $(".pwd1").val("");
-            //     }
 
-            // })
-
-            var isShow = true;
-
-            change = function() {
-                var v = $(".pwd").get(0);
-                var v1 = $(".pwd1").get(0);
-                if (isShow) {
-                    v.type = "text";
-                    v1.type = "text";
-                    isShow = false;
-                } else {
-                    v.type = "password";
-                    v1.type = "password";
-                    isShow = true;
-                }
-            };
-            change();
 
 
 
@@ -498,94 +521,4 @@ $(function() {
     });
 
 
-    layui.use(['form'], function() {
-        var form = layui.form;
-        form.on('switch(switchTest)', function(data) {
-            var checked = data.elem.checked;
-            var serverStatus = 1;
-
-            var onoff = this.checked ? 1 : 0;
-            //console.log(data.value);
-            // console.log(data.elem); // 得到checkbox原始DOM对象
-            // console.log(data.elem.checked); // 开关是否开启，true或者false
-            // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
-            // console.log(data.othis); // 得到美化后的DOM对象
-
-            if (this.checked == 1) {
-                $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
-                $("#onoff").prop("checked", true);
-            } else if (this.checked == 0) {
-                $("#content select,#content input").prop("disabled", true);
-                $("#onoff").removeAttr("checked");
-            }
-
-            // if (serverStatus) {
-            //     data.elem.checked = checked;
-            // } else {
-            //     data.elem.checked = !checked;
-            // }
-            form.render();
-
-
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "SetWlanSettings",
-                "params": {
-                    "wifi_config": [{
-                        //"phy_enable": Number($('.current input[type="checkbox"]').val()), //对于开关，0是关，1是开
-                        "phy_enable": onoff, //对于开关，0是关，1是开
-                        // "hwmode": parseInt($(".hwmode option:selected").text()), //可变
-                        "htmode": Number($("#HTmode").val()), //固定
-                        "Channel": parseInt($(".channel option:selected").text()), //可变
-                        "CountryCode": $(".countryCode option:selected").val(), //可变
-                        "vap_config": [{
-                            "Ssid": $(".ssid").val(), //可变
-                            "SecurityMode": Number($(".EncryptionType option:selected").val()), //可变
-                            "WepType": 0, //可变
-                            "WpaType": 2, //可变
-                            "WepKey": $(".pwd1").val(), //可变
-                            "WpaKey": $(".pwd").val(), //可变
-
-                        }]
-                    }]
-                },
-
-                "id": "9.1",
-
-            };
-            data = JSON.stringify(data);
-            console.log(data);
-
-            $.ajax({
-                type: "post",
-                url: "/action/action",
-                data: data,
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(res) {
-                    // $(document).on("click", ".cancel", function() {
-                    //     $("#content select,#content input,#content button").removeAttr("disabled");
-                    //     $("#onoff").prop("checked", true);
-                    //     var o = $(".layui-form-switch");
-                    //     o.find("em").text("ON");
-                    //     o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-
-                    // })
-                    // if (data == "true") {
-                    //     //layer.msg("状态修改成功");
-                    //     active.reload();
-                    // } else {
-
-                    // }
-
-                },
-                error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR.status);
-
-                }
-            });
-
-        });
-    });
-
-});
+}
