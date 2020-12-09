@@ -42,7 +42,7 @@ $(function() {
 
     var data = {
         "jsonrpc": "2.0",
-        "method": "hub_infor",
+        "method": "GetHubInfo",
         "params": {
 
         },
@@ -145,8 +145,10 @@ $(function() {
             $("#iMeiInfo").html(res.result.IMEI);
             $("#voltage").html(res.result.Voltage);
             $("#cd").html(res.result.Current_draw);
-            $("#temperature").html(res.result.Temperature);
-            $("#oh").html(res.result.Operating_hours);
+            var Temperature = (res.result.Temperature - 272.15).toFixed(2);
+            $("#temperature").html(Temperature);
+            var hour = (res.result.Operating_hours / 3600).toFixed(2)
+            $("#oh").html(hour);
             $("#macAddress1").html(res.result.imax_mac);
             $("#macAddress2").html(res.result.ipq_ether_mac);
             $("#aPma").html(res.result.ipq_wifi1_mac);
