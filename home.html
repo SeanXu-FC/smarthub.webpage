@@ -666,7 +666,7 @@
                     $('.location').eq(0).text(json.mobile.lca);
                     $('.act').eq(0).text(json.mobile.act);
                     $('.register').eq(0).text(json.mobile.cgreg);
-                    $('.cell').eq(0).text(json.mobile.Cell_id);
+                    $('.cell').eq(0).text(json.mobile.cell_id);
                 } else {
                     $('.Connected4G').eq(0).text(arr[2]);
                     $('.NetworkProvider').eq(0).text(json.mobile.provider);
@@ -677,7 +677,7 @@
                     $('.location').eq(0).text(json.mobile.lca);
                     $('.act').eq(0).text(json.mobile.act);
                     $('.register').eq(0).text(json.mobile.cgreg);
-                    $('.cell').eq(0).text(json.mobile.Cell_id);
+                    $('.cell').eq(0).text(json.mobile.cell_id);
                     $('.Connected4G').css('color', '#26b167')
                 }
 
@@ -700,8 +700,8 @@
                 var wirelessLen = $('.Group2901').length;
                 var EthernetLen = $('.Group2902').length;
 
-                $('#WirelessConnections span').text('(' + json.dev.apnum + ')');
-                $('#EthernetConnections span').text('(' + json.dev.ethnum + ')');
+                $('#WirelessConnections span').text('(' + json.dev.ap_num + ')');
+                $('#EthernetConnections span').text('(' + json.dev.eth_num + ')');
 
 
                 var $img = $(".imgIcon1 img");

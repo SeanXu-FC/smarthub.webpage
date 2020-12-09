@@ -9,8 +9,8 @@ $(function() {
 })
 
 function getWLANScan(layer) {
-    var loading = layer.load(0, {
-        shade: false
+    var loading = parent.layer.load(0, {
+        shade: [0.5, '#fff']
     });
     var data = {
         "jsonrpc": "2.0",
@@ -35,14 +35,19 @@ function getWLANScan(layer) {
                 }, 3000);
 
             } else if (res.error) {
-                layer.close(loading);
+
                 $("#none_wifiList").children("img").hide();
                 $("#none_wifiList").children("span").text(res.error.message)
-                layer.msg("An error occurred：" + res.error.message);
+                    //layer.msg("An error occurred：" + res.error.message);
+                    //sessionStorage.setItem('clickFlag', true);
+                setTimeout(() => {
+                    getWLANData(layer, loading);
+                }, 3000);
             }
 
         },
         error: function(jqXHR) {
+            //sessionStorage.setItem('clickFlag', true);
             alert("An error occurred：" + jqXHR.status);
         }
     });
@@ -50,9 +55,6 @@ function getWLANScan(layer) {
 
 function getWLANData(layer, loading) {
     console.log(9999999)
-    var loading = layer.load(0, {
-        shade: false
-    });
     var data = {
         "jsonrpc": "2.0",
         "method": "wlan_config",
@@ -69,7 +71,7 @@ function getWLANData(layer, loading) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            layer.close(loading);
+            parent.layer.close(loading);
             if (res.result && res.result.ap_list) {
                 var json = res.result.ap_list;
                 json.sort(arrSort("rssi"));
@@ -77,12 +79,13 @@ function getWLANData(layer, loading) {
                 renderWifiList(json);
             } else if (res.error) {
                 layer.msg("An error occurred：" + res.error.message);
-            }   
+            }  
+            //sessionStorage.setItem('clickFlag', true);
 
         },
         error: function(jqXHR) {
             alert("An error occurred：" + jqXHR.status);
-
+            //sessionStorage.setItem('clickFlag', true);
         }
     });
 }
@@ -179,10 +182,10 @@ function enterPasswordHtml(infoHtml) {
     var encrypt = infoHtml.attr("encrypt");
     var is_saved = infoHtml.attr("is_saved");
     if (is_saved == 1) { //已保存，直接连接
-        savedWifiConnect(ssid, bssid);
+        savedWifiConnect(ssid, bssid, encrypt);
         return;
     }
-    if (encrypt == "[ESS][UTF-8]") {
+    if (encrypt == "[OPEN]") {
         noPWDWifiConnect(ssid, bssid, is_saved);
         return;
     }
@@ -284,6 +287,9 @@ function pollingWifiStatus(infoDOM, type) {
                 $("#Connecting-status").text(res.result.status);
                 if (res.result.status == "Password incorrect" && type == "EnterPassword") { //密码错误从新弹框输入
                     clearInterval(timer);
+                    timer = setInterval(function() {
+                        pollingWifiStatus(infoDOM);
+                    }, 3000)
                     enterPasswordHtml(infoDOM, type)
                 }
                 if (res.result.status == "Connected") {
@@ -314,7 +320,7 @@ function pollingWifiStatus(infoDOM, type) {
     });
 }
 //已经保存的WiFi直接连接
-function savedWifiConnect(ssid, bssid) {
+function savedWifiConnect(ssid, bssid, encrypt) {
     var data = {
         "jsonrpc": "2.0",
         "method": "wlan_config",
@@ -322,6 +328,7 @@ function savedWifiConnect(ssid, bssid) {
             "operate_code": 2,
             "ssid": ssid,
             "bssid": bssid,
+            "encrypt": encrypt,
             "is_saved": 1,
         },
         "id": "9.1"
@@ -350,7 +357,7 @@ function savedWifiConnect(ssid, bssid) {
                         }
                     }
                     renderWifiList(wifiJson);
-                    if (res.result.status != "Disconnected") {
+                    if (res.result.status != "Connected" && res.result.status != "Password incorrect") {
                         clearInterval(timer);
                         $(".connecting-img").show();
                         timer = setInterval(function() {
@@ -385,7 +392,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
             "bssid": bssid,
             "encrypt": "None",
             "is_saved": is_saved,
-            "psk": "",
+            //"psk": "",
         },
         "id": "9.1"
     };
@@ -413,7 +420,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
                         }
                     }
                     renderWifiList(wifiJson);
-                    if (res.result.status != "Disconnected") {
+                    if (res.result.status != "Connected" && res.result.status != "Password incorrect") {
                         clearInterval(timer);
                         $(".connecting-img").show();
                         timer = setInterval(function() {

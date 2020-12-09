@@ -385,7 +385,7 @@ xblock {
     /* top: 66px; */
     top: 77px;
     bottom: 42px;
-    bottom: 0px;
+    bottom: 32px;
     left: 0;
     z-index: 2;
     padding-top: 20px;
@@ -501,7 +501,7 @@ xblock {
     /* top: 66px; */
     top: 37px;
     right: 0;
-    bottom: 0px;
+    bottom: 30px;
     left: 407px;
     overflow: hidden;
     zoom: 1;

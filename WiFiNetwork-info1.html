@@ -10,12 +10,9 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <script type="text/javascript" src="js/common.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="layui/css/layui.css">
     <link href="css/style.css" rel="stylesheet" />
-    <script src="js/WiFiNetwork.js"></script>
     <title>Document</title>
     <style>
         .mc {
@@ -481,7 +478,7 @@
             padding: 10px 0px 10px 20px;
         }
         
-        .Rectangle-1205 table>tbody>tr:hover {
+        .Rectangle-1205 table>tbody>tr.tip-dom:hover {
             background-color: #fff1f6;
         }
         
@@ -854,7 +851,7 @@
                 <span class="Choose-the-wireless-network-for-your-SmartHub-to-connect-to mt-40">Choose the wireless network for your SmartHub to connect to</span>
             </div>
             <div class="Rectangle-1205 mt-20" style="margin-left:120px;display:none" id="WLAN_list_c">
-                <div class="none-list" id="none_wifiList"><img class="connecting-img1" src="images/loading.gif" /><span>Loadding</span></div>
+                <div class="none-list" id="none_wifiList"><span>Loadding</span></div>
                 <!-- <table class="wifi-table">
                     <tr>
                         <td class="col-md-8">
@@ -1080,99 +1077,28 @@
         </div>
     </div>
     <div id="bg1"></div>
-    <script>
-        //弹出一个iframe层
-        $('.Rectangle-1205 .wifi').on('click', function() {
-
-            //iframe层
-            parent.layer.open({
-                type: 2,
-                title: false,
-                //shadeClose: true,
-                shade: 0.8,
-                area: ['521px', '360px'],
-                content: ['EnterPassword.html', 'no'],
-            });
-        });
-        $('.wireless img').on('click', function() {
-            //iframe层
-            parent.layer.open({
-                type: 2,
-                title: false,
-                //shadeClose: true,
-                shade: 0.8,
-                area: ['534px', '715px'],
-                content: ['WirelessNameInfo.html', 'no'],
-            });
-        });
-        $('.addN').on('click', function() {
-            $(".layui-layer").css("background", "none");
-
-            //iframe层
-            parent.layer.open({
-                type: 2,
-                title: false,
-                //shadeClose: true,
-                shade: 0.8,
-                area: ['541px', '361px'],
-                content: ['AddNetwork.html', 'no'],
-            });
-
-        });
-        $(".layui-layer").css("background", "none");
-    </script>
-    <script>
-        // $('.wifi').click(function() {
-        //     $('#bg1').show();
-        //     $('#enterPass').show(500);
-        //     console.log(111)
-        // }, function() {
-        //     $('#bg1').hide();
-        //     $('#enterPass').hide(500);
-        // })
-
-        // $('.wifi').click(function() {
-        //     if ($(this).css('display') == 'none') {
-        //         $('#bg1').show();
-        //         $('#enterPass').show(500);
-        //         //$(this).css('display', 'table-cell');
-        //     } else {
-        //         //$(this).css('display', 'block');
-        //         $('#bg1').hide();
-        //         $('#enterPass').hide(500);
-        //     }
-        // });
-
-        $(".connected button").prop("disabled", true);
-        $(".connected button").css("opacity", "0.5");
-        // $('.wifi').click(function() {
-        //     if ($('#enterPass1').css('display') == 'none') {
-        //         // $('#bg1').show();
-        //         // $('#enterPass').show(500);
-        //         //$(window.parent.document).find('#bg1').css('display', 'table-cell');
-        //         //$(window.parent.document).find('#enterPass1').css('display', 'table-cell');
-        //         // $(window.parent.document).find('#enterPass').hide();
-        //         $('#bg1').css('display', 'table-cell');
-        //         $('#enterPass1').css('display', 'table-cell');
-        //         console.log(111)
-        //     } else {
-        //         $('#bg1').css('display', 'none');
-        //         $('#enterPass1').css('display', 'none');
-        //         // $('#bg1').hide();
-        //         // $('#enterPass').hide(500);
-        //     }
-        // });
 
 
-        // $(document).click(function() {
-        //     $('#bg1').hide();
-        //     $('#enterPass1').hide(500);
-        // });
-    </script>
+    <!-- <div id="enterPass" class="Rectangle-1187">
+        <h3 class="Enter-admin-password">Enter admin password</h3>
+        <p class="Enter-the-admin-password-to-make-changes mt-20">Enter admin password to make change</p>
+        <label class="Password mt-30">password:</label>
+        <input type="password" value="" class="Rectangle-1188" />
+        <div class="Forgot-password mt-20">Forgot password?</div>
+        <div style="margin-left:192px;" class="mt-30"><button class="Path-101 Cancel">Cancel</button><button class="Rectangle-1187 Rectangle-1182 active OK" style="margin-left:20px;">OK</button></div>
+    </div>
+    <div id="bg1"></div> -->
+    <script type="text/javascript" src="js/common.js"></script>
+    <script src="layui/layui.js " charset="utf-8 "></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <script src="js/WiFiNetwork.js"></script>
+
     <script>
         $(function() {
             var isShow = true;
-
+            $(".connected button").prop("disabled", true);
+            $(".connected button").css("opacity", "0.5");
             change = function() {
                 var v = $(".pwd").get(0);
 
@@ -1185,43 +1111,9 @@
                 }
             };
             change();
+
         });
-    </script>
-    <!-- <div id="enterPass" class="Rectangle-1187">
-        <h3 class="Enter-admin-password">Enter admin password</h3>
-        <p class="Enter-the-admin-password-to-make-changes mt-20">Enter admin password to make change</p>
-        <label class="Password mt-30">password:</label>
-        <input type="password" value="" class="Rectangle-1188" />
-        <div class="Forgot-password mt-20">Forgot password?</div>
-        <div style="margin-left:192px;" class="mt-30"><button class="Path-101 Cancel">Cancel</button><button class="Rectangle-1187 Rectangle-1182 active OK" style="margin-left:20px;">OK</button></div>
-    </div>
-    <div id="bg1"></div> -->
-    <!-- <script>
-        $(function() {
-            // $('#bg1').show();
 
-            // $(document).click(function() {
-            //     $('#bg').hide();
-            //     $('#enterPass').hide(500);
-            // });
-        });
-        var oBtn = document.getElementById("btn1");
-        var oBg = document.getElementById("bg");
-        var oCont = document.getElementById("cont");
-        var oClose = document.getElementById("close");
-
-        oBtn.onclick = function() {
-            oBg.style.display = "block";
-            oCont.style.display = "block";
-        }
-        oClose.onclick = function() {
-            oBg.style.display = "none";
-            oCont.style.display = "none";
-        }
-    </script> -->
-    <script src="layui/layui.js " charset="utf-8 "></script>
-
-    <script>
         function show() {
             var oSecurity = document.getElementById("security").value;
             var oAdd = document.getElementById("add");
@@ -1243,37 +1135,7 @@
 
         }
     </script>
-    <script>
-        layui.use(['form'], function() {
-            var form = layui.form,
-                layer = layui.layer,
-                layedit = layui.layedit,
-                laydate = layui.laydate;
 
-        });
-
-
-
-
-        // *如果是页面层*
-        // layer.open({
-        //     type: 1,
-        //     content: '传入任意的文本或html' //这里content是一个普通的String
-        // });
-        // layer.open({
-        //     type: 1,
-        //     content: $('#id') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
-        // });
-        //Ajax获取
-        // $.post('url', {}, function(str) {
-        //     layer.open({
-        //         type: 1,
-        //         content: str //注意，如果str是object，那么需要字符拼接。
-        //     });
-        // });
-
-        //页面层
-    </script>
 </body>
 
 </html>

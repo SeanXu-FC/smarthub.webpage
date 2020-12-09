@@ -764,7 +764,7 @@
             if (Notifications == 1) { //如果是打开的才传用户操作的
                 var data = {
                     "jsonrpc": "2.0",
-                    "method": "io_conf",
+                    "method": "IoConfigure",
                     "params": {
                         "mode": 3,
                         "id": Number(dataId),
@@ -779,7 +779,7 @@
             } else { //否则oldTrigType，oldVolt，oldNoti_msg传之前的
                 var data = {
                     "jsonrpc": "2.0",
-                    "method": "io_conf",
+                    "method": "IoConfigure",
                     "params": {
                         "mode": 3,
                         "id": Number(dataId),

@@ -309,6 +309,7 @@
                     "id": "9.1"
                 }
                 data = JSON.stringify(data);
+
                 $.ajax({
                     type: "post",
                     url: req + "/action/action",
@@ -316,8 +317,17 @@
                     dataType: "json",
                     contentType: "application/json;charset=utf-8",
                     success: function(res) {
-                        console.log(data)
+                        if (res.result) {
+                            var domain = window.location.host;
+                            window.location.href = ('https:' == document.location.protocol ?
+                                'https://' : 'http://') + domain + "/setupWizard-3.html";
+                        } else {
+                            layui.use('layer', function() {
+                                var layer = layui.layer;
+                                layer.msg(res.error.message);
+                            })
 
+                        }
                     },
                     error: function(jqXHR) {
                         alert("An error occurred：" + jqXHR.status);

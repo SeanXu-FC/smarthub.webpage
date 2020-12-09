@@ -220,6 +220,8 @@
         
         .wirelessInfo {
             padding: 20px;
+            overflow-y: auto;
+            height: 100%;
         }
         
         .layui-form-label {
@@ -297,6 +299,36 @@
             text-align: right;
             margin-right: 0px;
         }
+        
+        .layui-form {
+            position: relative;
+        }
+        
+        .card-close {
+            width: 12px;
+            position: absolute;
+            top: 0;
+            right: 15px;
+            color: #666;
+        }
+        
+        .WLAN-auto-swtich {
+            display: none;
+        }
+        
+        .layui-form-item {
+            margin-bottom: 0;
+        }
+        
+        .layui-layer-iframe {
+            overflow: hidden !important;
+            overflow-y: hidden !important;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -304,7 +336,7 @@
     <div class="container wirelessInfo form-inline" id="wirelessInfo">
         <div class="layui-form">
             <div class="SKY546H">--</div>
-
+            <img src="images/close.png" class="card-close card-close-btn" />
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Status:</label>
                 <div class="layui-input-block">
@@ -349,16 +381,16 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label Status">Connect automatically:</label>
-                <div class="layui-input-block">
-                    <input id="WLAN_auto_swtich" type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                <div class="layui-input-block WLAN-auto-swtich">
+                    <input id="WLAN_auto_swtich" type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                     <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch">
                         <em>ON</em><i></i></div>
                 </div>
             </div>
             <div class="row pt-30 bottom-btn">
                 <span class="col-md-2 col-md-offset-4" id="layerDemo" style="display: inline-block;margin-left:148px;"><button data-method="notice"
-                        class="Path-97 layui-btn Forget-network">Forget network</button></span>
-                <span class="col-md-4 col-md-offset-2 connected" style="display: inline-block;"><button id="btn"
+                        class="Path-97 layui-btn Forget-network" disabled>Forget network</button></span>
+                <span class="col-md-4 col-md-offset-2 card-close-btn" style="display: inline-block;"><button id="btn"
                         class="Rectangle-1182 active Close">Close</button></span>
             </div>
         </div>
@@ -376,7 +408,7 @@
             layui.use(['layer', 'form'], function() {
                 var form = layui.form,
                     layer = layui.layer;
-                getWifiDetail(form);
+                getWifiDetail(layer, form);
                 form.on('switch(switchTest)', function(data) {
                     var checked = data.elem.checked;
                     console.log(checked)
@@ -384,12 +416,12 @@
                 });
             });
 
-            $('#btn').click(function() {
+            $('.card-close-btn').click(function() {
                 $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("bssid", "");
                 setTimeout(() => {
                     var index = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index); //关闭当前页
-                }, 500);
+                }, 200);
 
             });
 
@@ -399,9 +431,10 @@
                     id: "forget",
                     type: 2,
                     title: false,
-                    //shadeClose: true,
+                    closeBtn: 0,
                     shade: 0.8,
                     area: ['534px', '260px'],
+                    //area: '534px',
                     content: ['ForgetNetwork.html?ssid=' + ssid + "&bssid=" + bssid + "&is_saved=" + is_saved, 'no'],
                     end: function() {
                         var flag = $(parent.frames["my-iframe"].document).find("#wifiDetai_info").val();
@@ -413,10 +446,14 @@
 
                     }
                 });
+                $(window).resize();
             });
         })
 
-        function getWifiDetail(form) {
+        function getWifiDetail(layer, form) {
+            var loading = layer.load(0, {
+                shade: false
+            });
             var data = {
                 "jsonrpc": "2.0",
                 "method": "wlan_config",
@@ -431,16 +468,20 @@
             data = JSON.stringify(data);
             $.ajax({
                 type: "post",
+                timeout: 7000,
                 url: req + "/action/action",
                 data: data,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
+                    layer.close(loading);
+                    $("#layerDemo .layui-btn").removeAttr("disabled");
                     if (res.result) {
+                        if (res.result.status == "Unexpected Error Occured!") {
+                            getWifiDetail(layer, form);
+                        }
                         $(".SKY546H").text(res.result.ssid);
                         $(".Link-speed").text(res.result.rate + "Mbps");
-
-
                         $(".Security").text(res.result.encrypt);
                         $(".Security").attr("title", res.result.encrypt);
                         $(".MAC-address").text(res.result.bssid);
@@ -448,8 +489,6 @@
                         if (res.result.is_saved == 0) {
                             $('#layerDemo').hide();
                         }
-
-
                         var signal = Math.abs(res.result.rssi);
                         console.log(signal)
                         if (signal < 70) {
@@ -477,13 +516,27 @@
                             $("#WLAN_auto_swtich").removeAttr("checked");
                         }
                         form.render();
-
+                        $(".WLAN-auto-swtich").show();
                     } else if (res.error) {
                         layui.use(['form', 'layer'], function() {
                             var layer = layui.layer;
                             layer.msg("An error occurred：" + res.error.message);
                         })
 
+                    }
+                },
+                complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+                    if (status == 'timeout') { //超时,status还有success,error等值的情况
+                        ajaxTimeout.abort();
+                        layui.use(['layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("请求超时")
+                        });
+                        $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("bssid", "");
+                        setTimeout(() => {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index); //关闭当前页
+                        }, 500);
                     }
                 },
                 error: function(jqXHR) {

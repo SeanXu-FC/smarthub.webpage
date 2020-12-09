@@ -502,7 +502,7 @@
 
             var data = {
                 "jsonrpc": "2.0",
-                "method": "lan_conf",
+                "method": "LanConfigure",
                 "params": {
                     "mode": 3,
                     "ip_1": "",
@@ -716,7 +716,7 @@
 
                         var data = {
                             "jsonrpc": "2.0",
-                            "method": "lan_conf",
+                            "method": "LanConfigure",
                             "params": {
                                 "mode": 0,
                                 "ip_1": "",
@@ -777,7 +777,7 @@
                 }
                 var data = {
                     "jsonrpc": "2.0",
-                    "method": "lan_conf",
+                    "method": "LanConfigure",
                     "params": {
                         "mode": 1,
 
@@ -831,7 +831,7 @@
             $("#btn3").on("click", function() {
                 var data = {
                     "jsonrpc": "2.0",
-                    "method": "lan_conf",
+                    "method": "LanConfigure",
                     "params": {
                         "mode": 2,
                         "ip_1": $('#ipaddress1_ipinput input[name="ipOne"]').val() + '.' + $('#ipaddress1_ipinput input[name="ipTwo"]').val() + '.' + $('#ipaddress1_ipinput input[name="ipThree"]').val() + '.' + $('#ipaddress1_ipinput input[name="ipFour"]').val(),

@@ -270,80 +270,15 @@
                 <div id="result"><a href="/" id="logout">exit</a></div>
             </li> -->
         </ul>
-        <script language="javascript" type="text/javascript">
-            $(function() {
-                //Get cookie
-                function getCookie(name) {
-                    var strCookie = document.cookie;
-
-                    var arrCookie = strCookie.split("; ");
-                    for (var i = 0; i < arrCookie.length; i++) {
-                        var arr = arrCookie[i].split("=");
-                        if (arr[0] == name)
-                            return arr[1];
-                    }
-                    return "";
-                }
-
-                //Setting cookies
-                function setCookie(name, value, expireHours) {
-                    var cookieString = name + "=" + escape(value);
-                    if (expireHours > 0) {
-                        var date = new Date();
-                        date.setTime(date.getTime + expireHours * 3600 * 1000);
-                        cookieString = cookieString + "; expire=" + date.toGMTString();
-                    }
-                    cookieString = cookieString + "; secure;";
-                    document.cookie = cookieString;
-                }
-
-                //Clear cookie
-                function clearCookie() {
-                    delCookie("password");
-                    delCookie("username");
-
-                }
-
-                //delete cookie
-                function delCookie(name) {
-                    setCookie(name, '', -1);
-                }
-
-                var domain = window.location.host;
-                var logout = document.getElementById("logout");
-                $("#logout").click(function() {
-
-                    $.ajax({
-                        url: "/action/logout",
-                        type: "post",
-
-                        data: {
-
-                        },
-
-                    });
-                    clearCookie();
-                    if (confirm("Are you sure you want to exit the system?"))           
-                        window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
-                    return false;  
-
-                });
-            })
-        </script>
-
-
-
-
-
 
     </div>
     <!-- Top end -->
     <!-- Start in the middle -->
     <!-- Left menu starts -->
-    <div class="left-nav">
+    <div class="left-nav gundiv">
         <div id="side-nav">
 
-            <ul id="nav">
+            <ul id="nav" lay-filter="leftNav">
                 <li>
                     <a href="home.html" target="my-iframe" class="title">
                         <!-- <i class="iconfont">&#xe616;</i> -->
@@ -352,7 +287,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="setupWizard.html" target="my-iframe" class="title">
+                    <a href="javascript:;" data-url="setupWizard.html" data-id='setupWizard' class="title">
                         <!-- <i class="iconfont ">&#xe656;</i> -->
                         <cite class="hd">SET-UP WIZARD </cite>
                         <!-- <i class="iconfont nav_right ">&#xe603;</i> -->
@@ -366,7 +301,7 @@
                     </a>
                     <ul class="sub-menu ">
                         <li>
-                            <a href="WiFiNetwork-info1.html" target="my-iframe">
+                            <a href="javascript:;" data-url="WiFiNetwork-info1.html" data-id='WiFiNetwork_info'>
                                 <!-- <i class="iconfont ">&#xe6b6;</i> -->
                                 <cite class="hd">Wireless network</cite>
 
@@ -555,67 +490,6 @@
     <!-- Bottom end -->
 
 
-    <!-- <script>
-        $(function() {
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "SetWlanSettings",
-                "params": {
-                    "wifi_config": [{
-                        "phy_id": 2, //固定
-                        "phy_name": "wifi2", //固定
-                        "phy_enable": 0, //对于开关
-                        "hwmode": $(".hwmode option:selected").val(), //可变
-                        "htmode": 3, //固定
-                        "tx_power": 23, //固定
-                        "Channel": $(".channel option:selected").val(), //可变
-                        "country_code": $(".countryCode option:selected").val(), //可变
-                        "vap_config": [{
-                            "vap_id": 0, //固定
-                            "vap_mode": "ap", //固定
-                            "vap_enable": 0, //固定
-                            "Ssid": $(".ssid").val(),
-                            "SsidHidden": 0, //固定
-                            "SecurityMode": $(".EncryptionType").val(), //可变
-                            "WepType": 0, //可变
-                            "WpaType": 2, //可变
-                            "WepKey": "", //可变
-                            "WpaKey": $(".pwd").val(), //可变
-                            "ApIsolation": 0, //固定
-                            "max_numsta": 15 //固定
-                        }]
-                    }]
-                },
-                "id": "9.1",
-            };
-
-            data = JSON.stringify(data);
-            $.ajax({
-                type: "post",
-                url: "/action/action",
-                data: data,
-
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(res) {
-                    console.log(data);
-                    // $('#pwd').attr("disabled", true);
-                    // $('#btn1').attr("disabled", true);
-                    $("#content select,#content input,#content button").prop("disabled", true);
-                    $('#edit').attr("disabled", false);
-
-                    $('#pwd').attr("disabled", true);
-
-                },
-                error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR.status);
-                }
-
-            });
-
-
-        });
-    </script> -->
 
     <!-- <script>
         $(function() {
@@ -632,7 +506,70 @@
     <script type="text/javascript" src="js/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(function() {
+            //Get cookie
+            function getCookie(name) {
+                var strCookie = document.cookie;
+
+                var arrCookie = strCookie.split("; ");
+                for (var i = 0; i < arrCookie.length; i++) {
+                    var arr = arrCookie[i].split("=");
+                    if (arr[0] == name)
+                        return arr[1];
+                }
+                return "";
+            }
+
+            //Setting cookies
+            function setCookie(name, value, expireHours) {
+                var cookieString = name + "=" + escape(value);
+                if (expireHours > 0) {
+                    var date = new Date();
+                    date.setTime(date.getTime + expireHours * 3600 * 1000);
+                    cookieString = cookieString + "; expire=" + date.toGMTString();
+                }
+                cookieString = cookieString + "; secure;";
+                document.cookie = cookieString;
+            }
+
+            //Clear cookie
+            function clearCookie() {
+                delCookie("password");
+                delCookie("username");
+
+            }
+
+            //delete cookie
+            function delCookie(name) {
+                setCookie(name, '', -1);
+            }
+
+            var domain = window.location.host;
+            var logout = document.getElementById("logout");
+            $("#logout").click(function() {
+
+                $.ajax({
+                    url: "/action/logout",
+                    type: "post",
+
+                    data: {
+
+                    },
+
+                });
+                clearCookie();
+                if (confirm("Are you sure you want to exit the system?"))           
+                    window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/pub/login.html';     
+                return false;  
+
+            });
+        })
+    </script>
+
     <script>
+        //sessionStorage.setItem('clickFlag', true);
+        var clickFlag = 'true';
         $(function() {
             // $('#enterPass').hide();
             $('.sub-menu li a').click(function() {
@@ -655,11 +592,30 @@
                 $('#enterPass').hide(500);
             });
 
-        });
+            $("#side-nav #nav a").on("click", function() {
+                $("#side-nav #nav a").removeClass("nav-a-active");
+                $(this).addClass("nav-a-active");
+                var navA = $(this);
+                var id = navA.attr('data-id');
+                var url = navA.attr('data-url');
+                if (id == "WiFiNetwork_info" || id == "setupWizard") {
+                    var src = $("#my-iframe").attr("src");
+                    $("#my-iframe").attr("src", url);
 
-        // bg1 = function() {
-        //     $('#bg1').show();
-        // }
+
+                    // clickFlag = sessionStorage.getItem('clickFlag');
+                    // if (clickFlag == 'true') {
+                    //     sessionStorage.setItem('clickFlag', false);
+                    //     var src = $("#my-iframe").attr("src");
+                    //     $("#my-iframe").attr("src", url);
+                    // } else {
+                    //     //layer.msg("WiFi scanning, please wait!");
+                    // }
+                }
+            })
+
+
+        });
     </script>
 </body>
 

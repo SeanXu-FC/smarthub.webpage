@@ -131,14 +131,14 @@
 
         function reStarting(flag) {
             var timeout0;
-            if (flag == 0 || flag == "0") {                
+            if (flag == 0 || flag == "0") {
                 timeout0 = 1000;
             } else {
                 timeout0 = 3000;
             }
             data = {
                 "jsonrpc": "2.0",
-                "method": "restart_and_reset",
+                "method": "RestartAndReset",
                 "params": {
                     "mode": flag
                 },

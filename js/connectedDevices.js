@@ -1,6 +1,6 @@
 $(function() {
 
-    var data = { "jsonrpc": "2.0", "method": "connect_device", "params": {}, "id": "9.1" };
+    var data = { "jsonrpc": "2.0", "method": "GetConnectedDevices", "params": {}, "id": "9.1" };
 
     data = JSON.stringify(data);
     $.ajax({

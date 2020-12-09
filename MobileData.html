@@ -7,13 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link href="layui/css/modules/laydate/default/laydate.css" rel="stylesheet" media="all">
     <link href="css/style.css" rel="stylesheet" />
-    <script type="text/javascript" src="js/MobileData.js"></script>
-    <script type="text/javascript" src="js/MobileSetData.js"></script>
     <title>Document</title>
     <style type="text/css">
         table {
@@ -56,7 +52,7 @@
             font-size: 16px;
             line-height: 32px;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 25px;
         }
         
         #arrow,
@@ -121,6 +117,7 @@
             letter-spacing: normal;
             text-align: left;
             color: #861f41;
+            cursor: pointer;
         }
         
         .Data-usage {
@@ -169,7 +166,7 @@
             background-color: #fff;
             box-sizing: border-box;
             width: 100%;
-            padding: 20px 50px;
+            padding: 20px 50px 20px 25px;
         }
         
         .line {
@@ -634,6 +631,45 @@
             color: #434343 !important;
             margin-right: 20px;
         }
+        
+        .usedMB-echart {
+            width: 550px;
+            height: 155px;
+        }
+        
+        .echart-text {
+            font-size: 12px;
+            display: inline-block;
+            color: #343434;
+            transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            /* Internet Explorer 9*/
+            -moz-transform: rotate(-90deg);
+            /* Firefox */
+            -webkit-transform: rotate(-90deg);
+            /* Safari 和 Chrome */
+            -o-transform: rotate(-90deg);
+            /* Opera */
+            position: absolute;
+            left: -48px;
+            top: 58px;
+        }
+        
+        .content-echart {
+            position: relative;
+        }
+        
+        .content1 h3 {
+            padding-bottom: 20px;
+        }
+        
+        .widthper50 {
+            width: 550px;
+        }
+        
+        .tab-content>div.z1 {
+            padding-left: 0;
+        }
     </style>
 </head>
 
@@ -652,7 +688,7 @@
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
                             <div class="layui-input-block" id="mobileData">
-                                <input type="checkbox" checked="" name="open" value="" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <input type="checkbox" checked="" name="open" value="" lay-skin="switch" lay-filter="mobileData" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
@@ -665,7 +701,7 @@
                     <td>
                         <div class="layui-form layui-form-pane layui-form-item">
                             <div class="layui-input-block" id="DataRoaming">
-                                <input type="checkbox" checked="" name="open" value="" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <input type="checkbox" checked="" name="open" value="" lay-skin="switch" lay-filter="dataRoaming" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
@@ -682,7 +718,7 @@
                 </div>
                 <div class="advancedContent" style="overflow: hidden;zoom:1;">
                     <div class="body1 mb-15">
-                        <div class="Data-usage mt-30"><span><img id="arrow1" class="up"
+                        <div class="Data-usage mt-30" id="arrow1"><span><img  class="up pb-5"
                                     src="images/icon-arrow-right.png"></span> Data usage</div>
                         <div class="tab-wrapper content" id="content" style="display: none;">
 
@@ -692,19 +728,23 @@
                             </ul>
 
                             <div class="tab-content">
-                                <div>
-                                    <h3>Usage for this month -1</h3>
-                                    <div><img src="images/usage.png"></div>
+                                <div class="content1">
+                                    <h3>Usage for this month</h3>
+                                    <div class="content-echart">
+                                        <!-- <img src="images/usage.png"> -->
+                                        <span class="echart-text">Usage (MB)</span>
+                                        <div class="usedMB-echart" id="used_MB"></div>
+                                    </div>
                                     <p class="widthper50 mt-40 mb-40 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
-                                            <e style="font-size:26px;font-weight:600">500</e>MB
+                                            <e style="font-size:26px;font-weight:600" id="allUsed_MB">500</e>MB
                                         </span> total used, <span style="font-size:18px;font-weight:600">
-                                            <e style="font-size:26px;font-weight:600">300</e>MB
+                                            <e style="font-size:26px;font-weight:600" id="redmian_MB">300</e>MB
                                         </span> remaining</p>
                                     <div class="layui-form layui-form-pane layui-form-item">
                                         <label class="layui-form-label Set-monthly-data-limit">Set monthly data
                                             limit:</label>
                                         <div class="layui-input-block" id="monthlydatalimit">
-                                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                            <input type="checkbox" name="open" lay-skin="switch" lay-filter="dataLimit" lay-text="ON|OFF">
                                         </div>
                                     </div>
 
@@ -715,9 +755,9 @@
                                                 The remaining data allowance threshold below which the router will switch to the other SIM</div>
                                         </div>
                                         <div class="layui-input-inline" id="dataLimit" style="display: inline-block;margin-left:56px;margin-top: -40px;">
-                                            <input type="text" name="text" value="800" class="Rectangle-1185 pl-10" style="display: inline-block;">
+                                            <input type="text" name="text" value="800" class="Rectangle-1185 pl-10" style="display: inline-block;" disabled>
                                             <div class="layui-input-block" style="margin-left: 78px;margin-top: -31px;">
-                                                <select name="city" lay-verify="required" style="border:0">
+                                                <select id="switchMB" name="city" lay-verify="required" style="border:0" disabled>
                                                     <option value="0" class="MB">MB</option>
                                                     <option value="1" class="MB">GB</option>
                                                 </select>
@@ -740,14 +780,13 @@
                                             <div class="Start-data-limit-on">Start data limit on</div>
                                         </div>
                                         <div class="layui-input-inline" style="display: inline-block;margin-left:56px;" id="date">
-                                            <input type="text" id="test1" name="text" value="01/01/2021" class="Rectangle-1185-2021 pl-10 test1">
-
+                                            <input type="text" id="limit_time" name="text" value="2021-01-01" class="Rectangle-1185-2021 pl-10 test1" disabled>
                                         </div>
 
                                         <div style="display: inline-block;margin-left: 23px;" class="for">for</div>
                                         <div class="" style="display: inline-block;" id="formonth">
                                             <div class="layui-input-block" style="margin-left:30px;">
-                                                <select name="city" lay-verify="required" class="Rectangle-1185-12 formonth">
+                                                <select id="last_manth_s" name="city" lay-verify="required" class="Rectangle-1185-12 formonth" disabled>
                                                     <option value="1" class="MB">1</option>
                                                     <option value="2" class="MB">2</option>
                                                     <option value="3" class="MB">3</option>
@@ -771,7 +810,7 @@
                                         <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data
                                             limit notifications:</label>
                                         <div class="layui-input-block pt-5" id="usagereminders">
-                                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="limitInfo" lay-text="ON|OFF">
                                         </div>
                                     </div>
                                     <div class="Receive-notifications-when-the-data-limit-has-been-reached">Receive notifications when the data limit has been reached
@@ -779,7 +818,7 @@
 
                                 </div>
 
-                                <div>
+                                <!-- <div>
                                     <h3>Usage for this month -2</h3>
                                     <div><img src="images/usage.png"></div>
                                     <p class="widthper50 mt-40 mb-40 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
@@ -854,17 +893,17 @@
                                     </div>
                                     <div class="Receive-notifications-when-the-data-limit-has-been-reached">Receive notifications when the data limit has been reached
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
 
-                            <div class="save-btn" style="font-size: 18px;"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button><button class="Rectangle-1182 mt-10"><span class="" onclick="save()">Save</span></button>
+                            <div class="save-btn" style="font-size: 18px;"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button><button id="btn_saved1" class="Rectangle-1182 mt-10"><span class="" >Save</span></button>
                             </div>
                         </div>
                     </div>
 
                     <div class="body2">
-                        <div class="Data-usage mb-30"><span><img id="arrow2" class="up"
+                        <div class="Data-usage mb-30" id="arrow2"><span><img  class="up"
                                     src="images/icon-arrow-right.png"></span> SIM management</div>
                         <div class="" style="position: relative;display: none;" id="content1">
                             <div class="row">
@@ -883,7 +922,7 @@
                                 <label class="layui-form-label Set-monthly-data-limit mt-20 mb-0">Auto SIM
                                     switching:</label>
                                 <div class="layui-input-block pt-5" id="AutoSim">
-                                    <input type="checkbox" checked="" value="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                    <input type="checkbox" checked value="" name="open" lay-skin="switch" lay-filter="SIMswitch" lay-text="ON|OFF">
                                 </div>
                             </div>
                             <div class="Receive-notifications-when-the-data-limit-has-been-reached">Router will switch to the other SIM by defined SIM switching rules
@@ -895,7 +934,7 @@
                             <div class="Receive-notifications-when-the-data-limit-has-been-reached">Conditions on when the SIM card will switch to the other
                             </div>
 
-                            <div class="tab-wrapper content" id="content1">
+                            <div class="tab-wrapper content" id="content1" style="margin-left: 20px;">
 
                                 <ul class="tab-menu ml-20">
                                     <li class="SIM1-SIM2 SIM1-to-SIM2  active">SIM1 to SIM2</li>
@@ -905,19 +944,19 @@
                                 <div class="tab-content" id="tab-content1">
                                     <div class="layui-transfer-data layui-form" id="Sim1ToSim2">
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Weak signal-1" value="Weak signal-1">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" id="Weak_signal_1" title="Weak signal-1" value="Weak signal-1">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal-1</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Data limit reached" value="Data limit reached">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" id="rule_dlimit_1" title="Data limit reached" value="Data limit reached">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="When roaming" value="hen roaming">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" id="rule_roamming_1" title="When roaming" value="hen roaming">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="No network" value="No network">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" id="rule_noservice_1" title="No network" value="No network">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <!-- <div class="checkbox">
@@ -950,19 +989,19 @@
                                     </div>
                                     <div class="layui-transfer-data layui-form">
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Weak signal-2" value="Weak signal-2">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" id="Weak_signal_2" title="Weak signal-2" value="Weak signal-2">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal-2</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Data limit reached" value="Data limit reached">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" id="rule_dlimit_2" title="Data limit reached" value="Data limit reached">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="When roaming" value="When roaming">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" id="rule_roamming_2" title="When roaming" value="When roaming">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                         <div>
-                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="No network" value="No network">
+                                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" id="rule_noservice_2" title="No network" value="No network">
                                             <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
                                         </div>
                                     </div>
@@ -972,7 +1011,7 @@
                             <div>
                                 <div class="tab-wrapper content" id="content2">
 
-                                    <ul class="tab-menu ml-20" style="margin-top:-30px">
+                                    <ul class="tab-menu" style="margin-top:-30px;margin-left: -6px;">
                                         <li class="SIM1 active">SIM1</li>
                                         <li class="SIM1">SIM2</li>
                                     </ul>
@@ -999,7 +1038,7 @@
                                                 <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin
                                                     lock:</label>
                                                 <div class="layui-input-block mt-30">
-                                                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                                    <input type="checkbox" checked name="open" id="SIM_pin_lock1" lay-skin="switch" lay-filter="SIMpin" lay-text="ON|OFF">
                                                 </div>
                                             </div>
                                             <button class="Rectangle-1182 mt-10"><span class="Change-SIM-pin">Change SIM
@@ -1027,7 +1066,7 @@
                                                 <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin
                                                     lock:</label>
                                                 <div class="layui-input-block mt-30">
-                                                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                                    <input type="checkbox" checked="" name="open" id="SIM_pin_lock2" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                                 </div>
                                             </div>
 
@@ -1038,7 +1077,7 @@
                                 </div>
                             </div>
 
-                            <div class="save-btn1" style="font-size: 18px;"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button><button class="Rectangle-1182 mt-10"><span class="" onclick="save()">Save</span></button>
+                            <div class="save-btn1" style="font-size: 18px;"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button><button id="btn_saved2" class="Rectangle-1182 mt-10"><span class="">Save</span></button>
                             </div>
                         </div>
                     </div>
@@ -1049,7 +1088,7 @@
         </div>
 
     </div>
-    <div id="enterPass1" class="Rectangle-1187" style="display:none">
+    <!-- <div id="enterPass1" class="Rectangle-1187" style="display:none">
         <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Enter the password for network</h3>
         <p class="Enter-the-admin-password-to-make-changes mt-20 Enter-the-password-for-network-Mynetwork1">"Mynetwork1"
         </p>
@@ -1063,35 +1102,19 @@
             <div class="col-md-5 col-md-offset-1 connected"><button class="Rectangle-1182 active OK">Connected</button>
             </div>
         </div>
-    </div>
+    </div> -->
     <div id="bg1"></div>
-    <!-- <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
-    <script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script> -->
-    <script src="js/jquery/3.4.0/jquery.js"></script>
-    <script src="layui/lay/modules/layer.js"></script>
-    <script>
-        //弹出一个iframe层
-        $('.Change-SIM-pin').on('click', function() {
-            //var changeSimPin = '<div id="enterPass1" class="Rectangle-1187"><h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Enter the password for network</h3><p class="Enter-the-admin-password-to-make-changes mt-20 Enter-the-password-for-network-Mynetwork1">"Mynetwork1"</p><div style="position:relative"><label class="Password mt-30" style="display: inline-block;">password:</label><input type="password" value="" class="Rectangle-1188 pwd" style="display: inline-block;" /><span class="SHOW" style="position:absolute; top:37px;left:378px;cursor: pointer;" onclick="change()">show</span></div><div class="row mt-40"><div class="col-md-3 col-md-offset-3"><button class="Path-101 Cancel">Cancel</button></div><div class="col-md-5 col-md-offset-1 connected"><button class="Rectangle-1182 active OK">Connected</button></div></div></div>';
-            //iframe层
-            parent.layer.open({
-                type: 2,
-                title: false,
-                //shadeClose: true,
-                shade: 0.8,
-                area: ['500px', '410px'],
-                //content: ['内容', '#id'] ,
-                // content: $('#enterPass1')
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="layui/lay/modules/laydate.js"></script>
+    <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
+    <script type="text/javascript" src="js/MobileSetData.js"></script>
+    <script type="text/javascript" src="js/MobileData.js"></script>
 
-                //content: changeSimPin
-                content: ['changeSimPin.html', 'no'],
-            });
-        });
-    </script>
 
     <script>
-        $(".connected button").prop("disabled", true);
-        $(".connected button").css("opacity", "0.5");
         // $('.Change-SIM-pin').click(function() {
         //     if ($('#enterPass1').css('display') == 'none') {
         //         // $('#bg1').show();
@@ -1166,234 +1189,59 @@
             }
         });
     </script> -->
-    <script>
-        $(function() {
-            var isShow = true;
 
-            change = function() {
-                var v = $(".pwd").get(0);
 
-                if (isShow) {
-                    v.type = "text";
-                    isShow = false;
-                } else {
-                    v.type = "password";
-                    isShow = true;
-                }
-            };
-            change();
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-
-            var $wrapper = $('.tab-wrapper'),
-                $allTabs = $wrapper.find('.tab-content > div'),
-                $tabMenu = $wrapper.find('.tab-menu li'),
-                $line = $('<div class="line"></div>').appendTo($tabMenu)
-
-            $allTabs.not(':first-of-type').hide();
-            $tabMenu.filter(':first-of-type').find(':first').width('90%')
-
-            $tabMenu.each(function(i) {
-                $(this).attr('data-tab', 'tab' + i);
-            });
-
-            $allTabs.each(function(i) {
-                $(this).attr('data-tab', 'tab' + i);
-            });
-
-            $tabMenu.on('click', function() {
-
-                var dataTab = $(this).data('tab'),
-                    $getWrapper = $(this).closest($wrapper);
-
-                $getWrapper.find($tabMenu).removeClass('active');
-                $(this).addClass('active');
-
-                $getWrapper.find('.line').width(0);
-                $(this).find($line).animate({
-                    'width': '90%'
-                }, 'fast');
-                $getWrapper.find($allTabs).hide();
-                $getWrapper.find($allTabs).filter('[data-tab=' + dataTab + ']').show();
-            });
-
-        });
-    </script>
-    <script>
-        $(function() {
-            var images = ['images/icon-arrow-up.png', 'images/icon-arrow-down.png'];
-            $('#arrow_tab').click(function() {
-                if ($('#arrow').attr("class") == "up") {
-                    $('#arrow').attr("src", images[1]);
-                    $('#arrow').removeClass();
-                    $(".advancedContent").show();
-                } else {
-                    $('#arrow').attr("src", images[0]);
-                    $('#arrow').addClass("up");
-                    $(".advancedContent").hide();
-                }
-            });
-
-            var images1 = ['images/icon-arrow-right.png', 'images/icon-arrow-down-1.png'];
-            // $('#arrow1').click(function() {
-            //     if ($('#arrow1').attr("class") == "") {
-            //         $('#arrow1').attr("src", images1[0]);
-            //         $('#arrow1').removeClass();
-            //         $(".content").show();
-            //     } else {
-            //         $('#arrow1').attr("src", images1[1]);
-            //         $('#arrow1').addClass("up");
-            //         $(".content").hide();
-            //     }
-            // });
-            var images2 = ['images/icon-arrow-right.png', 'images/icon-arrow-down-1.png'];
-            $("#arrow1").click(function() {
-                var content = document.getElementById("content");
-                if (content.style.display == "none") {
-                    content.style.display = "block ";
-                    $('#arrow1').attr("src", images2[1]);
-                    $('#arrow1').removeClass();
-                } else {
-                    content.style.display = "none ";
-                    $('#arrow1').attr("src", images2[0]);
-                }
-            });
-
-            $("#arrow2").click(function() {
-                var content1 = document.getElementById("content1");
-                if (content1.style.display == "none") {
-                    content1.style.display = "block ";
-                    $('#arrow2').attr("src", images1[1]);
-                    $('#arrow2').removeClass();
-                } else {
-                    content1.style.display = "none ";
-                    $('#arrow2').attr("src", images1[0]);
-                }
-            });
-
-            // function SwitchMenu(obj) {
-            //     if (document.getElementById) {
-            //         var el = document.getElementById(obj);
-            //         var ar = document.getElementById("expand").getElementsByTagName("content ");
-            //         if (el.style.display != "block ") {
-            //             for (var i = 0; i < ar.length; i++) {
-            //                 if (ar[i].className == "content ")
-            //                     ar[i].style.display = "none ";
-            //             }
-            //             el.style.display = "block ";
-            //         } else {
-            //             el.style.display = "none ";
-            //         }
-            //     }
-            // }
-        });
-    </script>
-
-    <!-- <script>
-        $(function() {
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "lte_set_status",
-                "params": {},
-                "id": "9.1"
-            };
-            data = JSON.stringify(data);
-            $.ajax({
-                type: "post",
-                url: "/action/action",
-                data: data,
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(res) {
-                    console.log(res);
-                },
-                error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR.status);
-
-                }
-            });
-        });
-    </script> -->
-
-    <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="layui/lay/modules/laydate.js"></script>
-
-    <script type="text/javascript">
-        layui.use(['laydate'], function() {
-            var form = layui.form,
-                layer = layui.layer,
-                layedit = layui.layedit,
-                laydate = layui.laydate;
-
-            laydate.render({
-                elem: '#test1', //指定元素
-            });
-            laydate.render({
-                elem: '#test2', //指定元素
-            });
-
-            // laydate.render({
-            //     elem: '#test2',
-            //     position: 'static',
-            //     change: function(value, date) { //监听日期被切换
-            //         lay('#testView').html(value);
-            //     }
-            // });
-        });
-    </script>
     <script>
         layui.use('form', function() {
             var form = layui.form; //表单
-            form.on('switch', function(data) {
-                // console.log(data.elem.checked); //开关是否开启，true或者false
-                // console.log(data.value); //开关value值，也可以通过data.elem.value得到
-                // console.log(data.othis); //得到美化后的DOM对象
-                // var id = $(data.othis).next("input").val();
+            //form.on('switch', function(data) {
+            // console.log(data.elem.checked); //开关是否开启，true或者false
+            // console.log(data.value); //开关value值，也可以通过data.elem.value得到
+            // console.log(data.othis); //得到美化后的DOM对象
+            // var id = $(data.othis).next("input").val();
 
-                // var json = data.result;
-                // console.log(json)
-                // for (var index in json) {
-                //     if (data.json[index].phy_enable != 1) {
-                //         $("#mobileData1").attr("checked", "checked");
-                //         $("#mobileData2").attr("checked", "checked");
-                //     } else {
-                //         $("#mobileData1").remove("checked");
-                //         $("#mobileData2").remove("checked");
-                //     }
-                // }
-                // if (data.elem.checked == true) {
-                //     $.ajax({
-                //         type: "post",
-                //         async: false,
-                //         data: "id=" + id + "&state=" + 0,
-                //         url: "changeState",
-                //         success: function(data) {
-                //             flag = data
-                //         },
-                //     });
-                //     if (flag == "Ny") {
-                //         layer.msg("启用状态数不超过三个!");
-                //     } else {
-                //         layer.msg("已启用!");
-                //     }
-                // } else {
-                //     $.ajax({
-                //         type: "post",
-                //         async: false,
-                //         data: "id=" + id + "&state=" + 1,
-                //         url: "changeState",
-                //         success: function(data) {
-                //             flag = data
-                //         },
-                //     });
-                //     if (flag == "yes") {
-                //         layer.msg("已禁用!");
-                //     }
-                // }
+            // var json = data.result;
+            // console.log(json)
+            // for (var index in json) {
+            //     if (data.json[index].phy_enable != 1) {
+            //         $("#mobileData1").attr("checked", "checked");
+            //         $("#mobileData2").attr("checked", "checked");
+            //     } else {
+            //         $("#mobileData1").remove("checked");
+            //         $("#mobileData2").remove("checked");
+            //     }
+            // }
+            // if (data.elem.checked == true) {
+            //     $.ajax({
+            //         type: "post",
+            //         async: false,
+            //         data: "id=" + id + "&state=" + 0,
+            //         url: "changeState",
+            //         success: function(data) {
+            //             flag = data
+            //         },
+            //     });
+            //     if (flag == "Ny") {
+            //         layer.msg("启用状态数不超过三个!");
+            //     } else {
+            //         layer.msg("已启用!");
+            //     }
+            // } else {
+            //     $.ajax({
+            //         type: "post",
+            //         async: false,
+            //         data: "id=" + id + "&state=" + 1,
+            //         url: "changeState",
+            //         success: function(data) {
+            //             flag = data
+            //         },
+            //     });
+            //     if (flag == "yes") {
+            //         layer.msg("已禁用!");
+            //     }
+            // }
 
-            });
+            //});
         })
     </script>
     <script>

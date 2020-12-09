@@ -4,57 +4,76 @@
 <head>
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
     <title>OpenWrt - Flashing...</title>
+    <style>
+
+    </style>
     <script src="js/jquery.min.js"></script>
+    <script src="layui/layui.js " charset="utf-8 "></script>
     <script type="text/javascript">
         $(function() {
-            var interval = window.setInterval(function() {
-                var domain = window.location.host;
-                var data = {
-                    "jsonrpc": "2.0",
-                    "method": "upgrade_status",
-                    "params": {},
-                    "id": "9.1"
-
-                };
-                data = JSON.stringify(data);
-                $.ajax({
-                    type: "post",
-                    url: "/action/action?",
-                    data: data,
-                    dataType: "json",
-                    contentType: "application/json;charset=utf-8",
-                    success: function(data) {
-                        console.log(data.result);
-                        //$("#status").html(data.result.status);
-                        $("#steps").html(data.result.steps)
-                        var data = data.result;
-                        if (data.status == "1") {
-                            alert("Update Successful！");
-                            console.log("Now the status is：" + data.status + "--Upgrade Complete...");
-                            var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
-                            //alert(ds);
-                            $("#steps").html(ds);
-                            setTimeout(function() {
-                                top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
-                            }, 10000);
-
-                            //top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + '10.88.11.238/';
-                        } else if (data.status == "0") {
-                            self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/flashops.html';
-                        } else {
-                            console.log("Now the status is：" + data.status + "--Upgrading in progress...");
-                            //console.log("Preparing system upgrade environment");
-                            //console.log(data.steps);
-                        }
-
-                    },
-                    // error: function(jqXHR) {
-                    //     alert("An error occurred：" + jqXHR.status);
-                    // }
-
-
+            layui.use(['form', 'layer'], function() {
+                var form = layui.form;
+                var layer = layui.layer;
+                var loading = parent.layer.msg('Waiting for changes to be applied...', {
+                    icon: 16,
+                    time: false,
+                    shade: [0.5, '#fff']
                 });
-            }, 2000);
+
+
+                $(".layui-layer-loading .layui-layer-content").after("Waiting for changes to be applied...")
+                var interval = window.setInterval(function() {
+                    var domain = window.location.host;
+                    var data = {
+                        "jsonrpc": "2.0",
+                        "method": "GetUpgradeStatus",
+                        "params": {},
+                        "id": "9.1"
+
+                    };
+                    data = JSON.stringify(data);
+                    $.ajax({
+                        type: "post",
+                        url: "/action/action?",
+                        data: data,
+                        dataType: "json",
+                        contentType: "application/json;charset=utf-8",
+                        success: function(data) {
+                            console.log(data.result);
+                            //$("#status").html(data.result.status);
+                            $("#steps").html(data.result.steps)
+                            var data = data.result;
+                            if (data.status == "1") {
+                                parent.layer.close(loading);
+                                //alert("Update Successful！");
+                                console.log("Now the status is：" + data.status + "--Upgrade Complete...");
+                                var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
+                                //alert(ds);
+                                $("#steps").html(ds);
+                                setTimeout(function() {
+                                    top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                                }, 10000);
+
+                                //top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + '10.88.11.238/';
+                            } else if (data.status == "0") {
+                                self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/flashops.html';
+                            } else {
+                                console.log("Now the status is：" + data.status + "--Upgrading in progress...");
+                                //console.log("Preparing system upgrade environment");
+                                //console.log(data.steps);
+                            }
+
+                        },
+                        // error: function(jqXHR) {
+                        //     alert("An error occurred：" + jqXHR.status);
+                        // }
+
+
+                    });
+                }, 5000);
+
+            });
+
         });
     </script>
 </head>
@@ -70,9 +89,9 @@
                     The system is flashing now, this process will take several minutes.<br /> DO NOT POWER OFF THE DEVICE!<br /> Wait a few minutes before you try to reconnect. It might be necessary to renew the address of your computer to reach the device
                     again, depending on your settings.
                 </p>
-                <p>
+                <!-- <p>
                     <img src="images/loading.gif" alt="Loading" style="vertical-align:middle" /> Waiting for changes to be applied...
-                </p>
+                </p> -->
             </fieldset>
         </div>
     </div>

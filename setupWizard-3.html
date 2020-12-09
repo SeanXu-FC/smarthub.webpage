@@ -232,10 +232,26 @@
             <div class="mt-40 Your-SmartHub-is-now-set-up-and-ready-to-use">
                 Your SmartHub is now set-up and ready to use
             </div>
+            <div class="mt-40">
+                <button class="Rectangle-1182 Continue active">Finish</button>
+            </div>
         </div>
     </div>
     </div>
-
+    <script>
+        $(function() {
+            $(".Continue").on("click", function() {
+                var domain = window.location.host;
+                window.location.href = ('https:' == document.location.protocol ?
+                    'https://' : 'http://') + domain + "/home.html";
+            })
+            setTimeout(() => {
+                var domain = window.location.host;
+                window.location.href = ('https:' == document.location.protocol ?
+                    'https://' : 'http://') + domain + "/home.html";
+            }, 5000);
+        })
+    </script>
 </body>
 
 </html>

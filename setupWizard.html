@@ -222,6 +222,10 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+        
+        #none_wifiList {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -233,7 +237,7 @@
             <p class="Choose-your-wireless-network mt-30">Choose your wireless network</p>
             <p class="When-connected-your-SmartHub-will-distribute-wireless-data-to-all-devices-connected-to-its-access-point-If-there-are-no-wireless-networks-you-wish-to-connect-to-now-then-just-select-continue mt-20">When connected, your SmartHub will distribute wireless data to all devices connected to its access point. If there are no wireless networks you wish to connect to now then just select continue</p>
             <div class="mCont" style="padding:28px 37px;" id="set_wizard_c">
-                <div id="none_wifiList"><img class="connecting-img1" src="images/loading.gif" /><span class="none-wifi-info">Loadding</span></div>
+                <div id="none_wifiList"><span class="none-wifi-info">Loadding</span></div>
                 <!-- <div class="row -flex-display -justify-box">
                     <div class="-radio-flex">
                         <div class="myAp">Mynetwork1</div>
@@ -257,11 +261,11 @@
                 </div> -->
 
             </div>
-            <div class="row mt-40" style="display: flex;margin-bottom: 60px;">
-                <div class="col-md-7">
+            <div class="row mt-40 -flex-display" style="margin-bottom: 60px;">
+                <div class="col-md-7 -radio-flex2">
                     <button class="Rectangle-1181 Back" disabled>Back</button>
                 </div>
-                <div class="col-md-5" style="margin-left:300px;">
+                <div class="col-md-5 -radio-flex10" style="margin-left:300px;">
                     <button class="Rectangle-1182 Continue active"><a href="setupWizard-2.html">Continue</a></button>
                 </div>
             </div>

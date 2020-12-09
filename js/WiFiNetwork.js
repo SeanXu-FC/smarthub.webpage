@@ -1,20 +1,17 @@
 $(function() {
 
-
     layui.use(['form', 'layer'], function() {
         var form = layui.form;
         var layer = layui.layer;
         getSwitchStatus(layer, form);
         form.on('switch(switchTest)', function(data) {
             var checked = data.elem.checked;
-            console.log(checked)
             changeSwitchStatus(layer, form, checked)
         });
     });
 })
 
 function getSwitchStatus(layer, form) {
-    console.log(888888)
     var data = {
         "jsonrpc": "2.0",
         "method": "wlan_config",
@@ -32,7 +29,6 @@ function getSwitchStatus(layer, form) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            console.log("res", res)
             if (res.result) {
                 if (res.result.status == "WLAN_ON") {
                     $("#WLAN_swtich").attr("checked", "checked");
@@ -83,7 +79,6 @@ function changeSwitchStatus(layer, form, checked) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            console.log("res", res)
             if (res.result) {
                 layer.msg(res.result.status);
                 if (mode) {
@@ -109,8 +104,9 @@ function changeSwitchStatus(layer, form, checked) {
 }
 
 function getWLANScan(layer) {
-    var loading = layer.load(0, {
-        shade: false
+
+    var loading = parent.layer.load(0, {
+        shade: [0.5, '#fff']
     });
     var data = {
         "jsonrpc": "2.0",
@@ -135,32 +131,29 @@ function getWLANScan(layer) {
                 }, 3000);
 
             } else if (res.error) {
-                layer.close(loading);
                 $("#none_wifiList").children("img").hide();
                 $("#none_wifiList").children("span").text(res.error.message)
-                layer.msg("An error occurred：" + res.error.message);
-                var noneStr = '<div class="none-list" id="none_wifiList"><span>' + res.error.message + '</span></div>'
-                $("#WLAN_list_c").html(noneStr);
+                    //layer.msg("An error occurred：" + res.error.message);
+                    //var noneStr = '<div class="none-list" id="none_wifiList"><span>' + res.error.message + '</span></div>'
+                    //$("#WLAN_list_c").html(noneStr);
+                    //sessionStorage.setItem('clickFlag', true);
+                setTimeout(() => {
+                    getWLANData(layer, loading);
+                }, 3000);
             }
-            // if (checked) {
-            //     $(".mCont").show();
-            // } else {
-            //     $(".mCont").hide();
-            // }
 
         },
         error: function(jqXHR) {
-
+            //sessionStorage.setItem('clickFlag', true);
             alert("An error occurred：" + jqXHR.status);
         }
     });
+
+
 }
 
 function getWLANData(layer, loading) {
-    console.log(9999999)
-    var loading = layer.load(0, {
-        shade: false
-    });
+
     var data = {
         "jsonrpc": "2.0",
         "method": "wlan_config",
@@ -177,7 +170,7 @@ function getWLANData(layer, loading) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            layer.close(loading);
+            parent.layer.close(loading);
             if (res.result && res.result.ap_list) {
                 //$(".mCont").show();
                 var json = res.result.ap_list;
@@ -200,12 +193,15 @@ function getWLANData(layer, loading) {
                 //     }
                 // } 
             } else if (res.error) {
-
                 layer.msg("An error occurred：" + res.error.message);
             }   
 
+            //sessionStorage.setItem('clickFlag', true);
+
+
         },
         error: function(jqXHR) {
+            //sessionStorage.setItem('clickFlag', true);
             alert("An error occurred：" + jqXHR.status);
 
         }
@@ -275,12 +271,12 @@ function renderWifiList(json) {
             }
             if (json[j].is_saved != 0) {
                 savedStr = "Saved";
-            } else if (json[j].encrypt != "[ESS][UTF-8]" && json[j].is_saved == 0) {
-                savedStr = "Encrypted";
-            } else {
+            } else if (json[j].encrypt == "[OPEN]" && json[j].is_saved == 0) {
                 savedStr = "";
+            } else {
+                savedStr = "Encrypted";
             }
-            str += '<tr class="tip-dom"><td class="col-md-8 wifi" id="wifi_tips' + j + '"><div class="wifi-name">' + json[j].ssid + '</div><div class=" c9 Connected-24GHz" style="padding-left:0">' + savedStr + '</div></td><td><div class="col-md-2"><img class="wifi-icon" src="images/' + wifiImg + '"></div></td><td class="wifi-info"  style="display:none"><span class="save-wifi-info" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '"></span></td></tr>'
+            str += '<tr class="tip-dom" id="wifi_tips' + j + '"><td class="col-md-8 wifi"><div class="wifi-name">' + json[j].ssid + '</div><div class=" c9 Connected-24GHz" style="padding-left:0">' + savedStr + '</div></td><td><div class="col-md-2"><img class="wifi-icon" src="images/' + wifiImg + '"></div></td><td></td><td class="wifi-info"  style="display:none"><span class="save-wifi-info" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '"></span></td></tr>'
         }
     }
     str += '<tr><td colspan="3" class="add-Available-networks"><div class="col-md-2" style="padding-left:0"><img src="images/icon-add.png" style="display: inline-block;"></div><div class="col-md-10"><span style="display: inline-block;margin-top:3px;margin-left:-10px;" class="addN">Add network</span></div></td></tr></table>';
@@ -298,7 +294,7 @@ function bindEvent() {
         var freq = infoHtml.attr("freq");
         var bssid = infoHtml.attr("bssid");
         var encrypt = infoHtml.attr("encrypt");
-        var tipId = $(this).attr("id");
+        var tipId = $(this).parents("tr").attr("id");
         if (2400 < freq && freq < 2900) {
             freq = "2.4GHz"
         } else if (5030 < freq && freq < 5900) {
@@ -340,12 +336,11 @@ function addNetworkHtml() {
     parent.layer.open({
         type: 2,
         title: false,
-        //shadeClose: true,
+        closeBtn: 0,
         shade: 0.8,
         area: ['541px', '361px'],
         content: ['AddNetwork.html', 'no'],
         end: function() {
-            console.log($("#saved_id").val())
             var connectingSsid = $("#saved_id").val();
             var connectingEncrypt = $("#saved_id").attr("encrypt");
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
@@ -419,32 +414,37 @@ function forgetWifiHtml(infoHtml) {
     var bssid = infoHtml.attr("bssid");
     var encrypt = infoHtml.attr("encrypt");
     var is_saved = infoHtml.attr("is_saved");
+    var is_connected = infoHtml.attr("is_connected");
+
+    if (is_connected != '1') {
+        return;
+    }
     //iframe层
     parent.layer.open({
         type: 2,
         title: false,
-        //shadeClose: true,
+        closeBtn: 0,
         shade: 0.8,
-        area: ['534px', '715px'],
+        area: ['534px', '63%'],
+        //area: '534px',
         content: ['WirelessNameInfo.html?ssid=' + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
             var connectingSsid = $("#saved_id").val();
             var connectingBssid = $("#saved_id").attr("bssid");
             console.log(connectingSsid, connectingBssid);
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
-            console.log(wifiJson)
             if (connectingSsid && connectingBssid) {
                 for (var i = 0; i < wifiJson.length; i++) {
 
                     if (connectingSsid == wifiJson[i].ssid && connectingBssid == wifiJson[i].bssid) {
                         wifiJson.splice(i, 1);
                         sessionStorage.setItem('wifiJson', JSON.stringify(wifiJson))
-                        console.log("wifiJson", wifiJson)
                     }
                 }
                 renderWifiList(wifiJson);
                 clearInterval(timer);
                 $(".connecting-img").show();
+                pollingWifiStatus(infoHtml, "forgetWifi");
                 timer = setInterval(function() {
                     pollingWifiStatus(infoHtml, "forgetWifi");
                 }, 3000)
@@ -452,6 +452,7 @@ function forgetWifiHtml(infoHtml) {
 
         }
     });
+    $(window).resize();
 }
 //弹出输入密码事件
 function enterPasswordHtml(infoHtml) {
@@ -460,10 +461,10 @@ function enterPasswordHtml(infoHtml) {
     var encrypt = infoHtml.attr("encrypt");
     var is_saved = infoHtml.attr("is_saved");
     if (is_saved == 1) { //已保存，直接连接
-        savedWifiConnect(ssid, bssid);
+        savedWifiConnect(ssid, bssid, encrypt);
         return;
     }
-    if (encrypt == "[ESS][UTF-8]") {
+    if (encrypt == "[OPEN]") { //无需密码直接连接
         noPWDWifiConnect(ssid, bssid, is_saved);
         return;
     }
@@ -472,16 +473,14 @@ function enterPasswordHtml(infoHtml) {
     parent.layer.open({
         type: 2,
         title: false,
-        //shadeClose: true,
+        closeBtn: 0,
         shade: 0.8,
         area: ['521px', '360px'],
         content: ['EnterPassword.html?ssid=' + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
-            console.log($("#saved_id").val())
             var connectingSsid = $("#saved_id").val();
             var connectingBssid = $("#saved_id").attr("bssid");
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
-            console.log(wifiJson)
             if (connectingSsid && connectingBssid) {
                 for (var i = 0; i < wifiJson.length; i++) {
                     if (wifiJson[i].is_connected == 1) {
@@ -526,7 +525,10 @@ function pollingWifiStatus(infoDOM, type) {
                 $("#Connecting-status").text(res.result.status);
                 if (res.result.status == "Password incorrect" && type == "EnterPassword") { //密码错误从新弹框输入
                     clearInterval(timer);
-                    enterPasswordHtml(infoDOM, type)
+                    timer = setInterval(function() {
+                        pollingWifiStatus(infoDOM);
+                    }, 3000)
+                    enterPasswordHtml(infoDOM, type);
                 }
                 if (res.result.status == "Connected") {
                     clearInterval(timer);
@@ -546,7 +548,7 @@ function pollingWifiStatus(infoDOM, type) {
                         for (var i = 0; i < wifiJson.length; i++) {
                             if (res.result.ssid == wifiJson[i].ssid && res.result.bssid == wifiJson[i].bssid) {
                                 wifiJson[i].is_connected = 2;
-                                renderWifiList(wifiJson);
+                                updateWifiList(wifiJson);
                             }
                         }
                     }
@@ -560,13 +562,14 @@ function pollingWifiStatus(infoDOM, type) {
         },
         error: function(jqXHR) {
             clearInterval(timer);
-            alert("An error occurred：" + jqXHR.status);
+            pollingWifiStatus();
+            //alert("An error occurred：" + jqXHR.status);
         }
 
     });
 }
 //已经保存的WiFi直接连接
-function savedWifiConnect(ssid, bssid) {
+function savedWifiConnect(ssid, bssid, encrypt) {
     var data = {
         "jsonrpc": "2.0",
         "method": "wlan_config",
@@ -574,14 +577,13 @@ function savedWifiConnect(ssid, bssid) {
             "operate_code": 2,
             "ssid": ssid,
             "bssid": bssid,
+            "encrypt": encrypt,
             "is_saved": 1,
         },
         "id": "9.1"
     };
 
     data = JSON.stringify(data);
-
-    console.log(data);
     $.ajax({
         type: "post",
         url: req + "/action/action",
@@ -591,7 +593,6 @@ function savedWifiConnect(ssid, bssid) {
         success: function(res) {
             if (res.result) {
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
-                console.log(wifiJson)
                 if (ssid && bssid) {
                     for (var i = 0; i < wifiJson.length; i++) {
                         if (wifiJson[i].is_connected == 1) {
@@ -602,7 +603,7 @@ function savedWifiConnect(ssid, bssid) {
                         }
                     }
                     renderWifiList(wifiJson);
-                    if (res.result.status != "Disconnected") {
+                    if (res.result.status != "Connected" && res.result.status != "Password incorrect") {
                         clearInterval(timer);
                         $(".connecting-img").show();
                         timer = setInterval(function() {
@@ -637,14 +638,13 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
             "bssid": bssid,
             "encrypt": "None",
             "is_saved": is_saved,
-            "psk": "",
+            //"psk": "",
         },
         "id": "9.1"
     };
 
     data = JSON.stringify(data);
 
-    console.log(data);
     $.ajax({
         type: "post",
         url: req + "/action/action",
@@ -654,7 +654,6 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
         success: function(res) {
             if (res.result) {
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
-                console.log(wifiJson)
                 if (ssid && bssid) {
                     for (var i = 0; i < wifiJson.length; i++) {
                         if (wifiJson[i].is_connected == 1) {
@@ -665,7 +664,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
                         }
                     }
                     renderWifiList(wifiJson);
-                    if (res.result.status != "Disconnected") {
+                    if (res.result.status != "Connected" && res.result.status != "Password incorrect") {
                         clearInterval(timer);
                         $(".connecting-img").show();
                         timer = setInterval(function() {
@@ -740,7 +739,6 @@ function arrSort(prop) {
 //输入密码关闭弹窗回调函数
 function connectWifiCall(info) {
     console.log(info)
-    console.log("wwwwwwww")
 }
 
 function aa() {
@@ -794,7 +792,6 @@ function aa() {
                 if (json == '' || json == undefined || json == null || json.length < 1) return;
                 for (let i = 0; i < json.length; i++) {
                     var signal = json[i].signal;
-                    // console.log(signal);
                     if (signal);
                     if (signal == 0) {
                         $img.eq(i).attr("src", "/images/signal-0.png");

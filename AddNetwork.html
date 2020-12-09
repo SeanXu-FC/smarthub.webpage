@@ -442,6 +442,7 @@
 
             $('#security').change(function() {
                 if ($(this).val() == "None") {
+                    $("#pwd").val("");
                     $("#wpa").hide();
                     if ($(".Network_name").val()) {
                         $(".connected button").prop("disabled", false);
@@ -513,11 +514,12 @@
                 "jsonrpc": "2.0",
                 "method": "wlan_config",
                 "params": {
-                    "operate_code": 4,
+                    "operate_code": 2,
                     "ssid": ssid,
                     "encrypt": security,
                     "psk": pwd ? pwd : '',
-                    "bssid": "",
+                    "is_saved": 0,
+                    //"bssid": "",
                 },
                 "id": "9.1"
             };
@@ -532,7 +534,7 @@
                 success: function(res) {
                     console.log("res", res)
                     if (res.result) {
-                        if (res.result.status == "Scanning") {
+                        if (res.result) {
                             $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr("encrypt", security);
                             setTimeout(() => {
                                 var index = parent.layer.getFrameIndex(window.name);

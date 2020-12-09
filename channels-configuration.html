@@ -261,7 +261,7 @@
                     title: false,
                     //shadeClose: true,
                     shade: 0.8,
-                    area: ['761px', '380px'],
+                    area: ['761px', '320px'],
                     content: ['editOutput.html?ChannelID=' + dataId + '&name=' + name + '&types=' + types, 'no'],
                     end: function() {
                         location.reload();
@@ -273,7 +273,7 @@
         function getMonitoringData(layer, loading) {
             var data = {
                 "jsonrpc": "2.0",
-                "method": "io_conf",
+                "method": "IoConfigure",
                 "params": {
                     "mode": "0",
                 },
