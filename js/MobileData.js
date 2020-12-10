@@ -64,28 +64,6 @@ $(function() {
 
     var images1 = ['images/icon-arrow-right.png', 'images/icon-arrow-down-1.png'];
 
-    $("#arrow1").click(function() {
-        var content = document.getElementById("content");
-        if (content.style.display == "none") {
-            content.style.display = "block ";
-            $('#arrow1 span .up').attr("src", images1[1]);
-        } else {
-            content.style.display = "none ";
-            $('#arrow1 span .up').attr("src", images1[0]);
-        }
-    });
-
-    $("#arrow2").click(function() {
-        var content1 = document.getElementById("content1");
-        if (content1.style.display == "none") {
-            content1.style.display = "block ";
-            $('#arrow2 span .up').attr("src", images1[1]);
-        } else {
-            content1.style.display = "none ";
-            $('#arrow2 span .up').attr("src", images1[0]);
-        }
-    });
-
     // function SwitchMenu(obj) {
     //     if (document.getElementById) {
     //         var el = document.getElementById(obj);
@@ -154,11 +132,34 @@ $(function() {
             form.render();
         });
 
+        $("#arrow1").click(function() {
+            var content = document.getElementById("content");
+            if (content.style.display == "none") {
+                content.style.display = "block ";
+                $('#arrow1 span .up').attr("src", images1[1]);
+                getDatausage(layer, form);
+            } else {
+                content.style.display = "none ";
+                $('#arrow1 span .up').attr("src", images1[0]);
+                $tabMenu.filter('[data-tab=tab0]').click();
+            }
+        });
+
+        $("#arrow2").click(function() {
+            var content1 = document.getElementById("content1");
+            if (content1.style.display == "none") {
+                content1.style.display = "block ";
+                $('#arrow2 span .up').attr("src", images1[1]);
+                getSimManagement(layer, form)
+            } else {
+                content1.style.display = "none ";
+                $('#arrow2 span .up').attr("src", images1[0]);
+            }
+        });
+
     });
 
-    var Xdate = [1, 0, 0, 4, 5, 6, 7, 8, 0, 10];
-    var Ydata = [200, 300, 50, 100, 500, 200, 150, 350, 100, 400];
-    renderEchart("used_MB", Xdate, Ydata)
+
 
 });
 
@@ -252,7 +253,9 @@ function getMainParameters(layer, form) {
 var MobileData;
 
 function getDatausage(layer, form) {
-
+    var loading = layer.load(0, {
+        shade: false
+    });
     var data = {
         "jsonrpc": "2.0",
         "method": "GetLteDataUsage",
@@ -270,9 +273,9 @@ function getDatausage(layer, form) {
             layer.close(loading);
             if (res.result) {
                 var json = res.result;
-                MobileData = json;
+                MobileData = json.data_usages;
+                //var dataTab =$('.tab-wrapper .tab-menu li').data('tab');
                 renderDataUsage(MobileData, 0); //默认渲染Data usage SIM1
-                rendSIMManagement(MobileData)
             }
 
 
@@ -315,75 +318,98 @@ function getDatausage(layer, form) {
 }
 //渲染Data usage
 function renderDataUsage(json, i) {
-    if (json.moblie_data == 1) { //Mobile data:                
-        $("#mobileData input").attr("checked", "checked");
 
-        if (json.sim[i] && json.sim[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
-            $("#monthlydatalimit input").attr("checked", "checked");
-        } else {
-            $("#monthlydatalimit input").removeAttr("checked");
-        }
+    if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
+        $("#monthlydatalimit input").attr("checked", "checked");
+        $("#dataLimit input").removeAttr("disabled");
+        $("#switchMB").removeAttr("disabled");
+        $("#limit_time").removeAttr("disabled");
+        $("#last_manth_s").removeAttr("disabled");
+    } else {
+        $("#monthlydatalimit input").removeAttr("checked");
+        $("#dataLimit input").attr("disabled", true);
+        $("#switchMB").attr("disabled", true);
+        $("#limit_time").attr("disabled", true);
+        $("#last_manth_s").attr("disabled", true);
+    }
 
-        if (json.sim[i].usage_reminder_flag == 1) { //Usage reminders
-            $("#usagereminders input").attr("checked", "checked");
-        } else {
-            ("#usagereminders input").removeAttr("checked");
-        }
+    if (json[i].usage_reminder_flag == 1) { //Usage reminders
+        $("#usagereminders input").attr("checked", "checked");
+    } else {
+        ("#usagereminders input").removeAttr("checked");
+    }
 
-        $("#allUsed_MB").text(json.current_data_used);
-        var redmianMB = (json.monthly_data_limit * 1024 - json.current_data_used);
+    if (json[i].sim_data_limt_unit == 0) {
+        $(".limit_unit").text("MB");
+        $("#allUsed_MB").text(json[i].current_data_used);
+        var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(0);
         $("#redmian_MB").text(redmianMB);
-
-        if (json.start_date) { //Start data limit on
-            layui.use(['laydate'], function() {
-                laydate = layui.laydate;
-                laydate.render({
-                    elem: '#test1',
-                    lang: 'en',
-                    value: start_date,
-                    isInitValue: true,
-                    done: function(value, date) {
-                        console.log(value, date)
-                        $("#test1").val(value)
-                    }
-                });
-            });
-        } else {
-            layui.use(['laydate'], function() {
-                laydate = layui.laydate;
-                laydate.render({
-                    elem: '#test1',
-                    lang: 'en',
-                    done: function(value, date) {
-                        console.log(value, date)
-                        $("#test1").val(value)
-                    }
-                });
-            });
-        }
-
-        if (json.last_month) {
-            $("#last_manth_s option[value='" + Nunber(json.last_month) + "']").prop("selected", true);
-        }
-
+        $("#dataLimit input").val(redmianMB);
     } else {
-        $("#mobileData input").removeAttr("checked");
+        $(".limit_unit").text("GB");
+        var current_used = (json[i].current_data_used / 1024).toFixed(2)
+        $("#allUsed_MB").text(current_used);
+        var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(1);
+        $("#redmian_MB").text(redmianMB);
+        $("#dataLimit input").val(redmianMB);
     }
 
 
-    if (json.roam_data == 1) { //Data roaming:
-        $("#DataRoaming input").attr("checked", "checked");
+
+    $("#switchMB option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
+
+    if (json[i].start_date) { //Start data limit on
+        layui.use(['laydate'], function() {
+            laydate = layui.laydate;
+            laydate.render({
+                elem: '#test1',
+                lang: 'en',
+                value: json[i].start_date,
+                isInitValue: true,
+                done: function(value, date) {
+                    console.log(value, date)
+                    $("#test1").val(value)
+                }
+            });
+        });
     } else {
-        $("#DataRoaming input").removeAttr("checked");
+        layui.use(['laydate'], function() {
+            laydate = layui.laydate;
+            laydate.render({
+                elem: '#test1',
+                lang: 'en',
+                done: function(value, date) {
+                    console.log(value, date)
+                    $("#test1").val(value)
+                }
+            });
+        });
     }
+
+    if (json[i].last_month) {
+        $("#last_manth_s option[value='" + Number(json[i].last_month) + "']").prop("selected", true);
+    }
+
+
+
 
     if (i == 0) {
-        var Xdate = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        var Ydata = [200, 300, 50, 100, 500, 200, 150, 350, 100, 400];
+        var Xdate = [];
+        var Ydata = json[i].days;
+        if (Ydata.length > 0) {
+            for (var i = 1; i < Ydata.length; i++) {
+                Xdate.push(i);
+            }
+        }
         renderEchart("used_MB", Xdate, Ydata)
     } else {
-        var Xdate1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        var Ydata1 = [200, 300, 50, 100, 500, 200, 150, 350, 100, 400];
+        var Xdate1 = [];
+        var Ydata1 = json[i].days;
+        if (Ydata1.length > 0) {
+            for (var i = 1; i < Ydata1.length; i++) {
+                Xdate1.push(i);
+            }
+        }
         renderEchart("used_MB", Xdate1, Ydata1)
     }
     layui.use(['form'], function() {
@@ -396,7 +422,9 @@ function renderDataUsage(json, i) {
 }
 
 function getSimManagement(layer, form) {
-
+    var loading = layer.load(0, {
+        shade: false
+    });
     var data = {
         "jsonrpc": "2.0",
         "method": "GetLteSimManagement",
@@ -457,7 +485,7 @@ function rendSIMManagement(json) {
 
     $("#provider1").text(json.sim[0].provider);
     $("#sim_imsi1").text(json.sim[0].imsi);
-    $("#sim_tele_num1").text(json.sim[0].phonenum);
+    $("#sim_tele_num1").text(json.sim[0].phone_num);
     $("#sim_puk_num1").text(json.sim[0].puk);
 
     if (json.sim[0].pinlock == 1) { //SIM switching rules:
@@ -490,7 +518,7 @@ function rendSIMManagement(json) {
 
     $("#provider2").text(json.sim[1].provider);
     $("#sim_imsi2").text(json.sim[1].imsi);
-    $("#sim_tele_num2").text(json.sim[1].phonenum);
+    $("#sim_tele_num2").text(json.sim[1].phone_num);
     $("#sim_puk_num2").text(json.sim[1].puk);
 
     if (json.sim[1].pinlock == 1) { //SIM switching rules:
@@ -509,6 +537,16 @@ function renderEchart(id, Xdate, Ydata) {
     var myChartGL = echarts.init(document.getElementById(id));
     myChartGL.clear();
     var optionBranchGL = {
+        title: {
+            show: Ydata.length == 0,
+            extStyle: {
+                color: "#999",
+                fontSize: 14
+            },
+            text: "暂无数据",
+            left: "center",
+            top: "center"
+        },
         tooltip: {
             trigger: 'axis',
             formatter: function(params, ticket, callback) {
@@ -597,4 +635,35 @@ function renderEchart(id, Xdate, Ydata) {
 
         }
     }, 200);
+}
+
+//设置SIM management
+function setSimManagement(layer, form) {
+    var loading = layer.load(0, {
+        shade: false
+    });
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "SetLteSimManagement",
+        "params": {},
+        "id": "9.1"
+    }
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: req + "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            layer.close(loading);
+            if (res.result) {
+                var json = res.result;
+                rendSIMManagement(json)
+            }
+        },
+        error: function(jqXHR) {
+            alert("An error occurred：" + jqXHR.status);
+        }
+    });
 }
