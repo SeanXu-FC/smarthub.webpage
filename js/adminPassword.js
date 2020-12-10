@@ -103,7 +103,7 @@ $(function() {
         console.log($('#chagePWD').serialize())
 
         $.ajax({
-            url: "/proxy/action/password",
+            url: "/action/password",
             type: "post",
             data: $('#chagePWD').serialize(),
             //data: "username=admin&password=123456",
