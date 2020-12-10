@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/xadmin.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+        
+        a:link {
+            text-decoration: none;
+        }
+        
+        a:visited {
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: none;
+        }
+        
+        a:active {
+            text-decoration: none;
+        }
+        
+        a:focus {
+            text-decoration: none;
+        }
+        
+        .container-fluid {
+            margin: 30px 70px;
+        }
+        
+        .first-menu li a {
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            height: 40px;
+            color: #343434;
+        }
+        
+        .first-menu li .content {
+            margin-left: 30px;
+            padding-left: 0;
+        }
+        
+        .first-menu li .second-menu li a {
+            font-size: 18px;
+            font-weight: 600;
+            padding-left: 30px;
+            height: 30px;
+        }
+        
+        .first-menu li .second-menu li a .Dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(top, #333 0%, #999 100%);
+            background: -webkit-linear-gradient(top, #333 0%, #999 100%);
+            margin-right: 6px;
+        }
+        
+        .first-menu li .second-menu li .content {
+            margin-left: 60px;
+        }
+        
+        .first-menu li .second-menu li .third-menu li a {
+            font-size: 16px;
+            font-weight: 500;
+            padding-left: 60px;
+            height: 26px;
+        }
+        
+        .first-menu li .second-menu li .third-menu li a .Dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: linear-gradient(top, #333 0%, #999 100%);
+            background: -webkit-linear-gradient(top, #333 0%, #999 100%);
+            margin-right: 6px;
+        }
+        
+        .first-menu li .second-menu li .third-menu li .content {
+            margin-left: 90px;
+        }
+        
+        .arrow-right {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .content {
+            font-size: 14px;
+            font-weight: 500;
+            padding: 20px;
+            border-radius: 6px;
+            padding: 8px 20px;
+            word-wrap: break-word;
+        }
+        
+        .disNone {
+            display: none;
+        }
+        
+        .disVisi {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <ul class="first-menu">
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="images/arrow.png">AAAAAAAAA</a>
+                <ul class="second-menu disNone">
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>cccccc</a>
+                        <ul class="third-menu disNone">
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>11111111</a>
+                                <div class="content disNone">texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttex
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>22222222</a>
+                                <div class="content disNone">texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>ddddddd</a>
+                        <div class="content disNone">texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="images/arrow.png">BBBBBBB</a>
+                <div class="content disNone">texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</div>
+
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    $(".first-menu a").on("click", function() {
+        var isContent = $(this).parent().children().is('.content');
+        if (isContent) {
+            var disCss = $(this).parent().children(".content").hasClass("disNone");
+            $(".content").removeClass("disVisi").addClass("disNone");
+            if (disCss) {
+                $(this).parent().children(".content").removeClass("disNone").addClass("disVisi");
+            } else {
+                $(this).parent().children(".content").removeClass("disVisi").addClass("disNone");
+            }
+        } else {
+            var disCss = $(this).parent().children("ul").hasClass("disNone");
+            $(".content").removeClass("disVisi").addClass("disNone");
+            if (disCss) {
+                $(this).parent().children("ul").removeClass("disNone").addClass("disVisi");
+            } else {
+                $(this).parent().children("ul").removeClass("disVisi").addClass("disNone");
+            }
+        }
+    })
+</script>
+
+</html>

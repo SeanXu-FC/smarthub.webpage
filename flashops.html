@@ -34,7 +34,7 @@
                     data = JSON.stringify(data);
                     $.ajax({
                         type: "post",
-                        url: "/action/action?",
+                        url: "/proxy/action/action?",
                         data: data,
                         dataType: "json",
                         contentType: "application/json;charset=utf-8",
@@ -56,7 +56,8 @@
 
                                 //top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + '10.88.11.238/';
                             } else if (data.status == "0") {
-                                self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/flashops.html';
+                                parent.layer.close(loading);
+                                //self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/flashops.html';
                             } else {
                                 console.log("Now the status is：" + data.status + "--Upgrading in progress...");
                                 //console.log("Preparing system upgrade environment");

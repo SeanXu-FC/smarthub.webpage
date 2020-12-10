@@ -26,18 +26,13 @@ document.onkeydown = function(e) {
 function login() {
     var $userId = $("#userId");
     var $pwd = $("#pwd");
-    // if ($userId.val() == "") {
-    //     showTips(id, info);
-    //     checkUser(id, info);
-    // } else if ($pwd.val() == "") {
-    //     showTips(id, info);
-    //     checkUser(id, info);
-    // } else {
-    console.log(123456)
+    console.log($('#loginInfo').serialize())
+        //return;
     $.ajax({
-        url: "/action/login",
+        url: "/proxy/action/login",
         type: "post",
         data: $('#loginInfo').serialize(),
+        //data: "username=admin&password=123456",
         dataType: "json",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         success: function(res) {

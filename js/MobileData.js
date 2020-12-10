@@ -123,12 +123,17 @@ $(function() {
     layui.use(['layer', 'form'], function() {
         var layer = layui.layer;
         var form = layui.form;
+        getMainParameters(layer, form);
         //getMobileData(layer, form);
         form.on('switch(mobileData)', function(data) {
-            var checked = data.elem.checked;
+            var checked1 = data.elem.checked;
+            var checked2 = $("#DataRoaming input").is(":checked");
+            changeSwitchStatus(layer, form, checked1, checked2)
         });
         form.on('switch(dataRoaming)', function(data) {
-            var checked = data.elem.checked;
+            var checked2 = data.elem.checked;
+            var checked1 = $("#mobileData input").is(":checked");
+            changeSwitchStatus(layer, form, checked1, checked2)
         });
 
         form.on('switch(dataLimit)', function(data) {
@@ -139,6 +144,7 @@ $(function() {
                 $("#switchMB").removeAttr("disabled");
                 $("#limit_time").removeAttr("disabled");
                 $("#last_manth_s").removeAttr("disabled");
+
             } else {
                 $("#dataLimit input").attr("disabled", true);
                 $("#switchMB").attr("disabled", true);
@@ -155,15 +161,101 @@ $(function() {
     renderEchart("used_MB", Xdate, Ydata)
 
 });
-var MobileData;
 
-function getMobileData(layer, form) {
+function changeSwitchStatus(layer, form, checked1, checked2) {
+    var mode1, mode2;
+    if (checked1 == false) {
+        mode1 = 0;
+    } else if (checked1 == true) {
+        mode1 = 1;
+    }
+    if (checked2 == false) {
+        mode2 = 0;
+    } else if (checked2 == true) {
+        mode2 = 1;
+    }
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "SetLteMainParameters",
+        "params": {
+            "mobile_data": mode1,
+            "roam_data": mode2
+        },
+        "id": "9.1"
+    }
+
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: req + "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            if (res.result) {
+                //layer.msg(res.result.status);
+            } else if (res.error) {
+                layer.msg("An error occurred：" + res.error.message);
+            }
+        },
+        error: function(jqXHR) {
+            alert("An error occurred：" + jqXHR.status);
+
+        }
+    });
+}
+
+function getMainParameters(layer, form) {
     var loading = layer.load(0, {
         shade: false
     });
     var data = {
         "jsonrpc": "2.0",
-        "method": "lte_get_status",
+        "method": "GetLteMainParameters",
+        "params": {},
+        "id": "9.1"
+    }
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: req + "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            layer.close(loading);
+            if (res.result) {
+                var json = res.result;
+                if (json.mobile_data == 1) { //Mobile data:                
+                    $("#mobileData input").attr("checked", "checked");
+                } else {
+                    $("#mobileData input").removeAttr("checked");
+                }
+                if (json.roam_data == 1) { //Data roaming:
+                    $("#DataRoaming input").attr("checked", "checked");
+                } else {
+                    $("#DataRoaming input").removeAttr("checked");
+                }
+                form.render();
+                $("#mobileData").show();
+                $("#DataRoaming").show();
+            } else {
+                layer.msg(res.error.message)
+            }
+
+        },
+        error: function(jqXHR) {
+            alert("An error occurred：" + jqXHR.status);
+        }
+    });
+}
+var MobileData;
+
+function getDatausage(layer, form) {
+
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "GetLteDataUsage",
         "params": {},
         "id": "9.1"
     }
@@ -300,6 +392,34 @@ function renderDataUsage(json, i) {
         $("#monthlydatalimit").show();
         $("#usagereminders").show();
 
+    });
+}
+
+function getSimManagement(layer, form) {
+
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "GetLteSimManagement",
+        "params": {},
+        "id": "9.1"
+    }
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: req + "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            layer.close(loading);
+            if (res.result) {
+                var json = res.result;
+                rendSIMManagement(json)
+            }
+        },
+        error: function(jqXHR) {
+            alert("An error occurred：" + jqXHR.status);
+        }
     });
 }
 //渲染SIM management
