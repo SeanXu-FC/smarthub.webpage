@@ -24,7 +24,7 @@ function getWLANScan(layer) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -66,7 +66,7 @@ function getWLANData(layer, loading) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -277,7 +277,7 @@ function pollingWifiStatus(infoDOM, type) {
     data = JSON.stringify(data);
     var ajaxTimeout = $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         timeout: timeout0,
         data: data,
         dataType: "json",
@@ -339,7 +339,7 @@ function savedWifiConnect(ssid, bssid, encrypt) {
     console.log(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -402,7 +402,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
     console.log(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -457,7 +457,7 @@ function updateWifiList() {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",

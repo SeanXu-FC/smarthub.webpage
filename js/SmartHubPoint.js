@@ -77,7 +77,7 @@ $(function() {
 
             $.ajax({
                 type: "post",
-                url: req + "/action/action",
+                url: "/action/action",
                 data: data,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
@@ -120,7 +120,7 @@ function getData(layer, loading) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",

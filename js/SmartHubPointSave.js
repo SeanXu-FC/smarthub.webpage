@@ -81,7 +81,7 @@ $(function() {
             console.log(data)
             $.ajax({
                 type: "post",
-                url: req + "/action/action",
+                url: "/action/action",
                 data: data,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",

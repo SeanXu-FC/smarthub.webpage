@@ -13,18 +13,19 @@ $(function() {
     });
 
     $allTabs.each(function(i) {
-        if (i == 0) { //Data usage公用视图，$allTabs隐藏了一个，data-tab="tab1"要去掉
-            $(this).attr('data-tab', 'tab' + i);
-        } else {
-            $(this).attr('data-tab', 'tab' + (i + 1)); //data-tab="tab1"去掉
-        }
+        $(this).attr('data-tab', 'tab' + i);
+        // if (i == 0) { //Data usage公用视图，$allTabs隐藏了一个，data-tab="tab1"要去掉
+        //     $(this).attr('data-tab', 'tab' + i);
+        // } else {
+        //     $(this).attr('data-tab', 'tab' + (i + 1)); //data-tab="tab1"去掉
+        // }
 
     });
 
     $tabMenu.on('click', function() {
 
         var dataTab = $(this).data('tab');
-        console.log(dataTab);
+
 
         var $getWrapper = $(this).closest($wrapper);
         $getWrapper.find($tabMenu).removeClass('active');
@@ -38,7 +39,7 @@ $(function() {
             renderDataUsage(MobileData, 0); //渲染Data usage SIM1数据
         } else if (dataTab == "tab1") {
             renderDataUsage(MobileData, 1); //渲染Data usage SIM2数据
-            return;
+            console.log(dataTab);
         }
         $getWrapper.find($allTabs).hide();
         $getWrapper.find($allTabs).filter('[data-tab=' + dataTab + ']').show();
@@ -131,6 +132,55 @@ $(function() {
             form.render();
             getDatausageVal();
         });
+        $("#dataLimit").change(function() {
+            console.log(9876)
+            getDatausageVal();
+        });
+        $("#switchMB").change(function() {
+            console.log(9876)
+            getDatausageVal();
+        });
+        $("#last_manth_s").change(function() {
+            getDatausageVal();
+        });
+        form.on('switch(limitInfo)', function(data) {
+            getDatausageVal();
+        });
+
+        form.on('switch(dataLimit2)', function(data) {
+            var checked = data.elem.checked;
+            console.log(checked)
+            if (checked) {
+                $("#dataLimit2 input").removeAttr("disabled");
+                $("#switchMB2").removeAttr("disabled");
+                $("#limit_time2").removeAttr("disabled");
+                $("#last_manth_s2").removeAttr("disabled");
+
+            } else {
+                $("#dataLimit2 input").attr("disabled", true);
+                $("#switchMB2").attr("disabled", true);
+                $("#limit_time2").attr("disabled", true);
+                $("#last_manth_s2").attr("disabled", true);
+            }
+            form.render();
+            getDatausageVal();
+        });
+        $("#dataLimit2").change(function() {
+            console.log(9876)
+            getDatausageVal();
+        });
+        $("#switchMB2").change(function() {
+            console.log(9876)
+            getDatausageVal();
+        });
+        $("#last_manth_s2").change(function() {
+            getDatausageVal();
+        });
+        form.on('switch(limitInfo2)', function(data) {
+            getDatausageVal();
+        });
+
+
 
         $("#SIM").change(function() {
             getSimManagementVal();
@@ -171,7 +221,7 @@ $(function() {
                 var loading = layer.load(0, {
                     shade: false
                 });
-                getDatausage(layer, form, loading);
+                getDatausageFirst(layer, form, loading);
             } else {
                 content.style.display = "none ";
                 $('#arrow1 span .up').attr("src", images1[0]);
@@ -225,7 +275,7 @@ function changeSwitchStatus(layer, form, checked1, checked2) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -256,7 +306,7 @@ function getMainParameters(layer, form) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -289,8 +339,7 @@ function getMainParameters(layer, form) {
 }
 var MobileData;
 
-function getDatausage(layer, form, loading) {
-
+function getDatausageFirst(layer, form, loading) {
     var data = {
         "jsonrpc": "2.0",
         "method": "GetLteDataUsage",
@@ -300,7 +349,7 @@ function getDatausage(layer, form, loading) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -309,42 +358,47 @@ function getDatausage(layer, form, loading) {
             if (res.result) {
                 var json = res.result;
                 MobileData = json.data_usages;
-                //var dataTab =$('.tab-wrapper .tab-menu li').data('tab');
-                renderDataUsage(MobileData, 0); //默认渲染Data usage SIM1
+                //MobileData[0].start_date = "";
+                renderDataUsage(MobileData, 0);
+                setTimeout(() => {
+                    renderDataUsage(MobileData, 1);
+                }, 500);
             }
+        },
+        error: function(jqXHR) {
+            alert("An error occurred：" + jqXHR.status);
+        }
+    });
+}
 
+function getDatausage(layer, form, loading) {
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "GetLteDataUsage",
+        "params": {},
+        "id": "9.1"
+    }
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            layer.close(loading);
+            if (res.result) {
+                var json = res.result;
+                MobileData = json.data_usages;
+                var dataTab = $('.tab-wrapper .Data-usage-simmenu li.active').data('tab');
+                console.log("dataTab11", dataTab)
+                if (dataTab == "tab0") {
+                    renderDataUsage(MobileData, 0); //默认渲染Data usage SIM1
+                } else {
+                    renderDataUsage(MobileData, 1);
+                }
 
-            // if (json.moblie_data == 1 && json.sim.monthly_data_limit_flag == 1) {
-            //     $("#monthlydatalimit input").prop("checked", true);
-            //     var mobileData = $("#monthlydatalimit .layui-form-switch");
-            //     mobileData.find("em").text("ON");
-            //     mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-            //     console.log('monthly_data_limit on')
-            // }
-            // if (json.moblie_data == 0 && json.sim.monthly_data_limit_flag == 0) {
-            //     $("#monthlydatalimit input").prop("checked", false);
-            //     var mobileData = $("#monthlydatalimit .layui-form-switch");
-            //     mobileData.find("em").text("OFF");
-            //     mobileData.prop("class", "layui-unselect layui-form-switch");
-            //     console.log('monthlydatalimit off')
-            //     alert(0)
-            // }
-            // if (json.sim.usage_reminder_flag == 1) {
-            //     $("#usagereminders input").prop("checked", true);
-            //     var mobileData = $("#usagereminders .layui-form-switch");
-            //     mobileData.find("em").text("ON");
-            //     mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-            //     console.log('usagereminders on')
-            // }
-            // if (json.sim.usage_reminder_flag == 0) {
-            //     $("#usagereminders input").prop("checked", false);
-            //     var mobileData = $("#usagereminders .layui-form-switch");
-            //     mobileData.find("em").text("OFF");
-            //     mobileData.prop("class", "layui-unselect layui-form-switch");
-            //     console.log('usagereminders off')
-            // }
-
-
+            }
         },
         error: function(jqXHR) {
             alert("An error occurred：" + jqXHR.status);
@@ -353,80 +407,159 @@ function getDatausage(layer, form, loading) {
 }
 //渲染Data usage
 function renderDataUsage(json, i) {
+    if (i == 0) {
+        $("#sim_data_limt_unit").val(json[i].sim_data_limt_unit);
+        if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
+            $("#monthlydatalimit input").attr("checked", "checked");
+            $("#dataLimit input").removeAttr("disabled");
+            $("#switchMB").removeAttr("disabled");
+            $("#limit_time").removeAttr("disabled");
+            $("#last_manth_s").removeAttr("disabled");
+        } else {
+            $("#monthlydatalimit input").removeAttr("checked");
+            $("#dataLimit input").attr("disabled", true);
+            $("#switchMB").attr("disabled", true);
+            $("#limit_time").attr("disabled", true);
+            $("#last_manth_s").attr("disabled", true);
+        }
 
-    if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
-        $("#monthlydatalimit input").attr("checked", "checked");
-        $("#dataLimit input").removeAttr("disabled");
-        $("#switchMB").removeAttr("disabled");
-        $("#limit_time").removeAttr("disabled");
-        $("#last_manth_s").removeAttr("disabled");
-    } else {
-        $("#monthlydatalimit input").removeAttr("checked");
-        $("#dataLimit input").attr("disabled", true);
-        $("#switchMB").attr("disabled", true);
-        $("#limit_time").attr("disabled", true);
-        $("#last_manth_s").attr("disabled", true);
-    }
+        if (json[i].usage_reminder_flag == 1) { //Usage reminders
+            $("#usagereminders input").attr("checked", "checked");
+        } else {
+            console.log($("#usagereminders input"))
+            $("#usagereminders input").removeAttr("checked");
+        }
 
-    if (json[i].usage_reminder_flag == 1) { //Usage reminders
-        $("#usagereminders input").attr("checked", "checked");
-    } else {
-        ("#usagereminders input").removeAttr("checked");
-    }
+        if (json[i].sim_data_limt_unit == 0) {
+            $(".limit_unit").text("MB");
+            $("#allUsed_MB").text(json[i].current_data_used);
+            var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(0);
+            $("#redmian_MB").text(redmianMB);
+            $("#dataLimit input").val(json[i].monthly_data_limit);
+        } else {
+            $(".limit_unit").text("GB");
+            var current_used = (json[i].current_data_used / 1024).toFixed(2)
+            $("#allUsed_MB").text(current_used);
+            var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(1);
+            $("#redmian_MB").text(redmianMB);
+            $("#dataLimit input").val(json[i].monthly_data_limit / 1024);
+        }
 
-    if (json[i].sim_data_limt_unit == 0) {
-        $(".limit_unit").text("MB");
-        $("#allUsed_MB").text(json[i].current_data_used);
-        var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(0);
-        $("#redmian_MB").text(redmianMB);
-        $("#dataLimit input").val(redmianMB);
-    } else {
-        $(".limit_unit").text("GB");
-        var current_used = (json[i].current_data_used / 1024).toFixed(2)
-        $("#allUsed_MB").text(current_used);
-        var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(1);
-        $("#redmian_MB").text(redmianMB);
-        $("#dataLimit input").val(redmianMB);
-    }
+        $("#switchMB option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
 
-
-
-    $("#switchMB option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
-
-    if (json[i].start_date) { //Start data limit on
-        layui.use(['laydate'], function() {
-            laydate = layui.laydate;
-            laydate.render({
-                elem: '#limit_time',
-                lang: 'en',
-                value: json[i].start_date,
-                isInitValue: true,
-                done: function(value, date) {
-                    console.log(value, date)
-                    $("#test1").val(value)
-                }
+        if (json[i].start_date) { //Start data limit on
+            layui.use(['laydate'], function() {
+                laydate = layui.laydate;
+                laydate.render({
+                    elem: '#limit_time',
+                    lang: 'en',
+                    value: json[i].start_date,
+                    isInitValue: true,
+                    trigger: 'click',
+                    done: function(value, date) {
+                        console.log(value)
+                        $("#limit_time").val(value);
+                        getDatausageVal();
+                    }
+                });
             });
-        });
-    } else {
-        layui.use(['laydate'], function() {
-            laydate = layui.laydate;
-            laydate.render({
-                elem: '#test1',
-                lang: 'en',
-                done: function(value, date) {
-                    console.log(value, date)
-                    $("#test1").val(value)
-                }
+        } else {
+            layui.use(['laydate'], function() {
+                laydate = layui.laydate;
+                laydate.render({
+                    elem: '#limit_time',
+                    lang: 'en',
+                    trigger: 'click',
+                    done: function(value, date) {
+                        console.log(value)
+                        $("#limit_time").val(value);
+                        getDatausageVal();
+                    }
+                });
             });
-        });
+        }
+
+        if (json[i].last_month) {
+            $("#last_manth_s option[value='" + Number(json[i].last_month) + "']").prop("selected", true);
+        }
+    } else {
+        console.log(33444455)
+        $("#sim_data_limt_unit2").val(json[i].sim_data_limt_unit);
+        if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
+            $("#monthlydatalimit2 input").attr("checked", "checked");
+            $("#dataLimit2 input").removeAttr("disabled");
+            $("#switchMB2").removeAttr("disabled");
+            $("#limit_time2").removeAttr("disabled");
+            $("#last_manth_s2").removeAttr("disabled");
+        } else {
+            $("#monthlydatalimit2 input").removeAttr("checked");
+            $("#dataLimit2 input").attr("disabled", true);
+            $("#switchMB2").attr("disabled", true);
+            $("#limit_time2").attr("disabled", true);
+            $("#last_manth_s2").attr("disabled", true);
+        }
+
+        if (json[i].usage_reminder_flag == 1) { //Usage reminders
+            $("#usagereminders2 input").attr("checked", "checked");
+        } else {
+            console.log($("#usagereminders2 input"))
+            $("#usagereminders2 input").removeAttr("checked");
+        }
+        console.log("sim_data_limt_unit", json[i].sim_data_limt_unit)
+        if (json[i].sim_data_limt_unit == 0) {
+            $(".limit_unit2").text("MB");
+            $("#allUsed_MB2").text(json[i].current_data_used);
+            var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(0);
+            $("#redmian_MB2").text(redmianMB);
+            $("#dataLimit2 input").val(json[i].monthly_data_limit);
+        } else {
+            $(".limit_unit2").text("GB");
+            var current_used = (json[i].current_data_used / 1024).toFixed(2)
+            $("#allUsed_MB2").text(current_used);
+            var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(1);
+            $("#redmian_MB2").text(redmianMB);
+            $("#dataLimit2 input").val(json[i].monthly_data_limit / 1024);
+        }
+
+        $("#switchMB2 option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
+
+        if (json[i].start_date) { //Start data limit on
+            layui.use(['laydate'], function() {
+                laydate = layui.laydate;
+                laydate.render({
+                    elem: '#limit_time2',
+                    lang: 'en',
+                    value: json[i].start_date,
+                    isInitValue: true,
+                    trigger: 'click',
+                    done: function(value, date) {
+                        console.log(value, date)
+                        $("#limit_time2").val(value);
+                        getDatausageVal();
+                    }
+                });
+            });
+        } else {
+            layui.use(['laydate'], function() {
+                laydate = layui.laydate;
+                laydate.render({
+                    elem: '#limit_time2',
+                    lang: 'en',
+                    trigger: 'click',
+                    done: function(value, date) {
+                        console.log(value, date)
+                        $("#limit_time2").val(value);
+                        getDatausageVal();
+                    }
+                });
+            });
+        }
+
+        if (json[i].last_month) {
+            $("#last_manth_s2 option[value='" + Number(json[i].last_month) + "']").prop("selected", true);
+        }
+
     }
-
-    if (json[i].last_month) {
-        $("#last_manth_s option[value='" + Number(json[i].last_month) + "']").prop("selected", true);
-    }
-
-
-
 
     if (i == 0) {
         var Xdate = [];
@@ -445,7 +578,7 @@ function renderDataUsage(json, i) {
                 Xdate1.push(i);
             }
         }
-        renderEchart("used_MB", Xdate1, Ydata1)
+        renderEchart("used_MB2", Xdate1, Ydata1)
     }
     layui.use(['form'], function() {
         var form = layui.form;
@@ -467,7 +600,7 @@ function getSimManagement(layer, form, loading) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -485,14 +618,14 @@ function getSimManagement(layer, form, loading) {
 }
 //渲染SIM management
 function rendSIMManagement(json) {
-    if (json.active_sim) { //Active SIM:
-        $("#SIM option[value='" + Nunber(json.active_sim) + "']").prop("selected", true);
-    }
+
+    $("#SIM option[value='" + Number(json.active_sim) + "']").prop("selected", true);
+
 
     if (json.auo_switch == 1) { //Auto SIM switching:
         $("#AutoSim input").attr("checked", "checked");
     } else {
-        $("#DataRoaming input").removeAttr("checked");
+        $("#AutoSim input").removeAttr("checked");
     }
     //SIM1
     if (json.sim[0].rule_weak_signal == 1) { //SIM switching rules:
@@ -567,6 +700,7 @@ function rendSIMManagement(json) {
 }
 // 渲染图表
 function renderEchart(id, Xdate, Ydata) {
+    var unit = $("#switchMB").val() == 1 ? 'GB' : 'MB';
     var myChartGL = echarts.init(document.getElementById(id));
     myChartGL.clear();
     var optionBranchGL = {
@@ -584,10 +718,10 @@ function renderEchart(id, Xdate, Ydata) {
             trigger: 'axis',
             formatter: function(params, ticket, callback) {
                 if (params.length <= 0) return "";
-                var html = "d" + params[0].axisValue + "<br />\r\n";
+                var html = "day:" + params[0].axisValue + "<br />\r\n";
                 for (var i = 0; i < params.length; i++) {
                     var dataObj = params[i];
-                    html += dataObj.value + " MB<br />\r\n";
+                    html += dataObj.value + " " + unit + "<br />\r\n";
                 }
                 return html;
             }
@@ -701,6 +835,7 @@ function getSimManagementVal() {
             }
         ]
     }
+    console.log(params)
     setSimManagement(layer, params)
 }
 //设置SIM management
@@ -717,7 +852,7 @@ function setSimManagement(layer, params) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -738,37 +873,51 @@ function setSimManagement(layer, params) {
 }
 //设置前获取Datausage各项的值
 function getDatausageVal() {
-    var SIM = $("#SIM").val();
+    var switchMB = $("#switchMB").val();
     var data_limit_flag = $("#monthlydatalimit input").is(":checked") == true ? 1 : 0;
     var dataLimit = $("#dataLimit input").val();
+    if (switchMB == 1) {
+        dataLimit = dataLimit * 1024;
+    }
     var limit_time = $("#limit_time").val();
     console.log(limit_time)
-    var switchMB = $("#switchMB").val();
     var last_manth_s = $("#last_manth_s").val();
     var usagereminders = $("#usagereminders input").is(":checked") == true ? 1 : 0;
+
+    var switchMB2 = $("#switchMB2").val();
+    var data_limit_flag2 = $("#monthlydatalimit2 input").is(":checked") == true ? 1 : 0;
+    var dataLimit2 = $("#dataLimit2 input").val();
+    if (switchMB2 == 1) {
+        dataLimit2 = dataLimit2 * 1024;
+    }
+    var limit_time2 = $("#limit_time2").val();
+    console.log(limit_time2);
+    var last_manth_s2 = $("#last_manth_s2").val();
+    var usagereminders2 = $("#usagereminders2 input").is(":checked") == true ? 1 : 0;
 
     var params = {
         "data_usages": [{
                 "sim_id": 0,
                 "monthly_data_limit_flag": data_limit_flag,
                 "monthly_data_limit": dataLimit,
-                "sim_data_limt_unit": 1,
+                "sim_data_limt_unit": switchMB,
                 "start_date": limit_time,
                 "last_month": last_manth_s,
                 "usage_reminder_flag": usagereminders
             },
             {
                 "sim_id": 1,
-                "monthly_data_limit_flag": 1,
-                "monthly_data_limit": 690,
-                "sim_data_limt_unit": 0,
-                "start_date": "2020-11-04",
-                "last_month": 12,
-                "usage_reminder_flag": 1
+                "monthly_data_limit_flag": data_limit_flag2,
+                "monthly_data_limit": dataLimit2,
+                "sim_data_limt_unit": switchMB2,
+                "start_date": limit_time2,
+                "last_month": last_manth_s2,
+                "usage_reminder_flag": usagereminders2
             }
         ]
     }
-    setSimManagement(layer, params)
+    console.log(params)
+    setDatausage(layer, params)
 }
 //设置Datausage
 function setDatausage(layer, params) {
@@ -784,7 +933,7 @@ function setDatausage(layer, params) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",

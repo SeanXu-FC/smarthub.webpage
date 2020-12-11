@@ -24,7 +24,7 @@ function getSwitchStatus(layer, form) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -74,7 +74,7 @@ function changeSwitchStatus(layer, form, checked) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -120,7 +120,7 @@ function getWLANScan(layer) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -165,7 +165,7 @@ function getWLANData(layer, loading) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -379,7 +379,7 @@ function addNetworkHtml() {
             data = JSON.stringify(data);
             $.ajax({
                 type: "post",
-                url: req + "/action/action",
+                url: "/action/action",
                 data: data,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
@@ -516,7 +516,7 @@ function pollingWifiStatus(infoDOM, type) {
     data = JSON.stringify(data);
     var ajaxTimeout = $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         timeout: timeout0,
         data: data,
         dataType: "json",
@@ -587,7 +587,7 @@ function savedWifiConnect(ssid, bssid, encrypt) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -648,7 +648,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
 
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -702,7 +702,7 @@ function updateWifiList() {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -755,7 +755,7 @@ function aa() {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: req + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
