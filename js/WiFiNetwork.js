@@ -291,6 +291,7 @@ function bindEvent() {
 
     $('.Rectangle-1205 .wifi').hover(function() {
         var infoHtml = $(this).parents("tr").children(".wifi-info").children("span");
+        var ssid = infoHtml.attr("ssid");
         var freq = infoHtml.attr("freq");
         var bssid = infoHtml.attr("bssid");
         var encrypt = infoHtml.attr("encrypt");
@@ -300,7 +301,7 @@ function bindEvent() {
         } else if (5030 < freq && freq < 5900) {
             freq = "5GHz"
         }
-        var tipStr = '<div class="tips-c"><div class="-flex-dis"><span class="tip-l">Frequency band:</span><span class="tip-r">' + freq + '</span></div><div class="-flex-dis"><span class="tip-l">Security:</span><span class="tip-r">' + encrypt + '</span></div><div class="-flex-dis"><span class="tip-l">MAC address:</span><span class="tip-r">' + bssid + '</span></div></div>'
+        var tipStr = '<div class="tips-c"><div class="-flex-dis"><span class="tip-l">Ssid:</span><span class="tip-r">' + ssid + '</span></div><div class="-flex-dis"><span class="tip-l">Frequency band:</span><span class="tip-r">' + freq + '</span></div><div class="-flex-dis"><span class="tip-l">Security:</span><span class="tip-r">' + encrypt + '</span></div><div class="-flex-dis"><span class="tip-l">MAC address:</span><span class="tip-r">' + bssid + '</span></div></div>'
         layui.use('layer', function() {
             var layer = layui.layer;
             tipIndex = layer.tips(tipStr, "#" + tipId, {

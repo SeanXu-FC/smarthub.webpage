@@ -479,7 +479,7 @@
             <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel name:</label>
                 <div class="layui-input-block">
-                    <input id="output_name" type="text" name="" lay-verify="title" autocomplete="off" placeholder="Wipers" class="Rectangle-1188 layui-input form-control h18" onkeyup="WidthCheck(this,64);">
+                    <input id="output_name" type="text" name="" lay-verify="title" autocomplete="off" placeholder="Wipers" class="Rectangle-1188 layui-input form-control h18" oninput="value=value.replace(/[\u4e00-\u9fa5]/ig,'')" onkeyup="WidthCheck(this,64);">
                 </div>
             </div>
             <!-- <div class="layui-form-item mt-20">
@@ -503,10 +503,12 @@
     <script src="layui/layui.js " charset="utf-8 "></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script>
+        var saveChannelID;
         $(function() {
             var name = GetUrlParam("name");
             var ChannelID = GetUrlParam("ChannelID");
             var types = GetUrlParam("types");
+            saveChannelID = ChannelID;
             $("#channel-number").text(ChannelID)
             console.log("types", types)
             layui.use('layer', function() {
@@ -537,8 +539,11 @@
 
 
         $('#cancel').click(function() {
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index); //关闭当前页
+            $(parent.frames["my-iframe"].document).find("#saved_id").val("");
+            setTimeout(() => {
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index); //关闭当前页
+            }, 300);
         });
 
         //保存数据
@@ -563,9 +568,11 @@
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
                     if (res.result && res.result.status == "set channels configuration done") {
-
-                        var index = parent.layer.getFrameIndex(window.name);
-                        parent.layer.close(index); //关闭当前页
+                        $(parent.frames["my-iframe"].document).find("#saved_id").val(saveChannelID);
+                        setTimeout(() => {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index); //关闭当前页
+                        }, 300);
 
                     } else {
                         layer.msg(res.error.message);

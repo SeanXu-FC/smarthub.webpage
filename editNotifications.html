@@ -673,9 +673,10 @@
     <script src="layui/layui.js " charset="utf-8 "></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script>
-        var oldTrigType, oldVolt, oldNoti_msg;
+        var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
             var dataId = GetUrlParam("dataId");
+            savedataId = dataId;
             var name = GetUrlParam("name");
 
             var Notifications = GetUrlParam("Notifications");
@@ -802,16 +803,18 @@
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
                     if (res.result && res.result) {
-
-                        var index = parent.layer.getFrameIndex(window.name);
-                        parent.layer.close(index); //关闭当前页
+                        $(parent.frames["my-iframe"].document).find("#saved_id").val(savedataId);
+                        setTimeout(() => {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index); //关闭当前页
+                        }, 300)
 
                     } else {
                         layer.msg(res.error.message);
                     }
                 },
                 error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR.status);
+                    alert("An error occurred：" + jqXHR);
                 }
             })
         }
@@ -821,8 +824,11 @@
         }
 
         $('#cancel').click(function() {
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index); //关闭当前页
+            $(parent.frames["my-iframe"].document).find("#saved_id").val("");
+            setTimeout(() => {
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index); //关闭当前页
+            }, 300)
         });
     </script>
 </body>

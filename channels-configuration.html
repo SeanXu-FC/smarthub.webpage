@@ -153,6 +153,7 @@
 <body>
     <div class="container-fluid" style="padding:30px 70px;">
         <h3 class="Channels-configuration">Channels configuration</h3>
+        <input style="display: none" id="saved_id" name="saved_id" />
         <div class="row mt-40">
             <div class="col-sm-6 lan">
                 <h4 class="lanBt Inputs">Inputs</h4>
@@ -233,19 +234,23 @@
             //弹出一个iframe层
             $('.inputsEdit').on('click', function() {
                 var name = $(this).children(".Bilge-pump").text();
-
                 var dataId = $(this).attr("dataId");
 
                 //iframe层
                 parent.layer.open({
                     type: 2,
                     title: false,
+                    closeBtn: 0,
                     //shadeClose: true,
                     shade: 0.8,
                     area: ['761px', '320px'],
                     content: ['editInput.html?ChannelID=' + dataId + '&name=' + name, 'no'],
                     end: function() {
-                        location.reload();
+                        var ChannelID = $("#saved_id").val();
+                        if (ChannelID) {
+                            location.reload();
+                        }
+
                     }
                 });
             });
@@ -254,17 +259,22 @@
                 var name = $(this).children(".Bilge-pump").text();
                 var types = $(this).children(".Bilge-pump").attr("types");
                 var dataId = $(this).attr("dataId");
-                console.log(name, dataId)
-                    //iframe层
+                //iframe层
                 parent.layer.open({
                     type: 2,
                     title: false,
+                    closeBtn: 0,
                     //shadeClose: true,
                     shade: 0.8,
                     area: ['761px', '320px'],
                     content: ['editOutput.html?ChannelID=' + dataId + '&name=' + name + '&types=' + types, 'no'],
                     end: function() {
-                        location.reload();
+                        var ChannelID = $("#saved_id").val();
+                        console.log(ChannelID)
+                        if (ChannelID) {
+                            location.reload();
+                        }
+
                     }
                 });
             });

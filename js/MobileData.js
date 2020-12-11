@@ -1,6 +1,5 @@
 $(function() {
 
-
     var $wrapper = $('.tab-wrapper'),
         $allTabs = $wrapper.find('.tab-content > div'),
         $tabMenu = $wrapper.find('.tab-menu li'),
@@ -130,6 +129,38 @@ $(function() {
                 $("#last_manth_s").attr("disabled", true);
             }
             form.render();
+            getDatausageVal();
+        });
+
+        $("#SIM").change(function() {
+            getSimManagementVal();
+        });
+        form.on('switch(SIMswitch)', function(data) {
+            getSimManagementVal();
+        });
+        form.on('checkbox(Weak_signal_1)', function(data) {
+            getSimManagementVal();
+        });
+        form.on('checkbox(Weak_signal_2)', function(data) {
+            getSimManagementVal();
+        });
+        form.on('checkbox(rule_dlimit_1)', function(data) {
+            getSimManagementVal();
+        });
+        form.on('checkbox(rule_dlimit_2)', function(data) {
+            getSimManagementVal();
+        });
+        form.on('checkbox(rule_roamming_1)', function(data) {
+            getSimManagementVal();
+        });
+        form.on('checkbox(rule_roamming_2)', function(data) {
+            getSimManagementVal();
+        });
+        form.on('checkbox(rule_noservice_1)', function(data) {
+            getSimManagementVal();
+        });
+        form.on('checkbox(rule_noservice_2)', function(data) {
+            getSimManagementVal();
         });
 
         $("#arrow1").click(function() {
@@ -137,7 +168,10 @@ $(function() {
             if (content.style.display == "none") {
                 content.style.display = "block ";
                 $('#arrow1 span .up').attr("src", images1[1]);
-                getDatausage(layer, form);
+                var loading = layer.load(0, {
+                    shade: false
+                });
+                getDatausage(layer, form, loading);
             } else {
                 content.style.display = "none ";
                 $('#arrow1 span .up').attr("src", images1[0]);
@@ -150,7 +184,10 @@ $(function() {
             if (content1.style.display == "none") {
                 content1.style.display = "block ";
                 $('#arrow2 span .up').attr("src", images1[1]);
-                getSimManagement(layer, form)
+                var loading = layer.load(0, {
+                    shade: false
+                });
+                getSimManagement(layer, form, loading);
             } else {
                 content1.style.display = "none ";
                 $('#arrow2 span .up').attr("src", images1[0]);
@@ -252,10 +289,8 @@ function getMainParameters(layer, form) {
 }
 var MobileData;
 
-function getDatausage(layer, form) {
-    var loading = layer.load(0, {
-        shade: false
-    });
+function getDatausage(layer, form, loading) {
+
     var data = {
         "jsonrpc": "2.0",
         "method": "GetLteDataUsage",
@@ -362,7 +397,7 @@ function renderDataUsage(json, i) {
         layui.use(['laydate'], function() {
             laydate = layui.laydate;
             laydate.render({
-                elem: '#test1',
+                elem: '#limit_time',
                 lang: 'en',
                 value: json[i].start_date,
                 isInitValue: true,
@@ -421,10 +456,8 @@ function renderDataUsage(json, i) {
     });
 }
 
-function getSimManagement(layer, form) {
-    var loading = layer.load(0, {
-        shade: false
-    });
+function getSimManagement(layer, form, loading) {
+
     var data = {
         "jsonrpc": "2.0",
         "method": "GetLteSimManagement",
@@ -543,7 +576,7 @@ function renderEchart(id, Xdate, Ydata) {
                 color: "#999",
                 fontSize: 14
             },
-            text: "暂无数据",
+            text: "No data",
             left: "center",
             top: "center"
         },
@@ -636,16 +669,49 @@ function renderEchart(id, Xdate, Ydata) {
         }
     }, 200);
 }
-
+//设置前获取SimManagement各项的值
+function getSimManagementVal() {
+    var SIM = $("#SIM").val();
+    var autoSwitch = $("#AutoSim input").is(":checked") == true ? 1 : 0;
+    var Weak_signal_1 = $("#Weak_signal_1").is(":checked") == true ? 1 : 0;
+    console.log($("#Weak_signal_1").is(":checked"))
+    var rule_dlimit_1 = $("#rule_dlimit_1").is(":checked") == true ? 1 : 0;
+    var rule_roamming_1 = $("#rule_roamming_1").is(":checked") == true ? 1 : 0;
+    var rule_noservice_1 = $("#rule_noservice_1").is(":checked") == true ? 1 : 0;
+    var Weak_signal_2 = $("#Weak_signal_2").is(":checked") == true ? 1 : 0;
+    var rule_dlimit_2 = $("#rule_dlimit_2").is(":checked") == true ? 1 : 0;
+    var rule_roamming_2 = $("#rule_roamming_2").is(":checked") == true ? 1 : 0;
+    var rule_noservice_2 = $("#rule_noservice_2").is(":checked") == true ? 1 : 0;
+    var params = {
+        "active_sim": Number(SIM),
+        "auto_switch": autoSwitch,
+        "sim": [{
+                "sim_id": 0,
+                "rule_weak_signal": Weak_signal_1,
+                "rule_dlimit": rule_dlimit_1,
+                "rule_roamming": rule_roamming_1,
+                "rule_noservice": rule_noservice_1,
+            },
+            {
+                "sim_id": 1,
+                "rule_weak_signal": Weak_signal_2,
+                "rule_dlimit": rule_dlimit_2,
+                "rule_roamming": rule_roamming_2,
+                "rule_noservice": rule_noservice_2,
+            }
+        ]
+    }
+    setSimManagement(layer, params)
+}
 //设置SIM management
-function setSimManagement(layer, form) {
+function setSimManagement(layer, params) {
     var loading = layer.load(0, {
         shade: false
     });
     var data = {
         "jsonrpc": "2.0",
         "method": "SetLteSimManagement",
-        "params": {},
+        "params": params,
         "id": "9.1"
     }
     data = JSON.stringify(data);
@@ -658,8 +724,78 @@ function setSimManagement(layer, form) {
         success: function(res) {
             layer.close(loading);
             if (res.result) {
-                var json = res.result;
-                rendSIMManagement(json)
+                layui.use(['layer', 'form'], function() {
+                    var layer = layui.layer;
+                    var form = layui.form;
+                    getSimManagement(layer, form, loading)
+                })
+            }
+        },
+        error: function(jqXHR) {
+            alert("An error occurred：" + jqXHR.status);
+        }
+    });
+}
+//设置前获取Datausage各项的值
+function getDatausageVal() {
+    var SIM = $("#SIM").val();
+    var data_limit_flag = $("#monthlydatalimit input").is(":checked") == true ? 1 : 0;
+    var dataLimit = $("#dataLimit input").val();
+    var limit_time = $("#limit_time").val();
+    console.log(limit_time)
+    var switchMB = $("#switchMB").val();
+    var last_manth_s = $("#last_manth_s").val();
+    var usagereminders = $("#usagereminders input").is(":checked") == true ? 1 : 0;
+
+    var params = {
+        "data_usages": [{
+                "sim_id": 0,
+                "monthly_data_limit_flag": data_limit_flag,
+                "monthly_data_limit": dataLimit,
+                "sim_data_limt_unit": 1,
+                "start_date": limit_time,
+                "last_month": last_manth_s,
+                "usage_reminder_flag": usagereminders
+            },
+            {
+                "sim_id": 1,
+                "monthly_data_limit_flag": 1,
+                "monthly_data_limit": 690,
+                "sim_data_limt_unit": 0,
+                "start_date": "2020-11-04",
+                "last_month": 12,
+                "usage_reminder_flag": 1
+            }
+        ]
+    }
+    setSimManagement(layer, params)
+}
+//设置Datausage
+function setDatausage(layer, params) {
+    var loading = layer.load(0, {
+        shade: false
+    });
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "SetLteDataUsage",
+        "params": params,
+        "id": "9.1"
+    }
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: req + "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            layer.close(loading);
+            if (res.result) {
+                layui.use(['layer', 'form'], function() {
+                    var layer = layui.layer;
+                    var form = layui.form;
+                    getDatausage(layer, form, loading);
+                })
             }
         },
         error: function(jqXHR) {
