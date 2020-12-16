@@ -643,9 +643,9 @@
                     var mobileStatus = "";
                     if (json.mobile.status == 0) {
                         if (json.mobile.act_num == 0) {
-                            mobileStatus = "disconnected(3GHz)"
+                            mobileStatus = "disconnected(3G)"
                         } else {
-                            mobileStatus = "disconnected(4GHz)"
+                            mobileStatus = "disconnected(4G)"
                         }
 
                         $('.Connected4G').eq(0).text(mobileStatus);
@@ -664,9 +664,9 @@
                         $(".mobiledataImg-disable").show();
                     } else {
                         if (json.mobile.act_num == 0) {
-                            mobileStatus = "connected(3GHz)"
+                            mobileStatus = "connected(3G)"
                         } else {
-                            mobileStatus = "connected(4GHz)"
+                            mobileStatus = "connected(4G)"
                         }
                         $('.Connected4G').eq(0).text(mobileStatus);
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');
