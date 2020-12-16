@@ -11,12 +11,6 @@ $(function() {
             var form = layui.form;
 
 
-            // if (this.checked) {
-            //     $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
-            // } else {
-            //     $("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
-            // }
-            //var checked = data.elem.checked;
             var serverStatus = 1;
             var onoff = serverStatus ? 1 : 0;
             if (serverStatus == 0) {
@@ -28,29 +22,23 @@ $(function() {
                 //$("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
                 $("#content select,#content input").prop("disabled", false);
                 $("#btnGroup").removeAttr("disabled");
-                //$('#edit').prop("disabled", false);
-                //$('#cancel').attr("disabled", false);
-                // var o = $(".layui-form-switch");
-                // o.find("em").text("OFF")
-                // o.prop("class", "layui-unselect layui-form-switch")
+
             }
 
 
-            // if (serverStatus) {
-            //     data.elem.checked = checked;
-            // } else {
-            //     data.elem.checked = !checked;
-            // }
+
             form.render();
             var select = $("#EncryptionType").val();
-            console.log(select)
             var WpaKey = $(".pwd").val();
-            // if(select==1){
-            //     WpaKey=$(".pwd1").val()
-            // }else {
-            //     WpaKey=$(".pwd").val(); 
-            // }
-
+            var len = $("#pw").val().length;
+            if (len >= 8 && len <= 20 && $("#pw").val() != '' && isNaN($("#pw").val()) == false) {} else {
+                $(".pwd").siblings()
+                    .find('span')
+                    .text('Please enter a password with more than 8 digits!')
+                    .removeClass('state1 state2 state4')
+                    .addClass('state3');
+                return;
+            }
             var data = {
                 "jsonrpc": "2.0",
 
@@ -86,24 +74,17 @@ $(function() {
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
-                    if (data == "true") {
-                        //layer.msg("状态修改成功");
-                        $("#onoff").prop("checked", false);
-                        var o = $(".layui-form-switch");
-                        o.find("em").text("OFF");
-                        o.prop("class", "layui-unselect layui-form-switch");
-                        active.reload();
+                    if (res.result) {
+                        $('#success').show(1000).delay(6000).hide(0);
+
                     } else {
-                        //layer.msg(data);
-                        $("#onoff").prop("checked", true);
-                        var o = $(".layui-form-switch");
-                        o.find("em").text("ON");
-                        o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                        layer.msg(res.error);
                     }
 
                 },
                 error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR.status);
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
 
                 }
             });
@@ -186,7 +167,8 @@ $(function() {
 
         //     },
         //     error: function(jqXHR) {
-        //         alert("An error occurred：" + jqXHR.status);
+        //         var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+        //promptMessage("Error message", tip);
         //     }
 
         // });

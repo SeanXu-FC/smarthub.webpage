@@ -1,6 +1,6 @@
-//var req = "/proxy";
+//var reqUrlProxy = "/proxy";
 var restart0 = true;
-var req = "";
+var reqUrlProxy = "";
 //获取url中的参数
 function GetUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -27,4 +27,35 @@ function WidthCheck(str, maxLen) {
             break;
         }
     }
+}
+
+function promptMessage(title, content) {
+    layui.use(['layer'], function() {
+        var layer = layui.layer;
+        layer.open({
+            type: 1,
+            id: 'layerDemo1', //防止重复弹出   
+            title: title,
+            content: content,
+            btn: 'close',
+            btnAlign: 'c', //按钮居中 
+            closeBtn: 0,
+            shade: 0, //不显示遮罩                            
+            yes: function(index) {
+                layer.close(index);
+            }
+        });
+    })
+
+}
+
+function tipMessage(content) {
+    layui.use(['layer'], function() {
+        var layer = layui.layer;
+        layer.msg(content, {
+            skin: 'layui-layer-molv',
+            time: 3000000,
+            area: '400px'
+        });
+    })
 }

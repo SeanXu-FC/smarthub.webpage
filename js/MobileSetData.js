@@ -1,19 +1,94 @@
 $(function() {
-    //console.log($('#date input[type="text"]').eq(0).val())
-    // $('.formonth').change(function() {
-    //     console.log($('.formonth option').val())
-    // });
+    // 按钮禁掉和灰掉
+    $(".connected button").prop("disabled", true);
+    $(".connected button").css("opacity", "0.5");
 
-    $("#btn_saved1").on("click", function() {
-        saveDatausage();
-    })
-    $("#btn_saved2").on("click", function() {
-        saveSIMmanagement();
-    })
 
+    $('#pwd,#pwd2,#pwd3').bind("keyup", function() {
+        var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,19}$/;
+        var val = reg.test($('#pwd').val());
+        var val2 = reg.test($('#pwd2').val());
+        var val3 = reg.test($('#pwd3').val());
+        var len = $('#pwd').val().length;
+        var len2 = $('#pwd2').val().length;
+        var len3 = $('#pwd3').val().length;
+        if (len <= 6 || len >= 16 || val == "" || val == null) {
+            $("#OK_btn").attr("disabled", "true");
+            $("#OK_btn").css("opacity", "0.5");
+        } else {
+            $("#OK_btn").removeAttr("disabled");
+            $("#OK_btn").css("opacity", "1");
+        }
+        if (len2 <= 6 || len2 >= 16 || val2 == "" || val2 == null) {
+            $("#OK_btn").attr("disabled", "true");
+            $("#OK_btn").css("opacity", "0.5");
+        } else {
+            $("#OK_btn").removeAttr("disabled");
+            $("#OK_btn").css("opacity", "1");
+        }
+        if (len3 <= 6 || len3 >= 16 || val3 == "" || val3 == null) {
+            $("#OK_btn").attr("disabled", "true");
+            $("#OK_btn").css("opacity", "0.5");
+        } else {
+            $("#OK_btn").removeAttr("disabled");
+            $("#OK_btn").css("opacity", "1");
+        }
+        var oPwd2 = $('#pwd2').val();
+        var oPwd3 = $('#pwd3').val();
+        if (oPwd2 != oPwd3) {
+            $("#tip").show();
+            $("#tip").text("Passwords don't match"); //两次输入的密码不一致！
+            $("#tip").css({
+                "color": "red",
+                "fontWeight": "normal"
+            });
+        } else {
+            $("#tip").hide();
+        }
+    });
+
+    $('#cancel').click(function() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index); //关闭当前页
+    });
+
+    // show
+    var isShow = true;
+
+    change = function() {
+        var type = $("#pwd").attr("type");
+        if (type == "text") {
+            $("#pwd").attr("type", "password");
+        } else {
+            $("#pwd").attr("type", "text");
+        }
+    };
+    change2 = function() {
+        var type = $("#pwd2").attr("type");
+        if (type == "text") {
+            $("#pwd2").attr("type", "password");
+        } else {
+            $("#pwd2").attr("type", "text");
+        }
+    };
+    change3 = function() {
+        var type = $("#pwd3").attr("type");
+        if (type == "text") {
+            $("#pwd3").attr("type", "password");
+        } else {
+            $("#pwd3").attr("type", "text");
+        }
+    };
+
+    $("#OK_btn").on("click", function() {
+        saveChangePin();
+    })
 });
 
-function saveDatausage() {
+function saveChangePin() {
+    var pin1 = $("#pwd").val();
+    var pin2 = $("#pwd2").val();
+    var pin3 = $("#pwd3").val();
     var data = {
         "jsonrpc": "2.0",
         "method": "lte_set_status",
@@ -61,8 +136,6 @@ function saveDatausage() {
 
     data = JSON.stringify(data);
 
-    //console.log(this.checked)
-    //var mobileDataOnoff = [0, 1];
     $.ajax({
         type: "post",
         url: "/action/action",
@@ -70,54 +143,17 @@ function saveDatausage() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            //console.log(data);
-            if (data == "true") {
-                alert(1)
-                    // $("#mobileData").prop("checked", true);
-                    // var mobileData = $("#mobileData .layui-form-switch");
-                    // mobileData.find("em").text("ON");
-                    // mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-
-                // $("#DataRoaming").prop("checked", false);
-                // var dataRoaming = $("#DataRoaming .layui-form-switch");
-                // dataRoaming.find("em").text("ON");
-                // dataRoaming.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-                //layer.msg("状态修改成功");
-                // $("#onoff").prop("checked", false);
-                // var o = $(".layui-form-switch");
-                // o.find("em").text("OFF");
-                // o.prop("class", "layui-unselect layui-form-switch");
-                // active.reload();
-            } else {
-                alert(2)
-
-                // $("#mobileData").prop("checked", true);
-                // var mobileData = $("#mobileData .layui-form-switch");
-                // mobileData.find("em").text("ON");
-                // mobileData.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-                // $("#DataRoaming").prop("checked", true);
-                // var dataRoaming = $("#DataRoaming .layui-form-switch");
-                // dataRoaming.find("em").text("ON");
-                // dataRoaming.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
-                // $("#DataRoaming").prop("checked", false);
-                // var dataRoaming = $("#DataRoaming .layui-form-switch");
-                // dataRoaming.find("em").text("OFF");
-                // dataRoaming.prop("class", "layui-unselect layui-form-switch");
-                //layer.msg(data);
-                // $("#onoff").prop("checked", true);
-                // var o = $(".layui-form-switch");
-                // o.find("em").text("ON");
-                // o.prop("class", "layui-unselect layui-form-switch layui-form-onswitch");
+            if (res.result) {
+                //layer.msg(res.result.status);
+            } else if (res.error) {
+                layer.msg("An error occurred：" + res.error.message);
             }
 
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
 
         }
     });
-}
-
-function saveSIMmanagement() {
-
 }

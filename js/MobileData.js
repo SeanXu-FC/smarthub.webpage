@@ -87,13 +87,10 @@ $(function() {
         parent.layer.open({
             type: 2,
             title: false,
+            closeBtn: 0,
             //shadeClose: true,
             shade: 0.8,
             area: ['500px', '410px'],
-            //content: ['内容', '#id'] ,
-            // content: $('#enterPass1')
-
-            //content: changeSimPin
             content: ['changeSimPin.html', 'no'],
         });
     });
@@ -122,12 +119,14 @@ $(function() {
                 $("#switchMB").removeAttr("disabled");
                 $("#limit_time").removeAttr("disabled");
                 $("#last_manth_s").removeAttr("disabled");
+                $("#usagereminders input").removeAttr("disabled");
 
             } else {
                 $("#dataLimit input").attr("disabled", true);
                 $("#switchMB").attr("disabled", true);
                 $("#limit_time").attr("disabled", true);
                 $("#last_manth_s").attr("disabled", true);
+                $("#usagereminders input").attr("disabled", true);
             }
             form.render();
             getDatausageVal();
@@ -287,7 +286,8 @@ function changeSwitchStatus(layer, form, checked1, checked2) {
             }
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
 
         }
     });
@@ -333,7 +333,9 @@ function getMainParameters(layer, form) {
 
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            layer.close(loading);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 }
@@ -366,7 +368,9 @@ function getDatausageFirst(layer, form, loading) {
             }
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            layer.close(loading);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 }
@@ -401,7 +405,9 @@ function getDatausage(layer, form, loading) {
             }
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            layer.close(loading);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 }
@@ -483,7 +489,6 @@ function renderDataUsage(json, i) {
             $("#last_manth_s option[value='" + Number(json[i].last_month) + "']").prop("selected", true);
         }
     } else {
-        console.log(33444455)
         $("#sim_data_limt_unit2").val(json[i].sim_data_limt_unit);
         if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
             $("#monthlydatalimit2 input").attr("checked", "checked");
@@ -565,7 +570,7 @@ function renderDataUsage(json, i) {
         var Xdate = [];
         var Ydata = json[i].days;
         if (Ydata.length > 0) {
-            for (var i = 1; i < Ydata.length; i++) {
+            for (var i = 0; i < Ydata.length; i++) {
                 Xdate.push(i);
             }
         }
@@ -574,7 +579,7 @@ function renderDataUsage(json, i) {
         var Xdate1 = [];
         var Ydata1 = json[i].days;
         if (Ydata1.length > 0) {
-            for (var i = 1; i < Ydata1.length; i++) {
+            for (var i = 0; i < Ydata1.length; i++) {
                 Xdate1.push(i);
             }
         }
@@ -612,7 +617,9 @@ function getSimManagement(layer, form, loading) {
             }
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            layer.close(loading);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 }
@@ -718,7 +725,7 @@ function renderEchart(id, Xdate, Ydata) {
             trigger: 'axis',
             formatter: function(params, ticket, callback) {
                 if (params.length <= 0) return "";
-                var html = "day:" + params[0].axisValue + "<br />\r\n";
+                var html = "day:" + (Number(params[0].axisValue) + 1) + "<br />\r\n";
                 for (var i = 0; i < params.length; i++) {
                     var dataObj = params[i];
                     html += dataObj.value + " " + unit + "<br />\r\n";
@@ -739,7 +746,7 @@ function renderEchart(id, Xdate, Ydata) {
         }],
         xAxis: [{
             type: 'category',
-            boundaryGap: false,
+            boundaryGap: true,
             axisTick: { show: false },
             axisLabel: {
                 show: false
@@ -867,7 +874,9 @@ function setSimManagement(layer, params) {
             }
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            layer.close(loading);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 }
@@ -948,7 +957,9 @@ function setDatausage(layer, params) {
             }
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            layer.close(loading);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 }

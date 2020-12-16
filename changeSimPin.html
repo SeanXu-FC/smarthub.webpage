@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link href="css/style.css" rel="stylesheet" />
     <title>Document</title>
@@ -189,7 +187,7 @@
             <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Change SIM1 pin</h3>
             <div class="row">
                 <label class="col-md-4 Password mt-30" style="padding-left:0;">Change SIM1 pin:</label>
-                <input type="password" id="pwd" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
+                <input type="text" id="pwd" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
                 <span class="col-md-1 SHOW" style="cursor: pointer;" onclick="change()">show</span>
             </div>
             <div class="row">
@@ -201,103 +199,18 @@
                 <label class="col-md-4 Password mt-30" style="padding-left:0;">Confirm new pin:</label>
                 <input type="password" id="pwd3" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" style="margin-left: 4px;" />
                 <span class="col-md-1 SHOW" style="cursor: pointer;" onclick="change3()">show</span>
+                <div class="mt-10"><span id="tip" style="color: red;margin-left: 184px;"></span><br></div>
             </div>
 
             <div class="row mt-30 ">
                 <button class="Path-101 Cancel" id="cancel" style="margin-left:156px">Cancel</button>
-                <span class="connected"><button class="Rectangle-1182 active OK" id="btn" disabled style="margin-left:30px">Ok</button></span>
+                <span class="connected"><button class="Rectangle-1182 active OK" id="OK_btn" disabled style="margin-left:30px">Ok</button></span>
             </div>
         </div>
     </form>
-    <script>
-        $(function() {
-            // var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-
-            // parent.layer.title('新标题。。', index) //再改变当前层的标题
-            //parent.parent.$(".layui-layer-title")[0].innerText = "正在打开："+$("#f_title").val();
-
-            //去掉标题栏
-            //parent.parent.$(".layui-layer-title")[0].style.display = "none";
-
-            // 按钮禁掉和灰掉
-            $(".connected button").prop("disabled", true);
-            $(".connected button").css("opacity", "0.5");
-
-
-            $('#pwd,#pwd2,#pwd3').bind("keyup", function() {
-                var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,19}$/;
-                var val = reg.test($('#pwd').val());
-                var val2 = reg.test($('#pwd2').val());
-                var val3 = reg.test($('#pwd3').val());
-                var len = val.length;
-                var len2 = val2.length;
-                var len3 = val3.length;
-                if (len <= 6 || len >= 16 || val == "" || val == null) {
-                    $("#btn").attr("disabled", "true");
-                    $("#btn").css("opacity", "0.5");
-                } else {
-                    $("#btn").removeAttr("disabled");
-                    $("#btn").css("opacity", "1");
-                }
-                if (len2 <= 6 || len2 >= 16 || val2 == "" || val2 == null) {
-                    $("#btn").attr("disabled", "true");
-                    $("#btn").css("opacity", "0.5");
-                } else {
-                    $("#btn").removeAttr("disabled");
-                    $("#btn").css("opacity", "1");
-                }
-                if (len3 <= 6 || len3 >= 16 || val3 == "" || val3 == null) {
-                    $("#btn").attr("disabled", "true");
-                    $("#btn").css("opacity", "0.5");
-                } else {
-                    $("#btn").removeAttr("disabled");
-                    $("#btn").css("opacity", "1");
-                }
-            });
-
-            $('#cancel').click(function() {
-                var index = parent.layer.getFrameIndex(window.name);
-                parent.layer.close(index); //关闭当前页
-            });
-
-            // show
-            var isShow = true;
-
-            change = function() {
-                var v = $("#pwd").get(0);
-                if (isShow) {
-                    v.type = "text";
-                    isShow = false;
-                } else {
-                    v.type = "password";
-                    isShow = true;
-                }
-            };
-            change2 = function() {
-                var v2 = $("#pwd2").get(0);
-                if (isShow) {
-                    v2.type = "text";
-                    isShow = false;
-                } else {
-                    v2.type = "password";
-                    isShow = true;
-                }
-            };
-            change3 = function() {
-                var v3 = $("#pwd3").get(0);
-                if (isShow) {
-                    v3.type = "text";
-                    isShow = false;
-                } else {
-                    v3.type = "password";
-                    isShow = true;
-                }
-            };
-            change();
-            change2();
-            change3();
-        });
-    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/MobileSetData.js"></script>
 </body>
 
 </html>

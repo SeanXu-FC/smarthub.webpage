@@ -48,7 +48,8 @@ function getWLANScan(layer) {
         },
         error: function(jqXHR) {
             //sessionStorage.setItem('clickFlag', true);
-            alert("An error occurred：" + jqXHR.status);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 }
@@ -84,7 +85,9 @@ function getWLANData(layer, loading) {
 
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            parent.layer.close(loading);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
             //sessionStorage.setItem('clickFlag', true);
         }
     });
@@ -117,13 +120,13 @@ function renderWifiList(json) {
             }
             signal = Math.abs(json[i].rssi);
             if (100 > signal && signal >= 85) {
-                wifiImg = "wifi-icon1.png";
+                wifiImg = "s_wifi_02.png";
             } else if (85 > signal && signal >= 70) {
-                wifiImg = "wifi-icon2.png";
+                wifiImg = "s_wifi_03.png";
             } else if (70 > signal && signal >= 55) {
-                wifiImg = "wifi-icon3.png";
+                wifiImg = "s_wifi_04.png";
             } else if (55 > signal) {
-                wifiImg = "wifi-icon4.png";
+                wifiImg = "s_wifi_05.png";
             }
             str += '<div class="row -flex-display -justify-box"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
         }
@@ -144,13 +147,13 @@ function renderWifiList(json) {
             }
             signal = Math.abs(json[j].rssi);
             if (100 > signal && signal >= 85) {
-                wifiImg = "wifi-icon1.png";
+                wifiImg = "s_wifi_02.png";
             } else if (85 > signal && signal >= 70) {
-                wifiImg = "wifi-icon2.png";
+                wifiImg = "s_wifi_03.png";
             } else if (70 > signal && signal >= 55) {
-                wifiImg = "wifi-icon3.png";
+                wifiImg = "s_wifi_04.png";
             } else if (55 > signal) {
-                wifiImg = "wifi-icon4.png";
+                wifiImg = "s_wifi_05.png";
             }
             str += '<div class="row -flex-display -justify-box wifi" style="margin-top:13px;"><input class="dom_saved_data" value="" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '" style="display:none;"><div class="-radio-flex"><div class="wifi-name-set">' + json[j].ssid + '</div><div class="c9" style="padding-left:0">' + savedStr + '</div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
         }
@@ -314,7 +317,8 @@ function pollingWifiStatus(infoDOM, type) {
         },
         error: function(jqXHR) {
             clearInterval(timer);
-            alert("An error occurred：" + jqXHR.status);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
 
     });
@@ -377,7 +381,8 @@ function savedWifiConnect(ssid, bssid, encrypt) {
             }
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 }
@@ -440,7 +445,8 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
             }
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 }

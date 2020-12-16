@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link href="css/style.css" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js"></script>
+
     <title>Document</title>
     <style>
         * {
@@ -398,6 +396,9 @@
 
 
     </div>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
     <script>
         $(function() {
@@ -549,10 +550,9 @@
 
                     } else if (res.error) {
                         $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt", "");
-                        layui.use(['form', 'layer'], function() {
-                            var layer = layui.layer;
-                            layer.msg("An error occurred：" + res.error.message);
-                        })
+
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.error.message + '</div>';
+                        promptMessage("Error message", tip);
 
                     }
 
@@ -560,8 +560,8 @@
                 },
                 error: function(jqXHR) {
                     $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt", "");
-                    alert("An error occurred：" + jqXHR.status);
-
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
                 }
             });
         }

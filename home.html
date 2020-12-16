@@ -50,114 +50,6 @@
             text-align: left;
             color: #000000;
         }
-        /* .bd1 {
-            width: 560px;
-            height: auto;
-            position: relative;
-            overflow: hidden;
-            zoom: 1;
-            border: 0px solid #f00"
-
-        }
-        
-        .status {
-            font-size: 44px;
-            font-weight: 600;
-            color: #861f41;
-            border-bottom: solid 1px #d2d2d2;
-            padding-bottom: 20px;
-            width: 92%
-        }
-        
-        .mobiledataImg {
-            position: absolute;
-            top: 196px;
-            left: 261px;
-            z-index: 2;
-            width: 42px;
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .WiFiNetwork {
-            position: absolute;
-            top: 120px;
-            left: 215px;
-            z-index: 1;
-            width: 50px;
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .w520 {
-            position: relative;
-            width: 520px
-        }
-        
-        .r_01 {
-            display: block;
-            width: 80px;
-            max-width: 100%;
-            height: auto;
-            margin: 0 auto
-        }
-        
-        .r_02 {
-            display: block;
-            margin: 0 auto;
-            width: 50px;
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .group2916 {
-            display: block;
-            margin: 0 auto;
-            width: 70px;
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .r_06 {
-            display: block;
-            margin: 5px auto;
-            width: 50px;
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .r_07 {
-            display: block;
-            margin: 0 auto;
-            width: 300px;
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .Group2901 {
-            margin-left: 21px;
-            width: 30px;
-            max-width: 100%;
-            height: auto;
-            display: inline-block;
-        }
-        
-        .Group2902 {
-            width: 80px;
-            max-width: 100%;
-            height: auto;
-            display: inline-block;
-        }
-        
-        .Group2903 {
-            margin-left: 10px;
-            width: 80px;
-            max-width: 100%;
-            height: auto;
-            display: inline-block;
-        } */
         
         .ml-40 {
             margin-left: 60px !important;
@@ -202,6 +94,29 @@
             max-width: 100%;
             height: auto;
             display: block;
+        }
+        
+        .mobiledataImg-disable {
+            position: absolute;
+            top: 275px !important;
+            left: 278px;
+            z-index: 2;
+            width: 12px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .WiFiNetwork-disable {
+            position: absolute;
+            top: 147px;
+            left: 240px;
+            z-index: 1;
+            width: 12px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            background-color: #fff;
         }
         
         .w520 {
@@ -327,7 +242,7 @@
             }
             .mobiledataImg {
                 position: absolute;
-                top: 260px;
+                top: 237px;
                 left: 261px;
                 z-index: 2;
                 width: 56px;
@@ -344,6 +259,27 @@
                 max-width: 100%;
                 height: auto;
                 display: block;
+            }
+            .mobiledataImg-disable {
+                position: absolute;
+                top: 341px !important;
+                left: 283px;
+                z-index: 2;
+                width: 12px;
+                max-width: 100%;
+                height: auto;
+                display: none;
+            }
+            .WiFiNetwork-disable {
+                position: absolute;
+                top: 169px;
+                left: 240px;
+                z-index: 1;
+                width: 12px;
+                max-width: 100%;
+                height: auto;
+                display: none;
+                background-color: #fff;
             }
             .w520 {
                 position: relative;
@@ -451,6 +387,16 @@
                 height: auto;
                 display: block;
             }
+            .mobiledataImg-disable {
+                position: absolute;
+                top: 275px !important;
+                left: 278px;
+                z-index: 2;
+                width: 12px;
+                max-width: 100%;
+                height: auto;
+                display: none;
+            }
             .WiFiNetwork {
                 position: absolute;
                 top: 120px;
@@ -460,6 +406,17 @@
                 max-width: 100%;
                 height: auto;
                 display: block;
+            }
+            .WiFiNetwork-disable {
+                position: absolute;
+                top: 147px;
+                left: 240px;
+                z-index: 1;
+                width: 12px;
+                max-width: 100%;
+                height: auto;
+                display: none;
+                background-color: #fff;
             }
             .w520 {
                 position: relative;
@@ -536,8 +493,8 @@
             <h4 class="ml-40 mt-10 status">Status</h4>
             <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-1 mt-20">
                 <div class="bd bd1">
-                    <a href=" WiFiNetwork.html " title="Wi-Fi network "><img src="images/r_03.png " class="WiFiNetwork"></a>
-                    <a href="MobileData.html " title="Mobile data "><img src="images/r_04.png " class="mobiledataImg"></a>
+                    <a href=" WiFiNetwork.html " title="Wi-Fi network "><img src="images/r_03.png " class="WiFiNetwork"><img src="images/no-connect.png " class="WiFiNetwork-disable"></a>
+                    <a href="MobileData.html " title="Mobile data "><img src="images/r_04.png " class="mobiledataImg"><img src="images/no-connect.png " class="mobiledataImg-disable"></a>
                     <div class="w520">
                         <img src="images/r_01.png " class="r_01">
                     </div>
@@ -581,8 +538,8 @@
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="WiFiNetwork-info1.html" target="_self">WiFi</a></h3>
-                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected clg connected24"></span><img id="connected24" class="imgIcon"></div>
-                    <div class="mb-10 mt-10 font18 ">Network:<span class="ml-85 MyText ssid"></span></div>
+                    <div class="mb-10 mt-10 font18">Status:<span class="ml-100 Connected clg connected24"></span></div>
+                    <div class="mb-10 mt-10 font18 imgIcon1">Network:<span class="ml-85 MyText ssid"></span><img id="connected24" class="imgIcon"></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="MobileData.html" target="_self">Mobile network</a></h3>
@@ -624,7 +581,7 @@
             success: function(res) {
                 var json = res.result;
 
-                var arr = ['Connected', 'connected(2.4GHz)', 'Connected(4G)', 'On', 'Off', 'Error'];
+                var arr = ['Connected', 'connected(2.4GHz)', 'Connected(5G)', 'On', 'Off', 'Error'];
 
                 if (json.cloud.status == 0) {
                     $('.cloud').eq(0).text(arr[5]);
@@ -635,50 +592,110 @@
                     $('.r_01').attr("src", "images/r_01.png");
                     $('.cloud').css('color', '#26b167')
                 }
+
                 if (json.sta.status == 0) {
                     $('.connected24').eq(0).text(arr[4]);
                     //$('.r_06').attr("src", "images/r_06_gray.png");
-                    $('#connected24').attr("src", "images/s_wifi_nonea.png");
+                    //$('#connected24').attr("src", "images/s_wifi_nonea.png");
                     $('.ml-100').addClass("red");
-                    // $('.connected24').css({
-                    //     'color': 'red'
-                    // })
+                    $(".imgIcon1 .ssid").text("-");
+                    $(".WiFiNetwork-disable").show();
+                } else if (json.sta.status == 2) {
+                    $('.connected24').eq(0).text(arr[5]);
+                    //$('.r_06').attr("src", "images/r_06_gray.png");
+                    //$('#connected24').attr("src", "images/s_wifi_nonea.png");
+                    $('.ml-100').addClass("red");
+                    $(".imgIcon1 .ssid").text("-");
+                    $(".WiFiNetwork-disable").show();
                 } else {
-                    $('.connected24').eq(0).text(arr[1]);
+                    if (json.sta.band == 0) {
+                        $('.connected24').eq(0).text(arr[1]);
+                    } else {
+                        $('.connected24').eq(0).text(arr[2]);
+                    }
                     $('.r_06').attr("src", "images/r_06.png");
                     $('.ssid').eq(0).text(json.sta.ssid);
-                    $('.connected24').css('color', '#26b167')
+                    $('.connected24').css('color', '#26b167');
+                    $(".WiFiNetwork-disable").hide();
                 }
 
-
-                if (json.mobile.status == 0) {
+                var $img = $(".imgIcon1 img");
+                //var img0 = $('<img class="">');
+                var MobileSignalArr = ['mobileSignal-none.png', 'mobileSignal-0-20.png', 'mobileSignal-20-40.png', 'mobileSignal-40-60.png', 'mobileSignal-60-80.png', 'mobileSignal-80-100.png'];
+                var WiFiSignalArr = ['s_wifi_nonea.png', 's_wifi_02a.png', 's_wifi_03a.png', 's_wifi_04a.png', 's_wifi_05a.png'];
+                if (json.mobile.active_sim == 99) {
                     $('.Connected4G').eq(0).text(arr[4]);
                     $('#Connected4G').attr("src", "images/mobileSignal-none.png");
                     $('.red').css({
                         'color': 'red'
                     })
-                    $('.NetworkProvider').eq(0).text(json.mobile.provider);
-                    $('.active_sim').eq(0).text(json.mobile.active_sim);
-                    $('.imsi').eq(0).text(json.mobile.imsi);
-                    $('.plmn').eq(0).text(json.mobile.plmn);
-                    $('.csq').eq(0).text(json.mobile.csq);
-                    $('.location').eq(0).text(json.mobile.lca);
-                    $('.act').eq(0).text(json.mobile.act);
-                    $('.register').eq(0).text(json.mobile.cgreg);
-                    $('.cell').eq(0).text(json.mobile.cell_id);
+                    $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');
+                    $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile.active_sim : '-');
+                    $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
+                    $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
+                    $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
+                    $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
+                    $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
+                    $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
+                    $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
+                    $(".mobiledataImg-disable").show();
                 } else {
-                    $('.Connected4G').eq(0).text(arr[2]);
-                    $('.NetworkProvider').eq(0).text(json.mobile.provider);
-                    $('.active_sim').eq(0).text(json.mobile.active_sim);
-                    $('.imsi').eq(0).text(json.mobile.imsi);
-                    $('.plmn').eq(0).text(json.mobile.plmn);
-                    $('.csq').eq(0).text(json.mobile.csq);
-                    $('.location').eq(0).text(json.mobile.lca);
-                    $('.act').eq(0).text(json.mobile.act);
-                    $('.register').eq(0).text(json.mobile.cgreg);
-                    $('.cell').eq(0).text(json.mobile.cell_id);
-                    $('.Connected4G').css('color', '#26b167')
+                    var mobileStatus = "";
+                    if (json.mobile.status == 0) {
+                        if (json.mobile.act_num == 0) {
+                            mobileStatus = "disconnected(3GHz)"
+                        } else {
+                            mobileStatus = "disconnected(4GHz)"
+                        }
+
+                        $('.Connected4G').eq(0).text(mobileStatus);
+                        $('.red').css({
+                            'color': 'red'
+                        })
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile.active_sim : '-');
+                        $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
+                        $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
+                        $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
+                        $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
+                        $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
+                        $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
+                        $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
+                        $(".mobiledataImg-disable").show();
+                    } else {
+                        if (json.mobile.act_num == 0) {
+                            mobileStatus = "connected(3GHz)"
+                        } else {
+                            mobileStatus = "connected(4GHz)"
+                        }
+                        $('.Connected4G').eq(0).text(mobileStatus);
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile.active_sim : '-');
+                        $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
+                        $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
+                        $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
+                        $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
+                        $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
+                        $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
+                        $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
+                        $('.Connected4G').css('color', '#26b167')
+                        $(".mobiledataImg-disable").hide();
+                    }
+                    if (json.mobile.signal);
+                    if (json.mobile.signal > 0 && json.mobile.signal <= 6) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[1]);
+                    } else if (json.mobile.signal > 6 && json.mobile.signal <= 12) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[2]);
+                    } else if (json.mobile.signal > 12 && json.mobile.signal <= 18) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[3]);
+                    } else if (json.mobile.signal > 18 && json.mobile.signal <= 24) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[4]);
+                    } else if (json.mobile.signal > 24 && json.mobile.signal <= 30) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[5]);
+                    }
                 }
+
+
 
 
                 if (json.ap.status == 0) {
@@ -703,41 +720,36 @@
                 $('#EthernetConnections span').text('(' + json.dev.eth_num + ')');
 
 
-                var $img = $(".imgIcon1 img");
-                //var img0 = $('<img class="">');
-                var MobileSignalArr = ['mobileSignal-none.png', 'mobileSignal-0-20.png', 'mobileSignal-20-40.png', 'mobileSignal-40-60.png', 'mobileSignal-60-80.png', 'mobileSignal-80-100.png'];
-                var WiFiSignalArr = ['s_wifi_nonea.png', 's_wifi_02a.png', 's_wifi_03a.png', 's_wifi_04a.png', 's_wifi_05a.png'];
 
 
 
-                if (json.sta.signal);
-                if (json.sta.signal > 0 && json.sta.signal <= 25) {
-                    $img.eq(0).attr("src", 'images/' + WiFiSignalArr[1]);
-                } else if (json.sta.signal > 25 && json.sta.signal <= 50) {
-                    $img.eq(0).attr("src", 'images/' + WiFiSignalArr[2]);
-                } else if (json.sta.signal > 50 && json.sta.signal <= 75) {
-                    $img.eq(0).attr("src", 'images/' + WiFiSignalArr[3]);
-                } else if (json.sta.signal > 75 && json.sta.signal <= 100) {
-                    $img.eq(0).attr("src", 'images/' + WiFiSignalArr[4]);
+                if (json.sta.status == 1) {
+                    if (json.sta.signal);
+                    signal = Math.abs(json.sta.signal);
+                    if (100 > signal && signal >= 85) {
+                        $img.eq(0).attr("src", 'images/' + WiFiSignalArr[1]);
+                    } else if (85 > signal && signal >= 70) {
+                        $img.eq(0).attr("src", 'images/' + WiFiSignalArr[2]);
+                    } else if (70 > signal && signal >= 55) {
+                        $img.eq(0).attr("src", 'images/' + WiFiSignalArr[3]);
+                    } else if (55 > signal) {
+                        $img.eq(0).attr("src", 'images/' + WiFiSignalArr[4]);
+                    }
+
                 }
 
-                if (json.mobile.signal);
-                if (json.mobile.signal > 0 && json.mobile.signal <= 6) {
-                    $img.eq(1).attr("src", 'images/' + MobileSignalArr[1]);
-                } else if (json.mobile.signal > 6 && json.mobile.signal <= 12) {
-                    $img.eq(1).attr("src", 'images/' + MobileSignalArr[2]);
-                } else if (json.mobile.signal > 12 && json.mobile.signal <= 18) {
-                    $img.eq(1).attr("src", 'images/' + MobileSignalArr[3]);
-                } else if (json.mobile.signal > 18 && json.mobile.signal <= 24) {
-                    $img.eq(1).attr("src", 'images/' + MobileSignalArr[4]);
-                } else if (json.mobile.signal > 24 && json.mobile.signal <= 30) {
-                    $img.eq(1).attr("src", 'images/' + MobileSignalArr[5]);
-                }
+
+
+
+
+
+
 
 
             },
             error: function(jqXHR) {
-                alert("An error occurred：" + jqXHR.status);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                promptMessage("Error message", tip);
 
             }
         });

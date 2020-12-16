@@ -88,8 +88,8 @@ $(function() {
             });
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
-
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
         }
     });
 

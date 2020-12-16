@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/xadmin.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        .align {
+            vertical-align: middle !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="export_content">
+        <div class="container-fluid">
+            <div style="margin:20px 0 0 20px">
+                <h2 style="margin-bottom:20px;">add MAC</h2>
+
+                <table class="table table-hover table-responsive">
+
+                    <tr>
+                        <td width="30%" class="align">QCA WAN MAC :</td>
+                        <td><span class="title"><input type="text" id="ipq_eth0" class="form-control" placeholder="" style="width:40%"> </span></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" class="align">QCA LAN MAC :</td>
+                        <td><span class="title"><input type="text" id="ipq_eth1" class="form-control" placeholder="" style="width:40%"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="align">QCA WIFI0 MAC :</td>
+                        <td><span class="title"><input type="text" id="ipq_wif0" class="form-control" placeholder="" style="width:40%"> </span></td>
+                    </tr>
+                    <tr>
+                        <td class="align">QCA WIFI1 MAC:</td>
+                        <td><span class="title"><input type="text" id="ipq_wif1" class="form-control" placeholder="" style="width:40%"></span></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td class="align">iMax Ethernet MAC :</td>
+                        <td><span class="title"><input type="text" id="nxp_eth0" class="form-control" placeholder="" style="width:40%"></span></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td class="align">Device SN :</td>
+                        <td><span class="title"><input type="text" id="dev_sn" class="form-control" placeholder="" style="width:40%"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="margin-left:20px">
+                <div class="layui-input-inline">
+                    <button class="layui-btn" id="exportToPdf" lay-submit>Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdn.bootcss.com/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script>
+    var downPdf = document.getElementById("exportToPdf");
+    downPdf.onclick = function() {
+        html2canvas(
+            document.getElementById("export_content"), {
+                dpi: 172, //导出pdf清晰度
+                onrendered: function(canvas) {
+                    var contentWidth = canvas.width;
+                    var contentHeight = canvas.height;
+
+                    //一页pdf显示html页面生成的canvas高度;
+                    var pageHeight = contentWidth / 592.28 * 841.89;
+                    //未生成pdf的html页面高度
+                    var leftHeight = contentHeight;
+                    //pdf页面偏移
+                    var position = 0;
+                    //html页面生成的canvas在pdf中图片的宽高（a4纸的尺寸[595.28,841.89]）
+                    var imgWidth = 595.28;
+                    var imgHeight = 592.28 / contentWidth * contentHeight;
+
+                    var pageData = canvas.toDataURL('image/jpeg', 1.0);
+                    var pdf = new jsPDF('', 'pt', 'a4');
+
+                    //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                    //当内容未超过pdf一页显示的范围，无需分页
+                    if (leftHeight < pageHeight) {
+                        pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                    } else {
+                        while (leftHeight > 0) {
+                            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                            leftHeight -= pageHeight;
+                            position -= 841.89;
+                            //避免添加空白页
+                            if (leftHeight > 0) {
+                                pdf.addPage();
+                            }
+                        }
+                    }
+                    pdf.save('content.pdf');
+                },
+                //背景设为白色（默认为黑色）
+                background: "#fff"
+            })
+    }
+</script>
+
+</html>

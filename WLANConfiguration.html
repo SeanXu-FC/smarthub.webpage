@@ -249,6 +249,8 @@
             position: absolute;
             top: 20%;
             right: 500px;
+            z-index: 999;
+            background-color: #fff;
         }
         
         #error {
@@ -256,6 +258,8 @@
             position: absolute;
             top: 50px;
             right: 500px;
+            z-index: 999;
+            background-color: #fff;
         }
     </style>
 </head>
@@ -263,7 +267,7 @@
 <body>
     <div class="container-fluid" style="margin:30px 70px;">
         <div class="row">
-            <div style="position:relative;margin-bottom:40px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="LAN-configuration">LAN configuration
+            <div style="position:relative;margin-bottom:40px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="LAN-configuration">WLAN configuration
             </div>
             <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">Changes-saved</div>
             <div id="error" class="error-icon Password-successfully-changed Changes-saved"></div>
@@ -347,18 +351,18 @@
     </div>
 
     <script>
-        $("#btn3").on("click", function() {
-            $('#success').show(1000);
-            setTimeout(function() {
-                $('#success').hide();
-            }, 6000);
-            $("#btn3").removeAttr("disabled");
-            $("#btn3").css("opacity", "1");
-            $("#cancel").removeAttr("disabled");
-            $("#cancel").css("opacity", "1");
+        // $("#btn3").on("click", function() {
+        //     $('#success').show(1000);
+        //     setTimeout(function() {
+        //         $('#success').hide();
+        //     }, 6000);
+        //     $("#btn3").removeAttr("disabled");
+        //     $("#btn3").css("opacity", "1");
+        //     $("#cancel").removeAttr("disabled");
+        //     $("#cancel").css("opacity", "1");
 
-            return false;
-        });
+        //     return false;
+        // });
         $("#cancel").on("click", function() {
             $('#success').hide(1000);
             $(".Path-101").attr("disabled", true);
@@ -369,6 +373,7 @@
     </script>
     <script>
         $(function() {
+
 
             function timeConversion(millisec) {
                 var seconds = (millisec * 3600).toFixed(1);
@@ -413,18 +418,16 @@
                         });
                         var lease = $('input[name="sec"]').eq(0).val(timeConversion(json.DHCPLeaseTime));
                     } else {
-                        layui.use(['form', 'layer'], function() {
-                            var layer = layui.layer;
-                            layer.msg("An error occurred：" + res.error.message);
-                        })
+                        var tip = '<div class="custom-waring"><img src="../images/waring.png"><span class="waring-text">' + res.error.message + '</span></div>'
+                        tipMessage(tip);
 
                     }
 
 
                 },
                 error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR.status);
-
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
                 }
             });
 
@@ -474,7 +477,8 @@
 
                     },
                     error: function(jqXHR) {
-                        alert("An error occurred：" + jqXHR.status);
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                        promptMessage("Error message", tip);
                     }
                 });
             })

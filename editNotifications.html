@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link href="css/style.css" rel="stylesheet" />
 
@@ -634,9 +632,9 @@
                         </select>
                     </div>
                     <div class="layui-input-inline" style="width:38px;">
-                        <input type="text" id="volts_input" name="price_min " placeholder=" " autocomplete="off " class="layui-input" style="width: 40px;margin-left:24px ;border:1px solid #333">
+                        <input type="number" id="volts_input" name="price_min " placeholder=" " autocomplete="off " class="layui-input" style="width: 56px;margin-left:24px ;border:1px solid #333">
                     </div>
-                    <label class="layui-form-label volts " style="margin-left:8px;width: 60px !important; ">volts</label>
+                    <label class="layui-form-label volts " style="margin-left:22px;width: 60px !important; ">volts</label>
                 </div>
             </div>
 
@@ -644,7 +642,7 @@
             <div class="layui-form-item layui-form-text mt-20">
                 <label class=" layui-form-label Allow-notifications " style="margin-top:-14px;width:228px; ">Notification message:</label>
                 <div class="layui-input-block " style="margin-left:262px; ">
-                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="100" class="layui-textarea" onkeyup="WidthCheck(this,256);"></textarea>
+                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="100" class="layui-textarea" onkeyup="WidthCheckIO(this,256);"></textarea>
                 </div>
             </div>
 
@@ -670,8 +668,10 @@
 
 
     </div>
-    <script src="layui/layui.js " charset="utf-8 "></script>
     <script type="text/javascript" src="js/common.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <script src="layui/layui.js " charset="utf-8 "></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -734,10 +734,14 @@
                 var trigType = $("#security").val();
                 var volt = $("#volts_input").val();
                 volt = toDecimal(volt, 1);
+                console.log("volt1", volt)
                 volt = parseFloat(volt).toFixed(1);
+                console.log("volt2", volt)
                 volt = Number(volt)
+                console.log("volt3", volt)
                 volt = Number(volt).toFixed(1)
-                var noti_msg = $(".layui-textarea").val();
+                console.log("volt4", volt)
+                var noti_msg = $(".layui-textarea").val() ? $(".layui-textarea").val() : '';
                 var wake_func = $("#func_check").is(":checked") == true ? 1 : 0;;
                 saveData(dataId, Notifications, trigType, volt, noti_msg, wake_func)
 
@@ -814,7 +818,8 @@
                     }
                 },
                 error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR);
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
                 }
             })
         }
@@ -830,6 +835,29 @@
                 parent.layer.close(index); //关闭当前页
             }, 300)
         });
+        //限制字节输入长度
+        function WidthCheckIO(str, maxLen) {
+            var w = 0;
+            var tempCount = 0;
+
+            str.value = str.value.replace(/[^\x00-\xff]+/g, '');
+            str.value = str.value.replace(/(^\s*)|(\s*$)/g, "");
+            //length 获取字数数
+            for (var i = 0; i < str.value.length; i++) {
+                //charCodeAt()获取字符串中某一个字符的编码 
+                var c = str.value.charCodeAt(i);
+                //单字节加1 
+                if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                    w++;
+                } else {
+                    w += 2;
+                }
+                if (w > maxLen) {
+                    str.value = str.value.substr(0, i);
+                    break;
+                }
+            }
+        }
     </script>
 </body>
 

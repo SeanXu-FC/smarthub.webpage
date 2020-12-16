@@ -728,9 +728,44 @@ body.min990 {
     margin-left: 10px
 }
 
+.layui-layer-btn .layui-layer-btn0 {
+    border-color: #861f41 !important;
+    background-color: #861f41 !important;
+    border-radius: 4px;
+}
+
+.layui-layer-msg {
+    border-radius: 10px !important;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) !important;
+}
+
+.layui-layer-dialog .layui-layer-content .custom-waring {
+    display: flex;
+    align-items: center;
+}
+
+.layui-layer-dialog .layui-layer-content .custom-waring img {
+    width: 30px;
+    height: 30px;
+}
+
+.layui-layer-dialog .layui-layer-content .custom-waring .waring-text {
+    text-align: left;
+    padding: 20px;
+}
+
 .nav-a-active {
     color: #861f41;
     font-weight: bold;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 ::-webkit-scrollbar {
@@ -752,6 +787,13 @@ body.min990 {
     -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     background: #fefefe;
+}
+
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .-flex-display {

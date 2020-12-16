@@ -11,8 +11,10 @@ $(function() {
         console.log(type)
         if (type == "password") {
             $("#pw").attr("type", "text");
+            $(this).text("HIDE");
         } else if (type == "text") {
             $("#pw").attr("type", "password");
+            $(this).text("SHOW")
         }
     })
 
@@ -99,7 +101,8 @@ $(function() {
 
                 },
                 error: function(jqXHR) {
-                    alert("An error occurred：" + jqXHR.status);
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
 
                 }
             });
@@ -515,7 +518,8 @@ function getData(layer, loading) {
 
         },
         error: function(jqXHR) {
-            alert("An error occurred：" + jqXHR.status);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
 
         }
     });
