@@ -38,30 +38,33 @@
                         data: data,
                         dataType: "json",
                         contentType: "application/json;charset=utf-8",
-                        success: function(data) {
-                            console.log(data.result);
-                            //$("#status").html(data.result.status);
-                            $("#steps").html(data.result.steps)
-                            var data = data.result;
-                            if (data.status == "1") {
+                        success: function(res) {
+
+                            var data = res.result;
+                            if (data.status == "1") { //升级成功
                                 parent.layer.close(loading);
-                                //alert("Update Successful！");
-                                console.log("Now the status is：" + data.status + "--Upgrade Complete...");
                                 var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
-                                //alert(ds);
                                 $("#steps").html(ds);
+                                $("#upgrade_tip").hide();
                                 setTimeout(function() {
                                     top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
-                                }, 10000);
-
-                                //top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + '10.88.11.238/';
-                            } else if (data.status == "0") {
+                                }, 8000);
+                                clearInterval(interval);
+                            } else if (data.status == "0") { //升级失败
                                 parent.layer.close(loading);
-                                //self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/flashops.html';
-                            } else {
-                                console.log("Now the status is：" + data.status + "--Upgrading in progress...");
-                                //console.log("Preparing system upgrade environment");
-                                //console.log(data.steps);
+                                $("#steps").html(data.steps);
+                                $("#steps").css("color", "red")
+                                $("#upgrade_tip").hide();
+                                setTimeout(function() {
+                                    self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
+                                }, 5000);
+                            } else if (data.status == "2") { //升级中
+                                $("#steps").html(data.steps);
+                            } else { //没有升级
+                                parent.layer.close(loading);
+                                $("#steps").html(data.steps);
+                                $("#upgrade_tip").hide();
+                                clearInterval(interval);
                             }
 
                         },
@@ -87,7 +90,7 @@
             <h2><a id="content" name="content">System - Flashing...</a></h2>
             <p id="status"></p>
             <p id="steps"></p>
-            <fieldset class="cbi-section">
+            <fieldset class="cbi-section" id="upgrade_tip">
                 <p>
                     The system is flashing now, this process will take several minutes.<br /> DO NOT POWER OFF THE DEVICE!<br /> Wait a few minutes before you try to reconnect. It might be necessary to renew the address of your computer to reach the device
                     again, depending on your settings.

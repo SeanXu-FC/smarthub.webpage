@@ -14,7 +14,7 @@ function getWLANScan(layer) {
     });
     var data = {
         "jsonrpc": "2.0",
-        "method": "wlan_config",
+        "method": "WlanStationConfig",
         "params": {
             "operate_code": 9
         },
@@ -29,7 +29,7 @@ function getWLANScan(layer) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            if (res.result && res.result.status == "wlan_config scan done") {
+            if (res.result && res.result.status == "WlanStationConfig Scan Done") {
                 setTimeout(() => {
                     getWLANData(layer, loading);
                 }, 3000);
@@ -58,7 +58,7 @@ function getWLANData(layer, loading) {
     console.log(9999999)
     var data = {
         "jsonrpc": "2.0",
-        "method": "wlan_config",
+        "method": "WlanStationConfig",
         "params": {
             "operate_code": 10
         },
@@ -271,7 +271,7 @@ function pollingWifiStatus(infoDOM, type) {
     var timeout0 = 2000;
     data = {
         "jsonrpc": "2.0",
-        "method": "wlan_config",
+        "method": "WlanStationConfig",
         "params": {
             "operate_code": 8
         },
@@ -288,7 +288,7 @@ function pollingWifiStatus(infoDOM, type) {
         success: function(res) {
             if (res.result.status) {
                 $("#Connecting-status").text(res.result.status);
-                if (res.result.status == "Password incorrect" && type == "EnterPassword") { //密码错误从新弹框输入
+                if (res.result.status == "Password Incorrect" && type == "EnterPassword") { //密码错误从新弹框输入
                     clearInterval(timer);
                     timer = setInterval(function() {
                         pollingWifiStatus(infoDOM);
@@ -327,7 +327,7 @@ function pollingWifiStatus(infoDOM, type) {
 function savedWifiConnect(ssid, bssid, encrypt) {
     var data = {
         "jsonrpc": "2.0",
-        "method": "wlan_config",
+        "method": "WlanStationConfig",
         "params": {
             "operate_code": 2,
             "ssid": ssid,
@@ -361,7 +361,7 @@ function savedWifiConnect(ssid, bssid, encrypt) {
                         }
                     }
                     renderWifiList(wifiJson);
-                    if (res.result.status != "Connected" && res.result.status != "Password incorrect") {
+                    if (res.result.status != "Connected" && res.result.status != "Password Incorrect") {
                         clearInterval(timer);
                         $(".connecting-img").show();
                         timer = setInterval(function() {
@@ -390,7 +390,7 @@ function savedWifiConnect(ssid, bssid, encrypt) {
 function noPWDWifiConnect(ssid, bssid, is_saved) {
     var data = {
         "jsonrpc": "2.0",
-        "method": "wlan_config",
+        "method": "WlanStationConfig",
         "params": {
             "operate_code": 2,
             "ssid": ssid,
@@ -425,7 +425,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
                         }
                     }
                     renderWifiList(wifiJson);
-                    if (res.result.status != "Connected" && res.result.status != "Password incorrect") {
+                    if (res.result.status != "Connected" && res.result.status != "Password Incorrect") {
                         clearInterval(timer);
                         $(".connecting-img").show();
                         timer = setInterval(function() {
@@ -454,7 +454,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
 function updateWifiList() {
     var data = {
         "jsonrpc": "2.0",
-        "method": "wlan_config",
+        "method": "WlanStationConfig",
         "params": {
             "operate_code": 10
         },

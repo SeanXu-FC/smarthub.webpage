@@ -369,7 +369,7 @@
 
             var data = {
                 "jsonrpc": "2.0",
-                "method": "wlan_config",
+                "method": "WlanStationConfig",
                 "params": {
                     "operate_code": 3,
                     "ssid": ssid,
@@ -390,7 +390,7 @@
                 success: function(res) {
                     console.log("res", res)
                     if (res.result) {
-                        if (res.result.status == "wlan_config remove done") {
+                        if (res.result.status == "WlanStationConfig Remove Done") {
                             $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr("bssid", bssid);
                             $(parent.frames["my-iframe"].document).find("#wifiDetai_info").val(""); //不是关闭点击按钮
                             setTimeout(() => {

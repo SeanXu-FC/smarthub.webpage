@@ -642,7 +642,7 @@
             <div class="layui-form-item layui-form-text mt-20">
                 <label class=" layui-form-label Allow-notifications " style="margin-top:-14px;width:228px; ">Notification message:</label>
                 <div class="layui-input-block " style="margin-left:262px; ">
-                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="100" class="layui-textarea" onkeyup="WidthCheckIO(this,256);"></textarea>
+                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="100" class="layui-textarea" oninput="WidthCheckIO(this,256);"></textarea>
                 </div>
             </div>
 
@@ -734,15 +734,13 @@
                 var trigType = $("#security").val();
                 var volt = $("#volts_input").val();
                 volt = toDecimal(volt, 1);
-                console.log("volt1", volt)
                 volt = parseFloat(volt).toFixed(1);
-                console.log("volt2", volt)
                 volt = Number(volt)
-                console.log("volt3", volt)
                 volt = Number(volt).toFixed(1)
                 console.log("volt4", volt)
                 var noti_msg = $(".layui-textarea").val() ? $(".layui-textarea").val() : '';
                 var wake_func = $("#func_check").is(":checked") == true ? 1 : 0;;
+                noti_msg = noti_msg.replace(/(\s*$)/g, "");
                 saveData(dataId, Notifications, trigType, volt, noti_msg, wake_func)
 
             })

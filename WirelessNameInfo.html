@@ -456,7 +456,7 @@
             });
             var data = {
                 "jsonrpc": "2.0",
-                "method": "wlan_config",
+                "method": "WlanStationConfig",
                 "params": {
                     "operate_code": 5,
                     "ssid": ssid,
@@ -530,7 +530,7 @@
                         ajaxTimeout.abort();
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
-                            layer.msg("请求超时")
+                            layer.msg("request timeout")
                         });
                         $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("bssid", "");
                         setTimeout(() => {
@@ -556,7 +556,7 @@
             }
             var data = {
                 "jsonrpc": "2.0",
-                "method": "wlan_config",
+                "method": "WlanStationConfig",
                 "params": {
                     "operate_code": mode,
                     "ssid": ssid,

@@ -31,7 +31,7 @@ $(function() {
             var select = $("#EncryptionType").val();
             var WpaKey = $(".pwd").val();
             var len = $("#pw").val().length;
-            if (len >= 8 && len <= 20 && $("#pw").val() != '' && isNaN($("#pw").val()) == false) {} else {
+            if (len >= 8 && len <= 20 && $("#pw").val() != '') {} else {
                 $(".pwd").siblings()
                     .find('span')
                     .text('Please enter a password with more than 8 digits!')
