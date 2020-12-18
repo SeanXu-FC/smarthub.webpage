@@ -26,7 +26,7 @@
             var uploadFile = upload.render({
                 elem: '#upload', //绑定元素
                 //url: 'api/upload', //上传接口
-                url: '/proxy/action/upload', //上传接口
+                url: '/action/upload', //上传接口
                 exts: 'tar', //限定上传类型
                 //accept: images,//指定允许上传时校验的文件类型 images（图片）、file（所有文件）、video（视频）、audio（音频）
                 accept: File,
