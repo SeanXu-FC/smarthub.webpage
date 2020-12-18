@@ -343,6 +343,11 @@
                         form.render("checkbox");
                         $(".channels-switch").show();
 
+                    } else if (res.error) {
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
                     }
 
                 },
@@ -376,8 +381,11 @@
                 success: function(res) {
                     if (res.result) {
 
-                    } else {
-                        layer.msg(res.error.message)
+                    } else if (res.error) {
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
                     }
 
                 },

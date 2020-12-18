@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
     <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/myProgress.css" />
-    <script type="text/javascript" src="js/common.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="js/jquery.myProgress.js"></script>
@@ -69,19 +68,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script>
-        $('#btn').click(function() {
-            var index = parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index); //关闭当前页
-        });
-        layui.use(['form'], function() {
-            var form = layui.form,
-                layer = layui.layer,
-                layedit = layui.layedit,
-
-                laydate = layui.laydate;
-        });
-    </script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script>
         var length = 20;
         var successFlag = false;
@@ -89,6 +76,68 @@
         var timer = null;
         $(function() {
             reStarting(1);
+            $('#btn').click(function() {
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index); //关闭当前页
+            });
+        })
+
+        function reStarting(flag) {
+            var timeout0;
+            if (flag == 0 || flag == "0") {
+                timeout0 = 1000;
+            } else {
+                timeout0 = 3000;
+            }
+            data = {
+                "jsonrpc": "2.0",
+                "method": "RestartAndReset",
+                "params": {
+                    "mode": flag
+                },
+                "id": "1.1"
+            }
+            data = JSON.stringify(data);
+            // if(length==80){
+            //     console.log(22222)
+            //     successFlag = true;
+            // }
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                timeout: timeout0,
+                data: data,
+                dataType: "json",
+                contentType: "application/json",
+                success: function(res) {
+                    if (res.result.status == 1) {
+                        successFlag = true;
+                        PollingChecked();
+                    } else if (res.error) {
+                        layui.use(['layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        });
+                    }
+                },
+                complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+                    if (status == 'timeout') { //超时,status还有success,error等值的情况
+                        ajaxTimeout.abort();
+                        // layui.use(['layer'], function() {
+                        //     var layer = layui.layer;
+                        //     layer.msg("请求超时")
+                        // });
+                    }
+                },
+                error: function(jqXHR) {
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
+                }
+
+            });
+        }
+
+        function PollingChecked() {
             $("#div3").myProgress({
                 speed: 6000,
                 percent: length,
@@ -126,56 +175,6 @@
                     reStarting(2);
                 }
             }, 6000)
-
-        })
-
-        function reStarting(flag) {
-            var timeout0;
-            if (flag == 0 || flag == "0") {
-                timeout0 = 1000;
-            } else {
-                timeout0 = 3000;
-            }
-            data = {
-                "jsonrpc": "2.0",
-                "method": "RestartAndReset",
-                "params": {
-                    "mode": flag
-                },
-                "id": "1.1"
-            }
-            data = JSON.stringify(data);
-            // if(length==80){
-            //     console.log(22222)
-            //     successFlag = true;
-            // }
-            $.ajax({
-                type: "post",
-                url: "/action/action",
-                timeout: timeout0,
-                data: data,
-                dataType: "json",
-                contentType: "application/json",
-                success: function(res) {
-                    if (res.result.status == 1) {
-                        successFlag = true;
-                    }
-                },
-                complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
-                    if (status == 'timeout') { //超时,status还有success,error等值的情况
-                        ajaxTimeout.abort();
-                        // layui.use(['layer'], function() {
-                        //     var layer = layui.layer;
-                        //     layer.msg("请求超时")
-                        // });
-                    }
-                },
-                error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-                    promptMessage("Error message", tip);
-                }
-
-            });
         }
     </script>
 </body>

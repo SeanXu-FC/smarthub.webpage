@@ -291,6 +291,11 @@
                         }
 
 
+                    } else if (res.error) {
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
                     }
 
                 },

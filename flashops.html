@@ -9,6 +9,7 @@
     </style>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript">
         $(function() {
             layui.use(['form', 'layer'], function() {
@@ -34,37 +35,43 @@
                     data = JSON.stringify(data);
                     $.ajax({
                         type: "post",
-                        url: "/action/action?",
+                        url: "/proxy/action/action?",
                         data: data,
                         dataType: "json",
                         contentType: "application/json;charset=utf-8",
                         success: function(res) {
-
-                            var data = res.result;
-                            if (data.status == "1") { //升级成功
-                                parent.layer.close(loading);
-                                var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
-                                $("#steps").html(ds);
-                                $("#upgrade_tip").hide();
-                                setTimeout(function() {
-                                    top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
-                                }, 8000);
-                                clearInterval(interval);
-                            } else if (data.status == "0") { //升级失败
-                                parent.layer.close(loading);
-                                $("#steps").html(data.steps);
-                                $("#steps").css("color", "red")
-                                $("#upgrade_tip").hide();
-                                setTimeout(function() {
-                                    self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
-                                }, 5000);
-                            } else if (data.status == "2") { //升级中
-                                $("#steps").html(data.steps);
-                            } else { //没有升级
-                                parent.layer.close(loading);
-                                $("#steps").html(data.steps);
-                                $("#upgrade_tip").hide();
-                                clearInterval(interval);
+                            if (res.result) {
+                                var data = res.result;
+                                if (data.status == "1") { //升级成功
+                                    parent.layer.close(loading);
+                                    var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
+                                    $("#steps").html(ds);
+                                    $("#upgrade_tip").hide();
+                                    setTimeout(function() {
+                                        top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                                    }, 8000);
+                                    clearInterval(interval);
+                                } else if (data.status == "0") { //升级失败
+                                    parent.layer.close(loading);
+                                    $("#steps").html(data.steps);
+                                    $("#steps").css("color", "red")
+                                    $("#upgrade_tip").hide();
+                                    setTimeout(function() {
+                                        self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
+                                    }, 5000);
+                                } else if (data.status == "2") { //升级中
+                                    $("#steps").html(data.steps);
+                                } else { //没有升级
+                                    parent.layer.close(loading);
+                                    $("#steps").html(data.steps);
+                                    $("#upgrade_tip").hide();
+                                    clearInterval(interval);
+                                }
+                            } else if (res.error) {
+                                layui.use(['form', 'layer'], function() {
+                                    var layer = layui.layer;
+                                    layer.msg("An error occurred：" + res.error.message);
+                                })
                             }
 
                         },

@@ -668,10 +668,11 @@
 
 
     </div>
-    <script type="text/javascript" src="js/common.js"></script>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
+    <script type="text/javascript" src="js/common.js"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -811,8 +812,11 @@
                             parent.layer.close(index); //关闭当前页
                         }, 300)
 
-                    } else {
-                        layer.msg(res.error.message);
+                    } else if (res.error) {
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
                     }
                 },
                 error: function(jqXHR) {
