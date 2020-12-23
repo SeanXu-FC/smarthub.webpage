@@ -28,7 +28,7 @@ function getMACData(layer, form, loading, flag) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: "/action/action",
+        url: reqUrlProxy + "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -79,6 +79,9 @@ function getMACData(layer, form, loading, flag) {
                     if (flag == 1) {
                         layer.msg("操作成功");
                     }
+                    if (res.result.sn == 1 && res.result.mac_addr1 == 1 && res.result.mac_addr2 == 1 && res.result.mac_addr3 == 1) {
+                        $("#QCA_WLANAddress").attr("disabled", "disabled");
+                    }
 
                 }
 
@@ -125,17 +128,17 @@ function setMACData(layer, form) {
         "mac_addr3": $("#QCA_WLANAddress_i").val() ? $("#QCA_WLANAddress_i").val() : ""
     }
     console.log(param)
-    if ($("#Device_SN").attr("disabled") == "disabled")
-        var data = {
-            "jsonrpc": "2.0",
-            "method": "Factory_SetSnAndMac",
-            "params": param,
-            "id": "9.1"
-        }
+        //if ($("#Device_SN").attr("disabled") == "disabled")
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "Factory_SetSnAndMac",
+        "params": param,
+        "id": "9.1"
+    }
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: "/action/action",
+        url: reqUrlProxy + "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -159,6 +162,9 @@ function setMACData(layer, form) {
                     clearInterval(timer);
                     $("#start_btn1").removeAttr("disabled");
                     layer.msg("操作成功");
+                    if (res.result.sn == 1 && res.result.mac_addr1 == 1 && res.result.mac_addr2 == 1 && res.result.mac_addr3 == 1) {
+                        $("#QCA_WLANAddress").attr("disabled", "disabled");
+                    }
                 }
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {
