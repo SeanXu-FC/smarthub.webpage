@@ -538,7 +538,7 @@
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="WiFiNetwork-info1.html" target="_self">WiFi</a></h3>
-                    <div class="mb-10 mt-10 font18">Status:<span class="ml-100 Connected clg connected24"></span></div>
+                    <div class="mb-10 mt-10 font18">Status:<span class="ml-100 Connected connected24"></span></div>
                     <div class="mb-10 mt-10 font18 imgIcon1">Network:<span class="ml-85 MyText ssid"></span><img id="connected24" class="imgIcon"></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
@@ -556,7 +556,7 @@
                 </div>
                 <div class="mb-10 mt-20 bb1c w80 " style="border-bottom: 0px solid #ccc;">
                     <h3 class="fw26 "><a href="SmartHubPoint.html" target="_self">SmartHub access point</a></h3>
-                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg Status"></span></div>
+                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg Status "></span></div>
                     <div class="mb-10 mt-10 font18 ">Name:<span class="ml-103 MyText Name"></span></div>
                 </div>
             </div>
@@ -581,29 +581,29 @@
             success: function(res) {
                 if (res.result) {
                     var json = res.result;
-                    var arr = ['Connected', 'connected(2.4GHz)', 'Connected(5G)', 'On', 'Off', 'Error'];
+                    var arr = ['Connected', 'connected(2.4GHz)', 'Connected(5GHz)', 'On', 'Off', 'Error'];
                     if (json.cloud.status == 0) {
                         $('.cloud').eq(0).text(arr[5]);
                         $('.r_01').attr("src", "images/r_01_gray.png");
-                        $('.ml-100').addClass("red");
+                        $('.cloud').css('color', 'red')
                     } else {
                         $('.Connected').eq(0).text(arr[0]);
                         $('.r_01').attr("src", "images/r_01.png");
-                        $('.cloud').css('color', '#26b167')
+                        $('.cloud').css('color', '#26b167');
                     }
 
                     if (json.sta.status == 0) {
                         $('.connected24').eq(0).text(arr[4]);
                         //$('.r_06').attr("src", "images/r_06_gray.png");
                         //$('#connected24').attr("src", "images/s_wifi_nonea.png");
-                        $('.ml-100').addClass("red");
+                        $('.connected24').css('color', 'red');
                         $(".imgIcon1 .ssid").text("-");
                         $(".WiFiNetwork-disable").show();
                     } else if (json.sta.status == 2) {
                         $('.connected24').eq(0).text(arr[5]);
                         //$('.r_06').attr("src", "images/r_06_gray.png");
                         //$('#connected24').attr("src", "images/s_wifi_nonea.png");
-                        $('.ml-100').addClass("red");
+                        $('.connected24').css('color', 'red');
                         $(".imgIcon1 .ssid").text("-");
                         $(".WiFiNetwork-disable").show();
                     } else {
@@ -625,9 +625,7 @@
                     if (json.mobile.active_sim == 99) {
                         $('.Connected4G').eq(0).text(arr[4]);
                         $('#Connected4G').attr("src", "images/mobileSignal-none.png");
-                        $('.red').css({
-                            'color': 'red'
-                        })
+                        $('.Connected4G').css('color', 'red')
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile.active_sim : '-');
                         $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
@@ -648,9 +646,7 @@
                             }
 
                             $('.Connected4G').eq(0).text(mobileStatus);
-                            $('.red').css({
-                                'color': 'red'
-                            })
+                            $('.Connected4G').css('color', 'red')
                             $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');
                             $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile.active_sim : '-');
                             $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
@@ -700,14 +696,14 @@
                     if (json.ap.status == 0) {
                         $('.Status').eq(0).text(arr[4]);
                         $('.Name').eq(0).text(json.ap.name);
-                        $('.Status').css({
+                        $('.clg').css({
                             'color': 'red'
                         })
                         $('.r_06').attr("src", "images/r_06_gray.png");
                     } else {
                         $('.Status').eq(0).text(arr[3]);
                         $('.Name').eq(0).text(json.ap.name);
-                        $('.Status').css({
+                        $('.clg').css({
                             'color': '#26b167'
                         })
                     }

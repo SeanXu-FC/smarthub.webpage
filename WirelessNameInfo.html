@@ -492,7 +492,7 @@
                         }
                         var signal = Math.abs(res.result.rssi);
                         console.log(signal)
-                        if (signal < 70) {
+                        if (signal <= 70) {
                             console.log(11)
                             $("#Signal_strength").text("Good");
                         } else if (signal > 70) {

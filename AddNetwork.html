@@ -362,7 +362,7 @@
             <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status">Network name:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="" class="Rectangle-1188 layui-input form-control Network_name">
+                    <input type="text" id="ssid" name="title" lay-verify="title" autocomplete="off" placeholder="" class="Rectangle-1188 layui-input form-control Network_name">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -402,6 +402,19 @@
     <script src="layui/layui.js " charset="utf-8 "></script>
     <script>
         $(function() {
+            var ssid = $(parent.frames["my-iframe"].document).find("#saved_id").val();
+            var encrypt = $(parent.frames["my-iframe"].document).find("#saved_id").attr("encrypt");
+            var passwordIncorrect = $(parent.frames["my-iframe"].document).find("#saved_id").attr("passwordIncorrect");
+            if (ssid) {
+                $("#ssid").val(ssid)
+            }
+            if (encrypt) {
+                $("#security option[value='" + encrypt + "']").prop("selected", true);
+            }
+            if (passwordIncorrect == "newWifiIncorrect") {
+                $('.error').show();
+                $("#wpa").show();
+            }
             var isShow = true;
             change = function() {
                 var v = $(".pwd").get(0);
@@ -426,18 +439,32 @@
                 addWifi();
             });
 
-            //输入名称按钮可点
-            $(".Network_name").on("input", function() {
-                var security = $("#security").val();
+            var security = "";
+            var len1 = 0;
+            var len2 = 0;
+            $('#pwd,.Network_name').bind("keyup", function() {
+                security = $("#security").val();
+                len1 = $(".Network_name").val().length;
+                len2 = $("#pwd").val().length;
                 if (security == "None") {
-                    if ($(this).val()) {
+                    if (1 <= len1 && len1 <= 64) {
                         $(".connected button").prop("disabled", false);
                         $(".connected button").css("opacity", "1");
                     } else {
                         $(".connected button").prop("disabled", true);
                         $(".connected button").css("opacity", "0.5");
                     }
-
+                } else if (security == "WPA2-PSK") {
+                    if (8 <= len2 && len2 <= 64) {
+                        $(".connected button").prop("disabled", false);
+                        $(".connected button").css("opacity", "1");
+                    } else {
+                        $(".connected button").prop("disabled", true);
+                        $(".connected button").css("opacity", "0.5");
+                    }
+                }
+                if (len2 > 0) {
+                    $('.error').hide();
                 }
             })
 
@@ -461,42 +488,7 @@
                 }
             });
 
-            //输入密码按钮可点
-            $("#pwd").on("input", function() {
-                var security = $("#security").val();
-                if (security == "WPA2-PSK") {
-                    if ($(this).val()) {
-                        $(".connected button").prop("disabled", false);
-                        $(".connected button").css("opacity", "1");
-                    } else {
-                        $(".connected button").prop("disabled", true);
-                        $(".connected button").css("opacity", "0.5");
-                    }
-                }
-            })
-
         });
-
-
-
-        // $('#pwd').keyup(function() {
-        //     //var reg = /\w{6,19}$/;
-        //     var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,16}$/;
-        //     var val = reg.test($('#pwd').val());
-        //     var len = val.length;
-        //     if (len <= 6 || len >= 16 || val == "" || val == null) {
-        //         $("#btn").attr("disabled", "true");
-        //         $("#btn").css("opacity", "0.5");
-        //         $('.error').show();
-        //         $('.correct').hide();
-        //     } else {
-        //         $("#btn").removeAttr("disabled");
-        //         $("#btn").css("opacity", "1");
-        //         $('.correct').show();
-        //         $('.error').hide();
-        //     }
-        // });
-
 
 
         layui.use(['form'], function() {
@@ -511,6 +503,33 @@
             var ssid = $(".Network_name").val();
             var security = $("#security").val();
             var pwd = $("#pwd").val();
+            // if (security = "None") {
+            //     var data = {
+            //         "jsonrpc": "2.0",
+            //         "method": "WlanStationConfig",
+            //         "params": {
+            //             "operate_code": 2,
+            //             "ssid": ssid,
+            //             "encrypt": security,
+            //             "is_saved": 0,
+            //         },
+            //         "id": "9.1"
+            //     };
+            // } else {
+            //     var data = {
+            //         "jsonrpc": "2.0",
+            //         "method": "WlanStationConfig",
+            //         "params": {
+            //             "operate_code": 2,
+            //             "ssid": ssid,
+            //             "encrypt": security,
+            //             "psk": pwd ? pwd : '',
+            //             "is_saved": 0,
+            //             //"bssid": "",
+            //         },
+            //         "id": "9.1"
+            //     };
+            // }
             var data = {
                 "jsonrpc": "2.0",
                 "method": "WlanStationConfig",
@@ -524,6 +543,7 @@
                 },
                 "id": "9.1"
             };
+
 
             data = JSON.stringify(data);
             $.ajax({

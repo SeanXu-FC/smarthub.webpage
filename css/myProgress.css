@@ -25,6 +25,7 @@
 
 .direction-left {
     left: 0;
+    top: 1px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }

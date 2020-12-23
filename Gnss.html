@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css">
     <link href="css/style.css" rel="stylesheet" />
     <title>Document</title>
@@ -272,21 +270,18 @@
         </div>
     </div>
 
-
-
-
-
-
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
 
     <script>
-        layui.use(['form'], function() {
-            var form = layui.form,
-                layer = layui.layer,
-                layedit = layui.layedit,
-                laydate = layui.laydate;
+        $(function() {
+            layui.use(['layer', 'form'], function() {
+                var form = layui.form,
+                    layer = layui.layer;
 
-        });
+            });
+        })
     </script>
 </body>
 

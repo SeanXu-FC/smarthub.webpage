@@ -698,6 +698,10 @@ body.min990 {
     zoom: 1
 }
 
+.layui-layer-iframe iframe {
+    border-radius: 10px;
+}
+
 .layui-btn {
     display: inline-block;
     height: 38px;

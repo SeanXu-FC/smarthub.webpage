@@ -51,7 +51,7 @@
             height: 24px;
             margin: 0;
             padding: 0;
-            border-radius: 12px;
+            border-radius: 12px !important;
         }
     </style>
 </head>
@@ -59,7 +59,7 @@
 <body>
     <div class="container-fluid" style="margin:40px 70px;">
         <div class="row">
-            <h3 style="margin-bottom:40px;" class="Restart-factory-reset">Restart & factory reset</h3>
+            <h3 style="margin-bottom:40px;" class="Restart-factory-reset">Restart</h3>
             <div class="Restarting-SmartHub">Restarting SmartHub...</div>
             <div class="progress-out Rectangle-1286 mt-20" id="div3">
                 <div class="percent-show"><span>0</span>%</div>
@@ -76,31 +76,25 @@
         var data;
         var timer;
         $(function() {
-            reStarting(0);
+            reStartInit();
             $('#btn').click(function() {
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index); //关闭当前页
             });
         })
 
-        function reStarting(flag) {
-            console.log(1111111)
-            var timeout0;
-            if (flag == 0 || flag == "0") {
-                if (restart0 == true) {
-                    restart0 = false;
-                } else if (restart0 == false) {
-                    return;
-                }
-                timeout0 = 1000;
-            } else {
-                timeout0 = 3000;
-            }
+        function reStartInit() {
+            $("#div3").myProgress({
+                speed: 6000,
+                percent: length,
+                width: "100%",
+            });
+            var timeout0 = 2000;
             data = {
                 "jsonrpc": "2.0",
                 "method": "RestartAndReset",
                 "params": {
-                    "mode": flag
+                    "mode": 0
                 },
                 "id": "1.1"
             }
@@ -113,11 +107,19 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function(res) {
-
-                    if (res.result && res.result.status == 1) {
-                        successFlag = true;
+                    if (res.result && res.result.status == 2) {
+                        successFlag = false;
                         PollingChecked();
+                    } else if (res.result && res.result.status == 0) {
+                        successFlag = 2;
+                        $(".Restarting-SmartHub").text("Restart SmartHub Fail");
+                        $("#div3").hide();
+                    } else if (res.result && res.result.status == 1) {
+                        successFlag = true;
                     } else if (res.error) {
+                        successFlag = false;
+                        $(".Restarting-SmartHub").text("Restart SmartHub Fail")
+                        $("#div3").hide();
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
                             layer.msg("An error occurred：" + res.error.message);
@@ -127,33 +129,27 @@
                 complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
                     if (status == 'timeout') { //超时,status还有success,error等值的情况
                         ajaxTimeout.abort();
-                        // layui.use(['layer'], function() {
-                        //     var layer = layui.layer;
-                        //     layer.msg("请求超时")
-                        // });
                     }
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-                    promptMessage("Error message", tip);
+                    console.log(jqXHR)
+                    successFlag = false;
+                    PollingChecked();
+                    //var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    //promptMessage("Error message", tip);
                 }
 
             });
         }
 
         function PollingChecked() {
-            $("#div3").myProgress({
-                speed: 6000,
-                percent: length,
-                width: "100%",
-            });
             clearInterval(timer);
             timer = setInterval(function() {
-                if (successFlag) {
+                if (successFlag == true) {
                     length = 100;
                     var domain = window.location.host;
                     $("#div3").myProgress({
-                        speed: 100,
+                        speed: 0,
                         percent: 100,
                         width: "100%",
                     });
@@ -167,8 +163,9 @@
                     setTimeout(function() {
                         window.location.href = ('https:' == document.location.protocol ?
                             'https://' : 'http://') + domain + "/home.html";
-                        //window.location.href = "http://10.88.11.238/flashops.html";
                     }, 500);
+                } else if (successFlag == 2) {
+
                 } else {
                     if (length <= 60) {
                         length += 20;
@@ -178,9 +175,63 @@
                         percent: length,
                         width: "100%",
                     });
-                    reStarting(2);
+                    reStarting2(2);
                 }
             }, 6000)
+        }
+
+        function reStarting2(flag) {
+            console.log(1111111)
+            var timeout0 = 3000;
+            data = {
+                "jsonrpc": "2.0",
+                "method": "RestartAndReset",
+                "params": {
+                    "mode": 2
+                },
+                "id": "1.1"
+            }
+            data = JSON.stringify(data);
+            var ajaxTimeout = $.ajax({
+                type: "post",
+                url: "/action/action",
+                timeout: timeout0,
+                data: data,
+                dataType: "json",
+                contentType: "application/json",
+                success: function(res) {
+
+                    if (res.result && res.result.status == 2) {
+                        successFlag = false;
+                    } else if (res.result && res.result.status == 0) {
+                        successFlag = 2;
+                        $(".Restarting-SmartHub").text("Restart SmartHub Fail");
+                        $("#div3").hide();
+                    } else if (res.result && res.result.status == 1) {
+                        successFlag = true;
+                    } else if (res.error) {
+                        successFlag = false;
+                        $(".Restarting-SmartHub").text("Restart SmartHub Fail")
+                        $("#div3").hide();
+                        layui.use(['layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        });
+                    }
+                },
+                complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+                    if (status == 'timeout') { //超时,status还有success,error等值的情况
+                        ajaxTimeout.abort();
+                    }
+                },
+                error: function(jqXHR) {
+                    console.log(jqXHR)
+
+                    //var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    //promptMessage("Error message", tip);
+                }
+
+            });
         }
     </script>
 </body>

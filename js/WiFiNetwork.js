@@ -324,6 +324,7 @@ function bindEvent() {
     //弹出一个iframe层
     $('.Rectangle-1205 .wifi').on('click', function() {
         var infoHtml = $(this).parents("tr").children(".wifi-info").children("span");
+        $("#saved_id").attr("passwordIncorrect", "");
         enterPasswordHtml(infoHtml);
     });
     $('.wireless').on('click', function() {
@@ -332,7 +333,7 @@ function bindEvent() {
     });
     $('.add-Available-networks').on('click', function() {
         $(".layui-layer").css("background", "none");
-
+        $("#saved_id").val("").attr("encrypt", "None").attr("passwordIncorrect", "");
         addNetworkHtml();
 
     });
@@ -369,48 +370,10 @@ function addNetworkHtml() {
                 clearInterval(timer);
                 $(".connecting-img").show();
                 timer = setInterval(function() {
-                    pollingWifiStatus("", "AddNetwork");
+                    pollingWifiStatus("", "AddNetwork", newWifi);
                 }, 3000)
             }
-            return;
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "WlanStationConfig",
-                "params": {
-                    "operate_code": 10
-                },
-                "id": "9.1"
-            };
-            data = JSON.stringify(data);
-            $.ajax({
-                type: "post",
-                url: "/action/action",
-                data: data,
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(res) {
-                    if (res.result && res.result.ap_list) {
-                        var wifiJson = res.result.ap_list;
-                        console.log(wifiJson)
-                        if (connectingSsid && connectingEncrypt) {
-                            for (var i = 0; i < wifiJson.length; i++) {
-                                if (wifiJson[i].is_connected == 1 && connectingSsid != wifiJson[i].ssid) {
-                                    wifiJson[i].is_connected = 0;
-                                }
-                                if (connectingSsid == wifiJson[i].ssid && connectingEncrypt == wifiJson[i].encrypt) {
-                                    wifiJson[i].is_connected = 2;
-                                }
-                            }
-                            renderWifiList(wifiJson);
-                            clearInterval(timer);
-                            timer = setInterval(function() {
-                                pollingWifiStatus("", "AddNetwork");
-                            }, 3000)
-                        }
 
-                    }
-                }
-            })
         }
     });
 }
@@ -466,8 +429,9 @@ function enterPasswordHtml(infoHtml) {
     var bssid = infoHtml.attr("bssid");
     var encrypt = infoHtml.attr("encrypt");
     var is_saved = infoHtml.attr("is_saved");
+
     if (is_saved == 1) { //已保存，直接连接
-        savedWifiConnect(ssid, bssid, encrypt);
+        savedWifiConnect(ssid, bssid, encrypt, infoHtml);
         return;
     }
     if (encrypt == "[OPEN]") { //无需密码直接连接
@@ -508,7 +472,7 @@ function enterPasswordHtml(infoHtml) {
     });
 }
 //轮询当前wifi连接状态
-function pollingWifiStatus(infoDOM, type) {
+function pollingWifiStatus(infoDOM, type, newWifi) {
     var timeout0 = 2000;
     data = {
         "jsonrpc": "2.0",
@@ -529,24 +493,30 @@ function pollingWifiStatus(infoDOM, type) {
         success: function(res) {
             if (res.result.status) {
                 $("#Connecting-status").text(res.result.status);
-                if (res.result.status == "Password Incorrect" && type == "EnterPassword") { //密码错误从新弹框输入
-                    clearInterval(timer);
-                    timer = setInterval(function() {
-                        pollingWifiStatus(infoDOM);
-                    }, 3000)
-                    enterPasswordHtml(infoDOM, type);
-                }
+
                 if (res.result.status == "Connected") {
                     clearInterval(timer);
                     updateWifiList();
                     $(".connecting-img").hide();
                 }
-                // if (res.result.status == "Disconnected") {
-                //     clearInterval(timer);
-                // }
                 if (res.result.status == "Connected" && type == "AddNetwork") { //新增WiFi并连接，调接口返回列表不会马上有新路由，只能手动先添加进缓存列表，等连接上后，再调接口获取有新WiFi的列表，区更新wifi列表和缓存数据
                     $(".connecting-img").hide();
                     updateWifiList();
+                }
+
+                if (res.result.status == "Password Incorrect" && type == "EnterPassword") { //密码错误从新弹框输入
+                    clearInterval(timer);
+                    timer = setInterval(function() {
+                        pollingWifiStatus(infoDOM);
+                    }, 3000)
+                    $("#saved_id").attr("passwordIncorrect", "enterWifiIncorrect")
+                    infoDOM.attr("is_saved", 0);
+                    enterPasswordHtml(infoDOM, type);
+                }
+                if (res.result.status == "Password Incorrect" && type == "AddNetwork") { //新增wifi密码错误从新弹框输入
+                    clearInterval(timer);
+                    $("#saved_id").attr("passwordIncorrect", "newWifiIncorrect")
+                    addNetworkHtml();
                 }
                 if (type == "forgetWifi") { //删除/忘记网络后，之前有保存网络，路由会自动连接，轮询连接的这个wifi
                     if (res.result.ssid && res.result.bssid) {
@@ -554,9 +524,22 @@ function pollingWifiStatus(infoDOM, type) {
                         for (var i = 0; i < wifiJson.length; i++) {
                             if (res.result.ssid == wifiJson[i].ssid && res.result.bssid == wifiJson[i].bssid) {
                                 wifiJson[i].is_connected = 2;
-                                updateWifiList(wifiJson);
+                                infoDOM.attr("ssid", res.result.ssid);
+                                infoDOM.attr("bssid", res.result.bssid);
+                                infoDOM.attr("encrypt", wifiJson[i].encrypt);
+                                infoDOM.attr("is_saved", 0);
+                                //updateWifiList(wifiJson);
                             }
                         }
+                        renderWifiList(wifiJson);
+
+                    }
+                    if (res.result.status == "Password Incorrect") {
+                        clearInterval(timer);
+                        $(".connecting-img").hide();
+                        infoDOM.attr("is_saved", "0");
+                        $("#saved_id").attr("passwordIncorrect", "enterWifiIncorrect")
+                        enterPasswordHtml(infoDOM);
                     }
                 }
             }
@@ -576,7 +559,7 @@ function pollingWifiStatus(infoDOM, type) {
     });
 }
 //已经保存的WiFi直接连接
-function savedWifiConnect(ssid, bssid, encrypt) {
+function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
     var data = {
         "jsonrpc": "2.0",
         "method": "WlanStationConfig",
@@ -599,6 +582,7 @@ function savedWifiConnect(ssid, bssid, encrypt) {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             if (res.result) {
+                $("#Connecting-status").text(res.result.status);
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
                 if (ssid && bssid) {
                     for (var i = 0; i < wifiJson.length; i++) {
@@ -614,8 +598,12 @@ function savedWifiConnect(ssid, bssid, encrypt) {
                         clearInterval(timer);
                         $(".connecting-img").show();
                         timer = setInterval(function() {
-                            pollingWifiStatus();
+                            pollingWifiStatus(infoHtml, "EnterPassword");
                         }, 3000)
+                    } else if (res.result.status == "Password Incorrect") {
+                        $("#saved_id").attr("passwordIncorrect", "enterWifiIncorrect");
+                        infoHtml.attr("is_saved", 0);
+                        enterPasswordHtml(infoHtml);
                     } else {
                         $("#Connecting-status").text(res.result.status);
                     }
@@ -646,7 +634,6 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
             "bssid": bssid,
             "encrypt": "None",
             "is_saved": is_saved,
-            //"psk": "",
         },
         "id": "9.1"
     };

@@ -4,58 +4,541 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/xadmin.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <script src="js/addMAC.js"></script>
     <title>Document</title>
     <style>
+        .table>tbody>tr>td,
+        .table>tbody>tr>th,
+        .table>tfoot>tr>td,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>thead>tr>th {
+            vertical-align: middle;
+        }
+        
+        .table>tbody>tr {
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .table>tbody>tr>td {
+            font-size: 18px;
+        }
+        
+        input[type=checkbox],
+        input[type=radio] {
+            width: 20px;
+            height: 20px;
+        }
+        
         .align {
             vertical-align: middle !important;
+        }
+        
+        .Rectangle-1182 {
+            width: 70px;
+            height: 36px;
+            border-radius: 5px;
+            background-color: #861f41;
+            color: #fff;
+            float: right;
+            font-size: 24px;
+            margin-right: 40px;
+        }
+        
+        .container-item {
+            margin: 35px 0 0 20px
+        }
+        
+        .item-title {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        
+        .title-left {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .title {
+            font-size: 15px;
+            color: #666;
+        }
+        
+        .item-title img {
+            padding-right: 10px;
+        }
+        
+        .item-left {
+            width: 220px;
+        }
+        
+        .item-center {
+            width: calc(100% - 335px);
+        }
+        
+        .form-control {
+            width: 50%;
+            display: inline-block;
+        }
+        
+        .item-right {
+            width: 115px;
+        }
+        
+        .item-right-c {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .pad-r20 {
+            padding-right: 20px;
+        }
+        
+        .pad-l20 {
+            padding-left: 20px;
+        }
+        
+        .border-r1 {
+            border-left: 1px solid #ccc;
+        }
+        
+        .text-r {
+            text-align: right;
+        }
+        
+        .sansuo-radio {
+            padding-top: 7px;
+            font-size: 15px;
+            color: #666;
+            padding-left: 5px;
+        }
+        
+        .layui-form-item,
+        .layui-form-pane .layui-input-block {
+            margin: 0;
+        }
+        
+        .layui-form-pane .layui-input-block {
+            left: -12px;
+        }
+        
+        .pdf-btn {
+            width: auto;
+            margin-bottom: 40px;
+            margin-right: 20px;
+        }
+        
+        .container-fluid {
+            padding-right: 40px;
+            padding-left: 30px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div style="margin:20px 0 0 20px">
-            <h2 style="margin-bottom:20px;">add MAC</h2>
+    <div>
+        <div class="container-fluid" id="export_content">
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">SN及MAC地址写入 </div><button class="Rectangle-1182" id="start_btn1" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left">Device SN :</td>
+                        <td class="item-center"><span class="title"><input type="text" id="Device_SN_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="SN_MAC_status">Failed</span></td>
+                        <td class="item-right"><input type="checkbox" checked name="DeviceSN" lay-skin="primary" class="Rectangle-1233" id="Device_SN"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">Imx MacAdress :</td>
+                        <td class="item-center"><span class="title"><input type="text" id="ImxMac_Adress_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="ImxMac_Adress_status">Failed</span></td>
+                        <td class=""><input type="checkbox" checked name="ImxMacAdress" lay-skin="primary" class="Rectangle-1233" id="ImxMac_Adress"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">QCA_WAN address :</td>
+                        <td class="item-center"><span class="title"><input type="text" id="QCA_WANaddress_i" class="form-control" placeholder=""> </span><span class="title pad-l20" id="QCA_WANaddress_status">Failed</span></td>
+                        <td class="item-right"><input type="checkbox" checked name="QCA_WANaddress" lay-skin="primary" class="Rectangle-1233" id="QCA_WANaddress"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">QCA_WLAN Address :</td>
+                        <td class="item-center"><span class="title"><input type="text" id="QCA_WLANAddress_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="QCA_WLANAddress_status">Failed</span></td>
+                        <td class="item-right"><input type="checkbox" checked name="QCA_WLANAddress" lay-skin="primary" class="Rectangle-1233" id="QCA_WLANAddress"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">Admin Password :</td>
+                        <td class="item-center"><span class="title" id="Admin_Password">--</span></td>
+                        <td class="item-right"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">WIFI Password :</td>
+                        <td class="item-center"><span class="title" id="WIFI_Password">--</span></td>
+                        <td class="item-right"></td>
+                    </tr>
 
-            <table class="table table-hover table-responsive">
+                </table>
+            </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">LTE INFO </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left">LTE Module IMEI :</td>
+                        <td class="item-center"><span class="title" id="LTE_Module">Failed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">SIM1 Detect SIM :</td>
+                        <td class="item-center"><span class="title" id="SIM1_Detect">Failed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">SIM1 Internet :</td>
+                        <td class="item-center"><span class="title" id="SIM1_Internet">Failed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">SIM2 Detect SIM :</td>
+                        <td class="item-center"><span class="title" id="SIM2_Detect">Failed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">SIM2 Internet :</td>
+                        <td class="item-center"><span class="title" id="SIM2_Internet">Failed</span></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">LET UART :</td>
+                        <td class="item-center"><span class="title" id="LET_UART">Failed</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">设备认证 </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left">Provision key :</td>
+                        <td class="item-center"><span class="title"><input type="text" id="Provision_key" class="form-control" placeholder=""></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">LAN </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left">LAN1 :</td>
+                        <td class="item-right text-r"><span class="title" id="LAN1_status">Failed</span></td>
+                        <td class="align item-left border-r1">LED 是否正常指示 :</td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="LAN1_sansuo" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="LAN1_sansuo" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">LAN2 :</td>
+                        <td class="item-right text-r"><span class="title" id="LAN2_status">Failed</span></td>
+                        <td class="align item-left border-r1">LED 是否正常指示 :</td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="LAN2_sansuo" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="LAN2_sansuo" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">LAN3 :</td>
+                        <td class="item-right text-r"><span class="title" id="LAN3_status">Failed</span></td>
+                        <td class="align item-left border-r1">LED 是否正常指示 :</td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="LAN3_sansuo" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="LAN3_sansuo" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">LAN4 :</td>
+                        <td class="item-right text-r"><span class="title" id="LAN4_status">Failed</span></td>
+                        <td class="align item-left border-r1">LED 是否正常指示 :</td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="LAN4_sansuo" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="LAN4_sansuo" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">LED 是否快闪 :</td>
+                        <td class="item-right"></td>
+                        <td class="align item-left"></td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="LED_sansuo" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="LED_sansuo" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">定位信息 </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left">Location :</td>
+                        <td class="item-center"><span class="title" id="Location_lng">lng:33333</span><span class="title pad-l20" id="Location_lat">lat:444444</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-right.png">INPUT/OUTPUT </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left" style="font-weight: 600;">OUTPUT :</td>
+                        <td class="item-center"></td>
+                        <td class="item-right">
+                            <div class="layui-form layui-form-pane layui-form-item aa">
+                                <div class="layui-input-block channels-switch">
+                                    <input id="Switch7" type="checkbox" name="7" lay-skin="switch" lay-text="ON|OFF">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left" style="font-weight: 600;">INPUT :</td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">Channel 1 :</td>
+                        <td class="item-center"><span class="title" id="SN_MAC_i">2.3V</span></td>
+                        <td class="item-right"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">Channel 2 :</td>
+                        <td class="item-center"><span class="title" id="SN_MAC_i">2.3V</span></td>
+                        <td class="item-right"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">Channel 3 :</td>
+                        <td class="item-center"><span class="title" id="SN_MAC_i">2.3V</span></td>
+                        <td class="item-right"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">Channel 4 :</td>
+                        <td class="item-center"><span class="title" id="SN_MAC_i">2.3V</span></td>
+                        <td class="item-right"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">CAN2000 </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
 
-                <tr>
-                    <td width="30%" class="align">QCA WAN MAC :</td>
-                    <td><span class="title"><input type="text" id="ipq_eth0" class="form-control" placeholder="" style="width:40%"> </span></td>
-                </tr>
-                <tr>
-                    <td width="30%" class="align">QCA LAN MAC :</td>
-                    <td><span class="title"><input type="text" id="ipq_eth1" class="form-control" placeholder="" style="width:40%"></span></td>
-                </tr>
-                <tr>
-                    <td class="align">QCA WIFI0 MAC :</td>
-                    <td><span class="title"><input type="text" id="ipq_wif0" class="form-control" placeholder="" style="width:40%"> </span></td>
-                </tr>
-                <tr>
-                    <td class="align">QCA WIFI1 MAC:</td>
-                    <td><span class="title"><input type="text" id="ipq_wif1" class="form-control" placeholder="" style="width:40%"></span></td>
-                </tr>
-                <tr style="border-bottom: 1px solid #ddd;">
-                    <td class="align">iMax Ethernet MAC :</td>
-                    <td><span class="title"><input type="text" id="nxp_eth0" class="form-control" placeholder="" style="width:40%"></span></td>
-                </tr>
-                <tr style="border-bottom: 1px solid #ddd;">
-                    <td class="align">Device SN :</td>
-                    <td><span class="title"><input type="text" id="dev_sn" class="form-control" placeholder="" style="width:40%"></span></td>
-                </tr>
-            </table>
-        </div>
-        <div style="margin-left:20px">
-            <div class="layui-input-inline">
-                <button class="layui-btn" id="btnMAC" lay-submit>Save</button>
+                </table>
+            </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">IO类 </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left">复位按键是否成功 :</td>
+                        <td class="item-center"></td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="reset_status" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="reset_status" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">交换芯片是否能复位 :</td>
+                        <td class="item-center"></td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="Switch_chip" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="Switch_chip" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">IMX 电源是否可控 :</td>
+                        <td class="item-center"></td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="IMX_power" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="IMX_power" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">Station </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left">SSID :</td>
+                        <td class="item-center"><span class="title" id="Station_SSID">--</span></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">connected :</td>
+                        <td class="item-center"><span class="title" id="connected_status">Failed</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">AP </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left">SSID :</td>
+                        <td class="item-center"><span class="title" id="AP_SSID">--</span></td>
+                        <td class="item-right"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">密码 :</td>
+                        <td class="item-center"><span class="title" id="AP_pasword">--</span></td>
+                        <td class="item-right"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">是否可搜索及连接 :</td>
+                        <td class="item-center"></td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="AP_sousuo" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="AP_sousuo" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="text-align: right;">
+                <div class="layui-input-inline">
+                    <button class="Rectangle-1182 pdf-btn" id="exportToPdf1" lay-submit>Save PDF</button>
+                </div>
             </div>
         </div>
     </div>
+
 </body>
+<script src="js/jquery.min.js"></script>
+<script src="layui/layui.js " charset="utf-8 "></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script src="js/addMAC.js"></script>
+<script src="https://cdn.bootcss.com/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
+<script>
+    $(function() {
+        $("#exportToPdf1").on("click", function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            $('body,html').animate({
+                'scrollTop': 0
+            }, 0);
+            setTimeout(() => {
+                exportPdf();
+            }, 500);
+
+        })
+        $(".item-title").on("click", function(e) {
+
+            var attr = $(this).siblings().css('display');
+            if (attr == "none") {
+                $(this).siblings().show();
+                $(this).find("img").attr("src", "images/icon-arrow-down-1.png")
+            } else {
+                $(this).siblings().hide();
+                $(this).find("img").attr("src", "images/icon-arrow-right.png")
+            }
+        })
+    })
+
+    function exportPdf() {
+        var target = document.getElementById('export_content');
+        target.style.background = "#FFFFFF";
+
+        html2canvas(target, {
+            onrendered: function(canvas) {
+                var contentWidth = canvas.width;
+                var contentHeight = canvas.height;
+
+                //一页pdf显示html页面生成的canvas高度;
+                var pageHeight = contentWidth / 592.28 * 841.89;
+                //未生成pdf的html页面高度
+                var leftHeight = contentHeight;
+                //页面偏移
+                var position = 0;
+                //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+                var imgWidth = 595.28;
+                var imgHeight = 592.28 / contentWidth * contentHeight;
+
+                var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+                var pdf = new jsPDF('', 'pt', 'a4');
+
+                //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                //当内容未超过pdf一页显示的范围，无需分页
+                if (leftHeight < pageHeight) {
+                    pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                } else {
+                    while (leftHeight > 0) {
+                        pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                        leftHeight -= pageHeight;
+                        position -= 841.89;
+                        //避免添加空白页
+                        if (leftHeight > 0) {
+                            pdf.addPage();
+                        }
+                    }
+                }
+
+                pdf.save("content.pdf");
+            }
+        })
+    }
+
+    function exportPDF() {
+        let targetDom = $("#export_content");
+        targetDom.css("background-color", "#fff")
+        targetDom.scrollTop();
+        // let copyDom = targetDom.clone();
+        let copyDom = $("<div/>");
+        copyDom.addClass('super');
+        copyDom.width(targetDom.width() + "px");
+        copyDom.height(targetDom.height() + "px");
+        $('body').append(copyDom);
+        let cont = document.getElementById('export_content');
+        console.log(cont.offsetHeight);
+        html2canvas(targetDom, {
+            // windowHeight:2000,
+            height: cont.offsetHeight, //给canvas设置高度，
+            onrendered: function(canvas) {
+                console.log('回调开始');
+                //通过html2canvas将html渲染成canvas，然后获取图片数据
+                let imgData = canvas.toDataURL('image/jpeg', 1.0);
+                // console.log(imgData);
+                console.log(canvas.width, canvas.height);
+                //初始化pdf，设置相应格式
+                let doc = new jsPDF("p", "mm", "a4");
+                // let doc = new jsPDF('', 'pt', 'a4')
+
+                //这里设置的是a4纸张尺寸
+                doc.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+
+                //输出保存命名为content的pdf
+                doc.save('report.pdf');
+                //移除dom中添加的元素
+                $('.super').remove();
+
+            }
+        });
+    }
+</script>
 
 </html>

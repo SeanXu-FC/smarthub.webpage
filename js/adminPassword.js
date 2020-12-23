@@ -3,76 +3,57 @@ $(function() {
     $(".Change-password").prop("disabled", true);
     $(".Change-password").css("opacity", "0.5");
 
-    var isShow = true;
 
-    change = function() {
-        var v = $("#pwd").get(0);
-        if (isShow) {
-            v.type = "text";
-            isShow = false;
+    var isShow;
+    $(".SHOW1").on("click", function() {
+        isShow = $("#pwd").attr("type");
+        if (isShow == "text") {
+            $("#pwd").attr("type", "password");
+            $(this).text("SHOW");
         } else {
-            v.type = "password";
-            isShow = true;
+            $("#pwd").attr("type", "text");
+            $(this).text("HIDE");
         }
-    };
-    change2 = function() {
-        var v2 = $("#pwd2").get(0);
-        if (isShow) {
-            v2.type = "text";
-            isShow = false;
+    })
+    $(".SHOW2").on("click", function() {
+        isShow = $("#pwd2").attr("type");
+        if (isShow == "text") {
+            $("#pwd2").attr("type", "password");
+            $(this).text("SHOW");
         } else {
-            v2.type = "password";
-            isShow = true;
+            $("#pwd2").attr("type", "text");
+            $(this).text("HIDE");
         }
-    };
-    change3 = function() {
-        var v3 = $("#pwd3").get(0);
-        if (isShow) {
-            v3.type = "text";
-            isShow = false;
+    })
+    $(".SHOW3").on("click", function() {
+        isShow = $("#pwd3").attr("type");
+        if (isShow == "text") {
+            $("#pwd3").attr("type", "password");
+            $(this).text("SHOW");
         } else {
-            v3.type = "password";
-            isShow = true;
+            $("#pwd3").attr("type", "text");
+            $(this).text("HIDE");
         }
-    };
-    change();
-    change2();
-    change3();
+    })
 
 
     $('#pwd,#pwd2,#pwd3').bind("keyup", function() {
-        var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,100}$/;
-        var val = reg.test($('#pwd').val());
-        var val2 = reg.test($('#pwd2').val());
-        var val3 = reg.test($('#pwd3').val());
-        var len = $('#pwd').val().length;
-        var len2 = $('#pwd2').val().length;
-        var len3 = $('#pwd3').val().length;
-        if (len <= 8 || val == "" || val == null) {
-            $("#btn").attr("disabled", "true");
-            $("#btn").css("opacity", "0.5");
-        } else {
-            $("#btn").removeAttr("disabled");
-            $("#btn").css("opacity", "1");
-        }
-        if (len2 <= 8 || val2 == "" || val2 == null) {
-            $("#btn").attr("disabled", "true");
-            $("#btn").css("opacity", "0.5");
-        } else {
-            $("#btn").removeAttr("disabled");
-            $("#btn").css("opacity", "1");
-        }
-        if (len3 <= 8 || val3 == "" || val3 == null) {
-            $("#btn").attr("disabled", "true");
-            $("#btn").css("opacity", "0.5");
-        } else {
-            $("#btn").removeAttr("disabled");
-            $("#btn").css("opacity", "1");
-
-        }
+        var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,64}$/;
 
         var oPwd2 = document.getElementById("pwd2").value;
         var oPwd3 = document.getElementById("pwd3").value;
+        var len = $('#pwd').val().length;
+        var len2 = $('#pwd2').val().length;
+        var len3 = $('#pwd3').val().length;
+        if (8 <= len && len <= 64) {
+            $("#btn").removeAttr("disabled");
+            $("#btn").css("opacity", "1");
+        } else {
+            $("#btn").attr("disabled", "true");
+            $("#btn").css("opacity", "0.5");
+            return false;
+        }
+
         if (oPwd2 != oPwd3) {
             $("#tip").show();
             $("#tip").text("Passwords don't match"); //两次输入的密码不一致！
@@ -80,23 +61,39 @@ $(function() {
                 "color": "red",
                 "fontWeight": "normal"
             });
-
+            $("#btn").attr("disabled", "true");
+            $("#btn").css("opacity", "0.5");
             return false;
 
         } else {
-            $("#tip").text('Passwords match'); //两次输入的密码一致！
+            $("#tip").text('Passwords match');
             $("#tip").css({
                 "color": "green",
                 "fontWeight": "bold"
             });
-            if (8 <= len3) {
-                console.log(len3)
-                $("#btn").removeAttr("disabled");
-                $("#btn").css("opacity", "1");
-            }
-
+        }
+        if (8 <= len3 && len3 <= 64) {
+            $("#btn").removeAttr("disabled");
+            $("#btn").css("opacity", "1");
+        } else {
+            $("#btn").attr("disabled", "true");
+            $("#btn").css("opacity", "0.5");
+            $("#tip").text('Password too short'); //长度太短，为了显示这个len3判断提前len2
+            $("#tip").css({
+                "color": "#5d5d5d",
+                "fontWeight": "bold"
+            });
             return false;
         }
+        if (8 <= len2 && len2 <= 64) {
+            $("#btn").removeAttr("disabled");
+            $("#btn").css("opacity", "1");
+        } else {
+            $("#btn").attr("disabled", "true");
+            $("#btn").css("opacity", "0.5");
+            return false;
+        }
+
     });
 
     $('#btn').on('click', function() {
@@ -110,7 +107,7 @@ $(function() {
             dataType: "json",
             contentType: "application/x-www-form-urlencoded;charset=utf-8",
             success: function(res) {
-                if (res.result.login == "0") {
+                if (res.result && res.result.login == "0") {
                     // $userId.next().text("Wrong user name or password").css({
                     //     "font-weight": "bold",
                     //     "color": "red"
@@ -131,6 +128,7 @@ $(function() {
 
 })
 
+
 function check2() {
 
     var oPwd2 = document.getElementById("pwd2").value;
@@ -148,11 +146,11 @@ function check2() {
     } else if (oPwd2.length >= 8) {
         sp2.innerHTML = "";
 
-        var mmzz1 = /^[0-9]{8,100}$|^[a-zA-Z]{8,100}$/; //较弱：全是数字或全是字母 6-16个字符
+        var mmzz1 = /^[0-9]{8,100}$|^[a-zA-Z]{8,64}$/; //较弱：全是数字或全是字母 6-16个字符
 
-        var mmzz2 = /^[A-Za-z0-9]{8,100}$/; //中级：数字、26个英文字母 6-16个字符
+        var mmzz2 = /^[A-Za-z0-9]{8,64}$/; //中级：数字、26个英文字母 6-16个字符
 
-        var mmzz3 = /^[\da-zA-Z!@#$%|+-^&*.~]{8,100}$/; //较高：由数字、26个英文字母或者下划线组成的字符串 6-16个字符^[\da-zA-Z!@#$%^&*]*$
+        var mmzz3 = /^[\da-zA-Z!@#$%|+-^&*.~]{8,64}$/; //较高：由数字、26个英文字母或者下划线组成的字符串 6-16个字符^[\da-zA-Z!@#$%^&*]*$
 
         if (oPwd2.match(mmzz1)) {
             sp2.innerHTML = "Password strength: <span style='color: #ff002a;'>Weak</span>"; //密码等级'较弱'，建议字母+数字 Password level 'weak', letter + number is recommended
@@ -169,16 +167,4 @@ function check2() {
         console.log(sp2.innerHTML)
 
     }
-}
-
-function check3() {
-    var oPwd3 = $("#pwd3").val();
-    if (oPwd3.length < 8) {
-        $("#tip").text('Password too short'); //两次输入的密码一致！
-        $("#tip").css({
-            "color": "#5d5d5d",
-            "fontWeight": "bold"
-        });
-    }
-
 }
