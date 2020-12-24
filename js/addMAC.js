@@ -28,17 +28,25 @@ function getMACData(layer, form, loading, flag) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: reqUrlProxy + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             if (res.result) {
-                var sn_value = res.result.sn_value.substring(0, 8);
-                $("#Device_SN_i").val(sn_value);
-                $("#ImxMac_Adress_i").val(res.result.addr1_value);
-                $("#QCA_WANaddress_i").val(res.result.addr2_value);
-                $("#QCA_WLANAddress_i").val(res.result.addr3_value);
+                if (res.result.sn_value) {
+                    var sn_value = res.result.sn_value.substring(0, 8);
+                    $("#Device_SN_i").val(sn_value);
+                }
+                if (res.result.addr1_value) {
+                    $("#ImxMac_Adress_i").val(res.result.addr1_value);
+                }
+                if (res.result.addr2_value) {
+                    $("#QCA_WANaddress_i").val(res.result.addr2_value);
+                }
+                if (res.result.addr3_value) {
+                    $("#QCA_WLANAddress_i").val(res.result.addr3_value);
+                }
                 $("#SN_MAC_status").text(res.result.sn == 1 ? "已写/成功" : '失败');
                 $("#ImxMac_Adress_status").text(res.result.mac_addr1 == 1 ? "已写/成功" : '未写/失败');
                 $("#QCA_WANaddress_status").text(res.result.mac_addr2 == 1 ? "已写/成功" : '未写/失败');
@@ -138,7 +146,7 @@ function setMACData(layer, form) {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: reqUrlProxy + "/action/action",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
