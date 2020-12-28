@@ -189,7 +189,7 @@ function enterPasswordHtml(infoHtml) {
         savedWifiConnect(ssid, bssid, encrypt, infoHtml);
         return;
     }
-    if (encrypt == "[OPEN]") {
+    if (encrypt.indexOf(("[OPEN]")) != -1) {
         noPWDWifiConnect(ssid, bssid, is_saved);
         return;
     }
@@ -409,7 +409,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
             "ssid": ssid,
             "bssid": bssid,
             "encrypt": "None",
-            "is_saved": is_saved,
+            "is_saved": Number(is_saved),
             //"psk": "",
         },
         "id": "9.1"

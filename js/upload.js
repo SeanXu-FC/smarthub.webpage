@@ -1,4 +1,5 @@
 ﻿$(function() {
+
     layui.use(['layer', 'element', 'form', 'upload'], function() {
             var layer = layui.layer,
                 element = layui.element,

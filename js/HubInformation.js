@@ -75,6 +75,7 @@ $(function() {
                 $("#aPma").html(res.result.ipq_wifi1_mac);
                 $("#ipqAddress").html(res.result.ipq_ipaddr);
                 $("#ipqAddress").attr("href", "http://" + res.result.ipq_ipaddr);
+                $("#MAC6174").html(res.result.Qca6174Mac)
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {
                     var layer = layui.layer;

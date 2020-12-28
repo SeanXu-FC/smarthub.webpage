@@ -4,10 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/myProgress.css" />
+    <link href="css/style.css?mv=20201228" rel="stylesheet" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20201228" />
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="js/jquery.myProgress.js"></script>
@@ -68,9 +72,9 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/common.js?mv=20201228"></script>
     <script>
-        var length = 20;
+        var length = 80;
         var successFlag = false;
         var data;
         var timer = null;
@@ -84,11 +88,11 @@
 
         function reStartInit() {
             $("#div3").myProgress({
-                speed: 6000,
+                speed: 1000 * 50,
                 percent: length,
                 width: "100%",
             });
-            var timeout0 = 2000;
+            var timeout0 = 3000;
             data = {
                 "jsonrpc": "2.0",
                 "method": "RestartAndReset",
@@ -108,13 +112,17 @@
                 success: function(res) {
                     if (res.result && res.result.status == 2) {
                         successFlag = false;
-                        PollingChecked();
+                        PollingChecked(1000 * 6);
                     } else if (res.result && res.result.status == 0) {
                         successFlag = 2;
                         $(".Restarting-SmartHub").text("Reset SmartHub Fail");
                         $("#div3").hide();
                     } else if (res.result && res.result.status == 1) {
                         successFlag = true;
+                        resetSuccess()
+                    } else if (res.result && res.result.status == 3) {
+                        successFlag = false;
+                        PollingChecked(1000 * 60);
                     } else if (res.error) {
                         successFlag = false;
                         $(".Restarting-SmartHub").text("Reset SmartHub Fail")
@@ -132,51 +140,24 @@
                 },
                 error: function(jqXHR) {
                     console.log(jqXHR)
-                    successFlag = false;
-                    PollingChecked();
-                    //var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-                    //promptMessage("Error message", tip);
+                        //successFlag = false;
+                        //PollingChecked();
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
                 }
 
             });
         }
 
-        function PollingChecked() {
+        function PollingChecked(t) {
             clearInterval(timer);
             timer = setInterval(function() {
-                if (successFlag == true) {
-                    length = 100;
-                    var domain = window.location.host;
-                    $("#div3").myProgress({
-                        speed: 0,
-                        percent: 100,
-                        width: "100%",
-                    });
-
-                    $(".Restarting-SmartHub").text("Restart SmartHub Successful")
-                    $(".progress-out").css("border", "1px solid green");
-                    $(".progress-in").css("background-color", "green");
-                    $(".progress-in").css("background-image",
-                        "-webkit-linear-gradient(top, green 0%, green 40%, green 100%)");
-                    clearInterval(timer);
-                    setTimeout(function() {
-                        window.location.href = ('https:' == document.location.protocol ?
-                            'https://' : 'http://') + domain + "/home.html";
-                    }, 500);
-                } else if (successFlag == 2) {
+                if (successFlag == 2) {
 
                 } else {
-                    if (length <= 60) {
-                        length += 20;
-                    }
-                    $("#div3").myProgress({
-                        speed: 6000,
-                        percent: length,
-                        width: "100%",
-                    });
                     reStarting2(2);
                 }
-            }, 6000)
+            }, t)
         }
 
         function reStarting2(flag) {
@@ -203,11 +184,16 @@
                     if (res.result && res.result.status == 2) {
                         successFlag = false;
                     } else if (res.result && res.result.status == 0) {
+                        clearInterval(timer);
                         successFlag = 2;
                         $(".Restarting-SmartHub").text("Reset SmartHub Fail");
                         $("#div3").hide();
                     } else if (res.result && res.result.status == 1) {
                         successFlag = true;
+                        resetSuccess()
+                    } else if (res.result && res.result.status == 3) {
+                        successFlag = false;
+                        resetPollingChecked(1000 * 60);
                     } else if (res.error) {
                         successFlag = false;
                         $(".Restarting-SmartHub").text("Reset SmartHub Fail")
@@ -225,9 +211,101 @@
                 },
                 error: function(jqXHR) {
                     console.log(jqXHR)
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
+                }
 
-                    //var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-                    //promptMessage("Error message", tip);
+            });
+        }
+
+        function resetSuccess() {
+            if (successFlag == true) {
+                length = 100;
+                var domain = window.location.host;
+                $("#div3").myProgress({
+                    speed: 0,
+                    percent: 100,
+                    width: "100%",
+                });
+
+                $(".Restarting-SmartHub").text("Restart SmartHub Successful")
+                $(".progress-out").css("border", "1px solid green");
+                $(".progress-in").css("background-color", "green");
+                $(".progress-in").css("background-image",
+                    "-webkit-linear-gradient(top, green 0%, green 40%, green 100%)");
+                clearInterval(timer);
+                setTimeout(function() {
+                    window.location.href = ('https:' == document.location.protocol ?
+                        'https://' : 'http://') + domain + "/home.html";
+                }, 3000);
+            }
+        }
+
+        function resetPollingChecked(t) {
+            clearInterval(timer);
+            timer = setInterval(function() {
+                if (successFlag == 2) {
+
+                } else {
+                    reSetting(2);
+                }
+            }, t)
+        }
+        //重置后请求地址变成198.18.248.1
+        function reSetting(flag) {
+            console.log(1111111)
+            var timeout0 = 3000;
+            data = {
+                "jsonrpc": "2.0",
+                "method": "RestartAndReset",
+                "params": {
+                    "mode": 2
+                },
+                "id": "1.1"
+            }
+            data = JSON.stringify(data);
+            var url = ('https:' == document.location.protocol ? 'https://' : 'http://') + "198.18.248.1/action/action"
+            var ajaxTimeout = $.ajax({
+                type: "post",
+                url: url,
+                timeout: timeout0,
+                data: data,
+                dataType: "json",
+                contentType: "application/json",
+                success: function(res) {
+
+                    if (res.result && res.result.status == 2) {
+                        successFlag = false;
+                    } else if (res.result && res.result.status == 0) {
+                        clearInterval(timer);
+                        successFlag = 2;
+                        $(".Restarting-SmartHub").text("Reset SmartHub Fail");
+                        $("#div3").hide();
+                    } else if (res.result && res.result.status == 1) {
+                        successFlag = true;
+                        resetSuccess()
+                    } else if (res.result && res.result.status == 3) {
+                        successFlag = false;
+                        PollingChecked(1000 * 60);
+                    } else if (res.error) {
+                        successFlag = false;
+                        $(".Restarting-SmartHub").text("Reset SmartHub Fail")
+                        $("#div3").hide();
+                        layui.use(['layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        });
+                    }
+                },
+                complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+                    if (status == 'timeout') { //超时,status还有success,error等值的情况
+                        ajaxTimeout.abort();
+                    }
+                },
+                error: function(jqXHR) {
+                    console.log(jqXHR)
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
                 }
 
             });

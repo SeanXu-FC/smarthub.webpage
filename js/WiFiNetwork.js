@@ -434,7 +434,7 @@ function enterPasswordHtml(infoHtml) {
         savedWifiConnect(ssid, bssid, encrypt, infoHtml);
         return;
     }
-    if (encrypt == "[OPEN]") { //无需密码直接连接
+    if (encrypt.indexOf(("[OPEN]")) != -1) { //无需密码直接连接
         noPWDWifiConnect(ssid, bssid, is_saved);
         return;
     }
@@ -446,7 +446,7 @@ function enterPasswordHtml(infoHtml) {
         closeBtn: 0,
         shade: 0.8,
         area: ['521px', '360px'],
-        content: ['EnterPassword.html?ssid=' + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
+        content: ["EnterPassword.html?ssid='" + ssid + "'&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
             var connectingSsid = $("#saved_id").val();
             var connectingBssid = $("#saved_id").attr("bssid");
@@ -560,6 +560,9 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
 }
 //已经保存的WiFi直接连接
 function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
+    if (encrypt.indexOf(("[OPEN]")) != -1) {
+        encrypt = "None";
+    }
     var data = {
         "jsonrpc": "2.0",
         "method": "WlanStationConfig",
@@ -633,7 +636,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
             "ssid": ssid,
             "bssid": bssid,
             "encrypt": "None",
-            "is_saved": is_saved,
+            "is_saved": Number(is_saved),
         },
         "id": "9.1"
     };

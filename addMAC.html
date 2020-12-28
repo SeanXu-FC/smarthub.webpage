@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/xadmin.css" rel="stylesheet" />
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <link href="css/xadmin.css?mv=20201228" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="layui/css/layui.css" rel="stylesheet" />
     <title>Document</title>
@@ -140,6 +144,14 @@
             padding-right: 40px;
             padding-left: 30px;
         }
+        
+        button:disabled {
+            opacity: .7 !important;
+        }
+        
+        .dis-none {
+            display: none;
+        }
     </style>
 </head>
 
@@ -148,27 +160,34 @@
         <div class="container-fluid" id="export_content">
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">SN及MAC地址写入 </div><button class="Rectangle-1182" id="start_btn1" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">SN及MAC地址写入 </div>
+                    <button class="HRectangle-1182" id="start_btn1" disabled style="display:none;">Start</button>
+                </h2>
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">Device SN :</td>
                         <td class="item-center"><span class="title"><input type="text" id="Device_SN_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="SN_MAC_status">Failed</span></td>
-                        <td class="item-right"><input type="checkbox" checked name="DeviceSN" lay-skin="primary" class="Rectangle-1233" id="Device_SN"></td>
+                        <td class="item-right"><input type="checkbox" checked name="DeviceSN" lay-skin="primary" class="Rectangle-1233 dis-none" id="Device_SN"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">Imx MacAdress :</td>
-                        <td class="item-center"><span class="title"><input type="text" id="ImxMac_Adress_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="ImxMac_Adress_status">Failed</span></td>
-                        <td class=""><input type="checkbox" checked name="ImxMacAdress" lay-skin="primary" class="Rectangle-1233" id="ImxMac_Adress"></td>
+                        <td class="item-center"><span class="title"><input type="text" readonly id="ImxMac_Adress_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="ImxMac_Adress_status">Failed</span></td>
+                        <td class=""><input type="checkbox" checked name="ImxMacAdress" lay-skin="primary" class="Rectangle-1233 dis-none" id="ImxMac_Adress"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">QCA_WAN address :</td>
-                        <td class="item-center"><span class="title"><input type="text" id="QCA_WANaddress_i" class="form-control" placeholder=""> </span><span class="title pad-l20" id="QCA_WANaddress_status">Failed</span></td>
-                        <td class="item-right"><input type="checkbox" checked name="QCA_WANaddress" lay-skin="primary" class="Rectangle-1233" id="QCA_WANaddress"></td>
+                        <td class="item-center"><span class="title"><input type="text" readonly id="QCA_WANaddress_i" class="form-control" placeholder=""> </span><span class="title pad-l20" id="QCA_WANaddress_status">Failed</span></td>
+                        <td class="item-right"><input type="checkbox" checked name="QCA_WANaddress" lay-skin="primary" class="Rectangle-1233 dis-none" id="QCA_WANaddress"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">QCA_WLAN Address :</td>
-                        <td class="item-center"><span class="title"><input type="text" id="QCA_WLANAddress_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="QCA_WLANAddress_status">Failed</span></td>
-                        <td class="item-right"><input type="checkbox" checked name="QCA_WLANAddress" lay-skin="primary" class="Rectangle-1233" id="QCA_WLANAddress"></td>
+                        <td class="item-center"><span class="title"><input type="text" readonly id="QCA_WLANAddress_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="QCA_WLANAddress_status">Failed</span></td>
+                        <td class="item-right"><input type="checkbox" checked name="QCA_WLANAddress" lay-skin="primary" class="Rectangle-1233 dis-none" id="QCA_WLANAddress"></td>
+                    </tr>
+                    <tr>
+                        <td class="align item-left">QCA_6174 Address :</td>
+                        <td class="item-center"><span class="title"><input type="text" readonly id="Qca6174Mac" class="form-control" placeholder=""></span><span class="title pad-l20" id="QCA_6174Address">Failed</span></td>
+                        <td class="item-right"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">Admin Password :</td>
@@ -177,7 +196,7 @@
                     </tr>
                     <tr>
                         <td class="align item-left">WIFI Password :</td>
-                        <td class="item-center"><span class="title" id="WIFI_Password">--</span></td>
+                        <td class="item-center"><span class="title" id="WIFI_Password">--</span> <span class="title" id="Qca6174Mac" style="display:none;"></span></td>
                         <td class="item-right"></td>
                     </tr>
 
@@ -185,7 +204,7 @@
             </div>
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">LTE INFO </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">LTE INFO </div><button class="Rectangle-1182" id="LTE_Start" lay-submit>Start</button></h2>
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">LTE Module IMEI :</td>
@@ -296,9 +315,9 @@
             </div>
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-right.png">INPUT/OUTPUT </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-right.png">INPUT/OUTPUT </div><button class="Rectangle-1182" id="INP_Start" lay-submit>Start</button></h2>
                 <table class="table table-hover table-responsive">
-                    <tr>
+                    <!-- <tr>
                         <td class="align item-left" style="font-weight: 600;">OUTPUT :</td>
                         <td class="item-center"></td>
                         <td class="item-right">
@@ -308,28 +327,28 @@
                                 </div>
                             </div>
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td class="align item-left" style="font-weight: 600;">INPUT :</td>
                     </tr>
                     <tr>
                         <td class="align item-left">Channel 1 :</td>
-                        <td class="item-center"><span class="title" id="SN_MAC_i">2.3V</span></td>
+                        <td class="item-center"><span class="title" id="INPUT1">--V</span></td>
                         <td class="item-right"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">Channel 2 :</td>
-                        <td class="item-center"><span class="title" id="SN_MAC_i">2.3V</span></td>
+                        <td class="item-center"><span class="title" id="INPUT2">--V</span></td>
                         <td class="item-right"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">Channel 3 :</td>
-                        <td class="item-center"><span class="title" id="SN_MAC_i">2.3V</span></td>
+                        <td class="item-center"><span class="title" id="INPUT3">--V</span></td>
                         <td class="item-right"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">Channel 4 :</td>
-                        <td class="item-center"><span class="title" id="SN_MAC_i">2.3V</span></td>
+                        <td class="item-center"><span class="title" id="INPUT4">--V</span></td>
                         <td class="item-right"></td>
                     </tr>
                 </table>
@@ -343,7 +362,7 @@
             </div>
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">IO类 </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">IO类 </div><button class="Rectangle-1182" id="IO_Start" lay-submit>Start</button></h2>
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">复位按键是否成功 :</td>
@@ -428,117 +447,45 @@
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
-<script type="text/javascript" src="js/common.js"></script>
-<script src="js/addMAC.js"></script>
-<script src="https://cdn.bootcss.com/jspdf/1.5.3/jspdf.debug.js"></script>
-<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script type="text/javascript" src="js/common.js?mv=20201228"></script>
+<script src="js/addMAC.js?mv=20201228"></script>
+<script src="js/plugins/jspdf.debug.js"></script>
+<script src="js/plugins/html2canvas.js"></script>
 
 <script>
     $(function() {
-        $("#exportToPdf1").on("click", function(e) {
-            e.stopPropagation();
-            e.preventDefault();
-            $('body,html').animate({
-                'scrollTop': 0
-            }, 0);
-            setTimeout(() => {
-                exportPdf();
-            }, 500);
 
-        })
-        $(".item-title").on("click", function(e) {
 
-            var attr = $(this).siblings().css('display');
-            if (attr == "none") {
-                $(this).siblings().show();
-                $(this).find("img").attr("src", "images/icon-arrow-down-1.png")
-            } else {
-                $(this).siblings().hide();
-                $(this).find("img").attr("src", "images/icon-arrow-right.png")
-            }
-        })
+
+
+        postData('https://solelynet.com/public/index.php/api/v1/UserProduct/GetList', { //url  地址和请求参数调用下面postData方法
+                "is_page": true,
+                "currentPage": 1,
+                "pagesize": 2,
+                "thirdapp_id": 2,
+            })
+            .then(data => console.log(data)) // JSON from `response.json()` call
+            .catch(error => console.error(error))
+
+
+        function postData(url, data) {
+            // Default options are marked with *
+            return fetch(url, {
+                    body: JSON.stringify(data), // must match 'Content-Type' header
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    credentials: 'same-origin', // include, same-origin, *omit
+                    headers: {
+                        'user-agent': 'Mozilla/4.0 MDN Example',
+                        'content-type': 'application/json'
+                    },
+                    method: 'post', // *GET, POST, PUT, DELETE, etc.
+                    mode: 'cors', // no-cors, cors, *same-origin//设置是否跨域请求cors跨域no-cors不跨域
+                    redirect: 'follow', // manual, *follow, error
+                    referrer: 'no-referrer', // *client, no-referrer
+                })
+                .then(response => response.json()) // parses response to JSON
+        }
     })
-
-    function exportPdf() {
-        var target = document.getElementById('export_content');
-        target.style.background = "#FFFFFF";
-
-        html2canvas(target, {
-            onrendered: function(canvas) {
-                var contentWidth = canvas.width;
-                var contentHeight = canvas.height;
-
-                //一页pdf显示html页面生成的canvas高度;
-                var pageHeight = contentWidth / 592.28 * 841.89;
-                //未生成pdf的html页面高度
-                var leftHeight = contentHeight;
-                //页面偏移
-                var position = 0;
-                //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
-                var imgWidth = 595.28;
-                var imgHeight = 592.28 / contentWidth * contentHeight;
-
-                var pageData = canvas.toDataURL('image/jpeg', 1.0);
-
-                var pdf = new jsPDF('', 'pt', 'a4');
-
-                //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
-                //当内容未超过pdf一页显示的范围，无需分页
-                if (leftHeight < pageHeight) {
-                    pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
-                } else {
-                    while (leftHeight > 0) {
-                        pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
-                        leftHeight -= pageHeight;
-                        position -= 841.89;
-                        //避免添加空白页
-                        if (leftHeight > 0) {
-                            pdf.addPage();
-                        }
-                    }
-                }
-
-                pdf.save("content.pdf");
-            }
-        })
-    }
-
-    function exportPDF() {
-        let targetDom = $("#export_content");
-        targetDom.css("background-color", "#fff")
-        targetDom.scrollTop();
-        // let copyDom = targetDom.clone();
-        let copyDom = $("<div/>");
-        copyDom.addClass('super');
-        copyDom.width(targetDom.width() + "px");
-        copyDom.height(targetDom.height() + "px");
-        $('body').append(copyDom);
-        let cont = document.getElementById('export_content');
-        console.log(cont.offsetHeight);
-        html2canvas(targetDom, {
-            // windowHeight:2000,
-            height: cont.offsetHeight, //给canvas设置高度，
-            onrendered: function(canvas) {
-                console.log('回调开始');
-                //通过html2canvas将html渲染成canvas，然后获取图片数据
-                let imgData = canvas.toDataURL('image/jpeg', 1.0);
-                // console.log(imgData);
-                console.log(canvas.width, canvas.height);
-                //初始化pdf，设置相应格式
-                let doc = new jsPDF("p", "mm", "a4");
-                // let doc = new jsPDF('', 'pt', 'a4')
-
-                //这里设置的是a4纸张尺寸
-                doc.addImage(imgData, 'JPEG', 0, 0, 210, 297);
-
-                //输出保存命名为content的pdf
-                doc.save('report.pdf');
-                //移除dom中添加的元素
-                $('.super').remove();
-
-            }
-        });
-    }
 </script>
 
 </html>

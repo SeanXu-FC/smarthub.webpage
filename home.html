@@ -4,16 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <script type="text/javascript" src="js/common.js"></script>
-    <script src="js/jquery/2.1.1/jquery.min.js"></script>
-    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+
+
+    <link rel="stylesheet" href="css/style.css?mv=20201228">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css">
-    <script type="text/javascript" src="js/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/xadmin.css?mv=20201228">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/common.js?mv=20201228"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20201228"></script>
     <title>Document</title>
     <style>
         /* img {
@@ -581,7 +587,7 @@
             success: function(res) {
                 if (res.result) {
                     var json = res.result;
-                    var arr = ['Connected', 'connected(2.4GHz)', 'Connected(5GHz)', 'On', 'Off', 'Error'];
+                    var arr = ['Connected', 'Connected(2.4GHz)', 'Connected(5GHz)', 'On', 'Off', 'Error'];
                     if (json.cloud.status == 0) {
                         $('.cloud').eq(0).text(arr[5]);
                         $('.r_01').attr("src", "images/r_01_gray.png");
@@ -640,9 +646,9 @@
                         var mobileStatus = "";
                         if (json.mobile.status == 0) {
                             if (json.mobile.act_num == 0) {
-                                mobileStatus = "disconnected(3G)"
+                                mobileStatus = "Disconnected(3G)"
                             } else {
-                                mobileStatus = "disconnected(4G)"
+                                mobileStatus = "Disconnected(4G)"
                             }
 
                             $('.Connected4G').eq(0).text(mobileStatus);
@@ -659,9 +665,9 @@
                             $(".mobiledataImg-disable").show();
                         } else {
                             if (json.mobile.act_num == 0) {
-                                mobileStatus = "connected(3G)"
+                                mobileStatus = "Connected(3G)"
                             } else {
-                                mobileStatus = "connected(4G)"
+                                mobileStatus = "Connected(4G)"
                             }
                             $('.Connected4G').eq(0).text(mobileStatus);
                             $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');

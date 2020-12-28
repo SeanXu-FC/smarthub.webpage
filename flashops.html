@@ -3,14 +3,24 @@
 
 <head>
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
     <title>OpenWrt - Flashing...</title>
     <style>
-
+        .tip-text {
+            text-align: center;
+            padding: 40px 0;
+        }
     </style>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/common.js?mv=20201228"></script>
     <script type="text/javascript">
+        var interval = null;
         $(function() {
             layui.use(['form', 'layer'], function() {
                 var form = layui.form;
@@ -20,74 +30,168 @@
                     time: false,
                     shade: [0.5, '#fff']
                 });
-
-
-                $(".layui-layer-loading .layui-layer-content").after("Waiting for changes to be applied...")
-                var interval = window.setInterval(function() {
-                    var domain = window.location.host;
-                    var data = {
-                        "jsonrpc": "2.0",
-                        "method": "GetUpgradeStatus",
-                        "params": {},
-                        "id": "9.1"
-
-                    };
-                    data = JSON.stringify(data);
-                    $.ajax({
-                        type: "post",
-                        url: "/action/action?",
-                        data: data,
-                        dataType: "json",
-                        contentType: "application/json;charset=utf-8",
-                        success: function(res) {
-                            if (res.result) {
-                                var data = res.result;
-                                if (data.status == "1") { //升级成功
-                                    parent.layer.close(loading);
-                                    var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
-                                    $("#steps").html(ds);
-                                    $("#upgrade_tip").hide();
-                                    setTimeout(function() {
-                                        top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
-                                    }, 8000);
-                                    clearInterval(interval);
-                                } else if (data.status == "0") { //升级失败
-                                    parent.layer.close(loading);
-                                    $("#steps").html(data.steps);
-                                    $("#steps").css("color", "red")
-                                    $("#upgrade_tip").hide();
-                                    setTimeout(function() {
-                                        self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
-                                    }, 5000);
-                                } else if (data.status == "2") { //升级中
-                                    $("#steps").html(data.steps);
-                                } else { //没有升级
-                                    parent.layer.close(loading);
-                                    $("#steps").html(data.steps);
-                                    $("#upgrade_tip").hide();
-                                    clearInterval(interval);
-                                }
-                            } else if (res.error) {
-                                layui.use(['form', 'layer'], function() {
-                                    var layer = layui.layer;
-                                    layer.msg("An error occurred：" + res.error.message);
-                                })
-                            }
-
-                        },
-                        error: function(jqXHR) {
-                            parent.layer.close(loading);
-                            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-                            promptMessage("Error message", tip);
-                        }
-
-
-                    });
-                }, 5000);
-
+                $(".layui-layer-loading .layui-layer-content").after("Waiting for changes to be applied...");
+                no4Getstatus(layer, loading);
             });
 
         });
+
+        function no4Getstatus(layer, loading) { //没有返回4的定时轮询
+            interval = window.setInterval(function() {
+                var domain = window.location.host;
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "GetUpgradeStatus",
+                    "params": {},
+                    "id": "9.1"
+
+                };
+                data = JSON.stringify(data);
+                $.ajax({
+                    type: "post",
+                    url: "/action/action?",
+                    data: data,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function(res) {
+                        if (res.result) {
+                            var data = res.result;
+                            if (data.status == "1") { //升级成功
+                                parent.layer.close(loading);
+                                var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
+                                $("#steps").html(ds);
+                                $("#upgrade_tip").hide();
+                                setTimeout(function() {
+                                    top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                                }, 8000);
+                                clearInterval(interval);
+                            } else if (data.status == "0") { //升级失败
+                                parent.layer.close(loading);
+                                $("#steps").html(data.steps);
+                                $("#steps").css("color", "red")
+                                $("#upgrade_tip").hide();
+                                setTimeout(function() {
+                                    self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
+                                }, 5000);
+                            } else if (data.status == "2") { //升级中
+                                $("#steps").html(data.steps);
+                            } else if (data.status == "4") { //设备掉电
+                                clearInterval(interval);
+                                return4Getstatus(layer, loading);
+                            } else { //没有升级
+                                parent.layer.close(loading);
+                                $("#steps").html(data.steps);
+                                $("#upgrade_tip").hide();
+                                clearInterval(interval);
+                            }
+                        } else if (res.error) {
+                            parent.layer.close(loading);
+                            layui.use(['form', 'layer'], function() {
+                                var layer = layui.layer;
+                                layer.msg("An error occurred：" + res.error.message);
+                            })
+                        }
+
+                    },
+                    error: function(jqXHR) {
+                        parent.layer.close(loading);
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                        promptMessage("Error message", tip);
+                    }
+
+
+                });
+            }, 5000);
+        }
+
+        function return4Getstatus(layer, loading) { //返回4后的定时轮询
+            interval = window.setInterval(function() {
+                var domain = window.location.host;
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "GetUpgradeStatus",
+                    "params": {},
+                    "id": "9.1"
+
+                };
+                data = JSON.stringify(data);
+                $.ajax({
+                    type: "post",
+                    url: "/action/action?",
+                    data: data,
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    success: function(res) {
+                        if (res.result) {
+                            var data = res.result;
+                            if (data.status == "1") { //升级成功
+                                parent.layer.close(loading);
+                                var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
+                                $("#steps").html(ds);
+                                $("#upgrade_tip").hide();
+                                clearInterval(interval);
+                                upPromptMessage("Success message", "Upgrade successfully");
+                            } else if (data.status == "0") { //升级失败
+                                parent.layer.close(loading);
+                                $("#steps").html(data.steps);
+                                $("#steps").css("color", "red")
+                                $("#upgrade_tip").hide();
+                                clearInterval(interval);
+                                setTimeout(function() {
+                                    self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
+                                }, 5000);
+                            } else if (data.status == "2") { //升级中
+                                $("#steps").html(data.steps);
+                            } else if (data.status == "4") { //设备掉电
+                                return4Getstatus(layer, loading)
+                            } else { //没有升级
+                                parent.layer.close(loading);
+                                $("#steps").html(data.steps);
+                                $("#upgrade_tip").hide();
+                                clearInterval(interval);
+                            }
+                        } else if (res.error) {
+                            parent.layer.close(loading);
+                            layui.use(['form', 'layer'], function() {
+                                var layer = layui.layer;
+                                layer.msg("An error occurred：" + res.error.message);
+                            })
+                        }
+
+                    },
+                    error: function(jqXHR) {
+                        parent.layer.close(loading);
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                        promptMessage("Error message", tip);
+                    }
+
+
+                });
+            }, 1000 * 60 * 3);
+        }
+
+        function upPromptMessage(title, content) {
+            layui.use(['layer'], function() {
+                var layer = layui.layer;
+                layer.open({
+                    type: 1,
+                    id: 'layerDemo1', //防止重复弹出   
+                    title: title,
+                    content: '<div class="tip-text">' + content + '</div>',
+                    area: ['421px', 'auto'],
+                    btn: 'close',
+                    btnAlign: 'c', //按钮居中 
+                    closeBtn: 0,
+                    shade: 0, //不显示遮罩                            
+                    yes: function(index) {
+                        layer.close(index);
+                        var domain = window.location.host;
+                        top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                    }
+                });
+            })
+
+        }
     </script>
 </head>
 
