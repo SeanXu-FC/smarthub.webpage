@@ -137,9 +137,7 @@
                                 $("#steps").css("color", "red")
                                 $("#upgrade_tip").hide();
                                 clearInterval(interval);
-                                setTimeout(function() {
-                                    self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
-                                }, 5000);
+                                upfailPromptMessage("Fail message", "Upgrade fail");
                             } else if (data.status == "2") { //升级中
                                 $("#steps").html(data.steps);
                             } else if (data.status == "4") { //设备掉电
@@ -187,6 +185,29 @@
                         layer.close(index);
                         var domain = window.location.host;
                         top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                    }
+                });
+            })
+
+        }
+
+        function upfailPromptMessage(title, content) {
+            layui.use(['layer'], function() {
+                var layer = layui.layer;
+                layer.open({
+                    type: 1,
+                    id: 'layerDemo1', //防止重复弹出   
+                    title: title,
+                    content: '<div class="tip-text">' + content + '</div>',
+                    area: ['421px', 'auto'],
+                    btn: 'close',
+                    btnAlign: 'c', //按钮居中 
+                    closeBtn: 0,
+                    shade: 0, //不显示遮罩                            
+                    yes: function(index) {
+                        layer.close(index);
+                        var domain = window.location.host;
+                        self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
                     }
                 });
             })
