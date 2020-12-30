@@ -110,3 +110,26 @@ function login() {
         }
     });
 }
+//限制输入中文和字节输入长度
+function WidthCheckIO(str, maxLen) {
+    var w = 0;
+    var tempCount = 0;
+
+    str.value = str.value.replace(/[^\x00-\xff]+/g, '');
+    str.value = str.value.replace(/(^\s*)/g, "");
+    //length 获取字数数
+    for (var i = 0; i < str.value.length; i++) {
+        //charCodeAt()获取字符串中某一个字符的编码 
+        var c = str.value.charCodeAt(i);
+        //单字节加1 
+        if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+            w++;
+        } else {
+            w += 2;
+        }
+        if (w > maxLen) {
+            str.value = str.value.substr(0, i);
+            break;
+        }
+    }
+}

@@ -656,6 +656,29 @@ function rendSIMManagement(json) {
         $("#rule_noservice_1").removeAttr("checked");
     }
 
+    if (json.sim[0].sim_status) {
+        var status = json.sim[0].sim_status;
+        switch (status) {
+            case 0:
+                status = "SIM Unknown";
+                break;
+            case 1:
+                status = "SIM Not Insert";
+                break;
+            case 2:
+                status = "SIM Ready";
+                break;
+            case 3:
+                status = "SIM PIN Lock";
+                break;
+            case 4:
+                status = "SIM PUK Lock";
+                break;
+            default:
+                break;
+        }
+        $("#SIM_status1").text(status);
+    }
     $("#provider1").text(json.sim[0].provider);
     $("#sim_imsi1").text(json.sim[0].imsi);
     $("#sim_tele_num1").text(json.sim[0].phone_num);
@@ -688,7 +711,29 @@ function rendSIMManagement(json) {
     } else {
         $("#rule_noservice_2").removeAttr("checked");
     }
-
+    if (json.sim[1].sim_status) {
+        var status = json.sim[1].sim_status;
+        switch (status) {
+            case 0:
+                status = "SIM Unknown";
+                break;
+            case 1:
+                status = "SIM Not Insert";
+                break;
+            case 2:
+                status = "SIM Ready";
+                break;
+            case 3:
+                status = "SIM PIN Lock";
+                break;
+            case 4:
+                status = "SIM PUK Lock";
+                break;
+            default:
+                break;
+        }
+        $("#SIM_status2").text(status);
+    }
     $("#provider2").text(json.sim[1].provider);
     $("#sim_imsi2").text(json.sim[1].imsi);
     $("#sim_tele_num2").text(json.sim[1].phone_num);

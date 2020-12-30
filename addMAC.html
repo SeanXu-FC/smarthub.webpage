@@ -8,8 +8,8 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
-    <link href="css/xadmin.css?mv=20201228" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="css/xadmin.css?mv=20201229" rel="stylesheet" />
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link href="layui/css/layui.css" rel="stylesheet" />
     <title>Document</title>
     <style>
@@ -84,7 +84,7 @@
         }
         
         .item-center {
-            width: calc(100% - 335px);
+            width: calc(100% - 365px);
         }
         
         .form-control {
@@ -93,7 +93,7 @@
         }
         
         .item-right {
-            width: 115px;
+            width: 145px;
         }
         
         .item-right-c {
@@ -152,6 +152,26 @@
         .dis-none {
             display: none;
         }
+        
+        .SN-select-td {
+            display: flex;
+            align-items: center;
+        }
+        
+        .SN-select {
+            height: 34px;
+            width: 60px;
+            padding: 0px;
+        }
+        
+        .now-SIM {
+            font-size: 17px;
+            margin-left: 20px;
+        }
+        
+        .cursor-p {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -166,37 +186,51 @@
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">Device SN :</td>
-                        <td class="item-center"><span class="title"><input type="text" id="Device_SN_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="SN_MAC_status">Failed</span></td>
-                        <td class="item-right"><input type="checkbox" checked name="DeviceSN" lay-skin="primary" class="Rectangle-1233 dis-none" id="Device_SN"></td>
+                        <td class="item-center"><span class="title"><input type="text" id="Device_SN_i" class="form-control" placeholder=""></span></td>
+                        <td class="item-right SN-select-td">
+                            <span class="title" style="min-width: 70px;">SN位数:</span>
+                            <select class="SN-select" id="SN_select">
+                                    <option value="7" selected>7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                </select>
+                        </td>
                     </tr>
                     <tr>
                         <td class="align item-left">Imx MacAdress :</td>
-                        <td class="item-center"><span class="title"><input type="text" readonly id="ImxMac_Adress_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="ImxMac_Adress_status">Failed</span></td>
+                        <td class="item-center"><span class="title"><input type="text" readonly id="ImxMac_Adress_i" class="form-control cursor-p" placeholder=""></span><span class="title pad-l20" id="ImxMac_Adress_status">Failed</span></td>
                         <td class=""><input type="checkbox" checked name="ImxMacAdress" lay-skin="primary" class="Rectangle-1233 dis-none" id="ImxMac_Adress"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">QCA_WAN address :</td>
-                        <td class="item-center"><span class="title"><input type="text" readonly id="QCA_WANaddress_i" class="form-control" placeholder=""> </span><span class="title pad-l20" id="QCA_WANaddress_status">Failed</span></td>
+                        <td class="item-center"><span class="title"><input type="text" readonly id="QCA_WANaddress_i" class="form-control cursor-p" placeholder=""> </span><span class="title pad-l20" id="QCA_WANaddress_status">Failed</span></td>
                         <td class="item-right"><input type="checkbox" checked name="QCA_WANaddress" lay-skin="primary" class="Rectangle-1233 dis-none" id="QCA_WANaddress"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">QCA_WLAN Address :</td>
-                        <td class="item-center"><span class="title"><input type="text" readonly id="QCA_WLANAddress_i" class="form-control" placeholder=""></span><span class="title pad-l20" id="QCA_WLANAddress_status">Failed</span></td>
+                        <td class="item-center"><span class="title"><input type="text" readonly id="QCA_WLANAddress_i" class="form-control cursor-p" placeholder=""></span><span class="title pad-l20" id="QCA_WLANAddress_status">Failed</span></td>
                         <td class="item-right"><input type="checkbox" checked name="QCA_WLANAddress" lay-skin="primary" class="Rectangle-1233 dis-none" id="QCA_WLANAddress"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">QCA_6174 Address :</td>
-                        <td class="item-center"><span class="title"><input type="text" readonly id="Qca6174Mac" class="form-control" placeholder=""></span><span class="title pad-l20" id="QCA_6174Address">Failed</span></td>
+                        <td class="item-center"><span class="title"><input type="text" readonly id="Qca6174Mac" class="form-control cursor-p" placeholder=""></span><span class="title pad-l20" id="QCA_6174Address">Failed</span></td>
                         <td class="item-right"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">Admin Password :</td>
-                        <td class="item-center"><span class="title" id="Admin_Password">--</span></td>
+                        <td class="item-center"><span class="title" id="Admin_Password"></span></td>
                         <td class="item-right"></td>
                     </tr>
                     <tr>
                         <td class="align item-left">WIFI Password :</td>
-                        <td class="item-center"><span class="title" id="WIFI_Password">--</span> <span class="title" id="Qca6174Mac" style="display:none;"></span></td>
+                        <td class="item-center"><span class="title" id="WIFI_Password"></span> </td>
                         <td class="item-right"></td>
                     </tr>
 
@@ -204,7 +238,7 @@
             </div>
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">LTE INFO </div><button class="Rectangle-1182" id="LTE_Start" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">LTE INFO <span id="now_SIM" class="now-SIM"></span></div><button class="Rectangle-1182" id="LTE_Start" lay-submit>Start</button></h2>
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">LTE Module IMEI :</td>
@@ -244,7 +278,7 @@
             </div>
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">LAN </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">LAN </div><button class="Rectangle-1182" id="LAN_Start" lay-submit>Start</button></h2>
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">LAN1 :</td>
@@ -292,10 +326,10 @@
                     </tr>
                     <tr>
                         <td class="align item-left">LED 是否快闪 :</td>
-                        <td class="item-right"></td>
+                        <td class="item-right text-r"><span class="title dis-none" id="LED_status">Failed</span></td>
                         <td class="align item-left"></td>
                         <td class="item-right">
-                            <div class="item-right-c">
+                            <div class="item-right-c" id="LED_status_radio">
                                 <input type="radio" name="LED_sansuo" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
                                 <input type="radio" name="LED_sansuo" value="0" title="否"><span class="sansuo-radio">否</span>
                             </div>
@@ -305,11 +339,11 @@
             </div>
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">定位信息 </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">定位信息 </div><button class="Rectangle-1182" id="Location_Start" lay-submit>Start</button></h2>
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">Location :</td>
-                        <td class="item-center"><span class="title" id="Location_lng">lng:33333</span><span class="title pad-l20" id="Location_lat">lat:444444</span></td>
+                        <td class="item-center"><span class="title">lng:</span><span class="title" id="Location_lng">33333</span><span class="title pad-l20">lat:</span><span class="title" id="Location_lat">444444</span></td>
                     </tr>
                 </table>
             </div>
@@ -447,45 +481,10 @@
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
-<script type="text/javascript" src="js/common.js?mv=20201228"></script>
-<script src="js/addMAC.js?mv=20201228"></script>
+<script type="text/javascript" src="js/common.js?mv=20201229"></script>
+<script src="js/addMAC.js?mv=20201229"></script>
 <script src="js/plugins/jspdf.debug.js"></script>
 <script src="js/plugins/html2canvas.js"></script>
 
-<script>
-    $(function() {
-
-
-
-
-        postData('https://solelynet.com/public/index.php/api/v1/UserProduct/GetList', { //url  地址和请求参数调用下面postData方法
-                "is_page": true,
-                "currentPage": 1,
-                "pagesize": 2,
-                "thirdapp_id": 2,
-            })
-            .then(data => console.log(data)) // JSON from `response.json()` call
-            .catch(error => console.error(error))
-
-
-        function postData(url, data) {
-            // Default options are marked with *
-            return fetch(url, {
-                    body: JSON.stringify(data), // must match 'Content-Type' header
-                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                    credentials: 'same-origin', // include, same-origin, *omit
-                    headers: {
-                        'user-agent': 'Mozilla/4.0 MDN Example',
-                        'content-type': 'application/json'
-                    },
-                    method: 'post', // *GET, POST, PUT, DELETE, etc.
-                    mode: 'cors', // no-cors, cors, *same-origin//设置是否跨域请求cors跨域no-cors不跨域
-                    redirect: 'follow', // manual, *follow, error
-                    referrer: 'no-referrer', // *client, no-referrer
-                })
-                .then(response => response.json()) // parses response to JSON
-        }
-    })
-</script>
 
 </html>
