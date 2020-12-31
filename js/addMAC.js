@@ -541,7 +541,7 @@ function getLTEdata(layer, mode) {
                     } else {
                         $("#SIM2_Internet").text("Successful");
                     }
-                    if (res.result.sim[1].internet == 0) {
+                    if (res.result.sim[1].lte_uart == 0) {
                         $("#LET_UART").text("Failed");
                     } else {
                         $("#LET_UART").text("Successful");

@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
-    <link href="css/xadmin.css?mv=20201231" rel="stylesheet" />
+    <link href="css/xadmin.css?mv=20201229" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link href="layui/css/layui.css" rel="stylesheet" />
     <title>Document</title>
@@ -438,6 +438,23 @@
                     </tr>
                 </table>
             </div>
+            <div class="container-item">
+                <h2 class="item-title">
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">IO类 <span class="now-SIM">(提示：复位后恢复出厂设置，请作为最后一项测试内容)</span></div><button class="Rectangle-1182" id="IO_Start" lay-submit>Start</button></h2>
+                <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left" style="width:auto;">复位按键长按大于5s后，橙灯是否常亮 :</td>
+                        <td class="item-center"></td>
+                        <td class="item-right">
+                            <div class="item-right-c">
+                                <input type="radio" name="reset_status" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
+                                <input type="radio" name="reset_status" value="0" title="否"><span class="sansuo-radio">否</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
             <div style="text-align: right;">
                 <div class="layui-input-inline">
                     <button class="Rectangle-1182 pdf-btn" id="exportToPdf1" lay-submit>Save PDF</button>
@@ -449,8 +466,8 @@
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
-<script type="text/javascript" src="js/common.js?mv=20201231"></script>
-<script src="js/addMAC.js?mv=20201231"></script>
+<script type="text/javascript" src="js/common.js?mv=20201229"></script>
+<script src="js/addMAC.js?mv=20201229"></script>
 <script src="js/plugins/jspdf.debug.js"></script>
 <script src="js/plugins/html2canvas.js"></script>
 
