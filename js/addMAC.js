@@ -2,31 +2,13 @@ $(function() {
     layui.use(['layer', 'form'], function() {
         var form = layui.form,
             layer = layui.layer;
-        //getMACData(layer, form, "", 0)
+        getMACData(layer, form, "", 0)
     });
-    var len = 7;
-    $("#Device_SN_i").on("input", function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        len = $("#SN_select").val();
-        if ($(this).val().length == len) {
-            var ImxMac_Adress = $("#ImxMac_Adress_i").val();
-            var QCA_WANaddress = $("#QCA_WANaddress_i").val();
-            var QCA_WLANAddress = $("#QCA_WANaddress_i").val();
-            if (!(ImxMac_Adress || QCA_WANaddress || QCA_WLANAddress)) {
-                layui.use(['layer', 'form'], function() {
-                    var form = layui.form,
-                        layer = layui.layer;
-                    getMacAddr(layer);
-                });
-            } else {
-                layui.use(['form', 'layer'], function() {
-                    var layer = layui.layer;
-                    layer.msg("不能重复获取MAC地址！");
-                })
-            }
-        }
+    console.log(12345)
+    $("#Device_SN_i").bind("input", function() {
+        startGetMAC();
     })
+
     $("#exportToPdf1").on("click", function(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -54,14 +36,16 @@ $(function() {
     $("#LTE_Start").on("click", function(e) {
         e.stopPropagation();
         e.preventDefault();
+        $(this).attr("disabled", "disabled");
         layui.use(['layer'], function() {
             var layer = layui.layer;
-            getLTEdata(layer, mode);
+            getLTEdata(layer, 0);
         });
     })
     $("#LAN_Start").on("click", function(e) {
         e.stopPropagation();
         e.preventDefault();
+        $(this).attr("disabled", "disabled");
         layui.use(['layer'], function() {
             var layer = layui.layer;
             getLANdata(layer);
@@ -70,6 +54,7 @@ $(function() {
     $("#Location_Start").on("click", function(e) {
         e.stopPropagation();
         e.preventDefault();
+        $(this).attr("disabled", "disabled");
         layui.use(['layer'], function() {
             var layer = layui.layer;
             getLocationdata(layer);
@@ -78,13 +63,67 @@ $(function() {
     $("#INP_Start").on("click", function(e) {
         e.stopPropagation();
         e.preventDefault();
+        $(this).attr("disabled", "disabled");
         layui.use(['layer'], function() {
             var layer = layui.layer;
             getIOdata(layer);
         });
     })
-
+    $("#CAN_Start").on("click", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).attr("disabled", "disabled");
+        layui.use(['layer'], function() {
+            var layer = layui.layer;
+            getAPdata(1);
+        });
+    })
+    $("#AP_Start").on("click", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).attr("disabled", "disabled");
+        layui.use(['layer'], function() {
+            var layer = layui.layer;
+            getAPdata(0);
+        });
+    })
+    $("#Station_Start").on("click", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).attr("disabled", "disabled");
+        layui.use(['layer'], function() {
+            var layer = layui.layer;
+            getStationdata();
+        });
+    })
+    getStationdata();
+    getAPdata(0);
 })
+var SNlen = 7;
+
+function startGetMAC() {
+    SNlen = $("#SN_select").val();
+    console.log(SNlen)
+    if ($("#Device_SN_i").val().length == SNlen) {
+        console.log($("#Device_SN_i").val())
+
+        var ImxMac_Adress = $("#ImxMac_Adress_i").val();
+        var QCA_WANaddress = $("#QCA_WANaddress_i").val();
+        var QCA_WLANAddress = $("#QCA_WANaddress_i").val();
+        if (!(ImxMac_Adress || QCA_WANaddress || QCA_WLANAddress)) {
+            layui.use(['layer', 'form'], function() {
+                var form = layui.form,
+                    layer = layui.layer;
+                getMacAddr(layer);
+            });
+        } else {
+            layui.use(['form', 'layer'], function() {
+                var layer = layui.layer;
+                layer.msg("不能重复获取MAC地址！");
+            })
+        }
+    }
+}
 
 //插入：号
 function sertStr(soure, start, newStr) {
@@ -210,6 +249,15 @@ function setPassword(layer, loading) {
         layer.msg("Qca6174Mac 不能为空");
         return;
     }
+    var param = {
+        SN: Device_SN,
+        AdminMacAddr: ImxMac_Adress,
+        AdminPassword: Admin_Password,
+        WifiMacAddr: QCA_WLANAddress,
+        WifiPassword: WIFI_Password,
+        MAC6174: Qca6174Mac,
+    }
+    console.log(param)
     $.ajax({
         url: "http://oa.fastrain.com:9898/macs/getMacBack",
         type: "get", //get请求方式
@@ -245,7 +293,7 @@ function setPassword(layer, loading) {
         }
     });
 }
-//获取SN和MAC地址
+//获取admin password和wifi password地址
 function getMACData(layer, form, loading, flag) {
     var data = {
         "jsonrpc": "2.0",
@@ -275,9 +323,10 @@ function getMACData(layer, form, loading, flag) {
 
                     clearInterval(timer);
                     $("#start_btn1").removeAttr("disabled");
-
-                    if (res.result.sn == 1 && res.result.mac_addr1 == 1 && res.result.mac_addr2 == 1 && res.result.mac_addr3 == 1) {
-                        $("#QCA_WLANAddress").attr("disabled", "disabled");
+                    if (res.result.sn == 1) {
+                        $("#Device_SN_i").attr("readonly", true);
+                    } else {
+                        $("#Device_SN_i").removeAttr("disabled");
                     }
 
                     if (res.result.sn_value) {
@@ -300,7 +349,7 @@ function getMACData(layer, form, loading, flag) {
                     $("#ImxMac_Adress_status").text(res.result.mac_addr1 == 1 ? "已写/成功" : '未写/失败');
                     $("#QCA_WANaddress_status").text(res.result.mac_addr2 == 1 ? "已写/成功" : '未写/失败');
                     $("#QCA_WLANAddress_status").text(res.result.mac_addr3 == 1 ? "已写/成功" : '未写/失败');
-                    $("#QCA_6174Address").text(res.result.mac_addr3 == 1 ? "已写/成功" : '未写/失败');
+                    $("#QCA_6174Address").text(res.result.Qca6174Mac == 1 ? "已写/成功" : '未写/失败');
                     if (res.result.sn == 1) {
                         $("#Device_SN").attr("disabled", "disabled");
                     } else {
@@ -325,10 +374,22 @@ function getMACData(layer, form, loading, flag) {
                     $("#Admin_Password").text(res.result.AdminPassword_value ? res.result.AdminPassword_value : '--');
                     $("#WIFI_Password").text(res.result.WifiPassword_value ? res.result.WifiPassword_value : '--')
                     form.render("checkbox");
-                    if (res.result.AdminPassword_value || res.result.WifiPassword_value) {
-                        setPassword(layer, loading);
+                    if (res.result.AdminPassword_value && res.result.WifiPassword_value) {
+                        if (flag != 0) {
+                            setPassword(layer, loading);
+                        }
+
                     } else {
                         parent.layer.close(loading);
+                        if (flag != 0) {
+                            if (!res.result.AdminPassword_value) {
+                                layer.msg("获取Admin Password失败！");
+                            }
+                            if (!res.result.WifiPassword_value) {
+                                layer.msg("获取Wifi Password失败！");
+                            }
+                        }
+
                     }
 
                 }
@@ -374,7 +435,6 @@ function setMACData(layer, form, loading) {
         "mac_addr2": $("#QCA_WANaddress_i").val() ? $("#QCA_WANaddress_i").val() : "",
         "mac_addr3": $("#QCA_WLANAddress_i").val() ? $("#QCA_WLANAddress_i").val() : ""
     }
-    console.log(param)
     var data = {
         "jsonrpc": "2.0",
         "method": "Factory_SetSnAndMac",
@@ -455,7 +515,7 @@ function getLTEdata(layer, mode) {
                         layui.use(['layer', 'form'], function() {
                             var form = layui.form,
                                 layer = layui.layer;
-                            getMACData(layer, form, loading, 1)
+                            getLTEdata(layer, 1)
                         });
                     }, 10000)
                 } else {
@@ -481,18 +541,31 @@ function getLTEdata(layer, mode) {
                     } else {
                         $("#SIM2_Internet").text("Successful");
                     }
+                    if (res.result.sim[1].internet == 0) {
+                        $("#LET_UART").text("Failed");
+                    } else {
+                        $("#LET_UART").text("Successful");
+                    }
                     if (res.result.t_status == 1) {
                         if (res.result.slot == 0) {
                             $("#now_SIM").text("当前测试的SIM卡:SIM1")
                         } else {
                             $("#now_SIM").text("当前测试的SIM卡:SIM2")
                         }
+                    } else if (res.result.t_status == 2) {
+                        $("#LTE_Start").removeAttr("disabled");
+                        clearInterval(LTEtimer);
+                        $("#now_SIM").text("检测完成");
                     } else {
-                        $("#now_SIM").text("")
+                        $("#LTE_Start").removeAttr("disabled");
+                        $("#now_SIM").text("");
+                        clearInterval(LTEtimer);
                     }
                 }
 
             } else if (res.error) {
+                $("#LTE_Start").removeAttr("disabled");
+                clearInterval(LTEtimer);
                 layui.use(['form', 'layer'], function() {
                     var layer = layui.layer;
                     layer.msg("An error occurred：" + res.error.message);
@@ -505,6 +578,8 @@ function getLTEdata(layer, mode) {
             }
         },
         error: function(jqXHR) {
+            $("#LTE_Start").removeAttr("disabled");
+            clearInterval(LTEtimer);
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
             promptMessage("Error message", tip);
         }
@@ -528,12 +603,13 @@ function getIOdata() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            $("#INP_Start").removeAttr("disabled");
             if (res.result) {
                 var info = res.result;
-                $("#INPUT1").text(info["channel 0"]);
-                $("#INPUT2").text(info["channel 1"]);
-                $("#INPUT3").text(info["channel 2"]);
-                $("#INPUT4").text(info["channel 3"]);
+                $("#INPUT1").text(info["channel 0"] + " V");
+                $("#INPUT2").text(info["channel 1"] + " V");
+                $("#INPUT3").text(info["channel 2"] + " V");
+                $("#INPUT4").text(info["channel 3"] + " V");
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {
                     var layer = layui.layer;
@@ -543,6 +619,7 @@ function getIOdata() {
 
         },
         error: function(jqXHR) {
+            $("#INP_Start").removeAttr("disabled");
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
             promptMessage("Error message", tip);
         }
@@ -564,6 +641,7 @@ function getLocationdata() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            $("#Location_Start").removeAttr("disabled");
             if (res.result) {
                 $("#Location_lng").text(res.result.lng);
                 $("#Location_lat").text(res.result.lat);
@@ -576,6 +654,7 @@ function getLocationdata() {
 
         },
         error: function(jqXHR) {
+            $("#Location_Start").removeAttr("disabled");
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
             promptMessage("Error message", tip);
         }
@@ -585,8 +664,8 @@ function getLocationdata() {
 function getLANdata() {
     var data = {
         "jsonrpc": "2.0",
-        "method": "lan_conf",
-        "params": { "mode": 4, "lan1": "", "lan2": "", "lan3": "", "lan4": "", "led": "" },
+        "method": "LanConfigure",
+        "params": { "mode": 4, "ip_1": "", "ip_2": "", "netmask": "", "gateway": "", "start_ip": "", "end_ip": "", "lease_time": -1 },
         "id": "9.1"
     }
     data = JSON.stringify(data);
@@ -597,6 +676,7 @@ function getLANdata() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            $("#LAN_Start").removeAttr("disabled");
             if (res.result) {
                 if (res.result.lan1 == 0) {
                     $("#LAN1_status").text("Failed");
@@ -636,6 +716,92 @@ function getLANdata() {
 
         },
         error: function(jqXHR) {
+            $("#LAN_Start").removeAttr("disabled");
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
+        }
+    })
+}
+//获取AP
+function getAPdata(mode) {
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "Factory_Test",
+        "params": {
+            mode: mode
+        },
+        "id": "9.1"
+    }
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            $("#CAN_Start").removeAttr("disabled");
+            $("#AP_Start").removeAttr("disabled");
+            if (res.result) {
+                if (mode == 0) {
+                    $("#AP_SSID").text(res.result.ssid ? res.result.ssid : '--');
+                    $("#AP_pasword").text(res.result.password ? res.result.password : '--');
+                } else if (mode == 1) {
+                    if (res.result.status == 1) {
+                        $("#CAN2000").text("Successful")
+                    } else {
+                        $("#CAN2000").text("Failed")
+                    }
+                }
+
+            } else if (res.error) {
+                layui.use(['form', 'layer'], function() {
+                    var layer = layui.layer;
+                    layer.msg("code：" + res.error.code + ",message:" + res.error.message);
+                })
+            }
+
+        },
+        error: function(jqXHR) {
+            $("#CAN_Start").removeAttr("disabled");
+            $("#AP_Start").removeAttr("disabled");
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
+        }
+    })
+}
+
+function getStationdata() {
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "WlanStationConfig",
+        "params": {
+            "operate_code": 8
+        },
+        "id": "9.1"
+    }
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            $("#Station_Start").removeAttr("disabled");
+            if (res.result) {
+                $("#Station_SSID").text(res.result.ssid);
+                $("#connected_status").text(res.result.status);
+            } else if (res.error) {
+                layui.use(['form', 'layer'], function() {
+                    var layer = layui.layer;
+                    layer.msg("code：" + res.error.code + ",message:" + res.error.message);
+                })
+            }
+
+        },
+        error: function(jqXHR) {
+            $("#Station_Start").removeAttr("disabled");
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
             promptMessage("Error message", tip);
         }

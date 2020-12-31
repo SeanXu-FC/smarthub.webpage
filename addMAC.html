@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
-    <link href="css/xadmin.css?mv=20201229" rel="stylesheet" />
+    <link href="css/xadmin.css?mv=20201231" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link href="layui/css/layui.css" rel="stylesheet" />
     <title>Document</title>
@@ -325,7 +325,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="align item-left">LED 是否快闪 :</td>
+                        <td class="align item-left">LED 是否交替闪烁 :</td>
                         <td class="item-right text-r"><span class="title dis-none" id="LED_status">Failed</span></td>
                         <td class="align item-left"></td>
                         <td class="item-right">
@@ -343,7 +343,7 @@
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">Location :</td>
-                        <td class="item-center"><span class="title">lng:</span><span class="title" id="Location_lng">33333</span><span class="title pad-l20">lat:</span><span class="title" id="Location_lat">444444</span></td>
+                        <td class="item-center"><span class="title">lng:</span><span class="title" id="Location_lng">--</span><span class="title pad-l20">lat:</span><span class="title" id="Location_lat">--</span></td>
                     </tr>
                 </table>
             </div>
@@ -389,50 +389,18 @@
             </div>
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">CAN2000 </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">CAN2000 </div><button class="Rectangle-1182" id="CAN_Start" lay-submit>Start</button></h2>
                 <table class="table table-hover table-responsive">
+                    <tr>
+                        <td class="align item-left">CAN2000 :</td>
+                        <td class="item-center"><span class="title" id="CAN2000">Failed</span></td>
+                    </tr>
+                </table>
+            </div>
 
-                </table>
-            </div>
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">IO类 </div><button class="Rectangle-1182" id="IO_Start" lay-submit>Start</button></h2>
-                <table class="table table-hover table-responsive">
-                    <tr>
-                        <td class="align item-left">复位按键是否成功 :</td>
-                        <td class="item-center"></td>
-                        <td class="item-right">
-                            <div class="item-right-c">
-                                <input type="radio" name="reset_status" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
-                                <input type="radio" name="reset_status" value="0" title="否"><span class="sansuo-radio">否</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align item-left">交换芯片是否能复位 :</td>
-                        <td class="item-center"></td>
-                        <td class="item-right">
-                            <div class="item-right-c">
-                                <input type="radio" name="Switch_chip" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
-                                <input type="radio" name="Switch_chip" value="0" title="否"><span class="sansuo-radio">否</span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align item-left">IMX 电源是否可控 :</td>
-                        <td class="item-center"></td>
-                        <td class="item-right">
-                            <div class="item-right-c">
-                                <input type="radio" name="IMX_power" value="1" title="是" checked><span class="pad-r20 sansuo-radio">是</span>
-                                <input type="radio" name="IMX_power" value="0" title="否"><span class="sansuo-radio">否</span>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="container-item">
-                <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">Station </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">Station </div><button class="Rectangle-1182" id="Station_Start" lay-submit>Start</button></h2>
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">SSID :</td>
@@ -440,13 +408,13 @@
                     </tr>
                     <tr>
                         <td class="align item-left">connected :</td>
-                        <td class="item-center"><span class="title" id="connected_status">Failed</span></td>
+                        <td class="item-center"><span class="title" id="connected_status">--</span></td>
                     </tr>
                 </table>
             </div>
             <div class="container-item">
                 <h2 class="item-title">
-                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">AP </div><button class="Rectangle-1182" id="exportToPdf" lay-submit>Start</button></h2>
+                    <div class="title-left"><img class="up" src="images/icon-arrow-down-1.png">AP </div><button class="Rectangle-1182" id="AP_Start" lay-submit>Start</button></h2>
                 <table class="table table-hover table-responsive">
                     <tr>
                         <td class="align item-left">SSID :</td>
@@ -481,8 +449,8 @@
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
-<script type="text/javascript" src="js/common.js?mv=20201229"></script>
-<script src="js/addMAC.js?mv=20201229"></script>
+<script type="text/javascript" src="js/common.js?mv=20201231"></script>
+<script src="js/addMAC.js?mv=20201231"></script>
 <script src="js/plugins/jspdf.debug.js"></script>
 <script src="js/plugins/html2canvas.js"></script>
 

@@ -12,26 +12,22 @@ $(function() {
     var repassword = false;
     var email = false;
     //username
-    $('input[name="username"]').focus(function() {
-        $(this)
-            .siblings()
-            .find('span')
-            .text('User name input error, should be between 5-20 digits!')
-            .removeClass('state1 state4 state3').addClass('state2');
-        $(".state2").show();
-    }).blur(function() {
+    $('input[name="username"]').keyup(function() {
         var len = $(this).val().length;
         if (len >= 5 && len <= 20 && $(this).val() != '') {
             $(this).siblings()
                 .find('span')
-                .text('The user name is entered correctly!')
+                //.text('The user name is entered correctly!')
                 .removeClass('state1 state4 state3').addClass('state4');
             username = true;
-            $("#login_btn").removeAttr("disabled");
+            var len1 = $('input[name="password"]').val().length;
+            if (len1 >= 5 && len1 <= 20) {
+                $("#login_btn").removeAttr("disabled");
+            }
         } else {
             $(this).siblings()
                 .find('span')
-                .text('User name input error, should be between 5-20 digits!')
+                //.text('User name input error, should be between 5-20 digits!')
                 .removeClass('state1 state2 state4')
                 .addClass('state3');
             $("#login_btn").attr("disabled", "disabled");
@@ -39,28 +35,26 @@ $(function() {
     })
 
     //password
-    $('input[name="password"]').focus(function() {
-        $(this).siblings()
-            .find('span')
-            .text('Password 6-20 characters, only contains alphanumeric underline!')
-            .removeClass()
-            .addClass('state2');
-    }).keyup(function() {
+    $('input[name="password"]').keyup(function() {
         // var reg = /^[a-z | A-Z]\w{5,19}$/; //以字母开头，5-19位               
         //var reg = /^\w{6,19}$/;
         var reg = /^[\da-zA-Z!@#$%|+-^&*.~]{6,64}$/; //数字、字母、特殊字符
         if (reg.test($(this).val())) {
             $(this).siblings()
                 .find('span')
-                .text('Correct password input!')
+                //.text('Correct password input!')
                 .removeClass()
                 .addClass('state4');
             password = true;
-            $("#login_btn").removeAttr("disabled");
+            var len = $('input[name="username"]').val().length;
+            if (len >= 5 && len <= 20) {
+                $("#login_btn").removeAttr("disabled");
+            }
+
         } else {
             $(this).siblings()
                 .find('span')
-                .text('Password input error, please re-enter!')
+                //.text('Password input error, please re-enter!')
                 .removeClass()
                 .addClass('state3');
             $("#login_btn").attr("disabled", "disabled");
