@@ -446,7 +446,7 @@ function enterPasswordHtml(infoHtml) {
         closeBtn: 0,
         shade: 0.8,
         area: ['521px', '360px'],
-        content: ["EnterPassword.html?ssid='" + ssid + "'&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
+        content: ["EnterPassword.html?ssid=" + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
             var connectingSsid = $("#saved_id").val();
             var connectingBssid = $("#saved_id").attr("bssid");
