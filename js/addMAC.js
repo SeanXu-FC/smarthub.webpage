@@ -847,7 +847,12 @@ function exportPdf() {
                 }
             }
 
-            pdf.save("content.pdf");
+            if ($("#Device_SN_i").val()) {
+                var SNNum = $("#Device_SN_i").val();
+                pdf.save(SNNum + ".pdf");
+            } else {
+                pdf.save("report.pdf");
+            }
 
             setTimeout(() => {
                 $(".Rectangle-1182").show();
