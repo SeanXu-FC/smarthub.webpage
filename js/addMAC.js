@@ -517,7 +517,7 @@ function getLTEdata(layer, mode) {
                                 layer = layui.layer;
                             getLTEdata(layer, 1)
                         });
-                    }, 10000)
+                    }, 5000)
                 } else {
                     $("#LTE_Module").text(res.result.imei);
                     if (res.result.sim[0].sim_status == 0) {
