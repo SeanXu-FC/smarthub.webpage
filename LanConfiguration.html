@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20201231" rel="stylesheet" />
+    <link href="css/style.css?mv=20210107" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20201231"></script>
+    <script src="js/lanConfiguration.js?mv=20210107"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -286,10 +286,11 @@
                     </label>
 
                     <div class="col-sm-8 selectContent">
-                        <select class="form-control width100 Automatically-DHCP-on" id="rsd" style="width:358px;border: solid 1px #707070;">
-                            <option value="Automatically (DHCP on)">Automatically (DHCP on)</option>
-                            <option value="Manually (DHCP on)">Manually (DHCP on)</option>
-                            <option value="Manually (DHCP off)">Manually (DHCP off)</option>
+                        <select class="form-control width100 Automatically-DHCP-on" id="rsd" style="width:480px;border: solid 1px #707070;">
+                            <option value="Automatically (DHCP on)">Automatic address configuration, DHCP server on
+                            </option>
+                            <option value="Manually (DHCP on)">Manual address configuration, DHCP server on</option>
+                            <option value="Manually (DHCP off)">Manual address configuration, DHCP server off</option>
                         </select>
                     </div>
                 </div>
@@ -499,14 +500,16 @@
                         $('#d2').hide();
                         $('#d3').hide();
                         $('#btn').show();
-                        $('.selectContent option[value="Automatically (DHCP on)"]').prop("selected", "selected");
+                        $('.selectContent option[value="Automatically (DHCP on)"]').prop("selected",
+                            "selected");
                         //console.log(0);
                     }
                     if (json.mode == '1') {
                         $('#d2').show();
                         $('#d1').hide();
                         $('#d3').hide();
-                        $('.selectContent option[value="Manually (DHCP on)"]').prop("selected", "selected");
+                        $('.selectContent option[value="Manually (DHCP on)"]').prop("selected",
+                            "selected");
                         // console.log(1);
                     }
 
@@ -515,7 +518,8 @@
                         $('#d2').hide();
                         $('#d1').hide();
                         //alert(2);
-                        $('.selectContent option[value="Manually (DHCP off)"]').prop("selected", "selected");
+                        $('.selectContent option[value="Manually (DHCP off)"]').prop("selected",
+                            "selected");
                         //console.log(2);
                     }
 
@@ -706,7 +710,8 @@
                             success: function(res) {
                                 if (res.result) {
 
-                                    $('#success').show(1000).delay(6000).hide(0);
+                                    $('#success').show(1000).delay(6000).hide(
+                                        0);
 
                                 } else if (res.error) {
                                     $("#error").text(res.error.message)
@@ -716,7 +721,9 @@
 
                             },
                             error: function(jqXHR) {
-                                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                                var tip =
+                                    '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                                    JSON.stringify(jqXHR) + '</div>';
                                 promptMessage("Error message", tip);
                             }
                         });
@@ -724,7 +731,9 @@
 
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip =
+                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                        JSON.stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
 
                 }
@@ -750,12 +759,27 @@
                     "params": {
                         "mode": 1,
 
-                        "ip_1": $('#ip1_ipinput input[name="ipOne"]').val() + '.' + $('#ip1_ipinput input[name="ipTwo"]').val() + '.' + $('#ip1_ipinput input[name="ipThree"]').val() + '.' + $('#ip1_ipinput input[name="ipFour"]').val(),
+                        "ip_1": $('#ip1_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#ip1_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#ip1_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#ip1_ipinput input[name="ipFour"]').val(),
                         "ip_2": "",
-                        "netmask": $('#net_mask_ipinput input[name="ipOne"]').val() + '.' + $('#net_mask_ipinput input[name="ipTwo"]').val() + '.' + $('#net_mask_ipinput input[name="ipThree"]').val() + '.' + $('#net_mask_ipinput input[name="ipFour"]').val(),
-                        "gateway": $('#Gate_way_ipinput input[name="ipOne"]').val() + '.' + $('#Gate_way_ipinput input[name="ipTwo"]').val() + '.' + $('#Gate_way_ipinput input[name="ipThree"]').val() + '.' + $('#Gate_way_ipinput input[name="ipFour"]').val(),
-                        "start_ip": $('#startip_ipinput input[name="ipOne"]').val() + '.' + $('#startip_ipinput input[name="ipTwo"]').val() + '.' + $('#startip_ipinput input[name="ipThree"]').val() + '.' + $('#startip_ipinput input[name="ipFour"]').val(),
-                        "end_ip": $('#endip_ipinput input[name="ipOne"]').val() + '.' + $('#endip_ipinput input[name="ipTwo"]').val() + '.' + $('#endip_ipinput input[name="ipThree"]').val() + '.' + $('#endip_ipinput input[name="ipFour"]').val(),
+                        "netmask": $('#net_mask_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#net_mask_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#net_mask_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#net_mask_ipinput input[name="ipFour"]').val(),
+                        "gateway": $('#Gate_way_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#Gate_way_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#Gate_way_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#Gate_way_ipinput input[name="ipFour"]').val(),
+                        "start_ip": $('#startip_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#startip_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#startip_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#startip_ipinput input[name="ipFour"]').val(),
+                        "end_ip": $('#endip_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#endip_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#endip_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#endip_ipinput input[name="ipFour"]').val(),
                         "lease_time": $('#leasetime').val()
                     },
                     "id": "9.1"
@@ -790,7 +814,9 @@
 
                     },
                     error: function(jqXHR) {
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON.stringify(jqXHR) + '</div>';
                         promptMessage("Error message", tip);
                     }
                 });
@@ -803,10 +829,22 @@
                     "method": "LanConfigure",
                     "params": {
                         "mode": 2,
-                        "ip_1": $('#ipaddress1_ipinput input[name="ipOne"]').val() + '.' + $('#ipaddress1_ipinput input[name="ipTwo"]').val() + '.' + $('#ipaddress1_ipinput input[name="ipThree"]').val() + '.' + $('#ipaddress1_ipinput input[name="ipFour"]').val(),
-                        "ip_2": $('#ipaddress2_ipinput input[name="ipOne"]').val() + '.' + $('#ipaddress2_ipinput input[name="ipTwo"]').val() + '.' + $('#ipaddress2_ipinput input[name="ipThree"]').val() + '.' + $('#ipaddress2_ipinput input[name="ipFour"]').val(),
-                        "netmask": $('#ipnetmask_ipinput input[name="ipOne"]').val() + '.' + $('#ipnetmask_ipinput input[name="ipTwo"]').val() + '.' + $('#ipnetmask_ipinput input[name="ipThree"]').val() + '.' + $('#ipnetmask_ipinput input[name="ipFour"]').val(),
-                        "gateway": $('#Gateway1_ipinput input[name="ipOne"]').val() + '.' + $('#Gateway1_ipinput input[name="ipTwo"]').val() + '.' + $('#Gateway1_ipinput input[name="ipThree"]').val() + '.' + $('#Gateway1_ipinput input[name="ipFour"]').val(),
+                        "ip_1": $('#ipaddress1_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#ipaddress1_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#ipaddress1_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#ipaddress1_ipinput input[name="ipFour"]').val(),
+                        "ip_2": $('#ipaddress2_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#ipaddress2_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#ipaddress2_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#ipaddress2_ipinput input[name="ipFour"]').val(),
+                        "netmask": $('#ipnetmask_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#ipnetmask_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#ipnetmask_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#ipnetmask_ipinput input[name="ipFour"]').val(),
+                        "gateway": $('#Gateway1_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#Gateway1_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#Gateway1_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#Gateway1_ipinput input[name="ipFour"]').val(),
                         "start_ip": "",
                         "end_ip": "",
                         "lease_time": "",
@@ -840,7 +878,9 @@
 
                     },
                     error: function(jqXHR) {
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON.stringify(jqXHR) + '</div>';
                         promptMessage("Error message", tip);
                     }
                 });

@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20201231" rel="stylesheet" />
+    <link href="css/style.css?mv=20210107" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -200,7 +200,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <script>
         $(function() {
             layui.use('layer', function() {
@@ -224,7 +224,11 @@
                     //shadeClose: true,
                     shade: 0.8,
                     area: ['761px', '520px'],
-                    content: ['editNotifications.html?dataId=' + dataId + '&name=' + name + '&Notifications=' + Notifications + '&trigType=' + trigType + '&volt=' + volt + '&noti_msg=' + noti_msg + '&wake_func=' + wake_func, 'no'],
+                    content: ['editNotifications.html?dataId=' + dataId + '&name=' + name +
+                        '&Notifications=' + Notifications + '&trigType=' + trigType +
+                        '&volt=' + volt + '&noti_msg=' + noti_msg + '&wake_func=' +
+                        wake_func, 'no'
+                    ],
                     end: function() {
                         var ChannelID = $("#saved_id").val();
                         console.log(ChannelID)
@@ -278,9 +282,11 @@
                                 }
                                 var titleStr = "";
                                 if (json[i].notification == 1) {
-                                    titleStr += "Alert trigger condition: Value above, " + json[i].volt + "v" + "\n";
+                                    titleStr += "Alert trigger condition: Value above, " + json[i].volt +
+                                        "v" + "\n";
                                 } else {
-                                    titleStr += "Alert trigger condition: Value below, " + json[i].volt + "v" + "\n";
+                                    titleStr += "Alert trigger condition: Value below, " + json[i].volt +
+                                        "v" + "\n";
                                 }
                                 titleStr += "Notification message: " + json[i].noti_msg + "\n";
                                 if (json[i].wake_func == 1) {
@@ -305,7 +311,8 @@
                 },
                 error: function(jqXHR) {
                     layer.close(loading);
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             })

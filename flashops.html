@@ -18,7 +18,7 @@
     </style>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <script type="text/javascript">
         var interval = null;
         $(function() {
@@ -30,7 +30,8 @@
                     time: false,
                     shade: [0.5, '#fff']
                 });
-                $(".layui-layer-loading .layui-layer-content").after("Waiting for changes to be applied...");
+                $(".layui-layer-loading .layui-layer-content").after(
+                    "Waiting for changes to be applied...");
                 no4Getstatus(layer, loading);
             });
 
@@ -58,21 +59,19 @@
                             var data = res.result;
                             if (data.status == "1") { //升级成功
                                 parent.layer.close(loading);
-                                var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
+                                var ds = "Now the status is：" + data.status +
+                                    "--Upgrade Complete...";
                                 $("#steps").html(ds);
                                 $("#upgrade_tip").hide();
-                                setTimeout(function() {
-                                    top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
-                                }, 8000);
                                 clearInterval(interval);
+                                upPromptMessage("Success message", "Upgrade successfully");
                             } else if (data.status == "0") { //升级失败
                                 parent.layer.close(loading);
                                 $("#steps").html(data.steps);
                                 $("#steps").css("color", "red")
                                 $("#upgrade_tip").hide();
-                                setTimeout(function() {
-                                    self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
-                                }, 5000);
+                                clearInterval(interval);
+                                upfailPromptMessage("Fail message", "Upgrade fail");
                             } else if (data.status == "2") { //升级中
                                 $("#steps").html(data.steps);
                             } else if (data.status == "4") { //设备掉电
@@ -95,7 +94,9 @@
                     },
                     error: function(jqXHR) {
                         parent.layer.close(loading);
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON.stringify(jqXHR) + '</div>';
                         promptMessage("Error message", tip);
                     }
 
@@ -126,7 +127,8 @@
                             var data = res.result;
                             if (data.status == "1") { //升级成功
                                 parent.layer.close(loading);
-                                var ds = "Now the status is：" + data.status + "--Upgrade Complete...";
+                                var ds = "Now the status is：" + data.status +
+                                    "--Upgrade Complete...";
                                 $("#steps").html(ds);
                                 $("#upgrade_tip").hide();
                                 clearInterval(interval);
@@ -159,7 +161,9 @@
                     },
                     error: function(jqXHR) {
                         parent.layer.close(loading);
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON.stringify(jqXHR) + '</div>';
                         promptMessage("Error message", tip);
                     }
 
@@ -184,7 +188,8 @@
                     yes: function(index) {
                         layer.close(index);
                         var domain = window.location.host;
-                        top.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain;
+                        top.location.href = ('https:' == document.location.protocol ? 'https://' :
+                            'http://') + domain;
                     }
                 });
             })
@@ -196,7 +201,7 @@
                 var layer = layui.layer;
                 layer.open({
                     type: 1,
-                    id: 'layerDemo1', //防止重复弹出   
+                    id: 'layerDemo2', //防止重复弹出   
                     title: title,
                     content: '<div class="tip-text">' + content + '</div>',
                     area: ['421px', 'auto'],
@@ -207,7 +212,8 @@
                     yes: function(index) {
                         layer.close(index);
                         var domain = window.location.host;
-                        self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + '/SoftwareUpgrade.html';
+                        self.location.href = ('https:' == document.location.protocol ? 'https://' :
+                            'http://') + domain + '/SoftwareUpgrade.html';
                     }
                 });
             })
@@ -224,8 +230,8 @@
             <p id="steps"></p>
             <fieldset class="cbi-section" id="upgrade_tip">
                 <p>
-                    The system is flashing now, this process will take several minutes.<br /> DO NOT POWER OFF THE DEVICE!<br /> Wait a few minutes before you try to reconnect. It might be necessary to renew the address of your computer to reach the device
-                    again, depending on your settings.
+                    The system is flashing now, this process will take several minutes.<br /> DO NOT POWER OFF THE DEVICE!
+                    <br /> Wait a few minutes before you try to reconnect. It might be necessary to renew the address of your computer to reach the device again, depending on your settings.
                 </p>
                 <!-- <p>
                     <img src="images/loading.gif" alt="Loading" style="vertical-align:middle" /> Waiting for changes to be applied...

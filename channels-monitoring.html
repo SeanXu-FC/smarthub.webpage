@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20201231" rel="stylesheet" />
+    <link href="css/style.css?mv=20210107" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -279,7 +279,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <script>
         $(function() {
             layui.use(['layer', 'form'], function() {
@@ -357,7 +357,8 @@
                 },
                 error: function(jqXHR) {
                     layer.close(loading);
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             })
@@ -394,7 +395,8 @@
 
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             })

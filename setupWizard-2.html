@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20201231" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <link href="css/style.css?mv=20210107" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <title>Document</title>
     <style>
         table {
@@ -247,7 +247,8 @@
         <div class="text-left mc ml-70">
             <h2 class="Set-up-wizard"> Set-up wizard </h2>
             <p class="Choose-your-wireless-network mt-40">Configure your SmartHub access point</p>
-            <p class="When-connected-your-SmartHub-will-distribute-wireless-data-to-all-devices-connected-to-its-access-point-If-there-are-no-wireless-networks-you-wish-to-connect-to-now-then-just-select-continue mt-20">Your SmartHub access point allows other devices to connect to the SmartHub's cellular or wireless network data. You may update the name and password details other devices will use to connect to the access point</p>
+            <p class="When-connected-your-SmartHub-will-distribute-wireless-data-to-all-devices-connected-to-its-access-point-If-there-are-no-wireless-networks-you-wish-to-connect-to-now-then-just-select-continue mt-20">
+                Your SmartHub access point allows other devices to connect to the SmartHub's cellular or wireless network data. You may update the name and password details other devices will use to connect to the access point</p>
             <div class=""></div>
             <div class="row mt-40 -flex-display">
                 <div class="col-md-6 Access-point-name -radio-flex4">Access point name:</div>
@@ -266,7 +267,8 @@
                     <button class="Rectangle-1182 Back"><a href="setupWizard.html">Back</a></button>
                 </div>
                 <div class="col-md-5 -radio-flex10">
-                    <button class="Rectangle-1182 Continue active"><a href="setupWizard-3.html" onclick="save()">Continue</a></button>
+                    <button class="Rectangle-1182 Continue active"><a href="setupWizard-3.html"
+                            onclick="save()">Continue</a></button>
                 </div>
             </div>
         </div>
@@ -297,7 +299,9 @@
                     $('.pwd').val(res.result.PassWord);
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip =
+                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                        JSON.stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             })
@@ -334,7 +338,9 @@
                         }
                     },
                     error: function(jqXHR) {
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON.stringify(jqXHR) + '</div>';
                         promptMessage("Error message", tip);
                     }
                 })

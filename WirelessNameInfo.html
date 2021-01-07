@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20201231" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <link href="css/style.css?mv=20210107" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <title>Document</title>
     <style>
         * {
@@ -398,11 +398,9 @@
                         class="Rectangle-1182 active Close">Close</button></span>
             </div>
         </div>
-
-
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <script>
         var ssid, bssid, encrypt, is_saved;
         $(function() {
@@ -440,9 +438,12 @@
                     shade: 0.8,
                     area: ['534px', '260px'],
                     //area: '534px',
-                    content: ['ForgetNetwork.html?ssid=' + ssid + "&bssid=" + bssid + "&is_saved=" + is_saved, 'no'],
+                    content: ['ForgetNetwork.html?ssid=' + ssid + "&bssid=" + bssid +
+                        "&is_saved=" + is_saved, 'no'
+                    ],
                     end: function() {
-                        var flag = $(parent.frames["my-iframe"].document).find("#wifiDetai_info").val();
+                        var flag = $(parent.frames["my-iframe"].document).find(
+                            "#wifiDetai_info").val();
                         console.log(flag)
                         if (!flag) {
                             var index = parent.layer.getFrameIndex(window.name);
@@ -546,7 +547,8 @@
                 },
                 error: function(jqXHR) {
                     layer.close(loading);
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             });
@@ -589,7 +591,8 @@
 
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             });

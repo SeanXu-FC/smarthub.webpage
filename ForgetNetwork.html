@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20201231" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <link href="css/style.css?mv=20210107" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <title>Document</title>
     <style>
         * {
@@ -351,7 +351,8 @@
             $(".Forget-wireless-network-SKY546H").text("Forget wireless network " + ssid + "?")
             $('#btn').click(function() {
                 $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("bssid", "");
-                $(parent.frames["my-iframe"].document).find("#wifiDetai_info").val("forgetClickClose").attr("forgetClickClose", "forgetClickClose"); //记录点击关闭按钮
+                $(parent.frames["my-iframe"].document).find("#wifiDetai_info").val("forgetClickClose")
+                    .attr("forgetClickClose", "forgetClickClose"); //记录点击关闭按钮
                 setTimeout(() => {
                     var index = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index); //关闭当前页
@@ -395,8 +396,10 @@
                     console.log("res", res)
                     if (res.result) {
                         if (res.result.status == "WlanStationConfig Remove Done") {
-                            $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr("bssid", bssid);
-                            $(parent.frames["my-iframe"].document).find("#wifiDetai_info").val(""); //不是关闭点击按钮
+                            $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr("bssid",
+                                bssid);
+                            $(parent.frames["my-iframe"].document).find("#wifiDetai_info").val(
+                                ""); //不是关闭点击按钮
                             setTimeout(() => {
                                 var index = parent.layer.getFrameIndex(window.name);
                                 parent.layer.close(index); //关闭当前页
@@ -421,7 +424,8 @@
                 },
                 error: function(jqXHR) {
                     $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("bssid", "");
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
 
                 }

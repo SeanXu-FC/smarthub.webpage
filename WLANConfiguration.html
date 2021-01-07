@@ -14,10 +14,10 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20201231"></script>
+    <script src="js/lanConfiguration.js?mv=20210107"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -421,9 +421,12 @@
                         $('#endip').ipinput({
                             value: json.EndIPAddress
                         });
-                        var lease = $('input[name="sec"]').eq(0).val(timeConversion(json.DHCPLeaseTime));
+                        var lease = $('input[name="sec"]').eq(0).val(timeConversion(json
+                            .DHCPLeaseTime));
                     } else {
-                        var tip = '<div class="custom-waring"><img src="../images/waring.png"><span class="waring-text">' + res.error.message + '</span></div>'
+                        var tip =
+                            '<div class="custom-waring"><img src="../images/waring.png"><span class="waring-text">' +
+                            res.error.message + '</span></div>'
                         tipMessage(tip);
 
                     }
@@ -431,7 +434,9 @@
 
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip =
+                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                        JSON.stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             });
@@ -442,11 +447,26 @@
                     "jsonrpc": "2.0",
                     "method": "SetLanSettings",
                     "params": {
-                        "IPv4IPAddress": $('#ip1_ipinput input[name="ipOne"]').val() + '.' + $('#ip1_ipinput input[name="ipTwo"]').val() + '.' + $('#ip1_ipinput input[name="ipThree"]').val() + '.' + $('#ip1_ipinput input[name="ipFour"]').val(),
-                        "SubnetMask": $('#net_mask_ipinput input[name="ipOne"]').val() + '.' + $('#net_mask_ipinput input[name="ipTwo"]').val() + '.' + $('#net_mask_ipinput input[name="ipThree"]').val() + '.' + $('#net_mask_ipinput input[name="ipFour"]').val(),
-                        "LanGateWay": $('#Gate_way_ipinput input[name="ipOne"]').val() + '.' + $('#Gate_way_ipinput input[name="ipTwo"]').val() + '.' + $('#Gate_way_ipinput input[name="ipThree"]').val() + '.' + $('#Gate_way_ipinput input[name="ipFour"]').val(),
-                        "StartIPAddress": $('#startip_ipinput input[name="ipOne"]').val() + '.' + $('#startip_ipinput input[name="ipTwo"]').val() + '.' + $('#startip_ipinput input[name="ipThree"]').val() + '.' + $('#startip_ipinput input[name="ipFour"]').val(),
-                        "EndIPAddress": $('#endip_ipinput input[name="ipOne"]').val() + '.' + $('#endip_ipinput input[name="ipTwo"]').val() + '.' + $('#endip_ipinput input[name="ipThree"]').val() + '.' + $('#endip_ipinput input[name="ipFour"]').val(),
+                        "IPv4IPAddress": $('#ip1_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#ip1_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#ip1_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#ip1_ipinput input[name="ipFour"]').val(),
+                        "SubnetMask": $('#net_mask_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#net_mask_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#net_mask_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#net_mask_ipinput input[name="ipFour"]').val(),
+                        "LanGateWay": $('#Gate_way_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#Gate_way_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#Gate_way_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#Gate_way_ipinput input[name="ipFour"]').val(),
+                        "StartIPAddress": $('#startip_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#startip_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#startip_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#startip_ipinput input[name="ipFour"]').val(),
+                        "EndIPAddress": $('#endip_ipinput input[name="ipOne"]').val() + '.' + $(
+                            '#endip_ipinput input[name="ipTwo"]').val() + '.' + $(
+                            '#endip_ipinput input[name="ipThree"]').val() + '.' + $(
+                            '#endip_ipinput input[name="ipFour"]').val(),
                         "DHCPLeaseTime": leasetime
                     },
                     "id": "9.1"
@@ -482,7 +502,9 @@
 
                     },
                     error: function(jqXHR) {
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON.stringify(jqXHR) + '</div>';
                         promptMessage("Error message", tip);
                     }
                 });

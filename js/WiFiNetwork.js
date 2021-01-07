@@ -396,7 +396,7 @@ function forgetWifiHtml(infoHtml) {
         shade: 0.8,
         area: ['534px', '63%'],
         //area: '534px',
-        content: ['WirelessNameInfo.html?ssid=' + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
+        content: ["WirelessNameInfo.html?ssid=" + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
             var connectingSsid = $("#saved_id").val();
             var connectingBssid = $("#saved_id").attr("bssid");
@@ -438,8 +438,7 @@ function enterPasswordHtml(infoHtml) {
         noPWDWifiConnect(ssid, bssid, is_saved);
         return;
     }
-    console.log("ssid", ssid, bssid, encrypt, is_saved)
-        //iframe层
+    //iframe层
     parent.layer.open({
         type: 2,
         title: false,
@@ -451,6 +450,8 @@ function enterPasswordHtml(infoHtml) {
             var connectingSsid = $("#saved_id").val();
             var connectingBssid = $("#saved_id").attr("bssid");
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
+            console.log(connectingSsid)
+            console.log(connectingBssid)
             if (connectingSsid && connectingBssid) {
                 for (var i = 0; i < wifiJson.length; i++) {
                     if (wifiJson[i].is_connected == 1) {
@@ -460,6 +461,7 @@ function enterPasswordHtml(infoHtml) {
                         wifiJson[i].is_connected = 2;
                     }
                 }
+                console.log(wifiJson)
                 renderWifiList(wifiJson);
                 clearInterval(timer);
                 $(".connecting-img").show();

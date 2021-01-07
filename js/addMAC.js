@@ -280,6 +280,7 @@ function setPassword(layer, loading) {
                     layer.msg("An error occurred：" + res.result.message);
                 })
             } else if (res.code == 1) {
+                $("#Device_SN").attr("disabled", "disabled");
                 layui.use(['form', 'layer'], function() {
                     var layer = layui.layer;
                     layer.msg("回传MAC成功！");
@@ -517,7 +518,7 @@ function getLTEdata(layer, mode) {
                                 layer = layui.layer;
                             getLTEdata(layer, 1)
                         });
-                    }, 5000)
+                    }, 10000)
                 } else {
                     $("#LTE_Module").text(res.result.imei);
                     if (res.result.sim[0].sim_status == 0) {
@@ -846,13 +847,13 @@ function exportPdf() {
                     }
                 }
             }
-
             if ($("#Device_SN_i").val()) {
                 var SNNum = $("#Device_SN_i").val();
                 pdf.save(SNNum + ".pdf");
             } else {
                 pdf.save("report.pdf");
             }
+
 
             setTimeout(() => {
                 $(".Rectangle-1182").show();

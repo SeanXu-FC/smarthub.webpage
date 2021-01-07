@@ -400,7 +400,7 @@
 
 
     </div>
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
@@ -408,7 +408,8 @@
         $(function() {
             var ssid = $(parent.frames["my-iframe"].document).find("#saved_id").val();
             var encrypt = $(parent.frames["my-iframe"].document).find("#saved_id").attr("encrypt");
-            var passwordIncorrect = $(parent.frames["my-iframe"].document).find("#saved_id").attr("passwordIncorrect");
+            var passwordIncorrect = $(parent.frames["my-iframe"].document).find("#saved_id").attr(
+                "passwordIncorrect");
             if (ssid) {
                 $("#ssid").val(ssid)
             }
@@ -547,7 +548,8 @@
                     console.log("res", res)
                     if (res.result) {
                         if (res.result) {
-                            $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr("encrypt", security);
+                            $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr(
+                                "encrypt", security);
                             setTimeout(() => {
                                 var index = parent.layer.getFrameIndex(window.name);
                                 parent.layer.close(index); //关闭当前页
@@ -560,9 +562,11 @@
                         }
 
                     } else if (res.error) {
-                        $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt", "");
+                        $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt",
+                            "");
 
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.error.message + '</div>';
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            res.error.message + '</div>';
                         promptMessage("Error message", tip);
 
                     }
@@ -571,7 +575,8 @@
                 },
                 error: function(jqXHR) {
                     $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt", "");
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             });

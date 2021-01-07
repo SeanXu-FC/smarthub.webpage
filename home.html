@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
 
 
-    <link rel="stylesheet" href="css/style.css?mv=20201231">
+    <link rel="stylesheet" href="css/style.css?mv=20210107">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css?mv=20201231">
+    <link rel="stylesheet" href="css/xadmin.css?mv=20210107">
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20210107"></script>
     <title>Document</title>
     <style>
         /* img {
@@ -540,7 +540,8 @@
             <div class="col-md-6 col-md-offset-1 col-sm-6 col-lg-6 " style="float:right">
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26 ">Cloud</h3>
-                    <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected cloud"></span></div>
+                    <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected cloud"></span>
+                    </div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="WiFiNetwork-info1.html" target="_self">WiFi</a></h3>
@@ -550,14 +551,21 @@
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="MobileData.html" target="_self">Mobile network</a></h3>
                     <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected Connected4G"></span><img id="Connected4G" class="imgIcon"></div>
-                    <div class="mb-10 mt-10 font18 ">Network provider:<span class="ml-16 MyText NetworkProvider"></span></div>
-                    <div class="mb-10 mt-10 font18 ">SIM card(in use):<span class="ml-20 MyText active_sim"></span></div>
-                    <div class="mb-10 mt-10 font18 ">IMSI:<span class=" MyText imsi" style="margin-left: 115px;"></span></div>
-                    <div class="mb-10 mt-10 font18 ">PLMN:<span class=" MyText plmn" style="margin-left: 102px;"></span></div>
-                    <div class="mb-10 mt-10 font18 ">CSQ:<span class=" MyText csq" style="margin-left: 112px;"></span></div>
+                    <div class="mb-10 mt-10 font18 ">Network provider:<span class="ml-16 MyText NetworkProvider"></span>
+                    </div>
+                    <div class="mb-10 mt-10 font18 ">SIM card(in use):<span class="ml-20 MyText active_sim"></span>
+                    </div>
+                    <div class="mb-10 mt-10 font18 ">IMSI:<span class=" MyText imsi" style="margin-left: 115px;"></span>
+                    </div>
+                    <div class="mb-10 mt-10 font18 ">PLMN:<span class=" MyText plmn" style="margin-left: 102px;"></span>
+                    </div>
+                    <div class="mb-10 mt-10 font18 ">CSQ:<span class=" MyText csq" style="margin-left: 112px;"></span>
+                    </div>
                     <div class="mb-10 mt-10 font18 ">LOCATION:<span class=" MyText location" style="margin-left: 63px;"></span></div>
-                    <div class="mb-10 mt-10 font18 ">CELL:<span class=" MyText cell" style="margin-left: 108px;"></span></div>
-                    <div class="mb-10 mt-10 font18 ">ACT:<span class=" MyText act" style="margin-left: 119px;"></span></div>
+                    <div class="mb-10 mt-10 font18 ">CELL:<span class=" MyText cell" style="margin-left: 108px;"></span>
+                    </div>
+                    <div class="mb-10 mt-10 font18 ">ACT:<span class=" MyText act" style="margin-left: 119px;"></span>
+                    </div>
                     <div class="mb-10 mt-10 font18 ">REGISTER:<span class=" MyText register" style="margin-left: 60px;"></span></div>
                 </div>
                 <div class="mb-10 mt-20 bb1c w80 " style="border-bottom: 0px solid #ccc;">
@@ -571,6 +579,7 @@
 </body>
 <script>
     $(function() {
+        //LoginMessage();
         var data = {
             "jsonrpc": "2.0",
             "method": "GetHomeStatus",
@@ -587,7 +596,9 @@
             success: function(res) {
                 if (res.result) {
                     var json = res.result;
-                    var arr = ['Connected', 'Connected(2.4GHz)', 'Connected(5GHz)', 'On', 'Off', 'Error'];
+                    var arr = ['Connected', 'Connected(2.4GHz)', 'Connected(5GHz)', 'On', 'Off',
+                        'Error'
+                    ];
                     if (json.cloud.status == 0) {
                         $('.cloud').eq(0).text(arr[5]);
                         $('.r_01').attr("src", "images/r_01_gray.png");
@@ -626,14 +637,21 @@
 
                     var $img = $(".imgIcon1 img");
                     //var img0 = $('<img class="">');
-                    var MobileSignalArr = ['mobileSignal-none.png', 'mobileSignal-0-20.png', 'mobileSignal-20-40.png', 'mobileSignal-40-60.png', 'mobileSignal-60-80.png', 'mobileSignal-80-100.png'];
-                    var WiFiSignalArr = ['s_wifi_nonea.png', 's_wifi_02a.png', 's_wifi_03a.png', 's_wifi_04a.png', 's_wifi_05a.png'];
+                    var MobileSignalArr = ['mobileSignal-none.png', 'mobileSignal-0-20.png',
+                        'mobileSignal-20-40.png', 'mobileSignal-40-60.png',
+                        'mobileSignal-60-80.png', 'mobileSignal-80-100.png'
+                    ];
+                    var WiFiSignalArr = ['s_wifi_nonea.png', 's_wifi_02a.png', 's_wifi_03a.png',
+                        's_wifi_04a.png', 's_wifi_05a.png'
+                    ];
                     if (json.mobile.active_sim == 99) {
                         $('.Connected4G').eq(0).text(arr[4]);
                         $('#Connected4G').attr("src", "images/mobileSignal-none.png");
                         $('.Connected4G').css('color', 'red')
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile.active_sim : '-');
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
                         $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
                         $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
                         $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
@@ -653,8 +671,10 @@
 
                             $('.Connected4G').eq(0).text(mobileStatus);
                             $('.Connected4G').css('color', 'red')
-                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');
-                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile.active_sim : '-');
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
                             $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
                             $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
                             $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
@@ -670,8 +690,10 @@
                                 mobileStatus = "Connected(4G)"
                             }
                             $('.Connected4G').eq(0).text(mobileStatus);
-                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile.provider : '-');
-                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile.active_sim : '-');
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
                             $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
                             $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
                             $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
@@ -743,7 +765,8 @@
                 }
             },
             error: function(jqXHR) {
-                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                    JSON.stringify(jqXHR) + '</div>';
                 promptMessage("Error message", tip);
 
             }

@@ -69,15 +69,28 @@ function promptMessage(title, content) {
             }
         });
     })
-
 }
+
+function LoginMessage() {
+    parent.layer.open({
+        type: 2,
+        id: 'loginMsg', //防止重复弹出   
+        title: false,
+        closeBtn: 0,
+        shade: 0.8,
+        area: ['541px', '35%'],
+        content: ['LoginTip.html', 'no'],
+        end: function() {}
+    });
+}
+
 
 function tipMessage(content) {
     layui.use(['layer'], function() {
         var layer = layui.layer;
         layer.msg(content, {
             skin: 'layui-layer-molv',
-            time: 3000000,
+            time: 3000,
             area: '400px'
         });
     })

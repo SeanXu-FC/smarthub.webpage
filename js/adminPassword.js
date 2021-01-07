@@ -38,14 +38,14 @@ $(function() {
 
 
     $('#pwd,#pwd2,#pwd3').bind("keyup", function() {
-        var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{8,64}$/;
+        var reg = reg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,64}$/;
 
         var oPwd2 = document.getElementById("pwd2").value;
         var oPwd3 = document.getElementById("pwd3").value;
         var len = $('#pwd').val().length;
         var len2 = $('#pwd2').val().length;
         var len3 = $('#pwd3').val().length;
-        if (8 <= len && len <= 64) {
+        if (6 <= len && len <= 64) {
             $("#btn").removeAttr("disabled");
             $("#btn").css("opacity", "1");
         } else {
@@ -135,11 +135,11 @@ function check2() {
 
         sp2.innerHTML = "<span style='color: #ff002a;'>Password cannot be empty</span>"; //密码不能为空
 
-    } else if (oPwd2.length < 8) {
+    } else if (oPwd2.length < 6) {
 
         sp2.innerHTML = "Password strength: <span style='color: #909090;'>Too short</span>"; //密码不能小于6个字符 The password cannot be less than 6 characters
 
-    } else if (oPwd2.length >= 8) {
+    } else if (oPwd2.length >= 6) {
         sp2.innerHTML = "";
 
         var mmzz1 = /^[0-9]{8,100}$|^[a-zA-Z]{8,64}$/; //较弱：全是数字或全是字母 6-16个字符

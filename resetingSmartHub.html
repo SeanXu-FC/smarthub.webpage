@@ -10,8 +10,8 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20201231" rel="stylesheet" />
-    <link rel="stylesheet" href="css/myProgress.css?mv=20201231" />
+    <link href="css/style.css?mv=20210107" rel="stylesheet" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210107" />
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="js/jquery.myProgress.js"></script>
@@ -72,7 +72,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20201231"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
     <script>
         var length = 80;
         var successFlag = false;
@@ -142,7 +142,8 @@
                     console.log(jqXHR)
                         //successFlag = false;
                         //PollingChecked();
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
 
@@ -211,7 +212,8 @@
                 },
                 error: function(jqXHR) {
                     console.log(jqXHR)
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
 
@@ -304,7 +306,8 @@
                 },
                 error: function(jqXHR) {
                     console.log(jqXHR)
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
 
