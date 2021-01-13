@@ -65,6 +65,18 @@
                                 $("#upgrade_tip").hide();
                                 clearInterval(interval);
                                 upPromptMessage("Success message", "Upgrade successfully");
+                            } else if (data.status == "5") { //升级成功
+                                $("#steps").html(data.steps);
+                                clearInterval(interval);
+                                console.log(11111111)
+                                window.setTimeout(function() {
+                                    parent.layer.close(loading);
+                                    $("#upgrade_tip").hide();
+                                    console.log(22222222)
+                                    upPromptMessage("Success message",
+                                        "Upgrade successfully");
+                                }, 30000);
+
                             } else if (data.status == "0") { //升级失败
                                 parent.layer.close(loading);
                                 $("#steps").html(data.steps);
