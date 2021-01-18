@@ -120,7 +120,7 @@
                     } else if (res.result && res.result.status == 1) {
                         successFlag = true;
                         resetSuccess()
-                    } else if (res.result && res.result.status == 3) {
+                    } else if (res.result && res.result.status == 3) { //3表示准备掉电重启
                         successFlag = false;
                         PollingChecked(1000 * 60);
                     } else if (res.error) {
@@ -162,7 +162,6 @@
         }
 
         function reStarting2(flag) {
-            console.log(1111111)
             var timeout0 = 3000;
             data = {
                 "jsonrpc": "2.0",
@@ -192,9 +191,10 @@
                     } else if (res.result && res.result.status == 1) {
                         successFlag = true;
                         resetSuccess()
-                    } else if (res.result && res.result.status == 3) {
+                    } else if (res.result && res.result.status == 3) { //3表示准备掉电重启
                         successFlag = false;
-                        resetPollingChecked(1000 * 60);
+                        PollingChecked(1000 * 60);
+                        //resetPollingChecked(1000 * 60);
                     } else if (res.error) {
                         successFlag = false;
                         $(".Restarting-SmartHub").text("Reset SmartHub Fail")
@@ -255,7 +255,6 @@
         }
         //重置后请求地址变成198.18.248.1
         function reSetting(flag) {
-            console.log(1111111)
             var timeout0 = 3000;
             data = {
                 "jsonrpc": "2.0",
