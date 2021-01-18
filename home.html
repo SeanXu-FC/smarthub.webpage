@@ -771,7 +771,54 @@
 
             }
         });
+        // var domain = window.location.host;
+        // window.location.href = ('https:' == document.location.protocol ? 'https://' :
+        //     'http://') + domain + "/flashops.html?status=1";
+        //$("#my-iframe", window.parent.document).attr("src", "flashops.html?status=5");
+        getStatus();
     });
+    //获取设备状态，有没有掉电
+    function getStatus() {
+        var domain = window.location.host;
+        var data = {
+            "jsonrpc": "2.0",
+            "method": "GetUpgradeStatus",
+            "params": {
+                "status": 0
+            },
+            "id": "9.1"
+
+        };
+        data = JSON.stringify(data);
+        $.ajax({
+            type: "post",
+            url: "/action/action?",
+            data: data,
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function(res) {
+                if (res.result) {
+                    var data = res.result;
+                    if (data.status != "3") { //升级成功
+                        $("#my-iframe", window.parent.document).attr("src", "flashops.html?status=" + data
+                            .status);
+                    }
+                } else if (res.error) {
+                    layui.use(['form', 'layer'], function() {
+                        var layer = layui.layer;
+                        layer.msg("An error occurred：" + res.error.message);
+                    })
+                }
+
+            },
+            error: function(jqXHR) {
+                var tip =
+                    '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                    JSON.stringify(jqXHR) + '</div>';
+                promptMessage("Error message", tip);
+            }
+        });
+    }
 </script>
 
 </html>
