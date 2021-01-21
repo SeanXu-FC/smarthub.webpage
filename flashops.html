@@ -18,7 +18,7 @@
     </style>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210119"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
 
 </head>
 
@@ -86,7 +86,7 @@
             StateResponse(1);
             $("#steps").html(data.steps);
             clearInterval(interval);
-            return4Getstatus(layer, loading, 1000 * 30);
+            return4Getstatus(layer, loading, 1000 * 90);
 
         } else if (data.status == "0") { //升级失败
             StateResponse(1);
@@ -196,8 +196,6 @@
                         JSON.stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
-
-
             });
         }, time);
     }
