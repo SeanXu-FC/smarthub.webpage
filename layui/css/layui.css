@@ -131,7 +131,7 @@ pre {
 
 body {
     line-height: 24px;
-    font: 14px OpenSans, Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial, sans-serif
+    font: 14px OpenSans
 }
 
 hr {
@@ -3006,7 +3006,7 @@ hr {
 
 .layui-laypage-next em,
 .layui-laypage-prev em {
-    font-family: Sim sun;
+    font-family: "OpenSans";
     font-size: 16px
 }
 
@@ -4784,7 +4784,7 @@ body .layui-util-face .layui-layer-content {
     border-left-width: 6px;
     background-color: #F2F2F2;
     color: #333;
-    font-family: Courier New;
+    font-family: "OpenSans";
     font-size: 12px
 }
 

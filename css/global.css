@@ -354,20 +354,20 @@ dfn {
 }
 
 del {
-    font-family: Simsun
+    font-family: "OpenSans"
 }
 
 code,
 kbd,
 pre,
 samp {
-    font-family: monospace, serif;
+    font-family: "OpenSans";
     font-size: 1em
 }
 
 pre {
     display: block;
-    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+    font-family: "OpenSans";
     padding: 9.5px;
     margin-bottom: 10px;
     font-size: 14px;
@@ -499,7 +499,7 @@ sub {
 }
 
 .en {
-    font-family: Arial
+    font-family: "OpenSans"
 }
 
 .border-box {
@@ -1073,7 +1073,7 @@ a.yd-link {
 .wjf-more {
     font-size: 12px;
     color: #999;
-    font-family: '宋体'
+    font-family: 'OpenSans'
 }
 
 .wjf-more-bg9b {
@@ -1435,7 +1435,7 @@ a.yd-link {
     font-size: 12px;
     padding-left: 22px;
     background: url(/images2016/west_xyz.png) no-repeat left center;
-    font-family: "宋体"
+    font-family: "OpenSans"
 }
 
 #header2016 .headerTop .welcome:hover {
@@ -1642,7 +1642,7 @@ a.yd-link {
     border-color: #e3e3e3!important;
     color: #b5b5b5;
     width: 212px;
-    font-family: Arial, Tahoma, Helvetica
+    font-family: "OpenSans"
 }
 
 .login-form-container .form-input:hover,
@@ -1670,7 +1670,7 @@ a.yd-link {
     height: 15px;
     line-height: 15px;
     font-size: 12px;
-    font-family: 宋体;
+    font-family: "OpenSans";
     display: inline-block;
     color: #777
 }
@@ -1867,7 +1867,7 @@ input.fix-autofill-bg.form-input {
 
 #header2016 .user-info-container .user-quick-nav {
     padding: 8px 15px 12px;
-    font-family: 宋体
+    font-family: "OpenSans"
 }
 
 #header2016 .user-info-container .user-quick-nav a {
@@ -2074,7 +2074,7 @@ input.fix-autofill-bg.form-input {
     font-size: 18px;
     font-weight: 700;
     color: #ff840c;
-    font-family: "黑体"
+    font-family: "OpenSans"
 }
 
 #header2016 .shopping-car-container .shopping-car-bottom .shopping-num {
@@ -2184,7 +2184,7 @@ input.fix-autofill-bg.form-input {
     line-height: 30px;
     padding-right: 90px;
     color: #505050;
-    font-family: '宋体';
+    font-family: 'OpenSans';
     *width: 150px;
     font-size: 12px;
     margin-left: 25px;
@@ -2205,7 +2205,7 @@ input.fix-autofill-bg.form-input {
     top: 0;
     color: #bebebe;
     font-size: 12px;
-    font-family: "宋体"
+    font-family: "OpenSans"
 }
 
 #noread_countbox {
@@ -2397,7 +2397,7 @@ input.fix-autofill-bg.form-input {
     z-index: 9999;
     background-color: #f7f9fb;
     width: 100%;
-    font-family: arial;
+    font-family: "OpenSans";
     box-shadow: inset 0 1px 5px 0 rgba(137, 137, 137, .392);
     padding-top: 32px;
     display: none

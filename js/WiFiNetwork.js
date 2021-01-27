@@ -81,7 +81,6 @@ function changeSwitchStatus(layer, form, checked) {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             if (res.result) {
-                layer.msg(res.result.status);
                 if (mode) {
                     $(".network-c").show();
                     $("#WLAN_list_c").show();
@@ -383,7 +382,6 @@ function forgetWifiHtml(infoHtml) {
         end: function() {
             var connectingSsid = $("#saved_id").val();
             var connectingBssid = $("#saved_id").attr("bssid");
-            console.log(connectingSsid, connectingBssid);
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
             if (connectingSsid && connectingBssid) {
                 for (var i = 0; i < wifiJson.length; i++) {
@@ -433,8 +431,6 @@ function enterPasswordHtml(infoHtml) {
             var connectingSsid = $("#saved_id").val();
             var connectingBssid = $("#saved_id").attr("bssid");
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
-            console.log(connectingSsid)
-            console.log(connectingBssid)
             if (connectingSsid && connectingBssid) {
                 for (var i = 0; i < wifiJson.length; i++) {
                     if (wifiJson[i].is_connected == 1) {
@@ -444,7 +440,6 @@ function enterPasswordHtml(infoHtml) {
                         wifiJson[i].is_connected = 2;
                     }
                 }
-                console.log(wifiJson)
                 renderWifiList(wifiJson);
                 clearInterval(timer);
                 $(".connecting-img").show();

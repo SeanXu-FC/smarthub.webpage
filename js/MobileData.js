@@ -439,16 +439,16 @@ function renderDataUsage(json, i) {
         if (json[i].sim_data_limt_unit == 0) {
             $(".limit_unit").text("MB");
             $("#allUsed_MB").text(json[i].current_data_used);
-            var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(0);
+            var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(2);
             $("#redmian_MB").text(redmianMB);
             $("#dataLimit input").val(json[i].monthly_data_limit);
         } else {
             $(".limit_unit").text("GB");
             var current_used = (json[i].current_data_used / 1024).toFixed(2)
             $("#allUsed_MB").text(current_used);
-            var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(1);
+            var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(2);
             $("#redmian_MB").text(redmianMB);
-            $("#dataLimit input").val(json[i].monthly_data_limit / 1024);
+            $("#dataLimit input").val((json[i].monthly_data_limit / 1024).toFixed(2));
         }
 
         $("#switchMB option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
@@ -507,23 +507,21 @@ function renderDataUsage(json, i) {
         if (json[i].usage_reminder_flag == 1) { //Usage reminders
             $("#usagereminders2 input").attr("checked", "checked");
         } else {
-            console.log($("#usagereminders2 input"))
             $("#usagereminders2 input").removeAttr("checked");
         }
-        console.log("sim_data_limt_unit", json[i].sim_data_limt_unit)
         if (json[i].sim_data_limt_unit == 0) {
             $(".limit_unit2").text("MB");
             $("#allUsed_MB2").text(json[i].current_data_used);
-            var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(0);
+            var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(2);
             $("#redmian_MB2").text(redmianMB);
             $("#dataLimit2 input").val(json[i].monthly_data_limit);
         } else {
             $(".limit_unit2").text("GB");
             var current_used = (json[i].current_data_used / 1024).toFixed(2)
             $("#allUsed_MB2").text(current_used);
-            var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(1);
+            var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(2);
             $("#redmian_MB2").text(redmianMB);
-            $("#dataLimit2 input").val(json[i].monthly_data_limit / 1024);
+            $("#dataLimit2 input").val((json[i].monthly_data_limit / 1024).toFixed(2));
         }
 
         $("#switchMB2 option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);

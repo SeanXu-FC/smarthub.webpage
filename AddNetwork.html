@@ -276,7 +276,7 @@
         
         .Forget-network {
             font-family: OpenSans;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: normal;
             font-stretch: normal;
             font-style: normal;
@@ -356,6 +356,13 @@
             /* visibility: hidden; */
             /* height: 30px; */
         }
+        
+        .btn-bottom {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-right: 5px;
+        }
     </style>
 </head>
 
@@ -383,18 +390,16 @@
                     <label for="inputPassword3 " class="layui-form-label Status">Password:</label>
                     <div class="layui-input-block" style="position:relative">
                         <input type="password" value="" id="pwd" class="Rectangle-1188 pwd layui-input" style="display: inline-block;" />
-                        <span class="SHOW" style="position:absolute; top:10px;left:388px;cursor: pointer;" onclick="change()">show</span>
+                        <span class="SHOW" style="position:absolute; top:10px;left:388px;cursor: pointer;" onclick="change()">SHOW</span>
                         <div class="error">Password is incorrect</div>
                         <div class="correct">Password is correct</div>
                     </div>
 
                 </div>
             </div>
-            <div class="row mb-20">
-                <span class="col-md-4 col-md-offset-2" style="display: inline-block;margin-left:206px"><button
-                        id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button></span>
-                <span class="col-md-2 col-md-offset-4 connected" id="layerDemo" style="display: inline-block;margin-left:10px;"><button data-method="notice" id="save_btn"
-                        class="Rectangle-1182 active Close" style="margin-top:-3px">Connect</button></span>
+            <div class="btn-bottom mb-20">
+                <button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button>
+                <button data-method="notice" id="save_btn" class="Rectangle-1182 active Close" style="margin-left:20px;">Connect</button>
             </div>
         </div>
 
@@ -408,7 +413,8 @@
         $(function() {
             var ssid = $(parent.frames["my-iframe"].document).find("#saved_id").val();
             var encrypt = $(parent.frames["my-iframe"].document).find("#saved_id").attr("encrypt");
-            var passwordIncorrect = $(parent.frames["my-iframe"].document).find("#saved_id").attr("passwordIncorrect");
+            var passwordIncorrect = $(parent.frames["my-iframe"].document).find("#saved_id").attr(
+                "passwordIncorrect");
             if (ssid) {
                 $("#ssid").val(ssid)
             }
@@ -426,9 +432,11 @@
                 if (isShow) {
                     v.type = "text";
                     isShow = false;
+                    $(".SHOW").text("HIDE")
                 } else {
                     v.type = "password";
                     isShow = true;
+                    $(".SHOW").text("SHOW")
                 }
             };
             //change();
@@ -547,7 +555,8 @@
                     console.log("res", res)
                     if (res.result) {
                         if (res.result) {
-                            $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr("encrypt", security);
+                            $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr(
+                                "encrypt", security);
                             setTimeout(() => {
                                 var index = parent.layer.getFrameIndex(window.name);
                                 parent.layer.close(index); //关闭当前页
@@ -560,9 +569,11 @@
                         }
 
                     } else if (res.error) {
-                        $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt", "");
+                        $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt",
+                            "");
 
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.error.message + '</div>';
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            res.error.message + '</div>';
                         promptMessage("Error message", tip);
 
                     }
@@ -571,7 +582,8 @@
                 },
                 error: function(jqXHR) {
                     $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt", "");
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             });

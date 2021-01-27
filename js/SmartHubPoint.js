@@ -307,7 +307,7 @@ function getData(layer, loading) {
                         var optionEncryptionType = document.createElement("option");
                         $(optionEncryptionType).val(json[index].vap_config[index].SecurityMode).attr("selected", "selected");
                         $(optionEncryptionType).text(json[index].vap_config[index].SecurityMode);
-                        var encryptionTypeArr = ['No Encryption', 'WPA-PSA', 'WPA2-PSA', 'psk-mixed'];
+                        var encryptionTypeArr = ['No Encryption', 'WPA-PSA', 'WPA2-PSA', 'WPA-PSK/WPA2-PSK Mixed'];
                         for (var i = 0; i < encryptionTypeArr.length; i++) {
                             var EncryptionType = "<option value=" + i + ">" + encryptionTypeArr[i] + "</option>";
                             $('.EncryptionType').append(EncryptionType);
@@ -407,7 +407,7 @@ function getData(layer, loading) {
                     if (len >= 8 && len <= 20 && $(this).val() != '') {
                         $(this).siblings()
                             .find('span')
-                            .text('The password is correct!')
+                            .text('Please enter a password with more than 8 digits!')
                             .removeClass('state1 state4 state3').addClass('state4');
                         pwd = true;
                     } else {

@@ -8,7 +8,7 @@ $(function() {
     });
 })
 
-function getWLANScan(layer) {
+function getWLANScan(layer, form) {
     var loading = parent.layer.load(0, {
         shade: [0.5, '#fff']
     });
@@ -35,11 +35,12 @@ function getWLANScan(layer) {
                 }, 3000);
 
             } else if (res.error) {
-
+                if (res.error.code == "090705") {
+                    changeSwitchStatus(layer, loading, 1);
+                    return;
+                }
                 $("#none_wifiList").children("img").hide();
                 $("#none_wifiList").children("span").text(res.error.message)
-                    //layer.msg("An error occurred：" + res.error.message);
-                    //sessionStorage.setItem('clickFlag', true);
                 setTimeout(() => {
                     getWLANData(layer, loading);
                 }, 3000);
@@ -55,7 +56,6 @@ function getWLANScan(layer) {
 }
 
 function getWLANData(layer, loading) {
-    console.log(9999999)
     var data = {
         "jsonrpc": "2.0",
         "method": "WlanStationConfig",
@@ -89,6 +89,57 @@ function getWLANData(layer, loading) {
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
             promptMessage("Error message", tip);
             //sessionStorage.setItem('clickFlag', true);
+        }
+    });
+}
+
+function changeSwitchStatus(layer, loading, checked) {
+    var mode;
+    if (checked == false) {
+        mode = 0;
+    } else if (checked == true) {
+        mode = 1;
+
+    }
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "WlanStationConfig",
+        "params": {
+            "operate_code": mode
+        },
+        "id": "9.1"
+    };
+
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            parent.layer.close(loading);
+            if (res.result) {
+                if (mode) {
+                    $(".network-c").show();
+                    $("#WLAN_list_c").show();
+                    $("#WLAN_list_c").html("");
+                    getWLANScan(layer, loading);
+                } else {
+                    $(".network-c").hide();
+                    $("#WLAN_list_c").hide();
+                }
+            } else if (res.error) {
+                layer.msg("An error occurred：" + res.error.message);
+            }
+
+
+        },
+        error: function(jqXHR) {
+            parent.layer.close(loading);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
+
         }
     });
 }
@@ -193,8 +244,7 @@ function enterPasswordHtml(infoHtml) {
         noPWDWifiConnect(ssid, bssid, is_saved);
         return;
     }
-    console.log("ssid", ssid, bssid, encrypt, is_saved)
-        //iframe层
+    //iframe层
     parent.layer.open({
         type: 2,
         title: false,
@@ -203,11 +253,10 @@ function enterPasswordHtml(infoHtml) {
         area: ['521px', '360px'],
         content: ['EnterPassword.html?ssid=' + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
-            console.log($("#saved_id").val())
             var connectingSsid = $("#saved_id").val();
             var connectingBssid = $("#saved_id").attr("bssid");
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
-            console.log(wifiJson)
+
             if (connectingSsid && connectingBssid) {
                 for (var i = 0; i < wifiJson.length; i++) {
                     if (wifiJson[i].is_connected == 1) {
@@ -238,7 +287,6 @@ function addNetworkHtml() {
         area: ['541px', '361px'],
         content: ['AddNetwork.html', 'no'],
         end: function() {
-            console.log($("#saved_id").val())
             var connectingSsid = $("#saved_id").val();
             var connectingEncrypt = $("#saved_id").attr("encrypt");
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
@@ -348,8 +396,6 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
     };
 
     data = JSON.stringify(data);
-
-    console.log(data);
     $.ajax({
         type: "post",
         url: "/action/action",
@@ -359,7 +405,6 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
         success: function(res) {
             if (res.result) {
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
-                console.log(wifiJson)
                 if (ssid && bssid) {
                     for (var i = 0; i < wifiJson.length; i++) {
                         if (wifiJson[i].is_connected == 1) {
@@ -416,8 +461,6 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
     };
 
     data = JSON.stringify(data);
-
-    console.log(data);
     $.ajax({
         type: "post",
         url: "/action/action",
@@ -427,7 +470,6 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
         success: function(res) {
             if (res.result) {
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
-                console.log(wifiJson)
                 if (ssid && bssid) {
                     for (var i = 0; i < wifiJson.length; i++) {
                         if (wifiJson[i].is_connected == 1) {

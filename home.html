@@ -499,7 +499,7 @@
             <h4 class="ml-40 mt-10 status">Status</h4>
             <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-1 mt-20">
                 <div class="bd bd1">
-                    <a href=" WiFiNetwork.html " title="Wi-Fi network "><img src="images/r_03.png " class="WiFiNetwork"><img src="images/no-connect.png " class="WiFiNetwork-disable"></a>
+                    <a href=" WiFiNetwork.html " title="Wireless network "><img src="images/r_03.png " class="WiFiNetwork"><img src="images/no-connect.png " class="WiFiNetwork-disable"></a>
                     <a href="MobileData.html " title="Mobile data "><img src="images/r_04.png " class="mobiledataImg"><img src="images/no-connect.png " class="mobiledataImg-disable"></a>
                     <div class="w520">
                         <img src="images/r_01.png " class="r_01">
@@ -648,17 +648,15 @@
                         $('.Connected4G').eq(0).text(arr[4]);
                         $('#Connected4G').attr("src", "images/mobileSignal-none.png");
                         $('.Connected4G').css('color', 'red')
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
-                            .provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
-                            .active_sim : '-');
-                        $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
-                        $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
-                        $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
-                        $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
-                        $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
-                        $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
-                        $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
+                        $('.NetworkProvider').eq(0).text('-');
+                        $('.active_sim').eq(0).text('-');
+                        $('.imsi').eq(0).text('-');
+                        $('.plmn').eq(0).text('-');
+                        $('.csq').eq(0).text('-');
+                        $('.location').eq(0).text('-');
+                        $('.act').eq(0).text('-');
+                        $('.register').eq(0).text('');
+                        $('.cell').eq(0).text('-');
                         $(".mobiledataImg-disable").show();
                     } else {
                         var mobileStatus = "";
