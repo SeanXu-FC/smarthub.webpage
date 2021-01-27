@@ -15,13 +15,13 @@
     <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="bookmark" href="images/favicon.ico" />
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css?mv=20210119">
-    <link href="css/style.css?mv=20210119" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210119"></script>
+    <link rel="stylesheet" href="css/xadmin.css?mv=20210127">
+    <link href="css/style.css?mv=20210127" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210127"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js?mv=20210119"></script>
-    <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210119"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20210127"></script>
+    <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210127"></script>
 
     <style>
         body {
@@ -437,7 +437,6 @@
                     <ul class="sub-menu">
                         <!-- <li>
                             <a href="addMAC.html" target="my-iframe">
-                                
                                 <cite class="hd">Factory Inspection</cite>
                             </a>
                         </li> -->
@@ -503,14 +502,11 @@
                 var id = navA.attr('data-id');
                 var url = navA.attr('data-url');
                 var login = getCookie("-goahead-session-");
-                console.log(login)
-                    //if (login) {
-                console.log("登录了")
+                //if (login) {
                 var src = $("#my-iframe").attr("src");
                 $("#my-iframe").attr("src", url);
                 //} else {
-                console.log("请登录")
-                    // }
+                // }
 
 
 
@@ -546,8 +542,9 @@
             }
             return "";
         }
-
-        //Setting cookies
+        var login = getCookie("-goahead-session-");
+        console.log("login", login)
+            //Setting cookies
         function setCookie(name, value, expireHours) {
             var cookieString = name + "=" + escape(value);
             if (expireHours > 0) {

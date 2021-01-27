@@ -18,7 +18,7 @@
     </style>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210127"></script>
 
 </head>
 
@@ -56,13 +56,11 @@
                 "Waiting for changes to be applied...");
             status = $("#my-iframe", window.parent.document).attr("src");
             status = status.split("=")[1];
-            console.log("status", status)
             if (status != "null" && status != "undefined") { //从首页跳过来
                 var data = {
                     status: status,
                     steps: "",
                 }
-                console.log("status", data)
                 statusHandle(data, loading);
             } else {
                 no4Getstatus(layer, loading);

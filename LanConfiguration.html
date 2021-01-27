@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210119" rel="stylesheet" />
+    <link href="css/style.css?mv=20210127" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210119"></script>
+    <script src="js/lanConfiguration.js?mv=20210127"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210119"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210127"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -200,7 +200,7 @@
         }
         
         .Rectangle-1282 {
-            width: 63px !important;
+            min-width: 100px !important;
             height: 34px;
             border-radius: 5px;
             border: solid 1px #707070;
@@ -462,7 +462,7 @@
         $(function() {
 
             function timeConversion(millisec) {
-                var seconds = (millisec / 1000).toFixed(1);
+                var seconds = (millisec).toFixed(1);
                 //return seconds + " seconds";
                 return seconds;
             }

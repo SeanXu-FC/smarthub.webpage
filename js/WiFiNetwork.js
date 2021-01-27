@@ -146,7 +146,7 @@ function getWLANScan(layer) {
 
         },
         error: function(jqXHR) {
-            //sessionStorage.setItem('clickFlag', true);
+            parent.layer.close(loading);
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
             promptMessage("Error message", tip);
         }
@@ -180,31 +180,14 @@ function getWLANData(layer, loading) {
                 json.sort(arrSort("rssi"));
                 sessionStorage.setItem('wifiJson', JSON.stringify(json));
                 renderWifiList(json);
-                // var $img = $(".wifi-icon");
-                // var signal = 0;
-                // for (var k = 0; k < json.length; k++) {
-                //     signal = json[k].rssi;
-                //     // console.log(signal);
-                //     if (-100 < signal <= -85) {
-                //         $img.eq(k).attr("src", "/images/wifi-icon1.png");
-                //     } else if (-85 < signal <= -75) {
-                //         $img.eq(k).attr("src", "/images/wifi-icon2.png");
-                //     } else if (-50 < signal <= -70) {
-                //         $img.eq(k).attr("src", "/images/wifi-icon3.png");
-                //     } else if (-50 < signal) {
-                //         $img.eq(k).attr("src", "/images/wifi-icon4.png");
-                //     }
-                // } 
+
             } else if (res.error) {
                 layer.msg("An error occurred：" + res.error.message);
             }   
 
-            //sessionStorage.setItem('clickFlag', true);
-
-
         },
         error: function(jqXHR) {
-            //sessionStorage.setItem('clickFlag', true);
+
             parent.layer.close(loading);
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
             promptMessage("Error message", tip);

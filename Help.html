@@ -8,12 +8,14 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
-    <!-- <link href="css/xadmin.css?mv=20210119" rel="stylesheet" />
-    <link href="css/style.css?mv=20210119" rel="stylesheet" /> -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <title>Document</title>
+    <title>YachtSense Link Marine Cloud Router Help Page</title>
     <style>
+        ul li a u {
+            color: blue;
+        }
+        
         ul,
         li {
             padding: 0;
@@ -108,6 +110,11 @@
         .arrow-right {
             width: 20px;
             height: 20px;
+            margin-right: 10px;
+        }
+        
+        .arrow-down {
+            transform: rotate(90deg);
         }
         
         .content {
@@ -130,48 +137,291 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid">Click the links below to expand the available help content.
+
         <ul class="first-menu">
             <li>
-                <a href="javascript:;"><img class="arrow-right" src="images/arrow.png">Mobile Data</a>
+                <a href="javascript:;"><img class="arrow-right" src="./images/arrow.png">HOME</a>
                 <ul class="second-menu disNone">
+
                     <li>
-                        <a href="javascript:;"><span class="Dot"></span>First Part</a>
+                        <a href="javascript:;"><span class="Dot"></span>Cloud</a>
+                        <div class="content disNone">
+                            The Cloud status identifies when the Router has an active connection to the Raymarine cloud service.
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>WLAN (external wireless network)</a>
+                        <div class="content disNone">
+                            The WLAN section shows the status of the external wireless network connection (e.g.: connection to marina WLAN) and the name of the connected network.
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Router access point (internal WLAN)</a>
+                        <div class="content disNone">
+                            The router access point section provides status and name of the router’s access point (i.e.: internal boat WLAN).
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Connected devices (wired and wireless)</a>
+                        <div class="content disNone">
+                            The Home page also identifies the number of devices connected to the Router’s access point (internal WLAN) and wired network (devices connected to the Router’s 4 x RayNet ports).
+                        </div>
+                    </li>
+                    <li>
+                        <a href="https://s3.us-west-2.amazonaws.com/manuals.raymarine.com/Manuals/HTML_Help/YachtSense_Link_4G_Router/Help_001.html" target="_blank">
+                            <span class="Dot"></span><u>More information</u></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="./images/arrow.png">SET-UP WIZARD</a>
+
+                <ul class="second-menu disNone">
+                    <div style="margin-left:30px">The Set-up wizard page guides you through the necessary settings to set up your wireless network connections.</div>
+
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Wireless network (external WLAN)</a>
+                        <div class="content disNone">The first page allows you to connect to a wireless network, such as the WLAN provided by your marina. This will enable the Router and devices connected to it to connect to the internet.</div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Router access point (internal WLAN)</a>
+                        <div class="content disNone">The second page allows you to configure the Router access point's name and password. These are the details required to connect your mobile devices to the Router.
+                        </div>
+                    </li>
+                    <li>
+                        <a href="https://s3.us-west-2.amazonaws.com/manuals.raymarine.com/Manuals/HTML_Help/YachtSense_Link_4G_Router/Help_002.html" target="_blank">
+                            <span class="Dot"></span><u>More information</u></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="./images/arrow.png">BASIC SETTINGS</a>
+                <ul class="second-menu disNone">
+                    <div style="margin-left:30px">The Basic settings provides access to settings for WLAN, Mobile data (Cellular) and the Router’s access point. The Basic settings options also provide access to product information.</div>
+
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Wireless network (external WLAN)</a>
                         <ul class="third-menu disNone">
                             <li>
-                                <a href="javascript:;"><span class="Dot"></span>Data Usage </a>
+                                <a href="javascript:;"><span class="Dot"></span>WLAN switch</a>
                                 <div class="content disNone">
-                                    This place to explain data usage
+                                    Switches the Router’s external WLAN on and off. When switched off the Router will be unable to connect to an external WLAN.
                                 </div>
                             </li>
                             <li>
-                                <a href="javascript:;"><span class="Dot"></span>SIM Management</a>
+                                <a href="javascript:;"><span class="Dot"></span>List of available wireless networks</a>
                                 <div class="content disNone">
-                                    This place to explain SIM Management
+                                    Connect to an available wireless network, such as the WLAN provided by your marina. This will enable the Router and devices connected to it to connect to the internet. You can also connect to a network manually by selecting <b>Add network</b>                                    and entering that network's connection details.
                                 </div>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;"><span class="Dot"></span>Second Part</a>
-                        <div class="content disNone">explain second part</div>
+                        <a href="javascript:;"><span class="Dot"></span>Mobile data (cellular)</a>
+                        <ul class="third-menu disNone">
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>Mobile data switch</a>
+                                <div class="content disNone">
+                                    Switches mobile data on and off, when switched on the Router can access the internet using your SIM card’s data allowance.
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>Data roaming switch</a>
+                                <div class="content disNone">
+                                    Switches data roaming on and off. Data roaming allows you to use your data allowance when outside of your home country.
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>Advanced > Data usage</a>
+                                <div class="content disNone">
+                                    Allows you to view data usage statistics and set data limits for your mobile data.
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>Advanced > SIM management</a>
+                                <div class="content disNone">
+                                    Allows you to select which SIM card is in use and to assign rules for automatically switching between SIM cards.
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>SIM1 / SIM2</a>
+                                <div class="content disNone">
+                                    By selecting <b>SIM1</b> or <b>SIM2</b> you can view details for your SIM card(s) and set up SIM locks.
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Router access point (internal WLAN)</a>
+                        <ul class="third-menu disNone">
+                            <div style="margin-left:60px">The Router access point page allows you to set up the access point’s connection settings so that your wireless devices can connect to the Router and use its internet connection.</div>
+
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>Access point switch</a>
+                                <div class="content disNone">
+                                    Switches the Router’s internal WLAN on and off. When switched off wireless devices will not be able to connect to the Router.
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>Access point connection settings</a>
+                                <div class="content disNone">
+                                    <ul>
+                                        <li><b>Access point name</b> — This is the name of the network that you should connect your wireless device(s) to.</li>
+                                        <li><b>Password</b> — This is the password that needs to be entered when connecting your wireless device(s).</li>
+                                        <li><b>Channel width</b> — Allows you to switch between single channel (20 MHz) 144 M/bit and Dual channel (40MHz) 300 M/bit. Dual channel provides faster speed, however in areas where there is high wireless congestion
+                                            using a single channel may reduce interference.</li>
+                                        <li><b>Preferred WLAN channel</b> — Allows you to select your preferred WLAN channel. Interference can occur in areas where many WLAN networks are using the same channel; moving to a less used channel should eliminate
+                                            this interference.
+                                        </li>
+                                        <li><b>Encryption type</b> — Allows selection of the type of encryption used; WPA2–PSA is the default and recommended encryption type.</li>
+                                    </ul>
+                                    <div><b>Note: If the encryption type is changed to <i>No encryption</i>, anyone
+                                            within range will be able to connect to your Router, and the devices
+                                            connected to it. They will also be able to use your mobile data
+                                            allowance.</b></div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Info</a>
+                        <div class="content disNone">The Info page provides Router hardware and software information including:
+                            <ul>
+                                <li>- Model</li>
+                                <li>- Software version</li>
+                                <li>- Serial number</li>
+                                <li>- IMEI number</li>
+                                <li>- Voltage and current draw</li>
+                                <li>- Temperature</li>
+                                <li>- Operating hours</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="https://s3.us-west-2.amazonaws.com/manuals.raymarine.com/Manuals/HTML_Help/YachtSense_Link_4G_Router/Help_003.html" target="_blank">
+                            <span class="Dot"></span><u>More information</u></a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="javascript:;"><img class="arrow-right" src="images/arrow.png">IO Configure</a>
-                <div class="content disNone">say something about IO Configure</div>
+                <a href="javascript:;"><img class="arrow-right" src="./images/arrow.png">CONNECTED DEVICES</a>
+                <div class="content disNone">The Connected devices page provides a list of all devices connected to the Router using ethernet and wireless connections. The following details are available:
+                    <ul>
+                        <li>- Device name</li>
+                        <li>- MAC address</li>
+                        <li>- IP address</li>
+                        <li>- Connection type</li>
+                        <a href="https://s3.us-west-2.amazonaws.com/manuals.raymarine.com/Manuals/HTML_Help/YachtSense_Link_4G_Router/Help_004.html" target="_blank">
+                            <span class="Dot"></span><u>More information</u></a>
+                    </ul>
+                </div>
+
+            </li>
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="./images/arrow.png">ADVANCED SETTINGS</a>
+                <ul class="second-menu disNone">
+
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>LAN configuration</a>
+                        <div class="content disNone">Provides settings for the wired (RayNet) network.</div>
+                        <div class="content disNone"><b>Note: For correct operation with Raymarine MFDs ensure that
+                                Configure IP is set to 'Automatically (DHCP on)'.</b></div>
+                        <div class="content disNone">The following options are avaialble:
+                            <ul>
+                                <li><b>Automatically (DHCP on)</b> — This is the recommended setting, this allows IP addresses to be automatically assigned to connected devices by the Router using IP addresses within the range specified in the DHCP server
+                                    section.
+                                </li>
+                                <li><b>Manually (DHCP on)</b> — This setting allows you to manually configure the Router’s LAN IP address, subnet mask and default gateway and allows connected devices to be automatically assigned an IP address within the range
+                                    you specify in the DHCP server section.</li>
+                                <li><b>Manually (DHCP off)</b> — This setting allows you to manually configure the Router’s LAN IP Address, subnet mask and default gateway, but does not assign IP addresses to connected devices.</li>
+                            </ul>
+                        </div>
+                        <div class="content disNone"><b>Note: With DHCP switched off, each device will have to be
+                                manually assigned an IP address in the same range as your Router’s IP address.</b>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>WLAN configuration</a>
+                        <div class="content disNone">Provides settings for the wireless (internal WLAN) network.</div>
+                        <div class="content disNone">The following options are available:
+                            <ul>
+                                <li><b>Manually</b> — This setting allows you to manually configure the Router’s WLAN IP address, subnet mask and default gateway and specify the IP address range available.
+                                </li>
+                                <li><b>Automatically</b> — This is the recommended setting; it allows IP addresses to be automatically assigned to wireless devices connecting to the Router.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>GNSS</a>
+                        <div class="content disNone">Provides settings related to the Router’s internal GNSS (GPS) receiver.
+                            <ul>
+                                <li><b>GNSS fix status</b> — Provides position fix status.</li>
+                                <li><b>Internal GNSS</b> — Switches the internal receiver on and off.</li>
+                                <li><b>Restart GNSS</b> — Reboots the internal GNSS receiver.</li>
+                                <li><b>GNSS Constellations</b> — Enables use of GLONASS and Beidou GNSS constellations (in addition to the GPS constellation).</li>
+                                <li><b>Differential positioning</b> — Enables use of differential positioning satellites which enhance your position fix.</li>
+                                <li><b>Differential positioning systems</b> — Allows selection of specific differential systems.
+                                </li>
+                                <li><b>Satellites in use</b> — Provides details of the satellites being used for your position fix.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Inputs and outputs</a>
+                        <div class="content disNone">Allows management of devices connected to the Router’s input and output connections.
+                            <ul>
+                                <li><b>Channel monitoring</b> — This page provides monitoring details of connected input and output devices.</li>
+                                <li><b>Channel configuration</b> — This page allows configuration of connected input and output devices.</li>
+                                <li><b>Alert notifications</b> — This page allows configuration of alert notifications for connected input and output devices.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Software upgrade</a>
+                        <div class="content disNone">Upload and install new Router software.
+                            <p>Your Router's current software version can be found on the Info page (BASIC SETTINGS > Info). To search for updated software for your Router, go to the software updates section of the Raymarine website:
+                                <a href="http://wwww.raymarine.com/software" target="_blank"><u>Software updates</u></a>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Restart and factory reset</a>
+                        <div class="content disNone">Reboot Router or perform a factory reset.</div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Admin password</a>
+                        <div class="content disNone">Change the password required to access the Router’s web pages.
+                        </div>
+                    </li>
+                    <li>
+                        <a href="https://s3.us-west-2.amazonaws.com/manuals.raymarine.com/Manuals/HTML_Help/YachtSense_Link_4G_Router/Help_005.html" target="_blank">
+                            <span class="Dot"></span><u>More information</u></a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="./images/arrow.png">MANUALS & DOCUMENTS</a>
+                <div class="content disNone">Access the full documentation for your Router by scanning the QR code or clicking the link below.
+
+                    <div><img src="./images/QR_Code.png">
+
+                        <a href="https://tinyurl.com/yywjo3mj" target="_blank"><u>View full product documentation
+                            </u></a></div>
+                </div>
 
             </li>
         </ul>
     </div>
+
 </body>
 <script>
     $(".first-menu a").on("click", function() {
         var isContent = $(this).parent().children().is('.content');
         if (isContent) {
             var disCss = $(this).parent().children(".content").hasClass("disNone");
-            $(".content").removeClass("disVisi").addClass("disNone");
+            //$(".content").removeClass("disVisi").addClass("disNone");
             if (disCss) {
                 $(this).parent().children(".content").removeClass("disNone").addClass("disVisi");
             } else {
@@ -179,13 +429,23 @@
             }
         } else {
             var disCss = $(this).parent().children("ul").hasClass("disNone");
-            $(".content").removeClass("disVisi").addClass("disNone");
+            //$(".content").removeClass("disVisi").addClass("disNone");
             if (disCss) {
                 $(this).parent().children("ul").removeClass("disNone").addClass("disVisi");
             } else {
                 $(this).parent().children("ul").removeClass("disVisi").addClass("disNone");
             }
         }
+        var firstMenu = $(this).parent().parent().is('.first-menu');
+        if (firstMenu) {
+            $(".first-menu a").next().removeClass("disVisi").addClass("disNone");
+            $(this).next().addClass("disVisi");
+            $(".first-menu a img").removeClass("arrow-down");
+            $(this).children("img").addClass("arrow-down");
+        } else {
+
+        }
+
     })
 </script>
 

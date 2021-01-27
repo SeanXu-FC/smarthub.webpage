@@ -11,7 +11,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <!-- <meta http-equiv="refresh" content="0;"> -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/login.css?mv=20210119" />
+    <link rel="stylesheet" type="text/css" href="css/login.css?mv=20210127" />
 
     <title>Raymarine</title>
     <style>
@@ -25,10 +25,6 @@
         
         .state3 {
             color: #EB4F38 !important;
-        }
-        
-        .state4 {
-            color: #00B694;
         }
         /* input[type="submit"] {
             width: 80px;
@@ -95,11 +91,11 @@
                                 <h3 style="margin-bottom:30px">Welcome to login Raymarine !</h3>
                                 <div class="form-group">
                                     <input type="text" id="account" name="username" oninput="WidthCheckIO(this,64);" class="form-control" placeholder="UserName">
-                                    <div id="userspan"><span></span></div>
+
                                 </div>
                                 <div class="form-group" style="margin-bottom:30px;position: relative;">
                                     <input type="password" id="pwd" name="password" class="form-control" oninput="WidthCheckIO(this,64);" placeholder="Password"><span class='password-show'>SHOW</span>
-                                    <div id="passwordspan"><span></span></div>
+                                    <div><span id="passwordspan" class="state3"></span></div>
                                 </div>
                                 <div class="text-center"><input class="btn btn-md btn-default " type="button" id="login_btn" onclick="login()" name="submit" value="login" disabled></div>
                             </div>
@@ -110,9 +106,10 @@
         </div>
 
     </div>
-    <div class="text-center" style="position: fixed;bottom:10px;color:#ccc;">Copyright ©2020 Raymarine All Rights Reserved</div>
+    <div class="text-center" style="position: fixed;bottom:10px;color:#ccc;">Copyright ©2020 Raymarine All Rights Reserved
+    </div>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/login.js?mv=20210119"></script>
+    <script type="text/javascript" src="js/login.js?mv=20210127"></script>
 </body>
 
 </html>

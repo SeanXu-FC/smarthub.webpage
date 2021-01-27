@@ -59,9 +59,9 @@ $(function() {
         success: function(res) {
             if (res.result) {
                 $("#model").html(res.result.Model);
-                $("#iv").html(res.result.ipq_version);
-                $("#nv").html(res.result.nxp_version);
-                $("#stm8").html(res.result.stm8_version);
+                //$("#iv").html(res.result.ipq_version);
+                //$("#nv").html(res.result.nxp_version);
+                $("#stm8").html(res.result.TotalVersion);
                 $("#sn").html(res.result.serial_num);
                 $("#iMeiInfo").html(res.result.IMEI);
                 $("#voltage").html(res.result.Voltage + " V");

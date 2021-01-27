@@ -952,21 +952,21 @@ function getDatausageVal() {
     var params = {
         "data_usages": [{
                 "sim_id": 0,
-                "monthly_data_limit_flag": data_limit_flag,
-                "monthly_data_limit": dataLimit,
-                "sim_data_limt_unit": switchMB,
+                "monthly_data_limit_flag": Number(data_limit_flag),
+                "monthly_data_limit": Number(dataLimit),
+                "sim_data_limt_unit": Number(switchMB),
                 "start_date": limit_time,
-                "last_month": last_manth_s,
-                "usage_reminder_flag": usagereminders
+                "last_month": Number(last_manth_s),
+                "usage_reminder_flag": Number(usagereminders)
             },
             {
                 "sim_id": 1,
-                "monthly_data_limit_flag": data_limit_flag2,
-                "monthly_data_limit": dataLimit2,
-                "sim_data_limt_unit": switchMB2,
+                "monthly_data_limit_flag": Number(data_limit_flag2),
+                "monthly_data_limit": Number(dataLimit2),
+                "sim_data_limt_unit": Number(switchMB2),
                 "start_date": limit_time2,
-                "last_month": last_manth_s2,
-                "usage_reminder_flag": usagereminders2
+                "last_month": Number(last_manth_s2),
+                "usage_reminder_flag": Number(usagereminders2)
             }
         ]
     }

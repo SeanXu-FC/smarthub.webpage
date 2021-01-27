@@ -2,7 +2,12 @@ document.onkeydown = function(e) {
     var theEvent = window.event || e;
     var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
     if (code == 13) {
-        login();
+        var len1 = $('input[name="username"]').val().length;
+        var len2 = $('input[name="password"]').val().length;
+        if ((len1 >= 5 && len1 <= 20) && (len2 >= 6 && len2 <= 20)) {
+            login();
+        }
+
     }
 }
 $(function() {
@@ -15,21 +20,12 @@ $(function() {
     $('input[name="username"]').keyup(function() {
         var len = $(this).val().length;
         if (len >= 5 && len <= 20 && $(this).val() != '') {
-            $(this).siblings()
-                .find('span')
-                //.text('The user name is entered correctly!')
-                .removeClass('state1 state4 state3').addClass('state4');
             username = true;
             var len1 = $('input[name="password"]').val().length;
-            if (len1 >= 5 && len1 <= 20) {
+            if (len1 >= 6 && len1 <= 20) {
                 $("#login_btn").removeAttr("disabled");
             }
         } else {
-            $(this).siblings()
-                .find('span')
-                //.text('User name input error, should be between 5-20 digits!')
-                .removeClass('state1 state2 state4')
-                .addClass('state3');
             $("#login_btn").attr("disabled", "disabled");
         }
     })
@@ -40,23 +36,12 @@ $(function() {
         //var reg = /^\w{6,19}$/;
         var reg = /^[\da-zA-Z!@#$%|+-^&*.~]{6,64}$/; //数字、字母、特殊字符
         if (reg.test($(this).val())) {
-            $(this).siblings()
-                .find('span')
-                //.text('Correct password input!')
-                .removeClass()
-                .addClass('state4');
             password = true;
             var len = $('input[name="username"]').val().length;
             if (len >= 5 && len <= 20) {
                 $("#login_btn").removeAttr("disabled");
             }
-
         } else {
-            $(this).siblings()
-                .find('span')
-                //.text('Password input error, please re-enter!')
-                .removeClass()
-                .addClass('state3');
             $("#login_btn").attr("disabled", "disabled");
         }
     })
@@ -91,14 +76,14 @@ function login() {
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         success: function(res) {
             if (res.result && res.result.login == "0") {
-                // $userId.next().text("Wrong user name or password").css({
-                //     "font-weight": "bold",
-                //     "color": "red"
-                // });
-                $(".state2").hide();
-                $(".state4").text("Wrong user name or password").addClass('state3');
+                $("#passwordspan").text("Wrong user name or password")
             } else {
-                top.location.href = "/index.html";
+                var domain = window.location.host;
+                var str = ('https:' == document.location.protocol ? 'https://' :
+                    'http://') + domain + "/index.html";
+                console.log(str)
+                    //top.location.href = ('https:' == document.location.protocol ? 'https://' :
+                    //    'http://') + domain + "/index.html";
             }
 
         }

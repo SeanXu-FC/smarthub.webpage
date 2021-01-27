@@ -83,7 +83,7 @@ button,
 input,
 select,
 textarea {
-    font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, Verdana, sans-serif, "WenQuanYi Micro Hei", "\5B8B\4F53";
+    font-family: "OpenSans";
     font-size: 14px;
     color: #666 !important;
     -webkit-font-smoothing: antialiased;
@@ -702,8 +702,6 @@ ol.inline>li {
     border-top: solid 1px #eee;
     float: none
 }
-
-
 
 @media screen and (max-width:1206px) {
     .horizontal-center {

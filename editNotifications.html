@@ -676,7 +676,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210119"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210127"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -824,8 +824,7 @@
                     }
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
-                        .stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             })

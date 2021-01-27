@@ -76,7 +76,6 @@ $(function() {
                 success: function(res) {
                     if (res.result) {
                         $('#success').show(1000).delay(6000).hide(0);
-
                     } else {
                         layer.msg(res.error);
                     }
