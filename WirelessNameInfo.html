@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210127" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210127"></script>
+    <link href="css/style.css?mv=20210129" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210129"></script>
     <title>Document</title>
     <style>
         * {
@@ -277,7 +277,7 @@
         
         .Forget-network {
             font-family: OpenSans;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: normal;
             font-stretch: normal;
             font-style: normal;
@@ -289,7 +289,7 @@
         
         .Close {
             font-family: OpenSans;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: normal;
             font-stretch: normal;
             font-style: normal;
@@ -332,6 +332,13 @@
         html,
         body {
             height: 100%;
+        }
+        
+        .btn-bottom {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -391,16 +398,15 @@
                         <em>ON</em><i></i></div>
                 </div>
             </div>
-            <div class="row pt-30 bottom-btn">
-                <span class="col-md-2 col-md-offset-4" id="layerDemo" style="display: inline-block;margin-left:148px;"><button data-method="notice"
-                        class="Path-97 layui-btn Forget-network" disabled>Forget network</button></span>
-                <span class="col-md-4 col-md-offset-2 card-close-btn" style="display: inline-block;"><button id="btn"
-                        class="Rectangle-1182 active Close">Close</button></span>
+            <div class="btn-bottom mt-20 mb-20">
+                <button id="layerDemo" data-method="notice" class="Path-97 layui-btn Forget-network" disabled>Forget
+                    network</button>
+                <button id="btn" class="Rectangle-1182 active Close card-close-btn ml-20">Close</button>
             </div>
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210127"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210129"></script>
     <script>
         var ssid, bssid, encrypt, is_saved;
         $(function() {
@@ -428,7 +434,7 @@
 
             });
 
-            $('#layerDemo .layui-btn').on('click', function() {
+            $('#layerDemo').on('click', function() {
                 //iframe层
                 parent.layer.open({
                     id: "forget",
@@ -481,7 +487,7 @@
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
                     layer.close(loading);
-                    $("#layerDemo .layui-btn").removeAttr("disabled");
+                    $("#layerDemo").removeAttr("disabled");
                     if (res.result) {
                         if (res.result.status == "Unexpected Error Occured!") {
                             getWifiDetail(layer, form);

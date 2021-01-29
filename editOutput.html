@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210127" rel="stylesheet" />
+    <link href="css/style.css?mv=20210129" rel="stylesheet" />
 
     <title>Document</title>
     <style>
@@ -475,13 +475,15 @@
         <div class="layui-form" lay-filter="example">
             <div class="Edit-input">Edit output</div>
             <div class="layui-form-item mt-20">
-                <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel number:</label>
+                <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel
+                    number:</label>
                 <div class="layui-input-block">
                     <p id="channel-number" class="h18">5</p>
                 </div>
             </div>
             <div class="layui-form-item mt-20">
-                <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel name:</label>
+                <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel
+                    name:</label>
                 <div class="layui-input-block">
                     <input id="output_name" type="text" name="" lay-verify="title" autocomplete="off" placeholder="Wipers" class="Rectangle-1188 layui-input form-control h18" oninput="value=value.replace(/[\u4e00-\u9fa5]/ig,'')" onkeyup="WidthCheckIO(this,64);">
                 </div>
@@ -497,15 +499,17 @@
             </div> -->
 
             <div class="row mt-60">
-                <span class="col-md-4 col-md-offset-2" style="display: inline-block;margin-left:460px"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button></span>
-                <span class="col-md-2 col-md-offset-4 connected" id="layerDemo" style="display: inline-block;margin-left:-10px;"><button data-method="notice" id="btn" class="Rectangle-1182 active Close" style="margin-top:-3px">Save</button></span>
+                <span class="col-md-4 col-md-offset-2" style="display: inline-block;margin-left:460px"><button
+                        id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button></span>
+                <span class="col-md-2 col-md-offset-4 connected" id="layerDemo" style="display: inline-block;margin-left:-10px;"><button data-method="notice" id="btn"
+                        class="Rectangle-1182 active Close" style="margin-top:-3px">Save</button></span>
             </div>
         </div>
 
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210127"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210129"></script>
     <script>
         var saveChannelID;
         $(function() {
@@ -518,7 +522,7 @@
             layui.use('layer', function() {
                 var layer = layui.layer;
                 // $("#security option[value='" + types + "']").prop("selected", true);
-                $("#output_name").attr("placeholder", name);
+                $("#output_name").val(name);
             })
             layui.use(['form'], function() {
                 var form = layui.form;
@@ -586,7 +590,8 @@
                     }
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             })

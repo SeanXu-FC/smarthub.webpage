@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210127" rel="stylesheet" />
+    <link href="css/style.css?mv=20210129" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -164,7 +164,7 @@
                 <div class="mt-20 Rectangle-1234 inputsEdit" dataId="1">
                     <p class="lan-h Bilge-pump" id="name1">--</p>
                     <p class="mt-10 Channel">Channel 1 </p>
-                    <!-- <p class="mt-10 Digital-input" id="type1">Digital LEVEL</p> -->
+                    <p class="mt-10 Digital-input" id="type1">--</p>
                     <span class="lan-edit Edit edit-first "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -173,6 +173,7 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="5">
                     <p class="lan-h Bilge-pump" id="name5">--</p>
                     <p class="mt-10 Channel">Channel 5 </p>
+                    <p class="mt-10 Digital-input" id="type5">--</p>
                     <span class="lan-edit Edit edit-first "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -181,7 +182,7 @@
                 <div class="mt-20 Rectangle-1234 inputsEdit" dataId="2">
                     <p class="lan-h Bilge-pump" id="name2">--</p>
                     <p class="mt-10 Channel">Channel 2 </p>
-                    <!-- <p class="mt-10 Digital-input" id="type2">Digital LEVEL</p> -->
+                    <p class="mt-10 Digital-input" id="type2">--</p>
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -189,6 +190,7 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="6">
                     <p class="lan-h Bilge-pump" id="name6">--</p>
                     <p class="mt-10 Channel">Channel 6 </p>
+                    <p class="mt-10 Digital-input" id="type6">--</p>
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -196,7 +198,7 @@
                 <div class="mt-20 Rectangle-1234 inputsEdit" dataId="3">
                     <p class="lan-h Bilge-pump" id="name3">--</p>
                     <p class="mt-10 Channel">Channel 3 </p>
-                    <!-- <p class="mt-10 Digital-input" id="type3">Digital LEVEL</p> -->
+                    <p class="mt-10 Digital-input" id="type3">--</p>
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -204,6 +206,7 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="7">
                     <p class="lan-h Bilge-pump" id="name7">--</p>
                     <p class="mt-10 Channel">Channel 7 </p>
+                    <p class="mt-10 Digital-input" id="type7">--</p>
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -211,7 +214,7 @@
                 <div class="mt-20 Rectangle-1234 inputsEdit" dataId="4">
                     <p class="lan-h Bilge-pump" id="name4">--</p>
                     <p class="mt-10 Channel">Channel 4 </p>
-                    <!-- <p class="mt-10 Digital-input" id="type4">Digital LEVEL</p> -->
+                    <p class="mt-10 Digital-input" id="type4">--</p>
                     <span class="lan-edit Edit"><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -219,13 +222,14 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="8">
                     <p class="lan-h Bilge-pump" id="name8">--</p>
                     <p class="mt-10 Channel">Channel 8 </p>
+                    <p class="mt-10 Digital-input" id="type8">--</p>
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210127"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210129"></script>
     <script>
         $(function() {
             layui.use('layer', function() {
@@ -239,6 +243,7 @@
             $('.inputsEdit').on('click', function() {
                 var name = $(this).children(".Bilge-pump").text();
                 var dataId = $(this).attr("dataId");
+                var types = $(this).children(".Bilge-pump").attr("types");
 
                 //iframe层
                 parent.layer.open({
@@ -247,8 +252,10 @@
                     closeBtn: 0,
                     //shadeClose: true,
                     shade: 0.8,
-                    area: ['761px', '320px'],
-                    content: ['editInput.html?ChannelID=' + dataId + '&name=' + name, 'no'],
+                    area: ['761px', '380px'],
+                    content: ['editInput.html?ChannelID=' + dataId + '&name=' + name +
+                        '&types=' + types, 'no'
+                    ],
                     end: function() {
                         var ChannelID = $("#saved_id").val();
                         if (ChannelID) {
@@ -271,7 +278,9 @@
                     //shadeClose: true,
                     shade: 0.8,
                     area: ['761px', '320px'],
-                    content: ['editOutput.html?ChannelID=' + dataId + '&name=' + name + '&types=' + types, 'no'],
+                    content: ['editOutput.html?ChannelID=' + dataId + '&name=' + name +
+                        '&types=' + types, 'no'
+                    ],
                     end: function() {
                         var ChannelID = $("#saved_id").val();
                         console.log(ChannelID)
@@ -308,11 +317,18 @@
                             $("#name" + (i + 1)).text(json[i].name);
                             $("#name" + (i + 1)).attr("types", json[i].types)
                             if (i < 4) {
-                                $("#Voltage" + (i + 1)).text(json[i].volt + "v");
-                                if (json[i].level != 0) {
-                                    // $("#type" + (i + 1)).text("Analog input");
+                                if (json[i].types == 0) {
+                                    $("#type" + (i + 1)).text("Analog input");
+                                } else if (json[i].types == 2) {
+                                    $("#type" + (i + 1)).text("Digital negative input");
                                 } else {
-                                    //$("#type" + (i + 1)).text("Digital LEVEL");
+                                    $("#type" + (i + 1)).text("Digital postive input");
+                                }
+                            } else {
+                                if (json[i].types == 0) {
+                                    $("#type" + (i + 1)).text("Active low output");
+                                } else if (json[i].types == 1) {
+                                    $("#type" + (i + 1)).text("Active high output");
                                 }
                             }
                         }
@@ -331,7 +347,8 @@
                 },
                 error: function(jqXHR) {
                     layer.close(loading);
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             })

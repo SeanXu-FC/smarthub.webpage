@@ -28,26 +28,42 @@ $(function() {
 
 
         var $getWrapper = $(this).closest($wrapper);
-        $getWrapper.find($tabMenu).removeClass('active');
+        //$getWrapper.find($tabMenu).removeClass('active');
+        $(this).siblings().removeClass('active');
         $(this).addClass('active');
 
-        $getWrapper.find('.line').width(0);
+        //$getWrapper.find('.line').width(0);
+        $(this).siblings().find('.line').width(0);
         $(this).find($line).animate({
             'width': '90%'
         }, 'fast');
         if (dataTab == "tab0") {
-            renderDataUsage(MobileData, 0); //渲染Data usage SIM1数据
+            $getWrapper.find($allTabs).filter('[data-tab=tab1]').hide();
+            $getWrapper.find($allTabs).filter('[data-tab=tab0]').show();
+            renderDataUsage(MobileData, 0); //渲染Data usage SIM1数据           
         } else if (dataTab == "tab1") {
+            $getWrapper.find($allTabs).filter('[data-tab=tab0]').hide();
+            $getWrapper.find($allTabs).filter('[data-tab=tab1]').show();
             renderDataUsage(MobileData, 1); //渲染Data usage SIM2数据
-            console.log(dataTab);
         }
-        $getWrapper.find($allTabs).hide();
-        $getWrapper.find($allTabs).filter('[data-tab=' + dataTab + ']').show();
+        if (dataTab == "tab3") {
+            $getWrapper.find($allTabs).filter('[data-tab=tab2]').hide();
+            $getWrapper.find($allTabs).filter('[data-tab=tab3]').show();
+        } else if (dataTab == "tab2") {
+            $getWrapper.find($allTabs).filter('[data-tab=tab3]').hide();
+            $getWrapper.find($allTabs).filter('[data-tab=tab2]').show();
+        }
+        if (dataTab == "tab4") {
+            $getWrapper.find($allTabs).filter('[data-tab=tab5]').hide();
+            $getWrapper.find($allTabs).filter('[data-tab=tab4]').show();
+        } else if (dataTab == "tab5") {
+            $getWrapper.find($allTabs).filter('[data-tab=tab4]').hide();
+            $getWrapper.find($allTabs).filter('[data-tab=tab5]').show();
+        }
+        // $getWrapper.find($allTabs).hide();
+        // $getWrapper.find($allTabs).filter('[data-tab=' + dataTab + ']').show();
     });
 
-    // $(".SIMChange-tab").on("click",function(){
-
-    // })
 
     var images = ['images/icon-arrow-up.png', 'images/icon-arrow-down.png'];
     $('#arrow_tab').click(function() {
@@ -111,9 +127,8 @@ $(function() {
             changeSwitchStatus(layer, form, checked1, checked2)
         });
 
-        form.on('switch(dataLimit)', function(data) {
+        form.on('checkbox(dataLimit)', function(data) {
             var checked = data.elem.checked;
-            console.log(checked)
             if (checked) {
                 $("#dataLimit input").removeAttr("disabled");
                 $("#switchMB").removeAttr("disabled");
@@ -129,26 +144,23 @@ $(function() {
                 $("#usagereminders input").attr("disabled", true);
             }
             form.render();
-            getDatausageVal();
+            //getDatausageVal();
         });
         $("#dataLimit").change(function() {
-            console.log(9876)
-            getDatausageVal();
+            //getDatausageVal();
         });
         $("#switchMB").change(function() {
-            console.log(9876)
-            getDatausageVal();
+            //getDatausageVal();
         });
         $("#last_manth_s").change(function() {
-            getDatausageVal();
+            //getDatausageVal();
         });
-        form.on('switch(limitInfo)', function(data) {
-            getDatausageVal();
+        form.on('checkbox(limitInfo)', function(data) {
+            //getDatausageVal();
         });
 
-        form.on('switch(dataLimit2)', function(data) {
+        form.on('checkbox(dataLimit2)', function(data) {
             var checked = data.elem.checked;
-            console.log(checked)
             if (checked) {
                 $("#dataLimit2 input").removeAttr("disabled");
                 $("#switchMB2").removeAttr("disabled");
@@ -162,54 +174,53 @@ $(function() {
                 $("#last_manth_s2").attr("disabled", true);
             }
             form.render();
-            getDatausageVal();
+            //getDatausageVal();
         });
         $("#dataLimit2").change(function() {
-            console.log(9876)
-            getDatausageVal();
+            //getDatausageVal();
         });
         $("#switchMB2").change(function() {
-            console.log(9876)
-            getDatausageVal();
+            //getDatausageVal();
         });
         $("#last_manth_s2").change(function() {
-            getDatausageVal();
+            //getDatausageVal();
         });
-        form.on('switch(limitInfo2)', function(data) {
-            getDatausageVal();
+        form.on('checkbox(limitInfo2)', function(data) {
+            //getDatausageVal();
         });
 
 
 
-        $("#SIM").change(function() {
-            getSimManagementVal();
+
+        form.on('radio(activeSIM)', function(data) {
+            //getSimManagementVal();
         });
-        form.on('switch(SIMswitch)', function(data) {
-            getSimManagementVal();
+        form.on('checkbox(SIMswitch)', function(data) {
+            //getSimManagementVal();
         });
         form.on('checkbox(Weak_signal_1)', function(data) {
-            getSimManagementVal();
+            //getSimManagementVal();
         });
         form.on('checkbox(Weak_signal_2)', function(data) {
-            getSimManagementVal();
+            //getSimManagementVal();
         });
         form.on('checkbox(rule_dlimit_1)', function(data) {
-            getSimManagementVal();
+            //getSimManagementVal();
         });
         form.on('checkbox(rule_dlimit_2)', function(data) {
-            getSimManagementVal();
+            //getSimManagementVal();
         });
         form.on('checkbox(rule_roamming_1)', function(data) {
-            getSimManagementVal();
+            //getSimManagementVal();
         });
         form.on('checkbox(rule_roamming_2)', function(data) {
-            getSimManagementVal();
+            //getSimManagementVal();
         });
         form.on('checkbox(rule_noservice_1)', function(data) {
-            getSimManagementVal();
+            //getSimManagementVal();
         });
         form.on('checkbox(rule_noservice_2)', function(data) {
-            getSimManagementVal();
+            //getSimManagementVal();
         });
 
         $("#arrow1").click(function() {
@@ -242,6 +253,13 @@ $(function() {
                 $('#arrow2 span .up').attr("src", images1[0]);
             }
         });
+
+        $("#btn_saved1").click(function() {
+            getDatausageVal();
+        })
+        $("#btn_saved2").click(function() {
+            getSimManagementVal();
+        })
 
     });
 
@@ -364,7 +382,7 @@ function getDatausageFirst(layer, form, loading) {
                 renderDataUsage(MobileData, 0);
                 setTimeout(() => {
                     renderDataUsage(MobileData, 1);
-                }, 500);
+                }, 1000);
             }
         },
         error: function(jqXHR) {
@@ -453,6 +471,11 @@ function renderDataUsage(json, i) {
 
         $("#switchMB option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
 
+        var nextDate = getNextDate();
+        console.log(nextDate)
+        var dayLeft = DateDiff(json[i].start_date, nextDate);
+        $("#day_left2").text(dayLeft);
+        $("#limit_startTime2").text(nextDate);
         if (json[i].start_date) { //Start data limit on
             layui.use(['laydate'], function() {
                 laydate = layui.laydate;
@@ -465,7 +488,7 @@ function renderDataUsage(json, i) {
                     done: function(value, date) {
                         console.log(value)
                         $("#limit_time").val(value);
-                        getDatausageVal();
+                        //getDatausageVal();
                     }
                 });
             });
@@ -479,7 +502,7 @@ function renderDataUsage(json, i) {
                     done: function(value, date) {
                         console.log(value)
                         $("#limit_time").val(value);
-                        getDatausageVal();
+                        //getDatausageVal();
                     }
                 });
             });
@@ -526,6 +549,7 @@ function renderDataUsage(json, i) {
 
         $("#switchMB2 option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
 
+        $("#limit_startTime").text(json[i].start_date);
         if (json[i].start_date) { //Start data limit on
             layui.use(['laydate'], function() {
                 laydate = layui.laydate;
@@ -536,9 +560,8 @@ function renderDataUsage(json, i) {
                     isInitValue: true,
                     trigger: 'click',
                     done: function(value, date) {
-                        console.log(value, date)
                         $("#limit_time2").val(value);
-                        getDatausageVal();
+                        //getDatausageVal();
                     }
                 });
             });
@@ -550,9 +573,8 @@ function renderDataUsage(json, i) {
                     lang: 'en',
                     trigger: 'click',
                     done: function(value, date) {
-                        console.log(value, date)
                         $("#limit_time2").val(value);
-                        getDatausageVal();
+                        //getDatausageVal();
                     }
                 });
             });
@@ -590,6 +612,29 @@ function renderDataUsage(json, i) {
         $("#usagereminders").show();
 
     });
+}
+
+//计算天数差的函数(2016-09-09)，通用 
+function DateDiff(begintime, endtime) { //sDate1和sDate2是2006-12-18格式 
+    var begintime_ms = Date.parse(new Date(begintime.replace(/-/g, "/"))); //begintime 为开始时间   
+    var endtime_ms = Date.parse(new Date(endtime.replace(/-/g, "/"))); // endtime 为结束时间 
+    var ms = endtime_ms - begintime_ms;
+    var days = Math.floor(ms / (24 * 3600 * 1000))
+    return days;
+}
+//获取下月1号
+function getNextDate() {
+    var date = new Date();
+    var year = date.getFullYear()
+    var month = date.getMonth() + 2;
+    if (month == 13) {
+        year = parseInt(year) + 1;
+        month = 1;
+    }
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    return (year + "-" + month + "-01")
 }
 
 function getSimManagement(layer, form, loading) {
@@ -855,10 +900,9 @@ function renderEchart(id, Xdate, Ydata) {
 }
 //设置前获取SimManagement各项的值
 function getSimManagementVal() {
-    var SIM = $("#SIM").val();
+    var SIM = $("input[name='activeSIM']:checked").val();
     var autoSwitch = $("#AutoSim input").is(":checked") == true ? 1 : 0;
     var Weak_signal_1 = $("#Weak_signal_1").is(":checked") == true ? 1 : 0;
-    console.log($("#Weak_signal_1").is(":checked"))
     var rule_dlimit_1 = $("#rule_dlimit_1").is(":checked") == true ? 1 : 0;
     var rule_roamming_1 = $("#rule_roamming_1").is(":checked") == true ? 1 : 0;
     var rule_noservice_1 = $("#rule_noservice_1").is(":checked") == true ? 1 : 0;

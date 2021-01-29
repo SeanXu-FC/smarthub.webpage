@@ -79,7 +79,7 @@ function login() {
                 $("#passwordspan").text("Wrong user name or password")
             } else {
                 var domain = window.location.host;
-                // var str = ('https:' == document.location.protocol ? 'https://' :
+                //  str = ('https:' == document.location.protocol ? 'https://' :
                 //     'http://') + domain + "/index.html";
                 top.location.href = ('https:' == document.location.protocol ? 'https://' :
                     'http://') + domain + "/index.html";
