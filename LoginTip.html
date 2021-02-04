@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210129" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210129"></script>
+    <link href="css/style.css?mv=20210204" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210204"></script>
     <title>Document</title>
     <style>
         * {
@@ -284,11 +284,13 @@
     </div>
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210129"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210204"></script>
     <script>
+        var srcStr;
         $(function() {
-
-            // 按钮禁掉和灰掉
+            srcStr = GetUrlParam("url");
+            console.log("srcStr0", srcStr)
+                // 按钮禁掉和灰掉
             $(".connected button").prop("disabled", true);
             $(".connected button").css("opacity", "0.5");
 
@@ -306,7 +308,7 @@
 
             //password
             $('#pwd').keyup(function() {
-                var reg = /^[\da-zA-Z!@#$%|+-^&*.~]{8,64}$/; //数字、字母、特殊字符
+                var reg = /^[\da-zA-Z!@#$%|+-^&*.~]{6,64}$/; //数字、字母、特殊字符
                 $('.error').hide();
                 if (reg.test($(this).val())) {
 
@@ -320,16 +322,12 @@
             })
         });
         $('#cancel').click(function() {
-
-            setTimeout(() => {
-                var index = parent.layer.getFrameIndex(window.name);
-                parent.layer.close(index); //关闭当前页
-            }, 500);
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index); //关闭当前页
 
         });
 
         function login() {
-            console.log($('#loginInfo').serialize())
             $.ajax({
                 url: "/action/login",
                 type: "post",
@@ -338,10 +336,15 @@
                 dataType: "json",
                 contentType: "application/x-www-form-urlencoded;charset=utf-8",
                 success: function(res) {
-                    console.log(res)
+                    if (res.result && res.result.login == "0") {
+                        $(".error").show();
+                    } else {
+                        $(parent.document).find("#my-iframe").attr("src", srcStr);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index); //关闭当前页                       
+                    }
                 }
             })
-
         }
     </script>
 </body>

@@ -71,15 +71,15 @@ function promptMessage(title, content) {
     })
 }
 
-function LoginMessage() {
+function LoginMessage(url) {
     parent.layer.open({
         type: 2,
         id: 'loginMsg', //防止重复弹出   
         title: false,
         closeBtn: 0,
         shade: 0.8,
-        area: ['541px', '35%'],
-        content: ['LoginTip.html', 'no'],
+        area: ['541px', '38%'],
+        content: ["LoginTip.html?url=" + url, 'no'],
         end: function() {}
     });
 }

@@ -11,10 +11,10 @@
     <title>文件上传</title>
 
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210129" rel="stylesheet" />
+    <link href="css/style.css?mv=20210204" rel="stylesheet" />
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="layui/layui.js" type="text/javascript"></script>
-    <script src="js/upload.js?mv=20210129" type="text/javascript"></script>
+    <script src="js/upload.js?mv=20210204" type="text/javascript"></script>
     <style>
         .red {
             color: #861f41 !important
@@ -131,5 +131,74 @@
         </form>
     </div>
 </body>
+<script>
+    $(function() {
+        layui.use(['layer', 'element', 'form', 'upload'], function() {
+            var layer = layui.layer,
+                element = layui.element,
+                form = layui.form;
+
+            var box = document.querySelector('#upload');
+
+            //只要鼠标拖拽悬停在该区域就会触发
+            box.addEventListener('dragover', function(e) {
+                e.preventDefault(); //注意，如果dragover不阻止默认事件，drop事件就不会触发
+                console.log('dragover');
+            }, false);
+            //鼠标拖拽释放
+            box.addEventListener('drop', function(e) {
+                e.preventDefault(); //浏览器默认会打开该文件，因此停掉该默认事件
+                console.log(e.dataTransfer.files); //选中的文件
+                var files = e.dataTransfer.files;
+                console.log(files)
+                var formData = new FormData();
+
+                Array.prototype.slice.call(files).forEach(function(file) {
+                    formData.append('file', file);
+                });
+
+                var xhr = new XMLHttpRequest();
+                xhr.upload.onerror = function() {
+                    layer.msg("Upload fail！");
+                }
+                xhr.upload.onload = function() {
+                    console.log('上传成功');
+                }
+                $("#upload_progress").removeClass("layui-hide");
+                xhr.upload.onprogress = function(e) {
+                    var value = Math.floor(100 * e.loaded / e.total);
+                    console.log("value", value)
+                    element.progress('upload_progress', value + '%') //设置页面进度条
+                    $("#upgrade").prop("disabled", true);
+                }
+                xhr.open('post', '/action/upload', true);
+                xhr.send(formData);
+                xhr.onreadystatechange = state_Change;
+
+                function state_Change() {
+                    if (xhr.readyState == 4) { // 4 = "loaded"
+                        if (xhr.status == 200) { // 200 = OK
+                            var resObj = JSON.parse(xhr.response)
+                            if (resObj.code == 0) {
+                                layer.msg("Upload successful！");
+                                var domain = window.location.host;
+                                setTimeout(function() {
+                                    window.location.href = ('https:' == document
+                                        .location.protocol ? 'https://' : 'http://'
+                                    ) + domain + "/flashops.html";
+                                }, 1000);
+                                $("#version").html(resObj.id);
+                            } else {
+                                layer.msg("Upload fail:" + msg);
+                            }
+                        } else {
+                            layer.msg("Upload fail！");
+                        }
+                    }
+                }
+            }, false);
+        })
+    })
+</script>
 
 </html>

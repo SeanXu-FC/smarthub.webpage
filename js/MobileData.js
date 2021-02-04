@@ -471,11 +471,12 @@ function renderDataUsage(json, i) {
 
         $("#switchMB option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
 
-        var nextDate = getNextDate();
-        console.log(nextDate)
-        var dayLeft = DateDiff(json[i].start_date, nextDate);
-        $("#day_left2").text(dayLeft);
-        $("#limit_startTime2").text(nextDate);
+        var nextDate = getNextDate(json[i].start_date);
+        var nowdate = getNowFormatDate();
+        var dayLeft = DateDiff(nowdate, nextDate);
+        $("#day_left1").text(dayLeft);
+        $("#limit_startTime1").text(nextDate);
+        $("#reset_time1").text(json[i].start_date);
         if (json[i].start_date) { //Start data limit on
             layui.use(['laydate'], function() {
                 laydate = layui.laydate;
@@ -549,7 +550,12 @@ function renderDataUsage(json, i) {
 
         $("#switchMB2 option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
 
-        $("#limit_startTime").text(json[i].start_date);
+        var nextDate = getNextDate(json[i].start_date);
+        var nowdate = getNowFormatDate();
+        var dayLeft = DateDiff(nowdate, nextDate);
+        $("#day_left2").text(dayLeft);
+        $("#limit_startTime2").text(nextDate);
+        $("#reset_time2").text(json[i].start_date);
         if (json[i].start_date) { //Start data limit on
             layui.use(['laydate'], function() {
                 laydate = layui.laydate;
@@ -586,24 +592,35 @@ function renderDataUsage(json, i) {
 
     }
 
+    var unit = json[i].sim_data_limt_unit == 0 ? "MB" : "GB"
     if (i == 0) {
         var Xdate = [];
-        var Ydata = json[i].days;
+        var Ydata;
+        if (json[i].sim_data_limt_unit == 0) {
+            Ydata = json[i].days;
+        } else {
+            Ydata = (json[i].days / 1024).toFixed(2);
+        }
         if (Ydata.length > 0) {
             for (var i = 0; i < Ydata.length; i++) {
                 Xdate.push(i);
             }
         }
-        renderEchart("used_MB", Xdate, Ydata)
+        renderEchart("used_MB", Xdate, Ydata, unit)
     } else {
         var Xdate1 = [];
-        var Ydata1 = json[i].days;
+        var Ydata1;
+        if (json[i].sim_data_limt_unit == 0) {
+            Ydata1 = json[i].days;
+        } else {
+            Ydata1 = (json[i].days / 1024).toFixed(2);
+        }
         if (Ydata1.length > 0) {
             for (var i = 0; i < Ydata1.length; i++) {
                 Xdate1.push(i);
             }
         }
-        renderEchart("used_MB2", Xdate1, Ydata1)
+        renderEchart("used_MB2", Xdate1, Ydata1, unit)
     }
     layui.use(['form'], function() {
         var form = layui.form;
@@ -622,8 +639,26 @@ function DateDiff(begintime, endtime) { //sDate1和sDate2是2006-12-18格式
     var days = Math.floor(ms / (24 * 3600 * 1000))
     return days;
 }
+//获取当前日期
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = year + seperator1 + month + seperator1 + strDate;
+    return currentdate;
+}
 //获取下月1号
-function getNextDate() {
+function getNextDate(date) {
+    var arr = date.split('-');
+    var day = arr[2]; //获取当前日期的日
     var date = new Date();
     var year = date.getFullYear()
     var month = date.getMonth() + 2;
@@ -634,7 +669,34 @@ function getNextDate() {
     if (month >= 1 && month <= 9) {
         month = "0" + month;
     }
-    return (year + "-" + month + "-01")
+    return (year + "-" + month + "-" + day)
+}
+//根据指定日期获取下个月的这个日期
+function getNextMonth(date) {
+    var arr = date.split('-');
+    var year = arr[0]; //获取当前日期的年份
+    var month = arr[1]; //获取当前日期的月份
+    var day = arr[2]; //获取当前日期的日
+    var days = new Date(year, month, 0);
+    days = days.getDate(); //获取当前日期中的月的天数
+    var year2 = year;
+    var month2 = parseInt(month) + 1;
+    if (month2 == 13) {
+        year2 = parseInt(year2) + 1;
+        month2 = 1;
+    }
+    var day2 = day;
+    var days2 = new Date(year2, month2, 0);
+    days2 = days2.getDate();
+    if (day2 > days2) {
+        day2 = days2;
+    }
+    if (month2 < 10) {
+        month2 = '0' + month2;
+    }
+
+    var t2 = year2 + '-' + month2 + '-' + day2;
+    return t2;
 }
 
 function getSimManagement(layer, form, loading) {
@@ -794,8 +856,8 @@ function rendSIMManagement(json) {
     });
 }
 // 渲染图表
-function renderEchart(id, Xdate, Ydata) {
-    var unit = $("#switchMB").val() == 1 ? 'GB' : 'MB';
+function renderEchart(id, Xdate, Ydata, unit) {
+    console.log(unit)
     var myChartGL = echarts.init(document.getElementById(id));
     myChartGL.clear();
     var optionBranchGL = {

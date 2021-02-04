@@ -36,11 +36,12 @@
                 xhr: xhrOnProgress,
                 //data: {}, //可选项 额外的参数，如：{id: 123, abc: 'xxx'}
                 //multiple: true,// 开启多文件上传
-                drag: true, //是否允许拖拽上传
+                drag: false, //是否允许拖拽上传
                 size: 0, //为0为不限制大小
                 //size: 1024 * 3, //为0为不限制大小
                 //监听xhr进度，并返回给进度条
-                progress: function(value) { //上传进度回调 value进度值   
+                progress: function(value, elem) { //上传进度回调 value进度值  
+                    console.log(value)
                     element.progress('upload_progress', value + '%') //设置页面进度条
                     $("#upgrade").prop("disabled", true);
                 },
@@ -71,11 +72,7 @@
 				});
     		});
 			*/
-                /*allDone: function(obj){ //当文件全部被提交后，才触发  开启多文件上传时该回调才可触发
-				console.log(obj.total); //得到总文件数
-				console.log(obj.successful); //请求成功的文件数
-				console.log(obj.aborted); //请求失败的文件数
-  			},*/
+
                 done: function(res, index, upload) { //在多文件上传中 每次成功将被调用一次
                     /*  你不一定非得按照上述格式返回，只要是合法的 JSON 字符即可。其响应信息会转化成JS对象传递给 done 回调。
 				{	如果上传后，出现文件下载框（一般为ie下），那么你需要在服务端对response的header设置 Content-Type: text/html
@@ -91,20 +88,12 @@
                     layer.close(layer.index);
                     var domain = window.location.host;
                     if (res.code == 0) { //此处只用于单文件图片的上传，若为多图片多文件请做其他处理
-                        //layer.msg("上传成功！");
                         layer.msg("Upload successful！");
-
                         setTimeout(function() {
                             window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
-                            //window.location.href = "http://10.88.11.238/flashops.html";
                         }, 1000);
-                        //console.log(res.id);
                         $("#version").html(res.id);
-                        //console.log(res.src); //回调内容src
-                        // $("#upload_preview").html("<img alt='预览图' src='" + res.src + "' width='230px' height='146px' />");
                     }
-                    //获取当前触发上传的元素
-                    // var item = this.item;
                 },
                 error: function(index, upload) {
                     //请求异常回调

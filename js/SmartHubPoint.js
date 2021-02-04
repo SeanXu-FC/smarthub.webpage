@@ -404,10 +404,10 @@ function getData(layer, loading) {
                         .removeClass('state1 state4 state3').addClass('state2');
                 }).blur(function() {
                     var len = $(this).val().length;
-                    if (len >= 8 && len <= 20 && $(this).val() != '') {
+                    if (len >= 8 && len <= 64 && $(this).val() != '') {
                         $(this).siblings()
                             .find('span')
-                            .text('Please enter a password with more than 8 digits!')
+                            .text('')
                             .removeClass('state1 state4 state3').addClass('state4');
                         pwd = true;
                     } else {
