@@ -731,8 +731,8 @@ function getSimManagement(layer, form, loading) {
 //渲染SIM management
 function rendSIMManagement(json) {
 
-    $("#SIM option[value='" + Number(json.active_sim) + "']").prop("selected", true);
-
+    $('input[name="activeSIM"]').removeAttr("checked");
+    $('input[name="activeSIM"]').eq(json.active_sim).attr("checked", "checked");
 
     if (json.auo_switch == 1) { //Auto SIM switching:
         $("#AutoSim input").attr("checked", "checked");
