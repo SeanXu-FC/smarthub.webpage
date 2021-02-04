@@ -1,6 +1,264 @@
-eval(function(p, a, c, k, e, r) { e = function(c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c);
-        k = [function(e) { return r[e] }];
-        e = function() { return '\\w+' };
-        c = 1 }; while (c--)
-        if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
-    return p }('$(v(){1o();1p();$("#2i .2j a").2k("2l",v(){o a=$(2m).r(\'17-M\');1q.1r("M",a)n(a=="2n.1s"||a==2o){$(19.N).1t("#1a-1b").r("s",a)}q{o b=1u("2p");n(b){$(19.N).1t("#1a-1b").r("s",a)}q{2q(a)}}})});v 1o(){o k={"1v":"2.0","1w":"2r","1x":{},"1y":"9.1"}k=O.P(k);$.1z({1A:"1B",M:"/Q/Q",17:k,1C:"R",1D:"1E/R;1F=1G-8",1H:v(b){n(b.S){o c=b.S;o d=[\'J\',\'J(2.2s)\',\'J(2t)\',\'2u\',\'2v\',\'1c\'];n(c.T.w==0){$(\'.T\').l(0).m(d[5]);$(\'.1d\').r("s","u/2w.t");$(\'.T\').x(\'y\',\'K\')}q{$(\'.J\').l(0).m(d[0]);$(\'.1d\').r("s","u/1d.t");$(\'.T\').x(\'y\',\'#U\')}n(c.B.w==0){$(\'.C\').l(0).m(d[4]);$(\'.C\').x(\'y\',\'K\');$(".1e .1f").m("-");$(".1g-L").V()}q n(c.B.w==2){$(\'.C\').l(0).m(d[5]);$(\'.C\').x(\'y\',\'K\');$(".1e .1f").m("-");$(".1g-L").V()}q{n(c.B.2x==0){$(\'.C\').l(0).m(d[1])}q{$(\'.C\').l(0).m(d[2])}$(\'.1h\').r("s","u/1h.t");$(\'.1f\').l(0).m(c.B.2y);$(\'.C\').x(\'y\',\'#U\');$(".1g-L").1I()}o e=$(".1e 2z");o f=[\'D-1J.t\',\'D-0-20.t\',\'D-20-1K.t\',\'D-1K-1L.t\',\'D-1L-1M.t\',\'D-1M-1N.t\'];o g=[\'2A.t\',\'2B.t\',\'2C.t\',\'2D.t\',\'2E.t\'];n(c.7.z==2F){$(\'.E\').l(0).m(d[4]);$(\'#E\').r("s","u/D-1J.t");$(\'.E\').x(\'y\',\'K\')$(\'.1i\').l(0).m(\'-\');$(\'.z\').l(0).m(\'-\');$(\'.F\').l(0).m(\'-\');$(\'.G\').l(0).m(\'-\');$(\'.H\').l(0).m(\'-\');$(\'.W\').l(0).m(\'-\');$(\'.I\').l(0).m(\'-\');$(\'.1j\').l(0).m(\'\');$(\'.1k\').l(0).m(\'-\');$(".1l-L").V()}q{o h="";n(c.7.w==0){n(c.7.1O==0){h="1P(1Q)"}q{h="1P(1R)"}$(\'.E\').l(0).m(h);$(\'.E\').x(\'y\',\'K\')$(\'.1i\').l(0).m(c.7.X?c.7.X:\'-\');$(\'.z\').l(0).m(c.7.z?c.7.z:\'-\');$(\'.F\').l(0).m(c.7.F?c.7.F:\'-\');$(\'.G\').l(0).m(c.7.G?c.7.G:\'-\');$(\'.H\').l(0).m(c.7.H?c.7.H:\'-\');$(\'.W\').l(0).m(c.7.Y?c.7.Y:\'-\');$(\'.I\').l(0).m(c.7.I?c.7.I:\'-\');$(\'.1j\').l(0).m(c.7.Z?c.7.Z:\'\');$(\'.1k\').l(0).m(c.7.10?c.7.10:\'-\');$(".1l-L").V()}q{n(c.7.1O==0){h="J(1Q)"}q{h="J(1R)"}$(\'.E\').l(0).m(h);$(\'.1i\').l(0).m(c.7.X?c.7.X:\'-\');$(\'.z\').l(0).m(c.7.z?c.7.z:\'-\');$(\'.F\').l(0).m(c.7.F?c.7.F:\'-\');$(\'.G\').l(0).m(c.7.G?c.7.G:\'-\');$(\'.H\').l(0).m(c.7.H?c.7.H:\'-\');$(\'.W\').l(0).m(c.7.Y?c.7.Y:\'-\');$(\'.I\').l(0).m(c.7.I?c.7.I:\'-\');$(\'.1j\').l(0).m(c.7.Z?c.7.Z:\'\');$(\'.1k\').l(0).m(c.7.10?c.7.10:\'-\');$(\'.E\').x(\'y\',\'#U\')$(".1l-L").1I()}n(c.7.p);n(c.7.p>0&&c.7.p<=6){e.l(1).r("s",\'u/\'+f[1])}q n(c.7.p>6&&c.7.p<=12){e.l(1).r("s",\'u/\'+f[2])}q n(c.7.p>12&&c.7.p<=18){e.l(1).r("s",\'u/\'+f[3])}q n(c.7.p>18&&c.7.p<=24){e.l(1).r("s",\'u/\'+f[4])}q n(c.7.p>24&&c.7.p<=2G){e.l(1).r("s",\'u/\'+f[5])}}n(c.1m.w==0){$(\'.1S\').l(0).m(d[4]);$(\'.1T\').l(0).m(c.1m.1U);$(\'.1V\').x({\'y\':\'K\'})$(\'.1h\').r("s","u/2H.t")}q{$(\'.1S\').l(0).m(d[3]);$(\'.1T\').l(0).m(c.1m.1U);$(\'.1V\').x({\'y\':\'#U\'})}o i=$(\'.2I\').1n;o j=$(\'.2J\').1n;$(\'#2K 1W\').m(\'(\'+c.1X.2L+\')\');$(\'#2M 1W\').m(\'(\'+c.1X.2N+\')\');n(c.B.w==1){n(c.B.p);p=2O.2P(c.B.p);n(1N>p&&p>=1Y){e.l(0).r("s",\'u/\'+g[1])}q n(1Y>p&&p>=1Z){e.l(0).r("s",\'u/\'+g[2])}q n(1Z>p&&p>=21){e.l(0).r("s",\'u/\'+g[3])}q n(21>p){e.l(0).r("s",\'u/\'+g[4])}}}q n(b.A){11.22([\'13\'],v(){o a=11.13;a.23("25 A 26："+b.A.14)})}},A:v(a){o b=\'<15 27="28: 29;m-2a: 2b;16-2c:2d-16;">\'+O.P(a)+\'</15>\';2e("1c 14",b)}})}v 1u(a){o b=N.2Q;1q.1r(b)o c=b.2f("; ");2R(o i=0;i<c.1n;i++){o d=c[i].2f("=");n(d[0]==a)2g d[1]}2g""}v 1p(){o d=2h.W.2S;o e={"1v":"2.0","1w":"2T","1x":{"w":0},"1y":"9.1"};e=O.P(e);$.1z({1A:"1B",M:"/Q/Q?",17:e,1C:"R",1D:"1E/R;1F=1G-8",1H:v(b){n(b.S){o c=b.S;n(c.w!="3"){$("#1a-1b",2h.19.N).r("s","2U.1s?w="+c.w)}}q n(b.A){11.22([\'2V\',\'13\'],v(){o a=11.13;a.23("25 A 26："+b.A.14)})}},A:v(a){o b=\'<15 27="28: 29;m-2a: 2b;16-2c:2d-16;">\'+O.P(a)+\'</15>\';2e("1c 14",b)}})}', 62, 182, '|||||||mobile||||||||||||||eq|text|if|var|signal|else|attr|src|png|images|function|status|css|color|active_sim|error|sta|connected24|mobileSignal|Connected4G|imsi|plmn|csq|act|Connected|red|disable|url|document|JSON|stringify|action|json|result|cloud|26b167|show|location|provider|lca|cgreg|cell_id|layui||layer|message|div|word|data||parent|my|iframe|Error|r_01|imgIcon1|ssid|WiFiNetwork|r_06|NetworkProvider|register|cell|mobiledataImg|ap|length|getHomeData|getStatus|console|log|html|find|getCookie|jsonrpc|method|params|id|ajax|type|post|dataType|contentType|application|charset|utf|success|hide|none|40|60|80|100|act_num|Disconnected|3G|4G|Status|Name|name|clg|span|dev|85|70||55|use|msg||An|occurred|style|padding|20px|align|center|wrap|break|promptMessage|split|return|window|Home_c|row|on|click|this|home|undefined|LogInStaus|LoginMessage|GetHomeStatus|4GHz|5GHz|On|Off|r_01_gray|band|sta_ssid|img|s_wifi_nonea|s_wifi_02a|s_wifi_03a|s_wifi_04a|s_wifi_05a|99|30|r_06_gray|Group2901|Group2902|WirelessConnections|ap_num|EthernetConnections|eth_num|Math|abs|cookie|for|host|GetUpgradeStatus|flashops|form'.split('|'), 0, {}))
+$(function() {
+    getHomeData();
+    getStatus();
+    $("#Home_c .row a").on("click", function() {
+        var url = $(this).attr('data-url');
+        console.log("url", url)
+        if (url == "home.html" || url == undefined) {
+            $(parent.document).find("#my-iframe").attr("src", url);
+        } else {
+            var login = getCookie("LogInStaus");
+            if (login) {
+                $(parent.document).find("#my-iframe").attr("src", url);
+            } else {
+                LoginMessage(url);
+            }
+        }
+    })
+});
+
+function getHomeData() {
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "GetHomeStatus",
+        "params": {},
+        "id": "9.1"
+    }
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            if (res.result) {
+                var json = res.result;
+                var arr = ['Connected', 'Connected(2.4GHz)', 'Connected(5GHz)', 'On', 'Off',
+                    'Error'
+                ];
+                if (json.cloud.status == 0) {
+                    $('.cloud').eq(0).text(arr[5]);
+                    $('.r_01').attr("src", "images/r_01_gray.png");
+                    $('.cloud').css('color', 'red')
+                } else {
+                    $('.Connected').eq(0).text(arr[0]);
+                    $('.r_01').attr("src", "images/r_01.png");
+                    $('.cloud').css('color', '#26b167');
+                }
+
+                if (json.sta.status == 0) {
+                    $('.connected24').eq(0).text(arr[4]);
+                    //$('.r_06').attr("src", "images/r_06_gray.png");
+                    //$('#connected24').attr("src", "images/s_wifi_nonea.png");
+                    $('.connected24').css('color', 'red');
+                    $(".imgIcon1 .ssid").text("-");
+                    $(".WiFiNetwork-disable").show();
+                } else if (json.sta.status == 2) {
+                    $('.connected24').eq(0).text(arr[5]);
+                    //$('.r_06').attr("src", "images/r_06_gray.png");
+                    //$('#connected24').attr("src", "images/s_wifi_nonea.png");
+                    $('.connected24').css('color', 'red');
+                    $(".imgIcon1 .ssid").text("-");
+                    $(".WiFiNetwork-disable").show();
+                } else {
+                    if (json.sta.band == 0) {
+                        $('.connected24').eq(0).text(arr[1]);
+                    } else {
+                        $('.connected24').eq(0).text(arr[2]);
+                    }
+                    $('.r_06').attr("src", "images/r_06.png");
+                    $('.ssid').eq(0).text(json.sta.sta_ssid);
+                    $('.connected24').css('color', '#26b167');
+                    $(".WiFiNetwork-disable").hide();
+                }
+
+                var $img = $(".imgIcon1 img");
+                //var img0 = $('<img class="">');
+                var MobileSignalArr = ['mobileSignal-none.png', 'mobileSignal-0-20.png',
+                    'mobileSignal-20-40.png', 'mobileSignal-40-60.png',
+                    'mobileSignal-60-80.png', 'mobileSignal-80-100.png'
+                ];
+                var WiFiSignalArr = ['s_wifi_nonea.png', 's_wifi_02a.png', 's_wifi_03a.png',
+                    's_wifi_04a.png', 's_wifi_05a.png'
+                ];
+                if (json.mobile.active_sim == 99) {
+                    $('.Connected4G').eq(0).text(arr[4]);
+                    $('#Connected4G').attr("src", "images/mobileSignal-none.png");
+                    $('.Connected4G').css('color', 'red')
+                    $('.NetworkProvider').eq(0).text('-');
+                    $('.active_sim').eq(0).text('-');
+                    $('.imsi').eq(0).text('-');
+                    $('.plmn').eq(0).text('-');
+                    $('.csq').eq(0).text('-');
+                    $('.location').eq(0).text('-');
+                    $('.act').eq(0).text('-');
+                    $('.register').eq(0).text('');
+                    $('.cell').eq(0).text('-');
+                    $(".mobiledataImg-disable").show();
+                } else {
+                    var mobileStatus = "";
+                    if (json.mobile.status == 0) {
+                        if (json.mobile.act_num == 0) {
+                            mobileStatus = "Disconnected(3G)"
+                        } else {
+                            mobileStatus = "Disconnected(4G)"
+                        }
+
+                        $('.Connected4G').eq(0).text(mobileStatus);
+                        $('.Connected4G').css('color', 'red')
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
+                        $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
+                        $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
+                        $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
+                        $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
+                        $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
+                        $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
+                        $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
+                        $(".mobiledataImg-disable").show();
+                    } else {
+                        if (json.mobile.act_num == 0) {
+                            mobileStatus = "Connected(3G)"
+                        } else {
+                            mobileStatus = "Connected(4G)"
+                        }
+                        $('.Connected4G').eq(0).text(mobileStatus);
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
+                        $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
+                        $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
+                        $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
+                        $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
+                        $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
+                        $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
+                        $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
+                        $('.Connected4G').css('color', '#26b167')
+                        $(".mobiledataImg-disable").hide();
+                    }
+                    if (json.mobile.signal);
+                    if (json.mobile.signal > 0 && json.mobile.signal <= 6) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[1]);
+                    } else if (json.mobile.signal > 6 && json.mobile.signal <= 12) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[2]);
+                    } else if (json.mobile.signal > 12 && json.mobile.signal <= 18) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[3]);
+                    } else if (json.mobile.signal > 18 && json.mobile.signal <= 24) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[4]);
+                    } else if (json.mobile.signal > 24 && json.mobile.signal <= 30) {
+                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[5]);
+                    }
+                }
+
+
+
+
+                if (json.ap.status == 0) {
+                    $('.Status').eq(0).text(arr[4]);
+                    $('.Name').eq(0).text(json.ap.name);
+                    $('.clg').css({
+                        'color': 'red'
+                    })
+                    $('.r_06').attr("src", "images/r_06_gray.png");
+                } else {
+                    $('.Status').eq(0).text(arr[3]);
+                    $('.Name').eq(0).text(json.ap.name);
+                    $('.clg').css({
+                        'color': '#26b167'
+                    })
+                }
+
+                var wirelessLen = $('.Group2901').length;
+                var EthernetLen = $('.Group2902').length;
+
+                $('#WirelessConnections span').text('(' + json.dev.ap_num + ')');
+                $('#EthernetConnections span').text('(' + json.dev.eth_num + ')');
+
+
+                if (json.sta.status == 1) {
+                    if (json.sta.signal);
+                    signal = Math.abs(json.sta.signal);
+                    if (100 > signal && signal >= 85) {
+                        $img.eq(0).attr("src", 'images/' + WiFiSignalArr[1]);
+                    } else if (85 > signal && signal >= 70) {
+                        $img.eq(0).attr("src", 'images/' + WiFiSignalArr[2]);
+                    } else if (70 > signal && signal >= 55) {
+                        $img.eq(0).attr("src", 'images/' + WiFiSignalArr[3]);
+                    } else if (55 > signal) {
+                        $img.eq(0).attr("src", 'images/' + WiFiSignalArr[4]);
+                    }
+
+                }
+            } else if (res.error) {
+                layui.use(['layer'], function() {
+                    var layer = layui.layer;
+                    layer.msg("An error occurred：" + res.error.message);
+                })
+            }
+        },
+        error: function(jqXHR) {
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
+
+        }
+    });
+}
+//Get cookie
+function getCookie(name) {
+    var strCookie = document.cookie;
+    console.log(strCookie)
+    var arrCookie = strCookie.split("; ");
+    for (var i = 0; i < arrCookie.length; i++) {
+        var arr = arrCookie[i].split("=");
+        if (arr[0] == name)
+            return arr[1];
+    }
+    return "";
+}
+//获取设备状态，有没有掉电
+function getStatus() {
+    var domain = window.location.host;
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "GetUpgradeStatus",
+        "params": {
+            "status": 0
+        },
+        "id": "9.1"
+
+    };
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action?",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            if (res.result) {
+                var data = res.result;
+                if (data.status != "3") { //升级成功
+                    $("#my-iframe", window.parent.document).attr("src", "flashops.html?status=" + data
+                        .status);
+                }
+            } else if (res.error) {
+                layui.use(['form', 'layer'], function() {
+                    var layer = layui.layer;
+                    layer.msg("An error occurred：" + res.error.message);
+                })
+            }
+
+        },
+        error: function(jqXHR) {
+            var tip =
+                '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
+        }
+    });
+}
