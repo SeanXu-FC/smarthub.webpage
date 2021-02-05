@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210204" rel="stylesheet" />
+    <link href="css/style.css?mv=20210205" rel="stylesheet" />
 
     <title>Document</title>
     <style>
@@ -480,6 +480,10 @@
             display: block;
             border: solid 1px #707070;
         }
+        
+        #wirelessInfo .layui-select-title {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -498,7 +502,7 @@
                 <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel
                     name:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="Bilge pump" class="Rectangle-1188 layui-input form-control h18 name-input" style="color:#333;" oninput="value=value.replace(/[\u4e00-\u9fa5]/ig,'')" onkeyup="WidthCheckIO(this,64);">
+                    <input type="text" name="" lay-verify="title" autocomplete="off" placeholder="Bilge pump" class="Rectangle-1188 layui-input form-control h18 name-input" style="color:#333;" onkeyup="value=value.replace(/[\u4e00-\u9fa5]/ig,'')" oninput="WidthCheckIOStr(this,64);">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -512,6 +516,17 @@
                     </select>
                 </div>
             </div>
+            <!-- <div class="layui-form-item">
+                <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Input
+                    type:</label>
+                <div class="layui-input-block">
+                    <select class="form-control type-select" id="type_select">
+                        <option value="1">Digital positive</option>
+                        <option value="2">Digital negative</option>
+                        <option value="0">Analog</option>
+                    </select>
+                </div>
+            </div> -->
             <!-- <div class="layui-form-item mt-20">
                 <div>
                     <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Wake function:</label>
@@ -534,7 +549,7 @@
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210204"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210205"></script>
     <script>
         var saveChannelID;
         $(function() {
@@ -543,8 +558,6 @@
             var types = GetUrlParam("types");
             saveChannelID = ChannelID;
             $("#channel-number").text(ChannelID)
-            console.log(ChannelID)
-            console.log(name)
             $("#type_select option[value='" + types + "']").prop("selected", true);
             $(".name-input").val(name)
             $("#btn").on("click", function() {
@@ -609,6 +622,35 @@
                     promptMessage("Error message", tip);
                 }
             })
+        }
+        //限制输入中文和字节输入长度
+        function WidthCheckIOStr(str, maxLen) {
+            var w = 0;
+            var tempCount = 0;
+
+            //length 获取字数数
+            for (var i = 0; i < str.value.length; i++) {
+                //charCodeAt()获取字符串中某一个字符的编码 
+                var c = str.value.charCodeAt(i);
+                //单字节加1 
+                if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                    w++;
+                } else {
+                    w += 2;
+                }
+                if (w > maxLen) {
+                    str.value = str.value.substr(0, i);
+                    break;
+                }
+            }
+
+            if (str.value.indexOf("'") != -1) {
+                str.value = str.value.replace(/\'/g, "");
+                layui.use(['form', 'layer'], function() {
+                    var layer = layui.layer;
+                    layer.msg("Cannot enter special string ' ");
+                })
+            }
         }
     </script>
 </body>

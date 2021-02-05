@@ -1,6 +1,22 @@
-eval(function(p, a, c, k, e, r) { e = function(c) { return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36)) }; if (!''.replace(/^/, String)) { while (c--) r[e(c)] = k[c] || e(c);
-        k = [function(e) { return r[e] }];
-        e = function() { return '\\w+' };
-        c = 1 }; while (c--)
-        if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
-    return p }('4 y="z";$(2(){h.j(k());$(".A-B C a").9(2(){$("#e").l();$("#m").l(n)});$("#e").o("9",2(){$("#e").p();$("#m").p(n)});$("#q-3 #3 a").o("9",2(){$("#q-3 #3 a").D("3-a-r");$(s).E("3-a-r");4 a=$(s).5("F-G");"H.I"==a||J 0==a?($("#6-7").5("8"),$("#6-7").5("8",a)):t("K")?($("#6-7").5("8"),$("#6-7").5("8",a)):L(a)})});2 k(){f M.N.O(/(P|Q|R|S|T|U|V|W|X|Y|Z|10|11|12|13|14|15|16|17 18)/i)}2 t(a){4 b=u.v;h.j(b);b=b.w("; ");19(4 c=0;c<b.1a;c++){4 d=b[c].w("=");1b(d[0]==a)f d[1]}f""}2 x(a,b,c){a=a+"="+1c(b);0<c&&(b=1d 1e,b.1f(b.1g+1h*c),a=a+"; 1i="+b.1j());u.v=a+"; 1k;"}2 1l(){g("1m");g("1n")}2 g(a){x(a,"",-1)};', 62, 86, '||function|nav|var|attr|my|iframe|src|click|||||bg1|return|delCookie|console||log|_isMobile|show|enterPass|500|on|hide|side|active|this|getCookie|document|cookie|split|setCookie|clickFlag|true|sub|menu|li|removeClass|addClass|data|url|home|html|void|LogInStaus|LoginMessage|navigator|userAgent|match|phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows|Phone|for|length|if|escape|new|Date|setTime|getTime|36E5|expire|toGMTString|secure|clearCookie|password|username'.split('|'), 0, {}))
+var clickFlag = "true";
+$(function() { $(".sub-menu li a").click(function() { $("#bg1").show();
+        $("#enterPass").show(500) });
+    $("#bg1").on("click", function() { $("#bg1").hide();
+        $("#enterPass").hide(500) });
+    $("#side-nav #nav a").on("click", function() { $("#side-nav #nav a").removeClass("nav-a-active");
+        $(this).addClass("nav-a-active"); var a = $(this).attr("data-url"); "home.html" == a || void 0 == a ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : getCookie("LogInStaus") ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : LoginMessage(a) }) });
+
+function _isMobile() { return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) }
+
+function getCookie(a) { var b = document.cookie;
+    console.log(b);
+    b = b.split("; "); for (var c = 0; c < b.length; c++) { var d = b[c].split("="); if (d[0] == a) return d[1] } return "" }
+
+function setCookie(a, b, c) { a = a + "=" + escape(b);
+    0 < c && (b = new Date, b.setTime(b.getTime + 36E5 * c), a = a + "; expire=" + b.toGMTString());
+    document.cookie = a + "; secure;" }
+
+function clearCookie() { delCookie("password");
+    delCookie("username") }
+
+function delCookie(a) { setCookie(a, "", -1) };

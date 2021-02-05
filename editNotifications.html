@@ -646,7 +646,7 @@
             <div class="layui-form-item layui-form-text mt-20">
                 <label class=" layui-form-label Allow-notifications " style="margin-top:-14px;width:228px; ">Notification message:</label>
                 <div class="layui-input-block " style="margin-left:262px; ">
-                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="100" class="layui-textarea" oninput="WidthCheckIO(this,256);"></textarea>
+                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="100" class="layui-textarea" oninput="WidthCheckIOStr(this,256);"></textarea>
                 </div>
             </div>
 
@@ -676,10 +676,11 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210204"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210205"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
+
             var dataId = GetUrlParam("dataId");
             savedataId = dataId;
             var name = GetUrlParam("name");
@@ -749,8 +750,6 @@
                 saveData(dataId, Notifications, trigType, volt, noti_msg, wake_func)
 
             })
-
-
 
         });
 
@@ -824,7 +823,8 @@
                     }
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
                     promptMessage("Error message", tip);
                 }
             })
@@ -841,6 +841,35 @@
                 parent.layer.close(index); //关闭当前页
             }, 300)
         });
+        //限制输入中文和字节输入长度
+        function WidthCheckIOStr(str, maxLen) {
+            var w = 0;
+            var tempCount = 0;
+
+            //length 获取字数数
+            for (var i = 0; i < str.value.length; i++) {
+                //charCodeAt()获取字符串中某一个字符的编码 
+                var c = str.value.charCodeAt(i);
+                //单字节加1 
+                if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+                    w++;
+                } else {
+                    w += 2;
+                }
+                if (w > maxLen) {
+                    str.value = str.value.substr(0, i);
+                    break;
+                }
+            }
+
+            if (str.value.indexOf("'") != -1) {
+                str.value = str.value.replace(/\'/g, "");
+                layui.use(['form', 'layer'], function() {
+                    var layer = layui.layer;
+                    layer.msg("Cannot enter special string ' ");
+                })
+            }
+        }
     </script>
 </body>
 

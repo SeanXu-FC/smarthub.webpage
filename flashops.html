@@ -18,7 +18,7 @@
     </style>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210204"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210205"></script>
 
 </head>
 
@@ -42,8 +42,10 @@
 </body>
 <script type="text/javascript">
     var interval = null,
+        nowIndex = null,
         status = "undefined";
     $(function() {
+
         layui.use(['form', 'layer'], function() {
             var form = layui.form;
             var layer = layui.layer;
@@ -56,13 +58,11 @@
                 "Waiting for changes to be applied...");
             status = $("#my-iframe", window.parent.document).attr("src");
             status = status.split("=")[1];
-            console.log("status", status)
             if (status != "null" && status != "undefined") { //从首页跳过来
                 var data = {
                     status: status,
                     steps: "",
                 }
-                console.log("status", data)
                 statusHandle(data, loading);
             } else {
                 no4Getstatus(layer, loading);
@@ -73,6 +73,7 @@
     });
     //状态处理
     function statusHandle(data, loading) {
+        layer.close(nowIndex); //关闭Error message弹框
         if (data.status == "1") { //升级成功
             StateResponse(1);
             parent.layer.close(loading);
@@ -87,7 +88,6 @@
             $("#steps").html(data.steps);
             clearInterval(interval);
             return4Getstatus(layer, loading, 1000 * 90);
-
         } else if (data.status == "0") { //升级失败
             StateResponse(1);
             parent.layer.close(loading);
@@ -136,6 +136,7 @@
                         var data = res.result;
                         statusHandle(data, loading);
                     } else if (res.error) {
+                        layer.close(nowIndex); //关闭Error message弹框
                         parent.layer.close(loading);
                         layui.use(['form', 'layer'], function() {
                             var layer = layui.layer;
@@ -145,11 +146,10 @@
 
                 },
                 error: function(jqXHR) {
-                    parent.layer.close(loading);
                     var tip =
                         '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
                         JSON.stringify(jqXHR) + '</div>';
-                    promptMessage("Error message", tip);
+                    promptError("Error message", tip);
                 }
 
 
@@ -181,6 +181,7 @@
                         var data = res.result;
                         statusHandle(data, loading);
                     } else if (res.error) {
+                        layer.close(nowIndex); //关闭Error message弹框
                         parent.layer.close(loading);
                         layui.use(['form', 'layer'], function() {
                             var layer = layui.layer;
@@ -190,11 +191,10 @@
 
                 },
                 error: function(jqXHR) {
-                    parent.layer.close(loading);
                     var tip =
                         '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
                         JSON.stringify(jqXHR) + '</div>';
-                    promptMessage("Error message", tip);
+                    promptError("Error message", tip);
                 }
             });
         }, time);
@@ -269,7 +269,26 @@
                 }
             });
         })
+    }
 
+    function promptError(title, content) {
+        layui.use(['layer'], function() {
+            var layer = layui.layer;
+            layer.close(nowIndex);
+            nowIndex = null;
+            nowIndex = layer.open({
+                type: 1,
+                title: title,
+                content: content,
+                btn: 'close',
+                btnAlign: 'c', //按钮居中 
+                closeBtn: 0,
+                shade: 0, //不显示遮罩                            
+                yes: function(index) {
+                    layer.close(index);
+                }
+            });
+        })
     }
 </script>
 
