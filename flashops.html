@@ -84,22 +84,22 @@
             clearInterval(interval);
             upPromptMessage("Success message", "Upgrade successfully");
         } else if (data.status == "5") { //重置中
+            clearInterval(interval);
             StateResponse(1);
             $("#steps").html(data.steps);
-            clearInterval(interval);
             return4Getstatus(layer, loading, 1000 * 90);
         } else if (data.status == "6") { //恢复中
+            clearInterval(interval);
             StateResponse(1);
             $("#steps").html(data.steps);
-            clearInterval(interval);
             return4Getstatus(layer, loading, 1000 * 60 * 5);
         } else if (data.status == "0") { //升级失败
+            clearInterval(interval);
             StateResponse(1);
             parent.layer.close(loading);
             $("#steps").html(data.steps);
             $("#steps").css("color", "red")
             $("#upgrade_tip").hide();
-            clearInterval(interval);
             upfailPromptMessage("Fail message", "Upgrade fail");
         } else if (data.status == "2") { //升级中
             $("#steps").html(data.steps);
@@ -134,6 +134,7 @@
                 type: "post",
                 url: "/action/action?",
                 data: data,
+                timeout: 0,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
@@ -151,13 +152,13 @@
 
                 },
                 error: function(jqXHR) {
-                    var tip =
-                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                        JSON.stringify(jqXHR) + '</div>';
-                    promptError("Error message", tip);
+                    if (jqXHR.readyState != 0) {
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON.stringify(jqXHR) + '</div>';
+                        promptError("Error message", tip);
+                    }
                 }
-
-
             });
         }, 10000);
     }
@@ -179,6 +180,7 @@
                 type: "post",
                 url: "/action/action?",
                 data: data,
+                timeout: 0,
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
@@ -196,10 +198,12 @@
 
                 },
                 error: function(jqXHR) {
-                    var tip =
-                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                        JSON.stringify(jqXHR) + '</div>';
-                    promptError("Error message", tip);
+                    if (jqXHR.readyState != 0) {
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON.stringify(jqXHR) + '</div>';
+                        promptError("Error message", tip);
+                    }
                 }
             });
         }, time);
