@@ -88,6 +88,11 @@
             $("#steps").html(data.steps);
             clearInterval(interval);
             return4Getstatus(layer, loading, 1000 * 90);
+        } else if (data.status == "6") { //恢复中
+            StateResponse(1);
+            $("#steps").html(data.steps);
+            clearInterval(interval);
+            return4Getstatus(layer, loading, 1000 * 60 * 5);
         } else if (data.status == "0") { //升级失败
             StateResponse(1);
             parent.layer.close(loading);
