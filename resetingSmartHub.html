@@ -139,12 +139,12 @@
                     }
                 },
                 error: function(jqXHR) {
-                    console.log(jqXHR)
-                        //successFlag = false;
-                        //PollingChecked();
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
-                        .stringify(jqXHR) + '</div>';
-                    promptMessage("Error message", tip);
+                    if (jqXHR.readyState != 0) {
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON
+                            .stringify(jqXHR) + '</div>';
+                        promptMessage("Error message", tip);
+                    }
                 }
 
             });
@@ -211,10 +211,12 @@
                     }
                 },
                 error: function(jqXHR) {
-                    console.log(jqXHR)
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
-                        .stringify(jqXHR) + '</div>';
-                    promptMessage("Error message", tip);
+                    if (jqXHR.readyState != 0) {
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            JSON
+                            .stringify(jqXHR) + '</div>';
+                        promptMessage("Error message", tip);
+                    }
                 }
 
             });
