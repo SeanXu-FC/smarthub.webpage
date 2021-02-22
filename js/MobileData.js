@@ -429,9 +429,24 @@ function getDatausage(layer, form, loading) {
         }
     });
 }
+
+function getCurrentMonthLastDay() {
+    var current = new Date();
+    var currentMonth = current.getMonth();
+    var nextMonth = ++currentMonth;
+    var nextMonthDayOne = new Date(current.getFullYear(), nextMonth, 1);
+    var minusDate = 1000 * 60 * 60 * 24;
+    return new Date(nextMonthDayOne.getTime() - minusDate);
+}
 //渲染Data usage
 function renderDataUsage(json, i) {
+    var lastDay,
+        month;
     if (i == 0) {
+        lastDay = getCurrentMonthLastDay().getDate();
+        month = new Date().toDateString().split(" ")[1];
+        $(".now-month1").text("1 " + month)
+        $(".now-month2").text(lastDay + " " + month)
         $("#sim_data_limt_unit").val(json[i].sim_data_limt_unit);
         if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
             $("#monthlydatalimit input").attr("checked", "checked");
@@ -476,7 +491,7 @@ function renderDataUsage(json, i) {
         var dayLeft = DateDiff(nowdate, nextDate);
         $("#day_left1").text(dayLeft);
         $("#limit_startTime1").text(nextDate);
-        $("#reset_time1").text(json[i].start_date);
+        //$("#reset_time1").text(json[i].start_date);
         if (json[i].start_date) { //Start data limit on
             layui.use(['laydate'], function() {
                 laydate = layui.laydate;
@@ -513,6 +528,8 @@ function renderDataUsage(json, i) {
             $("#last_manth_s option[value='" + Number(json[i].last_month) + "']").prop("selected", true);
         }
     } else {
+        lastDay = getCurrentMonthLastDay().getDate();
+        month = new Date().toDateString().split(" ")[1];
         $("#sim_data_limt_unit2").val(json[i].sim_data_limt_unit);
         if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
             $("#monthlydatalimit2 input").attr("checked", "checked");
@@ -555,7 +572,7 @@ function renderDataUsage(json, i) {
         var dayLeft = DateDiff(nowdate, nextDate);
         $("#day_left2").text(dayLeft);
         $("#limit_startTime2").text(nextDate);
-        $("#reset_time2").text(json[i].start_date);
+        //$("#reset_time2").text(json[i].start_date);
         if (json[i].start_date) { //Start data limit on
             layui.use(['laydate'], function() {
                 laydate = layui.laydate;
@@ -596,28 +613,52 @@ function renderDataUsage(json, i) {
     if (i == 0) {
         var Xdate = [];
         var Ydata;
+        var AllY = 0;
         if (json[i].sim_data_limt_unit == 0) {
             Ydata = json[i].days;
-        } else {
-            Ydata = (json[i].days / 1024).toFixed(2);
-        }
-        if (Ydata.length > 0) {
+
             for (var i = 0; i < Ydata.length; i++) {
-                Xdate.push(i);
+                AllY += Number(Ydata[i]);
+                Ydata[i] = AllY.toFixed(3);
+            }
+        } else {
+            Ydata = json[i].days;
+            for (var i = 0; i < Ydata.length; i++) {
+
+                Ydata[i] = (Ydata[i] / 1024).toFixed(3);
+                AllY += Number(Ydata[i]);
+                Ydata[i] = AllY.toFixed(3);
+            }
+        }
+        console.log(Ydata)
+        if (Ydata.length > 0) {
+            for (var j = 0; j < Ydata.length; j++) {
+                Xdate.push(j);
             }
         }
         renderEchart("used_MB", Xdate, Ydata, unit)
     } else {
         var Xdate1 = [];
         var Ydata1;
+        var AllY1 = 0;
         if (json[i].sim_data_limt_unit == 0) {
             Ydata1 = json[i].days;
-        } else {
-            Ydata1 = (json[i].days / 1024).toFixed(2);
-        }
-        if (Ydata1.length > 0) {
             for (var i = 0; i < Ydata1.length; i++) {
-                Xdate1.push(i);
+                AllY += Number(Ydata1[i]);
+                Ydata1[i] = AllY.toFixed(3);
+            }
+        } else {
+            Ydata1 = json[i].days;
+            for (var i = 0; i < Ydata1.length; i++) {
+                Ydata1[i] = (Ydata1[i] / 1024).toFixed(3);
+                AllY1 += Number(Ydata1[i]);
+                Ydata1[i] = AllY1.toFixed(3);
+            }
+        }
+        console.log(Ydata1)
+        if (Ydata1.length > 0) {
+            for (var k = 0; k < Ydata1.length; k++) {
+                Xdate1.push(k);
             }
         }
         renderEchart("used_MB2", Xdate1, Ydata1, unit)
@@ -661,7 +702,7 @@ function getNextDate(date) {
     var day = arr[2]; //获取当前日期的日
     var date = new Date();
     var year = date.getFullYear()
-    var month = date.getMonth() + 2;
+    var month = date.getMonth() + 1;
     if (month == 13) {
         year = parseInt(year) + 1;
         month = 1;

@@ -88,12 +88,12 @@ function getHomeData() {
                     $('.Connected4G').css('color', 'red')
                     $('.NetworkProvider').eq(0).text('-');
                     $('.active_sim').eq(0).text('-');
-                    $('.imsi').eq(0).text('-');
-                    $('.plmn').eq(0).text('-');
-                    $('.csq').eq(0).text('-');
-                    $('.location').eq(0).text('-');
-                    $('.act').eq(0).text('-');
-                    $('.register').eq(0).text('');
+                    // $('.imsi').eq(0).text('-');
+                    // $('.plmn').eq(0).text('-');
+                    // $('.csq').eq(0).text('-');
+                    // $('.location').eq(0).text('-');
+                    // $('.act').eq(0).text('-');
+                    // $('.register').eq(0).text('');
                     $('.cell').eq(0).text('-');
                     $(".mobiledataImg-disable").show();
                 } else {
@@ -111,12 +111,12 @@ function getHomeData() {
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
                             .active_sim : '-');
-                        $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
-                        $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
-                        $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
-                        $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
-                        $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
-                        $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
+                        // $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
+                        // $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
+                        // $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
+                        // $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
+                        // $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
+                        // $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
                         $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
                         $(".mobiledataImg-disable").show();
                     } else {
@@ -130,12 +130,12 @@ function getHomeData() {
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
                             .active_sim : '-');
-                        $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
-                        $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
-                        $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
-                        $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
-                        $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
-                        $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
+                        // $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
+                        // $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
+                        // $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
+                        // $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
+                        // $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
+                        // $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
                         $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
                         $('.Connected4G').css('color', '#26b167')
                         $(".mobiledataImg-disable").hide();

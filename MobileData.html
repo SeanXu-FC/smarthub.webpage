@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210205" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210205" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210222" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210222" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -723,6 +723,13 @@
         .usage-content {
             padding: 20px 200px 20px 25px;
         }
+        
+        .now-month1,
+        .now-month2 {
+            font-family: OpenSans;
+            font-size: 14px;
+            color: #343434;
+        }
     </style>
 </head>
 
@@ -790,6 +797,7 @@
                                         <!-- <img src="images/usage.png"> -->
                                         <span class="echart-text">Usage (MB)</span>
                                         <div class="usedMB-echart" id="used_MB"></div>
+                                        <div class="-flex-display -justify-box"><span class="now-month1"></span><span class="now-month2"></span></div>
                                     </div>
                                     <p class="widthper50 mt-20 mb-20 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
                                             <e style="font-size:26px;font-weight:600" id="allUsed_MB">0</e><span
@@ -867,9 +875,9 @@
                                         </div>
 
                                     </div>
-                                    <div class="The-remaining-data">
+                                    <!--<div class="The-remaining-data">
                                         (your data limit will be reset on <span id="reset_time1">--</span>)</div>
-                                    <!-- <div class=" Usage-reminders mt-30">Usage reminders</div> -->
+                                     <div class=" Usage-reminders mt-30">Usage reminders</div> -->
                                     <div class="layui-form layui-form-pane -flex-display -justify-box mt-30 ">
                                         <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data
                                             limit notifications:</label>
@@ -890,6 +898,7 @@
                                         <!-- <img src="images/usage.png"> -->
                                         <span class="echart-text">Usage (MB)</span>
                                         <div class="usedMB-echart" id="used_MB2"></div>
+                                        <div class="-flex-display -justify-box"><span class="now-month1"></span><span class="now-month2"></span></div>
                                     </div>
                                     <p class="widthper50 mt-20 mb-20 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
                                             <e style="font-size:26px;font-weight:600" id="allUsed_MB2">0</e><span
@@ -967,9 +976,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="The-remaining-data">
-                                        (your data limit will be reset on <span id="reset_time2">--</span>)</div>
-                                    <!-- <div class=" Usage-reminders mt-30">Usage reminders</div> -->
+                                    <!--<div class="The-remaining-data">
+                                         (your data limit will be reset on <span id="reset_time2">--</span>)</div>
+                                    <div class=" Usage-reminders mt-30">Usage reminders</div> -->
                                     <div class="layui-form layui-form-pane -flex-display -justify-box mt-30">
                                         <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data
                                             limit notifications:</label>
@@ -1169,10 +1178,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210205"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210205"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210222"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210222"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210205"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210222"></script>
 
 
 </body>

@@ -178,15 +178,17 @@ function getWLANData(layer, loading) {
                 var json = res.result.ap_list;
                 json.sort(arrSort("rssi"));
                 sessionStorage.setItem('wifiJson', JSON.stringify(json));
+                $(".search-container").hide();
                 renderWifiList(json);
 
             } else if (res.error) {
+                $(".search-container").hide();
                 layer.msg("An error occurred：" + res.error.message);
             }   
 
         },
         error: function(jqXHR) {
-
+            $(".search-container").hide();
             parent.layer.close(loading);
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
             promptMessage("Error message", tip);

@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <link href="css/style.css?mv=20210205" rel="stylesheet" />
+    <link href="css/style.css?mv=20210222" rel="stylesheet" />
     <title>Document</title>
     <style>
         table {
@@ -31,8 +31,8 @@
             /* top: 150px;
             left: 0px; */
             width: 272px;
-            height: auto;
-            margin-top: 40px;
+            height: 320px;
+            overflow-y: auto;
             border: 1px solid #707070;
             border-radius: 5px;
             background-color: #fff
@@ -230,6 +230,25 @@
         #none_wifiList {
             text-align: center;
         }
+        
+        .search-container {
+            padding-bottom: 10px;
+        }
+        
+        .search-text {
+            width: 16px;
+            margin-right: 3px;
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 13px;
+            color: #343434;
+        }
+        
+        .searching-img {
+            width: 16px;
+            margin-right: 3px;
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -239,10 +258,13 @@
             <h2 class="Set-up-wizard"> Set-up wizard </h2>
             <input style="display: none" id="saved_id" name="saved_id" />
             <p class="Choose-your-wireless-network mt-30">Choose your wireless network</p>
-            <p class="When-connected-your-SmartHub-will-distribute-wireless-data-to-all-devices-connected-to-its-access-point-If-there-are-no-wireless-networks-you-wish-to-connect-to-now-then-just-select-continue mt-20">When connected, your SmartHub will distribute wireless data to all devices connected to its access point. If there are no wireless networks you wish to connect to now then just select continue</p>
-            <div class="mCont" style="padding:28px 37px;" id="set_wizard_c">
-                <div id="none_wifiList"><span class="none-wifi-info">Loadding</span></div>
-                <!-- <div class="row -flex-display -justify-box">
+            <p class="When-connected-your-SmartHub-will-distribute-wireless-data-to-all-devices-connected-to-its-access-point-If-there-are-no-wireless-networks-you-wish-to-connect-to-now-then-just-select-continue mt-20">
+                When connected, your SmartHub will distribute wireless data to all devices connected to its access point. If there are no wireless networks you wish to connect to now then just select continue</p>
+            <div class="mt-40">
+                <div class="search-container"><img class="searching-img" src="images/loading.gif" /><span class="search-text">Searching for networks</span></div>
+                <div class="mCont" style="padding:28px 37px;" id="set_wizard_c">
+                    <div id="none_wifiList"><span class="none-wifi-info"></span></div>
+                    <!-- <div class="row -flex-display -justify-box">
                     <div class="-radio-flex">
                         <div class="myAp">Mynetwork1</div>
                         <div class="col-md-4 c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">ConnectedStr</span></div>
@@ -255,15 +277,16 @@
                         <div class="col-md-4 c9" style="padding-left:0">Saved</div>
                     </div>
                     <div class=""><img src="images/icon-wifi01.png"></div>
-                </div>
+                </div>-->
 
-                <div class="row mt-40" style="display: flex;">
-                    <div class="col-md-2">
-                        <div><img src="images/icon-add.png"></div>
+                    <div class="row mt-40" style="display: flex;">
+                        <div class="col-md-2">
+                            <div><img src="images/icon-add.png"></div>
+                        </div>
+                        <div class="col-md-10"><span class="addN">Create network</span></div>
                     </div>
-                    <div class="col-md-10"><span class="addN">Create network</span></div>
-                </div> -->
 
+                </div>
             </div>
             <div class="row mt-40 -flex-display" style="margin-bottom: 60px;">
                 <div class="col-md-7 -radio-flex2">
@@ -279,8 +302,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210205"></script>
-    <script type="text/javascript" src="js/setWizard/setWizard.js?mv=20210205"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210222"></script>
+    <script type="text/javascript" src="js/setWizard/setWizard.js?mv=20210222"></script>
 
 </body>
 

@@ -78,8 +78,10 @@ function getWLANData(layer, loading) {
                 json.sort(arrSort("rssi"));
                 sessionStorage.setItem('wifiJson', JSON.stringify(json));
                 renderWifiList(json);
+                $(".search-container").hide();
             } else if (res.error) {
                 layer.msg("An error occurred：" + res.error.message);
+                $(".search-container").hide();
             }  
             //sessionStorage.setItem('clickFlag', true);
 
@@ -88,6 +90,7 @@ function getWLANData(layer, loading) {
             parent.layer.close(loading);
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
             promptMessage("Error message", tip);
+            $(".search-container").hide();
             //sessionStorage.setItem('clickFlag', true);
         }
     });
@@ -209,7 +212,7 @@ function renderWifiList(json) {
             str += '<div class="row -flex-display -justify-box wifi" style="margin-top:13px;"><input class="dom_saved_data" value="" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '" style="display:none;"><div class="-radio-flex"><div class="wifi-name-set">' + json[j].ssid + '</div><div class="c9" style="padding-left:0">' + savedStr + '</div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
         }
     }
-    str += ' <div class="row mt-40 add-Available-networks" style="display: flex;"><div class="col-md-2 pl-0"><div><img src="images/icon-add.png"></div></div><div class="col-md-10"><span class="addN">Create network</span></div></div>'
+    str += ' <div class="row mt-30 add-Available-networks" style="display: flex;"><div class="col-md-2 pl-0"><div><img src="images/icon-add.png"></div></div><div class="col-md-10"><span class="addN">Create network</span></div></div>'
     $("#set_wizard_c").html(str);
     bindEvent();
 }

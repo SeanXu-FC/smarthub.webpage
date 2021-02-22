@@ -676,7 +676,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210205"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210222"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -690,10 +690,10 @@
             oldTrigType = trigType;
             var volt = GetUrlParam("volt");
             oldVolt = volt;
-            var noti_msg = GetUrlParam("noti_msg");
+            var noti_msg = getUrlPara1("noti_msg");
             oldNoti_msg = noti_msg;
             var wake_func = GetUrlParam("wake_func");
-            console.log(dataId, Notifications, trigType, volt, noti_msg, wake_func)
+            console.log(oldNoti_msg)
             $(".Edit-Air-conditioner-notifications").text("Edit " + name + " notifications");
             layui.use(['form', 'layer'], function() {
                 var layer = layui.layer;
@@ -752,6 +752,24 @@
             })
 
         });
+
+        function getUrlPara1(paraName) {
+            var url = document.location.toString();
+            var arrObj = url.split("?");
+            if (arrObj.length > 1) {
+                var arrPara = arrObj[1].split("&");
+                var arr;
+                for (var i = 0; i < arrPara.length; i++) {
+                    arr = arrPara[i].split("=");
+                    if (arr != null && arr[0] == paraName) {
+                        return arr[1];
+                    }
+                }
+                return "";
+            } else {
+                return "";
+            }
+        }
 
         function toDecimal(value, n) {
             var f = Math.round(value * Math.pow(10, n)) / Math.pow(10, n);
@@ -845,8 +863,8 @@
         function WidthCheckIOStr(str, maxLen) {
             var w = 0;
             var tempCount = 0;
-
-            //length 获取字数数
+            console.log(str.value.length)
+                //length 获取字数数
             for (var i = 0; i < str.value.length; i++) {
                 //charCodeAt()获取字符串中某一个字符的编码 
                 var c = str.value.charCodeAt(i);

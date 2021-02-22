@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
 
     <link rel="stylesheet" href="layui/css/layui.css">
-    <link href="css/style.css?mv=20210205" rel="stylesheet" />
+    <link href="css/style.css?mv=20210222" rel="stylesheet" />
     <title>Document</title>
     <style>
         .mc {
@@ -290,9 +290,10 @@
         
         .Rectangle-1205 {
             width: 344px;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             zoom: 1;
-            /* height: 466px; */
+            height: 466px;
             border-radius: 5px;
             border: solid 1px #707070;
             min-height: 60px;
@@ -828,6 +829,25 @@
             text-align: center;
             line-height: 60px;
         }
+        
+        .search-container {
+            padding-bottom: 10px;
+        }
+        
+        .search-text {
+            width: 16px;
+            margin-right: 3px;
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 13px;
+            color: #343434;
+        }
+        
+        .searching-img {
+            width: 16px;
+            margin-right: 3px;
+            margin-left: 130px;
+        }
     </style>
 </head>
 
@@ -852,83 +872,53 @@
                 <span class="Choose-the-wireless-network-for-your-SmartHub-to-connect-to mt-40">Choose the wireless
                     network for your SmartHub to connect to</span>
             </div>
-            <div class="Rectangle-1205 mt-20" style="margin-left:120px;display:none" id="WLAN_list_c">
-                <div class="none-list" id="none_wifiList"><span>Loadding</span></div>
-                <!-- <table class="wifi-table">
-                    <tr>
-                        <td class="col-md-8">
-                            <div class="wifi-name wifi-name-green">SKY546H</div>
-                            <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
-                        </td>
-                        <td>
-                            <div class="col-md-2"><img src="images/icon-wifi.png"></div>
-                        </td>
-                        <td>
-                            <div class="col-md-2 wireless">
-                                <img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="Available-networks">Available networks</td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-8 wifi">
-                            <div class="wifi-name">SKY546H</div>
-                            <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
-                        </td>
-                        <td>
-                            <div class="col-md-2"><img src="images/icon-wifi.png"></div>
-                        </td>
-                        <td>
-                            <div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-8 wifi">
-                            <div class="wifi-name">SKY546H</div>
-                            <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
-                        </td>
-                        <td>
-                            <div class="col-md-2"><img src="images/icon-wifi.png"></div>
-                        </td>
-                        <td>
-                            <div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-8 wifi">
-                            <div class="wifi-name">SKY546H</div>
-                            <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
-                        </td>
-                        <td>
-                            <div class="col-md-2"><img src="images/icon-wifi.png"></div>
-                        </td>
-                        <td>
-                            <div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-8 wifi">
-                            <div class="wifi-name">SKY546H</div>
-                            <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
-                        </td>
-                        <td>
-                            <div class="col-md-2"><img src="images/icon-wifi.png"></div>
-                        </td>
-                        <td>
-                            <div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="Available-networks">
-                            <div class="col-md-2" style="padding-left:0"><img src="images/icon-add.png" style="display: inline-block;"></div>
-                            <div class="col-md-10"><span style="display: inline-block;margin-top:3px;margin-left:-10px;" class="addN">Add network</span></div>
-                        </td>
-                    </tr>
-                </table> -->
+            <div class="mt-40">
+                <div class="search-container"><img class="searching-img" src="images/loading.gif" /><span class="search-text">Searching for networks</span></div>
+                <div class="Rectangle-1205" style="margin-left:120px;display:none" id="WLAN_list_c">
+                    <div class="none-list" id="none_wifiList"><span></span></div>
+                    <table class="wifi-table">
+                        <!-- <tr>
+                            <td class="col-md-8">
+                                <div class="wifi-name wifi-name-green">SKY546H</div>
+                                <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
+                            </td>
+                            <td>
+                                <div class="col-md-2"><img src="images/icon-wifi.png"></div>
+                            </td>
+                            <td>
+                                <div class="col-md-2 wireless">
+                                    <img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="Available-networks">Available networks</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="col-md-8 wifi">
+                                <div class="wifi-name">SKY546H</div>
+                                <div class=" c9 Connected-24GHz" style="padding-left:0">Encrypted</div>
+                            </td>
+                            <td>
+                                <div class="col-md-2"><img src="images/icon-wifi.png"></div>
+                            </td>
+                            <td>
+                                <div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td colspan="3" class="add-Available-networks">
+                                <div class="col-md-2" style="padding-left:0"><img src="images/icon-add.png" style="display: inline-block;"></div>
+                                <div class="col-md-10"><span style="display: inline-block;margin-top:3px;margin-left:-10px;" class="addN">Add
+                                        network</span></div>
+                            </td>
+                        </tr>
+                    </table>
 
+                </div>
             </div>
+
 
             <!-- <div class="Rectangle-1205 mt-20" style="padding:20px; margin-left:120px;">
                 <div class="row">
@@ -1095,10 +1085,10 @@
     <div id="bg1"></div> -->
 
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210205"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210222"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <script src="js/WiFiNetwork.js?mv=20210205"></script>
+    <script src="js/WiFiNetwork.js?mv=20210222"></script>
 
     <script>
         $(function() {
