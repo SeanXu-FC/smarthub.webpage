@@ -57,11 +57,12 @@
             $(".layui-layer-loading .layui-layer-content").after(
                 "Waiting for changes to be applied...");
             status = $("#my-iframe", window.parent.document).attr("src");
-            status = status.split("=")[1];
+
+            status = GetUrlParam("status");
             if (status != "null" && status != "undefined") { //从首页跳过来
                 var data = {
-                    status: status,
-                    steps: "",
+                    status: GetUrlParam("status"),
+                    steps: GetUrlParam("steps"),
                 }
                 statusHandle(data, loading);
             } else {
@@ -108,6 +109,7 @@
         } else if (data.status == "4") { //设备掉电
             StateResponse(1);
             clearInterval(interval);
+            $("#steps").html(data.steps);
             return4Getstatus(layer, loading, 1000 * 60 * 3);
         } else if (data.status == "3") { //没有升级
             parent.layer.close(loading);

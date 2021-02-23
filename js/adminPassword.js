@@ -45,7 +45,7 @@ $(function() {
         var len = $('#pwd').val().length;
         var len2 = $('#pwd2').val().length;
         var len3 = $('#pwd3').val().length;
-        if (6 <= len && len <= 64) {
+        if (8 <= len && len <= 64) {
             $("#btn").removeAttr("disabled");
             $("#btn").css("opacity", "1");
         } else {

@@ -13,6 +13,7 @@
     <link href="layui/css/layui.css" rel="stylesheet" />
     <link href="css/style.css?mv=20210223" rel="stylesheet" />
     <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210223"></script>
     <script src="layui/layui.js" type="text/javascript"></script>
     <script src="js/upload.js?mv=20210223" type="text/javascript"></script>
     <style>
@@ -78,13 +79,41 @@
         .Upgrade {
             font-family: OpenSans;
             font-size: 18px;
-            font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 1.33;
+            line-height: 54px;
             letter-spacing: normal;
             text-align: center;
             color: #ffffff;
+        }
+        
+        .disable-btn {
+            opacity: 0.54;
+        }
+        
+        .upgrade-title {
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: left;
+            color: #333333;
+            padding-left: 20px;
+        }
+        
+        .exclamatory-mark {
+            width: 33px;
+            height: 32px;
+        }
+        
+        .version-name {
+            margin-bottom: 10px;
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .version-num {
+            padding-left: 70px;
         }
     </style>
 </head>
@@ -94,8 +123,14 @@
         <div class="row">
             <h2 class="col-md-12 Software-upgrade" style="margin-bottom:10px;">Software upgrade</h2>
         </div>
-        <div class="row">
-            <div class="col-md-12" style="margin-bottom:10px;">Current version:<span id="version" style="padding-left:10px;font-size:16px;font-weight:bold;"></span></div>
+        <div class="row -flex-display -align-box mt-30">
+            <img class="exclamatory-mark" src="images/tanhao.png" />
+            <span class="upgrade-title">SmartHub software requires an update</span>
+        </div>
+        <div class="row mt-20">
+            <div class="col-md-12 version-name">Application version:<span id="version" class="version-name version-num"></span></div>
+            <div class="col-md-12 version-name">Platform version:<span id="Platform_version" class="version-name version-num"></span></div>
+            <div class="col-md-12 version-name">Product bundle version:<span id="Product_version" class="version-name version-num"></span></div>
         </div>
 
 
@@ -122,17 +157,17 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="">
+            <div class="mt-30">
                 <div class="layui-input-inline">
-                    <input type="button" class="layui-btn Rectangle-1183 Upgrade" id="upgrade" lay-submit value="Upgrade">
-                    <button class="layui-btn" lay-submit>Upgrade</button> 
-    </div>
-    </div> -->
+                    <div class="layui-btn Rectangle-1183 Upgrade disable-btn" id="upgrade">Upgrade</div>
+                </div>
+            </div>
         </form>
     </div>
 </body>
 <script>
     $(function() {
+        getVersion();
         layui.use(['layer', 'element', 'form', 'upload'], function() {
             var layer = layui.layer,
                 element = layui.element,
@@ -180,12 +215,14 @@
                             var resObj = JSON.parse(xhr.response)
                             if (resObj.code == 0) {
                                 layer.msg("Upload successful！");
-                                var domain = window.location.host;
-                                setTimeout(function() {
-                                    window.location.href = ('https:' == document
-                                        .location.protocol ? 'https://' : 'http://'
-                                    ) + domain + "/flashops.html";
-                                }, 1000);
+                                $("#upgrade").removeClass("disable-btn");
+                                // var domain = window.location.host;
+                                // setTimeout(function() {
+                                //     window.location.href = ('https:' == document
+                                //         .location.protocol ? 'https://' : 'http://'
+                                //     ) + domain + "/flashops.html";
+                                // }, 1000);
+                                console.log(resObj)
                                 $("#version").html(resObj.id);
                             } else {
                                 layer.msg("Upload fail:" + msg);
@@ -198,6 +235,41 @@
             }, false);
         })
     })
+
+    function getVersion() {
+        var data = {
+            "jsonrpc": "2.0",
+            "method": "GetHubInfo",
+            "params": {
+
+            },
+            "id": "9.1"
+        };
+
+        data = JSON.stringify(data);
+        $.ajax({
+            type: "post",
+            url: "/action/action",
+            data: data,
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function(res) {
+                if (res.result) {
+                    $("#version").html(res.result.TotalVersion);
+                } else if (res.error) {
+                    layui.use(['form', 'layer'], function() {
+                        var layer = layui.layer;
+                        layer.msg("An error occurred：" + res.error.message);
+                    })
+                }
+            },
+            error: function(jqXHR) {
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                    .stringify(jqXHR) + '</div>';
+                promptMessage("Error message", tip);
+            }
+        });
+    }
 </script>
 
 </html>

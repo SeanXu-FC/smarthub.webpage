@@ -244,7 +244,7 @@ function getStatus() {
                 var data = res.result;
                 if (data.status != "3") { //升级成功
                     $("#my-iframe", window.parent.document).attr("src", "flashops.html?status=" + data
-                        .status);
+                        .status + "&steps=" + data.steps);
                 }
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {

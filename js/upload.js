@@ -41,7 +41,6 @@
                 //size: 1024 * 3, //为0为不限制大小
                 //监听xhr进度，并返回给进度条
                 progress: function(value, elem) { //上传进度回调 value进度值  
-                    console.log(value)
                     element.progress('upload_progress', value + '%') //设置页面进度条
                     $("#upgrade").prop("disabled", true);
                 },
@@ -86,13 +85,15 @@
                     //上传完毕回调
                     //假设code=0代表上传成功
                     layer.close(layer.index);
-                    var domain = window.location.host;
+
                     if (res.code == 0) { //此处只用于单文件图片的上传，若为多图片多文件请做其他处理
                         layer.msg("Upload successful！");
-                        setTimeout(function() {
-                            window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
-                        }, 1000);
+                        $("#upgrade").removeClass("disable-btn")
+                            // setTimeout(function() {
+                            //     window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
+                            // }, 1000);
                         $("#version").html(res.id);
+                        console.log(res)
                     }
                 },
                 error: function(index, upload) {
@@ -114,4 +115,15 @@
 
         }) //layui
 
+    $("#upgrade").on("click", function() {
+        var has = $(this).hasClass("disable-btn");
+        if (has) {
+            console.log(2223)
+            return;
+        } else {
+            console.log(333333)
+            var domain = window.location.host;
+            window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
+        }
+    })
 })
