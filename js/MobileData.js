@@ -612,25 +612,22 @@ function renderDataUsage(json, i) {
     var unit = json[i].sim_data_limt_unit == 0 ? "MB" : "GB"
     if (i == 0) {
         var Xdate = [];
-        var Ydata;
+        var Ydata = [];
         var AllY = 0;
         if (json[i].sim_data_limt_unit == 0) {
-            Ydata = json[i].days;
-
-            for (var i = 0; i < Ydata.length; i++) {
-                AllY += Number(Ydata[i]);
-                Ydata[i] = AllY.toFixed(3);
+            //Ydata = json[i].days;
+            for (var k = 0; k < json[i].days.length; k++) {
+                AllY += Number(json[i].days[k]);
+                Ydata[k] = AllY.toFixed(3);
             }
         } else {
-            Ydata = json[i].days;
-            for (var i = 0; i < Ydata.length; i++) {
-
-                Ydata[i] = (Ydata[i] / 1024).toFixed(3);
-                AllY += Number(Ydata[i]);
-                Ydata[i] = AllY.toFixed(3);
+            //Ydata = json[i].days;
+            for (var p = 0; p < json[i].days.length; p++) {
+                Ydata[p] = (Number(json[i].days[p]) / 1024).toFixed(3);
+                AllY += Number(Ydata[p]);
+                Ydata[p] = AllY.toFixed(3);
             }
         }
-        console.log(Ydata)
         if (Ydata.length > 0) {
             for (var j = 0; j < Ydata.length; j++) {
                 Xdate.push(j);
@@ -639,23 +636,22 @@ function renderDataUsage(json, i) {
         renderEchart("used_MB", Xdate, Ydata, unit)
     } else {
         var Xdate1 = [];
-        var Ydata1;
+        var Ydata1 = [];
         var AllY1 = 0;
         if (json[i].sim_data_limt_unit == 0) {
-            Ydata1 = json[i].days;
-            for (var i = 0; i < Ydata1.length; i++) {
-                AllY += Number(Ydata1[i]);
-                Ydata1[i] = AllY.toFixed(3);
+            //Ydata1 = json[i].days;
+            for (var a = 0; a < json[i].days.length; a++) {
+                AllY1 += Number(json[i].days[a]);
+                Ydata1[a] = AllY1.toFixed(3);
             }
         } else {
-            Ydata1 = json[i].days;
-            for (var i = 0; i < Ydata1.length; i++) {
-                Ydata1[i] = (Ydata1[i] / 1024).toFixed(3);
-                AllY1 += Number(Ydata1[i]);
-                Ydata1[i] = AllY1.toFixed(3);
+            //Ydata1 = json[i].days;
+            for (var b = 0; b < json[i].days.length; b++) {
+                Ydata1[b] = (Number(json[i].days[b]) / 1024).toFixed(3);
+                AllY1 += Number(Ydata1[b]);
+                Ydata1[b] = AllY1.toFixed(3);
             }
         }
-        console.log(Ydata1)
         if (Ydata1.length > 0) {
             for (var k = 0; k < Ydata1.length; k++) {
                 Xdate1.push(k);
@@ -701,8 +697,15 @@ function getNextDate(date) {
     var arr = date.split('-');
     var day = arr[2]; //获取当前日期的日
     var date = new Date();
-    var year = date.getFullYear()
-    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    var nowDay = date.getDate(); //得到日期
+    console.log(nowDay)
+    var month;
+    if (Number(nowDay) > Number(day)) {
+        month = date.getMonth() + 2;
+    } else {
+        month = date.getMonth() + 1;
+    }
     if (month == 13) {
         year = parseInt(year) + 1;
         month = 1;

@@ -40,7 +40,7 @@ function getWLANScan(layer, form) {
                     return;
                 }
                 $("#none_wifiList").children("img").hide();
-                $("#none_wifiList").children("span").text(res.error.message)
+                //$("#none_wifiList").children("span").text(res.error.message)
                 setTimeout(() => {
                     getWLANData(layer, loading);
                 }, 3000);
@@ -97,18 +97,11 @@ function getWLANData(layer, loading) {
 }
 
 function changeSwitchStatus(layer, loading, checked) {
-    var mode;
-    if (checked == false) {
-        mode = 0;
-    } else if (checked == true) {
-        mode = 1;
-
-    }
     var data = {
         "jsonrpc": "2.0",
         "method": "WlanStationConfig",
         "params": {
-            "operate_code": mode
+            "operate_code": checked
         },
         "id": "9.1"
     };
@@ -123,7 +116,7 @@ function changeSwitchStatus(layer, loading, checked) {
         success: function(res) {
             parent.layer.close(loading);
             if (res.result) {
-                if (mode) {
+                if (checked) {
                     $(".network-c").show();
                     $("#WLAN_list_c").show();
                     $("#WLAN_list_c").html("");

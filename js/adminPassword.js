@@ -157,8 +157,6 @@ function check2() {
         } else if (oPwd2.match(mmzz3)) {
             sp2.innerHTML = "Password strength: <span style='color: #26b167;'>Strong</span>"; //密码等级'较强'
 
-        } else {
-            sp2.innerHTML = "Password strength: <span style='color: #26b167;'>Strong</span>"; //密码等级'较强'
         }
 
     }

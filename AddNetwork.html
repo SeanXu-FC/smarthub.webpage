@@ -405,7 +405,7 @@
 
 
     </div>
-    <script type="text/javascript" src="js/common.js?mv=20210222"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210223"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
@@ -515,33 +515,28 @@
             var ssid = $(".Network_name").val();
             var security = $("#security").val();
             var pwd = $("#pwd").val();
-            if (security = "None") {
-                var data = {
-                    "jsonrpc": "2.0",
-                    "method": "WlanStationConfig",
-                    "params": {
-                        "operate_code": 2,
-                        "ssid": ssid,
-                        "encrypt": security,
-                        "is_saved": 0,
-                    },
-                    "id": "9.1"
+            if (security == "None") {
+                var params = {
+                    "operate_code": 2,
+                    "ssid": ssid,
+                    "encrypt": security,
+                    "is_saved": 0,
                 };
             } else {
-                var data = {
-                    "jsonrpc": "2.0",
-                    "method": "WlanStationConfig",
-                    "params": {
-                        "operate_code": 2,
-                        "ssid": ssid,
-                        "encrypt": security,
-                        "psk": pwd ? pwd : '',
-                        "is_saved": 0,
-                    },
-                    "id": "9.1"
-                };
+                var params = {
+                    "operate_code": 2,
+                    "ssid": ssid,
+                    "encrypt": security,
+                    "psk": pwd ? pwd : '',
+                    "is_saved": 0,
+                }
             }
-
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "WlanStationConfig",
+                "params": params,
+                "id": "9.1"
+            };
 
 
             data = JSON.stringify(data);

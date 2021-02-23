@@ -34,9 +34,11 @@ function getSwitchStatus(layer, form) {
                     $("#WLAN_swtich").attr("checked", "checked");
                     $(".network-c").show();
                     $("#WLAN_list_c").show();
+                    $(".search-container").show();
                     getWLANScan(layer);
 
                 } else {
+                    $(".search-container").hide();
                     $("#WLAN_swtich").removeAttr("checked");
 
                 }
@@ -84,11 +86,13 @@ function changeSwitchStatus(layer, form, checked) {
                 if (mode) {
                     $(".network-c").show();
                     $("#WLAN_list_c").show();
+                    $(".search-container").show();
                     $("#WLAN_list_c").html("");
                     getWLANScan(layer);
                 } else {
                     $(".network-c").hide();
                     $("#WLAN_list_c").hide();
+                    $(".search-container").hide();
                 }
             } else if (res.error) {
                 layer.msg("An error occurred：" + res.error.message);
@@ -107,7 +111,7 @@ function changeSwitchStatus(layer, form, checked) {
 function getWLANScan(layer) {
 
     var loading = parent.layer.load(0, {
-        shade: [0.5, '#fff']
+        shade: [0.5, '#fff'],
     });
     var data = {
         "jsonrpc": "2.0",
@@ -133,11 +137,11 @@ function getWLANScan(layer) {
 
             } else if (res.error) {
                 $("#none_wifiList").children("img").hide();
-                $("#none_wifiList").children("span").text(res.error.message)
-                    //layer.msg("An error occurred：" + res.error.message);
-                    //var noneStr = '<div class="none-list" id="none_wifiList"><span>' + res.error.message + '</span></div>'
-                    //$("#WLAN_list_c").html(noneStr);
-                    //sessionStorage.setItem('clickFlag', true);
+                //$("#none_wifiList").children("span").text(res.error.message)
+                //layer.msg("An error occurred：" + res.error.message);
+                //var noneStr = '<div class="none-list" id="none_wifiList"><span>' + res.error.message + '</span></div>'
+                //$("#WLAN_list_c").html(noneStr);
+                //sessionStorage.setItem('clickFlag', true);
                 setTimeout(() => {
                     getWLANData(layer, loading);
                 }, 3000);
