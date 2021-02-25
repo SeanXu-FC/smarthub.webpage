@@ -1,5 +1,5 @@
+var unlockSIM = 1;
 $(function() {
-
     var $wrapper = $('.tab-wrapper'),
         $allTabs = $wrapper.find('.tab-content > div'),
         $tabMenu = $wrapper.find('.tab-menu li'),
@@ -54,9 +54,11 @@ $(function() {
             $getWrapper.find($allTabs).filter('[data-tab=tab2]').show();
         }
         if (dataTab == "tab4") {
+            unlockSIM = 1;
             $getWrapper.find($allTabs).filter('[data-tab=tab5]').hide();
             $getWrapper.find($allTabs).filter('[data-tab=tab4]').show();
         } else if (dataTab == "tab5") {
+            unlockSIM = 2;
             $getWrapper.find($allTabs).filter('[data-tab=tab4]').hide();
             $getWrapper.find($allTabs).filter('[data-tab=tab5]').show();
         }
@@ -97,19 +99,35 @@ $(function() {
     // }
 
     //弹出一个iframe层
-    $('.Change-SIM-pin').on('click', function() {
-        //var changeSimPin = '<div id="enterPass1" class="Rectangle-1187"><h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Enter the password for network</h3><p class="Enter-the-admin-password-to-make-changes mt-20 Enter-the-password-for-network-Mynetwork1">"Mynetwork1"</p><div style="position:relative"><label class="Password mt-30" style="display: inline-block;">password:</label><input type="password" value="" class="Rectangle-1188 pwd" style="display: inline-block;" /><span class="SHOW" style="position:absolute; top:37px;left:378px;cursor: pointer;" onclick="change()">show</span></div><div class="row mt-40"><div class="col-md-3 col-md-offset-3"><button class="Path-101 Cancel">Cancel</button></div><div class="col-md-5 col-md-offset-1 connected"><button class="Rectangle-1182 active OK">Connected</button></div></div></div>';
-        //iframe层
+    $('.Unlock-SIM').on('click', function() {
+        console.log("unlockSIM", unlockSIM)
+            //iframe层
         parent.layer.open({
             type: 2,
             title: false,
             closeBtn: 0,
             //shadeClose: true,
             shade: 0.8,
-            area: ['500px', '410px'],
-            content: ['changeSimPin.html', 'no'],
+            area: ['400px', '320px'],
+            content: ['changeSimPin.html?SIM=' + unlockSIM, 'no'],
+            end: function(index, layero) {
+
+                var unlockSIM = $("#unlockSIM").val();
+                console.log(unlockSIM)
+                if (unlockSIM == 1) {
+                    layui.use(['layer', 'form'], function() {
+                        var layer = layui.layer;
+                        var form = layui.form;
+                        var loading = layer.load(0, {
+                            shade: false
+                        });
+                        getSimManagement(layer, form, loading);
+                    })
+                }
+            }
         });
     });
+
 
     layui.use(['layer', 'form'], function() {
         var layer = layui.layer;
@@ -134,14 +152,15 @@ $(function() {
                 $("#switchMB").removeAttr("disabled");
                 $("#limit_time").removeAttr("disabled");
                 $("#last_manth_s").removeAttr("disabled");
-                $("#usagereminders input").removeAttr("disabled");
+                $("#usagereminders input").prop("disabled", false);
 
             } else {
                 $("#dataLimit input").attr("disabled", true);
                 $("#switchMB").attr("disabled", true);
                 $("#limit_time").attr("disabled", true);
                 $("#last_manth_s").attr("disabled", true);
-                $("#usagereminders input").attr("disabled", true);
+                $("#usagereminders input").prop("checked", false);
+                $("#usagereminders input").prop("disabled", true);
             }
             form.render();
             //getDatausageVal();
@@ -166,12 +185,14 @@ $(function() {
                 $("#switchMB2").removeAttr("disabled");
                 $("#limit_time2").removeAttr("disabled");
                 $("#last_manth_s2").removeAttr("disabled");
-
+                $("#usagereminders2 input").prop("disabled", false);
             } else {
                 $("#dataLimit2 input").attr("disabled", true);
                 $("#switchMB2").attr("disabled", true);
                 $("#limit_time2").attr("disabled", true);
                 $("#last_manth_s2").attr("disabled", true);
+                $("#usagereminders2 input").prop("checked", false);
+                $("#usagereminders2 input").prop("disabled", true);
             }
             form.render();
             //getDatausageVal();
@@ -261,6 +282,18 @@ $(function() {
             getSimManagementVal();
         })
 
+        $("#cancel1").on("click", function() {
+            var loading = layer.load(0, {
+                shade: false
+            });
+            getDatausageFirst(layer, form, loading);
+        })
+        $("#cancel2").on("click", function() {
+            var loading = layer.load(0, {
+                shade: false
+            });
+            getSimManagement(layer, form, loading);
+        })
     });
 
 
@@ -379,9 +412,9 @@ function getDatausageFirst(layer, form, loading) {
                 var json = res.result;
                 MobileData = json.data_usages;
                 //MobileData[0].start_date = "";
-                renderDataUsage(MobileData, 0);
+                renderDataUsage(MobileData, 0, form);
                 setTimeout(() => {
-                    renderDataUsage(MobileData, 1);
+                    renderDataUsage(MobileData, 1, form);
                 }, 1000);
             }
         },
@@ -415,9 +448,9 @@ function getDatausage(layer, form, loading) {
                 var dataTab = $('.tab-wrapper .Data-usage-simmenu li.active').data('tab');
                 console.log("dataTab11", dataTab)
                 if (dataTab == "tab0") {
-                    renderDataUsage(MobileData, 0); //默认渲染Data usage SIM1
+                    renderDataUsage(MobileData, 0, form); //默认渲染Data usage SIM1
                 } else {
-                    renderDataUsage(MobileData, 1);
+                    renderDataUsage(MobileData, 1, form);
                 }
 
             }
@@ -439,7 +472,7 @@ function getCurrentMonthLastDay() {
     return new Date(nextMonthDayOne.getTime() - minusDate);
 }
 //渲染Data usage
-function renderDataUsage(json, i) {
+function renderDataUsage(json, i, form) {
     var lastDay,
         month;
     if (i == 0) {
@@ -449,13 +482,13 @@ function renderDataUsage(json, i) {
         $(".now-month2").text(lastDay + " " + month)
         $("#sim_data_limt_unit").val(json[i].sim_data_limt_unit);
         if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
-            $("#monthlydatalimit input").attr("checked", "checked");
+            $("#monthlydatalimit input").prop("checked", "checked");
             $("#dataLimit input").removeAttr("disabled");
             $("#switchMB").removeAttr("disabled");
             $("#limit_time").removeAttr("disabled");
             $("#last_manth_s").removeAttr("disabled");
         } else {
-            $("#monthlydatalimit input").removeAttr("checked");
+            $("#monthlydatalimit input").prop("checked", false);
             $("#dataLimit input").attr("disabled", true);
             $("#switchMB").attr("disabled", true);
             $("#limit_time").attr("disabled", true);
@@ -463,11 +496,12 @@ function renderDataUsage(json, i) {
         }
 
         if (json[i].usage_reminder_flag == 1) { //Usage reminders
-            $("#usagereminders input").attr("checked", "checked");
+            $("#usagereminders input").prop("checked", "checked");
+            $("#usagereminders input").prop("disabled", false);
         } else {
-            console.log($("#usagereminders input"))
-            $("#usagereminders input").removeAttr("checked");
+            $("#usagereminders input").prop("checked", false);
         }
+
 
         if (json[i].sim_data_limt_unit == 0) {
             $(".limit_unit").text("MB");
@@ -532,13 +566,13 @@ function renderDataUsage(json, i) {
         month = new Date().toDateString().split(" ")[1];
         $("#sim_data_limt_unit2").val(json[i].sim_data_limt_unit);
         if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
-            $("#monthlydatalimit2 input").attr("checked", "checked");
+            $("#monthlydatalimit2 input").prop("checked", "checked");
             $("#dataLimit2 input").removeAttr("disabled");
             $("#switchMB2").removeAttr("disabled");
             $("#limit_time2").removeAttr("disabled");
             $("#last_manth_s2").removeAttr("disabled");
         } else {
-            $("#monthlydatalimit2 input").removeAttr("checked");
+            $("#monthlydatalimit2 input").prop("checked", false);
             $("#dataLimit2 input").attr("disabled", true);
             $("#switchMB2").attr("disabled", true);
             $("#limit_time2").attr("disabled", true);
@@ -546,10 +580,12 @@ function renderDataUsage(json, i) {
         }
 
         if (json[i].usage_reminder_flag == 1) { //Usage reminders
-            $("#usagereminders2 input").attr("checked", "checked");
+            $("#usagereminders2 input").prop("checked", "checked");
+            $("#usagereminders2 input").prop("disabled", false);
         } else {
-            $("#usagereminders2 input").removeAttr("checked");
+            $("#usagereminders2 input").prop("checked", false);
         }
+
         if (json[i].sim_data_limt_unit == 0) {
             $(".limit_unit2").text("MB");
             $("#allUsed_MB2").text(json[i].current_data_used);
@@ -662,10 +698,10 @@ function renderDataUsage(json, i) {
     layui.use(['form'], function() {
         var form = layui.form;
         form.render();
-        $("#monthlydatalimit").show();
-        $("#usagereminders").show();
+    })
+    $("#monthlydatalimit").show();
+    $("#usagereminders").show();
 
-    });
 }
 
 //计算天数差的函数(2016-09-09)，通用 
@@ -775,34 +811,34 @@ function getSimManagement(layer, form, loading) {
 //渲染SIM management
 function rendSIMManagement(json) {
 
-    $('input[name="activeSIM"]').removeAttr("checked");
-    $('input[name="activeSIM"]').eq(json.active_sim).attr("checked", "checked");
+    $('input[name="activeSIM"]').prop("checked", false);
+    $('input[name="activeSIM"]').eq(json.active_sim).prop("checked", true);
 
     if (json.auo_switch == 1) { //Auto SIM switching:
-        $("#AutoSim input").attr("checked", "checked");
+        $("#AutoSim input").prop("checked", true);
     } else {
-        $("#AutoSim input").removeAttr("checked");
+        $("#AutoSim input").prop("checked", false);
     }
     //SIM1
     if (json.sim[0].rule_weak_signal == 1) { //SIM switching rules:
-        $("#Weak_signal_1").attr("checked", "checked");
+        $("#Weak_signal_1").prop("checked", true);
     } else {
-        $("#Weak_signal_1").removeAttr("checked");
+        $("#Weak_signal_1").prop("checked", false);
     }
     if (json.sim[0].rule_dlimit == 1) { //SIM switching rules:
-        $("#rule_dlimit_1").attr("checked", "checked");
+        $("#rule_dlimit_1").prop("checked", true);
     } else {
-        $("#rule_dlimit_1").removeAttr("checked");
+        $("#rule_dlimit_1").prop("checked", false);
     }
     if (json.sim[0].rule_roamming == 1) { //SIM switching rules:
-        $("#rule_roamming_1").attr("checked", "checked");
+        $("#rule_roamming_1").prop("checked", true);
     } else {
-        $("#rule_roamming_1").removeAttr("checked");
+        $("#rule_roamming_1").prop("checked", false);
     }
     if (json.sim[0].rule_noservice == 1) { //SIM switching rules:
-        $("#rule_noservice_1").attr("checked", "checked");
+        $("#rule_noservice_1").prop("checked", true);
     } else {
-        $("#rule_noservice_1").removeAttr("checked");
+        $("#rule_noservice_1").prop("checked", false);
     }
 
     if (json.sim[0].sim_status) {
@@ -832,33 +868,37 @@ function rendSIMManagement(json) {
     $("#sim_imsi1").text(json.sim[0].imsi);
     $("#sim_tele_num1").text(json.sim[0].phone_num);
     $("#sim_puk_num1").text(json.sim[0].puk);
-
-    if (json.sim[0].pinlock == 1) { //SIM switching rules:
-        $("#SIM_pin_lock1").attr("checked", "checked");
+    json.sim[0].pin_lock = 1;
+    if (json.sim[0].pin_lock == 0) { //SIM switching rules:
+        $("#Change_SIM_pin1").attr("disabled", "true");
+        $("#Change_SIM_pin1").css("opacity", "0.5");
+        $("#Change_SIM_pin1 span").text("SIM is ready")
     } else {
-        $("#SIM_pin_lock1").removeAttr("checked");
+        $("#Change_SIM_pin1").removeAttr("disabled");
+        $("#Change_SIM_pin1").css("opacity", "1");
+        $("#Change_SIM_pin1 span").text("Unlock SIM")
     }
 
     //SIM2
     if (json.sim[1].rule_weak_signal == 1) { //SIM switching rules:
-        $("#Weak_signal_2").attr("checked", "checked");
+        $("#Weak_signal_2").prop("checked", true);
     } else {
-        $("#Weak_signal_2").removeAttr("checked");
+        $("#Weak_signal_2").prop("checked", false);
     }
     if (json.sim[1].rule_dlimit == 1) { //SIM switching rules:
-        $("#rule_dlimit_2").attr("checked", "checked");
+        $("#rule_dlimit_2").prop("checked", true);
     } else {
-        $("#rule_dlimit_2").removeAttr("checked");
+        $("#rule_dlimit_2").prop("checked", false);
     }
     if (json.sim[1].rule_roamming == 1) { //SIM switching rules:
-        $("#rule_roamming_2").attr("checked", "checked");
+        $("#rule_roamming_2").prop("checked", true);
     } else {
-        $("#rule_roamming_2").removeAttr("checked");
+        $("#rule_roamming_2").prop("checked", false);
     }
     if (json.sim[1].rule_noservice == 1) { //SIM switching rules:
-        $("#rule_noservice_2").attr("checked", "checked");
+        $("#rule_noservice_2").prop("checked", true);
     } else {
-        $("#rule_noservice_2").removeAttr("checked");
+        $("#rule_noservice_2").prop("checked", false);
     }
     if (json.sim[1].sim_status) {
         var status = json.sim[1].sim_status;
@@ -887,11 +927,15 @@ function rendSIMManagement(json) {
     $("#sim_imsi2").text(json.sim[1].imsi);
     $("#sim_tele_num2").text(json.sim[1].phone_num);
     $("#sim_puk_num2").text(json.sim[1].puk);
-
-    if (json.sim[1].pinlock == 1) { //SIM switching rules:
-        $("#SIM_pin_lock2").attr("checked", "checked");
+    json.sim[1].pin_lock = 1
+    if (json.sim[1].pin_lock == 0) { //SIM switching rules:
+        $("#Change_SIM_pin2").attr("disabled", "true");
+        $("#Change_SIM_pin2").css("opacity", "0.5");
+        $("#Change_SIM_pin2 span").text("SIM is ready")
     } else {
-        $("#SIM_pin_lock2").removeAttr("checked");
+        $("#Change_SIM_pin2").removeAttr("disabled");
+        $("#Change_SIM_pin2").css("opacity", "1");
+        $("#Change_SIM_pin2 span").text("Unlock SIM")
     }
 
     layui.use(['form'], function() {

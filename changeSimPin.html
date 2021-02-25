@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210223" rel="stylesheet" />
+    <link href="css/style.css?mv=20210225" rel="stylesheet" />
     <title>Document</title>
     <style>
         * {
@@ -86,7 +86,7 @@
             /* position: absolute;
             top: 50%;
             left: 50%; */
-            width: 500px;
+            width: 400px;
             height: 318px;
             /* margin-left: -250px;
             margin-top: -152px; */
@@ -133,14 +133,20 @@
             height: 24px;
             font-family: OpenSans;
             font-size: 18px;
-            font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
             line-height: 1.61;
-            letter-spacing: normal;
             text-align: left;
             color: #343434;
             margin-left: 15px;
+            font-weight: 500;
+        }
+        
+        .PIN-describe {
+            font-family: OpenSans;
+            font-size: 18px;
+            text-align: left;
+            color: #343434;
+            margin-left: 15px;
+            font-weight: 500;
         }
         
         .SHOW {
@@ -185,36 +191,28 @@
 </head>
 
 <body>
-    <form>
-        <div id="enterPass1" class="Rectangle-1187">
+    <div id="enterPass1" class="Rectangle-1187">
 
-            <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Change SIM1 pin</h3>
-            <div class="row">
-                <label class="col-md-4 Password mt-30" style="padding-left:0;">Change SIM1 pin:</label>
-                <input type="text" id="pwd" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
-                <span class="col-md-1 SHOW" style="cursor: pointer;" onclick="change()">show</span>
-            </div>
-            <div class="row">
-                <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">New pin:</label>
-                <input type="password" id="pwd2" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" style="margin-left: 75px;" />
-                <span class="col-md-1 SHOW" style="cursor: pointer;" onclick="change2()">show</span>
-            </div>
-            <div class="row">
-                <label class="col-md-4 Password mt-30" style="padding-left:0;">Confirm new pin:</label>
-                <input type="password" id="pwd3" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" style="margin-left: 4px;" />
-                <span class="col-md-1 SHOW" style="cursor: pointer;" onclick="change3()">show</span>
-                <div class="mt-10"><span id="tip" style="color: red;margin-left: 184px;"></span><br></div>
-            </div>
-
-            <div class="row mt-30 ">
-                <button class="Path-101 Cancel" id="cancel" style="margin-left:156px">Cancel</button>
-                <span class="connected"><button class="Rectangle-1182 active OK" id="OK_btn" disabled style="margin-left:30px">Ok</button></span>
-            </div>
+        <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Unlock <span id="unlock_name"></span> card
+        </h3>
+        <div class="row">
+            <label class="col-md-4 PIN-describe mt-30" style="padding-left:0;">Enter your SIM card PIN</label>
         </div>
-    </form>
+        <div class="row">
+            <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">PIN:</label>
+            <input type="number" id="PIN_input" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
+        </div>
+        <div class="row mt-40" style="text-align: center;">
+            <button class="Path-101 Cancel" id="cancel">Cancel</button>
+            <span class="connected"><button class="Rectangle-1182 active OK" id="OK_btn" disabled
+                    style="margin-left:30px">OK</button></span>
+        </div>
+    </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/MobileSetData.js?mv=20210223"></script>
+    <script src="layui/layui.js " charset="utf-8 "></script>
+    <script type="text/javascript" src="js/common.js?mv=20210225"></script>
+    <script type="text/javascript" src="js/MobileSetData.js?mv=20210225"></script>
 </body>
 
 </html>

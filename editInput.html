@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210223" rel="stylesheet" />
+    <link href="css/style.css?mv=20210225" rel="stylesheet" />
 
     <title>Document</title>
     <style>
@@ -374,7 +374,6 @@
         .Enable-if-you-want-this-input-to-wake-the-SmartHub {
             width: 380px !important;
             height: 19px;
-            opacity: 0.74;
             font-family: OpenSans;
             font-size: 14px;
             font-weight: normal;
@@ -396,19 +395,6 @@
             letter-spacing: normal;
             text-align: left;
             color: #333333 !important;
-        }
-        
-        .Enable-if-you-want-this-input-to-wake-the-SmartHub {
-            opacity: 0.74;
-            font-family: OpenSans;
-            font-size: 14px;
-            font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 1.43;
-            letter-spacing: normal;
-            text-align: left;
-            color: #343434;
         }
         
         .h18 {
@@ -484,6 +470,27 @@
         #wirelessInfo .layui-select-title {
             display: none !important;
         }
+        
+        .Alert-ID-desc {
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Alert-ID-label {
+            font-family: OpenSans;
+            font-size: 18px;
+            text-align: left;
+            color: #343434;
+            font-weight: normal;
+        }
+        
+        .alertID-input {
+            width: 80px;
+            border: solid 1px #707070;
+        }
     </style>
 </head>
 
@@ -514,6 +521,16 @@
                         <option value="2">Digital negative</option>
                         <option value="0">Analog</option>
                     </select>
+                </div>
+            </div>
+            <div class="layui-form-item -flex-display mt-20">
+                <div style="width:380px;padding-left: 14px;">
+                    <label class="Alert-ID-label">Alert
+                        ID:</label>
+                    <p class="Alert-ID-desc">Alert ID must be between 1000 and 65000</p>
+                </div>
+                <div class="layui-input-block" style="margin-left:0;">
+                    <input id="alert_ID" type="number" lay-verify="title" class="form-control h18 alertID-input" style="color:#333;">
                 </div>
             </div>
             <!-- <div class="layui-form-item">
@@ -549,17 +566,19 @@
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210223"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210225"></script>
     <script>
         var saveChannelID;
         $(function() {
             var name = GetUrlParam("name");
             var ChannelID = GetUrlParam("ChannelID");
             var types = GetUrlParam("types");
+            var alertid = GetUrlParam("alertid");
             saveChannelID = ChannelID;
             $("#channel-number").text(ChannelID)
             $("#type_select option[value='" + types + "']").prop("selected", true);
-            $(".name-input").val(name)
+            $(".name-input").val(name);
+            $("#alert_ID").val(alertid)
             $("#btn").on("click", function() {
                 var name = $(".name-input").val();
                 saveData(name, ChannelID)
@@ -582,6 +601,10 @@
 
         //保存数据
         function saveData(name, ChannelID) {
+            var alertId = Number($("#alert_ID").val());
+            if (alertId < 1000 || alertId > 65000) {
+                return;
+            }
             var data = {
                 "jsonrpc": "2.0",
                 "method": "IoConfigure",
@@ -590,6 +613,7 @@
                     "id": Number(ChannelID),
                     "name": name,
                     "types": Number($("#type_select").val()),
+                    "alter_id": Number($("#alert_ID").val())
                 },
                 "id": "9.1"
             }

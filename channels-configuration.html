@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210223" rel="stylesheet" />
+    <link href="css/style.css?mv=20210225" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -229,7 +229,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210223"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210225"></script>
     <script>
         $(function() {
             layui.use('layer', function() {
@@ -244,7 +244,7 @@
                 var name = $(this).children(".Bilge-pump").text();
                 var dataId = $(this).attr("dataId");
                 var types = $(this).children(".Bilge-pump").attr("types");
-
+                var alertID = $(this).children(".Bilge-pump").attr("alertID");
                 //iframe层
                 parent.layer.open({
                     type: 2,
@@ -252,9 +252,9 @@
                     closeBtn: 0,
                     //shadeClose: true,
                     shade: 0.8,
-                    area: ['761px', '380px'],
+                    area: ['761px', '440px'],
                     content: ['editInput.html?ChannelID=' + dataId + '&name=' + name +
-                        '&types=' + types, 'no'
+                        '&types=' + types + '&alertid=' + alertID, 'no'
                     ],
                     end: function() {
                         var ChannelID = $("#saved_id").val();
@@ -270,6 +270,7 @@
                 var name = $(this).children(".Bilge-pump").text();
                 var types = $(this).children(".Bilge-pump").attr("types");
                 var dataId = $(this).attr("dataId");
+                var alertID = $(this).children(".Bilge-pump").attr("alertID");
                 //iframe层
                 parent.layer.open({
                     type: 2,
@@ -277,9 +278,9 @@
                     closeBtn: 0,
                     //shadeClose: true,
                     shade: 0.8,
-                    area: ['761px', '320px'],
+                    area: ['761px', '365px'],
                     content: ['editOutput.html?ChannelID=' + dataId + '&name=' + name +
-                        '&types=' + types, 'no'
+                        '&types=' + types + '&alertid=' + alertID, 'no'
                     ],
                     end: function() {
                         var ChannelID = $("#saved_id").val();
@@ -316,6 +317,7 @@
                         for (var i = 0; i < json.length; i++) {
                             $("#name" + (i + 1)).text(json[i].name);
                             $("#name" + (i + 1)).attr("types", json[i].types)
+                            $("#name" + (i + 1)).attr("alertID", json[i].alter_id)
                             if (i < 4) {
                                 if (json[i].types == 0) {
                                     $("#type" + (i + 1)).text("Analog input");

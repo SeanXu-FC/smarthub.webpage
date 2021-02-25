@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210223" rel="stylesheet" />
+    <link href="css/style.css?mv=20210225" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -200,7 +200,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210223"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210225"></script>
     <script>
         $(function() {
             layui.use('layer', function() {
@@ -215,7 +215,9 @@
                 var trigType = $(this).children(".Digital-input").attr("trigType");
                 var volt = $(this).children(".Digital-input").attr("volt");
                 var noti_msg = $(this).children(".Digital-input").attr("noti_msg");
-                var wake_func = $(this).children(".Digital-input").attr("wake_func");
+                noti_msg = "'" + noti_msg + "'";
+                console.log(noti_msg)
+                var types = $(this).children(".Digital-input").attr("types");
                 //iframe层
                 parent.layer.open({
                     type: 2,
@@ -223,11 +225,10 @@
                     closeBtn: 0,
                     //shadeClose: true,
                     shade: 0.8,
-                    area: ['761px', '520px'],
-                    content: ["editNotifications.html?dataId=" + dataId + "&name=" + name +
-                        "&Notifications=" + Notifications + "&trigType=" + trigType +
-                        "&volt=" + volt + "&noti_msg=" + noti_msg + "&wake_func=" +
-                        wake_func, 'no'
+                    area: ['761px', '420px'],
+                    content: ['editNotifications.html?dataId=' + dataId + '&name=' + name +
+                        '&Notifications=' + Notifications + '&trigType=' + trigType +
+                        '&volt=' + volt + '&types=' + types, 'no'
                     ],
                     end: function() {
                         var ChannelID = $("#saved_id").val();
@@ -272,7 +273,7 @@
                                 $("#Notifications" + (i + 1)).attr("trigType", json[i].trig_cond_type);
                                 $("#Notifications" + (i + 1)).attr("volt", json[i].trig_cond_value);
                                 $("#Notifications" + (i + 1)).attr("noti_msg", json[i].noti_msg);
-                                $("#Notifications" + (i + 1)).attr("wake_func", json[i].wake_func);
+                                $("#Notifications" + (i + 1)).attr("types", json[i].types);
                                 if (json[i].notification == 0) {
                                     $("#Notifications" + (i + 1)).text("Notifications disabled");
                                     $("#Notifications" + (i + 1)).removeClass("text-green")

@@ -110,6 +110,17 @@ $(function() {
         });
     });
 
+    $("#cancel").on("click", function() {
+        $('#success').hide(1000);
+        layui.use('layer', function() {
+            var layer = layui.layer;
+            var loading = layer.load(0, {
+                shade: false
+            });
+            getData(layer, loading);
+        });
+    });
+
 });
 
 function getData(layer, loading) {

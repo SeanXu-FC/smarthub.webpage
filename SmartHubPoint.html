@@ -12,7 +12,7 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210223" rel="stylesheet" />
+    <link href="css/style.css?mv=20210225" rel="stylesheet" />
     <link rel="stylesheet" href="layui/css/layui.css">
 
     <title>Document</title>
@@ -81,7 +81,7 @@
         #content ul {
             line-height: 25px;
             display: none;
-            margin: 0 30px 0 15px;
+            margin: 0 30px 0 30px;
             padding: 10px 0;
         }
         
@@ -186,6 +186,7 @@
             text-align: left;
             color: #343434;
             white-space: nowrap;
+            padding-left: 0px;
         }
         
         .Access-point-connection-settings {
@@ -254,7 +255,7 @@
         
         .table>tbody>tr>th,
         .table>tbody>tr>td {
-            padding: 8px;
+            padding: 15px 8px;
             line-height: 1.42857143;
             vertical-align: top;
             border-top: 0px solid #ddd;
@@ -373,7 +374,7 @@
     <div class="container-fluid">
         <div class="mc ml-70">
             <h2 style="margin-top:10px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="SmartHub-access-point"> SmartHub access point </h2>
-            <p class="red Your-SmartHub-access-point-allows-other-devices-to-connect-to-the-SmartHubs-cellular-or-wireless-network-data" style="margin-top:20px">Your SmartHub access point allows other devices to connect to the SmartHub's cellular or WiFi data</p>
+            <p class="red Your-SmartHub-access-point-allows-other-devices-to-connect-to-the-SmartHubs-cellular-or-wireless-network-data" style="margin-top:20px">Your SmartHub's wireless access point allows other devices to connect to the SmartHub's cellular or wireless network data</p>
             <!-- <p style="margin-top:30px;" class="Allow-devices-to-connect-to-SmartHub-access-point">Allow devices to connect to SmartHub access point:</p> -->
 
             <div class="row">
@@ -405,11 +406,11 @@
                                     </tr>
                                     <tr>
                                         <th colspan="2" class="Use-these-details-when-connecting-a-device-to-the-SmartHubs-access-point">
-                                            Use these details when connecting a device to the SmartHub's access point
+                                            Use these details when connecting a device to the SmartHub's wireless access point
                                         </th>
                                     </tr>
                                     <tr>
-                                        <td class="col-sm-3 czjz Access-point-name mt-20">Access point name:</td>
+                                        <td class="col-sm-3 czjz Access-point-name mt-20">Access point name (SSID):</td>
                                         <td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="" style="width:80%">
                                         </td>
                                     </tr>
@@ -481,20 +482,9 @@
 
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210223"></script>
-    <script src="js/SmartHubPoint.js?mv=20210223"></script>
-    <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210223"></script>
-
-    <script>
-        $("#cancel").on("click", function() {
-            $('#success').hide(1000);
-            // $(".Path-101").attr("disabled", true);
-            // $(".Path-101").css("opacity", "0.5");
-            // $('.qx button').removeClass("Pah-101 Cancel")
-            return false;
-        });
-    </script>
-
+    <script type="text/javascript" src="js/common.js?mv=20210225"></script>
+    <script src="js/SmartHubPoint.js?mv=20210225"></script>
+    <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210225"></script>
 </body>
 
 </html>

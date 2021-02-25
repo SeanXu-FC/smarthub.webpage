@@ -78,7 +78,7 @@ function LoginMessage(url) {
         title: false,
         closeBtn: 0,
         shade: 0.8,
-        area: ['541px', '38%'],
+        area: ['541px', '390px'],
         content: ["LoginTip.html?url=" + url, 'no'],
         end: function() {}
     });

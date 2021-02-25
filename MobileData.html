@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210223" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210223" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210225" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210225" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -737,7 +737,7 @@
     <div class="container-fluid">
         <div class="mc ml-70">
             <h2 class="Mobile-data-big"> Mobile data</h2>
-
+            <input style="display: none" id="unlockSIM" name="unlockSIM" />
             <table class="mt-20 table-responsive">
                 <tr>
                     <td>
@@ -994,7 +994,7 @@
                                 </div>
 
                             </div>
-                            <div class="save-btn1" style="font-size: 18px;"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button><button id="btn_saved1" class="Rectangle-1182"><span class="">Save</span></button>
+                            <div class="save-btn1" style="font-size: 18px;"><button id="cancel1" class="Path-97 layui-btn Forget-network">Cancel</button><button id="btn_saved1" class="Rectangle-1182"><span class="">Save</span></button>
                             </div>
                         </div>
                     </div>
@@ -1109,7 +1109,7 @@
                                                 </label><span class="col-md-6 mt-15 valColor" id="sim_puk_num1"></span>
                                             </div>
                                             <div style="clear:both;"></div>
-                                            <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div>
+                                            <!-- <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div> -->
                                             <!-- <div class="layui-form layui-form-pane layui-form-item" style="margin-top: -20px;">
                                                 <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin
                                                     lock:</label>
@@ -1117,10 +1117,8 @@
                                                     <input type="checkbox" checked name="open" id="SIM_pin_lock1" lay-skin="switch" lay-filter="SIMpin" lay-text="ON|OFF" disabled>
                                                 </div>
                                             </div> -->
-                                            <button class="Rectangle-1182 width-auto mt-10"><span
-                                                    class="Change-SIM-pin">Change
-                                                    SIM
-                                                    pin</span></button>
+                                            <button class="Rectangle-1182 width-auto Unlock-SIM mt-40 " id="Change_SIM_pin1"><span class="Change-SIM-pin">Unlock
+                                                    SIM</span></button>
                                         </div>
                                         <div class="z1">
                                             <div class="row">
@@ -1147,7 +1145,7 @@
                                                 </label><span class="col-md-6 mt-15 valColor" id="sim_puk_num2"></span>
                                             </div>
                                             <div style="clear:both;"></div>
-                                            <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div>
+                                            <!-- <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div> -->
                                             <!-- <div class="layui-form layui-form-pane layui-form-item" style="margin-top: -20px;">
                                                 <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin
                                                     lock:</label>
@@ -1156,15 +1154,15 @@
                                                 </div>
                                             </div> -->
 
-                                            <button class="Rectangle-1182 width-auto mt-10"><span
-                                                    class="Change-SIM-pin">Change SIM pin</span></button>
+                                            <button class="Rectangle-1182 width-auto Unlock-SIM mt-40" id="Change_SIM_pin2"><span class="Change-SIM-pin">Unlock
+                                                    SIM</span></button>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <div class="save-btn1" style="font-size: 18px;"><button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button><button id="btn_saved2" class="Rectangle-1182"><span class="">Save</span></button>
+                            <div class="save-btn1" style="font-size: 18px;"><button id="cancel2" class="Path-97 layui-btn Forget-network">Cancel</button><button id="btn_saved2" class="Rectangle-1182"><span class="">Save</span></button>
                             </div>
                         </div>
                     </div>
@@ -1178,10 +1176,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210223"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210223"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210225"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210225"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210223"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210225"></script>
 
 
 </body>
