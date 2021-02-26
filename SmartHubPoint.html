@@ -367,6 +367,22 @@
         #onoffFlag {
             display: none;
         }
+        
+        .error-icon {
+            width: auto;
+            height: 41px;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+            border: solid 2px #b12626;
+            background-color: #f9fffc;
+            background: url("images/icon-info.png") no-repeat 5px 4px;
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 500px;
+            z-index: 999;
+            background-color: #fff;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
@@ -398,6 +414,9 @@
                     <div id="content">
                         <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">
                             Changes-saved</div>
+                        <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">
+                            Changes-saved</div>
+                        <div id="error" class="error-icon Password-successfully-changed Changes-saved"></div>
                         <form>
                             <ul style="display:block;">
                                 <table class="table table-hover table-responsive">
@@ -448,7 +467,7 @@
                                     <tr>
                                         <td></td>
                                         <td>
-                                            <div id="btnGroup" class="form-group form-line btn-group edit"><button id="cancel" class="Path-101 Cancel">Cancel</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px;cursor: pointer;" onclick="save()">Save</button></div>
+                                            <div id="btnGroup" class="form-group form-line btn-group edit"><button id="cancel" class="Path-101 Cancel">Cancel</button><button type="button" id="btn1" class="Rectangle-1182 active OK" style="margin-left:10px;cursor: pointer;">Save</button></div>
                                         </td>
                                     </tr>
                                 </table>
@@ -484,7 +503,7 @@
     <script src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/common.js?mv=20210226"></script>
     <script src="js/SmartHubPoint.js?mv=20210226"></script>
-    <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210226"></script>
+    <!-- <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210226"></script> -->
 </body>
 
 </html>

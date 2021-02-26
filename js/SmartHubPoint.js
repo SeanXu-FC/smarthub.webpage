@@ -8,7 +8,6 @@ $(function() {
     });
     $("#eye").on("click", function() {
         var type = $("#pw").attr("type");
-        console.log(type)
         if (type == "password") {
             $("#pw").attr("type", "text");
             $(this).text("HIDE");
@@ -18,7 +17,9 @@ $(function() {
         }
     })
 
-
+    $("#btn1").on("click", function() {
+        APsave();
+    })
 
 
     layui.use(['form'], function() {
@@ -28,11 +29,6 @@ $(function() {
             var serverStatus = 1;
 
             var onoff = this.checked ? 1 : 0;
-            //console.log(data.value);
-            // console.log(data.elem); // 得到checkbox原始DOM对象
-            // console.log(data.elem.checked); // 开关是否开启，true或者false
-            // console.log(data.value); // 开关value值，也可以通过data.elem.value得到
-            // console.log(data.othis); // 得到美化后的DOM对象
 
             if (this.checked == 1) {
                 $("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
@@ -43,12 +39,6 @@ $(function() {
                 $("#onoff").removeAttr("checked");
                 $("#btn1").attr("disabled", true)
             }
-
-            // if (serverStatus) {
-            //     data.elem.checked = checked;
-            // } else {
-            //     data.elem.checked = !checked;
-            // }
             form.render();
 
 
@@ -75,7 +65,6 @@ $(function() {
 
             };
             data = JSON.stringify(data);
-            console.log(data);
 
             $.ajax({
                 type: "post",
@@ -333,7 +322,7 @@ function getData(layer, loading) {
                             $('.EncryptionType option[value=4]').attr("selected", "selected");
                         }
                         if (json[index].vap_config[index].SecurityMode == 3) {
-                            console.log($('.EncryptionType option:selected').text(encryptionTypeArr[3]));
+
                             $('.EncryptionType option:selected').hide();
                             $('.EncryptionType option[value=3]').attr("selected", "selected");
                         }
@@ -441,5 +430,88 @@ function getData(layer, loading) {
         }
     });
 
+
+}
+
+function APsave() {
+    var serverStatus = 1;
+    var onoff = serverStatus ? 1 : 0;
+    if (serverStatus == 0) {
+        //$("#content select,#content input,#content button,#btnGroup button").prop("disabled", true);
+        $("#content select,#content input").prop("disabled", true);
+    }
+    if (serverStatus == 1) {
+        $("#content").removeAttr("disabled");
+        //$("#content select,#content input,#content button,#btnGroup button").prop("disabled", false);
+        $("#content select,#content input").prop("disabled", false);
+        $("#btnGroup").removeAttr("disabled");
+
+    }
+
+
+    layui.use(['form'], function() {
+        var form = layui.form;
+        form.render();
+    })
+    var select = $("#EncryptionType").val();
+    var WpaKey = $(".pwd").val();
+    var len = $("#pw").val().length;
+    if ($("#EncryptionType").val() != 0) {
+        if (len >= 8 && len <= 20 && $("#pw").val() != '') {} else {
+            $(".pwd").siblings()
+                .find('span')
+                .text('Please enter a password with more than 8 digits!')
+                .removeClass('state1 state2 state4')
+                .addClass('state3');
+            return;
+        }
+    }
+
+    var data = {
+        "jsonrpc": "2.0",
+
+        "method": "SetWlanSettings",
+        "params": {
+            "wifi_config": [{
+                //"phy_enable": Number($('.current input[type="checkbox"]').val()), //对于开关，0是关，1是开
+                "PhyEnable": onoff, //对于开关，0是关，1是开
+                "HtMode": Number($("#HTmode").val()), //可变
+                "Channel": parseInt($(".channel option:selected").text()), //可变
+                //"CountryCode": $(".countryCode option:selected").val(), //可变
+                "vap_config": [{
+                    "Ssid": $(".ssid").val(), //可变
+                    "SecurityMode": Number($(".EncryptionType option:selected").val()), //可变
+                    "WpaKey": WpaKey, //可变
+                }]
+            }]
+        },
+
+
+        "id": "9.1",
+
+    };
+
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            if (res.result) {
+                $('#success').show(1000).delay(6000).hide(0);
+            } else {
+                $("#error").text(res.error.message)
+                $("#error").show(1000).delay(6000).hide(0);
+            }
+
+        },
+        error: function(jqXHR) {
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            promptMessage("Error message", tip);
+
+        }
+    });
 
 }
