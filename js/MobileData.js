@@ -100,8 +100,7 @@ $(function() {
 
     //弹出一个iframe层
     $('.Unlock-SIM').on('click', function() {
-        console.log("unlockSIM", unlockSIM)
-            //iframe层
+        //iframe层
         parent.layer.open({
             type: 2,
             title: false,
@@ -113,7 +112,6 @@ $(function() {
             end: function(index, layero) {
 
                 var unlockSIM = $("#unlockSIM").val();
-                console.log(unlockSIM)
                 if (unlockSIM == 1) {
                     layui.use(['layer', 'form'], function() {
                         var layer = layui.layer;
@@ -446,7 +444,7 @@ function getDatausage(layer, form, loading) {
                 var json = res.result;
                 MobileData = json.data_usages;
                 var dataTab = $('.tab-wrapper .Data-usage-simmenu li.active').data('tab');
-                console.log("dataTab11", dataTab)
+
                 if (dataTab == "tab0") {
                     renderDataUsage(MobileData, 0, form); //默认渲染Data usage SIM1
                 } else {
@@ -473,8 +471,9 @@ function getCurrentMonthLastDay() {
 }
 //渲染Data usage
 function renderDataUsage(json, i, form) {
-    var lastDay,
-        month;
+    let lastDay,
+        month,
+        limitNum1, limitNum2;
     if (i == 0) {
         lastDay = getCurrentMonthLastDay().getDate();
         month = new Date().toDateString().split(" ")[1];
@@ -502,10 +501,10 @@ function renderDataUsage(json, i, form) {
             $("#usagereminders input").prop("checked", false);
         }
 
-
         if (json[i].sim_data_limt_unit == 0) {
             $(".limit_unit").text("MB");
             $("#allUsed_MB").text(json[i].current_data_used);
+            limitNum1 = json[i].monthly_data_limit;
             var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(2);
             $("#redmian_MB").text(redmianMB);
             $("#dataLimit input").val(json[i].monthly_data_limit);
@@ -513,10 +512,12 @@ function renderDataUsage(json, i, form) {
             $(".limit_unit").text("GB");
             var current_used = (json[i].current_data_used / 1024).toFixed(2)
             $("#allUsed_MB").text(current_used);
+            limitNum1 = (Number(json[i].monthly_data_limit) / 1024).toFixed(3);
             var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(2);
             $("#redmian_MB").text(redmianMB);
             $("#dataLimit input").val((json[i].monthly_data_limit / 1024).toFixed(2));
         }
+
 
         $("#switchMB option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
 
@@ -536,7 +537,6 @@ function renderDataUsage(json, i, form) {
                     isInitValue: true,
                     trigger: 'click',
                     done: function(value, date) {
-                        console.log(value)
                         $("#limit_time").val(value);
                         //getDatausageVal();
                     }
@@ -550,7 +550,6 @@ function renderDataUsage(json, i, form) {
                     lang: 'en',
                     trigger: 'click',
                     done: function(value, date) {
-                        console.log(value)
                         $("#limit_time").val(value);
                         //getDatausageVal();
                     }
@@ -589,6 +588,7 @@ function renderDataUsage(json, i, form) {
         if (json[i].sim_data_limt_unit == 0) {
             $(".limit_unit2").text("MB");
             $("#allUsed_MB2").text(json[i].current_data_used);
+            limitNum2 = json[i].monthly_data_limit;
             var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(2);
             $("#redmian_MB2").text(redmianMB);
             $("#dataLimit2 input").val(json[i].monthly_data_limit);
@@ -596,6 +596,7 @@ function renderDataUsage(json, i, form) {
             $(".limit_unit2").text("GB");
             var current_used = (json[i].current_data_used / 1024).toFixed(2)
             $("#allUsed_MB2").text(current_used);
+            limitNum2 = (Number(json[i].monthly_data_limit / 1024)).toFixed(3);
             var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(2);
             $("#redmian_MB2").text(redmianMB);
             $("#dataLimit2 input").val((json[i].monthly_data_limit / 1024).toFixed(2));
@@ -669,7 +670,7 @@ function renderDataUsage(json, i, form) {
                 Xdate.push(j);
             }
         }
-        renderEchart("used_MB", Xdate, Ydata, unit)
+        renderEchart("used_MB", Xdate, Ydata, unit, limitNum1)
     } else {
         var Xdate1 = [];
         var Ydata1 = [];
@@ -693,7 +694,7 @@ function renderDataUsage(json, i, form) {
                 Xdate1.push(k);
             }
         }
-        renderEchart("used_MB2", Xdate1, Ydata1, unit)
+        renderEchart("used_MB2", Xdate1, Ydata1, unit, limitNum2)
     }
     layui.use(['form'], function() {
         var form = layui.form;
@@ -735,7 +736,6 @@ function getNextDate(date) {
     var date = new Date();
     var year = date.getFullYear();
     var nowDay = date.getDate(); //得到日期
-    console.log(nowDay)
     var month;
     if (Number(nowDay) > Number(day)) {
         month = date.getMonth() + 2;
@@ -944,8 +944,7 @@ function rendSIMManagement(json) {
     });
 }
 // 渲染图表
-function renderEchart(id, Xdate, Ydata, unit) {
-    console.log(unit)
+function renderEchart(id, Xdate, Ydata, unit, limitNum) {
     var myChartGL = echarts.init(document.getElementById(id));
     myChartGL.clear();
     var optionBranchGL = {
@@ -973,9 +972,9 @@ function renderEchart(id, Xdate, Ydata, unit) {
         },
         grid: {
             left: '0px',
-            right: '0px',
+            right: '130px',
             bottom: '2px',
-            top: '2%',
+            top: '20px',
             containLabel: true
         },
         dataZoom: [{
@@ -999,7 +998,7 @@ function renderEchart(id, Xdate, Ydata, unit) {
         }],
         yAxis: [{
             type: 'value',
-
+            max: extent => extent.max > limitNum ? extent.max : limitNum, //强制改变Y周最大值，以便定值横线能显示
             axisLabel: {
                 show: false
             },
@@ -1015,27 +1014,46 @@ function renderEchart(id, Xdate, Ydata, unit) {
             axisTick: { show: false },
         }],
         series: [{
-            type: 'line',
-            symbolSize: 6,
-            symbol: 'circle',
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(
-                        0, 0, 0, 1, [
-                            { offset: 0, color: '#cda4b1' },
-                            { offset: 1, color: '#faf5f7' },
+                type: 'line',
+                symbolSize: 6,
+                symbol: 'circle',
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1, [
+                                { offset: 0, color: '#cda4b1' },
+                                { offset: 1, color: '#faf5f7' },
 
-                        ]
-                    )
+                            ]
+                        )
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#861f41'
+                    }
+                },
+                data: Ydata,
+                markLine: {
+                    symbol: ['none', 'none'], //['none']表示是一条横线；['arrow', 'none']表示线的左边是箭头，右边没右箭头；['none','arrow']表示线的左边没有箭头，右边有箭头
+                    label: {
+                        position: "end", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                        formatter: limitNum + unit + " limit"
+                    },
+                    data: [{
+                        silent: false, //鼠标悬停事件 true没有，false有
+                        lineStyle: { //警戒线的样式 ，虚实 颜色
+                            type: "solid", //样式  ‘solid’和'dotted'
+                            color: "#ff002a",
+                            padding: "0 60px 0 0",
+                            width: 1 //宽度
+                        },
+                        yAxis: limitNum // 警戒线的标注值，可以有多个yAxis,多条警示线 或者采用 {type : 'average', name: '平均值'}，type值有 max min average，分为最大，最小，平均值
+                    }]
                 }
             },
-            itemStyle: {
-                normal: {
-                    color: '#861f41'
-                }
-            },
-            data: Ydata
-        }]
+
+        ]
     };
 
     myChartGL.setOption(optionBranchGL);
@@ -1079,7 +1097,6 @@ function getSimManagementVal() {
             }
         ]
     }
-    console.log(params)
     setSimManagement(layer, params)
 }
 //设置SIM management
@@ -1126,7 +1143,6 @@ function getDatausageVal() {
         dataLimit = dataLimit * 1024;
     }
     var limit_time = $("#limit_time").val();
-    console.log(limit_time)
     var last_manth_s = $("#last_manth_s").val();
     var usagereminders = $("#usagereminders input").is(":checked") == true ? 1 : 0;
 
@@ -1137,7 +1153,6 @@ function getDatausageVal() {
         dataLimit2 = dataLimit2 * 1024;
     }
     var limit_time2 = $("#limit_time2").val();
-    console.log(limit_time2);
     var last_manth_s2 = $("#last_manth_s2").val();
     var usagereminders2 = $("#usagereminders2 input").is(":checked") == true ? 1 : 0;
 
@@ -1162,7 +1177,6 @@ function getDatausageVal() {
             }
         ]
     }
-    console.log(params)
     setDatausage(layer, params)
 }
 //设置Datausage

@@ -108,7 +108,6 @@ $(function() {
             contentType: "application/x-www-form-urlencoded;charset=utf-8",
             success: function(res) {
                 if (res.result && res.result.flag == "0") {
-
                     $("#current_pass_e").text("Wrong user name or password").addClass('state3');
                 } else {
                     $('#success').show(1000);

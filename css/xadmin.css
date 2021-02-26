@@ -293,7 +293,7 @@ xblock {
 
 .Smart-Hub-Manager {
     /* width: 369px; */
-    width: 311px;
+    width: auto;
     height: 43px;
     /* line-height: 52px; */
     font-family: OpenSans;
@@ -306,7 +306,7 @@ xblock {
     text-align: left;
     color: #861f41;
     color: grape-purple;
-    margin-top: 10px;
+    margin-top: 14px;
 }
 
 .Smart-Hub-Manager:hover {

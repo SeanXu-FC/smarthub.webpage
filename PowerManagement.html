@@ -12,10 +12,7 @@
     <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210225"></script>
+
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -336,8 +333,11 @@
             </div>
         </div>
     </div>
-
+    <script src="js/jquery.min.js"></script>
+    <script src="layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210226"></script>
     <script>
+        var powerData;
         $(function() {
             layui.use(['layer', 'form'], function() {
                 var layer = layui.layer;
@@ -370,6 +370,7 @@
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
                     layer.close(loading);
+                    powerData = res.result;
                     $('input[name="activeSIM"]').prop("checked", false);
                     if (res.result.LowPowerMode == 1) {
                         $('input[name="activeSIM"]').eq(0).prop("checked", true);
@@ -380,13 +381,20 @@
                     if (res.result && res.result.io_date) {
                         var json = res.result.io_date;
                         for (var i = 0; i < json.length; i++) {
+
                             if (i < 4) {
                                 $("#input_channels" + i).attr("title", json[i].name)
-                                if (json[i].wake_func == 2) {
-                                    $("#input_channels" + i).prop("checked", true);
+                                if (json[i].types == 0) {
+                                    $("#input_channels" + i).prop("disabled", true);
+                                    $("#input_channels" + i).prop("checked", false);
                                 } else {
-                                    $("#Weak_signal_" + i).prop("checked", false);
+                                    if (json[i].wake_func != 0) {
+                                        $("#input_channels" + i).prop("checked", true);
+                                    } else {
+                                        $("#input_channels" + i).prop("checked", false);
+                                    }
                                 }
+
                             } else {
                                 $("#Output_channels" + i).attr("title", json[i].name);
                                 if (json[i].wake_func == 1) {
@@ -395,6 +403,7 @@
                                     $("#Output_channels" + i).prop("checked", false);
                                 }
                             }
+
                         }
                         layui.use(['form'], function() {
                             var form = layui.form;
@@ -421,50 +430,60 @@
         function getSimManagementVal() {
             var EnableLowpower = $("#AutoSim input").is(":checked") == true ? 1 : 0;
             var lowPower = $("input[name='activeSIM']:checked").val();
+            var wakeup_data = [];
+            var inputArr = [{
+                id: 1,
+                wake_func: 0
+            }, {
+                id: 2,
+                wake_func: 0
+            }, {
+                id: 3,
+                wake_func: 0
+            }, {
+                id: 4,
+                wake_func: 0
+            }];
+            for (var i = 0; i < inputArr.length; i++) {
+                if ($("#input_channels" + i).is(":checked") == true) {
+                    if (powerData.io_date[i].types == 1)
+                        inputArr[i].wake_func = 2;
+                    else
+                        inputArr[i].wake_func = 1;
+                } else {
+                    inputArr[i].wake_func = 0;
+                }
+                // input_channels0 = $("#input_channels0").is(":checked") == true ? powerData.io_date[i].wake_func: 0;
+                // input_channels1 = $("#input_channels1").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
+                // input_channels2 = $("#input_channels2").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
+                // input_channels3 = $("#input_channels3").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
+            }
 
-            var input_channels0 = $("#input_channels0").is(":checked") == true ? 2 : 0;
-            var input_channels1 = $("#input_channels1").is(":checked") == true ? 2 : 0;
-            var input_channels2 = $("#input_channels2").is(":checked") == true ? 2 : 0;
-            var input_channels3 = $("#input_channels3").is(":checked") == true ? 2 : 0;
             var Output_channels4 = $("#Output_channels4").is(":checked") == true ? 1 : 0;
             var Output_channels5 = $("#Output_channels5").is(":checked") == true ? 1 : 0;
             var Output_channels6 = $("#Output_channels6").is(":checked") == true ? 1 : 0;
             var Output_channels7 = $("#Output_channels7").is(":checked") == true ? 1 : 0;
+            var outputArr = [{
+                "id": 5,
+                "wake_func": Output_channels4
+            }, {
+                "id": 6,
+                "wake_func": Output_channels5
+            }, {
+                "id": 7,
+                "wake_func": Output_channels6
+            }, {
+                "id": 8,
+                "wake_func": Output_channels7
+            }]
+            wakeup_data = inputArr.concat(outputArr)
             var params = {
-                "jsonrpc": "2.0",
-                "method": "IoConfigure",
-                "params": {
-                    "wakeup_data": [{
-                        "id": 1,
-                        "wake_func": input_channels0
-                    }, {
-                        "id": 2,
-                        "wake_func": input_channels1
-                    }, {
-                        "id": 3,
-                        "wake_func": input_channels2
-                    }, {
-                        "id": 4,
-                        "wake_func": input_channels3
-                    }, {
-                        "id": 5,
-                        "wake_func": Output_channels4
-                    }, {
-                        "id": 6,
-                        "wake_func": Output_channels5
-                    }, {
-                        "id": 7,
-                        "wake_func": Output_channels6
-                    }, {
-                        "id": 8,
-                        "wake_func": Output_channels7
-                    }],
-                    "LowPowerMode": Number(lowPower),
-                    "LowPower": Number(EnableLowpower),
-                    "mode": 5
-                },
-                "id": "9.1"
+                "wakeup_data": wakeup_data,
+                "LowPowerMode": Number(lowPower),
+                "LowPower": Number(EnableLowpower),
+                "mode": 5
             }
+
             console.log(params)
             setSimManagement(params)
         }
@@ -476,7 +495,13 @@
                 var loading = layer.load(0, {
                     shade: false
                 });
-                data = JSON.stringify(params);
+                var data = {
+                    "jsonrpc": "2.0",
+                    "method": "IoConfigure",
+                    "params": params,
+                    "id": "9.1"
+                }
+                data = JSON.stringify(data);
                 $.ajax({
                     type: "post",
                     url: "/action/action",
@@ -487,8 +512,9 @@
                         layer.close(loading);
                         if (res.result) {
                             $('#success').show(1000).delay(6000).hide(0);
-                        } else {
-                            layer.msg(res.error);
+                        } else if (res.error) {
+                            $("#error").text(res.error.code + " : " + res.error.message)
+                            $("#error").show(1000).delay(6000).hide(0);
                         }
                     },
                     error: function(jqXHR) {
