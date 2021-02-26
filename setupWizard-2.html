@@ -267,7 +267,7 @@
                     <button class="Rectangle-1182 Back"><a href="setupWizard.html">Back</a></button>
                 </div>
                 <div class="col-md-5 -radio-flex10">
-                    <button class="Rectangle-1182 Continue active" id="btn" onclick="save()">Continue</button>
+                    <button class="Rectangle-1182 Continue active" id="btn" onclick="save()" disabled>Continue</button>
                 </div>
             </div>
         </div>
@@ -276,6 +276,8 @@
     </div>
     <script>
         $(function() {
+            $("#btn").attr("disabled", "disabled");
+            $("#btn").css("opacity", "0.5");
             var data = {
                 "jsonrpc": "2.0",
                 "method": "GetSmartMode",
@@ -294,8 +296,16 @@
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
                     console.log(res)
-                    $('.apName').val(res.result.SmartSSID);
-                    $('.pwd').val(res.result.PassWord);
+                    if (res.result) {
+                        $('.apName').val(res.result.SmartSSID);
+                        $('.pwd').val(res.result.PassWord);
+                        if (res.result.PassWord && res.result.PassWord.length > 7) {
+                            $("#btn").removeAttr("disabled");
+                            $("#btn").css("opacity", "1");
+                        }
+                    }
+
+
                 },
                 error: function(jqXHR) {
                     var tip =
@@ -314,10 +324,7 @@
                     console.log($(this).val())
                     $("#btn").attr("disabled", "disabled");
                     $("#btn").css("opacity", "0.5");
-                    if (!$(this).val()) {
-                        $("#btn").removeAttr("disabled");
-                        $("#btn").css("opacity", "1");
-                    }
+
                 }
             }).on('mouseup', function() {
                 var reg = /^[\da-zA-Z!@#$%|+-^&*.~]{8,64}$/; //数字、字母、特殊字符
@@ -328,10 +335,6 @@
                     console.log($(this).val())
                     $("#btn").attr("disabled", "disabled");
                     $("#btn").css("opacity", "0.5");
-                    if (!$(this).val()) {
-                        $("#btn").removeAttr("disabled");
-                        $("#btn").css("opacity", "1");
-                    }
                 }
             })
 
