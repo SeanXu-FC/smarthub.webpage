@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="layui/css/layui.css" rel="stylesheet" />
+    <link href="css/style.css?mv=20210107" rel="stylesheet" />
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .lan {
+            position: relative
+        }
+        
+        .lanBt {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        /* .lan-content {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            position: relative;
+        } */
+        
+        .lan-h {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .lan-edit {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            top: 66px;
+            right: 45px;
+            padding-right: 20px;
+            vertical-align: middle;
+        }
+        
+        .edit-first {
+            position: absolute;
+            top: 107px;
+            right: 45px;
+        }
+        
+        .lan-edit a {
+            color: #007de9
+        }
+        
+        .Channels-configuration {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            border-bottom: solid 1px #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .Inputs {
+            font-family: OpenSans;
+            font-size: 28px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Bilge-pump {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+            max-width: 88%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+        .Channel {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.25;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Digital-input {
+            opacity: 0.7;
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.38;
+            letter-spacing: normal;
+            text-align: left;
+            color: #000000;
+        }
+        
+        .Rectangle-1234 {
+            /* width: 378px; */
+            height: 128px;
+            border-radius: 10px;
+            border: solid 1px #707070;
+            padding: 10px;
+        }
+        
+        .Edit {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: left;
+            color: #007de9;
+            vertical-align: middle;
+        }
+        
+        .col-sm-5 {
+            border: 1px solid #000
+        }
+        
+        .HIGH-LEVEL {
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 3.06;
+            letter-spacing: normal;
+            text-align: left;
+            color: #26b167;
+            display: inline-block;
+        }
+        
+        .v {
+            font-family: OpenSans;
+            font-size: 30px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.55;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .aa {
+            position: absolute;
+            top: 47px;
+            right: 30px;
+        }
+        
+        .channels-switch {
+            display: none;
+        }
+        
+        .Voltage-text {
+            font-family: OpenSans;
+            font-size: 18px;
+            color: #000;
+            margin-top: 10px;
+            line-height: 2.55;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" style="padding:30px 70px;">
+        <h3 class="Channels-configuration">Channel monitoring & control</h3>
+        <div class="row mt-40">
+            <div class="col-sm-6 lan">
+                <h4 class="lanBt Inputs">Inputs</h4>
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump" id="name1">--</p>
+                    <p class="mt-10 Channel">Channel 1 </p>
+                    <!-- <p class="HIGH-LEVEL" id="LEVEL1">-- LEVEL</p> -->
+                    <span class="v Voltage-text" id="Voltage1">--v</span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1 lan">
+                <h4 class="lanBt Inputs">Outputs</h4>
+                <div class="mt-20 Rectangle-1234" style="position:relative">
+                    <p class="lan-h Bilge-pump" id="name5">--</p>
+                    <p class="mt-10 Channel">Channel 5 </p>
+                    <!-- <p class="HIGH-LEVEL" id="LEVEL5">-- LEVEL</p> -->
+                    <div class="layui-form layui-form-pane layui-form-item aa">
+                        <div class="layui-input-block channels-switch">
+                            <input id="Switch5" type="checkbox" name="5" lay-skin="switch" lay-text="ON|OFF" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump" id="name2"></p>
+                    <p class="mt-10 Channel">Channel 2 </p>
+                    <!-- <p class="HIGH-LEVEL" id="LEVEL2">-- LEVEL</p> -->
+                    <span class="v Voltage-text" id="Voltage2">--v</span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234" style="position:relative">
+                    <p class="lan-h Bilge-pump" id="name6"></p>
+                    <p class="mt-10 Channel">Channel 6 </p>
+                    <!-- <p class="HIGH-LEVEL" id="LEVEL6">-- LEVEL</p> -->
+                    <div class="layui-form layui-form-pane layui-form-item aa">
+                        <div class="layui-input-block channels-switch">
+                            <input id="Switch6" type="checkbox" name="6" lay-skin="switch" lay-text="ON|OFF">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump" id="name3"></p>
+                    <p class="mt-10 Channel">Channel 3 </p>
+                    <!-- <p class="HIGH-LEVEL" id="LEVEL3">-- LEVEL</p> -->
+                    <span class="v Voltage-text" id="Voltage3">--v</span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234" style="position:relative">
+                    <p class="lan-h Bilge-pump" id="name7"></p>
+                    <p class="mt-10 Channel">Channel 7 </p>
+                    <!-- <p class="HIGH-LEVEL" id="LEVEL7">-- LEVEL</p> -->
+                    <div class="layui-form layui-form-pane layui-form-item aa">
+                        <div class="layui-input-block channels-switch">
+                            <input id="Switch7" type="checkbox" name="7" lay-skin="switch" lay-text="ON|OFF">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234">
+                    <p class="lan-h Bilge-pump" id="name4"></p>
+                    <p class="mt-10 Channel">Channel 4 </p>
+                    <!-- <p class="HIGH-LEVEL" id="LEVEL4">-- LEVEL</p> -->
+                    <span class="v Voltage-text" id="Voltage4">--v</span>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1 lan mt-10">
+                <div class="mt-20 Rectangle-1234" style="position:relative">
+                    <p class="lan-h Bilge-pump" id="name8"></p>
+                    <p class="mt-10 Channel">Channel 8 </p>
+                    <!-- <p class="HIGH-LEVEL" id="LEVEL8">-- LEVEL</p> -->
+                    <div class="layui-form layui-form-pane layui-form-item aa" lay-filter="Switch8">
+                        <div class="layui-input-block channels-switch">
+                            <input id="Switch8" type="checkbox" name="8" lay-skin="switch" lay-text="ON|OFF" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="layui/layui.js " charset="utf-8 "></script>
+    <script type="text/javascript" src="js/common.js?mv=20210107"></script>
+    <script>
+        $(function() {
+            layui.use(['layer', 'form'], function() {
+                var layer = layui.layer;
+                var form = layui.form;
+                var loading = layer.load(0, {
+                    shade: false
+                });
+                getMonitoringData(layer, form, loading);
+                form.on('switch', function(data) {
+                    var checked = data.elem.checked;
+                    var name = data.elem.name;
+                    console.log(checked)
+                    console.log(data.elem.name)
+                    changeSwitch(layer, form, checked, name)
+                });
+            });
+
+
+        })
+
+        function getMonitoringData(layer, form, loading) {
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "IoConfigure",
+                "params": {
+                    "mode": "0",
+                },
+                "id": "9.1"
+            }
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    layer.close(loading);
+                    if (res.result && res.result.io_date) {
+                        var json = res.result.io_date;
+                        for (var i = 0; i < json.length; i++) {
+                            $("#name" + (i + 1)).text(json[i].name)
+                            if (i < 4) {
+                                if (json[i].volt == -1) {
+                                    $("#Voltage" + (i + 1)).text("Active");
+                                    $("#Voltage" + (i + 1)).addClass("Voltage-text");
+                                } else if (json[i].volt == -2) {
+                                    $("#Voltage" + (i + 1)).text("Inactive");
+                                    $("#Voltage" + (i + 1)).addClass("Voltage-text");
+                                } else if (json[i].volt == -3) {
+                                    $("#Voltage" + (i + 1)).text("Unknown");
+                                    $("#Voltage" + (i + 1)).addClass("Voltage-text");
+                                } else {
+                                    $("#Voltage" + (i + 1)).text(json[i].volt + "v");
+                                    $("#Voltage" + (i + 1)).removeClass("Voltage-text")
+                                }
+                            } else {
+                                if (json[i].types != 0) {
+                                    $("#LEVEL" + (i + 1)).text("HIGH LEVEL");
+                                    $("#Switch" + (i + 1)).attr("checked", "checked")
+                                } else {
+                                    $("#LEVEL" + (i + 1)).text("LOW LEVEL");
+                                    $("#Switch" + (i + 1)).removeAttr("checked")
+                                }
+                            }
+                        }
+                        form.render("checkbox");
+                        $(".channels-switch").show();
+
+                    } else if (res.error) {
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
+                    }
+
+                },
+                error: function(jqXHR) {
+                    layer.close(loading);
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
+                }
+            })
+        }
+
+        function changeSwitch(layer, form, checked, name) {
+            checked = checked ? 1 : 0;
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "IoConfigure",
+                "params": {
+                    "mode": 1,
+                    "id": Number(name),
+                    "types": Number(checked),
+                },
+                "id": "9.1"
+            }
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    if (res.result) {
+
+                    } else if (res.error) {
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
+                    }
+
+                },
+                error: function(jqXHR) {
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
+                        .stringify(jqXHR) + '</div>';
+                    promptMessage("Error message", tip);
+                }
+            })
+        }
+    </script>
+
+
+
+</body>
+
+</html>
