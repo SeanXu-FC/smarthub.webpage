@@ -67,7 +67,7 @@ $(function() {
     });
 
 
-    var images = ['images/icon-arrow-up.png', 'images/icon-arrow-down.png'];
+    var images = ['images/icon-arrow-down.png', 'images/icon-arrow-up.png'];
     $('#arrow_tab').click(function() {
         if ($('#arrow').attr("class") == "up") {
             $('#arrow').attr("src", images[1]);
@@ -480,6 +480,7 @@ function renderDataUsage(json, i, form) {
         $(".now-month1").text("1 " + month)
         $(".now-month2").text(lastDay + " " + month)
         $("#sim_data_limt_unit").val(json[i].sim_data_limt_unit);
+
         if (json[i] && json[i].monthly_data_limit_flag == 1) { //Set monthly data limit:
             $("#monthlydatalimit input").prop("checked", "checked");
             $("#dataLimit input").removeAttr("disabled");
@@ -502,6 +503,7 @@ function renderDataUsage(json, i, form) {
         }
 
         if (json[i].sim_data_limt_unit == 0) {
+            $(".echart_Ytext1").text("MB");
             $(".limit_unit").text("MB");
             $("#allUsed_MB").text(json[i].current_data_used);
             limitNum1 = json[i].monthly_data_limit;
@@ -509,6 +511,7 @@ function renderDataUsage(json, i, form) {
             $("#redmian_MB").text(redmianMB);
             $("#dataLimit input").val(json[i].monthly_data_limit);
         } else {
+            $(".echart_Ytext1").text("GB");
             $(".limit_unit").text("GB");
             var current_used = (json[i].current_data_used / 1024).toFixed(2)
             $("#allUsed_MB").text(current_used);
@@ -586,6 +589,7 @@ function renderDataUsage(json, i, form) {
         }
 
         if (json[i].sim_data_limt_unit == 0) {
+            $(".echart_Ytext2").text("GB");
             $(".limit_unit2").text("MB");
             $("#allUsed_MB2").text(json[i].current_data_used);
             limitNum2 = json[i].monthly_data_limit;
@@ -593,6 +597,7 @@ function renderDataUsage(json, i, form) {
             $("#redmian_MB2").text(redmianMB);
             $("#dataLimit2 input").val(json[i].monthly_data_limit);
         } else {
+            $(".echart_Ytext2").text("GB");
             $(".limit_unit2").text("GB");
             var current_used = (json[i].current_data_used / 1024).toFixed(2)
             $("#allUsed_MB2").text(current_used);
@@ -868,7 +873,6 @@ function rendSIMManagement(json) {
     $("#sim_imsi1").text(json.sim[0].imsi);
     $("#sim_tele_num1").text(json.sim[0].phone_num);
     $("#sim_puk_num1").text(json.sim[0].puk);
-    json.sim[0].pin_lock = 1;
     if (json.sim[0].pin_lock == 0) { //SIM switching rules:
         $("#Change_SIM_pin1").attr("disabled", "true");
         $("#Change_SIM_pin1").css("opacity", "0.5");
@@ -927,7 +931,6 @@ function rendSIMManagement(json) {
     $("#sim_imsi2").text(json.sim[1].imsi);
     $("#sim_tele_num2").text(json.sim[1].phone_num);
     $("#sim_puk_num2").text(json.sim[1].puk);
-    json.sim[1].pin_lock = 1
     if (json.sim[1].pin_lock == 0) { //SIM switching rules:
         $("#Change_SIM_pin2").attr("disabled", "true");
         $("#Change_SIM_pin2").css("opacity", "0.5");
@@ -973,7 +976,7 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum) {
         grid: {
             left: '0px',
             right: '130px',
-            bottom: '2px',
+            bottom: '10px',
             top: '20px',
             containLabel: true
         },

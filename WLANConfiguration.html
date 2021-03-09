@@ -14,10 +14,10 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210226"></script>
+    <script src="js/lanConfiguration.js?mv=20210309"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210226"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -250,7 +250,7 @@
         
         #success {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 20%;
             right: 500px;
             z-index: 999;
@@ -259,7 +259,7 @@
         
         #error {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 50px;
             right: 500px;
             z-index: 999;
@@ -304,7 +304,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="" class="col-sm-4 control-label Configure-IP">IP subnet mask:</label>
+                                <label for="" class="col-sm-4 control-label Configure-IP">Subnet mask:</label>
                                 <div class="col-sm-8">
                                     <input class="form-control Configure-IP" id="net_mask" type="text" name="ip" />
                                 </div>
@@ -380,7 +380,7 @@
 
 
             function timeConversion(millisec) {
-                var seconds = (millisec * 3600).toFixed(1);
+                var seconds = (millisec * 3600).toFixed(0);
                 //return seconds + " seconds";
                 return seconds;
             }

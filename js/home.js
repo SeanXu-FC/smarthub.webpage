@@ -1,9 +1,16 @@
+var timer = null;
 $(function() {
     getHomeData();
+    timer = setInterval(() => {
+        getHomeData();
+    }, 10000);
+    $(window).on('beforeunload', function() {
+        clearInterval(timer);
+    });
+
     getStatus();
     $("#Home_c .row a").on("click", function() {
         var url = $(this).attr('data-url');
-        console.log("url", url)
         if (url == "home.html" || url == undefined) {
             $(parent.document).find("#my-iframe").attr("src", url);
         } else {
@@ -211,7 +218,6 @@ function getHomeData() {
 //Get cookie
 function getCookie(name) {
     var strCookie = document.cookie;
-    console.log(strCookie)
     var arrCookie = strCookie.split("; ");
     for (var i = 0; i < arrCookie.length; i++) {
         var arr = arrCookie[i].split("=");

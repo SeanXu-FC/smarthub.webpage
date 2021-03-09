@@ -14,13 +14,13 @@ $(function() {
         var a = $(this).attr("data-url");
         "home.html" == a || void 0 == a ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : getCookie("LogInStaus") ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : LoginMessage(a)
     })
+
 });
 
 function _isMobile() { return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) }
 
 function getCookie(a) {
     var b = document.cookie;
-    console.log(b);
     b = b.split("; ");
     for (var c = 0; c < b.length; c++) { var d = b[c].split("="); if (d[0] == a) return d[1] }
     return ""

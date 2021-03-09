@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210226" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210226" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210309" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210309" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -52,19 +52,16 @@
         
         .advancedContent {
             display: none;
-            margin-left: 30px;
             font-size: 16px;
             line-height: 32px;
             font-weight: bold;
-            margin-top: 25px;
+            margin-top: 40px;
         }
         
         #arrow,
         #arrow1,
         #arrow2 {
             cursor: pointer;
-            margin-top: -2px;
-            /* margin-left: 10px; */
         }
         
         .czjz {
@@ -130,10 +127,13 @@
             font-weight: 600;
             font-stretch: normal;
             font-style: normal;
-            line-height: 1.38;
+            line-height: 82px;
             letter-spacing: normal;
             text-align: left;
             color: #000000;
+            border-top: 1px solid #d3d3d3;
+            padding-left: 30px;
+            width: 92%;
         }
         
         .tab-wrapper {
@@ -195,7 +195,7 @@
         }
         
         .layui-form-pane .layui-form-label {
-            width: 40%;
+            width: 80%;
             padding: 8px 0px;
             height: 38px;
             line-height: 20px;
@@ -730,6 +730,11 @@
             font-size: 14px;
             color: #343434;
         }
+        
+        .split {
+            border-bottom: 1px solid #d3d3d3;
+            width: 92%;
+        }
     </style>
 </head>
 
@@ -774,11 +779,11 @@
 
             <div class="main mb-30">
                 <div class="Advanced" id="arrow_tab">Advanced <span><img id="arrow" class="up"
-                            src="images/icon-arrow-up.png"></span>
+                            src="images/icon-arrow-down.png"></span>
                 </div>
                 <div class="advancedContent" style="overflow: hidden;zoom:1;">
-                    <div class="body1 mb-15">
-                        <div class="Data-usage mt-30" id="arrow1"><span><img class="up pb-5"
+                    <div class="body1">
+                        <div class="Data-usage" id="arrow1"><span><img class="up pb-5"
                                     src="images/icon-arrow-right.png"></span> Data usage</div>
                         <div class="tab-wrapper content" id="content" style="display: none;">
 
@@ -795,7 +800,7 @@
                                     <input id="sim_data_limt_unit" style="display:none" />
                                     <div class="content-echart">
                                         <!-- <img src="images/usage.png"> -->
-                                        <span class="echart-text">Usage (MB)</span>
+                                        <span class="echart-text">Usage (<span class="echart_Ytext1">MB</span>)</span>
                                         <div class="usedMB-echart" id="used_MB"></div>
                                         <div class="-flex-display -justify-box"><span class="now-month1"></span><span class="now-month2"></span></div>
                                     </div>
@@ -896,7 +901,7 @@
                                     <input id="sim_data_limt_unit2" style="display:none" />
                                     <div class="content-echart">
                                         <!-- <img src="images/usage.png"> -->
-                                        <span class="echart-text">Usage (MB)</span>
+                                        <span class="echart-text">Usage (<span class="echart_Ytext2">MB</span>)</span>
                                         <div class="usedMB-echart" id="used_MB2"></div>
                                         <div class="-flex-display -justify-box"><span class="now-month1"></span><span class="now-month2"></span></div>
                                     </div>
@@ -1000,7 +1005,7 @@
                     </div>
 
                     <div class="body2">
-                        <div class="Data-usage mb-30" id="arrow2"><span><img class="up"
+                        <div class="Data-usage" id="arrow2"><span><img class="up"
                                     src="images/icon-arrow-right.png"></span> SIM management</div>
                         <div class="tab-wrapper" id="content1" style="display: none;">
                             <div class="usage-content">
@@ -1165,6 +1170,7 @@
                             <div class="save-btn1" style="font-size: 18px;"><button id="cancel2" class="Path-97 layui-btn Forget-network">Cancel</button><button id="btn_saved2" class="Rectangle-1182"><span class="">Save</span></button>
                             </div>
                         </div>
+                        <div class="split"></div>
                     </div>
                 </div>
 
@@ -1176,10 +1182,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210226"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210226"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210309"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210309"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210226"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210309"></script>
 
 
 </body>

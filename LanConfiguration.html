@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210226" rel="stylesheet" />
+    <link href="css/style.css?mv=20210309" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210226"></script>
+    <script src="js/lanConfiguration.js?mv=20210309"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210226"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -251,7 +251,7 @@
         
         #success {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 20%;
             right: 500px;
             z-index: 999;
@@ -260,7 +260,7 @@
         
         #error {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 50px;
             right: 500px;
             z-index: 999;
@@ -466,8 +466,9 @@
         var loading, interval, t = 10;
         $(function() {
 
+
             function timeConversion(millisec) {
-                var seconds = (millisec).toFixed(1);
+                var seconds = (millisec).toFixed(0);
                 //return seconds + " seconds";
                 return seconds;
             }
@@ -828,6 +829,7 @@
 
 
             $("#btn3").on("click", function() {
+
                 var data = {
                     "jsonrpc": "2.0",
                     "method": "LanConfigure",
@@ -851,7 +853,7 @@
                             '#Gateway1_ipinput input[name="ipFour"]').val(),
                         "start_ip": "",
                         "end_ip": "",
-                        "lease_time": "",
+                        "lease_time": Number($('#leasetime').val()),
                     },
                     "id": "9.1"
                 }
@@ -893,31 +895,32 @@
         });
 
         function ejectTip() {
-            loading = parent.layer.load(2, {
-                shade: [0.5, '#fff'],
-                content: '<span id="loading_text" style="font-size:20px;">In application...10s<span>',
-                success: function(layero) {
-                    layero.find('.layui-layer-content').css({
-                        'padding-top': '45px',
-                        'width': '190px',
-                        'background-position': '56px 0'
-                    });
-                    var fn = function() {
-                        console.log(t)
-                        t--;
-                        layero.find('#loading_text').text("In application..." + t + "s");
 
-                    };
-                    interval = setInterval(function() {
-                        fn();
-                        if (t === 0) {
-                            clearInterval(interval);
-                            parent.layer.close(loading);
+            var loading = parent.layer.msg('Waiting for changes to be applied...', {
+                icon: 16,
+                time: false,
+                shade: [0.5, '#fff'],
+                success: function(layero, index) {
+                    var msg = layero.text();
+                    console.log(msg)
+                    var i = 10;
+                    var timer = null;
+                    var fn = function() {
+                        layero.find(".layui-layer-content").html(
+                            '<i class="layui-layer-ico layui-layer-ico16"></i>' + msg + '(' + i +
+                            's)');
+                        if (!i) {
+                            parent.layer.close(index);
+                            clearInterval(timer);
                             $('#success').show(1000).delay(6000).hide(0);
                         }
-                    }, 1000);
-                }
+                        i--;
+                    };
+                    timer = setInterval(fn, 1000);
+                    fn();
+                },
             });
+
         }
     </script>
 

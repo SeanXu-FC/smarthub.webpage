@@ -139,7 +139,7 @@
         
         #success {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 20%;
             right: 500px;
             z-index: 999;
@@ -148,7 +148,7 @@
         
         #error {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 50px;
             right: 500px;
             z-index: 999;
@@ -335,7 +335,7 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210226"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
     <script>
         var powerData;
         $(function() {
@@ -485,10 +485,10 @@
             }
 
             console.log(params)
-            setSimManagement(params)
+            setPowerManagement(params)
         }
         //保存
-        function setSimManagement(params) {
+        function setPowerManagement(params) {
             layui.use(['layer', 'form'], function() {
                 var layer = layui.layer;
                 var form = layui.form;

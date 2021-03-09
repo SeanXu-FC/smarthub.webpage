@@ -12,7 +12,7 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210226" rel="stylesheet" />
+    <link href="css/style.css?mv=20210309" rel="stylesheet" />
     <link rel="stylesheet" href="layui/css/layui.css">
 
     <title>Document</title>
@@ -82,7 +82,7 @@
             line-height: 25px;
             display: none;
             margin: 0 30px 0 30px;
-            padding: 10px 0;
+            padding: 10px 0 0 0;
         }
         
         .layui-form-pane .layui-form-switch {
@@ -262,8 +262,8 @@
         }
         
         .Path-101 {
-            width: 87px;
-            height: 42px;
+            width: 140px;
+            height: 52px;
             border: solid 1px #707070;
             background-color: #f1f1f1;
             border-radius: 5px;
@@ -276,7 +276,7 @@
         
         .Cancel {
             font-family: OpenSans;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: normal;
             font-stretch: normal;
             font-style: normal;
@@ -301,8 +301,8 @@
         }
         
         .Rectangle-1182 {
-            width: 87px;
-            height: 42px;
+            width: 138px;
+            height: 52px;
             /* padding: 0 20px; */
             border-radius: 5px;
             background-color: #861f41;
@@ -311,7 +311,7 @@
         
         .OK {
             font-family: OpenSans;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: normal;
             font-stretch: normal;
             font-style: normal;
@@ -357,7 +357,7 @@
         
         #success {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 50px;
             right: 500px;
             z-index: 999;
@@ -376,12 +376,38 @@
             background-color: #f9fffc;
             background: url("images/icon-info.png") no-repeat 5px 4px;
             display: none;
-            position: absolute;
+            position: fixed;
             top: 50px;
             right: 500px;
             z-index: 999;
             background-color: #fff;
             border-radius: 5px;
+        }
+        
+        .split {
+            opacity: 0.7;
+            border-top: solid 0.5px #707070;
+            width: 90%;
+            margin: 30px 0px 5px 15px;
+        }
+        
+        .split1 {
+            opacity: 0.7;
+            border-bottom: solid 0.5px #707070;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .split2 {
+            opacity: 0.7;
+            border-bottom: solid 0.5px #707070;
+            width: 98%;
+            margin: 0px 0px 40px 0px;
+        }
+        
+        .btn-group {
+            width: 80%;
+            text-align: right;
         }
     </style>
 </head>
@@ -389,16 +415,17 @@
 <body>
     <div class="container-fluid">
         <div class="mc ml-70">
-            <h2 style="margin-top:10px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="SmartHub-access-point"> SmartHub access point </h2>
+            <h2 style="margin-top:10px;padding-bottom: 10px;" class="SmartHub-access-point"> SmartHub access point </h2>
+            <div class="split1"></div>
             <p class="red Your-SmartHub-access-point-allows-other-devices-to-connect-to-the-SmartHubs-cellular-or-wireless-network-data" style="margin-top:20px">Your SmartHub's wireless access point allows other devices to connect to the SmartHub's cellular or wireless network data</p>
             <!-- <p style="margin-top:30px;" class="Allow-devices-to-connect-to-SmartHub-access-point">Allow devices to connect to SmartHub access point:</p> -->
 
             <div class="row">
                 <div id="outer" style="margin-top:20px;">
                     <ul id="tab">
-                        <div class="layui-form layui-form-pane layui-form-item">
-                            <div class="col-md-5 Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div>
-                            <div class="col-md-2 current" style="margin-top: 22px" id="onoffFlag">
+                        <div class="layui-form layui-form-pane layui-form-item -flex-display">
+                            <div class="Wireless Allow-devices-to-connect-to-SmartHub-access-point mt-20">Allow devices to connect to SmartHub access point:</div>
+                            <div class="current" style="margin-top: 22px" id="onoffFlag">
                                 <!-- <input type="checkbox" checked id="onoff" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
                                 <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch">
                                     <em>ON</em><i></i></div> -->
@@ -411,9 +438,9 @@
                             </div> -->
                         </div>
                     </ul>
+                    <div class="split"></div>
                     <div id="content">
-                        <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">
-                            Changes-saved</div>
+
                         <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">
                             Changes-saved</div>
                         <div id="error" class="error-icon Password-successfully-changed Changes-saved"></div>
@@ -435,8 +462,8 @@
                                     </tr>
                                     <tr id="pwd">
                                         <td class="col-sm-3 czjz Access-point-name">Password:</td>
-                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point" value="" style="width:80%"><span id="eye" style="margin-left:10px;">SHOW</span>
-                                            <div><span></span></div>
+                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point access_point_password" value="" style="width:80%"><span id="eye" style="margin-left:10px;">SHOW</span>
+                                            <p class="len-tip"></p>
                                         </td>
                                     </tr>
                                     <!-- <tr id="pwd1">
@@ -472,6 +499,7 @@
                                     </tr>
                                 </table>
                             </ul>
+                            <div class="split2"></div>
                         </form>
                     </div>
                 </div>
@@ -501,9 +529,9 @@
 
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210226"></script>
-    <script src="js/SmartHubPoint.js?mv=20210226"></script>
-    <!-- <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210226"></script> -->
+    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
+    <script src="js/SmartHubPoint.js?mv=20210309"></script>
+    <!-- <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210309"></script> -->
 </body>
 
 </html>

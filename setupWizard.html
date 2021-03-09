@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <link href="css/style.css?mv=20210226" rel="stylesheet" />
+    <link href="css/style.css?mv=20210309" rel="stylesheet" />
     <title>Document</title>
     <style>
         table {
@@ -27,15 +27,14 @@
         
         .mCont {
             position: relative;
-            /* margin: 0 auto; */
-            /* top: 150px;
-            left: 0px; */
-            width: 272px;
+            width: 344px;
             height: 320px;
             overflow-y: auto;
             border: 1px solid #707070;
             border-radius: 5px;
-            background-color: #fff
+            background-color: #fff;
+            padding: 30px 52px 30px 38px;
+            /* padding: 30px 75px 30px 38px; */
         }
         
         .btFs {
@@ -48,7 +47,10 @@
         }
         
         .c9 {
-            color: #999
+            color: #999;
+            font-size: 16px;
+            text-align: left;
+            color: #7a7a7a;
         }
         
         .fsFw {
@@ -220,11 +222,22 @@
             cursor: pointer;
         }
         
+        .wifi-name {
+            font-family: OpenSans;
+            font-size: 18px;
+            text-align: left;
+            color: #343434;
+        }
+        
         .wifi-name-set {
             max-width: 180px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            font-family: OpenSans;
+            font-size: 18px;
+            text-align: left;
+            color: #343434;
         }
         
         #none_wifiList {
@@ -249,6 +262,21 @@
             margin-right: 3px;
             margin-left: 10px;
         }
+        
+        .tips-c {
+            color: #000;
+            font-size: 16px;
+            line-height: 34px;
+            z-index: 999;
+        }
+        
+        .detail-wifi-icon {
+            margin-left: 20px;
+            margin-top: -2px;
+            width: 25px;
+            height: 25px;
+            margin-right: -45px;
+        }
     </style>
 </head>
 
@@ -262,7 +290,7 @@
                 When connected, your SmartHub will distribute wireless data to all devices connected to its access point. If there are no wireless networks you wish to connect to now then just select continue</p>
             <div class="mt-40">
                 <div class="search-container"><img class="searching-img" src="images/loading.gif" /><span class="search-text">Searching for networks</span></div>
-                <div class="mCont" style="padding:28px 37px;" id="set_wizard_c">
+                <div class="mCont" id="set_wizard_c">
                     <div id="none_wifiList"><span class="none-wifi-info"></span></div>
                     <!-- <div class="row -flex-display -justify-box">
                     <div class="-radio-flex">
@@ -302,8 +330,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210226"></script>
-    <script type="text/javascript" src="js/setWizard/setWizard.js?mv=20210226"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
+    <script type="text/javascript" src="js/setWizard/setWizard.js?mv=20210309"></script>
 
 </body>
 

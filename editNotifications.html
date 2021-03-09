@@ -676,7 +676,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210226"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -695,10 +695,10 @@
             console.log("types", types)
             var str = "";
             if (types == 0) {
-                str = '<option value="1">met</option><option value="0">not met</option>'
+                str = '<option value="0">Value below</option><option value="1">Value above</option>'
                 $("#security").html(str)
             } else {
-                str = '<option value="0">Value below</option><option value="1">Value above</option>'
+                str = '<option value="1">met</option><option value="0">not met</option>'
                 $("#security").html(str)
             }
             $(".Edit-Air-conditioner-notifications").text("Edit " + name + " notifications");

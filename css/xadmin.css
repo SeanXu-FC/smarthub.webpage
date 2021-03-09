@@ -428,14 +428,9 @@ xblock {
 }
 
 .left-nav #nav li a {
-    font-size: 24px;
     padding: 20px 0px 20px 0px;
     display: block;
     cursor: pointer;
-}
-
-.left-nav #nav li a cite {
-    font-size: 24px;
 }
 
 .left-nav #nav li .sub-menu {
@@ -829,17 +824,24 @@ table td {
     color: red
 }
 
-#nav li a cite {
-    font-size: 18px;
-    /* font-weight: 700 !important; */
+.main-menu li a cite {
+    font-size: 24px;
+    font-weight: bold;
+    color: #555555;
 }
 
 .sub-menu li a cite {
-    font-size: 14px;
-    font-weight: normal !important;
+    font-size: 21px;
+    font-weight: normal;
+    color: #666;
 }
 
-.title {
-    font-weight: 700 !important;
-    color: #333;
+.main-menu li a.nav-a-active cite {
+    color: #861f41;
+    font-weight: 800;
+}
+
+.sub-menu li a.nav-a-active cite {
+    color: #861f41;
+    font-weight: bold;
 }

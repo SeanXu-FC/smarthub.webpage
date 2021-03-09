@@ -21,6 +21,21 @@ $(function() {
         APsave();
     })
 
+    $('#pw').on("input", function() {
+        var len = $(this).val().length;
+        if (len <= 8) {
+
+            $(".len-tip")
+                .text('Please enter a password with more than 8 digits!')
+                .removeClass('state1 state4 state3').addClass('state2');
+        } else {
+            $(".len-tip")
+                .text(' ')
+                .removeClass('state1 state4 state3').addClass('state4');
+        }
+
+    })
+
 
     layui.use(['form'], function() {
         var form = layui.form;
@@ -395,30 +410,7 @@ function getData(layer, loading) {
                     $("#pwd1").hide();
 
                 }
-                $('.pwd, .pwd1').focus(function() {
-                    var pwd = $("#pwd").val();
-                    pwd = false;
-                    $(this).siblings()
-                        .find('span')
-                        .text('Please enter a password with more than 8 digits!')
-                        .removeClass('state1 state4 state3').addClass('state2');
-                }).blur(function() {
-                    var len = $(this).val().length;
-                    if (len >= 8 && len <= 64 && $(this).val() != '') {
-                        $(this).siblings()
-                            .find('span')
-                            .text('')
-                            .removeClass('state1 state4 state3').addClass('state4');
-                        pwd = true;
-                    } else {
 
-                        $(this).siblings()
-                            .find('span')
-                            .text('Please enter a password with more than 8 digits!')
-                            .removeClass('state1 state2 state4')
-                            .addClass('state3');
-                    }
-                })
             } else {
                 layer.msg("An error occurred：" + res.error.message);
             }
@@ -457,9 +449,8 @@ function APsave() {
     var WpaKey = $(".pwd").val();
     var len = $("#pw").val().length;
     if ($("#EncryptionType").val() != 0) {
-        if (len >= 8 && len <= 20 && $("#pw").val() != '') {} else {
-            $(".pwd").siblings()
-                .find('span')
+        if (len <= 8) {
+            $(".len-tip")
                 .text('Please enter a password with more than 8 digits!')
                 .removeClass('state1 state2 state4')
                 .addClass('state3');
@@ -500,7 +491,7 @@ function APsave() {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             if (res.result) {
-                $('#success').show(1000).delay(6000).hide(0);
+                ejectTip();
             } else {
                 $("#error").text(res.error.message)
                 $("#error").show(1000).delay(6000).hide(0);
@@ -512,6 +503,35 @@ function APsave() {
             promptMessage("Error message", tip);
 
         }
+    });
+
+}
+
+function ejectTip() {
+
+    var loading = parent.layer.msg('Waiting for changes to be applied...', {
+        icon: 16,
+        time: false,
+        shade: [0.5, '#fff'],
+        success: function(layero, index) {
+            var msg = layero.text();
+            console.log(msg)
+            var i = 10;
+            var timer = null;
+            var fn = function() {
+                layero.find(".layui-layer-content").html(
+                    '<i class="layui-layer-ico layui-layer-ico16"></i>' + msg + '(' + i +
+                    's)');
+                if (!i) {
+                    parent.layer.close(index);
+                    clearInterval(timer);
+                    $('#success').show(1000).delay(6000).hide(0);
+                }
+                i--;
+            };
+            timer = setInterval(fn, 1000);
+            fn();
+        },
     });
 
 }

@@ -175,7 +175,9 @@ function renderWifiList(json) {
             } else if (55 > signal) {
                 wifiImg = "s_wifi_05.png";
             }
-            str += '<div class="row -flex-display -justify-box"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
+            str += '<div class="row setWifi-item -flex-display -justify-box" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
+                //有感叹号图标
+                //str += '<div class="row -flex-display -justify-box" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div><div class=""><img class="detail-wifi-icon" src="images/icon-info.png"></div></div>'
         }
     }
     for (let j = 0; j < json.length; j++) {
@@ -202,7 +204,7 @@ function renderWifiList(json) {
             } else if (55 > signal) {
                 wifiImg = "s_wifi_05.png";
             }
-            str += '<div class="row -flex-display -justify-box wifi" style="margin-top:13px;"><input class="dom_saved_data" value="" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '" style="display:none;"><div class="-radio-flex"><div class="wifi-name-set">' + json[j].ssid + '</div><div class="c9" style="padding-left:0">' + savedStr + '</div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
+            str += '<div class="row setWifi-item -flex-display -justify-box wifi" style="margin-top:13px;" id="wifi_tips' + j + '"><input class="dom_saved_data" value="" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '" style="display:none;"><div class="-radio-flex"><div class="wifi-name-set">' + json[j].ssid + '</div><div class="c9" style="padding-left:0">' + savedStr + '</div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
         }
     }
     str += ' <div class="row mt-30 add-Available-networks" style="display: flex;"><div class="col-md-2 pl-0"><div><img src="images/icon-add.png"></div></div><div class="col-md-10"><span class="addN">Create network</span></div></div>'
@@ -213,6 +215,30 @@ var tipIndex = null;
 var timer = null; //定时器
 //绑定事件
 function bindEvent() {
+    $('.setWifi-item').hover(function() {
+        var infoHtml = $(this).children(".dom_saved_data");
+        var ssid = infoHtml.attr("ssid");
+        var freq = infoHtml.attr("freq");
+        var bssid = infoHtml.attr("bssid");
+        var encrypt = infoHtml.attr("encrypt");
+        var tipId = $(this).attr("id");
+        if (2400 < freq && freq < 2900) {
+            freq = "2.4GHz"
+        } else if (5030 < freq && freq < 5900) {
+            freq = "5GHz"
+        }
+        var tipStr = '<div class="tips-c"><div class="-flex-dis"><span class="tip-l">Ssid: </span><span class="tip-r"> ' + ssid + '</span></div><div class="-flex-dis"><span class="tip-l">Frequency band: </span><span class="tip-r"> ' + freq + '</span></div><div class="-flex-dis"><span class="tip-l">Security: </span><span class="tip-r"> ' + encrypt + '</span></div><div class="-flex-dis"><span class="tip-l">MAC address: </span><span class="tip-r"> ' + bssid + '</span></div></div>'
+        layui.use('layer', function() {
+            var layer = layui.layer;
+            tipIndex = layer.tips(tipStr, "#" + tipId, {
+                area: ['auto', 'auto'],
+                time: 0,
+                tips: [2, "#f9f9f9"]
+            });
+        });
+    }, function() {
+        layer.close(tipIndex)
+    });
     //弹出一个iframe层
     $('.wifi').on('click', function() {
         var infoHtml = $(this).children(".dom_saved_data");

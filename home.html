@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
 
 
-    <link rel="stylesheet" href="css/style.css?mv=20210226">
+    <link rel="stylesheet" href="css/style.css?mv=20210309">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css?mv=20210226">
+    <link rel="stylesheet" href="css/xadmin.css?mv=20210309">
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210226"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js?mv=20210226"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20210309"></script>
     <title>Document</title>
     <style>
         /* img {
@@ -196,6 +196,7 @@
         .fw26 a {
             font-size: 26px;
             font-weight: 600;
+            color: #343434;
         }
         
         .imgIcon {
@@ -214,6 +215,13 @@
         
         .green {
             color: green;
+        }
+        
+        .home-left {
+            font-family: OpenSans;
+            font-size: 18px;
+            text-align: left;
+            color: #343434;
         }
         
         .ml-16 {
@@ -499,7 +507,7 @@
             <h4 class="ml-40 mt-10 status">Status</h4>
             <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-1 mt-20">
                 <div class="bd bd1">
-                    <a href="javascript:;" data-url="WiFiNetwork.html" title="Wireless network "><img src="images/r_03.png " class="WiFiNetwork"><img src="images/no-connect.png " class="WiFiNetwork-disable"></a>
+                    <a href="javascript:;" data-url="WiFiNetwork-info1.html" title="Wireless network "><img src="images/r_03.png " class="WiFiNetwork"><img src="images/no-connect.png " class="WiFiNetwork-disable"></a>
                     <a href="javascript:;" data-url="MobileData.html" title="Mobile data "><img src="images/r_04.png " class="mobiledataImg"><img src="images/no-connect.png " class="mobiledataImg-disable"></a>
                     <div class="w520">
                         <img src="images/r_01.png " class="r_01">
@@ -540,22 +548,24 @@
             <div class="col-md-6 col-md-offset-1 col-sm-6 col-lg-6 " style="float:right">
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26 ">Cloud</h3>
-                    <div class="mb-10 mt-10 font18" id="connected">Status:<span class="ml-100 Connected cloud"></span>
+                    <div class="mb-10 mt-10 font18 home-left" id="connected">Status:<span class="ml-100 Connected cloud"></span>
                     </div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
-                    <h3 class="fw26"><a href="javascript:;" data-url="WiFiNetwork-info1.html" target="_self">WLAN</a>
+                    <h3 class="fw26"><a href="javascript:;" data-url="WiFiNetwork-info1.html" target="_self">Wireless
+                            network</a>
                     </h3>
-                    <div class="mb-10 mt-10 font18">Status:<span class="ml-100 Connected connected24"></span></div>
-                    <div class="mb-10 mt-10 font18 imgIcon1">Network:<span class="ml-85 MyText ssid"></span><img id="connected24" class="imgIcon"></div>
+                    <div class="mb-10 mt-10 font18 home-left">Status:<span class="ml-100 Connected connected24"></span>
+                    </div>
+                    <div class="mb-10 mt-10 font18 home-left imgIcon1">Network:<span class="ml-85 MyText ssid"></span><img id="connected24" class="imgIcon"></div>
                 </div>
                 <div class="mt-20 mb-10 bb1c w80 ">
                     <h3 class="fw26"><a href="javascript:;" data-url="MobileData.html" target="_self">Mobile network</a>
                     </h3>
-                    <div class="mb-10 mt-10 font18 imgIcon1">Status:<span class="ml-100 Connected Connected4G"></span><img id="Connected4G" class="imgIcon"></div>
-                    <div class="mb-10 mt-10 font18 ">Network provider:<span class="ml-16 MyText NetworkProvider"></span>
+                    <div class="mb-10 mt-10 font18 home-left imgIcon1">Status:<span class="ml-100 Connected Connected4G"></span><img id="Connected4G" class="imgIcon"></div>
+                    <div class="mb-10 mt-10 font18 home-left ">Network provider:<span class="ml-16 MyText NetworkProvider"></span>
                     </div>
-                    <div class="mb-10 mt-10 font18 ">SIM card(in use):<span class="ml-20 MyText active_sim"></span>
+                    <div class="mb-10 mt-10 font18 home-left ">SIM card(in use):<span class="ml-20 MyText active_sim"></span>
                     </div>
                     <!-- <div class="mb-10 mt-10 font18 ">IMSI:<span class="MyText imsi" style="margin-left: 115px;"></span>
                     </div>
@@ -573,13 +583,14 @@
                 <div class="mb-10 mt-20 bb1c w80 " style="border-bottom: 0px solid #ccc;">
                     <h3 class="fw26 "><a href="javascript:;" data-url="SmartHubPoint.html" target="_self">SmartHub
                             access point</a></h3>
-                    <div class="mb-10 mt-10 font18 ">Status:<span class="ml-100 Connected clg Status "></span></div>
-                    <div class="mb-10 mt-10 font18 ">Name:<span class="ml-103 MyText Name"></span></div>
+                    <div class="mb-10 mt-10 font18 home-left">Status:<span class="ml-100 Connected clg Status "></span>
+                    </div>
+                    <div class="mb-10 mt-10 font18 home-left">Name:<span class="ml-103 MyText Name"></span></div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<script type="text/javascript" src="js/home.js?mv=20210226"></script>
+<script type="text/javascript" src="js/home.js?mv=20210309"></script>
 
 </html>

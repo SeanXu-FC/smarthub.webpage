@@ -34,7 +34,7 @@
                 //acceptMime: 'image/jpg, image/png, image/jpeg', //只筛选上述类型图片
                 //number： '0',//0为不限制上传数量
                 xhr: xhrOnProgress,
-                //data: {}, //可选项 额外的参数，如：{id: 123, abc: 'xxx'}
+                data: { mode: 0 }, //可选项 额外的参数，如：{id: 123, abc: 'xxx'}
                 //multiple: true,// 开启多文件上传
                 drag: false, //是否允许拖拽上传
                 size: 0, //为0为不限制大小
@@ -118,12 +118,28 @@
     $("#upgrade").on("click", function() {
         var has = $(this).hasClass("disable-btn");
         if (has) {
-            console.log(2223)
             return;
         } else {
-            console.log(333333)
-            var domain = window.location.host;
-            window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
+            toUpgrade();
         }
     })
 })
+
+function toUpgrade() {
+    $.ajax({
+        url: "/action/upload",
+        type: "post",
+        data: "mode=1",
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        success: function(res) {
+            console.log(res)
+            if (res.code == 100) {
+                var domain = window.location.host;
+                window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
+            } else {
+
+            }
+        }
+    })
+}

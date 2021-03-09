@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210226" rel="stylesheet" />
+    <link href="css/style.css?mv=20210309" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -287,8 +287,9 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210226"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
     <script>
+        var timer = null;
         $(function() {
             layui.use(['layer', 'form'], function() {
                 var layer = layui.layer;
@@ -297,6 +298,13 @@
                     shade: false
                 });
                 getMonitoringData(layer, form, loading);
+                timer = setInterval(() => {
+                    getMonitoringData(layer, form, loading);
+                }, 10000);
+                $(window).on('beforeunload', function() {
+                    clearInterval(timer);
+                });
+
                 form.on('switch', function(data) {
                     var checked = data.elem.checked;
                     var name = data.elem.name;
