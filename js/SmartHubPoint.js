@@ -27,11 +27,9 @@ $(function() {
 
             $(".len-tip")
                 .text('Please enter a password with more than 8 digits!')
-                .removeClass('state1 state4 state3').addClass('state2');
         } else {
             $(".len-tip")
                 .text(' ')
-                .removeClass('state1 state4 state3').addClass('state4');
         }
 
     })
@@ -452,8 +450,6 @@ function APsave() {
         if (len <= 8) {
             $(".len-tip")
                 .text('Please enter a password with more than 8 digits!')
-                .removeClass('state1 state2 state4')
-                .addClass('state3');
             return;
         }
     }

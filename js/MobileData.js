@@ -80,7 +80,7 @@ $(function() {
         }
     });
 
-    var images1 = ['images/icon-arrow-right.png', 'images/icon-arrow-down-1.png'];
+    var images1 = ['images/icon-arrow-up-1.png', 'images/icon-arrow-down-1.png'];
 
     // function SwitchMenu(obj) {
     //     if (document.getElementById) {
@@ -246,14 +246,14 @@ $(function() {
             var content = document.getElementById("content");
             if (content.style.display == "none") {
                 content.style.display = "block ";
-                $('#arrow1 span .up').attr("src", images1[1]);
+                $('#arrow1 .up').attr("src", images1[0]);
                 var loading = layer.load(0, {
                     shade: false
                 });
                 getDatausageFirst(layer, form, loading);
             } else {
                 content.style.display = "none ";
-                $('#arrow1 span .up').attr("src", images1[0]);
+                $('#arrow1 .up').attr("src", images1[1]);
                 $tabMenu.filter('[data-tab=tab0]').click();
             }
         });
@@ -262,14 +262,14 @@ $(function() {
             var content1 = document.getElementById("content1");
             if (content1.style.display == "none") {
                 content1.style.display = "block ";
-                $('#arrow2 span .up').attr("src", images1[1]);
+                $('#arrow2 .up').attr("src", images1[0]);
                 var loading = layer.load(0, {
                     shade: false
                 });
                 getSimManagement(layer, form, loading);
             } else {
                 content1.style.display = "none ";
-                $('#arrow2 span .up').attr("src", images1[0]);
+                $('#arrow2 .up').attr("src", images1[1]);
             }
         });
 
@@ -508,7 +508,7 @@ function renderDataUsage(json, i, form) {
             $("#allUsed_MB").text(json[i].current_data_used);
             limitNum1 = json[i].monthly_data_limit;
             var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(2);
-            $("#redmian_MB").text(redmianMB);
+            $("#redmian_MB").text(json[i].monthly_data_limit);
             $("#dataLimit input").val(json[i].monthly_data_limit);
         } else {
             $(".echart_Ytext1").text("GB");
@@ -517,7 +517,7 @@ function renderDataUsage(json, i, form) {
             $("#allUsed_MB").text(current_used);
             limitNum1 = (Number(json[i].monthly_data_limit) / 1024).toFixed(3);
             var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(2);
-            $("#redmian_MB").text(redmianMB);
+            $("#redmian_MB").text(json[i].monthly_data_limit);
             $("#dataLimit input").val((json[i].monthly_data_limit / 1024).toFixed(2));
         }
 
@@ -594,7 +594,7 @@ function renderDataUsage(json, i, form) {
             $("#allUsed_MB2").text(json[i].current_data_used);
             limitNum2 = json[i].monthly_data_limit;
             var redmianMB = (json[i].monthly_data_limit - json[i].current_data_used).toFixed(2);
-            $("#redmian_MB2").text(redmianMB);
+            $("#redmian_MB2").text(json[i].monthly_data_limit);
             $("#dataLimit2 input").val(json[i].monthly_data_limit);
         } else {
             $(".echart_Ytext2").text("GB");
@@ -603,7 +603,7 @@ function renderDataUsage(json, i, form) {
             $("#allUsed_MB2").text(current_used);
             limitNum2 = (Number(json[i].monthly_data_limit / 1024)).toFixed(3);
             var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(2);
-            $("#redmian_MB2").text(redmianMB);
+            $("#redmian_MB2").text(json[i].monthly_data_limit);
             $("#dataLimit2 input").val((json[i].monthly_data_limit / 1024).toFixed(2));
         }
 

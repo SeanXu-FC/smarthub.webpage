@@ -14,23 +14,31 @@ $(function() {
                 var json = res.result.dev_list;
                 var main = "";
 
-                //main += '<table class="table table-bordered table-responsive table-condensed table-hover">';
-                // main += '<thead><tr><th class="text-center Device-name active">Device</th><th class="text-center Device-name active">Device name</th><th class="text-center Device-name active">MAC address</th><th class="text-center Device-name active">IP address</th><th class="text-center Device-name active">Connection type</th></tr></thead>';
-                for (var item in json) {
-                    main += '<tr class="text-center"><td class="align"><img class="img_a" src=""></td><td class="align"><span id="DeviceName"></span>' + json[item].DName + '</td><td class="align"><span id="MACAddress"></span>' + json[item].MACAddress + '</td><td class="align"><span id="IPAddress"></span>' + json[item].IPAddress + '</td><td class="align"><span id="ConnectMode" class="ConnectMode"></span>' + json[item].DType + '</td></tr>';
+                var arr = ["Ethernet", "Wireless"];
+                var arrImg = ["Group 2902.png", "Group 2901.png", "Group 2903.png"];
+                for (var i = 0; i < json.length; i++) {
+                    //main += '<tr class="text-center"><td class="align"><img class="img_a" src=""></td><td class="align"><span id="DeviceName"></span>' + json[item].DName + '</td><td class="align"><span id="MACAddress"></span>' + json[item].MACAddress + '</td><td class="align"><span id="IPAddress"></span>' + json[item].IPAddress + '</td><td class="align"><span id="ConnectMode" class="ConnectMode"></span>' + json[item].DType + '</td></tr>';
+                    //main += '<tr class="text-center"><td class="align"><img class="img_a" src=""></td><td class="align"><span class="DeviceName"></span>' + json[item].DName + '</td><td class="align"><span class="MACAddress"></span></td><td class="align"><span class="IPAddress"></span>' + json[item].IPAddress + '</td><td class="align"><span  class="ConnectMode"></span></td></tr>';
+                    if (json[i].DType == 0) {
+                        main += '<tr class="text-center"><td style="text-align: center;"><img class="img_a" src="images/' + arrImg[0] + '"></td><td class="align"><span class="DeviceName"></span>' + json[i].DName + '</td><td class="align"><span class="MACAddress">PC</span></td><td class="align"><span class="IPAddress"></span>' + json[i].IPAddress + '</td><td class="align"><span  class="ConnectMode">' + arr[0] + '</span></td></tr>';
+                    } else if (json[i].DType == 1) {
+                        main += '<tr class="text-center"><td style="text-align: center;"><img class="img_b" src="images/' + arrImg[1] + '"></td><td class="align"><span class="DeviceName"></span>' + json[i].DName + '</td><td class="align"><span class="MACAddress">Mobile</span></td><td class="align"><span class="IPAddress"></span>' + json[i].IPAddress + '</td><td class="align"><span  class="ConnectMode">' + arr[1] + '</span></td></tr>';
+                    } else {
+                        main += '<tr class="text-center"><td style="text-align: center;"><img class="img_a" src="images/' + arrImg[2] + '"></td><td class="align"><span class="DeviceName"></span>' + json[i].DName + '</td><td class="align"><span class="MACAddress">MFD</span></td><td class="align"><span class="IPAddress"></span>' + json[i].IPAddress + '</td><td class="align"><span  class="ConnectMode">' + arr[0] + '</span></td></tr>';
+                    };
+
                 }
-                //main += '</table>'
                 $('#main').html(main);
 
                 var arr = ['Ethernet', 'Wireless'];
-                var arrImg = ['Group 2902.png', 'Group 2901.png'];
+                var arrImg = ['Group 2902.png', 'Group 2901.png', 'Group 2903.png'];
                 for (var i = 0; i < json.length; i++) {
                     if (json[i].DType == 0) {
-                        $('.ConnectMode').eq(i).text(arr[0]);
                         $(".img_a").eq(i).attr("src", 'images/' + arrImg[0]);
                     } else if (json[i].DType == 1) {
-                        $('.ConnectMode').eq(i).text(arr[1]);
-                        $(".img_a").eq(i).attr("src", 'images/' + arrImg[1]);
+                        $(".img_b").eq(i).attr("src", 'images/' + arrImg[1]);
+                    } else {
+                        $(".img_a").eq(i).attr("src", 'images/Group 2903.png');
                     };
                 }
             } else if (res.error) {

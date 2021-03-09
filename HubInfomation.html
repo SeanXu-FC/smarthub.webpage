@@ -107,7 +107,8 @@
         .table>tfoot>tr>th,
         .table>thead>tr>td,
         .table>thead>tr>th {
-            padding: 6px;
+            padding: 6px 0;
+            min-width: 310px;
         }
     </style>
     <title>Document</title>
@@ -125,7 +126,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="30%" class="Model">Model:</td>
+                    <td width="310px" class="Model">Model:</td>
                     <td><span id="model" class="title My-SmartHub"></span></td>
                 </tr>
                 <!-- <tr>
@@ -169,7 +170,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="30%" class="Model">Application version:</td>
+                    <td width="310px" class="Model">Application version:</td>
                     <td><span id="Application_version" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
@@ -189,7 +190,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="30%" class="Model">Ethernet MAC address 1:</td>
+                    <td width="310px" class="Model">Ethernet MAC address 1:</td>
                     <td><span id="macAddress1" class="title My-SmartHub"></span></td>
                 </tr>
                 <tr>
@@ -214,10 +215,11 @@
                 </tr>
 
             </table>
+            <img class="mt-20 mb-40" src="images/QR-info.PNG" />
             <div style="margin-bottom:60px;">
                 <div class="layui-input-inline">
-                    <button class="layui-btn Rectangle-1182 Save-crash-logs-12" id="btnSave" lay-submit>Save crash
-                        log</button>
+                    <button class="layui-btn Rectangle-1182 Save-crash-logs-12" id="btnSave" lay-submit>Save crash logs
+                        (12)</button>
                 </div>
             </div>
         </div>

@@ -189,10 +189,38 @@
         
         .Voltage-text {
             font-family: OpenSans;
-            font-size: 18px;
-            color: #000;
+            font-size: 16px;
+            color: #909090;
             margin-top: 10px;
             line-height: 2.55;
+            font-weight: normal;
+        }
+        
+        .active-color {
+            color: #26b167;
+        }
+        
+        .layui-form-switch {
+            height: 25px;
+            line-height: 22px;
+        }
+        
+        .layui-form-switch em {
+            font-family: OpenSans;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: left;
+            color: #858585 !important;
+        }
+        
+        .layui-form-onswitch em {
+            font-family: OpenSans;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: left;
+            margin-left: 1px;
+            margin-right: 18px;
+            color: #fff !important;
         }
     </style>
 </head>
@@ -342,7 +370,7 @@
                             if (i < 4) {
                                 if (json[i].volt == -1) {
                                     $("#Voltage" + (i + 1)).text("Active");
-                                    $("#Voltage" + (i + 1)).addClass("Voltage-text");
+                                    $("#Voltage" + (i + 1)).addClass("Voltage-text active-color");
                                 } else if (json[i].volt == -2) {
                                     $("#Voltage" + (i + 1)).text("Inactive");
                                     $("#Voltage" + (i + 1)).addClass("Voltage-text");

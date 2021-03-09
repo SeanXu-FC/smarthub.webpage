@@ -52,12 +52,35 @@
             font-style: normal;
             line-height: 1.38;
             letter-spacing: normal;
-            text-align: center;
+            text-align: left;
             color: #333333;
         }
         /* .pd20 {
             padding: 20px 0 !important;
         } */
+        
+        .table-bordered {
+            border-radius: 5px;
+            border: solid 1px #5d5d5d;
+        }
+        
+        .table-bordered>tbody>tr>td,
+        .table-bordered>tbody>tr>th,
+        .table-bordered>tfoot>tr>td,
+        .table-bordered>tfoot>tr>th,
+        .table-bordered>thead>tr>td,
+        .table-bordered>thead>tr>th {
+            border: none;
+        }
+        
+        .table-bordered>tbody>tr:nth-child(2n) {
+            background-color: #f9f9f9;
+        }
+        
+        .table-bordered>thead>tr {
+            border-bottom: solid 1px #5d5d5d;
+            ;
+        }
         
         .main table tr td {
             padding: 20px 0 !important;
@@ -68,8 +91,16 @@
             font-style: normal;
             line-height: 1.33;
             letter-spacing: normal;
-            text-align: center;
+            text-align: left;
             color: #555555;
+        }
+        
+        .img_a {
+            width: 63px;
+        }
+        
+        .img_b {
+            width: 26px;
         }
     </style>
 </head>
@@ -78,16 +109,16 @@
     <div class="container-fluid" style="margin:10px 70px 10px 70px;">
         <div class="row main">
             <h3 class="Connected-devices mt-20">Connected devices</h3>
-            <h6 class="All-devices-currently-connected-to-your-SmartHub-device mt-20" style="margin-bottom:20px;">All devices currently connected to your SmartHub device:</h6>
+            <h6 class="All-devices-currently-connected-to-your-SmartHub-device mt-40 mb-40">All devices currently connected to your SmartHub device:</h6>
             <div>
                 <table class="table table-bordered table-responsive table-condensed table-hover">
                     <thead>
                         <tr>
-                            <th class="text-center Device-name active">Device</th>
-                            <th class="text-center Device-name active">Device name</th>
-                            <th class="text-center Device-name active">MAC address</th>
-                            <th class="text-center Device-name active">IP address</th>
-                            <th class="text-center Device-name active">Connection type</th>
+                            <th class="text-center Device-name"></th>
+                            <th class="text-center Device-name">Device name</th>
+                            <th class="text-center Device-name">Type</th>
+                            <th class="text-center Device-name">IP address</th>
+                            <th class="text-center Device-name">Connection type</th>
                         </tr>
                     </thead>
                     <tbody id="main">

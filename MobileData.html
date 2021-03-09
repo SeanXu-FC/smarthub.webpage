@@ -123,7 +123,7 @@
         
         .Data-usage {
             font-family: OpenSans;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 600;
             font-stretch: normal;
             font-style: normal;
@@ -132,24 +132,28 @@
             text-align: left;
             color: #000000;
             border-top: 1px solid #d3d3d3;
-            padding-left: 30px;
+            padding: 0 57px 0 30px;
             width: 92%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .tab-wrapper {
-            margin: 20px;
+            margin: 0 20px;
             width: 826px;
         }
         
         .tab-menu li {
             position: relative;
             background-color: #fff;
-            color: #bcbcbc;
+            color: #343434;
             display: inline-block;
             padding: 20px 10px;
             opacity: 0.8;
             cursor: pointer;
             z-index: 0;
+            font-family: OpenSans;
         }
         
         .tab-menu li:hover {
@@ -176,7 +180,7 @@
         .line {
             position: absolute;
             width: 0;
-            height: 7px;
+            height: 4px;
             background-color: #861f41;
             top: 55px;
             left: 7px;
@@ -206,6 +210,7 @@
             background-color: #fff;
             overflow: hidden;
             box-sizing: border-box;
+            color: #343434;
         }
         
         .Set-monthly-data-limit {
@@ -349,7 +354,6 @@
         }
         
         .Receive-notifications-when-the-data-limit-has-been-reached {
-            width: 338px;
             height: 39px;
             opacity: 0.74;
             font-family: OpenSans;
@@ -415,7 +419,7 @@
             /* width: 62px; */
             height: 36px;
             font-family: OpenSans;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 600;
             font-stretch: normal;
             font-style: normal;
@@ -701,13 +705,16 @@
         }
         
         .valColor {
-            color: #999;
+            font-family: OpenSans;
             font-size: 18px;
+            font-weight: normal;
+            text-align: left;
+            color: #343434;
         }
         
         .limit-subtiltle {
             font-family: OpenSans;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
             text-align: left;
             color: #333333;
@@ -724,6 +731,10 @@
             padding: 20px 200px 20px 25px;
         }
         
+        .management-content {
+            padding: 0px 200px 20px 25px;
+        }
+        
         .now-month1,
         .now-month2 {
             font-family: OpenSans;
@@ -734,6 +745,29 @@
         .split {
             border-bottom: 1px solid #d3d3d3;
             width: 92%;
+        }
+        
+        .layui-form-radio {
+            padding-right: 0;
+            display: block;
+            margin: 6px 6px 0 0;
+        }
+        
+        .layui-form-radio div {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .layui-form-checkbox span {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: left;
+            color: #343434;
+            padding-left: 29px !important;
         }
     </style>
 </head>
@@ -783,8 +817,8 @@
                 </div>
                 <div class="advancedContent" style="overflow: hidden;zoom:1;">
                     <div class="body1">
-                        <div class="Data-usage" id="arrow1"><span><img class="up pb-5"
-                                    src="images/icon-arrow-right.png"></span> Data usage</div>
+                        <div class="Data-usage" id="arrow1"><span>Data usage</span>
+                            <img class="up" src="images/icon-arrow-down-1.png"></div>
                         <div class="tab-wrapper content" id="content" style="display: none;">
 
                             <ul class="tab-menu ml-20 Data-usage-simmenu">
@@ -807,10 +841,10 @@
                                     <p class="widthper50 mt-20 mb-20 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
                                             <e style="font-size:26px;font-weight:600" id="allUsed_MB">0</e><span
                                                 class="limit_unit">MB</span>
-                                        </span> total used, <span style="font-size:18px;font-weight:600">
+                                        </span> of <span style="font-size:18px;font-weight:600">
                                             <e style="font-size:26px;font-weight:600" id="redmian_MB">0</e><span
                                                 class="limit_unit">MB</span>
-                                        </span> remaining</p>
+                                        </span> used</p>
                                     <div class="useage-describe mb-20">Data usage is measured by the SmartHub and may differ to your provider's measurements</div>
                                     <h4 class="limit-subtiltle">Data limit</h4>
                                     <div class="useage-describe mb-40 pt-10">Setting a monthly data limit helps to protect from unwanted charges. If the relevant settings are enabled reaching the data limit will trigger notifications and/or switching to the other SIM</div>
@@ -822,7 +856,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="-flex-display -align-box -justify-box mt-30">
+                                    <div class="-flex-display -align-box -justify-box mt-30 ml-10">
                                         <div>
                                             <div class="Set-monthly-data-limit">Data limit:</div>
                                             <div class="The-remaining-data">
@@ -845,7 +879,7 @@
                                         </div> -->
                                     </div>
 
-                                    <div>
+                                    <div class="ml-10">
                                         <div class="Set-monthly-data-limit mt-30 mb-10">Data limit start date and duration:
                                         </div>
                                         <div class="useage-describe mb-20">Set the date for when you want your data limit to start and how long your data limit should last for</div>
@@ -886,7 +920,7 @@
                                     <div class="layui-form layui-form-pane -flex-display -justify-box mt-30 ">
                                         <label class="layui-form-label Set-monthly-data-limit mt-10 mb-20">Send data
                                             limit notifications:</label>
-                                        <div class="layui-input-block pt-5" id="usagereminders">
+                                        <div class="layui-input-block pt-5" style="left:-42px;" id="usagereminders">
                                             <input type="checkbox" checked name="limitInfo" lay-skin="primary" lay-filter="limitInfo">
                                         </div>
                                     </div>
@@ -908,10 +942,10 @@
                                     <p class="widthper50 mt-20 mb-20 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
                                             <e style="font-size:26px;font-weight:600" id="allUsed_MB2">0</e><span
                                                 class="limit_unit2">MB</span>
-                                        </span> total used, <span style="font-size:18px;font-weight:600">
+                                        </span> of <span style="font-size:18px;font-weight:600">
                                             <e style="font-size:26px;font-weight:600" id="redmian_MB2">0</e><span
                                                 class="limit_unit2">MB</span>
-                                        </span> remaining</p>
+                                        </span> used</p>
                                     <div class="useage-describe mb-20">Data usage is measured by the SmartHub and may differ to your provider's measurements</div>
                                     <h4 class="limit-subtiltle">Data limit</h4>
                                     <div class="useage-describe mb-40 pt-10">Setting a monthly data limit helps to protect from unwanted charges. If the relevant settings are enabled reaching the data limit will trigger notifications and/or switching to the other SIM</div>
@@ -923,7 +957,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="-flex-display -align-box -justify-box mt-30">
+                                    <div class="-flex-display -align-box -justify-box mt-30 ml-10">
 
                                         <div style="display: inline-block;">
                                             <div class="Set-monthly-data-limit">Data limit:</div>
@@ -947,7 +981,7 @@
                                         </div> -->
                                     </div>
 
-                                    <div class="" style="position: relative;">
+                                    <div class="ml-10" style="position: relative;">
                                         <div class="Set-monthly-data-limit mt-30 mb-10">Data limit start date and duration:
                                         </div>
                                         <div class="useage-describe mb-20">Set the date for when you want your data limit to start and how long your data limit should last for</div>
@@ -1005,12 +1039,12 @@
                     </div>
 
                     <div class="body2">
-                        <div class="Data-usage" id="arrow2"><span><img class="up"
-                                    src="images/icon-arrow-right.png"></span> SIM management</div>
+                        <div class="Data-usage" id="arrow2"><span>SIM management</span>
+                            <img class="up" src="images/icon-arrow-down-1.png"> </div>
                         <div class="tab-wrapper" id="content1" style="display: none;">
-                            <div class="usage-content">
+                            <div class="management-content">
                                 <div class="-flex-display -justify-box">
-                                    <div class="Active-SIM mt-30 mb-20">Active SIM:
+                                    <div class="Active-SIM mt-30 mb-20">Primary SIM:
                                     </div>
                                     <div class="mt-30">
                                         <div class="layui-form layui-input-block" style="margin-left:-30px;">
@@ -1039,12 +1073,13 @@
 
                                     <ul class="tab-menu ml-20">
                                         <li class="SIM1-SIM2 SIM1-to-SIM2  active">SIM1 to SIM2</li>
-                                        <li class="SIM1-SIM2 SIM1-to-SIM2 ">SIM2 to SIM1</li>
+                                        <li class="SIM1-SIM2 SIM1-to-SIM2 " style="font-family: SegoeUI;">SIM2 to SIM1
+                                        </li>
                                     </ul>
 
                                     <div class="tab-content" id="tab-content1" style="margin-left: 33px;">
                                         <div class="layui-transfer-data layui-form" id="Sim1ToSim2">
-                                            <div>
+                                            <div class="mt-10">
                                                 <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Weak_signal_1" id="Weak_signal_1" title="Weak signal" value="Weak signal">
                                                 <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>
                                             </div>
@@ -1062,7 +1097,7 @@
                                             </div>
                                         </div>
                                         <div class="layui-transfer-data layui-form">
-                                            <div>
+                                            <div class="mt-10">
                                                 <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Weak_signal_2" id="Weak_signal_2" title="Weak signal" value="Weak signal">
                                                 <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>
                                             </div>
@@ -1083,10 +1118,10 @@
                                 </div>
 
 
-                                <div class="tab-wrapper content">
+                                <div class="tab-wrapper content" style="margin-top:70px;">
                                     <ul class="tab-menu" style="margin-top:-30px;margin-left: -6px;">
                                         <li class="SIM1 active">SIM1</li>
-                                        <li class="SIM1">SIM2</li>
+                                        <li class="SIM1" style="font-family: SegoeUI;">SIM2</li>
                                     </ul>
 
                                     <div class="tab-content mt-20">

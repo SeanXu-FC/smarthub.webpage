@@ -175,8 +175,8 @@
         }
         
         .Rectangle-1182 {
-            width: 94px;
-            height: 50px;
+            width: 87px;
+            height: 42px;
             /* padding: 0 20px; */
             border-radius: 5px;
             background-color: #861f41;
@@ -239,7 +239,12 @@
             width: 88%;
             padding-left: 10px;
             border-radius: 5px;
-            border: 1px solid #333 !important
+            border: 1px solid #333 !important;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: left;
+            color: #343434;
         }
         
         .form-control-static {
@@ -283,24 +288,24 @@
         }
         
         .Forget-network {
+            width: 87px;
+            height: 42px;
             font-family: OpenSans;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 1.38;
-            letter-spacing: normal;
             text-align: center;
-            color: #363636 !important;
+            color: #434343 !important;
+            padding: 0;
+            margin-right: 14px;
         }
         
         .Close {
             font-family: OpenSans;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: normal;
             font-stretch: normal;
             font-style: normal;
-            line-height: 1.38;
+            line-height: 1.35;
             letter-spacing: normal;
             text-align: center;
             color: #f9f9f9;
@@ -607,6 +612,23 @@
             text-align: left;
             color: #343434;
         }
+        
+        .font-left {
+            opacity: 0.71;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: right;
+            color: #333333;
+            padding: 5px 55px 0 0;
+        }
+        
+        .btn-div {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 51px;
+            align-items: center
+        }
     </style>
 </head>
 
@@ -646,7 +668,8 @@
             <div class="layui-form-item layui-form-text mt-20">
                 <label class=" layui-form-label Allow-notifications " style="margin-top:-14px;width:228px; ">Notification message:</label>
                 <div class="layui-input-block " style="margin-left:262px; ">
-                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="100" class="layui-textarea" oninput="WidthCheckIOStr(this,256);"></textarea>
+                    <textarea placeholder="Please enter the content， You can enter up to 100 characters" maxlength="256" class="layui-textarea" oninput="WidthCheckIOStr(this,256);"></textarea>
+                    <p class="font-left"><span id="wordCheck">256</span> characters left</p>
                 </div>
             </div>
 
@@ -662,11 +685,9 @@
                 </div>
             </div> -->
 
-            <div class="row mt-20 ">
-                <span class="col-md-4 col-md-offset-2 " style="display: inline-block;margin-left:460px "><button
-                        id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button></span>
-                <span class="col-md-2 col-md-offset-4 connected " id="layerDemo" style="display: inline-block;margin-left:-10px; "><button data-method="notice" id="btn"
-                        class="Rectangle-1182 active Close " style="margin-top:-3px ">Save</button></span>
+            <div class="btn-div row mt-20 ">
+                <button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button>
+                <button data-method="notice" id="btn" class="Rectangle-1182 active Close " style="margin-top:-3px ">Save</button>
             </div>
         </div>
 
@@ -800,6 +821,7 @@
                             if (Id == json[i].id) {
                                 $(".layui-textarea").val(json[i].noti_msg);
                                 oldNoti_msg = json[i].noti_msg;
+                                $("#wordCheck").text(256 - json[i].noti_msg.length);
                                 console.log("oldNoti_msg", oldNoti_msg)
                             }
                         }
@@ -925,6 +947,32 @@
                     var layer = layui.layer;
                     layer.msg("Cannot enter special string ' ");
                 })
+            }
+            $("#wordCheck").text(maxLen - str.value.length);
+        }
+        var maxstrlen = 256;
+
+        function checkWord(c) {
+            len = maxstrlen;
+            var str = c.value;
+            myLen = getStrleng(str);
+            var wck = $("#wordCheck");
+            if (myLen > len * 2) {
+                c.value = str.substring(0, i + 1);
+            } else {
+                wck.innerHTML = Math.floor((len * 2 - myLen) / 2);
+            }
+        }
+
+        function getStrleng(str) {
+            myLen = 0;
+            for (var i = 0;
+                (i < str.length) && (myLen <= maxstrlen * 2); i++) {
+                if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128) //字符编码，128以内的是数字，英文字符，已经英文的符号等
+                    myLen++;
+                else
+                    myLen += 2;
+                return myLen;
             }
         }
     </script>
