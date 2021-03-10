@@ -66,6 +66,9 @@ function promptMessage(title, content) {
             shade: 0, //不显示遮罩                            
             yes: function(index) {
                 layer.close(index);
+                var domain = window.location.host;
+                // top.location.href = ('https:' == document.location.protocol ? 'https://' :
+                // 'http://') + domain;
             }
         });
     })

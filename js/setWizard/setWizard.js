@@ -1,3 +1,4 @@
+var frequency = 0;
 $(function() {
     $(".Back").prop("disabled", true);
     $(".Back").css("opacity", "0.5");
@@ -48,9 +49,18 @@ function getWLANScan(layer, form) {
 
         },
         error: function(jqXHR) {
-            //sessionStorage.setItem('clickFlag', true);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log(JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getWLANScan(layer);
+                }, 5000);
+            } else {
+                frequency = 0;
+                parent.layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -73,12 +83,23 @@ function getWLANData(layer, loading) {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             parent.layer.close(loading);
-            if (res.result && res.result.ap_list) {
+            if (res.result && res.result.ap_list && res.result.ap_list.length > 0) {
                 var json = res.result.ap_list;
                 json.sort(arrSort("rssi"));
                 sessionStorage.setItem('wifiJson', JSON.stringify(json));
                 renderWifiList(json);
                 $(".search-container").hide();
+            } else if (res.result && res.result.ap_list && res.result.ap_list.length < 1) { //返回列表为空再请求两次
+                frequency++;
+                if (frequency < 3) {
+                    setTimeout(() => {
+                        getWLANData(layer, loading);
+                    }, 5000);
+                } else {
+                    frequency = 0;
+                    $(".search-container").hide();
+                    parent.layer.close(loading);
+                }
             } else if (res.error) {
                 layer.msg("An error occurred：" + res.error.message);
                 $(".search-container").hide();
@@ -87,11 +108,19 @@ function getWLANData(layer, loading) {
 
         },
         error: function(jqXHR) {
-            parent.layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
-            $(".search-container").hide();
-            //sessionStorage.setItem('clickFlag', true);
+            console.log(JSON.stringify(jqXHR));
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getWLANData(layer, loading);
+                }, 5000);
+            } else {
+                frequency = 0;
+                $(".search-container").hide();
+                parent.layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -132,8 +161,9 @@ function changeSwitchStatus(layer, loading, checked) {
 
         },
         error: function(jqXHR) {
+            console.log(JSON.stringify(jqXHR))
             parent.layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
 
         }
@@ -461,8 +491,17 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
             }
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log(JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    savedWifiConnect(ssid, bssid, encrypt, infoHtml);
+                }, 5000);
+            } else {
+                frequency = 0;
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -522,8 +561,17 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
             }
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log(JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    noPWDWifiConnect(ssid, bssid, is_saved);
+                }, 5000);
+            } else {
+                frequency = 0;
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }

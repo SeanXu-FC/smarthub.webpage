@@ -1,4 +1,5 @@
 var timer = null;
+var frequency = 0;
 $(function() {
     getHomeData();
     timer = setInterval(() => {
@@ -208,10 +209,13 @@ function getHomeData() {
             }
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
-
+            console.log(JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency > 3) {
+                frequency = 0;
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }

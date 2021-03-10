@@ -54,6 +54,7 @@
         
         .Rectangle-1182.active {
             background-color: #861f41;
+            color: #fff;
         }
         
         .Cancel {
@@ -177,8 +178,8 @@
         }
         
         .Rectangle-1182 {
-            width: 124px;
-            height: 50px;
+            width: 102px;
+            height: 42px;
             /* padding: 0 20px; */
             border-radius: 5px;
             background-color: #861f41;
@@ -269,8 +270,8 @@
         }
         
         .Path-97 {
-            /* width: 138.9px; */
-            height: 50px;
+            width: 102px;
+            height: 42px;
             border-radius: 5px;
             border: solid 1px #707070;
             background-color: #f1f1f1;
@@ -286,6 +287,7 @@
             letter-spacing: normal;
             text-align: center;
             color: #363636 !important;
+            margin-right: 14px;
         }
         
         .Close {
@@ -297,7 +299,7 @@
             line-height: 1.38;
             letter-spacing: normal;
             text-align: center;
-            color: #f9f9f9;
+            color: #434343;
         }
         
         .layui-input {
@@ -474,6 +476,11 @@
             width: 80px;
             border: solid 1px #707070;
         }
+        
+        .btn-c {
+            justify-content: flex-end;
+            margin-right: 23px;
+        }
     </style>
 </head>
 
@@ -515,11 +522,9 @@
                 </div>
             </div> -->
 
-            <div class="row mt-60">
-                <span class="col-md-4 col-md-offset-2" style="display: inline-block;margin-left:460px"><button
-                        id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button></span>
-                <span class="col-md-2 col-md-offset-4 connected" id="layerDemo" style="display: inline-block;margin-left:-10px;"><button data-method="notice" id="btn"
-                        class="Rectangle-1182 active Close" style="margin-top:-3px">Save</button></span>
+            <div class="btn-c row mt-60 -flex-display -align-box">
+                <button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button>
+                <button data-method="notice" id="btn" class="Rectangle-1182 active Close">Save</button>
             </div>
         </div>
 

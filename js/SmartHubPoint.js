@@ -103,9 +103,9 @@ $(function() {
 
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    console.log(JSON.stringify(jqXHR))
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                     promptMessage("Error message", tip);
-
                 }
             });
 
@@ -124,6 +124,7 @@ $(function() {
     });
 
 });
+var frequency = 0;
 
 function getData(layer, loading) {
     var data = {
@@ -132,7 +133,6 @@ function getData(layer, loading) {
         "params": {},
         "id": "9.1"
     };
-
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
@@ -156,7 +156,6 @@ function getData(layer, loading) {
                         Hzstr += '<option value="1">20MHz</option>';
                         Hzstr += '<option value="2" selected>40MHz</option>'
                     }
-                    console.log($('.pwd1').val())
                 }
                 $("#HTmode").html(Hzstr);
 
@@ -414,9 +413,18 @@ function getData(layer, loading) {
             }
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
-
+            console.log(JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getData(layer, loading)
+                }, 5000);
+            } else {
+                frequency = 0;
+                layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 
@@ -495,9 +503,9 @@ function APsave() {
 
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            console.log(JSON.stringify(jqXHR))
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
-
         }
     });
 

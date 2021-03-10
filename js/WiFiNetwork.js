@@ -1,3 +1,4 @@
+var frequency = 0;
 $(function() {
 
     layui.use(['form', 'layer'], function() {
@@ -50,9 +51,9 @@ function getSwitchStatus(layer, form) {
 
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            console.log(JSON.stringify(jqXHR))
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
-
         }
     });
 }
@@ -101,9 +102,9 @@ function changeSwitchStatus(layer, form, checked) {
 
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            console.log(JSON.stringify(jqXHR))
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
-
         }
     });
 }
@@ -149,9 +150,18 @@ function getWLANScan(layer) {
 
         },
         error: function(jqXHR) {
-            parent.layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log(JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getWLANScan(layer);
+                }, 5000);
+            } else {
+                frequency = 0;
+                parent.layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 
@@ -176,27 +186,46 @@ function getWLANData(layer, loading) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            parent.layer.close(loading);
-            if (res.result && res.result.ap_list) {
-                //$(".mCont").show();
+            if (res.result && res.result.ap_list && res.result.ap_list.length > 0) {
                 var json = res.result.ap_list;
                 json.sort(arrSort("rssi"));
                 sessionStorage.setItem('wifiJson', JSON.stringify(json));
                 $(".search-container").hide();
+                parent.layer.close(loading);
                 renderWifiList(json);
 
+            } else if (res.result && res.result.ap_list && res.result.ap_list.length < 1) { //返回列表为空再请求两次
+                frequency++;
+                if (frequency < 3) {
+                    setTimeout(() => {
+                        getWLANData(layer, loading);
+                    }, 5000);
+                } else {
+                    frequency = 0;
+                    $(".search-container").hide();
+                    parent.layer.close(loading);
+                }
             } else if (res.error) {
+                parent.layer.close(loading);
                 $(".search-container").hide();
                 layer.msg("An error occurred：" + res.error.message);
             }   
 
         },
         error: function(jqXHR) {
-            $(".search-container").hide();
-            parent.layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
-
+            console.log(JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getWLANData(layer, loading);
+                }, 5000);
+            } else {
+                frequency = 0;
+                $(".search-container").hide();
+                parent.layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -530,16 +559,15 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
                 }
             }
         },
-        complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+        complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数           
             if (status == 'timeout') { //超时,status还有success,error等值的情况
+                console.log(status)
                 ajaxTimeout.abort();
             }
         },
         error: function(jqXHR) {
             clearInterval(timer);
             pollingWifiStatus();
-            //var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            //promptMessage("Error message", tip);
         }
 
     });
@@ -607,8 +635,17 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
             }
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log(JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    savedWifiConnect(ssid, bssid, encrypt, infoHtml);
+                }, 5000);
+            } else {
+                frequency = 0;
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -668,8 +705,17 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
             }
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log(JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    noPWDWifiConnect(ssid, bssid, is_saved);
+                }, 5000);
+            } else {
+                frequency = 0;
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -719,86 +765,4 @@ function arrSort(prop) {
             return 0;
         }
     }
-}
-
-//输入密码关闭弹窗回调函数
-function connectWifiCall(info) {
-    console.log(info)
-}
-
-function aa() {
-    var data = {
-        "jsonrpc": "2.0",
-        "method": "WlanStationConfig",
-        "params": {
-            "operate_code": 10
-        },
-        "id": "9.1"
-    };
-
-    data = JSON.stringify(data);
-    $.ajax({
-        type: "post",
-        url: "/action/action",
-        data: data,
-        dataType: "json",
-        contentType: "application/json;charset=utf-8",
-        success: function(res) {
-            layer.close(loading);
-            if (res.result) {
-                //$(".mCont").show();
-                var json = res.result.ap_list;
-                var str = "";
-                //方法一:es5字符串拼接：
-                str += '<table style="width:100%" class=" table-responsive">';
-                // str += '<tr>';
-                // str += '<td width="60%"><div class="btFs ml20 mt20" id="wn_name_00">' + json[0].ssid + '</div><div class="green ml20">Channel:<span class="channel_00">' + json[0].channel + '</span> </div><div class="green ml20" id="wn_openStatus_00">' + json[0].encryption + '</div></td>';
-                // str += '<td width="25%"><div class="mt10"><img class="imgIcon" src="images/icon-wifi01.png"></div><div class="mt10"><span id="signal_00">' + json[0].signal + '</span>%</div></td>';
-                // str += '<td><img src="images/icon-info.png"></td>';
-                // str += '</tr>';
-                str += '<tr><td colspan="3" class="fsFw"><div class="ml20 ">Available networks</div></td></tr>';
-                for (var index in json) {
-                    str += '<tr>';
-                    str += '<td width="60%"><div class="btFs ml20 mt20" id="wn_name_00">' + json[index].ssid + '</div><div class="green ml20">Channel:<span class="channel_00">' + json[index].channel + '</span> <span class="green ml20" id="wn_openStatus_00">encryption:' + json[index].encryption + '</span><span class="green ml20">mode:' + json[index].mode + '</span><span class="green ml20">bssid:' + json[index].bssid + '</span></div></td>';
-                    str += '<td width="25%"><div class="mt10"><img class="imgIcon" src="images/icon-wifi01.png"></div><div class="mt10"><span id="signal_00">' + json[index].signal + '</span>%</div></td>';
-                    // str += '<td><img src="images/icon-info.png"></td>';
-                    str += '</tr>';
-                }
-                str += '<tr><td colspan="3"><img src="images/icon-add.png" style="margin-top:-6px !important;margin-left:18px"><span data-toggle="modal" data-target="#myModal" class="addN">Add network</span></td></tr>';
-                str += '</table>'
-
-                $(".mCont").html(str);
-
-                var $img = $(".imgIcon");
-                // for (var i = 0; i < $img.length; i++) {
-                //     console.log($img[i]);
-                // }
-
-                if (json == '' || json == undefined || json == null || json.length < 1) return;
-                for (let i = 0; i < json.length; i++) {
-                    var signal = json[i].signal;
-                    if (signal);
-                    if (signal == 0) {
-                        $img.eq(i).attr("src", "/images/signal-0.png");
-                    } else if (signal <= 25) {
-                        $img.eq(i).attr("src", "/images/signal-0-25.png");
-                    } else if (signal <= 50) {
-                        $img.eq(i).attr("src", "/images/signal-25-50.png");
-                    } else if (signal <= 75) {
-                        $img.eq(i).attr("src", "/images/signal-50-75.png");
-                    } else if (signal <= 100) {
-                        $img.eq(i).attr("src", "/images/signal-75-100.png");
-                    }
-                } 
-            } else if (res.error) {
-                layer.msg("An error occurred：" + res.error.message);
-            }   
-
-        },
-        error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
-
-        }
-    });
 }
