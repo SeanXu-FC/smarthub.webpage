@@ -126,9 +126,6 @@
 })
 
 function toUpgrade() {
-    var domain = window.location.host;
-    window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
-    return;
     $.ajax({
         url: "/action/upload",
         type: "post",
