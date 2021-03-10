@@ -2,7 +2,7 @@ var timer = null;
 $(function() {
     getHomeData();
     timer = setInterval(() => {
-        getHomeData();
+        //getHomeData();
     }, 10000);
     $(window).on('beforeunload', function() {
         clearInterval(timer);

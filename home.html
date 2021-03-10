@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
 
 
-    <link rel="stylesheet" href="css/style.css?mv=20210309">
+    <link rel="stylesheet" href="css/style.css?mv=20210310">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css?mv=20210309">
+    <link rel="stylesheet" href="css/xadmin.css?mv=20210310">
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210310"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js?mv=20210309"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20210310"></script>
     <title>Document</title>
     <style>
         /* img {
@@ -104,8 +104,8 @@
         
         .mobiledataImg-disable {
             position: absolute;
-            top: 275px !important;
-            left: 278px;
+            top: 408px !important;
+            left: 287px;
             z-index: 2;
             width: 12px;
             max-width: 100%;
@@ -115,7 +115,7 @@
         
         .WiFiNetwork-disable {
             position: absolute;
-            top: 147px;
+            top: 199px;
             left: 240px;
             z-index: 1;
             width: 12px;
@@ -236,7 +236,160 @@
             margin-bottom: 0px
         }
         
-        @media (min-width:1368px) {
+        .Ethernet-Connections,
+        .Ethernet-Connections span,
+        .Wireless-Connections,
+        .Wireless-Connections span {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            color: #343434;
+        }
+        
+        @media (max-width: 1366px) {
+            .left-nav {
+                width: auto !important;
+            }
+            #side-nav {
+                margin-top: 20px;
+                margin-left: 30px;
+            }
+            /* .ml-40 {
+                margin-left: 0px !important;
+            } */
+            .bd1 {
+                width: 560px;
+                height: auto;
+                position: relative;
+                overflow: hidden;
+                zoom: 1;
+                border: 0px solid #f00"
+
+            }
+            .status {
+                font-size: 34px;
+                font-weight: 600;
+                color: #861f41;
+                border-bottom: solid 1px #d2d2d2;
+                padding-bottom: 10px;
+                width: 92%
+            }
+            .mobiledataImg {
+                position: absolute;
+                top: 180px !important;
+                left: 264px;
+                z-index: 2;
+                width: 42px;
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
+            .mobiledataImg-disable {
+                position: absolute;
+                top: 275px !important;
+                left: 278px;
+                z-index: 2;
+                width: 12px;
+                max-width: 100%;
+                height: auto;
+                display: none;
+            }
+            .WiFiNetwork {
+                position: absolute;
+                top: 120px;
+                left: 211px;
+                z-index: 1;
+                width: 50px;
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
+            .WiFiNetwork-disable {
+                position: absolute;
+                top: 147px;
+                left: 240px;
+                z-index: 1;
+                width: 12px;
+                max-width: 100%;
+                height: auto;
+                display: none;
+                background-color: #fff;
+            }
+            .w520 {
+                position: relative;
+                width: 520px
+            }
+            .r_01 {
+                display: block;
+                width: 80px;
+                max-width: 100%;
+                height: auto;
+                margin: 0 auto
+            }
+            .r_02 {
+                display: block;
+                margin: 0 auto;
+                width: 60px;
+                max-width: 100%;
+                height: auto;
+            }
+            .group2916 {
+                display: block;
+                margin: 0 auto;
+                width: 70px;
+                max-width: 100%;
+                height: auto;
+            }
+            .r_06 {
+                display: block;
+                margin: 5px auto;
+                width: 50px;
+                max-width: 100%;
+                height: auto;
+            }
+            .r_07 {
+                display: block;
+                margin: 0 auto;
+                width: 220px;
+                max-width: 100%;
+                height: auto;
+            }
+            #EthernetConnections {
+                margin-right: 28px;
+            }
+            .Group2901 {
+                margin-left: 21px;
+                width: 20px;
+                max-width: 100%;
+                height: auto;
+                display: inline-block;
+            }
+            .Group2902 {
+                width: 60px;
+                max-width: 100%;
+                height: auto;
+                display: inline-block;
+            }
+            .Group2903 {
+                margin-left: 10px;
+                width: 80px;
+                max-width: 100%;
+                height: auto;
+                display: inline-block;
+            }
+            .ml85 {
+                margin-left: 100px;
+            }
+            .Ethernet-Connections,
+            .Ethernet-Connections span,
+            .Wireless-Connections,
+            .Wireless-Connections span {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width:1400px) {
             .bd1 {
                 width: 560px;
                 height: auto;
@@ -355,147 +508,11 @@
                 height: auto;
                 display: inline-block;
             }
-            #EthernetConnections {
-                font-size: 18px;
-            }
-            #WirelessConnections {
-                font-size: 18px;
-            }
-        }
-        
-        @media (max-width: 1366px) {
-            .left-nav {
-                width: auto !important;
-            }
-            #side-nav {
-                margin-top: 20px;
-                margin-left: 30px;
-            }
-            /* .ml-40 {
-                margin-left: 0px !important;
-            } */
-            .bd1 {
-                width: 560px;
-                height: auto;
-                position: relative;
-                overflow: hidden;
-                zoom: 1;
-                border: 0px solid #f00"
-
-            }
-            .status {
-                font-size: 34px;
-                font-weight: 600;
-                color: #861f41;
-                border-bottom: solid 1px #d2d2d2;
-                padding-bottom: 10px;
-                width: 92%
-            }
-            .mobiledataImg {
-                position: absolute;
-                top: 180px !important;
-                left: 264px;
-                z-index: 2;
-                width: 42px;
-                max-width: 100%;
-                height: auto;
-                display: block;
-            }
-            .mobiledataImg-disable {
-                position: absolute;
-                top: 275px !important;
-                left: 278px;
-                z-index: 2;
-                width: 12px;
-                max-width: 100%;
-                height: auto;
-                display: none;
-            }
-            .WiFiNetwork {
-                position: absolute;
-                top: 120px;
-                left: 211px;
-                z-index: 1;
-                width: 50px;
-                max-width: 100%;
-                height: auto;
-                display: block;
-            }
-            .WiFiNetwork-disable {
-                position: absolute;
-                top: 147px;
-                left: 240px;
-                z-index: 1;
-                width: 12px;
-                max-width: 100%;
-                height: auto;
-                display: none;
-                background-color: #fff;
-            }
-            .w520 {
-                position: relative;
-                width: 520px
-            }
-            .r_01 {
-                display: block;
-                width: 80px;
-                max-width: 100%;
-                height: auto;
-                margin: 0 auto
-            }
-            .r_02 {
-                display: block;
-                margin: 0 auto;
-                width: 60px;
-                max-width: 100%;
-                height: auto;
-            }
-            .group2916 {
-                display: block;
-                margin: 0 auto;
-                width: 70px;
-                max-width: 100%;
-                height: auto;
-            }
-            .r_06 {
-                display: block;
-                margin: 5px auto;
-                width: 50px;
-                max-width: 100%;
-                height: auto;
-            }
-            .r_07 {
-                display: block;
-                margin: 0 auto;
-                width: 220px;
-                max-width: 100%;
-                height: auto;
-            }
-            #EthernetConnections {
-                margin-right: 90px;
-            }
-            .Group2901 {
-                margin-left: 21px;
-                width: 20px;
-                max-width: 100%;
-                height: auto;
-                display: inline-block;
-            }
-            .Group2902 {
-                width: 60px;
-                max-width: 100%;
-                height: auto;
-                display: inline-block;
-            }
-            .Group2903 {
-                margin-left: 10px;
-                width: 80px;
-                max-width: 100%;
-                height: auto;
-                display: inline-block;
-            }
-            .ml85 {
-                margin-left: 100px;
+            .Ethernet-Connections,
+            .Ethernet-Connections span,
+            .Wireless-Connections,
+            .Wireless-Connections span {
+                font-size: 14px;
             }
         }
     </style>
@@ -527,7 +544,8 @@
                     </div>
                     <div class="w520">
                         <div style="float:left;margin-left:20px; ">
-                            <div id="WirelessConnections">Wireless connections <span></span></div>
+                            <div class="Wireless-Connections" id="WirelessConnections">Wireless connections
+                                <span></span></div>
                             <div class="mt-10" id="">
                                 <a href="javascript:;" data-url="connectedDevices.html" target="_self"><img src="images/Group 2901.png " title="Wireless" class="Group2901"></a>
                                 <a href="javascript:;" data-url="connectedDevices.html" target="_self"><img src="images/Group 2901.png " title="Wireless" class="Group2901"></a>
@@ -535,7 +553,8 @@
                             </div>
                         </div>
                         <div style="float:right ">
-                            <div id="EthernetConnections">Ethernet connections <span></span></div>
+                            <div class="Ethernet-Connections" id="EthernetConnections">Ethernet connections
+                                <span></span></div>
                             <div class="mt-10 ">
                                 <a href="javascript:;" data-url="connectedDevices.html" target="_self"><img src="images/Group 2902.png " title="Ethernet" class="Group2902"></a>
                                 <a href="javascript:;" data-url="connectedDevices.html" target="_self"><img src="images/Group 2903.png " title="Ethernet" class="Group2902"></a>
@@ -591,6 +610,6 @@
         </div>
     </div>
 </body>
-<script type="text/javascript" src="js/home.js?mv=20210309"></script>
+<script type="text/javascript" src="js/home.js?mv=20210310"></script>
 
 </html>
