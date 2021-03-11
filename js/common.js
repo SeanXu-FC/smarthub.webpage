@@ -67,8 +67,8 @@ function promptMessage(title, content) {
             yes: function(index) {
                 layer.close(index);
                 var domain = window.location.host;
-                // top.location.href = ('https:' == document.location.protocol ? 'https://' :
-                // 'http://') + domain;
+                top.location.href = ('https:' == document.location.protocol ? 'https://' :
+                    'http://') + domain;
             }
         });
     })
