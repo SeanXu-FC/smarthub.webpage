@@ -154,12 +154,13 @@
 
                 },
                 error: function(jqXHR) {
-                    if (jqXHR.readyState != 0) {
-                        var tip =
-                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                            JSON.stringify(jqXHR) + '</div>';
-                        promptError("Error message", tip);
-                    }
+                    console.log(JSON.stringify(jqXHR))
+                    // if (jqXHR.readyState != 0) {
+                    //     var tip =
+                    //         '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                    //         JSON.stringify(jqXHR) + '</div>';
+                    //     promptError("Error message", tip);
+                    // }
                 }
             });
         }, 10000);
@@ -200,12 +201,13 @@
 
                 },
                 error: function(jqXHR) {
-                    if (jqXHR.readyState != 0) {
-                        var tip =
-                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                            JSON.stringify(jqXHR) + '</div>';
-                        promptError("Error message", tip);
-                    }
+                    console.log(JSON.stringify(jqXHR))
+                    // if (jqXHR.readyState != 0) {
+                    //     var tip =
+                    //         '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                    //         JSON.stringify(jqXHR) + '</div>';
+                    //     promptError("Error message", tip);
+                    // }
                 }
             });
         }, time);
