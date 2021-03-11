@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210310" rel="stylesheet" />
+    <link href="css/style.css?mv=20210311" rel="stylesheet" />
 
     <title>Document</title>
     <style>
@@ -571,7 +571,7 @@
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210310"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210311"></script>
     <script>
         var saveChannelID;
         $(function() {
@@ -646,8 +646,9 @@
                     }
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
-                        .stringify(jqXHR) + '</div>';
+                    console.log("Error message", JSON.stringify(jqXHR))
+                    var tip =
+                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                     promptMessage("Error message", tip);
                 }
             })

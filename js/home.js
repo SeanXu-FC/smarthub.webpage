@@ -209,9 +209,9 @@ function getHomeData() {
             }
         },
         error: function(jqXHR) {
-            console.log(JSON.stringify(jqXHR))
+            console.log("Error message", JSON.stringify(jqXHR))
             frequency++;
-            if (frequency > 3) {
+            if (frequency > 2) {
                 frequency = 0;
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                 promptMessage("Error message", tip);

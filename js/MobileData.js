@@ -1,4 +1,5 @@
 var unlockSIM = 1;
+var frequency = 0;
 $(function() {
     var $wrapper = $('.tab-wrapper'),
         $allTabs = $wrapper.find('.tab-content > div'),
@@ -335,9 +336,9 @@ function changeSwitchStatus(layer, form, checked1, checked2) {
             }
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            console.log("Error message", JSON.stringify(jqXHR))
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
-
         }
     });
 }
@@ -383,7 +384,8 @@ function getMainParameters(layer, form) {
         },
         error: function(jqXHR) {
             layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            console.log("Error message", JSON.stringify(jqXHR))
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
         }
     });
@@ -417,9 +419,18 @@ function getDatausageFirst(layer, form, loading) {
             }
         },
         error: function(jqXHR) {
-            layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log("Error message", JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getDatausageFirst(layer, form, loading);
+                }, 5000);
+            } else {
+                frequency = 0;
+                layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -454,9 +465,18 @@ function getDatausage(layer, form, loading) {
             }
         },
         error: function(jqXHR) {
-            layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log("Error message", JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getDatausage(layer, form, loading);
+                }, 5000);
+            } else {
+                frequency = 0;
+                layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -807,9 +827,18 @@ function getSimManagement(layer, form, loading) {
             }
         },
         error: function(jqXHR) {
-            layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log("Error message", JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getSimManagement(layer, form, loading);
+                }, 5000);
+            } else {
+                frequency = 0;
+                layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -1132,7 +1161,8 @@ function setSimManagement(layer, params) {
         },
         error: function(jqXHR) {
             layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            console.log("Error message", JSON.stringify(jqXHR))
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
         }
     });
@@ -1212,7 +1242,8 @@ function setDatausage(layer, params) {
         },
         error: function(jqXHR) {
             layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            console.log("Error message", JSON.stringify(jqXHR))
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
         }
     });

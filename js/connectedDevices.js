@@ -1,5 +1,15 @@
+var frequency = 0;
 $(function() {
+    layui.use('layer', function() {
+        var layer = layui.layer;
+        var loading = layer.load(0, {
+            shade: false
+        });
+        getConnected(layer, loading);
+    });
+})
 
+function getConnected(layer, loading) {
     var data = { "jsonrpc": "2.0", "method": "GetConnectedDevices", "params": {}, "id": "9.1" };
 
     data = JSON.stringify(data);
@@ -10,6 +20,7 @@ $(function() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            layer.close(loading);
             if (res.result && res.result.dev_list) {
                 var json = res.result.dev_list;
                 var main = "";
@@ -50,10 +61,18 @@ $(function() {
 
         },
         error: function(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log("Error message", JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getConnected(layer, loading);
+                }, 5000);
+            } else {
+                frequency = 0;
+                layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     })
-
-
-})
+}

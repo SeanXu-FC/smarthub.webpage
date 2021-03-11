@@ -49,7 +49,7 @@ function getWLANScan(layer, form) {
 
         },
         error: function(jqXHR) {
-            console.log(JSON.stringify(jqXHR))
+            console.log("Error message", JSON.stringify(jqXHR))
             frequency++;
             if (frequency < 3) {
                 setTimeout(() => {
@@ -108,7 +108,7 @@ function getWLANData(layer, loading) {
 
         },
         error: function(jqXHR) {
-            console.log(JSON.stringify(jqXHR));
+            console.log("Error message", JSON.stringify(jqXHR));
             frequency++;
             if (frequency < 3) {
                 setTimeout(() => {
@@ -161,7 +161,7 @@ function changeSwitchStatus(layer, loading, checked) {
 
         },
         error: function(jqXHR) {
-            console.log(JSON.stringify(jqXHR))
+            console.log("Error message", JSON.stringify(jqXHR))
             parent.layer.close(loading);
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
@@ -491,7 +491,7 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
             }
         },
         error: function(jqXHR) {
-            console.log(JSON.stringify(jqXHR))
+            console.log("Error message", JSON.stringify(jqXHR))
             frequency++;
             if (frequency < 3) {
                 setTimeout(() => {
@@ -561,7 +561,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
             }
         },
         error: function(jqXHR) {
-            console.log(JSON.stringify(jqXHR))
+            console.log("Error message", JSON.stringify(jqXHR))
             frequency++;
             if (frequency < 3) {
                 setTimeout(() => {

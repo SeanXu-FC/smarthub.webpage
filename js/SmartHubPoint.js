@@ -103,7 +103,7 @@ $(function() {
 
                 },
                 error: function(jqXHR) {
-                    console.log(JSON.stringify(jqXHR))
+                    console.log("Error message", JSON.stringify(jqXHR))
                     var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                     promptMessage("Error message", tip);
                 }
@@ -413,7 +413,7 @@ function getData(layer, loading) {
             }
         },
         error: function(jqXHR) {
-            console.log(JSON.stringify(jqXHR))
+            console.log("Error message", JSON.stringify(jqXHR))
             frequency++;
             if (frequency < 3) {
                 setTimeout(() => {
@@ -503,7 +503,7 @@ function APsave() {
 
         },
         error: function(jqXHR) {
-            console.log(JSON.stringify(jqXHR))
+            console.log("Error message", JSON.stringify(jqXHR))
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
         }
