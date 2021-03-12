@@ -232,7 +232,6 @@ function getCookie(name) {
 }
 //获取设备状态，有没有掉电
 function getStatus() {
-    var domain = window.location.host;
     var data = {
         "jsonrpc": "2.0",
         "method": "GetUpgradeStatus",
@@ -265,10 +264,17 @@ function getStatus() {
 
         },
         error: function(jqXHR) {
-            var tip =
-                '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                JSON.stringify(jqXHR) + '</div>';
-            promptMessage("Error message", tip);
+            console.log("Error message", JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getStatus();
+                }, 5000);
+            } else {
+                frequency = 0;
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
