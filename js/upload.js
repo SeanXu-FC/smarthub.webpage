@@ -99,10 +99,10 @@
                 error: function(index, upload) {
                     //请求异常回调
                     layer.close(layer.index);
-                    layer.confirm("上传失败，您是否要重新上传？", {
-                        btn: ['确定', '取消'],
+                    layer.confirm("Upload failed, do you want to upload again?", {
+                        btn: ['OK', 'Cancel'],
                         icon: 3,
-                        title: "提示"
+                        title: "Tips"
                     }, function() {
                         //关闭询问框
                         layer.closeAll();
@@ -126,6 +126,9 @@
 })
 
 function toUpgrade() {
+    var domain = window.location.host;
+    window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
+    return;
     $.ajax({
         url: "/action/upload",
         type: "post",

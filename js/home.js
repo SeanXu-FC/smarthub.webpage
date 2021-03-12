@@ -232,6 +232,7 @@ function getCookie(name) {
 }
 //获取设备状态，有没有掉电
 function getStatus() {
+    var domain = window.location.host;
     var data = {
         "jsonrpc": "2.0",
         "method": "GetUpgradeStatus",
@@ -276,5 +277,5 @@ function getStatus() {
                 promptMessage("Error message", tip);
             }
         }
-    });
+    })
 }

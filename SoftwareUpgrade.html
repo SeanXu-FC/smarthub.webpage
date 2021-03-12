@@ -173,6 +173,7 @@
     </div>
 </body>
 <script>
+    var frequency = 0;
     $(function() {
         getVersion();
         layui.use(['layer', 'element', 'form', 'upload'], function() {
@@ -258,6 +259,9 @@
             success: function(res) {
                 if (res.result) {
                     $("#version").html(res.result.TotalVersion);
+                    $("#Platform_version").html(res.result.PlatformVersion ? res.result.PlatformVersion :
+                        "--");
+                    $("#Product_version").html(res.result.BundleVersion);
                 } else if (res.error) {
                     layui.use(['form', 'layer'], function() {
                         var layer = layui.layer;
@@ -266,9 +270,17 @@
                 }
             },
             error: function(jqXHR) {
-                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
-                    .stringify(jqXHR) + '</div>';
-                promptMessage("Error message", tip);
+                console.log(JSON.stringify(jqXHR))
+                frequency++;
+                if (frequency < 3) {
+                    setTimeout(() => {
+                        getVersion();
+                    }, 5000);
+                } else {
+                    frequency = 0;
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                    promptMessage("Error message", tip);
+                }
             }
         });
     }

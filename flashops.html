@@ -42,6 +42,7 @@
 </body>
 <script type="text/javascript">
     var interval = null,
+        frequency = 0,
         nowIndex = null,
         status = "undefined";
     $(function() {
@@ -75,25 +76,20 @@
     //状态处理
     function statusHandle(data, loading) {
         layer.close(nowIndex); //关闭Error message弹框
-        if (data.status == "1") { //升级成功
+        if (data.status == "4") { //设备掉电
             StateResponse(1);
-            parent.layer.close(loading);
-            var ds = "Now the status is：" + data.status +
-                "--Upgrade Complete...";
-            $("#steps").html(ds);
-            $("#upgrade_tip").hide();
-            clearInterval(interval);
-            upPromptMessage("Success message", "Upgrade successfully");
+            $("#steps").html(data.steps);
+            return4Getstatus(layer, loading, 1000 * 60 * 3);
         } else if (data.status == "5") { //重置中
-            clearInterval(interval);
             StateResponse(1);
             $("#steps").html(data.steps);
             return4Getstatus(layer, loading, 1000 * 90);
         } else if (data.status == "6") { //恢复中
-            clearInterval(interval);
             StateResponse(1);
             $("#steps").html(data.steps);
             return4Getstatus(layer, loading, 1000 * 60 * 5);
+        } else if (data.status == "2") { //升级中
+            $("#steps").html(data.steps);
         } else if (data.status == "0") { //升级失败
             clearInterval(interval);
             StateResponse(1);
@@ -102,15 +98,15 @@
             $("#steps").css("color", "red")
             $("#upgrade_tip").hide();
             upfailPromptMessage("Fail message", "Upgrade fail");
-        } else if (data.status == "2") { //升级中
-            $("#steps").html(data.steps);
-            clearInterval(interval);
-            no4Getstatus(layer, loading);
-        } else if (data.status == "4") { //设备掉电
+        } else if (data.status == "1") { //升级成功
             StateResponse(1);
+            parent.layer.close(loading);
+            var ds = "Now the status is：" + data.status +
+                "--Upgrade Complete...";
+            $("#steps").html(ds);
+            $("#upgrade_tip").hide();
             clearInterval(interval);
-            $("#steps").html(data.steps);
-            return4Getstatus(layer, loading, 1000 * 60 * 3);
+            upPromptMessage("Success message", "Upgrade successfully");
         } else if (data.status == "3") { //没有升级
             parent.layer.close(loading);
             $("#steps").html(data.steps);
@@ -140,6 +136,7 @@
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
+                    frequency = 0;
                     if (res.result) {
                         var data = res.result;
                         statusHandle(data, loading);
@@ -154,62 +151,24 @@
 
                 },
                 error: function(jqXHR) {
-                    console.log("Error message", JSON.stringify(jqXHR))
-                        // if (jqXHR.readyState != 0) {
-                        //     var tip =
-                        //         '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                        //         JSON.stringify(jqXHR) + '</div>';
-                        //     promptError("Error message", tip);
-                        // }
+                    console.log(JSON.stringify(jqXHR))
+                    frequency++;
+                    if (frequency > 3) {
+                        frequency = 0;
+                        parent.layer.close(loading);
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Please wait patiently while the device is upgrading and restarting!</div>';
+                        promptMessage("Tips", tip);
+                    }
                 }
             });
         }, 10000);
     }
 
-    function return4Getstatus(layer, loading, time) { //返回4后的定时轮询
-        interval = window.setInterval(function() {
-            var domain = window.location.host;
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "GetUpgradeStatus",
-                "params": {
-                    "status": 0
-                },
-                "id": "9.1"
-
-            };
-            data = JSON.stringify(data);
-            $.ajax({
-                type: "post",
-                url: "/action/action?",
-                data: data,
-                timeout: 0,
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(res) {
-                    if (res.result) {
-                        var data = res.result;
-                        statusHandle(data, loading);
-                    } else if (res.error) {
-                        layer.close(nowIndex); //关闭Error message弹框
-                        parent.layer.close(loading);
-                        layui.use(['form', 'layer'], function() {
-                            var layer = layui.layer;
-                            layer.msg("An error occurred：" + res.error.message);
-                        })
-                    }
-
-                },
-                error: function(jqXHR) {
-                    console.log("Error message", JSON.stringify(jqXHR))
-                        // if (jqXHR.readyState != 0) {
-                        //     var tip =
-                        //         '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                        //         JSON.stringify(jqXHR) + '</div>';
-                        //     promptError("Error message", tip);
-                        // }
-                }
-            });
+    function return4Getstatus(layer, loading, time) { //time毫秒后执行
+        clearInterval(interval); //先清掉10s轮询定时器，time毫秒后通过调用no4Getstatus再开启10s轮询定时器
+        window.setTimeout(function() {
+            no4Getstatus(layer, loading);
         }, time);
     }
 
@@ -266,7 +225,7 @@
             var layer = layui.layer;
             layer.open({
                 type: 1,
-                id: 'layerDemo2', //防止重复弹出   
+                id: 'layerDemo1', //防止重复弹出   
                 title: title,
                 content: '<div class="tip-text">' + content + '</div>',
                 area: ['421px', 'auto'],
@@ -279,26 +238,6 @@
                     var domain = window.location.host;
                     self.location.href = ('https:' == document.location.protocol ? 'https://' :
                         'http://') + domain + '/SoftwareUpgrade.html';
-                }
-            });
-        })
-    }
-
-    function promptError(title, content) {
-        layui.use(['layer'], function() {
-            var layer = layui.layer;
-            layer.close(nowIndex);
-            nowIndex = null;
-            nowIndex = layer.open({
-                type: 1,
-                title: title,
-                content: content,
-                btn: 'close',
-                btnAlign: 'c', //按钮居中 
-                closeBtn: 0,
-                shade: 0, //不显示遮罩                            
-                yes: function(index) {
-                    layer.close(index);
                 }
             });
         })

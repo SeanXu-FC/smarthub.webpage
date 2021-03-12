@@ -10,8 +10,8 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210311" rel="stylesheet" />
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210311" />
+    <link href="css/style.css?mv=20210312" rel="stylesheet" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210312" />
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="js/jquery.myProgress.js"></script>
@@ -72,13 +72,14 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210311"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210312"></script>
 
     <script>
         var length = 80;
         var successFlag = false;
         var data;
         var timer;
+        var frequency = 0;
         $(function() {
             reStartInit();
             $('#btn').click(function() {
@@ -137,16 +138,28 @@
                 complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
                     if (status == 'timeout') { //超时,status还有success,error等值的情况
                         ajaxTimeout.abort();
+                        frequency++;
+                        if (frequency < 3) {
+                            setTimeout(() => {
+                                reStartInit();
+                            }, 5000);
+                        } else {
+                            frequency = 0;
+                        }
                     }
                 },
                 error: function(jqXHR) {
-                    console.log("Error message", JSON.stringify(jqXHR));
-                    // if (jqXHR.readyState != 0) {
-                    //     var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                    //         JSON
-                    //         .stringify(jqXHR) + '</div>';
-                    //     promptMessage("Error message", tip);
-                    // }
+                    console.log("Error message", JSON.stringify(jqXHR))
+                    frequency++;
+                    if (frequency < 3) {
+                        setTimeout(() => {
+                            reStartInit();
+                        }, 5000);
+                    } else {
+                        frequency = 0;
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                        promptMessage("Error message", tip);
+                    }
                 }
 
             });
@@ -172,7 +185,6 @@
         }
 
         function reStarting2(flag) {
-            console.log(1111111)
             var timeout0 = 3000;
             data = {
                 "jsonrpc": "2.0",
@@ -218,15 +230,22 @@
                 complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
                     if (status == 'timeout') { //超时,status还有success,error等值的情况
                         ajaxTimeout.abort();
+                        frequency++;
+                        if (frequency > 3) {
+                            frequency = 0;
+                            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                            promptMessage("Error message", tip);
+                        }
                     }
                 },
                 error: function(jqXHR) {
-                    console.log("Error message", JSON.stringify(jqXHR));
-                    // if (jqXHR.readyState != 0) {
-                    //     var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                    //         JSON.stringify(jqXHR) + '</div>';
-                    //     promptMessage("Error message", tip);
-                    // }
+                    console.log("Error message", JSON.stringify(jqXHR))
+                    frequency++;
+                    if (frequency > 2) {
+                        frequency = 0;
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                        promptMessage("Error message", tip);
+                    }
                 }
 
             });

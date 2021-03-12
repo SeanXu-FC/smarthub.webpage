@@ -13,6 +13,9 @@ $(function() {
 })
 
 function getSwitchStatus(layer, form) {
+    var loading = parent.layer.load(0, {
+        shade: [0.5, '#fff'],
+    });
     var data = {
         "jsonrpc": "2.0",
         "method": "WlanStationConfig",
@@ -30,6 +33,7 @@ function getSwitchStatus(layer, form) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            parent.layer.close(loading);
             if (res.result) {
                 if (res.result.status == "WLAN_ON") {
                     $("#WLAN_swtich").attr("checked", "checked");
@@ -51,6 +55,7 @@ function getSwitchStatus(layer, form) {
 
         },
         error: function(jqXHR) {
+            parent.layer.close(loading);
             console.log(JSON.stringify(jqXHR))
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);

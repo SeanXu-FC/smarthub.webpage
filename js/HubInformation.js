@@ -105,6 +105,7 @@ function getInfoData(layer, loading) {
                     getInfoData(layer, loading);
                 }, 5000);
             } else {
+
                 frequency = 0;
                 layer.close(loading);
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
