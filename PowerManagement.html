@@ -95,8 +95,6 @@
         }
         
         .Rectangle-1269 {
-            width: 204px;
-            height: 41px;
             box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
             border: solid 2px #26b167;
             background-color: #f9fffc;
@@ -105,7 +103,6 @@
         
         .error-icon {
             width: auto;
-            height: 41px;
             box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
             border: solid 2px #b12626;
             background-color: #f9fffc;
@@ -140,19 +137,23 @@
         #success {
             display: none;
             position: fixed;
-            top: 20%;
-            right: 500px;
+            top: 50px;
+            right: 50%;
             z-index: 999;
             background-color: #fff;
+            max-width: 400px;
+            margin-right: -200px;
         }
         
         #error {
             display: none;
             position: fixed;
             top: 50px;
-            right: 500px;
+            right: 50%;
             z-index: 999;
             background-color: #fff;
+            max-width: 400px;
+            margin-right: -200px;
         }
         
         .layui-form-item {
@@ -230,6 +231,44 @@
             color: #343434 !important;
             padding-left: 5px;
         }
+        
+        .input-name {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: left;
+            color: #343434;
+            width: 167px;
+            padding-left: 10px;
+        }
+        
+        .input-select {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: left;
+            color: #3a3a3a;
+        }
+        
+        .layui-form-pane .layui-input {
+            border: solid 1px #707070;
+            width: 88px;
+            border-radius: 5px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: left;
+            color: #3a3a3a;
+        }
+        
+        .layui-form-select .layui-edge {
+            border-width: 4px;
+            border-top-color: #3a3a3a;
+        }
+        
+        .layui-form-select .layui-input {
+            padding-right: 15px;
+        }
     </style>
 </head>
 
@@ -270,33 +309,58 @@
                         </div>
                         <div class="layui-form layui-form-pane -flex-display mt-40">
                             <div class="item-left">
-                                <label class="Set-monthly-data-limit mt-10 mb-0">Inputs to wake the router:</label>
-                                <p class="left-describe">Input channels can be assigned to wake the router from low power mode
+                                <label class="Set-monthly-data-limit mt-10 mb-0">Define which inputs should wake or put
+                                    the router to sleep:</label>
+                                <p class="left-describe">Each input channel can be chosen to either wake or put the router to sleep (sleep inputs will be ignored if a wake input is active)
                                 </p>
                             </div>
                             <div class="layui-input-block pt-5" id="input_power">
-                                <div class="mt-10">
-                                    <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels0" id="input_channels0" title="--" value="Weak signal">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>
+                                <div class="-flex-display -align-box mt-10">
+                                    <span class="input-name" id="input-name0">--</span>
+                                    <select class="input-select " id="input_channels0">
+                                        <option value="None">None</option>
+                                        <option value="Wake">Wake</option>
+                                        <option value="Sleep">Sleep</option>
+                                    </select>
+                                    <!--<input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels0" id="input_channels0" title="--" value="Weak signal">
+                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>-->
                                 </div>
-                                <div class="mt-10">
-                                    <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels1" id="input_channels1" title="--" value="Data limit reached">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
+                                <div class="-flex-display -align-box mt-10">
+                                    <span class="input-name" id="input-name1">--</span>
+                                    <select class="input-select " id="input_channels1">
+                                        <option value="None">None</option>
+                                        <option value="Wake">Wake</option>
+                                        <option value="Sleep">Sleep</option>
+                                    </select>
+                                    <!-- <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels1" id="input_channels1" title="--" value="Data limit reached">
+                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div> -->
                                 </div>
-                                <div class="mt-10">
-                                    <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels2" id="input_channels2" title="--" value="hen roaming">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
+                                <div class="-flex-display -align-box mt-10">
+                                    <span class="input-name" id="input-name2">--</span>
+                                    <select class="input-select " id="input_channels2">
+                                        <option value="None">None</option>
+                                        <option value="Wake">Wake</option>
+                                        <option value="Sleep">Sleep</option>
+                                    </select>
+                                    <!-- <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels2" id="input_channels2" title="--" value="hen roaming">
+                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div> -->
                                 </div>
-                                <div class="mt-10">
-                                    <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels3" id="input_channels3" title="--" value="No network">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
+                                <div class="-flex-display -align-box mt-10">
+                                    <span class="input-name" id="input-name3">--</span>
+                                    <select class="input-select " id="input_channels3">
+                                        <option value="None">None</option>
+                                        <option value="Wake">Wake</option>
+                                        <option value="Sleep">Sleep</option>
+                                    </select>
+                                    <!-- <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels3" id="input_channels3" title="--" value="No network">
+                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div> -->
                                 </div>
                             </div>
                         </div>
                         <div class="layui-form layui-form-pane -flex-display mt-30">
                             <div class="item-left">
-                                <label class="Set-monthly-data-limit mt-10 mb-0">Outputs to wake Digital switching on
-                                    router waking:</label>
+                                <label class="Set-monthly-data-limit mt-10 mb-0">Define outputs to wake Digital
+                                    switching on router waking:</label>
                                 <p class="left-describe">Output channels can be assigned to wake Digital switching when the router is awake
                                 </p>
                             </div>
@@ -335,24 +399,26 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210309"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210312"></script>
     <script>
         var powerData;
+        var frequency = 0;
         $(function() {
             layui.use(['layer', 'form'], function() {
                 var layer = layui.layer;
                 var form = layui.form;
-                getMonitoringData(layer);
+                var loading = layer.load(0, {
+                    shade: false
+                });
+                getMonitoringData(layer, loading);
             });
             $("#btn2").on("click", function() {
                 getSimManagementVal()
             })
         })
 
-        function getMonitoringData(layer) {
-            var loading = layer.load(0, {
-                shade: false
-            });
+        function getMonitoringData(layer, loading) {
+
             var data = {
                 "jsonrpc": "2.0",
                 "method": "IoConfigure",
@@ -383,19 +449,25 @@
                         for (var i = 0; i < json.length; i++) {
 
                             if (i < 4) {
-                                $("#input_channels" + i).attr("title", json[i].name)
-                                if (json[i].types == 0) {
+                                $("#input-name" + i).text(json[i].name)
+                                if (json[i].types == 0) { //types=0都禁用并不勾选
                                     $("#input_channels" + i).prop("disabled", true);
-                                    $("#input_channels" + i).prop("checked", false);
+                                    $("#input_channels" + i + " option[value='None']").prop("selected",
+                                        true);
                                 } else {
-                                    if (json[i].wake_func != 0) {
-                                        $("#input_channels" + i).prop("checked", true);
-                                    } else {
-                                        $("#input_channels" + i).prop("checked", false);
+                                    if (json[i].wake_func == 1 || json[i].wake_func == 2) {
+                                        $("#input_channels" + i + " option[value='Wake']").prop("selected",
+                                            true);
+                                    } else if (json[i].wake_func == 3 || json[i].wake_func == 4) {
+                                        $("#input_channels" + i + " option[value='Sleep']").prop("selected",
+                                            true);
+                                    } else if (json[i].wake_func == 0) {
+                                        $("#input_channels" + i + " option[value='None']").prop("selected",
+                                            true);
                                     }
                                 }
 
-                            } else {
+                            } else { //types！=0根据wake_func判断
                                 $("#Output_channels" + i).attr("title", json[i].name);
                                 if (json[i].wake_func == 1) {
                                     $("#Output_channels" + i).prop("checked", true);
@@ -418,10 +490,19 @@
 
                 },
                 error: function(jqXHR) {
-                    layer.close(loading);
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
-                        .stringify(jqXHR) + '</div>';
-                    promptMessage("Error message", tip);
+                    console.log("Error message", JSON.stringify(jqXHR));
+                    frequency++;
+                    if (frequency < 3) {
+                        setTimeout(() => {
+                            getMonitoringData(layer, loading);
+                        }, 5000);
+                    } else {
+                        frequency = 0;
+                        layer.close(loading);
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                        promptMessage("Error message", tip);
+                    }
                 }
             })
         }
@@ -445,12 +526,18 @@
                 wake_func: 0
             }];
             for (var i = 0; i < inputArr.length; i++) {
-                if ($("#input_channels" + i).is(":checked") == true) {
+                console.log($("#input_channels" + i).val())
+                if ($("#input_channels" + i).val() == "Wake") {
                     if (powerData.io_date[i].types == 1)
                         inputArr[i].wake_func = 2;
-                    else
+                    else if (powerData.io_date[i].types == 2)
                         inputArr[i].wake_func = 1;
-                } else {
+                } else if ($("#input_channels" + i).val() == "Sleep") {
+                    if (powerData.io_date[i].types == 1)
+                        inputArr[i].wake_func = 4;
+                    else if (powerData.io_date[i].types == 2)
+                        inputArr[i].wake_func = 3;
+                } else { //没有勾选wake_func统一传0
                     inputArr[i].wake_func = 0;
                 }
                 // input_channels0 = $("#input_channels0").is(":checked") == true ? powerData.io_date[i].wake_func: 0;
@@ -458,7 +545,6 @@
                 // input_channels2 = $("#input_channels2").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
                 // input_channels3 = $("#input_channels3").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
             }
-
             var Output_channels4 = $("#Output_channels4").is(":checked") == true ? 1 : 0;
             var Output_channels5 = $("#Output_channels5").is(":checked") == true ? 1 : 0;
             var Output_channels6 = $("#Output_channels6").is(":checked") == true ? 1 : 0;
@@ -511,7 +597,7 @@
                     success: function(res) {
                         layer.close(loading);
                         if (res.result) {
-                            $('#success').show(1000).delay(6000).hide(0);
+                            $('#success').text(res.result.status).show(1000).delay(6000).hide(0);
                         } else if (res.error) {
                             $("#error").text(res.error.code + " : " + res.error.message)
                             $("#error").show(1000).delay(6000).hide(0);
