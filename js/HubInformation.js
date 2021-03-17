@@ -90,6 +90,11 @@ function getInfoData(layer, loading) {
                 $("#MAC6174").html(res.result.Qca6174Mac);
                 $("#Platform_version").html(res.result.PlatformVersion ? res.result.PlatformVersion : "--");
                 $("#Product_version").html(res.result.BundleVersion);
+                if (res.result.AdminPwd) {
+                    qrcode(res.result.AdminPwd);
+                    $("#code_text").text(res.result.AdminPwd);
+                }
+
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {
                     var layer = layui.layer;
@@ -112,5 +117,15 @@ function getInfoData(layer, loading) {
                 promptMessage("Error message", tip);
             }
         }
+    });
+}
+
+function qrcode(str) {
+    $('#code').qrcode({
+        text: str,
+        width: 178,
+        height: 178,
+        background: '#fff',
+        foreground: '#000'
     });
 }

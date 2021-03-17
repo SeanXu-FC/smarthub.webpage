@@ -8,8 +8,8 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
-    <!-- <link href="css/global.css?mv=20210312" rel="stylesheet"> -->
-    <link href="css/style.css?mv=20210312" rel="stylesheet" />
+    <!-- <link href="css/global.css?mv=20210317" rel="stylesheet"> -->
+    <link href="css/style.css?mv=20210317" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <style>
         .layui-btn {
@@ -109,6 +109,15 @@
         .table>thead>tr>th {
             padding: 6px 0;
             min-width: 310px;
+        }
+        
+        .code-text {
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.48px;
+            text-align: center;
+            color: #333333;
         }
     </style>
     <title>Document</title>
@@ -215,7 +224,11 @@
                 </tr>
 
             </table>
-            <img class="mt-20 mb-40" src="images/QR-info.PNG" />
+            <div class="mt-20 mb-40">
+                <div id="code"></div>
+                <span class="code-text" id="code_text"></span>
+            </div>
+            <!-- <img class="mt-20 mb-40" src="images/QR-info.PNG" /> -->
             <div style="margin-bottom:60px;">
                 <div class="layui-input-inline">
                     <button class="layui-btn Rectangle-1182 Save-crash-logs-12" id="btnSave" lay-submit>Save crash logs
@@ -227,9 +240,10 @@
     </div>
 </body>
 <script src="js/jquery.min.js"></script>
-<script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
-<script type="text/javascript" src="js/common.js?mv=20210312"></script>
-<script src="js/HubInformation.js?mv=20210312"></script>
+<script type="text/javascript" src="js/common.js?mv=20210317"></script>
+<script src="js/plugins/qrcode.min.js"></script>
+<script src="js/HubInformation.js?mv=20210317"></script>
+<script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
 
 </html>

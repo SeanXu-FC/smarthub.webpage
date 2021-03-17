@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210312" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210312"></script>
+    <link href="css/style.css?mv=20210317" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
     <title>Document</title>
     <style>
         * {
@@ -406,7 +406,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210312"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
     <script>
         var ssid, bssid, encrypt, is_saved;
         $(function() {
@@ -553,8 +553,10 @@
                 },
                 error: function(jqXHR) {
                     layer.close(loading);
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
-                        .stringify(jqXHR) + '</div>';
+                    console.log("Error message", JSON.stringify(jqXHR))
+                    parent.layer.close(loading);
+                    var tip =
+                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                     promptMessage("Error message", tip);
                 }
             });
@@ -589,7 +591,7 @@
                 success: function(res) {
                     console.log("res", res)
                     if (res.result) {
-                        layer.msg(res.result.status);
+                        //layer.msg(res.result.status);
                     } else if (res.error) {
                         layer.msg("An error occurred：" + res.error.message);
                     }
@@ -597,8 +599,10 @@
 
                 },
                 error: function(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
-                        .stringify(jqXHR) + '</div>';
+                    console.log("Error message", JSON.stringify(jqXHR))
+                    parent.layer.close(loading);
+                    var tip =
+                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                     promptMessage("Error message", tip);
                 }
             });

@@ -351,7 +351,9 @@ $(function() {
             });
         },
         error: function error(jqXHR) {
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+            console.log("Error message", JSON.stringify(jqXHR))
+            parent.layer.close(loading);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
         }
     });
@@ -396,7 +398,9 @@ $(function() {
                     }
                 },
                 error: function error(jqXHR) {
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
+                    console.log("Error message", JSON.stringify(jqXHR))
+                    parent.layer.close(loading);
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                     promptMessage("Error message", tip);
                 }
             });

@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210312" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210312"></script>
+    <link href="css/style.css?mv=20210317" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
     <title>Document</title>
     <style>
         * {
@@ -56,20 +56,12 @@
             padding: 5px 10px
         }
         
-        .error,
-        .error-tip {
-            color: #f00;
-            margin: 10px 0 10px 104px;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        
         .forget-pwd {
             color: #861f41;
             margin: 15px 0 10px 104px;
             font-family: OpenSans;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: normal;
         }
         
         .admin-password-tip {
@@ -213,10 +205,13 @@
         }
         
         .error {
-            color: #f00;
+            color: #ff002a;
             display: none;
             margin: 10px 0 10px 104px;
-            font-weight: bold;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: left;
+            color: #ff002a;
         }
         
         .wirelessInfo {
@@ -277,7 +272,7 @@
             </div>
             <form name="details" onsubmit="return false" action="##" method="post" id="loginInfo" class="form-horizontal">
                 <div class="row" style="position:relative">
-                    <label class="Password mt-20" style="display: inline-block;">password:</label>
+                    <label class="Password mt-20" style="display: inline-block;">Password:</label>
                     <input type="text" id="account" value="admin" name="username" class="form-control" style="display:none">
                     <div style="display: inline-block;position: relative;">
                         <input type="password" value="" id="pwd" name="password" class="Rectangle-1188 pwd" oninput="WidthCheckIO(this,64);" style="display: inline-block;" />
@@ -298,7 +293,7 @@
     </div>
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210312"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
     <script>
         var srcStr;
         $(function() {

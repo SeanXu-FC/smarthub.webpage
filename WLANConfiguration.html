@@ -14,10 +14,10 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210312"></script>
+    <script src="js/lanConfiguration.js?mv=20210317"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210312"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -375,11 +375,8 @@
         //     return false;
         // });
         $("#cancel").on("click", function() {
-            $('#success').hide(1000);
-            $(".Path-101").attr("disabled", true);
-            $(".Path-101").css("opacity", "0.5");
-            // $('.qx button').removeClass("Pah-101 Cancel")
-            return false;
+
+            eco_refresh('my-iframe')
         });
     </script>
     <script>
@@ -455,9 +452,10 @@
 
                     },
                     error: function(jqXHR) {
+                        console.log("Error message", JSON.stringify(jqXHR))
+                        parent.layer.close(loading);
                         var tip =
-                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                            JSON.stringify(jqXHR) + '</div>';
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                         promptMessage("Error message", tip);
                     }
                 });

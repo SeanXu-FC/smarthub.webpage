@@ -98,3 +98,10 @@ function tipMessage(content) {
         });
     })
 }
+//刷新当前iframe页面
+function eco_refresh(id) {
+    var _body = window.parent;
+    var _iframe1 = _body.document.getElementById(id);
+    window.onbeforeunload = function() {};
+    _iframe1.contentWindow.location.reload(true);
+}

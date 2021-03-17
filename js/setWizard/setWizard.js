@@ -205,9 +205,9 @@ function renderWifiList(json) {
             } else if (55 > signal) {
                 wifiImg = "s_wifi_05.png";
             }
-            str += '<div class="row setWifi-item -flex-display -justify-box" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
-                //有感叹号图标
-                //str += '<div class="row -flex-display -justify-box" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div><div class=""><img class="detail-wifi-icon" src="images/icon-info.png"></div></div>'
+            //str += '<div class="row setWifi-item -flex-display -justify-box" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
+            //有感叹号图标
+            str += '<div class="row -flex-display -justify-box" id="wifi_tips' + i + '" style="margin-bottom:13px;"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div><div class=""><img class="detail-wifi-icon" src="images/icon-info.png"></div></div>'
         }
     }
     for (let j = 0; j < json.length; j++) {
@@ -234,7 +234,7 @@ function renderWifiList(json) {
             } else if (55 > signal) {
                 wifiImg = "s_wifi_05.png";
             }
-            str += '<div class="row setWifi-item -flex-display -justify-box wifi" style="margin-top:13px;" id="wifi_tips' + j + '"><input class="dom_saved_data" value="" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '" style="display:none;"><div class="-radio-flex"><div class="wifi-name-set">' + json[j].ssid + '</div><div class="c9" style="padding-left:0">' + savedStr + '</div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
+            str += '<div class="row setWifi-item -flex-display -justify-box wifi" style="margin-bottom:13px;" id="wifi_tips' + j + '"><input class="dom_saved_data" value="" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '" style="display:none;"><div class="-radio-flex"><div class="wifi-name-set">' + json[j].ssid + '</div><div class="c9" style="padding-left:0">' + savedStr + '</div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
         }
     }
     str += ' <div class="row mt-30 add-Available-networks" style="display: flex;"><div class="col-md-2 pl-0"><div><img src="images/icon-add.png"></div></div><div class="col-md-10"><span class="addN">Create network</span></div></div>'
@@ -281,6 +281,55 @@ function bindEvent() {
         addNetworkHtml();
 
     });
+    $('.detail-wifi-icon').on('click', function() {
+        var infoHtml = $(this).parents().siblings(".dom_saved_data");
+        forgetWifiHtml(infoHtml);
+    });
+}
+//删除/忘记wifi
+function forgetWifiHtml(infoHtml) {
+    var ssid = infoHtml.attr("ssid");
+    var bssid = infoHtml.attr("bssid");
+    var encrypt = infoHtml.attr("encrypt");
+    var is_saved = infoHtml.attr("is_saved");
+    var is_connected = infoHtml.attr("is_connected");
+
+    if (is_connected != '1') {
+        return;
+    }
+    //iframe层
+    parent.layer.open({
+        type: 2,
+        title: false,
+        closeBtn: 0,
+        shade: 0.8,
+        area: ['534px', '63%'],
+        //area: '534px',
+        content: ["WirelessNameInfo.html?ssid=" + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
+        end: function() {
+            var connectingSsid = $("#saved_id").val();
+            var connectingBssid = $("#saved_id").attr("bssid");
+            var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
+            if (connectingSsid && connectingBssid) {
+                for (var i = 0; i < wifiJson.length; i++) {
+
+                    if (connectingSsid == wifiJson[i].ssid && connectingBssid == wifiJson[i].bssid) {
+                        wifiJson.splice(i, 1);
+                        sessionStorage.setItem('wifiJson', JSON.stringify(wifiJson))
+                    }
+                }
+                renderWifiList(wifiJson);
+                clearInterval(timer);
+                $(".connecting-img").show();
+                pollingWifiStatus(infoHtml, "forgetWifi");
+                timer = setInterval(function() {
+                    pollingWifiStatus(infoHtml, "forgetWifi");
+                }, 3000)
+            }
+
+        }
+    });
+    $(window).resize();
 }
 //弹出输入密码事件
 function enterPasswordHtml(infoHtml) {
@@ -368,7 +417,7 @@ function addNetworkHtml() {
     });
 }
 //轮询当前wifi连接状态
-function pollingWifiStatus(infoDOM, type) {
+function pollingWifiStatus(infoDOM, type, newWifi) {
     var timeout0 = 2000;
     data = {
         "jsonrpc": "2.0",
@@ -396,7 +445,6 @@ function pollingWifiStatus(infoDOM, type) {
                     $(".connecting-img").hide();
                 }
                 if (res.result.status == "Connected" && type == "AddNetwork") { //新增WiFi并连接，调接口返回列表不会马上有新路由，只能手动先添加进缓存列表，等连接上后，再调接口获取有新WiFi的列表，区更新wifi列表和缓存数据
-                    clearInterval(timer);
                     $(".connecting-img").hide();
                     updateWifiList();
                 }
@@ -415,19 +463,41 @@ function pollingWifiStatus(infoDOM, type) {
                     $("#saved_id").attr("passwordIncorrect", "newWifiIncorrect")
                     addNetworkHtml();
                 }
+                if (type == "forgetWifi") { //删除/忘记网络后，之前有保存网络，路由会自动连接，轮询连接的这个wifi
+                    if (res.result.ssid && res.result.bssid) {
+                        var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
+                        for (var i = 0; i < wifiJson.length; i++) {
+                            if (res.result.ssid == wifiJson[i].ssid && res.result.bssid == wifiJson[i].bssid) {
+                                wifiJson[i].is_connected = 2;
+                                infoDOM.attr("ssid", res.result.ssid);
+                                infoDOM.attr("bssid", res.result.bssid);
+                                infoDOM.attr("encrypt", wifiJson[i].encrypt);
+                                infoDOM.attr("is_saved", 0);
+                                //updateWifiList(wifiJson);
+                            }
+                        }
+                        renderWifiList(wifiJson);
 
+                    }
+                    if (res.result.status == "Password Incorrect") {
+                        clearInterval(timer);
+                        $(".connecting-img").hide();
+                        infoDOM.attr("is_saved", "0");
+                        $("#saved_id").attr("passwordIncorrect", "enterWifiIncorrect")
+                        enterPasswordHtml(infoDOM);
+                    }
+                }
             }
         },
-        complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数
+        complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数           
             if (status == 'timeout') { //超时,status还有success,error等值的情况
+                console.log(status)
                 ajaxTimeout.abort();
             }
         },
         error: function(jqXHR) {
             clearInterval(timer);
             pollingWifiStatus();
-            // var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON.stringify(jqXHR) + '</div>';
-            // promptMessage("Error message", tip);
         }
 
     });

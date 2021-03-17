@@ -97,7 +97,7 @@
             $("#steps").html(data.steps);
             $("#steps").css("color", "red")
             $("#upgrade_tip").hide();
-            upfailPromptMessage("Fail message", "Upgrade fail");
+            upfailPromptMessage("Fail message", data.steps);
         } else if (data.status == "1") { //升级成功
             StateResponse(1);
             parent.layer.close(loading);
@@ -106,7 +106,7 @@
             $("#steps").html(ds);
             $("#upgrade_tip").hide();
             clearInterval(interval);
-            upPromptMessage("Success message", "Upgrade successfully");
+            upPromptMessage("Success message", data.steps);
         } else if (data.status == "3") { //没有升级
             parent.layer.close(loading);
             $("#steps").html(data.steps);

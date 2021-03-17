@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210312" rel="stylesheet" />
+    <link href="css/style.css?mv=20210317" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210312"></script>
+    <script src="js/lanConfiguration.js?mv=20210317"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210312"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -422,7 +422,7 @@
                                 </div>
                             </div>
                             <div class="btn1" id="btn02">
-                                <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel"
+                                <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel2"
                                         class="Path-101 Cancel">Cancel</button></span>
                                 <span class="connected" style="display: inline-block;"><button id="btn2"
                                         class="Rectangle-1182 active OK">Save</button></span>
@@ -455,7 +455,7 @@
                             </div>
                         </div>
                         <div class="btn1" id="btn03">
-                            <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel"
+                            <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel3"
                                     class="Path-101 Cancel">Cancel</button></span>
                             <span class="connected" style="display: inline-block;"><button id="btn3"
                                     class="Rectangle-1182 active OK">Save</button></span>
@@ -468,18 +468,15 @@
 
 
     <script>
-        $("#cancel").on("click", function() {
-            $('#success').hide(1000);
-            $(".Path-101").attr("disabled", true);
-            $(".Path-101").css("opacity", "0.5");
-            // $('.qx button').removeClass("Pah-101 Cancel")
-            return false;
-        });
-    </script>
-    <script>
         var loading, interval, t = 10;
         var frequency = 0;
         $(function() {
+            $("#cancel2").on("click", function() {
+                eco_refresh('my-iframe')
+            });
+            $("#cancel3").on("click", function() {
+                eco_refresh('my-iframe')
+            });
             layui.use('layer', function() {
                 var layer = layui.layer;
                 var loading = layer.load(0, {
@@ -562,9 +559,10 @@
 
                     },
                     error: function(jqXHR) {
+                        console.log("Error message", JSON.stringify(jqXHR))
+                        parent.layer.close(loading);
                         var tip =
-                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                            JSON.stringify(jqXHR) + '</div>';
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                         promptMessage("Error message", tip);
                     }
                 });
@@ -626,9 +624,10 @@
 
                     },
                     error: function(jqXHR) {
+                        console.log("Error message", JSON.stringify(jqXHR))
+                        parent.layer.close(loading);
                         var tip =
-                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                            JSON.stringify(jqXHR) + '</div>';
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                         promptMessage("Error message", tip);
                     }
                 });
@@ -791,7 +790,7 @@
                         </div>
                         
                         <div class="btn1" id="btn01">
-                                <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel" class="Path-101 Cancel">Cancel</button></span>
+                                <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel1" class="Path-101 Cancel">Cancel</button></span>
                                 <span class="connected" style="display: inline-block;"><button id="btn1" class="Rectangle-1182 active OK">Save</button></span>
                             </div>
                     </div>
@@ -858,7 +857,9 @@
                     }
 
                     $("#d1").html(str);
-
+                    $("#cancel1").on("click", function() {
+                        eco_refresh('my-iframe')
+                    });
                     $("#btn1").on("click", function() {
 
                         var data = {
@@ -897,9 +898,10 @@
 
                             },
                             error: function(jqXHR) {
+                                console.log("Error message", JSON.stringify(jqXHR))
+                                parent.layer.close(loading);
                                 var tip =
-                                    '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
-                                    JSON.stringify(jqXHR) + '</div>';
+                                    '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                                 promptMessage("Error message", tip);
                             }
                         });
@@ -926,7 +928,13 @@
         }
 
         function ejectTip() {
-
+            layui.use('layer', function() {
+                var layer = layui.layer;
+                var loading = layer.load(0, {
+                    shade: false
+                });
+                getLanData(layer, loading);
+            });
             var loading = parent.layer.msg('Waiting for changes to be applied...', {
                 icon: 16,
                 time: false,

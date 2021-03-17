@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css">
-    <link href="css/style.css?mv=20210312" rel="stylesheet" />
+    <link href="css/style.css?mv=20210317" rel="stylesheet" />
     <title>Document</title>
     <style>
         .mc {
@@ -59,6 +59,9 @@
         }
         
         .Restart-GNSS {
+            width: 242px;
+            height: 54px;
+            border-radius: 5px;
             font-family: OpenSans;
             font-size: 20px;
             font-weight: 600;
@@ -80,10 +83,7 @@
             letter-spacing: normal;
             text-align: left;
             color: #343434;
-        }
-        
-        .table>tbody>tr>td {
-            border-top: 0px solid #ddd;
+            padding: 20px 0 15px 0;
         }
         
         .Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data {
@@ -97,6 +97,7 @@
             letter-spacing: normal;
             text-align: left;
             color: #343434;
+            width: 345px;
         }
         
         .layui-input-block {
@@ -131,6 +132,166 @@
         .Rectangle-1228 {
             background-color: #f9f9f9;
         }
+        
+        .layui-form-checkbox[lay-skin=primary] i {
+            width: 21px;
+            height: 21px;
+            line-height: 21px;
+            font-size: 20px;
+        }
+        
+        .table-border {
+            border: 1px solid #707070;
+            border-radius: 5px;
+            max-width: 943px;
+        }
+        
+        .table>tbody>tr>td {
+            border-top: 0px solid #ddd;
+        }
+        
+        .table>tbody>tr>td.pt-30 {
+            padding-top: 30px;
+        }
+        
+        .table>tbody>tr>td.pt-40 {
+            padding-top: 40px;
+        }
+        
+        .table>tbody>tr>td.pt-0 {
+            padding-top: 0px;
+        }
+        
+        .table>thead>tr>th {
+            border-bottom: 1px solid #707070;
+        }
+        
+        .layui-form-item {
+            margin-bottom: 0;
+        }
+        
+        .btn1 {
+            position: absolute;
+            top: -3px;
+            right: 80px;
+        }
+        
+        .Path-101 {
+            width: 138px;
+            height: 52px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        .Path-101:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Cancel {
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.45;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+        }
+        
+        .Rectangle-1182:hover {
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .Rectangle-1182.active {
+            background-color: #861f41;
+        }
+        
+        .Rectangle-1182 {
+            width: 138px;
+            height: 52px;
+            /* padding: 0 20px; */
+            border-radius: 5px;
+            background-color: #861f41;
+            color: #fff;
+        }
+        
+        .OK {
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+            margin-left: 22px;
+        }
+        
+        .Rectangle-1269 {
+            width: 204px;
+            height: 41px;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+            border: solid 2px #26b167;
+            background-color: #f9fffc;
+            background: url("images/correct.png") no-repeat 5px 4px
+        }
+        
+        .error-icon {
+            width: auto;
+            height: 41px;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+            border: solid 2px #b12626;
+            background-color: #f9fffc;
+            background: url("images/icon-info.png") no-repeat 5px 4px
+        }
+        
+        .Password-successfully-changed {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+            padding: 5px 10px 5px 40px;
+        }
+        
+        .Changes-saved {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        #success {
+            display: none;
+            position: fixed;
+            top: 20%;
+            right: 500px;
+            z-index: 999;
+            background-color: #fff;
+        }
+        
+        #error {
+            display: none;
+            position: fixed;
+            top: 50px;
+            right: 500px;
+            z-index: 999;
+            background-color: #fff;
+        }
     </style>
 </head>
 
@@ -138,19 +299,22 @@
     <div class="container-fluid" style="margin-bottom:30px;">
         <div class="mc">
             <h2 class="GNSS">GNSS</h2>
-            <table class="table table-hover table-responsive mt-30">
+            <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">Changes-saved</div>
+            <div id="error" class="error-icon Password-successfully-changed Changes-saved"></div>
+            <table class="table table-hover table-responsive mt-40">
                 <tr>
                     <td class="col-sm-3 GNSS-Fix-status">GNSS Fix status: </td>
                     <td class="col-sm-7 col-sm-offset-2 GNSS-Fix-status" style="padding-left: 22px !important;">Fix</td>
                 </tr>
                 <tr>
-                    <td class="col-sm-3 GNSS-Fix-status">Internal GNSS:
-                        <div class="Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data">Disable if you do not want to use the router's internal GNSS receiver as a source for positioning data</div>
+                    <td class="GNSS-Fix-status pt-30">Internal GNSS:
+                        <div class="Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data">
+                            Disable if you do not want to use the router's internal GNSS receiver as a source for positioning data</div>
                     </td>
-                    <td class="col-sm-7 col-sm-offset-2">
+                    <td class="col-sm-7 col-sm-offset-2 pt-30">
                         <div class="layui-form layui-form-pane layui-form-item" style="padding-left:6px !important">
                             <div class="layui-input-block">
-                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <input type="checkbox" checked name="open" lay-skin="primary" lay-filter="InternalGNSS:">
                             </div>
                         </div>
                     </td>
@@ -159,16 +323,17 @@
                 <tr>
                     <td>
                         <div class="form-group form-line mt-20">
-                            <button type="submit" class="btn layui-btn Rectangle-1182 Restart-GNSS">Restart GNSS</button>
+                            <button type="submit" class="btn layui-btn Restart-GNSS">Restart
+                                GNSS</button>
                         </div>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td class="col-sm-3 GNSS-Fix-status">GNSS Constellations:
+                    <td class="col-sm-3 GNSS-Fix-status pt-30">GNSS Constellations:
 
                     </td>
-                    <td class="col-sm-7 col-sm-offset-2">
+                    <td class="col-sm-7 col-sm-offset-2 pt-30">
                         <div class="layui-form" style="padding-left: 15px !important;">
                             <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="GLONASS" value="1" checked>
                             <!-- <div class="GNSS-Fix-status">GLONASS</div> -->
@@ -177,7 +342,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-sm-3 Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data">Select which other satellite constellations are used to determine position,in addition to the GPS system </td>
+                    <td class="col-sm-3 Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data pt-0">
+                        Select which other satellite constellations are used to determine position,in addition to the GPS system </td>
                     <td class="col-sm-7 col-sm-offset-2">
                         <div class="layui-form" style="padding-left: 15px !important;">
                             <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="BEIDOU" value="1">
@@ -186,42 +352,50 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="col-sm-3 GNSS-Fix-status">Differential positioning:</td>
-                    <td class="col-sm-7 col-sm-offset-2">
+                    <td class="col-sm-3 GNSS-Fix-status pt-30" style="vertical-align: bottom;padding-bottom: 0px;">
+                        Differential positioning:</td>
+                    <td class="col-sm-7 col-sm-offset-2 pt-30" style="padding-bottom: 0;">
                         <div class="layui-form layui-form-pane layui-form-item" style="padding-left: 6px !important;">
                             <div class="layui-input-block">
-                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                                <input type="checkbox" checked="" name="open" lay-skin="primary" lay-filter="DifferentialPositioning" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td class="Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data">Activating differential positioning provides more accurate positioning in regions covered by Satellite Based Augmentation Systems(SBAS)</td>
+                    <td class="Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data">
+                        Activating differential positioning provides more accurate positioning in regions covered by Satellite Based Augmentation Systems(SBAS)</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td class="col-sm-3 GNSS-Fix-status">Differential positioning systems:</td>
-                    <td class="col-sm-7 col-sm-offset-2" style="padding-left: 22px !important;">
+                    <td class="col-sm-3 GNSS-Fix-status pt-40">Differential positioning systems:</td>
+                    <td class="col-sm-7 col-sm-offset-2 pt-40" style="padding-left: 22px !important;">
                         <div id="test2" class="demo-transfer"></div>
-                        <div class="layui-transfer-box" data-index="0" style="width: 300px; height: 150px;">
-                            <ul class="layui-transfer-data layui-form" style="height: 130px;overflow-y:auto;">
+                        <div class="layui-transfer-box" data-index="0" style="width: 373px; height: 253px;">
+                            <ul class="layui-transfer-data layui-form" id="positioning_systems_ul" style="height: 253px;overflow-y:auto;">
                                 <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Alcomsat(Algeria)" value="1">
-                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>Alcomsat(Algeria)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>Alcomsat(Algeria)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
                                 <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="AUS-NZ(Australia New Zealand)" value="2">
-                                    <div class="layui-unselect layui-form-checkbox " lay-skin="primary"><span>AUS-NZ(Australia New Zealand)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    <div class="layui-unselect layui-form-checkbox " lay-skin="primary">
+                                        <span>AUS-NZ(Australia New Zealand)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
                                 <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="BDSBAS(China)" value="3">
-                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>BDSBAS(China)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>BDSBAS(China)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
                                 <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="EGNOS(Europe)" value="4">
-                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>EGNOS(Europe)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>EGNOS(Europe)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
                                 <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="GAGAN(Indian)" value="5">
-                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>GAGAN(Indian)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>GAGAN(Indian)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
                                 <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="KAAS(Korea)" value="6">
-                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>KAAS(Korea)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>KAAS(Korea)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
 
                             </ul>
@@ -232,7 +406,7 @@
 
             </table>
             <h4 class="GNSS-Fix-status">Satellites in use:</h4>
-            <table class="table table-hover table-responsive">
+            <table class="table table-hover table-responsive table-border">
                 <thead>
                     <th class="Satellite-IDPRN">Satellite ID/PRN</th>
                     <th class="Satellite-IDPRN">Constellation</th>
@@ -271,12 +445,19 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="btn1" id="btn02">
+                <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel"
+                        class="Path-101 Cancel">Cancel</button></span>
+                <span class="connected" style="display: inline-block;"><button id="btn2"
+                        class="Rectangle-1182 active OK">Save</button></span>
+            </div>
         </div>
     </div>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
 
     <script>
         $(function() {
@@ -285,6 +466,24 @@
                     layer = layui.layer;
 
             });
+            //页面刷新
+            $("#cancel").on("click", function() {
+                eco_refresh('my-iframe')
+            });
+            $("#btn2").on("click", function() {
+                $('#success').show(1000).delay(6000).hide(0);
+            });
+            layui.use(['form'], function() {
+                var form = layui.form;
+                form.on('checkbox(DifferentialPositioning)', function(data) {
+                    var checked = data.elem.checked;
+                    if (checked) {
+                        $("#positioning_systems_ul input").removeAttr("disabled");
+                    } else {
+                        $("#positioning_systems_ul input").attr("disabled", true);
+                    }
+                });
+            })
         })
     </script>
 </body>

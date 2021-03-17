@@ -405,7 +405,7 @@
 
 
     </div>
-    <script type="text/javascript" src="js/common.js?mv=20210312"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
@@ -441,8 +441,8 @@
             };
             //change();
             // 按钮禁掉和灰掉
-            $(".connected button").prop("disabled", true);
-            $(".connected button").css("opacity", "0.5");
+            $("#save_btn").prop("disabled", true);
+            $("#save_btn").css("opacity", "0.5");
             $('#cancel').click(function() {
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index); //关闭当前页
@@ -460,19 +460,19 @@
                 len2 = $("#pwd").val().length;
                 if (security == "None") {
                     if (1 <= len1 && len1 <= 64) {
-                        $(".connected button").prop("disabled", false);
-                        $(".connected button").css("opacity", "1");
+                        $("#save_btn").prop("disabled", false);
+                        $("#save_btn").css("opacity", "1");
                     } else {
-                        $(".connected button").prop("disabled", true);
-                        $(".connected button").css("opacity", "0.5");
+                        $("#save_btn").prop("disabled", true);
+                        $("#save_btn").css("opacity", "0.5");
                     }
                 } else if (security == "WPA2-PSK") {
                     if (8 <= len2 && len2 <= 64) {
-                        $(".connected button").prop("disabled", false);
-                        $(".connected button").css("opacity", "1");
+                        $("#save_btn").prop("disabled", false);
+                        $("#save_btn").css("opacity", "1");
                     } else {
-                        $(".connected button").prop("disabled", true);
-                        $(".connected button").css("opacity", "0.5");
+                        $("#save_btn").prop("disabled", true);
+                        $("#save_btn").css("opacity", "0.5");
                     }
                 }
                 if (len2 > 0) {
@@ -485,18 +485,18 @@
                     $("#pwd").val("");
                     $("#wpa").hide();
                     if ($(".Network_name").val()) {
-                        $(".connected button").prop("disabled", false);
-                        $(".connected button").css("opacity", "1");
+                        $("#save_btn").prop("disabled", false);
+                        $("#save_btn").css("opacity", "1");
                     } else {
-                        $(".connected button").prop("disabled", true);
-                        $(".connected button").css("opacity", "0.5");
+                        $("#save_btn").prop("disabled", true);
+                        $("#save_btn").css("opacity", "0.5");
                     }
                 }
 
                 if ($(this).val() == "WPA2-PSK") {
                     $("#wpa").show();
-                    $(".connected button").prop("disabled", true);
-                    $(".connected button").css("opacity", "0.5");
+                    $("#save_btn").prop("disabled", true);
+                    $("#save_btn").css("opacity", "0.5");
                 }
             });
 
@@ -577,8 +577,10 @@
                 },
                 error: function(jqXHR) {
                     $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("encrypt", "");
-                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + JSON
-                        .stringify(jqXHR) + '</div>';
+                    console.log("Error message", JSON.stringify(jqXHR))
+                    parent.layer.close(loading);
+                    var tip =
+                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                     promptMessage("Error message", tip);
                 }
             });
