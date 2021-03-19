@@ -827,7 +827,7 @@ function getSimManagement(layer, form, loading) {
             }
         },
         error: function(jqXHR) {
-            console.log("Error message", JSON.stringify(jqXHR))
+
             frequency++;
             if (frequency < 3) {
                 setTimeout(() => {
