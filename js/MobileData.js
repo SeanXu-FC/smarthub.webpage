@@ -537,7 +537,7 @@ function renderDataUsage(json, i, form) {
             $("#allUsed_MB").text(current_used);
             limitNum1 = (Number(json[i].monthly_data_limit) / 1024).toFixed(3);
             var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(2);
-            $("#redmian_MB").text(json[i].monthly_data_limit);
+            $("#redmian_MB").text(limitNum1);
             $("#dataLimit input").val((json[i].monthly_data_limit / 1024).toFixed(2));
         }
 
@@ -609,7 +609,7 @@ function renderDataUsage(json, i, form) {
         }
 
         if (json[i].sim_data_limt_unit == 0) {
-            $(".echart_Ytext2").text("GB");
+            $(".echart_Ytext2").text("MB");
             $(".limit_unit2").text("MB");
             $("#allUsed_MB2").text(json[i].current_data_used);
             limitNum2 = json[i].monthly_data_limit;
@@ -623,7 +623,7 @@ function renderDataUsage(json, i, form) {
             $("#allUsed_MB2").text(current_used);
             limitNum2 = (Number(json[i].monthly_data_limit / 1024)).toFixed(3);
             var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(2);
-            $("#redmian_MB2").text(json[i].monthly_data_limit);
+            $("#redmian_MB2").text(limitNum2);
             $("#dataLimit2 input").val((json[i].monthly_data_limit / 1024).toFixed(2));
         }
 
