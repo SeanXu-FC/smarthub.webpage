@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210317" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
+    <link href="css/style.css?mv=20210323" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210323"></script>
     <title>Document</title>
     <style>
         * {
@@ -328,7 +328,7 @@
 <body>
     <div class="container wirelessInfo form-inline Rectangle-1213 mt-20">
         <div class="layui-form">
-            <div class="Forget-wireless-network-SKY546H">Forget wireless network SKY546H?</div>
+            <div class="Forget-wireless-network-SKY546H">Forget Wi-Fi network SKY546H?</div>
             <div class="layui-form-item Authentication-details-for-this-network-will-be-erased mt-20">
                 Authentication details for this network will be erased.
             </div>
@@ -348,7 +348,7 @@
             ssid = GetUrlParam("ssid");
             bssid = GetUrlParam("bssid");
             is_saved = GetUrlParam("is_saved");
-            $(".Forget-wireless-network-SKY546H").text("Forget wireless network " + ssid + "?")
+            $(".Forget-wireless-network-SKY546H").text("Forget Wi-Fi network " + ssid + "?")
             $('#btn').click(function() {
                 $(parent.frames["my-iframe"].document).find("#saved_id").val("").attr("bssid", "");
                 $(parent.frames["my-iframe"].document).find("#wifiDetai_info").val("forgetClickClose")

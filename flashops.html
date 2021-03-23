@@ -18,7 +18,7 @@
     </style>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210311"></script>
 
 </head>
 
@@ -65,7 +65,7 @@
                     status: GetUrlParam("status"),
                     steps: GetUrlParam("steps"),
                 }
-                statusHandle(data, loading);
+                statusHandle(data, loading, layer);
             } else {
                 no4Getstatus(layer, loading);
             }
@@ -74,8 +74,7 @@
 
     });
     //状态处理
-    function statusHandle(data, loading) {
-        layer.close(nowIndex); //关闭Error message弹框
+    function statusHandle(data, loading, layer) {
         if (data.status == "4") { //设备掉电
             StateResponse(1);
             $("#steps").html(data.steps);
@@ -90,6 +89,8 @@
             return4Getstatus(layer, loading, 1000 * 60 * 5);
         } else if (data.status == "2") { //升级中
             $("#steps").html(data.steps);
+            clearInterval(interval);
+            no4Getstatus(layer, loading);
         } else if (data.status == "0") { //升级失败
             clearInterval(interval);
             StateResponse(1);
@@ -152,14 +153,14 @@
                 },
                 error: function(jqXHR) {
                     console.log(JSON.stringify(jqXHR))
-                    frequency++;
-                    if (frequency > 3) {
-                        frequency = 0;
-                        parent.layer.close(loading);
-                        var tip =
-                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Please wait patiently while the device is upgrading and restarting!</div>';
-                        promptMessage("Tips", tip);
-                    }
+                        // frequency++;
+                        // if (frequency > 3) {
+                        //     frequency = 0;
+                        //     parent.layer.close(loading);
+                        //     var tip =
+                        //         '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Please wait patiently while the device is upgrading and restarting!</div>';
+                        //     promptMessage("Tips", tip);
+                        // }
                 }
             });
         }, 10000);

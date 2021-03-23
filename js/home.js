@@ -23,6 +23,8 @@ $(function() {
             }
         }
     })
+    getCnss();
+    getCloud();
 });
 
 function getHomeData() {
@@ -276,6 +278,40 @@ function getStatus() {
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                 promptMessage("Error message", tip);
             }
+        }
+    })
+}
+
+function getCloud() {
+
+    $.ajax({
+        type: "post",
+        url: "http://localhost:7777/status",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            console.log(res)
+
+        },
+        error: function(jqXHR) {
+            console.log("Error message", JSON.stringify(jqXHR))
+        }
+    })
+}
+
+function getCnss() {
+
+    $.ajax({
+        type: "post",
+        url: "http://localhost:4000",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            console.log(res)
+
+        },
+        error: function(jqXHR) {
+            console.log("Error message", JSON.stringify(jqXHR))
         }
     })
 }

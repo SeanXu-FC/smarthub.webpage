@@ -51,14 +51,14 @@ function getWLANScan(layer, form) {
         error: function(jqXHR) {
             console.log("Error message", JSON.stringify(jqXHR))
             frequency++;
-            if (frequency < 3) {
+            if (frequency < 5) {
                 setTimeout(() => {
                     getWLANScan(layer);
-                }, 5000);
+                }, 3000);
             } else {
                 frequency = 0;
                 parent.layer.close(loading);
-                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                 promptMessage("Error message", tip);
             }
         }
@@ -110,15 +110,15 @@ function getWLANData(layer, loading) {
         error: function(jqXHR) {
             console.log("Error message", JSON.stringify(jqXHR));
             frequency++;
-            if (frequency < 3) {
+            if (frequency < 5) {
                 setTimeout(() => {
                     getWLANData(layer, loading);
-                }, 5000);
+                }, 3000);
             } else {
                 frequency = 0;
                 $(".search-container").hide();
                 parent.layer.close(loading);
-                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                 promptMessage("Error message", tip);
             }
         }
@@ -161,11 +161,18 @@ function changeSwitchStatus(layer, loading, checked) {
 
         },
         error: function(jqXHR) {
-            console.log("Error message", JSON.stringify(jqXHR))
-            parent.layer.close(loading);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
-            promptMessage("Error message", tip);
-
+            console.log("Error message", JSON.stringify(jqXHR));
+            frequency++;
+            if (frequency < 5) {
+                setTimeout(() => {
+                    changeSwitchStatus(layer, loading, 1);
+                }, 3000);
+            } else {
+                frequency = 0;
+                parent.layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -569,7 +576,7 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
                 }, 5000);
             } else {
                 frequency = 0;
-                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                 promptMessage("Error message", tip);
             }
         }
@@ -639,7 +646,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
                 }, 5000);
             } else {
                 frequency = 0;
-                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                 promptMessage("Error message", tip);
             }
         }

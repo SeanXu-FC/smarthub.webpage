@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210317" rel="stylesheet" />
+    <link href="css/style.css?mv=20210323" rel="stylesheet" />
     <title>Document</title>
     <style>
         .Restart-factory-reset {
@@ -27,6 +27,13 @@
             color: #861f41;
             border-bottom: solid 1px #ddd;
             padding-bottom: 10px;
+        }
+        
+        .Rectangle-1181 {
+            width: 274px;
+            height: 54px;
+            border-radius: 5px;
+            background-color: #861f41;
         }
         
         .Rectangle-1182 {
@@ -58,6 +65,11 @@
             letter-spacing: normal;
             text-align: left;
             color: #3a3a3a;
+            margin-top: 23px;
+        }
+        
+        .mt-65 {
+            margin-top: 65px;
         }
     </style>
 </head>
@@ -66,15 +78,19 @@
     <div class="container-fluid" style="margin:40px 70px;">
         <div class="row">
             <h3 style="margin-bottom:40px;" class="Restart-factory-reset">Restart & factory reset</h3>
-            <p class="mb-20 Lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-Ut-enim-ad-minim-veniam">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-            <div class="layui-input-inline">
-                <button class="layui-btn Rectangle-1182 Restart-SmartHub restartSmartHub" lay-submit>Restart SmartHub</button>
+
+            <div class="mt-10">
+                <button class="layui-btn Rectangle-1182 Restart-SmartHub restartSmartHub" lay-submit>Restart
+                    router</button>
             </div>
 
-            <p class="mt-50 mb-20 Lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-Ut-enim-ad-minim-veniam">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-            <div class="layui-input-inline">
-                <button class="layui-btn Rectangle-1182 Restart-SmartHub restartFactoryDefaults" lay-submit>Reset to factory defaults</button>
+
+            <div class="mt-65">
+                <button class="layui-btn Rectangle-1181 Restart-SmartHub restartFactoryDefaults" lay-submit>Reset to
+                    factory defaults</button>
             </div>
+            <p class="mt-50 mb-20 Lorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-sed-do-eiusmod-tempor-incididunt-ut-labore-et-dolore-magna-aliqua-Ut-enim-ad-minim-veniam">
+                Resetting your router will mean any changes you have made to your router settings will be restored to factory defaults</p>
         </div>
     </div>
 

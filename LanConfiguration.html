@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210317" rel="stylesheet" />
+    <link href="css/style.css?mv=20210323" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210317"></script>
+    <script src="js/lanConfiguration.js?mv=20210323"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210323"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -785,7 +785,7 @@
                         <div class="form-group form-inline">
                             <label for="" class="col-sm-4 control-label Configure-IP">DHCP lease time:</label>
                             <div class="col-sm-8">
-                                <p class="Configure-IP"><span id="lease_time">${timeConversion(json.lease_time)}</span></p>
+                                <p class="Configure-IP"><span id="lease_time">${timeConversion(json.lease_time)}</span><span style="margin-left:10px;">seconds</span></p>
                             </div>
                         </div>
                         
@@ -928,7 +928,7 @@
         }
 
         function ejectTip() {
-            
+
             var loading = parent.layer.msg('Waiting for changes to be applied...', {
                 icon: 16,
                 time: false,
@@ -947,7 +947,7 @@
                             clearInterval(timer);
                             $('#success').show(1000).delay(6000).hide(0);
                             eco_refresh('my-iframe');
-                            
+
                         }
                         i--;
                     };

@@ -10,8 +10,8 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210317" rel="stylesheet" />
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210317" />
+    <link href="css/style.css?mv=20210323" rel="stylesheet" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210323" />
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="js/jquery.myProgress.js"></script>
@@ -64,7 +64,7 @@
     <div class="container-fluid" style="margin:40px 70px;">
         <div class="row">
             <h3 style="margin-bottom:40px;" class="Restart-factory-reset">Factory Reset</h3>
-            <div class="Restarting-SmartHub">Reseting SmartHub...</div>
+            <div class="Restarting-SmartHub">Restarting router...</div>
             <div class="progress-out Rectangle-1286 mt-20" id="div3">
                 <div class="percent-show"><span>0</span>%</div>
                 <div class="progress-in"></div>
@@ -72,7 +72,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210317"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210323"></script>
     <script>
         var length = 80;
         var successFlag = false;
@@ -116,7 +116,7 @@
                         PollingChecked(1000 * 6);
                     } else if (res.result && res.result.status == 0) {
                         successFlag = 2;
-                        $(".Restarting-SmartHub").text("Reset SmartHub Fail");
+                        $(".Restarting-SmartHub").text("Reset Router Fail");
                         $("#div3").hide();
                     } else if (res.result && res.result.status == 1) {
                         successFlag = true;
@@ -126,7 +126,7 @@
                         PollingChecked(1000 * 60);
                     } else if (res.error) {
                         successFlag = false;
-                        $(".Restarting-SmartHub").text("Reset SmartHub Fail")
+                        $(".Restarting-SmartHub").text("Reset Router Fail")
                         $("#div3").hide();
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
@@ -156,7 +156,8 @@
                         }, 5000);
                     } else {
                         frequency = 0;
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                         promptMessage("Error message", tip);
                     }
                 }
@@ -200,7 +201,7 @@
                     } else if (res.result && res.result.status == 0) {
                         clearInterval(timer);
                         successFlag = 2;
-                        $(".Restarting-SmartHub").text("Reset SmartHub Fail");
+                        $(".Restarting-SmartHub").text("Reset Router Fail");
                         $("#div3").hide();
                     } else if (res.result && res.result.status == 1) {
                         successFlag = true;
@@ -211,7 +212,7 @@
                         //resetPollingChecked(1000 * 60);
                     } else if (res.error) {
                         successFlag = false;
-                        $(".Restarting-SmartHub").text("Reset SmartHub Fail")
+                        $(".Restarting-SmartHub").text("Reset Router Fail")
                         $("#div3").hide();
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
@@ -225,7 +226,8 @@
                         frequency++;
                         if (frequency > 3) {
                             frequency = 0;
-                            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                            var tip =
+                                '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                             promptMessage("Error message", tip);
                         }
                     }
@@ -234,7 +236,8 @@
                     frequency++;
                     if (frequency > 2) {
                         frequency = 0;
-                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                         promptMessage("Error message", tip);
                     }
                 }
@@ -252,7 +255,7 @@
                     width: "100%",
                 });
 
-                $(".Restarting-SmartHub").text("Reset SmartHub Successful")
+                $(".Restarting-SmartHub").text("Reset Router Successful")
                 $(".progress-out").css("border", "1px solid green");
                 $(".progress-in").css("background-color", "green");
                 $(".progress-in").css("background-image",
@@ -302,7 +305,7 @@
                     } else if (res.result && res.result.status == 0) {
                         clearInterval(timer);
                         successFlag = 2;
-                        $(".Restarting-SmartHub").text("Reset SmartHub Fail");
+                        $(".Restarting-SmartHub").text("Reset Router Fail");
                         $("#div3").hide();
                     } else if (res.result && res.result.status == 1) {
                         successFlag = true;
@@ -312,7 +315,7 @@
                         PollingChecked(1000 * 60);
                     } else if (res.error) {
                         successFlag = false;
-                        $(".Restarting-SmartHub").text("Reset SmartHub Fail")
+                        $(".Restarting-SmartHub").text("Reset Router Fail")
                         $("#div3").hide();
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
