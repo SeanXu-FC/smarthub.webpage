@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <title>OpenWrt - Flashing...</title>
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210326" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210107" />
     <style>
         .Software-upgrade {
             font-family: OpenSans;
@@ -76,6 +76,24 @@
             color: #3a3a3a;
             margin-top: 45px;
         }
+        
+        .step-cricle {
+            font-family: OpenSans;
+            font-size: 48px;
+            font-weight: 600;
+            text-align: center;
+            color: #3a3a3a;
+        }
+        
+        .progress-gif {
+            display: flex;
+            align-items: center;
+        }
+        
+        .gif-img {
+            padding-top: 6px;
+            margin-left: 10px;
+        }
     </style>
 
 </head>
@@ -86,8 +104,8 @@
             <div class="row">
                 <h2 class="col-md-12 Software-upgrade" style="margin-bottom:10px;">Software upgrade</h2>
             </div>
-            <p class="step-text" id="status"></p>
-            <p class="step-text" id="steps"></p>
+            <!-- <p class="step-text" id="status"></p> <span class="step-cricle"></span>-->
+            <div class="progress-gif"><span class="step-text" id="steps">Upgrading</span><img class="gif-img" src="images/progress-loading.gif" /></div>
             <div class="progress-row">
                 <div class="progress-out Rectangle-1286 mt-20" id="div3">
                     <div class="progress-in"></div>
@@ -218,7 +236,7 @@
     function progress(length, total) {
         $("#div3").show();
         $("#div3").myProgress({
-            speed: 500,
+            speed: 10,
             percent: (100 * (length / total)).toFixed(0),
             width: "100%",
         });
