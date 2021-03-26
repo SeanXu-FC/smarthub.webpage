@@ -98,6 +98,24 @@ function tipMessage(content) {
         });
     })
 }
+
+function parentTipMessage(content) {
+    // layui.use(['layer'], function() {
+    //     var layer = layui.layer;
+    //     layer.msg(content, {
+    //         skin: 'layui-layer-molv',
+    //         time: 3000,
+    //         area: '400px'
+    //     });
+    // })
+    var tip = parent.layer.msg(content, {
+        skin: 'layui-layer-molv',
+        shade: 0.4,
+        time: 0,
+        area: ['421px', '136px']
+    });
+    return tip;
+}
 //刷新当前iframe页面
 function eco_refresh(id) {
     var _body = window.parent;

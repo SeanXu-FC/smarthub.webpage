@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <title>OpenWrt - Flashing...</title>
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210326" />
+    <style>
+        .Software-upgrade {
+            font-family: OpenSans;
+            font-size: 44px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.36;
+            letter-spacing: normal;
+            text-align: left;
+            color: #861f41;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .step-text {
+            font-family: OpenSans;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: left;
+            color: #3a3a3a;
+        }
+        
+        .tip-text {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .Rectangle-1286 {
+            border-radius: 12px;
+            background-color: #fff;
+        }
+        
+        .progress-out {
+            border-radius: 20px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+            display: none;
+        }
+        
+        .progress-in {
+            height: 22px;
+            margin: 0;
+            padding: 0;
+            border-radius: 12px !important;
+        }
+        
+        .direction-left {
+            top: 3px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="mainContainer" style="margin-left:20px;">
+        <div id="mainContent">
+            <div class="row">
+                <h2 class="col-md-12 Software-upgrade" style="margin-bottom:10px;">Software upgrade</h2>
+            </div>
+            <p class="step-text" id="status"></p>
+            <p class="step-text" id="steps"></p>
+            <div class="progress-out Rectangle-1286 mt-20" id="div3">
+                <div class="progress-in"></div>
+            </div>
+            <!-- <fieldset class="cbi-section" id="upgrade_tip">
+                <p>
+                    The system is flashing now, this process will take several minutes.<br /> DO NOT POWER OFF THE DEVICE!
+                    <br /> Wait a few minutes before you try to reconnect. It might be necessary to renew the address of your computer to reach the device again, depending on your settings.
+                </p>
+            </fieldset> -->
+        </div>
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="layui/layui.js " charset="utf-8 "></script>
+<script src="js/jquery.myProgress.js"></script>
+<script type="text/javascript" src="js/common.js?mv=20210311"></script>
+
+<script type="text/javascript">
+    var interval = null,
+        frequency = 0,
+        nowIndex = null,
+        status = "undefined";
+    $(function() {
+
+            layui.use(['form', 'layer'], function() {
+                var form = layui.form;
+                var layer = layui.layer;
+                var loading = parent.layer.msg('Waiting for changes to be applied...', {
+                    icon: 16,
+                    time: false,
+                    shade: [0.5, '#fff']
+                });
+                $(".layui-layer-loading .layui-layer-content").after(
+                    "Waiting for changes to be applied...");
+                status = $("#my-iframe", window.parent.document).attr("src");
+
+                status = GetUrlParam("status");
+                if (status != "null" && status != "undefined") { //从首页跳过来
+                    var data = {
+                        status: GetUrlParam("status"),
+                        steps: GetUrlParam("steps"),
+                        length: GetUrlParam("length"),
+                        total: GetUrlParam("total")
+                    }
+                    statusHandle(data, loading, layer);
+                } else {
+                    no4Getstatus(layer, loading);
+                }
+            });
+            progress(10, 100);
+
+            setTimeout(() => {
+                console.log("10s")
+                $("#div3").myProgress({
+                    speed: 100,
+                    percent: 100,
+                    width: "100%",
+                });
+            }, 10000);
+
+        })
+        //状态处理
+    function statusHandle(data, loading, layer) {
+        if (data.status == "4") { //设备掉电
+            StateResponse(1);
+            $("#steps").html(data.steps);
+            return4Getstatus(layer, loading, 1000 * 60 * 3);
+        } else if (data.status == "5") { //重置中
+            StateResponse(1);
+            $("#steps").html(data.steps);
+            return4Getstatus(layer, loading, 1000 * 90);
+        } else if (data.status == "6") { //恢复中
+            StateResponse(1);
+            $("#steps").html(data.steps);
+            return4Getstatus(layer, loading, 1000 * 60 * 5);
+        } else if (data.status == "2") { //升级中
+            $("#steps").html(data.steps);
+            progress(data.length, data.total);
+            clearInterval(interval);
+            no4Getstatus(layer, loading);
+        } else if (data.status == "0") { //升级失败
+            clearInterval(interval);
+            StateResponse(1);
+            parent.layer.close(loading);
+            $("#steps").html(data.steps);
+            $("#steps").css("color", "red")
+            $("#upgrade_tip").hide();
+            upfailPromptMessage("Fail message", data.steps);
+        } else if (data.status == "1") { //升级成功
+            StateResponse(1);
+            parent.layer.close(loading);
+            var ds = "Now the status is：" + data.status +
+                "--Upgrade Complete...";
+            $("#steps").html(ds);
+            $("#upgrade_tip").hide();
+            clearInterval(interval);
+            upPromptMessage("Success message", data.steps);
+        } else if (data.status == "3") { //没有升级           
+            parent.layer.close(loading);
+            $("#steps").html(data.steps);
+            $("#upgrade_tip").hide();
+            clearInterval(interval);
+        }
+    }
+
+    function progress(length, total) {
+        $("#div3").show();
+        $("#div3").myProgress({
+            speed: 1000 * 60,
+            percent: 100 * (length / total),
+            width: "100%",
+        });
+    }
+
+    function no4Getstatus(layer, loading) { //没有返回4的定时轮询
+        interval = window.setInterval(function() {
+            var domain = window.location.host;
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "GetUpgradeStatus",
+                "params": {
+                    "status": 0
+                },
+                "id": "9.1"
+
+            };
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action?",
+                data: data,
+                timeout: 0,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    frequency = 0;
+                    if (res.result) {
+                        var data = res.result;
+                        statusHandle(data, loading);
+                    } else if (res.error) {
+                        layer.close(nowIndex); //关闭Error message弹框
+                        parent.layer.close(loading);
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
+                    }
+
+                },
+                error: function(jqXHR) {
+                    console.log(JSON.stringify(jqXHR))
+                        // frequency++;
+                        // if (frequency > 3) {
+                        //     frequency = 0;
+                        //     parent.layer.close(loading);
+                        //     var tip =
+                        //         '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Please wait patiently while the device is upgrading and restarting!</div>';
+                        //     promptMessage("Tips", tip);
+                        // }
+                }
+            });
+        }, 10000);
+    }
+
+    function return4Getstatus(layer, loading, time) { //time毫秒后执行
+        clearInterval(interval); //先清掉10s轮询定时器，time毫秒后通过调用no4Getstatus再开启10s轮询定时器
+        window.setTimeout(function() {
+            no4Getstatus(layer, loading);
+        }, time);
+    }
+
+    function StateResponse(status) {
+        var data = {
+            "jsonrpc": "2.0",
+            "method": "GetUpgradeStatus",
+            "params": {
+                "status": status
+            },
+            "id": "9.1"
+
+        };
+        data = JSON.stringify(data);
+        $.ajax({
+            type: "post",
+            url: "/action/action?",
+            data: data,
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function(res) {
+
+            },
+            error: function(jqXHR) {}
+        });
+    }
+
+    function upPromptMessage(title, content) {
+        layui.use(['layer'], function() {
+            var layer = layui.layer;
+            layer.open({
+                type: 1,
+                id: 'layerDemo1', //防止重复弹出   
+                title: title,
+                content: '<div class="tip-text">' + content + '</div>',
+                area: ['421px', 'auto'],
+                btn: 'close',
+                btnAlign: 'c', //按钮居中 
+                closeBtn: 0,
+                shade: 0, //不显示遮罩                            
+                yes: function(index) {
+                    layer.close(index);
+                    var domain = window.location.host;
+                    top.location.href = ('https:' == document.location.protocol ?
+                        'https://' :
+                        'http://') + domain;
+                }
+            });
+        })
+
+    }
+
+    function upfailPromptMessage(title, content) {
+        layui.use(['layer'], function() {
+            var layer = layui.layer;
+            layer.open({
+                type: 1,
+                id: 'layerDemo1', //防止重复弹出   
+                title: title,
+                content: '<div class="tip-text">' + content + '</div>',
+                area: ['421px', 'auto'],
+                btn: 'close',
+                btnAlign: 'c', //按钮居中 
+                closeBtn: 0,
+                shade: 0, //不显示遮罩                            
+                yes: function(index) {
+                    layer.close(index);
+                    var domain = window.location.host;
+                    self.location.href = ('https:' == document.location.protocol ?
+                        'https://' :
+                        'http://') + domain + '/SoftwareUpgrade.html';
+                }
+            });
+        })
+    }
+</script>
+
+</html>

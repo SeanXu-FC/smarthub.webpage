@@ -1,7 +1,12 @@
 var timer = null;
-var frequency = 0;
+var frequency1 = 0;
+var progressTimer = null;
+var progressBarTimer = null;
+var progress = null;
+var progressFrequency = 0;
 $(function() {
     getHomeData();
+    getStatus();
     timer = setInterval(() => {
         getHomeData();
     }, 10000);
@@ -9,23 +14,26 @@ $(function() {
         clearInterval(timer);
     });
 
-    getStatus();
+
     $("#Home_c .row a").on("click", function() {
-        var url = $(this).attr('data-url');
-        if (url == "home.html" || url == undefined) {
-            $(parent.document).find("#my-iframe").attr("src", url);
-        } else {
-            var login = getCookie("LogInStaus");
-            if (login) {
+            var url = $(this).attr('data-url');
+            if (url == "home.html" || url == undefined) {
                 $(parent.document).find("#my-iframe").attr("src", url);
             } else {
-                LoginMessage(url);
+                var login = getCookie("LogInStaus");
+                if (login) {
+                    $(parent.document).find("#my-iframe").attr("src", url);
+                } else {
+                    LoginMessage(url);
+                }
             }
-        }
-    })
-    getCnss();
-    getCloud();
+        })
+        //getCnss();
+        //getCloud();
+
 });
+
+
 
 function getHomeData() {
     var data = {
@@ -212,9 +220,9 @@ function getHomeData() {
         },
         error: function(jqXHR) {
             console.log("Error message", JSON.stringify(jqXHR))
-            frequency++;
-            if (frequency > 2) {
-                frequency = 0;
+            frequency1++;
+            if (frequency1 > 2) {
+                frequency1 = 0;
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                 promptMessage("Error message", tip);
             }
@@ -237,7 +245,7 @@ function getStatus() {
     var domain = window.location.host;
     var data = {
         "jsonrpc": "2.0",
-        "method": "GetUpgradeStatus",
+        "method": "GetUpgradeStatusAndProgress",
         "params": {
             "status": 0
         },
@@ -256,9 +264,17 @@ function getStatus() {
                 var data = res.result;
                 if (data.status != "3") { //升级成功
                     $("#my-iframe", window.parent.document).attr("src", "flashops.html?status=" + data
-                        .status + "&steps=" + data.steps);
+                        .status + "&steps=" + data.steps + "&count=" + data.count + "&total=" + data.total);
+                } else {
+                    getInfoData();
+                    progressTimer = setInterval(() => {
+                        getInfoData();
+                    }, 1000 * 10);
                 }
             } else if (res.error) {
+                setTimeout(() => {
+                    getStatus();
+                }, 10000);
                 layui.use(['form', 'layer'], function() {
                     var layer = layui.layer;
                     layer.msg("An error occurred：" + res.error.message);
@@ -267,20 +283,93 @@ function getStatus() {
 
         },
         error: function(jqXHR) {
+            setTimeout(() => {
+                getStatus();
+            }, 10000);
             console.log("Error message", JSON.stringify(jqXHR))
-            frequency++;
-            if (frequency < 3) {
-                setTimeout(() => {
-                    getStatus();
-                }, 5000);
-            } else {
-                frequency = 0;
-                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
-                promptMessage("Error message", tip);
-            }
         }
     })
 }
+var progressI = 0;
+
+function progressBar() {
+    var tip =
+        '<div class=""><p class="progress-text">Router is starting up...</p>' +
+        '<div class="progress-out progress-container mt-20" id="div3">' +
+
+        '<div class="progress-in"></div>' +
+        '</div></div>'
+    progress = parentTipMessage(tip);
+    $(parent.document).find("#div3").myProgress({
+        speed: 10,
+        percent: ((progressI / 600) * 100).toFixed(0),
+        width: "100%",
+    });
+
+    progressBarTimer = setInterval(() => {
+        progressI = progressI + 1;
+        console.log(progressI)
+        $(parent.document).find("#div3").myProgress({
+            speed: 10,
+            percent: ((progressI / 600) * 100).toFixed(0),
+            width: "100%",
+        });
+    }, 100);
+}
+var progressInitFlag = false;
+
+function getInfoData() {
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "GetHubInfo",
+        "params": {
+
+        },
+        "id": "9.1"
+    };
+
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            if (res.result && res.result.ipq_ipaddr) {
+                clearInterval(progressTimer);
+                clearInterval(progressBarTimer);
+                $(parent.document).find("#div3").myProgress({
+                    speed: 10,
+                    percent: 100,
+                    width: "100%",
+                });
+                parent.layer.close(progress);
+
+            } else {
+                if (!progressInitFlag) {
+                    progressInitFlag = true;
+                    progressBar();
+                }
+            }
+        },
+        error: function(jqXHR) {
+            console.log("Error message", JSON.stringify(jqXHR))
+            if (progressFrequency < 7) {
+                progressFrequency++
+            } else {
+                progressFrequency = 0;
+                clearInterval(progressTimer);
+                parent.layer.close(progress);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
+                promptMessage("Error message", tip);
+            }
+
+        }
+    });
+}
+
+
 
 function getCloud() {
 

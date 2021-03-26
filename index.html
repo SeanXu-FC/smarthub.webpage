@@ -15,9 +15,11 @@
     <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="bookmark" href="images/favicon.ico" />
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css?mv=20210323">
-    <link href="css/style.css?mv=20210323" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210323"></script>
+    <link rel="stylesheet" href="css/xadmin.css?mv=20210326">
+    <link href="css/style.css?mv=20210326" rel="stylesheet" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210326" />
+
+    <script type="text/javascript" src="js/common.js?mv=20210326"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script>
         let flag = navigator.userAgent.match(
@@ -260,6 +262,40 @@
             margin-left: 90px;
             margin-top: 10px;
         }
+        
+        .progress-text {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.08;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .progress-container {
+            border-radius: 12px;
+            background-color: #fff;
+        }
+        
+        .progress-in {
+            height: 24px;
+            margin: 0;
+            padding: 0;
+            border-radius: 12px !important;
+        }
+        
+        .progress-out {
+            border-radius: 20px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+        }
+        
+        .direction-left {
+            top: 2px;
+        }
     </style>
 </head>
 
@@ -322,7 +358,7 @@
                         <li>
                             <a href="javascript:;" data-url="MobileData.html">
                                 <!-- <i class="iconfont ">&#xe6b6;</i> -->
-                                <cite class="hd">Mobile data</cite>
+                                <cite class="hd">Mobile data & SIM management</cite>
 
                             </a>
                         </li>
@@ -488,10 +524,11 @@
     <!-- Bottom end -->
 
     <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js?mv=20210323"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20210326"></script>
     <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
-    <script type="text/javascript" src="js/index.js?mv=20210323"></script>
+    <script src="js/jquery.myProgress.js"></script>
+    <script type="text/javascript" src="js/index.js?mv=20210326"></script>
 
 </body>
 

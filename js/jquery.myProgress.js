@@ -16,8 +16,6 @@
             var this_ = $(this);
             var $percent = $(this).find("div.percent-show>span");
             var progress_in = $(this).find("div.progress-in");
-            console.log($percent);
-            console.log(progress_in);
             initCss(options, $(this));
             var t = setInterval(function() {
                 $percent.html(parseInt(progress_in.width() / this_.width() * 100))
