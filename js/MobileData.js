@@ -104,10 +104,11 @@ function getMainParameters(layer, form) {
             layer.close(loading);
             if (res.result) {
                 var json = res.result;
-                if (json.auo_switch == 1) { //Mobile data:                
-                    $("#autoSwitch input").attr("checked", "checked");
-                } else {
+                if (json.auo_switch == 0) { //Mobile data:                
                     $("#autoSwitch input").removeAttr("checked");
+                } else {
+                    $("#autoSwitch input").attr("checked", "checked");
+
                 }
 
 
@@ -167,7 +168,6 @@ function renderDataUsage(json, i) {
             var current_used = (json[i].current_data_used / 1024).toFixed(2)
             $("#allUsed_MB").text(current_used);
             limitNum1 = (Number(json[i].monthly_data_limit) / 1024).toFixed(3);
-            console.log(limitNum1)
             var redmianMB = ((json[i].monthly_data_limit - json[i].current_data_used) / 1024).toFixed(2);
             $("#redmian_MB").text(limitNum1);
         }
@@ -519,25 +519,29 @@ function getDatausageVal() {
             "auto_switch": autoSwitch,
             "sim": [{
                     "sim_id": 0,
-                    "mobile_data": mobileData,
-                    "data_roamming": DataRoaming,
-                    "data_cycle": last_manth_s,
-                    "data_warning_flag": setDataWaring,
-                    "data_warning_size": dataWaring,
-                    "data_limit_flag": setDataLimit,
-                    "data_limit_size": dataLimit,
-                    "lock_sim": SIM_pin_lock
+                    "mobile_data": Number(mobileData),
+                    "roam_data": Number(DataRoaming),
+                    "usage_cycle": Number(last_manth_s),
+                    "data_warning_flag": Number(setDataWaring),
+                    "data_warning_size": Number(dataWaring),
+                    "warning_limit_unit": Number(switchMBWar),
+                    "usage_reminder_flag": Number(setDataLimit),
+                    "monthly_data_limit": Number(dataLimit),
+                    "sim_data_limt_unit": Number(switchMBLim),
+                    "lock_sim": Number(SIM_pin_lock)
                 },
                 {
                     "sim_id": 1,
-                    "mobile_data": mobileData2,
-                    "data_roamming": DataRoaming2,
-                    "data_cycle": last_manth_s2,
-                    "data_warning_flag": setDataWaring2,
-                    "data_warning_size": dataWaring2,
-                    "data_limit_flag": setDataLimit2,
-                    "data_limit_size": dataLimit2,
-                    "lock_sim": SIM_pin_lock2
+                    "mobile_data": Number(mobileData2),
+                    "roam_data": Number(DataRoaming2),
+                    "usage_cycle": Number(last_manth_s2),
+                    "data_warning_flag": Number(setDataWaring2),
+                    "data_warning_size": Number(dataWaring2),
+                    "warning_limit_unit": Number(switchMBWar2),
+                    "usage_reminder_flag": Number(setDataLimit2),
+                    "monthly_data_limit": Number(dataLimit2),
+                    "sim_data_limt_unit": Number(switchMBLim2),
+                    "lock_sim": Number(SIM_pin_lock2)
                 }
             ]
         }
