@@ -8,8 +8,8 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
-    <!-- <link href="css/global.css?mv=20210326" rel="stylesheet"> -->
-    <link href="css/style.css?mv=20210326" rel="stylesheet" />
+    <!-- <link href="css/global.css?mv=20210107" rel="stylesheet"> -->
+    <link href="css/style.css?mv=20210107" rel="stylesheet" />
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <style>
         .layui-btn {
@@ -131,7 +131,7 @@
             <table class="table table-hover table-responsive">
                 <tr>
                     <td colspan="2">
-                        <h4 style="color:#333" class="Product-info">Product info</h4>
+                        <h4 style="color:#333" class="Product-info">Device info</h4>
                     </td>
                 </tr>
                 <tr>
@@ -171,6 +171,24 @@
                     <td class="Model">Operating hours:</td>
                     <td><span id="oh" class="title My-SmartHub"></span></td>
                 </tr>
+                <tr>
+                    <td width="310px" class="Model">Ethernet MAC address 1:</td>
+                    <td><span id="macAddress1" class="title My-SmartHub"></span></td>
+                </tr>
+                <tr>
+                    <td class="Model">Ethernet MAC address 2:</td>
+                    <td><span id="macAddress2" class="title My-SmartHub"></span></td>
+                </tr>
+                <tr>
+                    <td class="Model">Wireless MAC address 1:</td>
+                    <td><span id="aPma" class="title My-SmartHub"></span></td>
+                </tr>
+                <tr>
+                    <td class="Model">Wireless MAC address 2:</td>
+                    <td>
+                        <span id="MAC6174" class="title My-SmartHub" href="" target="_blank"></span>
+                    </td>
+                </tr>
             </table>
             <table class="table table-hover table-responsive">
                 <tr>
@@ -195,27 +213,14 @@
 
                 <tr>
                     <td colspan="2">
-                        <h4 style="color:#333" class="Product-info">Network info</h4>
+                        <h4 style="color:#333" class="Product-info">Mobile network</h4>
                     </td>
                 </tr>
                 <tr>
-                    <td width="310px" class="Model">Ethernet MAC address 1:</td>
-                    <td><span id="macAddress1" class="title My-SmartHub"></span></td>
+                    <td width="310px" class="Model">Cellular signal strength (RSSI):</td>
+                    <td><span id="Cellular_signal" class="title My-SmartHub">--</span></td>
                 </tr>
-                <tr>
-                    <td class="Model">Ethernet MAC address 2:</td>
-                    <td><span id="macAddress2" class="title My-SmartHub"></span></td>
-                </tr>
-                <tr>
-                    <td class="Model">Wireless MAC address 1:</td>
-                    <td><span id="aPma" class="title My-SmartHub"></span></td>
-                </tr>
-                <tr>
-                    <td class="Model">Wireless MAC address 2:</td>
-                    <td>
-                        <span id="MAC6174" class="title My-SmartHub" href="" target="_blank"></span>
-                    </td>
-                </tr>
+
                 <tr style="display:none">
                     <td class="Model">Platform address:</td>
                     <td>
@@ -241,9 +246,9 @@
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
-<script type="text/javascript" src="js/common.js?mv=20210326"></script>
+<script type="text/javascript" src="js/common.js?mv=20210107"></script>
 <script src="js/plugins/qrcode.min.js"></script>
-<script src="js/HubInformation.js?mv=20210326"></script>
+<script src="js/HubInformation.js?mv=20210107"></script>
 <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
 
 </html>
