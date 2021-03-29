@@ -105,7 +105,7 @@
                 <h2 class="col-md-12 Software-upgrade" style="margin-bottom:10px;">Software upgrade</h2>
             </div>
             <!-- <p class="step-text" id="status"></p> <span class="step-cricle"></span>-->
-            <div class="progress-gif"><span class="step-text" id="steps">Upgrading</span><img class="gif-img" src="images/progress-loading.gif" /></div>
+            <div class="progress-gif"><span class="step-text" id="steps">Starting to upgrade</span><img class="gif-img" src="images/progress-loading.gif" /></div>
             <div class="progress-row">
                 <div class="progress-out Rectangle-1286 mt-20" id="div3">
                     <div class="progress-in"></div>
@@ -169,7 +169,6 @@
         })
         //状态处理
     function statusHandle(data, layer) {
-
         if (data.status == "4") { //设备掉电
             $(".progress-time").show();
             if (timeRemainingStatus == 4) {
@@ -193,6 +192,15 @@
             StateResponse(1);
             $("#steps").html(data.steps);
             return4Getstatus(layer, 1000 * 60 * 5); //清除进度条轮询定时器，5分钟后再开启
+        } else if (data.status == "8") { //重置中
+            $(".progress-time").show();
+            if (timeRemainingStatus == 5) {
+                $(".progress-time").text("Please restart manually")
+            }
+            timeRemainingStatus = data.status;
+            StateResponse(1);
+            $("#steps").html(data.steps);
+            return4Getstatus(layer, 1000 * 60); //清除进度条轮询定时器，60s后再开启
         } else if (data.status == "2") { //升级中
             $(".progress-time").hide();
             timeRemainingStatus = data.status;
@@ -208,6 +216,7 @@
             $("#steps").html(data.steps);
             $("#steps").css("color", "red")
             $("#upgrade_tip").hide();
+            $(".gif-img").hide();
             upfailPromptMessage("Fail message", data.steps);
         } else if (data.status == "1") { //升级成功
             parent.layer.close(loading); //关闭禁止点击的透明遮罩
@@ -219,6 +228,7 @@
             clearInterval(interval);
 
             progress(100, 100);
+            $(".gif-img").hide();
 
             upPromptMessage("Success message", data.steps);
         } else if (data.status == "3") { //没有升级 
@@ -230,6 +240,7 @@
             clearInterval(interval);
 
             $("#div3").hide();
+            $(".gif-img").hide();
         }
     }
 
