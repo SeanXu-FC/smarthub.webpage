@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210326" rel="stylesheet" />
+    <link href="css/style.css?mv=20210330" rel="stylesheet" />
 
     <title>Document</title>
     <style>
@@ -502,7 +502,7 @@
                     <input id="output_name" type="text" name="" lay-verify="title" autocomplete="off" placeholder="Wipers" class="Rectangle-1188 layui-input form-control h18" oninput="value=value.replace(/[\u4e00-\u9fa5]/ig,'')" onkeyup="WidthCheckIOStr(this,64);">
                 </div>
             </div>
-            <div class="layui-form-item -flex-display mt-20">
+            <!-- <div class="layui-form-item -flex-display mt-20">
                 <div style="width:380px;padding-left: 14px;">
                     <label class="Alert-ID-label">Alert
                         ID:</label>
@@ -511,7 +511,7 @@
                 <div class="layui-input-block" style="margin-left:0;">
                     <input id="alert_ID" type="number" lay-verify="title" class="form-control h18 alertID-input" style="color:#333;">
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Input type:</label>
                 <div class="layui-input-block">
@@ -531,7 +531,7 @@
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210326"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210330"></script>
     <script>
         var saveChannelID;
         $(function() {
@@ -542,7 +542,7 @@
             saveChannelID = ChannelID;
             $("#channel-number").text(ChannelID)
             console.log("types", types)
-            $("#alert_ID").val(alertid)
+                //$("#alert_ID").val(alertid)
             layui.use('layer', function() {
                 var layer = layui.layer;
                 // $("#security option[value='" + types + "']").prop("selected", true);
@@ -580,7 +580,7 @@
 
         //保存数据
         function saveData(name, ChannelID) {
-            var alertId = Number($("#alert_ID").val());
+            //var alertId = Number($("#alert_ID").val());
             if (alertId < 1000 || alertId > 65000) {
                 return;
             }
@@ -591,8 +591,8 @@
                     "mode": 2,
                     "id": Number(ChannelID),
                     "name": name,
-                    "alter_id": Number($("#alert_ID").val())
-                        //"types": Number(security),
+                    //"alter_id": Number($("#alert_ID").val())
+                    //"types": Number(security),
                 },
                 "id": "9.1"
             }

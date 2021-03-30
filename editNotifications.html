@@ -629,6 +629,23 @@
             padding-right: 51px;
             align-items: center
         }
+        
+        .Alert-ID-label {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            text-align: left;
+            color: #333333;
+        }
+        
+        .Alert-ID-desc {
+            opacity: 0.74;
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            text-align: left;
+            color: #343434;
+        }
     </style>
 </head>
 
@@ -636,11 +653,21 @@
     <div class="container wirelessInfo form-inline" id="wirelessInfo">
         <div class="layui-form" lay-filter="example">
             <div class="Edit-Air-conditioner-notifications">Edit -- notifications</div>
+            <div class="layui-form-item -flex-display mt-20">
+                <div style="width:380px;padding-left: 14px;">
+                    <label class="Alert-ID-label">Alert
+                        ID:</label>
+                    <p class="Alert-ID-desc">Alert ID must be between 1000 and 65000 and must be individual to other input alert ID's</p>
+                </div>
+                <div class="layui-input-block" style="margin-left:0;">
+                    <input id="alert_ID" type="number" lay-verify="title" class="form-control h18 alertID-input" style="color:#333;">
+                </div>
+            </div>
             <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number Allow-notifications">Allow
                     notifications</label>
                 <div class="layui-input-block">
-                    <input id="Notifications" type="checkbox" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                    <input id="Notifications" type="checkbox" name="open" lay-skin="primary" lay-filter="switchTest">
                 </div>
             </div>
 
@@ -697,7 +724,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210326"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210330"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -711,6 +738,9 @@
             oldTrigType = trigType;
             var volt = GetUrlParam("volt");
             oldVolt = volt;
+            var alertID = GetUrlParam("alertID");
+            console.log("alertID", alertID);
+            $("#alert_ID").val(alertID);
             layui.use('layer', function() {
                 var layer = layui.layer;
                 var loading = layer.load(2, {
@@ -782,7 +812,8 @@
                 //var wake_func = $("#func_check").is(":checked") == true ? 1 : 0;;
                 console.log("noti_msg", noti_msg)
                 noti_msg = noti_msg.replace(/(\s*$)/g, "");
-                saveData(dataId, Notifications, trigType, volt, noti_msg)
+                var alert_ID = Number($("#alert_ID").val());
+                saveData(dataId, Notifications, trigType, volt, noti_msg, alert_ID)
 
             })
 
@@ -860,7 +891,8 @@
         }
 
         //保存数据
-        function saveData(dataId, Notifications, trigType, volt, noti_msg) {
+        function saveData(dataId, Notifications, trigType, volt, noti_msg, alert_ID) {
+            console.log("222", alert_ID)
             if (Notifications == 1) { //如果是打开的才传用户操作的
                 var data = {
                     "jsonrpc": "2.0",
@@ -872,7 +904,8 @@
                         "trig_cond_type": Number(trigType),
                         "trig_cond_value": volt,
                         "noti_msg": noti_msg,
-                        //"wake_func": Number(wake_func),
+                        "alter_id": alert_ID
+                            //"wake_func": Number(wake_func),
                     },
                     "id": "9.1"
                 }
@@ -887,7 +920,8 @@
                         "trig_cond_type": Number(oldTrigType),
                         "trig_cond_value": Number(oldVolt),
                         "noti_msg": oldNoti_msg,
-                        //"wake_func": Number(wake_func),
+                        "alter_id": alert_ID
+                            //"wake_func": Number(wake_func),
                     },
                     "id": "9.1"
                 }

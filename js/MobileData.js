@@ -172,7 +172,7 @@ function renderDataUsage(json, i) {
             $("#redmian_MB").text(limitNum1);
         }
 
-
+        $("#last_manth_s option[value='" + json[i].usage_cycle + "']").prop("selected", true);
         if (json[i].data_warning_flag == 1) {
             $("#setDataWaring input").attr("checked", "checked");
         } else {
@@ -238,7 +238,7 @@ function renderDataUsage(json, i) {
             $("#redmian_MB2").text(limitNum2);
         }
 
-
+        $("#last_manth_s2 option[value='" + json[i].usage_cycle + "']").prop("selected", true);
         if (json[i].data_warning_flag == 1) {
             $("#setDataWaring2 input").attr("checked", "checked");
         } else {
@@ -515,36 +515,35 @@ function getDatausageVal() {
     }
     var SIM_pin_lock2 = $("#SIM_pin_lock2 input").is(":checked") == true ? 1 : 0;
     var params = {
-        "params": {
-            "auto_switch": autoSwitch,
-            "sim": [{
-                    "sim_id": 0,
-                    "mobile_data": Number(mobileData),
-                    "roam_data": Number(DataRoaming),
-                    "usage_cycle": Number(last_manth_s),
-                    "data_warning_flag": Number(setDataWaring),
-                    "data_warning_size": Number(dataWaring),
-                    "warning_limit_unit": Number(switchMBWar),
-                    "usage_reminder_flag": Number(setDataLimit),
-                    "monthly_data_limit": Number(dataLimit),
-                    "sim_data_limt_unit": Number(switchMBLim),
-                    "lock_sim": Number(SIM_pin_lock)
-                },
-                {
-                    "sim_id": 1,
-                    "mobile_data": Number(mobileData2),
-                    "roam_data": Number(DataRoaming2),
-                    "usage_cycle": Number(last_manth_s2),
-                    "data_warning_flag": Number(setDataWaring2),
-                    "data_warning_size": Number(dataWaring2),
-                    "warning_limit_unit": Number(switchMBWar2),
-                    "usage_reminder_flag": Number(setDataLimit2),
-                    "monthly_data_limit": Number(dataLimit2),
-                    "sim_data_limt_unit": Number(switchMBLim2),
-                    "lock_sim": Number(SIM_pin_lock2)
-                }
-            ]
-        }
+        "auto_switch": autoSwitch,
+        "sim": [{
+                "sim_id": 0,
+                "mobile_data": Number(mobileData),
+                "roam_data": Number(DataRoaming),
+                "usage_cycle": Number(last_manth_s),
+                "data_warning_flag": Number(setDataWaring),
+                "data_warning_size": Number(dataWaring),
+                "warning_limit_unit": Number(switchMBWar),
+                "usage_reminder_flag": Number(setDataLimit),
+                "monthly_data_limit": Number(dataLimit),
+                "sim_data_limt_unit": Number(switchMBLim),
+                "lock_sim": Number(SIM_pin_lock)
+            },
+            {
+                "sim_id": 1,
+                "mobile_data": Number(mobileData2),
+                "roam_data": Number(DataRoaming2),
+                "usage_cycle": Number(last_manth_s2),
+                "data_warning_flag": Number(setDataWaring2),
+                "data_warning_size": Number(dataWaring2),
+                "warning_limit_unit": Number(switchMBWar2),
+                "usage_reminder_flag": Number(setDataLimit2),
+                "monthly_data_limit": Number(dataLimit2),
+                "sim_data_limt_unit": Number(switchMBLim2),
+                "lock_sim": Number(SIM_pin_lock2)
+            }
+        ]
+
     }
     layui.use(['layer'], function() {
         var layer = layui.layer;

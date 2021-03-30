@@ -90,6 +90,7 @@ function getInfoData(layer, loading) {
                 $("#MAC6174").html(res.result.Qca6174Mac);
                 $("#Platform_version").html(res.result.PlatformVersion ? res.result.PlatformVersion : "--");
                 $("#Product_version").html(res.result.BundleVersion);
+                $("#Cellular_signal").html(res.result.MobileSignalStrength);
                 if (res.result.AdminPwd) {
                     qrcode(res.result.AdminPwd);
                     $("#code_text").text(res.result.AdminPwd);
