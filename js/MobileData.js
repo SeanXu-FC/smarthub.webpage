@@ -80,6 +80,17 @@ $(function() {
         })
     })
 
+    // $("#dataWaring input").on('input', function(e) {
+    //     var valLimit = $("#dataLimit input").val();
+    //     var uintLimit = $("#switchMBLim").val();
+    //     var uintWarning = $("#switchMBWar").val();
+    //     valLimit = Number(uintLimit) == 1 ? valLimit * 1024 : valLimit;
+    //     var valWarning = Number(uintWarning) == 1 ? $(this).val * 1024 : $(this).val;
+    //     if (valWarning > valLimit) {
+
+    //     }
+    // })
+
 })
 var MobileData;
 
@@ -181,10 +192,9 @@ function renderDataUsage(json, i) {
         $("#switchMBWar option[value='" + json[i].warning_limit_unit + "']").prop("selected", true);
         if (json[i].warning_limit_unit == 0) {
             $("#dataWaring input").val(json[i].data_warning_size);
-            waringNum1 = json[i].data_warning_size;
         } else {
             $("#dataWaring input").val((Number(json[i].data_warning_size) / 1024).toFixed(2));
-            waringNum1 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
+
         }
 
         if (json[i].usage_reminder_flag == 1) {
@@ -287,6 +297,7 @@ function renderDataUsage(json, i) {
                 AllY += Number(json[i].days[k]);
                 Ydata[k] = AllY.toFixed(3);
             }
+            waringNum1 = Number(json[i].data_warning_size);
         } else {
             //Ydata = json[i].days;
             for (var p = 0; p < json[i].days.length; p++) {
@@ -294,7 +305,9 @@ function renderDataUsage(json, i) {
                 AllY += Number(Ydata[p]);
                 Ydata[p] = AllY.toFixed(3);
             }
+            waringNum1 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
         }
+        console.log(Ydata)
         if (Ydata.length > 0) {
             for (var j = 0; j < Ydata.length; j++) {
                 Xdate.push(j);
@@ -311,6 +324,7 @@ function renderDataUsage(json, i) {
                 AllY1 += Number(json[i].days[a]);
                 Ydata1[a] = AllY1.toFixed(3);
             }
+            waringNum2 = Number(json[i].data_warning_size);
         } else {
             //Ydata1 = json[i].days;
             for (var b = 0; b < json[i].days.length; b++) {
@@ -318,12 +332,17 @@ function renderDataUsage(json, i) {
                 AllY1 += Number(Ydata1[b]);
                 Ydata1[b] = AllY1.toFixed(3);
             }
+            waringNum2 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
         }
         if (Ydata1.length > 0) {
             for (var k = 0; k < Ydata1.length; k++) {
                 Xdate1.push(k);
             }
         }
+        //Xdate1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+        //Ydata1 = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 9001, 90002, 90002, 90002];
+        //Ydata1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40];
+        //Ydata1 = [];
         renderEchart("used_MB2", Xdate1, Ydata1, unit, limitNum2, unit2, waringNum2)
     }
 
@@ -344,6 +363,46 @@ function renderDataUsage(json, i) {
 function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
     var myChartGL = echarts.init(document.getElementById(id));
     myChartGL.clear();
+    var markLineObj = null;
+    var textLine = '';
+
+    var len = Ydata.length;
+    var fenmu = limitNum > Ydata[len - 1] ? limitNum : Ydata[len - 1]
+    var differNum = (limitNum / fenmu) - (waringNum / fenmu);
+    textLine = differNum > 0.1 ? '' : '\r\n'
+
+    if (Ydata.length > 0) {
+        markLineObj = {
+            symbol: ['none', 'none'], //['none']表示是一条横线；['arrow', 'none']表示线的左边是箭头，右边没右箭头；['none','arrow']表示线的左边没有箭头，右边有箭头
+            label: {
+                position: "end", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                //formatter: limitNum + unit + " limit"
+            },
+            data: [{
+                name: "limit",
+                label: { formatter: limitNum + unit + " limit" + textLine },
+                silent: false, //鼠标悬停事件 true没有，false有
+                lineStyle: { //警戒线的样式 ，虚实 颜色
+                    type: "solid", //样式  ‘solid’和'dotted'
+                    color: "#ff002a",
+                    padding: "0 60px 0 0px",
+                    width: 1 //宽度
+                },
+                yAxis: limitNum // 警戒线的标注值，可以有多个yAxis,多条警示线 或者采用 {type : 'average', name: '平均值'}，type值有 max min average，分为最大，最小，平均值
+            }, {
+                name: "waring",
+                label: { formatter: textLine + waringNum + unit + " waring", },
+                silent: false, //鼠标悬停事件 true没有，false有
+                lineStyle: { //警戒线的样式 ，虚实 颜色
+                    type: "solid", //样式  ‘solid’和'dotted'
+                    color: "#f77b00",
+                    padding: "0px 60px 0 0",
+                    width: 1 //宽度
+                },
+                yAxis: waringNum // 警戒线的标注值，可以有多个yAxis,多条警示线 或者采用 {type : 'average', name: '平均值'}，type值有 max min average，分为最大，最小，平均值
+            }]
+        }
+    }
     var optionBranchGL = {
         title: {
             show: Ydata.length == 0,
@@ -369,7 +428,7 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
         },
         grid: {
             left: '0px',
-            right: '130px',
+            right: '135px',
             bottom: '10px',
             top: '20px',
             containLabel: true
@@ -395,7 +454,19 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
         }],
         yAxis: [{
             type: 'value',
-            max: extent => extent.max > limitNum ? extent.max : limitNum, //强制改变Y周最大值，以便定值横线能显示
+            max: limitNum,
+            max: function(extent) {
+                console.log(extent)
+
+                if (extent.max != "-Infinity") {
+                    console.log(limitNum)
+                    return extent.max > limitNum ? extent.max : limitNum //强制改变Y周最大值，以便定值横线能显示
+                } else {
+                    console.log(limitNum)
+                    return limitNum
+                }
+
+            },
             axisLabel: {
                 show: false
             },
@@ -431,36 +502,7 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
                     }
                 },
                 data: Ydata,
-                markLine: {
-                    symbol: ['none', 'none'], //['none']表示是一条横线；['arrow', 'none']表示线的左边是箭头，右边没右箭头；['none','arrow']表示线的左边没有箭头，右边有箭头
-                    label: {
-                        position: "end", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                        //formatter: limitNum + unit + " limit"
-                    },
-                    data: [{
-                        name: "limit",
-                        label: { formatter: limitNum + unit + " limit" },
-                        silent: false, //鼠标悬停事件 true没有，false有
-                        lineStyle: { //警戒线的样式 ，虚实 颜色
-                            type: "solid", //样式  ‘solid’和'dotted'
-                            color: "#ff002a",
-                            padding: "0 60px 0 0",
-                            width: 1 //宽度
-                        },
-                        yAxis: limitNum // 警戒线的标注值，可以有多个yAxis,多条警示线 或者采用 {type : 'average', name: '平均值'}，type值有 max min average，分为最大，最小，平均值
-                    }, {
-                        name: "waring",
-                        label: { formatter: waringNum + unit2 + " waring", },
-                        silent: false, //鼠标悬停事件 true没有，false有
-                        lineStyle: { //警戒线的样式 ，虚实 颜色
-                            type: "solid", //样式  ‘solid’和'dotted'
-                            color: "#f77b00",
-                            padding: "0 60px 0 0",
-                            width: 1 //宽度
-                        },
-                        yAxis: waringNum // 警戒线的标注值，可以有多个yAxis,多条警示线 或者采用 {type : 'average', name: '平均值'}，type值有 max min average，分为最大，最小，平均值
-                    }]
-                }
+                markLine: markLineObj
             },
 
         ]
@@ -514,6 +556,18 @@ function getDatausageVal() {
         dataLimit2 = dataLimit2 * 1024;
     }
     var SIM_pin_lock2 = $("#SIM_pin_lock2 input").is(":checked") == true ? 1 : 0;
+
+
+    if (Number(dataWaring) > Number(dataLimit)) {
+        console.log(dataWaring, dataLimit)
+        layer.msg("data warning cannot be greater than data limit");
+        return;
+    }
+    if (Number(dataWaring2) > Number(dataLimit2)) {
+        layer.msg("data warning cannot be greater than data limit");
+        return;
+    }
+
     var params = {
         "auto_switch": autoSwitch,
         "sim": [{
