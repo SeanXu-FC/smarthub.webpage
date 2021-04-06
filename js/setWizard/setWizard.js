@@ -145,15 +145,21 @@ function changeSwitchStatus(layer, loading, checked) {
         success: function(res) {
             parent.layer.close(loading);
             if (res.result) {
-                if (checked) {
-                    $(".network-c").show();
-                    $("#WLAN_list_c").show();
-                    $("#WLAN_list_c").html("");
-                    getWLANScan(layer, loading);
+                if (res.result.error_code && res.result.error_code == 1) {
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.result.error_msg + '!</div>';
+                    promptMessage("Error message", tip);
                 } else {
-                    $(".network-c").hide();
-                    $("#WLAN_list_c").hide();
+                    if (checked) {
+                        $(".network-c").show();
+                        $("#WLAN_list_c").show();
+                        $("#WLAN_list_c").html("");
+                        getWLANScan(layer, loading);
+                    } else {
+                        $(".network-c").hide();
+                        $("#WLAN_list_c").hide();
+                    }
                 }
+
             } else if (res.error) {
                 layer.msg("An error occurred：" + res.error.message);
             }
@@ -214,7 +220,7 @@ function renderWifiList(json) {
             }
             //str += '<div class="row setWifi-item -flex-display -justify-box" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
             //有感叹号图标
-            str += '<div class="row -flex-display -justify-box" id="wifi_tips' + i + '" style="margin-bottom:13px;"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div><div class=""><img class="detail-wifi-icon" src="images/icon-info.png"></div></div>'
+            str += '<div class="row -flex-display -justify-box concected-wifi" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div><div class=""><img class="detail-wifi-icon" src="images/icon-info.png"></div></div>'
         }
     }
     for (let j = 0; j < json.length; j++) {

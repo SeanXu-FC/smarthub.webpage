@@ -78,9 +78,9 @@ function getInfoData(layer, loading) {
                 $("#iMeiInfo").html(res.result.IMEI);
                 $("#voltage").html(res.result.Voltage + " V");
                 $("#cd").html(res.result.Current_draw + " A");
-                var Temperature = (res.result.Temperature - 272.15).toFixed(2);
+                var Temperature = (res.result.Temperature - 272.15).toFixed(0);
                 $("#temperature").html(Temperature + " ℃");
-                var hour = (res.result.Operating_hours / 3600).toFixed(2)
+                var hour = (res.result.Operating_hours / 3600).toFixed(0)
                 $("#oh").html(hour + " hours");
                 $("#macAddress1").html(res.result.imax_mac);
                 $("#macAddress2").html(res.result.ipq_ether_mac);
@@ -90,7 +90,7 @@ function getInfoData(layer, loading) {
                 $("#MAC6174").html(res.result.Qca6174Mac);
                 $("#Platform_version").html(res.result.PlatformVersion ? res.result.PlatformVersion : "--");
                 $("#Product_version").html(res.result.BundleVersion);
-                $("#Cellular_signal").html(res.result.MobileSignalStrength);
+                $("#Cellular_signal").html(res.result.MobileSignalStrength + " dB");
                 if (res.result.AdminPwd) {
                     qrcode(res.result.AdminPwd);
                     $("#code_text").text(res.result.AdminPwd);

@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210330" rel="stylesheet" />
+    <link href="css/style.css?mv=20210406" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210330"></script>
+    <script src="js/lanConfiguration.js?mv=20210406"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210330"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210406"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -66,7 +66,7 @@
             line-height: 1.45;
             letter-spacing: normal;
             text-align: center;
-            color: #343434;
+            color: #434343;
         }
         
         .Rectangle-1182:hover {
@@ -299,16 +299,18 @@
                     <label for="" class="col-sm-4 control-label Configure-IP" style="color:#3a3a3a;">Configure IP:
                         <div
                             class="For-correct-operation-with-Raymarine-MFDs-ensure-that-IP-configuration-is-set-to-automatic">
-                            For correct operation with Raymarine MFDs ensure that IP configuration is set to automatic
+                            IP configuration is for advanced users and shouldn't be changed unless for a specific
+                            reason. Changing from automatic configuration will affect compatibility with Raymarine MFDs
                         </div>
                     </label>
 
                     <div class="col-sm-8 selectContent">
                         <select class="form-control width100 Automatically-DHCP-on" id="rsd" style="width:480px;border: solid 1px #707070;">
-                            <option value="Automatically (DHCP on)">Automatic address configuration, DHCP server on
+                            <option value="Automatically (DHCP on)">Automatically (DHCP on)
                             </option>
-                            <option value="Manually (DHCP on)">Manual address configuration, DHCP server on</option>
-                            <option value="Manually (DHCP off)">Manual address configuration, DHCP server off</option>
+                            <option value="Manually (DHCP off)">Manually (DHCP off)</option>
+                            <option value="Manually (DHCP on)">Manually (DHCP on)</option>
+
                         </select>
                     </div>
                 </div>

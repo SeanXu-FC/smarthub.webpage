@@ -25,7 +25,7 @@ function getConnected(layer, loading) {
                 var json = res.result.dev_list;
                 var main = "";
 
-                var arr = ["Ethernet", "Wireless"];
+                var arr = ["Ethernet", "Wi-Fi"];
                 var arrImg = ["Group 2902.png", "Group 2901.png", "Group 2903.png"];
                 for (var i = 0; i < json.length; i++) {
                     //main += '<tr class="text-center"><td class="align"><img class="img_a" src=""></td><td class="align"><span id="DeviceName"></span>' + json[item].DName + '</td><td class="align"><span id="MACAddress"></span>' + json[item].MACAddress + '</td><td class="align"><span id="IPAddress"></span>' + json[item].IPAddress + '</td><td class="align"><span id="ConnectMode" class="ConnectMode"></span>' + json[item].DType + '</td></tr>';

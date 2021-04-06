@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210330" rel="stylesheet" />
+    <link href="css/style.css?mv=20210406" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -151,8 +151,9 @@
         .col-sm-5 {
             border: 1px solid #000
         }
-        .layui-layer-btn a.layui-layer-btn0{
-           color:#fff;
+        
+        .layui-layer-btn a.layui-layer-btn0 {
+            color: #fff;
         }
     </style>
 </head>
@@ -176,7 +177,7 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="5">
                     <p class="lan-h Bilge-pump" id="name5">--</p>
                     <p class="mt-10 Channel">Channel 5 </p>
-                    <p class="mt-10 Digital-input" id="type5">--</p>
+                    <!-- <p class="mt-10 Digital-input" id="type5">--</p> -->
                     <span class="lan-edit Edit edit-first "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -193,7 +194,7 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="6">
                     <p class="lan-h Bilge-pump" id="name6">--</p>
                     <p class="mt-10 Channel">Channel 6 </p>
-                    <p class="mt-10 Digital-input" id="type6">--</p>
+                    <!-- <p class="mt-10 Digital-input" id="type6">--</p> -->
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -209,7 +210,7 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="7">
                     <p class="lan-h Bilge-pump" id="name7">--</p>
                     <p class="mt-10 Channel">Channel 7 </p>
-                    <p class="mt-10 Digital-input" id="type7">--</p>
+                    <!-- <p class="mt-10 Digital-input" id="type7">--</p> -->
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -225,14 +226,14 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="8">
                     <p class="lan-h Bilge-pump" id="name8">--</p>
                     <p class="mt-10 Channel">Channel 8 </p>
-                    <p class="mt-10 Digital-input" id="type8">--</p>
+                    <!-- <p class="mt-10 Digital-input" id="type8">--</p> -->
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210330"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210406"></script>
     <script>
         var frequency = 0;
         $(function() {
@@ -331,11 +332,11 @@
                                     $("#type" + (i + 1)).text("Digital postive input");
                                 }
                             } else {
-                                if (json[i].types == 0) {
-                                    $("#type" + (i + 1)).text("Active low output");
-                                } else if (json[i].types == 1) {
-                                    $("#type" + (i + 1)).text("Active high output");
-                                }
+                                // if (json[i].types == 0) {
+                                //     $("#type" + (i + 1)).text("Active low output");
+                                // } else if (json[i].types == 1) {
+                                //     $("#type" + (i + 1)).text("Active high output");
+                                // }
                             }
                         }
                         layui.use(['form'], function() {

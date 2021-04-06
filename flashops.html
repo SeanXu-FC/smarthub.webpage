@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <title>OpenWrt - Flashing...</title>
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210330" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210406" />
     <style>
         .Software-upgrade {
             font-family: OpenSans;
@@ -125,7 +125,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
 <script src="js/jquery.myProgress.js"></script>
-<script type="text/javascript" src="js/common.js?mv=20210330"></script>
+<script type="text/javascript" src="js/common.js?mv=20210406"></script>
 
 <script type="text/javascript">
     var interval = null,
@@ -159,6 +159,7 @@
                         count: GetUrlParam("count"),
                         total: GetUrlParam("total")
                     }
+                    progress(data.count, data.total);
                     statusHandle(data, layer);
                 } else {
                     no4Getstatus(layer);
@@ -290,15 +291,16 @@
                 },
                 error: function(jqXHR) {
                     console.log(JSON.stringify(jqXHR));
-                    parent.layer.close(loading); //关闭禁止点击的透明遮罩
-                    // frequency++;
-                    // if (frequency > 3) {
-                    //     frequency = 0;
-                    //     parent.layer.close(loading);
-                    //     var tip =
-                    //         '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Please wait patiently while the device is upgrading and restarting!</div>';
-                    //     promptMessage("Tips", tip);
-                    // }
+
+                    frequency++;
+                    if (frequency > 7) {
+                        parent.layer.close(loading); //关闭禁止点击的透明遮罩
+                        frequency = 0;
+                        parent.layer.close(loading);
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
+                        promptMessage("Tips", tip);
+                    }
                 }
             });
         }, 2000);

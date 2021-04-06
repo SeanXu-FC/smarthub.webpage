@@ -89,16 +89,29 @@ function changeSwitchStatus(layer, form, checked) {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             if (res.result) {
-                if (mode) {
-                    $(".network-c").show();
-                    $("#WLAN_list_c").show();
-                    $(".search-container").show();
-                    $("#WLAN_list_c").html("");
-                    getWLANScan(layer);
+                if (res.result.error_code && res.result.error_code == 1) {
+                    if (mode) {
+                        $("#WLAN_swtich_c input").removeAttr("checked");
+                    } else {
+                        $("#WLAN_swtich_c input").attr("checked", "checked");
+                    }
+                    form.render();
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.result.error_msg + '!</div>';
+                    promptMessage("Error message", tip);
                 } else {
-                    $(".network-c").hide();
-                    $("#WLAN_list_c").hide();
-                    $(".search-container").hide();
+                    if (mode) {
+
+                        $(".network-c").show();
+                        $("#WLAN_list_c").show();
+                        $(".search-container").show();
+                        $("#WLAN_list_c").html("");
+                        getWLANScan(layer);
+                    } else {
+
+                        $(".network-c").hide();
+                        $("#WLAN_list_c").hide();
+                        $(".search-container").hide();
+                    }
                 }
             } else if (res.error) {
                 layer.msg("An error occurred：" + res.error.message);
@@ -262,7 +275,7 @@ function renderWifiList(json) {
             } else {
                 ConnectedStr = "Connecting";
             }
-            str += '<tr><td class="col-md-8"><div class="wifi-name wifi-name-green">' + json[i].ssid + '</div><div class=" c9 Connected-24GHz" style="padding-left:0"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status">' + ConnectedStr + '</span></div></td><td><div class="col-md-2">'
+            str += '<tr class="connected-wifi"><td class="col-md-8" ><div class="wifi-name wifi-name-green">' + json[i].ssid + '</div><div class=" c9 Connected-24GHz" style="padding-left:0"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status">' + ConnectedStr + '</span></div></td><td><div class="col-md-2">'
             signal = Math.abs(json[i].rssi);
             if (100 > signal && signal >= 85) {
                 wifiImg = "s_wifi_02.png";
@@ -274,7 +287,7 @@ function renderWifiList(json) {
                 wifiImg = "s_wifi_05.png";
             }
 
-            str += '<img class="wifi-icon" src="images/' + wifiImg + '"></div></td><td><div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div></td><td class="wifi-info" style="display:none"><span class="save-wifi-info" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '"></span></td></tr>'
+            str += '<img class="wifi-icon" src="images/' + wifiImg + '"></div></td><td style="padding-left: 0;"><div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div></td><td class="wifi-info" style="display:none"><span class="save-wifi-info" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '"></span></td></tr>'
 
         }
     }

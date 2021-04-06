@@ -297,7 +297,7 @@ xblock {
     height: 43px;
     /* line-height: 52px; */
     font-family: OpenSans;
-    font-size: 28px;
+    font-size: 38px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -306,7 +306,7 @@ xblock {
     text-align: left;
     color: #861f41;
     color: grape-purple;
-    margin-top: 14px;
+    margin-top: 7px;
 }
 
 .Smart-Hub-Manager:hover {

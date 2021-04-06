@@ -12,7 +12,7 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210330" rel="stylesheet" />
+    <link href="css/style.css?mv=20210406" rel="stylesheet" />
     <link rel="stylesheet" href="layui/css/layui.css">
 
     <title>Document</title>
@@ -283,7 +283,7 @@
             line-height: 1.45;
             letter-spacing: normal;
             text-align: center;
-            color: #343434;
+            color: #434343;
         }
         
         .Cancel:hover {
@@ -479,7 +479,7 @@
                                     </tr>
                                     <tr id="pwd">
                                         <td class="col-sm-3 czjz Access-point-name">Password:</td>
-                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point access_point_password" value="" style="width:80%"><span id="eye" class="pass-show" style="margin-left:10px;">SHOW</span>
+                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point access_point_password" value="" style="width:80%"><span id="eye" class="pass-show" style="margin-left:-50px;">SHOW</span>
                                             <p class="len-tip"></p>
                                         </td>
                                     </tr>
@@ -490,16 +490,17 @@
                                         </td>
                                     </tr> -->
                                     <tr>
+                                        <td class="czjz Access-point-name">Preferred Wi-Fi channel:</td>
+                                        <td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td>
+                                    </tr>
+                                    <tr>
                                         <td class="czjz Access-point-name">Channel width:</td>
                                         <td>
                                             <select name="type" id="HTmode" class="form-control  My-access-pointHZ" style="width:80%">
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="czjz Access-point-name">Preferred Wi-Fi channel:</td>
-                                        <td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td>
-                                    </tr>
+
                                     <tr>
                                         <td class="czjz Access-point-name">Encryption type:</td>
                                         <td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point" style="width:80%"></select></td>
@@ -546,9 +547,9 @@
 
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210330"></script>
-    <script src="js/SmartHubPoint.js?mv=20210330"></script>
-    <!-- <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210330"></script> -->
+    <script type="text/javascript" src="js/common.js?mv=20210406"></script>
+    <script src="js/SmartHubPoint.js?mv=20210406"></script>
+    <!-- <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210406"></script> -->
 </body>
 
 </html>

@@ -5,17 +5,26 @@ var progressBarTimer = null;
 var progress = null;
 var progressFrequency = 0;
 $(function() {
-    getHomeData();
+
+    layui.use(['layer', 'form'], function() {
+        var layer = layui.layer;
+        var form = layui.form;
+        var loading = layer.load(0, {
+            shade: false
+        });
+        getHomeData(layer, loading);
+        timer = setInterval(() => {
+            getHomeData(layer, loading);
+        }, 10000);
+    })
     getStatus();
-    timer = setInterval(() => {
-        getHomeData();
-    }, 10000);
+
     $(window).on('beforeunload', function() {
         clearInterval(timer);
     });
 
 
-    $("#Home_c .row a").on("click", function() {
+    $("#Home_c .row a,#connected_devices").on("click", function() {
             var url = $(this).attr('data-url');
             if (url == "home.html" || url == undefined) {
                 $(parent.document).find("#my-iframe").attr("src", url);
@@ -35,7 +44,7 @@ $(function() {
 
 
 
-function getHomeData() {
+function getHomeData(layer, loading) {
     var data = {
         "jsonrpc": "2.0",
         "method": "GetHomeStatus",
@@ -50,6 +59,7 @@ function getHomeData() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            layer.close(loading);
             if (res.result) {
                 var json = res.result;
                 var arr = ['Connected', 'Connected(2.4GHz)', 'Connected(5GHz)', 'On', 'Off',
@@ -222,6 +232,7 @@ function getHomeData() {
             console.log("Error message", JSON.stringify(jqXHR))
             frequency1++;
             if (frequency1 > 2) {
+                layer.close(loading);
                 frequency1 = 0;
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                 promptMessage("Error message", tip);
@@ -309,6 +320,10 @@ function progressBar() {
     progressBarTimer = setInterval(() => {
         progressI = progressI + 1;
         console.log(progressI)
+        if (progressI == 600) { //progressI=600进度条达到100%，时间达到1分钟
+            clearInterval(progressBarTimer);
+            return;
+        }
         $(parent.document).find("#div3").myProgress({
             speed: 10,
             percent: ((progressI / 600) * 100).toFixed(0),

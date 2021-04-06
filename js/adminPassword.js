@@ -58,7 +58,7 @@ $(function() {
             $("#tip").show();
             $("#tip").text("Passwords don't match"); //两次输入的密码不一致！
             $("#tip").css({
-                "color": "red",
+                "color": "#ff002a",
                 "fontWeight": "normal"
             });
             $("#btn").attr("disabled", "true");
@@ -68,8 +68,8 @@ $(function() {
         } else {
             $("#tip").text('Passwords match');
             $("#tip").css({
-                "color": "green",
-                "fontWeight": "bold"
+                "color": "#26b167",
+                "fontWeight": "normal"
             });
         }
         if (8 <= len3 && len3 <= 64) {
@@ -80,8 +80,8 @@ $(function() {
             $("#btn").css("opacity", "0.5");
             $("#tip").text('Password too short'); //长度太短，为了显示这个len3判断提前len2
             $("#tip").css({
-                "color": "#5d5d5d",
-                "fontWeight": "bold"
+                "color": "#909090",
+                "fontWeight": "normal"
             });
             return false;
         }
@@ -108,7 +108,7 @@ $(function() {
             contentType: "application/x-www-form-urlencoded;charset=utf-8",
             success: function(res) {
                 if (res.result && res.result.flag == "0") {
-                    $("#current_pass_e").text("Wrong user name or password").addClass('state3');
+                    $("#current_pass_e").text("Password is incorrect").addClass('state3');
                 } else {
                     $('#success').show(1000);
                     setTimeout(() => {

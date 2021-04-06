@@ -11,16 +11,16 @@
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
 
 
-    <link rel="stylesheet" href="css/style.css?mv=20210330">
+    <link rel="stylesheet" href="css/style.css?mv=20210406">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css?mv=20210330">
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210330" />
+    <link rel="stylesheet" href="css/xadmin.css?mv=20210406">
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210406" />
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210330"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210406"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js?mv=20210330"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20210406"></script>
     <title>Document</title>
     <style>
         /* img {
@@ -543,22 +543,22 @@
                     <div class="w520">
                         <img src="images/r_07.png " class="r_07">
                     </div>
-                    <div class="w520">
-                        <div style="float:left;margin-left:20px; ">
+                    <div class="w520" id="connected_devices" data-url="connectedDevices.html">
+                        <div style="float:left;margin-left:20px; cursor: pointer;">
                             <div class="Wireless-Connections" id="WirelessConnections">Wi-Fi connections
                                 <span></span></div>
                             <div class="mt-10" id="">
-                                <a href="javascript:;" data-url="connectedDevices.html" target="_self"><img src="images/Group 2901.png " title="Wi-Fi" class="Group2901"></a>
-                                <a href="javascript:;" data-url="connectedDevices.html" target="_self"><img src="images/Group 2901.png " title="Wi-Fi" class="Group2901"></a>
-                                <a href="javascript:;" data-url="connectedDevices.html" target="_self"><img src="images/Group 2901.png " title="Wi-Fi" class="Group2901"></a>
+                                <span><img src="images/Group 2901.png " title="Wi-Fi" class="Group2901"></span>
+                                <span><img src="images/Group 2901.png " title="Wi-Fi" class="Group2901"></span>
+                                <span><img src="images/Group 2901.png " title="Wi-Fi" class="Group2901"></span>
                             </div>
                         </div>
-                        <div style="float:right ">
+                        <div style="float:right ;cursor: pointer;">
                             <div class="Ethernet-Connections" id="EthernetConnections">Ethernet connections
                                 <span></span></div>
                             <div class="mt-10 ">
-                                <a href="javascript:;" data-url="connectedDevices.html" target="_self"><img src="images/Group 2902.png " title="Ethernet" class="Group2902"></a>
-                                <a href="javascript:;" data-url="connectedDevices.html" target="_self"><img src="images/Group 2903.png " title="Ethernet" class="Group2902"></a>
+                                <span><img src="images/Group 2902.png " title="Ethernet" class="Group2902"></span>
+                                <span><img src="images/Group 2903.png " title="Ethernet" class="Group2902"></span>
                             </div>
                         </div>
                     </div>
@@ -612,6 +612,23 @@
     </div>
 </body>
 <script src="js/jquery.myProgress.js"></script>
-<script type="text/javascript" src="js/home.js?mv=20210330"></script>
+<script type="text/javascript" src="js/home.js?mv=20210406"></script>
+<!-- <script>
+    setTimeout(function() {
+        console.log(123456)
+        $.ajax({
+            url: 'http://yachtsense.raymarine.com',
+            dataType: 'json',
+            data: {},
+            cache: false,
+            ifModified: true,
+
+            success: function(response) {
+                //操作
+            },
+            async: false
+        });
+    }, 2000)
+</script> -->
 
 </html>
