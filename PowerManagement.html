@@ -552,6 +552,7 @@
                         var json = res.result.io_date;
                         for (var i = 0; i < json.length; i++) {
                             if (3 < i) {
+                                $('input[name="Output"]').eq(i - 4).attr("title", json[i].name);
                                 if (json[i].wake_func == 2) { //根据wake_func有等于2的勾上复选框checked
                                     $(".no-full-power-mode1").show();
                                     $('#allow_switch input').prop("checked", true);
