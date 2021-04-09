@@ -52,6 +52,31 @@ function WidthCheckIO(str, maxLen) {
     }
 }
 
+
+//限制输入单引号和)和输入长度
+function WidthCheckPassword(str, maxLen) {
+    var w = 0;
+    var tempCount = 0;
+    str.value = str.value.replace(/[')！￥……（）——、【】？《》。，：；“”·‘’]/g, "");
+
+    str.value = str.value.replace(/[\u4e00-\u9fa5]/g, '');
+    //length 获取字数数
+    for (var i = 0; i < str.value.length; i++) {
+        //charCodeAt()获取字符串中某一个字符的编码 
+        var c = str.value.charCodeAt(i);
+        //单字节加1 
+        if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+            w++;
+        } else {
+            w += 2;
+        }
+        if (w > maxLen) {
+            str.value = str.value.substr(0, i);
+            break;
+        }
+    }
+}
+
 function promptMessage(title, content) {
     layui.use(['layer'], function() {
         var layer = layui.layer;
@@ -122,4 +147,15 @@ function eco_refresh(id) {
     var _iframe1 = _body.document.getElementById(id);
     window.onbeforeunload = function() {};
     _iframe1.contentWindow.location.reload(true);
+}
+
+function clearCookie(name) {
+    setCookie(name, "", -1);
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
 }

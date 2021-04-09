@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210406" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210406"></script>
+    <link href="css/style.css?mv=20210409" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210409"></script>
     <title>Document</title>
     <style>
         * {
@@ -293,7 +293,7 @@
     </div>
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210406"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210409"></script>
     <script>
         var srcStr;
         $(function() {
@@ -330,9 +330,10 @@
             //     }
             // })
             $('#pwd').on("input", function() {
-                var reg = /^[\da-zA-Z!@#$%|+-^&*.~]{8,64}$/; //数字、字母、特殊字符
+
                 $('.error').hide();
-                if (reg.test($(this).val())) {
+                var len = $(this).val().length;
+                if (7 < len && len < 64) {
 
                     $("#btn").removeAttr("disabled");
                     $("#btn").css("opacity", "1");
@@ -342,9 +343,10 @@
                     $("#btn").css("opacity", "0.5");
                 }
             }).on('mouseup', function() {
-                var reg = /^[\da-zA-Z!@#$%|+-^&*.~]{8,64}$/; //数字、字母、特殊字符
+
                 $('.error').hide();
-                if (reg.test($(this).val())) {
+                var len = $(this).val().length;
+                if (7 < len && len < 64) {
 
                     $("#btn").removeAttr("disabled");
                     $("#btn").css("opacity", "1");

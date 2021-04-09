@@ -140,7 +140,8 @@
             font-weight: 500;
         }
         
-        .PIN-describe {
+        .PIN-describe,
+        .PIN-describe1 {
             font-family: OpenSans;
             font-size: 18px;
             text-align: left;
@@ -193,20 +194,25 @@
 <body>
     <div id="enterPass1" class="Rectangle-1187">
 
-        <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Change <span id="unlock_name"></span>PIN
+        <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Enter PUK to unblock <span id="unlock_name"></span>
         </h3>
-
         <div class="row">
-            <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">Current PIN:</label>
-            <input type="number" id="Current_PIN" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
+            <label class="col-md-4 PIN-describe mt-30" style="padding-left:0;">Your SIM can't be accessed. </label>
+        </div>
+        <div class="row">
+            <label class="col-md-4 PIN-describe" style="padding-left:0;">Enter PUK code to unblock the SIM.</label>
+        </div>
+        <div class="row">
+            <label class="col-md-4 PIN-describe1 mt-30" style="padding-left:0;"><span id="unblock_time">10</span>
+                attempts remaining</label>
+        </div>
+        <div class="row">
+            <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">PUK:</label>
+            <input type="number" id="PUK_input" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
         </div>
         <div class="row">
             <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">New PIN:</label>
-            <input type="number" id="New_PIN" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
-        </div>
-        <div class="row">
-            <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">Confirm new PIN:</label>
-            <input type="number" id="New_PIN1" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
+            <input type="number" id="PIN_input" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
         </div>
         <div class="row mt-40" style="text-align: center;">
             <button class="Path-101 Cancel" id="cancel">Cancel</button>
@@ -219,21 +225,22 @@
     <script src="layui/layui.js " charset="utf-8 "></script>
     <script type="text/javascript" src="js/common.js?mv=20210409"></script>
     <script type="text/javascript">
-        var SIM;
+        var SIM, times;
         $(function() {
             SIM = GetUrlParam("SIM");
+            times = GetUrlParam("times");
             console.log("SIM2", SIM)
+            $("#unblock_time").text(times);
             $("#unlock_name").text("SIM" + SIM);
             // 按钮禁掉和灰掉
             $(".connected button").prop("disabled", true);
             $(".connected button").css("opacity", "0.5");
 
 
-            $('#Current_PIN,#New_PIN,#New_PIN1').bind("keyup", function() {
-                var len = $('#Current_PIN').val().length;
-                var len1 = $('#New_PIN').val().length;
-                var len2 = $('#New_PIN1').val().length;
-                if (2 <= len && 2 <= len1 && 2 <= len2) {
+            $('#PIN_input,#PUK_input').bind("keyup", function() {
+                var len = $('#PIN_input').val().length;
+                var len1 = $('#PUK_input').val().length;
+                if (2 <= len && 2 <= len1) {
                     $("#OK_btn").removeAttr("disabled");
                     $("#OK_btn").css("opacity", "1");
 
@@ -266,13 +273,11 @@
             });
             var data = {
                 "jsonrpc": "2.0",
-                "method": "ChangePin",
+                "method": "UnblockWithPuk",
                 "params": {
                     "sim_id": Number(SIM - 1),
-                    "status": 0,
-                    "old_pin": $('#Current_PIN').val(),
-                    "new_pin1": $('#New_PIN').val(),
-                    "new_pin2": $('#New_PIN1').val()
+                    "puk_code": $('#PUK_input').val(),
+                    "new_pin_code": $('#PIN_input').val()
                 },
                 "id": "9.1"
             }
@@ -293,7 +298,16 @@
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index); //关闭当前页
                     } else {
-
+                        if (res.result.puktimes == 0) {
+                            $(parent.frames["my-iframe"].document).find("#unlockSIM").val(1);
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index); //关闭当前页
+                        } else {
+                            if (res.result.puktimes < 4) {
+                                $(".PIN-describe1").addClass("color-red");
+                            }
+                            $("#unblock_time").text(res.result.puktimes);
+                        }
                     }
                 },
                 error: function(jqXHR) {

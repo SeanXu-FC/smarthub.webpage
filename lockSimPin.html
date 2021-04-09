@@ -129,7 +129,7 @@
         }
         
         .Password {
-            width: 125px;
+            /* width: 86px; */
             height: 24px;
             font-family: OpenSans;
             font-size: 18px;
@@ -163,7 +163,7 @@
         }
         
         .Rectangle-1188 {
-            width: auto;
+            width: 242px;
             height: 40px;
             padding: 5px 10px;
             border-radius: 5px;
@@ -187,26 +187,25 @@
             background-color: #861f41;
             color: #fff;
         }
+        
+        .color-red {
+            color: #ff0000
+        }
     </style>
 </head>
 
 <body>
     <div id="enterPass1" class="Rectangle-1187">
 
-        <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Change <span id="unlock_name"></span>PIN
+        <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Enter PIN to <span id="lock_type"></span> <span id="unlock_name"></span>
         </h3>
-
         <div class="row">
-            <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">Current PIN:</label>
-            <input type="number" id="Current_PIN" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
+            <label class="col-md-4 PIN-describe mt-30" style="padding-left:0;"><span id="lock_time">3</span> attempts
+                remaining</label>
         </div>
         <div class="row">
-            <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">New PIN:</label>
-            <input type="number" id="New_PIN" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
-        </div>
-        <div class="row">
-            <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">Confirm new PIN:</label>
-            <input type="number" id="New_PIN1" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
+            <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">PIN:</label>
+            <input type="number" id="PIN_input" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
         </div>
         <div class="row mt-40" style="text-align: center;">
             <button class="Path-101 Cancel" id="cancel">Cancel</button>
@@ -218,94 +217,7 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
     <script type="text/javascript" src="js/common.js?mv=20210409"></script>
-    <script type="text/javascript">
-        var SIM;
-        $(function() {
-            SIM = GetUrlParam("SIM");
-            console.log("SIM2", SIM)
-            $("#unlock_name").text("SIM" + SIM);
-            // 按钮禁掉和灰掉
-            $(".connected button").prop("disabled", true);
-            $(".connected button").css("opacity", "0.5");
-
-
-            $('#Current_PIN,#New_PIN,#New_PIN1').bind("keyup", function() {
-                var len = $('#Current_PIN').val().length;
-                var len1 = $('#New_PIN').val().length;
-                var len2 = $('#New_PIN1').val().length;
-                if (2 <= len && 2 <= len1 && 2 <= len2) {
-                    $("#OK_btn").removeAttr("disabled");
-                    $("#OK_btn").css("opacity", "1");
-
-                } else {
-                    $("#OK_btn").attr("disabled", "true");
-                    $("#OK_btn").css("opacity", "0.5");
-                }
-            });
-
-            $('#cancel').click(function() {
-                $(parent.frames["my-iframe"].document).find("#unlockSIM").val(0);
-                var index = parent.layer.getFrameIndex(window.name);
-                parent.layer.close(index); //关闭当前页
-            });
-
-
-            $("#OK_btn").on("click", function() {
-                console.log(111)
-                layui.use(['layer'], function() {
-                    var layer = layui.layer;
-                    unlockSIM(layer)
-                })
-            })
-        });
-
-        //解锁SIM卡
-        function unlockSIM(layer, params) {
-            var loading = layer.load(0, {
-                shade: false
-            });
-            var data = {
-                "jsonrpc": "2.0",
-                "method": "ChangePin",
-                "params": {
-                    "sim_id": Number(SIM - 1),
-                    "status": 0,
-                    "old_pin": $('#Current_PIN').val(),
-                    "new_pin1": $('#New_PIN').val(),
-                    "new_pin2": $('#New_PIN1').val()
-                },
-                "id": "9.1"
-            }
-            data = JSON.stringify(data);
-            $(parent.frames["my-iframe"].document).find("#unlockSIM").val(1);
-            //var index = parent.layer.getFrameIndex(window.name);
-            // parent.layer.close(index); //关闭当前页
-            $.ajax({
-                type: "post",
-                url: "/action/action",
-                data: data,
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                success: function(res) {
-                    layer.close(loading);
-                    if (res.result && res.result.status == 1) {
-                        $(parent.frames["my-iframe"].document).find("#unlockSIM").val(1);
-                        var index = parent.layer.getFrameIndex(window.name);
-                        parent.layer.close(index); //关闭当前页
-                    } else {
-
-                    }
-                },
-                error: function(jqXHR) {
-                    layer.close(loading);
-                    console.log("Error message", JSON.stringify(jqXHR))
-                    var tip =
-                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
-                    promptMessage("Error message", tip);
-                }
-            });
-        }
-    </script>
+    <script type="text/javascript" src="js/lockSimPin.js?mv=20210409"></script>
 </body>
 
 </html>

@@ -111,6 +111,7 @@ $(function() {
                     $("#current_pass_e").text("Password is incorrect").addClass('state3');
                 } else {
                     $('#success').show(1000);
+                    clearCookie("LogInStaus");
                     setTimeout(() => {
                         top.location.href = "/index.html";
                     }, 3000);

@@ -27,46 +27,89 @@ $(function() {
             'width': '90%'
         }, 'fast');
         if (dataTab == "tab0") {
+            unlockSIM = 1;
             $getWrapper.find($allTabs).filter('[data-tab=tab1]').hide();
             $getWrapper.find($allTabs).filter('[data-tab=tab0]').show();
         } else if (dataTab == "tab1") {
+            unlockSIM = 2;
             $getWrapper.find($allTabs).filter('[data-tab=tab0]').hide();
             $getWrapper.find($allTabs).filter('[data-tab=tab1]').show();
         }
+
     })
 
     //弹出一个iframe层
-    $('.Unlock-SIM').on('click', function() {
-        //iframe层
-        parent.layer.open({
-            type: 2,
-            title: false,
-            closeBtn: 0,
-            //shadeClose: true,
-            shade: 0.8,
-            area: ['400px', '320px'],
-            content: ['changeSimPin.html?SIM=' + unlockSIM, 'no'],
-            end: function(index, layero) {
-
-                var unlockSIM = $("#unlockSIM").val();
-                if (unlockSIM == 1) {
-                    layui.use(['layer', 'form'], function() {
-                        var layer = layui.layer;
-                        var form = layui.form;
-                        var loading = layer.load(0, {
-                            shade: false
-                        });
-                        getSimManagement(layer, form, loading);
-                    })
-                }
-            }
-        });
-    });
+    initBindEvent("Change_SIM_pin");
+    initBindEvent("Change_SIM_pin1");
+    bindUnblockEvent("unblock_SIM");
+    bindUnblockEvent("unblock_SIM1");
 
     layui.use(['layer', 'form'], function() {
         var layer = layui.layer;
         var form = layui.form;
         getMainParameters(layer, form);
+
+        form.on('checkbox(SIMpin)', function(data) {
+            console.log(data)
+            var checked = data.elem.checked;
+            var type, times;
+            if (checked) {
+                type = 1 //lock
+            } else {
+                type = 2 //unlock
+            }
+            times = MobileData[(unlockSIM - 1)].pin_times;
+            parent.layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 0,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['400px', '320px'],
+                content: ['lockSimPin.html?SIM=' + unlockSIM + '&type=' + type + '&times=' + times, 'no'],
+                end: function(index, layero) {
+                    var unlockSIM = $("#unlockSIM").val();
+                    if (unlockSIM == 1) {
+                        layui.use(['layer', 'form'], function() {
+                            var layer = layui.layer;
+                            var form = layui.form;
+                            getMainParameters(layer, form);
+                        })
+                    }
+                }
+            });
+        });
+        form.on('checkbox(SIMpin2)', function(data) {
+            console.log(data)
+            var checked = data.elem.checked;
+            var type, times;
+            if (checked) {
+                type = 1 //lock
+            } else {
+                type = 2 //unlock
+            }
+            times = MobileData[(unlockSIM - 1)].pin_times;
+            parent.layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 0,
+                //shadeClose: true,
+                shade: 0.8,
+                area: ['400px', '320px'],
+                content: ['lockSimPin.html?SIM=' + unlockSIM + '&type=' + type + '&times=' + times, 'no'],
+                end: function(index, layero) {
+                    var unlockSIM = $("#unlockSIM").val();
+                    if (unlockSIM == 1) {
+                        layui.use(['layer', 'form'], function() {
+                            var layer = layui.layer;
+                            var form = layui.form;
+                            getMainParameters(layer, form);
+                        })
+                    }
+                }
+            });
+
+        });
     })
 
     $("#btn_saved1").on("click", function() {
@@ -92,6 +135,34 @@ $(function() {
     // })
 
 })
+
+function initBindEvent(id) {
+    console.log(id)
+    $('#' + id).on('click', function() {
+        console.log(unlockSIM)
+            //iframe层
+        parent.layer.open({
+            type: 2,
+            title: false,
+            closeBtn: 0,
+            //shadeClose: true,
+            shade: 0.8,
+            area: ['400px', '415px'],
+            content: ['changeSimPin.html?SIM=' + unlockSIM, 'no'],
+            end: function(index, layero) {
+                var unlockSIM = $("#unlockSIM").val();
+                if (unlockSIM == 1) {
+                    layui.use(['layer', 'form'], function() {
+                        var layer = layui.layer;
+                        var form = layui.form;
+                        getMainParameters(layer, form);
+                    })
+                }
+            }
+        });
+    });
+
+}
 var MobileData;
 
 function getMainParameters(layer, form) {
@@ -115,15 +186,28 @@ function getMainParameters(layer, form) {
             layer.close(loading);
             if (res.result) {
                 var json = res.result;
+
+                //模拟数据
+                // json.sim[0].isblock = 1;
+                // json.sim[0].pin_lock = 0;
+                // json.sim[0].pin_times = 3;
+                // json.sim[0].puk_times = 10;
+                // json.sim[1].isblock = 0;
+                //json.sim[1].pin_lock = 1;
+                // json.sim[1].pin_times = 3;
+                // json.sim[1].puk_times = 10;
+
+
+
                 if (json.auo_switch == 0) { //Mobile data:                
                     $("#autoSwitch input").removeAttr("checked");
                 } else {
                     $("#autoSwitch input").attr("checked", "checked");
-
                 }
 
 
                 MobileData = json.sim;
+                console.log("MobileData", MobileData)
                 renderDataUsage(MobileData, 0);
                 setTimeout(() => {
                     renderDataUsage(MobileData, 1);
@@ -138,7 +222,7 @@ function getMainParameters(layer, form) {
             frequency++;
             if (frequency < 3) {
                 setTimeout(() => {
-                    getMainParameters(layer, form, loading);
+                    getMainParameters(layer, form);
                 }, 5000);
             } else {
                 frequency = 0;
@@ -150,9 +234,55 @@ function getMainParameters(layer, form) {
     });
 }
 
+function bindUnblockEvent(id) {
+    $('#' + id).on('click', function() {
+        console.log(unlockSIM)
+        var times = MobileData[(unlockSIM - 1)].pin_times;
+        //iframe层
+        parent.layer.open({
+            type: 2,
+            title: false,
+            closeBtn: 0,
+            //shadeClose: true,
+            shade: 0.8,
+            area: ['400px', '510px'],
+            content: ['unblockSIM.html?SIM=' + unlockSIM + '&times=' + times, 'no'],
+            end: function(index, layero) {
+                var unlockSIM = $("#unlockSIM").val();
+                if (unlockSIM == 1) {
+                    layui.use(['layer', 'form'], function() {
+                        var layer = layui.layer;
+                        var form = layui.form;
+                        getMainParameters(layer, form);
+                    })
+                }
+            }
+        });
+    });
+}
+
 function renderDataUsage(json, i) {
     var limitNum1, limitNum2, waringNum1, waringNum2;
     if (i == 0) {
+        if (json[i].provider) {
+            $("#SIM_provider1").text("(" + json[i].provider + ")");
+        }
+        if (json[i].isblock == 1) {
+            $(".content1 .content1-contianer").hide();
+            $(".sim-block-c").show();
+            return;
+        } else {
+            $(".content1 .content1-contianer").show();
+            $(".sim-block-c").hide();
+        }
+        if (json[i].pin_lock == 0) {
+            $("#SIM_pin_lock input").removeAttr("checked");
+            $("#Change_SIM_pin").attr("disabled", "disabled");
+        } else {
+            $("#SIM_pin_lock input").attr("checked", "checked");
+            $("#Change_SIM_pin").removeAttr("disabled");
+        }
+
         if (json[i].mobile_data == 1) { //Mobile data:                
             $("#mobileData input").attr("checked", "checked");
         } else {
@@ -212,12 +342,28 @@ function renderDataUsage(json, i) {
         $("#provider").text(json[i].provider);
         $("#sim_imsi").text(json[i].imsi);
 
-        if (json[i].lock_sim == 1) {
-            $("#SIM_pin_lock input").attr("checked", "checked");
-        } else {
-            $("#SIM_pin_lock input").removeAttr("checked");
-        }
     } else {
+        if (json[i].provider) {
+            $("#SIM_provider2").text("(" + json[i].provider + ")");
+        }
+
+        if (json[i].isblock == 1) {
+            $(".content2 .content2-contianer").hide();
+            $(".sim-block-c2").show();
+            return;
+        } else {
+            $(".content2 .content2-contianer").show();
+            $(".sim-block-c2").hide();
+        }
+
+        if (json[i].pin_lock == 0) {
+            $("#SIM_pin_lock2 input").removeAttr("checked");
+            $("#Change_SIM_pin1").prop("disabled", "disabled");
+        } else {
+            $("#SIM_pin_lock2 input").attr("checked", "checked");
+            $("#Change_SIM_pin1").prop("disabled", false);
+        }
+
         if (json[i].mobile_data == 1) {
             $("#mobileData2 input").attr("checked", "checked");
         } else {
@@ -278,11 +424,6 @@ function renderDataUsage(json, i) {
         $("#provider2").text(json[i].provider);
         $("#sim_imsi2").text(json[i].imsi);
 
-        if (json[i].lock_sim == 1) {
-            $("#SIM_pin_lock2 input").attr("checked", "checked");
-        } else {
-            $("#SIM_pin_lock2 input").removeAttr("checked");
-        }
     }
 
     var unit = json[i].sim_data_limt_unit == 0 ? "MB" : "GB"

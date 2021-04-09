@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210406" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210406" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210409" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210409" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -192,6 +192,10 @@
             background-color: #861f41;
             top: 55px;
             left: 7px;
+        }
+        
+        .SIM1-SIM2.active .line {
+            width: 90%;
         }
         
         .SIM1-SIM2 {
@@ -801,6 +805,24 @@
             text-align: left;
             color: #343434;
         }
+        
+        .sim-block-c,
+        .sim-block-c2 {
+            display: none;
+        }
+        
+        .sim-block {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: left;
+            color: #ff002a;
+            padding: 20px 0 30px;
+        }
+        
+        .Change-SIM-pin:disabled {
+            opacity: 0.5;
+        }
     </style>
 </head>
 
@@ -834,190 +856,197 @@
                         <div class="tab-wrapper content" id="content">
 
                             <ul class="tab-menu ml-10 Data-usage-simmenu mt-20">
-                                <li class="SIM1-SIM2 active">SIM1</li>
-                                <li class="SIM1-SIM2">SIM2</li>
+                                <li class="SIM1-SIM2 active">SIM1<span id="SIM_provider1"></span></li>
+                                <li class="SIM1-SIM2">SIM2<span id="SIM_provider2"></span></li>
                             </ul>
 
                             <div class="tab-content usage-content">
                                 <div class="content1">
+                                    <div class="content1-contianer">
+                                        <table class="mt-10 table-responsive">
+                                            <tr>
+                                                <td>
+                                                    <div class="Mobile-data">Mobile data:</div>
+                                                </td>
+                                                <td>
+                                                    <div class="layui-form layui-form-pane layui-form-item">
+                                                        <div class="layui-input-block" id="mobileData" style="display:none;">
+                                                            <input type="checkbox" name="open" lay-skin="primary" lay-filter="mobileData">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="Mobile-data">Data roaming:</div>
+                                                    <div class="sm Use-cellular-network-for-data-connection">Use mobile data when roaming, this may result in additional fees</div>
+                                                </td>
+                                                <td>
+                                                    <div class="layui-form layui-form-pane layui-form-item">
+                                                        <div class="layui-input-block" id="DataRoaming" style="display:none;">
+                                                            <input type="checkbox" name="open" lay-skin="primary" lay-filter="dataRoaming">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                            </tr>
 
-                                    <table class="mt-10 table-responsive">
-                                        <tr>
-                                            <td>
-                                                <div class="Mobile-data">Mobile data:</div>
-                                            </td>
-                                            <td>
-                                                <div class="layui-form layui-form-pane layui-form-item">
-                                                    <div class="layui-input-block" id="mobileData" style="display:none;">
-                                                        <input type="checkbox" name="open" lay-skin="primary" lay-filter="mobileData">
+                                        </table>
+                                        <h3 class="Usage-month pb-20">Usage for this month</h3>
+                                        <div class="The-remaining-data">
+                                            <span id="day_left">--</span> days left until reset (<span id="limit_startTime">--</span>)</div>
+                                        <input id="sim_data_limt_unit" style="display:none" />
+                                        <div class="content-echart">
+                                            <!-- <img src="images/usage.png"> -->
+                                            <!-- <span class="echart-text">Usage (<span class="echart_Ytext1">MB</span>)</span> -->
+                                            <div class="usedMB-echart" id="used_MB"></div>
+                                            <div class="-flex-display -justify-box"><span class="now-month1">1
+                                                    Jan</span><span class="now-month2">31 Jan</span></div>
+                                        </div>
+                                        <p class="widthper50 mt-20 mb-10 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
+                                                <e style="font-size:26px;font-weight:600" id="allUsed_MB">0</e><span
+                                                    class="limit_unit">MB</span>
+                                            </span> of <span style="font-size:18px;font-weight:600">
+                                                <e style="font-size:26px;font-weight:600" id="redmian_MB">0</e><span
+                                                    class="limit_unit">MB</span>
+                                            </span> used</p>
+                                        <div class="useage-describe mb-20">Data usage is measured by the router and may differ to your provider's measurements</div>
+                                        <h4 class="limit-subtiltle">Router data usage cycle</h4>
+                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Date of each month:</div>
+                                                <div class="The-remaining-data">
+                                                    Set the date of each month for the usage cycle to reset</div>
+                                            </div>
+                                            <div class="layui-input-inline">
+                                                <select id="last_manth_s" name="city" lay-verify="required" class="Rectangle-1185-12 formonth">
+                                                    <option value="1" class="MB">1</option>
+                                                    <option value="2" class="MB">2</option>
+                                                    <option value="3" class="MB">3</option>
+                                                    <option value="4" class="MB">4</option>
+                                                    <option value="5" class="MB">5</option>
+                                                    <option value="6" class="MB">6</option>
+                                                    <option value="7" class="MB">7</option>
+                                                    <option value="8" class="MB">8</option>
+                                                    <option value="9" class="MB">9</option>
+                                                    <option value="10" class="MB">10</option>
+                                                    <option value="11" class="MB">11</option>
+                                                    <option value="12" class="MB">12</option>
+                                                    <option value="13" class="MB">13</option>
+                                                    <option value="14" class="MB">14</option>
+                                                    <option value="15" class="MB">15</option>
+                                                    <option value="16" class="MB">16</option>
+                                                    <option value="17" class="MB">17</option>
+                                                    <option value="18" class="MB">18</option>
+                                                    <option value="19" class="MB">19</option>
+                                                    <option value="20" class="MB">20</option>
+                                                    <option value="21" class="MB">21</option>
+                                                    <option value="22" class="MB">22</option>
+                                                    <option value="23" class="MB">23</option>
+                                                    <option value="24" class="MB">24</option>
+                                                    <option value="25" class="MB">25</option>
+                                                    <option value="26" class="MB">26</option>
+                                                    <option value="27" class="MB">27</option>
+                                                    <option value="28" class="MB">28</option>
+                                                    <option value="29" class="MB">29</option>
+                                                    <option value="30" class="MB">30</option>
+                                                    <option value="31" class="MB">31</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <h4 class="limit-subtiltle mt-40">Data warning and limit</h4>
+                                        <div class="layui-form -flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Set data warning:</div>
+                                                <div class="The-remaining-data">
+                                                    Notifications will be sent to RayConnect when the data warning has been reached
+                                                </div>
+                                            </div>
+                                            <div class="layui-input-inline" id="setDataWaring" style="display:none;">
+                                                <div class="layui-input-block mt-30">
+                                                    <input type="checkbox" name="open" lay-skin="primary" lay-filter="setDataWaring">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Data warning:</div>
+                                            </div>
+                                            <div class="layui-input-inline" id="dataWaring">
+                                                <input type="text" name="text" value="0" class="Rectangle-1185 pl-10" style="display: inline-block;">
+                                                <select id="switchMBWar" name="city" lay-verify="required" style="border:0">
+                                                    <option value="0" class="MB">MB</option>
+                                                    <option value="1" class="MB">GB</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form -flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Set data limit:</div>
+                                                <div class="The-remaining-data">
+                                                    Notifications will be sent to RayConnect when the data limit has been reached
+                                                </div>
+                                            </div>
+                                            <div class="layui-input-inline" id="setDataLimit" style="display:none;">
+                                                <div class="layui-input-block mt-30">
+                                                    <input type="checkbox" name="open" lay-skin="primary" lay-filter="dataLimit">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Data limit:</div>
+                                            </div>
+                                            <div class="layui-input-inline" id="dataLimit">
+                                                <input type="text" name="text" value="0" class="Rectangle-1185 pl-10" style="display: inline-block;">
+                                                <select id="switchMBLim" name="city" lay-verify="required" style="border:0">
+                                                    <option value="0" class="MB">MB</option>
+                                                    <option value="1" class="MB">GB</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <h4 class="limit-subtiltle mt-40">SIM info</h4>
+                                        <div class="mt-20">
+                                            <div class="z1">
+                                                <div class="row">
+                                                    <label class="Network-provider col-md-6 mt-15">Network
+                                                        provider:</label><span class="col-md-6 valColor" id="provider"></span>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="Network-provider col-md-6 mt-15">SIM IMSI
+                                                        (International
+                                                        Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15 valColor" id="sim_imsi"></span>
+                                                </div>
+                                                <!-- <div class="row">
+                                                    <label class="Network-provider col-md-6 mt-15" style="display:inline-block">SIM telephone number:</label><span class="col-md-6 mt-15 valColor" id="sim_tele_num1"></span>
+                                                </div> -->
+                                                <!-- <div class="row">
+                                                    <label class="Network-provider col-md-6 mt-15">SIM PUK number:</br>
+                                                        <e>8 digit
+                                                            code to reset a forgotten or lost pin</e>
+                                                    </label><span class="col-md-6 mt-15 valColor" id="sim_puk_num1"></span>
+                                                </div> -->
+                                                <div style="clear:both;"></div>
+                                                <!-- <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div> -->
+                                                <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 50px;">
+                                                    <label class="layui-form-label SIM-pin-lock mt-0 mb-0">Lock
+                                                        SIM:</label>
+                                                    <div class="layui-input-block mt-30" id="SIM_pin_lock" style="display:none;">
+                                                        <input type="checkbox" name="open" lay-skin="primary" lay-filter="SIMpin">
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="Mobile-data">Data roaming:</div>
-                                                <div class="sm Use-cellular-network-for-data-connection">Use mobile data when roaming, this may result in additional fees</div>
-                                            </td>
-                                            <td>
-                                                <div class="layui-form layui-form-pane layui-form-item">
-                                                    <div class="layui-input-block" id="DataRoaming" style="display:none;">
-                                                        <input type="checkbox" name="open" lay-skin="primary" lay-filter="dataRoaming">
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2"></td>
-                                        </tr>
-
-                                    </table>
-                                    <h3 class="Usage-month pb-20">Usage for this month</h3>
-                                    <div class="The-remaining-data">
-                                        <span id="day_left">--</span> days left until reset (<span id="limit_startTime">--</span>)</div>
-                                    <input id="sim_data_limt_unit" style="display:none" />
-                                    <div class="content-echart">
-                                        <!-- <img src="images/usage.png"> -->
-                                        <!-- <span class="echart-text">Usage (<span class="echart_Ytext1">MB</span>)</span> -->
-                                        <div class="usedMB-echart" id="used_MB"></div>
-                                        <div class="-flex-display -justify-box"><span class="now-month1">1
-                                                Jan</span><span class="now-month2">31 Jan</span></div>
-                                    </div>
-                                    <p class="widthper50 mt-20 mb-10 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
-                                            <e style="font-size:26px;font-weight:600" id="allUsed_MB">0</e><span
-                                                class="limit_unit">MB</span>
-                                        </span> of <span style="font-size:18px;font-weight:600">
-                                            <e style="font-size:26px;font-weight:600" id="redmian_MB">0</e><span
-                                                class="limit_unit">MB</span>
-                                        </span> used</p>
-                                    <div class="useage-describe mb-20">Data usage is measured by the router and may differ to your provider's measurements</div>
-                                    <h4 class="limit-subtiltle">Router data usage cycle</h4>
-                                    <div class="-flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Date of each month:</div>
-                                            <div class="The-remaining-data">
-                                                Set the date of each month for the usage cycle to reset</div>
-                                        </div>
-                                        <div class="layui-input-inline">
-                                            <select id="last_manth_s" name="city" lay-verify="required" class="Rectangle-1185-12 formonth">
-                                                <option value="1" class="MB">1</option>
-                                                <option value="2" class="MB">2</option>
-                                                <option value="3" class="MB">3</option>
-                                                <option value="4" class="MB">4</option>
-                                                <option value="5" class="MB">5</option>
-                                                <option value="6" class="MB">6</option>
-                                                <option value="7" class="MB">7</option>
-                                                <option value="8" class="MB">8</option>
-                                                <option value="9" class="MB">9</option>
-                                                <option value="10" class="MB">10</option>
-                                                <option value="11" class="MB">11</option>
-                                                <option value="12" class="MB">12</option>
-                                                <option value="13" class="MB">13</option>
-                                                <option value="14" class="MB">14</option>
-                                                <option value="15" class="MB">15</option>
-                                                <option value="16" class="MB">16</option>
-                                                <option value="17" class="MB">17</option>
-                                                <option value="18" class="MB">18</option>
-                                                <option value="19" class="MB">19</option>
-                                                <option value="20" class="MB">20</option>
-                                                <option value="21" class="MB">21</option>
-                                                <option value="22" class="MB">22</option>
-                                                <option value="23" class="MB">23</option>
-                                                <option value="24" class="MB">24</option>
-                                                <option value="25" class="MB">25</option>
-                                                <option value="26" class="MB">26</option>
-                                                <option value="27" class="MB">27</option>
-                                                <option value="28" class="MB">28</option>
-                                                <option value="29" class="MB">29</option>
-                                                <option value="30" class="MB">30</option>
-                                                <option value="31" class="MB">31</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <h4 class="limit-subtiltle mt-40">Data warning and limit</h4>
-                                    <div class="layui-form -flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Set data warning:</div>
-                                            <div class="The-remaining-data">
-                                                Notifications will be sent to RayConnect when the data warning has been reached
-                                            </div>
-                                        </div>
-                                        <div class="layui-input-inline" id="setDataWaring" style="display:none;">
-                                            <div class="layui-input-block mt-30">
-                                                <input type="checkbox" name="open" lay-skin="primary" lay-filter="setDataWaring">
+                                                <button class="Rectangle-1182 width-auto Unlock-SIM Change-SIM-pin" id="Change_SIM_pin">Change SIM
+                                                    PIN</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="-flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Data warning:</div>
-                                        </div>
-                                        <div class="layui-input-inline" id="dataWaring">
-                                            <input type="text" name="text" value="0" class="Rectangle-1185 pl-10" style="display: inline-block;">
-                                            <select id="switchMBWar" name="city" lay-verify="required" style="border:0">
-                                                <option value="0" class="MB">MB</option>
-                                                <option value="1" class="MB">GB</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form -flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Set data limit:</div>
-                                            <div class="The-remaining-data">
-                                                Notifications will be sent to RayConnect when the data limit has been reached
-                                            </div>
-                                        </div>
-                                        <div class="layui-input-inline" id="setDataLimit" style="display:none;">
-                                            <div class="layui-input-block mt-30">
-                                                <input type="checkbox" name="open" lay-skin="primary" lay-filter="SIMpin1">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="-flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Data limit:</div>
-                                        </div>
-                                        <div class="layui-input-inline" id="dataLimit">
-                                            <input type="text" name="text" value="0" class="Rectangle-1185 pl-10" style="display: inline-block;">
-                                            <select id="switchMBLim" name="city" lay-verify="required" style="border:0">
-                                                <option value="0" class="MB">MB</option>
-                                                <option value="1" class="MB">GB</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <h4 class="limit-subtiltle mt-40">SIM info</h4>
-                                    <div class="mt-20">
-                                        <div class="z1">
-                                            <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">Network
-                                                    provider:</label><span class="col-md-6 valColor" id="provider"></span>
-                                            </div>
-                                            <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International
-                                                    Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15 valColor" id="sim_imsi"></span>
-                                            </div>
-                                            <!-- <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15" style="display:inline-block">SIM telephone number:</label><span class="col-md-6 mt-15 valColor" id="sim_tele_num1"></span>
-                                            </div> -->
-                                            <!-- <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">SIM PUK number:</br>
-                                                    <e>8 digit
-                                                        code to reset a forgotten or lost pin</e>
-                                                </label><span class="col-md-6 mt-15 valColor" id="sim_puk_num1"></span>
-                                            </div> -->
-                                            <div style="clear:both;"></div>
-                                            <!-- <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div> -->
-                                            <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 50px;">
-                                                <label class="layui-form-label SIM-pin-lock mt-0 mb-0">Lock SIM:</label>
-                                                <div class="layui-input-block mt-30" id="SIM_pin_lock" style="display:none;">
-                                                    <input type="checkbox" name="open" lay-skin="primary" lay-filter="SIMpin1">
-                                                </div>
-                                            </div>
-                                            <button class="Rectangle-1182 width-auto Unlock-SIM" id="Change_SIM_pin1"><span class="Change-SIM-pin">Unlock
-                                                    SIM</span></button>
-                                        </div>
+                                    <div class="sim-block-c">
+                                        <div class="sim-block">SIM is blocked</div><button class="Rectangle-1182 width-auto Unlock-SIM" id="unblock_SIM"><span
+                                                class="Change-SIM-pin">Unblock SIM</span></button>
                                     </div>
 
                                 </div>
@@ -1027,177 +1056,183 @@
 
 
 
-                                <div>
-                                    <table class="mt-10 table-responsive">
-                                        <tr>
-                                            <td>
-                                                <div class="Mobile-data">Mobile data:</div>
-                                            </td>
-                                            <td>
-                                                <div class="layui-form layui-form-pane layui-form-item">
-                                                    <div class="layui-input-block" id="mobileData2">
-                                                        <input type="checkbox" name="open" lay-skin="primary" lay-filter="mobileData2">
+                                <div class="content2">
+                                    <div class="content2-contianer">
+                                        <table class="mt-10 table-responsive">
+                                            <tr>
+                                                <td>
+                                                    <div class="Mobile-data">Mobile data:</div>
+                                                </td>
+                                                <td>
+                                                    <div class="layui-form layui-form-pane layui-form-item">
+                                                        <div class="layui-input-block" id="mobileData2">
+                                                            <input type="checkbox" name="open" lay-skin="primary" lay-filter="mobileData2">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="Mobile-data">Data roaming:</div>
+                                                    <div class="sm Use-cellular-network-for-data-connection">Use mobile data when roaming, this may result in additional fees</div>
+                                                </td>
+                                                <td>
+                                                    <div class="layui-form layui-form-pane layui-form-item">
+                                                        <div class="layui-input-block" id="DataRoaming2">
+                                                            <input type="checkbox" name="open" lay-skin="primary" lay-filter="dataRoaming2">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                            </tr>
+
+                                        </table>
+                                        <h3 class="Usage-month pb-20">Usage for this month</h3>
+                                        <div class="The-remaining-data">
+                                            <span id="day_left2">--</span> days left until reset (<span id="limit_startTime2">--</span>)</div>
+                                        <input id="sim_data_limt_unit" style="display:none" />
+                                        <div class="content-echart">
+                                            <!-- <img src="images/usage.png"> -->
+                                            <!-- <span class="echart-text">Usage (<span class="echart_Ytext1">MB</span>)</span> -->
+                                            <div class="usedMB-echart" id="used_MB2"></div>
+                                            <div class="-flex-display -justify-box"><span class="now-month1"></span><span class="now-month2"></span></div>
+                                            <div class="-flex-display -justify-box"><span class="now-month1">1
+                                                    Jan</span><span class="now-month2">31 Jan</span></div>
+                                        </div>
+                                        <p class="widthper50 mt-20 mb-10 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
+                                                <e style="font-size:26px;font-weight:600" id="allUsed_MB2">0</e><span
+                                                    class="limit_unit2">MB</span>
+                                            </span> of <span style="font-size:18px;font-weight:600">
+                                                <e style="font-size:26px;font-weight:600" id="redmian_MB2">0</e><span
+                                                    class="limit_unit2">MB</span>
+                                            </span> used</p>
+                                        <div class="useage-describe mb-20">Data usage is measured by the router and may differ to your provider's measurements</div>
+                                        <h4 class="limit-subtiltle">Router data usage cycle</h4>
+                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Date of each month:</div>
+                                                <div class="The-remaining-data">
+                                                    Set the date of each month for the usage cycle to reset</div>
+                                            </div>
+                                            <div class="layui-input-inline">
+                                                <select id="last_manth_s2" name="city" lay-verify="required" class="Rectangle-1185-12 formonth">
+                                                    <option value="1" class="MB">1</option>
+                                                    <option value="2" class="MB">2</option>
+                                                    <option value="3" class="MB">3</option>
+                                                    <option value="4" class="MB">4</option>
+                                                    <option value="5" class="MB">5</option>
+                                                    <option value="6" class="MB">6</option>
+                                                    <option value="7" class="MB">7</option>
+                                                    <option value="8" class="MB">8</option>
+                                                    <option value="9" class="MB">9</option>
+                                                    <option value="10" class="MB">10</option>
+                                                    <option value="11" class="MB">11</option>
+                                                    <option value="12" class="MB">12</option>
+                                                    <option value="13" class="MB">13</option>
+                                                    <option value="14" class="MB">14</option>
+                                                    <option value="15" class="MB">15</option>
+                                                    <option value="16" class="MB">16</option>
+                                                    <option value="17" class="MB">17</option>
+                                                    <option value="18" class="MB">18</option>
+                                                    <option value="19" class="MB">19</option>
+                                                    <option value="20" class="MB">20</option>
+                                                    <option value="21" class="MB">21</option>
+                                                    <option value="22" class="MB">22</option>
+                                                    <option value="23" class="MB">23</option>
+                                                    <option value="24" class="MB">24</option>
+                                                    <option value="25" class="MB">25</option>
+                                                    <option value="26" class="MB">26</option>
+                                                    <option value="27" class="MB">27</option>
+                                                    <option value="28" class="MB">28</option>
+                                                    <option value="29" class="MB">29</option>
+                                                    <option value="30" class="MB">30</option>
+                                                    <option value="31" class="MB">31</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <h4 class="limit-subtiltle mt-40">Data warning and limit</h4>
+                                        <div class="layui-form -flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Set data warning:</div>
+                                                <div class="The-remaining-data">
+                                                    Notifications will be sent to RayConnect when the data warning has been reached
+                                                </div>
+                                            </div>
+                                            <div class="layui-input-inline" id="setDataWaring2">
+                                                <input type="checkbox" name="open" lay-skin="primary" lay-filter="setDataWaring2">
+                                            </div>
+                                        </div>
+                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Data warning:</div>
+                                            </div>
+                                            <div class="layui-input-inline" id="dataWaring2">
+                                                <input type="text" name="text" value="0" class="Rectangle-1185 pl-10" style="display: inline-block;">
+                                                <select id="switchMBWar2" name="city" lay-verify="required" style="border:0">
+                                                    <option value="0" class="MB">MB</option>
+                                                    <option value="1" class="MB">GB</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form -flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Set data limit:</div>
+                                                <div class="The-remaining-data">
+                                                    Notifications will be sent to RayConnect when the data limit has been reached
+                                                </div>
+                                            </div>
+                                            <div class="layui-input-inline" id="setDataLimit2">
+                                                <div class="layui-input-block pt-5">
+                                                    <input type="checkbox" name="open" lay-skin="primary" lay-filter="dataLimit2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                            <div>
+                                                <div class="Set-monthly-data-limit">Data limit:</div>
+                                            </div>
+                                            <div class="layui-input-inline" id="dataLimit2">
+                                                <input type="text" name="text" value="0" class="Rectangle-1185 pl-10" style="display: inline-block;">
+                                                <select id="switchMBLim2" name="city" lay-verify="required" style="border:0">
+                                                    <option value="0" class="MB">MB</option>
+                                                    <option value="1" class="MB">GB</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <h4 class="limit-subtiltle mt-40">SIM info</h4>
+                                        <div class="mt-20">
+                                            <div class="z1">
+
+                                                <div class="row">
+                                                    <label class="Network-provider col-md-6 mt-15">Network
+                                                        provider:</label><span class="col-md-6 valColor" id="provider2"></span>
+                                                </div>
+                                                <div class="row">
+                                                    <label class="Network-provider col-md-6 mt-15">SIM IMSI
+                                                        (International
+                                                        Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15 valColor" id="sim_imsi2"></span>
+                                                </div>
+                                                <div style="clear:both;"></div>
+                                                <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 50px;">
+                                                    <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin
+                                                        lock:</label>
+                                                    <div class="layui-input-block mt-30" id="SIM_pin_lock2">
+                                                        <input type="checkbox" lay-skin="primary" lay-filter="SIMpin2">
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="Mobile-data">Data roaming:</div>
-                                                <div class="sm Use-cellular-network-for-data-connection">Use mobile data when roaming, this may result in additional fees</div>
-                                            </td>
-                                            <td>
-                                                <div class="layui-form layui-form-pane layui-form-item">
-                                                    <div class="layui-input-block" id="DataRoaming2">
-                                                        <input type="checkbox" name="open" lay-skin="primary" lay-filter="dataRoaming2">
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2"></td>
-                                        </tr>
-
-                                    </table>
-                                    <h3 class="Usage-month pb-20">Usage for this month</h3>
-                                    <div class="The-remaining-data">
-                                        <span id="day_left2">--</span> days left until reset (<span id="limit_startTime2">--</span>)</div>
-                                    <input id="sim_data_limt_unit" style="display:none" />
-                                    <div class="content-echart">
-                                        <!-- <img src="images/usage.png"> -->
-                                        <!-- <span class="echart-text">Usage (<span class="echart_Ytext1">MB</span>)</span> -->
-                                        <div class="usedMB-echart" id="used_MB2"></div>
-                                        <div class="-flex-display -justify-box"><span class="now-month1"></span><span class="now-month2"></span></div>
-                                        <div class="-flex-display -justify-box"><span class="now-month1">1
-                                                Jan</span><span class="now-month2">31 Jan</span></div>
-                                    </div>
-                                    <p class="widthper50 mt-20 mb-10 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
-                                            <e style="font-size:26px;font-weight:600" id="allUsed_MB2">0</e><span
-                                                class="limit_unit2">MB</span>
-                                        </span> of <span style="font-size:18px;font-weight:600">
-                                            <e style="font-size:26px;font-weight:600" id="redmian_MB2">0</e><span
-                                                class="limit_unit2">MB</span>
-                                        </span> used</p>
-                                    <div class="useage-describe mb-20">Data usage is measured by the router and may differ to your provider's measurements</div>
-                                    <h4 class="limit-subtiltle">Router data usage cycle</h4>
-                                    <div class="-flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Date of each month:</div>
-                                            <div class="The-remaining-data">
-                                                Set the date of each month for the usage cycle to reset</div>
-                                        </div>
-                                        <div class="layui-input-inline">
-                                            <select id="last_manth_s2" name="city" lay-verify="required" class="Rectangle-1185-12 formonth">
-                                                <option value="1" class="MB">1</option>
-                                                <option value="2" class="MB">2</option>
-                                                <option value="3" class="MB">3</option>
-                                                <option value="4" class="MB">4</option>
-                                                <option value="5" class="MB">5</option>
-                                                <option value="6" class="MB">6</option>
-                                                <option value="7" class="MB">7</option>
-                                                <option value="8" class="MB">8</option>
-                                                <option value="9" class="MB">9</option>
-                                                <option value="10" class="MB">10</option>
-                                                <option value="11" class="MB">11</option>
-                                                <option value="12" class="MB">12</option>
-                                                <option value="13" class="MB">13</option>
-                                                <option value="14" class="MB">14</option>
-                                                <option value="15" class="MB">15</option>
-                                                <option value="16" class="MB">16</option>
-                                                <option value="17" class="MB">17</option>
-                                                <option value="18" class="MB">18</option>
-                                                <option value="19" class="MB">19</option>
-                                                <option value="20" class="MB">20</option>
-                                                <option value="21" class="MB">21</option>
-                                                <option value="22" class="MB">22</option>
-                                                <option value="23" class="MB">23</option>
-                                                <option value="24" class="MB">24</option>
-                                                <option value="25" class="MB">25</option>
-                                                <option value="26" class="MB">26</option>
-                                                <option value="27" class="MB">27</option>
-                                                <option value="28" class="MB">28</option>
-                                                <option value="29" class="MB">29</option>
-                                                <option value="30" class="MB">30</option>
-                                                <option value="31" class="MB">31</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <h4 class="limit-subtiltle mt-40">Data warning and limit</h4>
-                                    <div class="layui-form -flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Set data warning:</div>
-                                            <div class="The-remaining-data">
-                                                Notifications will be sent to RayConnect when the data warning has been reached
-                                            </div>
-                                        </div>
-                                        <div class="layui-input-inline" id="setDataWaring2">
-                                            <input type="checkbox" name="open" lay-skin="primary" lay-filter="setDataWaring2">
-                                        </div>
-                                    </div>
-                                    <div class="-flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Data warning:</div>
-                                        </div>
-                                        <div class="layui-input-inline" id="dataWaring2">
-                                            <input type="text" name="text" value="0" class="Rectangle-1185 pl-10" style="display: inline-block;">
-                                            <select id="switchMBWar2" name="city" lay-verify="required" style="border:0">
-                                                <option value="0" class="MB">MB</option>
-                                                <option value="1" class="MB">GB</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form -flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Set data limit:</div>
-                                            <div class="The-remaining-data">
-                                                Notifications will be sent to RayConnect when the data limit has been reached
-                                            </div>
-                                        </div>
-                                        <div class="layui-input-inline" id="setDataLimit2">
-                                            <div class="layui-input-block pt-5">
-                                                <input type="checkbox" name="open" lay-skin="primary" lay-filter="dataLimit">
+                                                <button class="Rectangle-1182 width-auto Unlock-SIM Change-SIM-pin" id="Change_SIM_pin1">Change SIM
+                                                    PIN</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="-flex-display -align-box -justify-box mt-30">
-                                        <div>
-                                            <div class="Set-monthly-data-limit">Data limit:</div>
-                                        </div>
-                                        <div class="layui-input-inline" id="dataLimit2">
-                                            <input type="text" name="text" value="0" class="Rectangle-1185 pl-10" style="display: inline-block;">
-                                            <select id="switchMBLim2" name="city" lay-verify="required" style="border:0">
-                                                <option value="0" class="MB">MB</option>
-                                                <option value="1" class="MB">GB</option>
-                                            </select>
-                                        </div>
+                                    <div class="sim-block-c2">
+                                        <div class="sim-block2">SIM is blocked</div><button class="Rectangle-1182 width-auto Unlock-SIM" id="unblock_SIM"><span
+                                                class="Change-SIM-pin">Unblock SIM</span></button>
                                     </div>
-                                    <h4 class="limit-subtiltle mt-40">SIM info</h4>
-                                    <div class="mt-20">
-                                        <div class="z1">
-
-                                            <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">Network
-                                                    provider:</label><span class="col-md-6 valColor" id="provider2"></span>
-                                            </div>
-                                            <div class="row">
-                                                <label class="Network-provider col-md-6 mt-15">SIM IMSI (International
-                                                    Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15 valColor" id="sim_imsi2"></span>
-                                            </div>
-                                            <div style="clear:both;"></div>
-                                            <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 50px;">
-                                                <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin
-                                                    lock:</label>
-                                                <div class="layui-input-block mt-30" id="SIM_pin_lock2">
-                                                    <input type="checkbox" lay-skin="primary" lay-filter="SIMpin">
-                                                </div>
-                                            </div>
-                                            <button class="Rectangle-1182 width-auto Unlock-SIM" id="Change_SIM_pin1"><span class="Change-SIM-pin">Unlock
-                                                    SIM</span></button>
-                                        </div>
-                                    </div>
-
 
                                 </div>
 
@@ -1212,10 +1247,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210406"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210406"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210409"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210409"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210406"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210409"></script>
 
 </body>
 

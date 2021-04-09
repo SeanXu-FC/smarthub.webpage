@@ -389,7 +389,7 @@
                 <div class="layui-form-item">
                     <label for="inputPassword3 " class="layui-form-label Status">Password:</label>
                     <div class="layui-input-block" style="position:relative">
-                        <input type="password" value="" id="pwd" class="Rectangle-1188 pwd layui-input" style="display: inline-block;" />
+                        <input type="password" value="" id="pwd" class="Rectangle-1188 pwd layui-input" oninput="WidthCheckPassword(this,64);" style="display: inline-block;" />
                         <span class="SHOW" style="position:absolute; top:10px;left:388px;cursor: pointer;" onclick="change()">SHOW</span>
                         <div class="error">Password is incorrect</div>
                         <div class="correct">Password is correct</div>
@@ -405,7 +405,7 @@
 
 
     </div>
-    <script type="text/javascript" src="js/common.js?mv=20210406"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210409"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>

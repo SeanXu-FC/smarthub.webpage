@@ -319,7 +319,6 @@ function progressBar() {
 
     progressBarTimer = setInterval(() => {
         progressI = progressI + 1;
-        console.log(progressI)
         if (progressI == 600) { //progressI=600进度条达到100%，时间达到1分钟
             clearInterval(progressBarTimer);
             return;
