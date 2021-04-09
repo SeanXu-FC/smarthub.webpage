@@ -61,7 +61,7 @@
             line-height: 1.45;
             letter-spacing: normal;
             text-align: center;
-            color: #434343;
+            color: #343434;
         }
         
         .Rectangle-1182:hover {
@@ -188,7 +188,7 @@
             line-height: 1.44;
             letter-spacing: normal;
             text-align: left;
-            color: #3a3a3a;
+            color: #343434;
         }
         
         .layui-form-checkbox[lay-skin=primary] i {
@@ -199,7 +199,7 @@
         }
         
         .item-left {
-            flex: 3;
+            width: 330px;
         }
         
         .left-describe {
@@ -219,31 +219,12 @@
         }
         
         .layui-form-radio {
-            margin-top: 30px !important;
+            margin-top: 20px !important;
         }
         
         .layui-form-radio div {
-            font-family: OpenSans;
             font-size: 18px;
-            font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 1.33;
-            letter-spacing: normal;
-            text-align: left;
-            color: #3a3a3a !important;
-        }
-        
-        .layui-input-block .layui-form-radio:nth-of-type(1) {
-            margin-top: 0px !important;
-        }
-        
-        .layui-input-block {
-            flex: 5;
-        }
-        
-        .layui-form-pane .layui-input-block {
-            margin-left: 0px;
+            color: #343434 !important;
         }
         
         .layui-form-checkbox span {
@@ -289,11 +270,6 @@
         .layui-form-select .layui-input {
             padding-right: 15px;
         }
-        
-        .no-full-power-mode,
-        .no-full-power-mode1 {
-            display: none;
-        }
     </style>
 </head>
 
@@ -307,60 +283,32 @@
             <div class="form-horizontal" name="formdata" id="content">
                 <div id="main">
                     <div id="d2">
-
+                        <div class="layui-form layui-form-pane -flex-display -align-box">
+                            <div class="item-left">
+                                <label class="Set-monthly-data-limit mt-10 mb-0">Enable low power mode:</label>
+                                <p class="left-describe">Low power mode will run the router in a low power state. The router will be woken on conditions determined by the low power mode selected
+                                </p>
+                            </div>
+                            <div class="layui-input-block pt-5" id="AutoSim">
+                                <input type="checkbox" value="" name="open" lay-skin="primary" lay-filter="SIMswitch">
+                            </div>
+                        </div>
                         <div class="layui-form layui-form-pane -flex-display mt-30">
                             <div class="item-left">
-                                <label class="Set-monthly-data-limit mt-10 mb-0">Power mode:</label>
-                                <!-- <p class="left-describe">Both modes will duty cycle between active and sleep
-                                </p> -->
+                                <label class="Set-monthly-data-limit mt-10 mb-0">Low power mode:</label>
+                                <p class="left-describe">Both modes will duty cycle between active and sleep
+                                </p>
                             </div>
-                            <div class="layui-input-block pt-5" id="power_mode">
-                                <input type="radio" lay-filter="activeSIM" name="powerMode" value="2" title="Full power mode">
-                                <p class="right-describe">Router will always run at full power
+                            <div class="layui-input-block pt-5" id="low_power">
+                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="1" title="Low power mode 1">
+                                <p class="right-describe">Ethernet is on. Router will wake on input, LTE and on LAN
                                 </p>
-                                <input type="radio" lay-filter="activeSIM" name="powerMode" value="1" title="Low power mode 1">
-                                <p class="right-describe">Router will run in a low power state and will wake on LAN, LTE and on input (when digital inputs are switched on and alerts are triggered)
-                                </p>
-                                <input type="radio" lay-filter="activeSIM" name="powerMode" value="0" title="Low power mode 2 (lowest power)">
-                                <p class="right-describe">Router will run in a low power state and will wake on LTE and on input (when digital inputs are switched on and alerts are triggered)
+                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="0" title="Low power mode 2 (lowest power)">
+                                <p class="right-describe">Ethernet is off. Router will wake on input and LTE
                                 </p>
                             </div>
                         </div>
-                        <div class="layui-form layui-form-pane no-full-power-mode">
-                            <div class="-flex-display -align-box">
-                                <div class="item-left">
-                                    <label class="Set-monthly-data-limit mt-10 mb-0">Allow output to wake Digital
-                                        switching
-                                        when router wakes:</label>
-                                </div>
-                                <div class="layui-input-block pt-5" id="allow_switch">
-                                    <input type="checkbox" value="" name="open" lay-skin="primary" lay-filter="allowSwitch">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-form layui-form-pane no-full-power-mode1 mt-30">
-                            <div class="-flex-display">
-                                <div class="item-left">
-                                    <label class="Set-monthly-data-limit mt-10 mb-0">Output connected to digital
-                                        switching:</label>
-                                </div>
-                                <div class="layui-input-block pt-5" id="power_output">
-                                    <input type="radio" lay-filter="Output1" name="Output" value="0" title="Output 1" checked>
-                                    <p class="right-describe">
-                                    </p>
-                                    <input type="radio" lay-filter="Output2" name="Output" value="1" title="Output 2">
-                                    <p class="right-describe">
-                                    </p>
-                                    <input type="radio" lay-filter="Output3" name="Output" value="2" title="Output 3">
-                                    <p class="right-describe">
-                                    </p>
-                                    <input type="radio" lay-filter="Output4" name="Output" value="3" title="Output 4">
-                                    <p class="right-describe">
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="layui-form layui-form-pane -flex-display mt-40">
+                        <div class="layui-form layui-form-pane -flex-display mt-40">
                             <div class="item-left">
                                 <label class="Set-monthly-data-limit mt-10 mb-0">Define which inputs should wake or put
                                     the router to sleep:</label>
@@ -375,7 +323,9 @@
                                         <option value="Wake">Wake</option>
                                         <option value="Sleep">Sleep</option>
                                     </select>
-                               </div>
+                                    <!--<input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels0" id="input_channels0" title="--" value="Weak signal">
+                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>-->
+                                </div>
                                 <div class="-flex-display -align-box mt-10">
                                     <span class="input-name" id="input-name1">--</span>
                                     <select class="input-select " id="input_channels1">
@@ -383,7 +333,9 @@
                                         <option value="Wake">Wake</option>
                                         <option value="Sleep">Sleep</option>
                                     </select>
-                               </div>
+                                    <!-- <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels1" id="input_channels1" title="--" value="Data limit reached">
+                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div> -->
+                                </div>
                                 <div class="-flex-display -align-box mt-10">
                                     <span class="input-name" id="input-name2">--</span>
                                     <select class="input-select " id="input_channels2">
@@ -391,7 +343,9 @@
                                         <option value="Wake">Wake</option>
                                         <option value="Sleep">Sleep</option>
                                     </select>
-                               </div>
+                                    <!-- <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels2" id="input_channels2" title="--" value="hen roaming">
+                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div> -->
+                                </div>
                                 <div class="-flex-display -align-box mt-10">
                                     <span class="input-name" id="input-name3">--</span>
                                     <select class="input-select " id="input_channels3">
@@ -399,9 +353,11 @@
                                         <option value="Wake">Wake</option>
                                         <option value="Sleep">Sleep</option>
                                     </select>
+                                    <!-- <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels3" id="input_channels3" title="--" value="No network">
+                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div> -->
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="layui-form layui-form-pane -flex-display mt-30">
                             <div class="item-left">
                                 <label class="Set-monthly-data-limit mt-10 mb-0">Define outputs to wake Digital
@@ -427,7 +383,7 @@
                                     <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <div>
                             <div class="btn1" id="btn02">
                                 <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel"
@@ -444,12 +400,11 @@
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210409"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210330"></script>
     <script>
         var powerData;
         var frequency = 0;
         $(function() {
-
             layui.use(['layer', 'form'], function() {
                 var layer = layui.layer;
                 var form = layui.form;
@@ -457,71 +412,10 @@
                     shade: false
                 });
                 getMonitoringData(layer, loading);
-                form.on('radio(activeSIM)', function(data) {
-                    if (data.value == 2) {
-                        $(".no-full-power-mode").hide();
-                        $(".no-full-power-mode1").hide();
-                    } else {
-                        $(".no-full-power-mode").show();
-                        if ($("#allow_switch input").is(":checked")) {
-                            $(".no-full-power-mode1").show();
-                        }
-                    }
-                });
-                form.on('checkbox(allowSwitch)', function(data) {
-                    if (this.checked) {
-                        var json = powerData.io_date;
-
-                        for (var i = 0; i < json.length; i++) {
-                            if (3 < i) {
-                                if (json[i].wake_func == 2) { //根据wake_func有等于2的勾上复选框checked
-                                    switch (i) {
-                                        case 4:
-                                            $('input[name="Output"]').eq(0).prop("checked",
-                                                true);
-                                            break;
-                                        case 5:
-                                            $('input[name="Output"]').eq(1).prop("checked",
-                                                true);
-                                            break;
-                                        case 6:
-                                            $('input[name="Output"]').eq(2).prop("checked",
-                                                true);
-                                            break;
-                                        case 7:
-                                            $('input[name="Output"]').eq(3).prop("checked",
-                                                true);
-                                            break;
-                                        default:
-                                            $('input[name="Output"]').eq(0).prop("checked",
-                                                true);
-                                    }
-                                }
-                            }
-                        }
-                        $(".no-full-power-mode1").show();
-                    } else {
-                        $('input[name="Output"]').eq(0).prop("checked", false);
-                        $('input[name="Output"]').eq(1).prop("checked", false);
-                        $('input[name="Output"]').eq(2).prop("checked", false);
-                        $('input[name="Output"]').eq(3).prop("checked", false);
-                        $(".no-full-power-mode1").hide();
-                    }
-                    form.render();
-                });
-
-                $("#cancel").on("click", function() {
-                    var loading = layer.load(0, {
-                        shade: false
-                    });
-                    getMonitoringData(layer, loading);
-                });
-
             });
             $("#btn2").on("click", function() {
                 getSimManagementVal()
             })
-
         })
 
         function getMonitoringData(layer, loading) {
@@ -544,41 +438,42 @@
                 success: function(res) {
                     layer.close(loading);
                     powerData = res.result;
-                    $('input[name="powerMode"]').prop("checked", false);
-                    if (res.result.LowPowerMode == 2) {
-                        $('input[name="powerMode"]').eq(0).prop("checked", true);
-                        $(".no-full-power-mode").hide();
-                        $(".no-full-power-mode1").hide();
-                    } else if (res.result.LowPowerMode == 1) {
-                        $('input[name="powerMode"]').eq(1).prop("checked", true);
-                        $(".no-full-power-mode").show();
+                    $('input[name="activeSIM"]').prop("checked", false);
+                    if (res.result.LowPowerMode == 1) {
+                        $('input[name="activeSIM"]').eq(0).prop("checked", true);
                     } else {
-                        $('input[name="powerMode"]').eq(2).prop("checked", true);
-                        $(".no-full-power-mode").show();
+                        $('input[name="activeSIM"]').eq(1).prop("checked", true);
                     }
 
                     if (res.result && res.result.io_date) {
                         var json = res.result.io_date;
                         for (var i = 0; i < json.length; i++) {
-                            if (3 < i) {
-                                $('input[name="Output"]').eq(i - 4).attr("title", json[i].name);
-                                if (json[i].wake_func == 2) { //根据wake_func有等于2的勾上复选框checked
-                                    $(".no-full-power-mode1").show();
-                                    $('#allow_switch input').prop("checked", true);
-                                    switch (i) {
-                                        case 4:
-                                            $('input[name="Output"]').eq(0).prop("checked", true);
-                                            break;
-                                        case 5:
-                                            $('input[name="Output"]').eq(1).prop("checked", true);
-                                            break;
-                                        case 6:
-                                            $('input[name="Output"]').eq(2).prop("checked", true);
-                                            break;
-                                        case 7:
-                                            $('input[name="Output"]').eq(3).prop("checked", true);
-                                            break;
+
+                            if (i < 4) {
+                                $("#input-name" + i).text(json[i].name)
+                                if (json[i].types == 0) { //types=0都禁用并不勾选
+                                    $("#input_channels" + i).prop("disabled", true);
+                                    $("#input_channels" + i + " option[value='None']").prop("selected",
+                                        true);
+                                } else {
+                                    if (json[i].wake_func == 1 || json[i].wake_func == 2) {
+                                        $("#input_channels" + i + " option[value='Wake']").prop("selected",
+                                            true);
+                                    } else if (json[i].wake_func == 3 || json[i].wake_func == 4) {
+                                        $("#input_channels" + i + " option[value='Sleep']").prop("selected",
+                                            true);
+                                    } else if (json[i].wake_func == 0) {
+                                        $("#input_channels" + i + " option[value='None']").prop("selected",
+                                            true);
                                     }
+                                }
+
+                            } else { //types！=0根据wake_func判断
+                                $("#Output_channels" + i).attr("title", json[i].name);
+                                if (json[i].wake_func == 1) {
+                                    $("#Output_channels" + i).prop("checked", true);
+                                } else {
+                                    $("#Output_channels" + i).prop("checked", false);
                                 }
                             }
 
@@ -615,41 +510,66 @@
 
         //设置前获取各项的值
         function getSimManagementVal() {
-            var params = {};
-            var powerMode = $("input[name='powerMode']:checked").val();
-            if (powerMode == 2) {
-                params = {
-                    "LowPowerMode": Number(powerMode),
-                    "mode": 5
+            var EnableLowpower = $("#AutoSim input").is(":checked") == true ? 1 : 0;
+            var lowPower = $("input[name='activeSIM']:checked").val();
+            var wakeup_data = [];
+            var inputArr = [{
+                id: 1,
+                wake_func: 0
+            }, {
+                id: 2,
+                wake_func: 0
+            }, {
+                id: 3,
+                wake_func: 0
+            }, {
+                id: 4,
+                wake_func: 0
+            }];
+            for (var i = 0; i < inputArr.length; i++) {
+                console.log($("#input_channels" + i).val())
+                if ($("#input_channels" + i).val() == "Wake") {
+                    if (powerData.io_date[i].types == 1)
+                        inputArr[i].wake_func = 2;
+                    else if (powerData.io_date[i].types == 2)
+                        inputArr[i].wake_func = 1;
+                } else if ($("#input_channels" + i).val() == "Sleep") {
+                    if (powerData.io_date[i].types == 1)
+                        inputArr[i].wake_func = 4;
+                    else if (powerData.io_date[i].types == 2)
+                        inputArr[i].wake_func = 3;
+                } else { //没有勾选wake_func统一传0
+                    inputArr[i].wake_func = 0;
                 }
-            } else {
-                var powerOutput = $("input[name='Output']:checked").val();
-                var outputArr = [{
-                    id: 5,
-                    wake_func: 0
-                }, {
-                    id: 6,
-                    wake_func: 0
-                }, {
-                    id: 7,
-                    wake_func: 0
-                }, {
-                    id: 8,
-                    wake_func: 0
-                }];
-                for (var i = 0; i < outputArr.length; i++) {
-                    if (powerOutput == i) {
-                        outputArr[powerOutput].wake_func = 2;
-                    }
-                }
-
-                params = {
-                    "wakeup_data": outputArr,
-                    "LowPowerMode": Number(powerMode),
-                    "mode": 5
-                }
+                // input_channels0 = $("#input_channels0").is(":checked") == true ? powerData.io_date[i].wake_func: 0;
+                // input_channels1 = $("#input_channels1").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
+                // input_channels2 = $("#input_channels2").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
+                // input_channels3 = $("#input_channels3").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
             }
-
+            var Output_channels4 = $("#Output_channels4").is(":checked") == true ? 1 : 0;
+            var Output_channels5 = $("#Output_channels5").is(":checked") == true ? 1 : 0;
+            var Output_channels6 = $("#Output_channels6").is(":checked") == true ? 1 : 0;
+            var Output_channels7 = $("#Output_channels7").is(":checked") == true ? 1 : 0;
+            var outputArr = [{
+                "id": 5,
+                "wake_func": Output_channels4
+            }, {
+                "id": 6,
+                "wake_func": Output_channels5
+            }, {
+                "id": 7,
+                "wake_func": Output_channels6
+            }, {
+                "id": 8,
+                "wake_func": Output_channels7
+            }]
+            wakeup_data = inputArr.concat(outputArr)
+            var params = {
+                "wakeup_data": wakeup_data,
+                "LowPowerMode": Number(lowPower),
+                "LowPower": Number(EnableLowpower),
+                "mode": 5
+            }
 
             console.log(params)
             setPowerManagement(params)
