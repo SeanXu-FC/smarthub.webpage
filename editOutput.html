@@ -581,9 +581,7 @@
         //保存数据
         function saveData(name, ChannelID) {
             //var alertId = Number($("#alert_ID").val());
-            if (alertId < 1000 || alertId > 65000) {
-                return;
-            }
+
             var data = {
                 "jsonrpc": "2.0",
                 "method": "IoConfigure",
