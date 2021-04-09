@@ -320,7 +320,12 @@ function progressBar() {
     progressBarTimer = setInterval(() => {
         progressI = progressI + 1;
         if (progressI == 600) { //progressI=600进度条达到100%，时间达到1分钟
+            progressInitFlag = false;
             clearInterval(progressBarTimer);
+            clearInterval(progressTimer);
+            parent.layer.close(progress);
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Qca9563 loss connection with IMX8!</div>';
+            promptMessage("Error message", tip);
             return;
         }
         $(parent.document).find("#div3").myProgress({
@@ -351,14 +356,14 @@ function getInfoData() {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             if (res.result && res.result.ipq_ipaddr) {
-                clearInterval(progressTimer);
-                clearInterval(progressBarTimer);
-                $(parent.document).find("#div3").myProgress({
-                    speed: 10,
-                    percent: 100,
-                    width: "100%",
-                });
-                parent.layer.close(progress);
+                // clearInterval(progressTimer);
+                // clearInterval(progressBarTimer);
+                // $(parent.document).find("#div3").myProgress({
+                //     speed: 10,
+                //     percent: 100,
+                //     width: "100%",
+                // });
+                // parent.layer.close(progress);
 
             } else {
                 if (!progressInitFlag) {
