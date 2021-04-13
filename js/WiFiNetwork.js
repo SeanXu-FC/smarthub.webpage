@@ -255,6 +255,7 @@ function renderWifiList(json) {
         savedStr = "",
         encryptStr = "",
         ConnectedStr = "",
+        ConnectedClass = "",
         wifiImg = "wifi-icon4.png";
     var signal = 0;
     //es5字符串拼接：
@@ -266,16 +267,20 @@ function renderWifiList(json) {
             } else {
                 encryptStr = "icon-wifi.png"
             }
+
             if (json[i].is_connected == 1) {
                 if (2400 < Number(json[i].freq) && Number(json[i].freq) < 2900) {
                     ConnectedStr = "Connected (2.4GHz)";
                 } else if (5100 < Number(json[i].freq) && Number(json[i].freq) < 5900) {
                     ConnectedStr = "Connected (5GHz)";
                 }
+            } else if (json[i].is_connected == 2) {
+                //ConnectedClass = "color-red"
+                ConnectedStr = "Connected(No internet)";
             } else {
                 ConnectedStr = "Connecting";
             }
-            str += '<tr class="connected-wifi"><td class="col-md-8" ><div class="wifi-name wifi-name-green">' + json[i].ssid + '</div><div class=" c9 Connected-24GHz" style="padding-left:0"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status">' + ConnectedStr + '</span></div></td><td><div class="col-md-2">'
+            str += '<tr class="connected-wifi"><td class="col-md-8" ><div class="wifi-name wifi-name-green">' + json[i].ssid + '</div><div class=" c9 Connected-24GHz" style="padding-left:0"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="' + ConnectedClass + '">' + ConnectedStr + '</span></div></td><td><div class="col-md-2">'
             signal = Math.abs(json[i].rssi);
             if (100 > signal && signal >= 85) {
                 wifiImg = "s_wifi_02.png";
@@ -429,7 +434,7 @@ function forgetWifiHtml(infoHtml) {
         title: false,
         closeBtn: 0,
         shade: 0.8,
-        area: ['534px', '63%'],
+        area: ['534px', '585px'],
         //area: '534px',
         content: ["WirelessNameInfo.html?ssid=" + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
@@ -526,7 +531,12 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
         success: function(res) {
             if (res.result.status) {
                 $("#Connecting-status").text(res.result.status);
-
+                if (res.result.status == "Connect Error") {
+                    clearInterval(timer);
+                    $(".connecting-img").hide();
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Connect Error!</div>';
+                    promptMessagePoll("Error message", tip, updateWifiList);
+                }
                 if (res.result.status == "Connected") {
                     clearInterval(timer);
                     updateWifiList();
@@ -764,6 +774,26 @@ function updateWifiList() {
 
             }
         }
+    })
+}
+
+function promptMessagePoll(title, content, fn) {
+    layui.use(['layer'], function() {
+        var layer = layui.layer;
+        layer.open({
+            type: 1,
+            id: 'layerDemo1', //防止重复弹出   
+            title: title,
+            content: content,
+            btn: 'close',
+            btnAlign: 'c', //按钮居中 
+            closeBtn: 0,
+            shade: 0, //不显示遮罩                            
+            yes: function(index) {
+                layer.close(index);
+                fn();
+            }
+        });
     })
 }
 

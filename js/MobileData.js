@@ -1,4 +1,4 @@
-var unlockSIM = 1;
+var currentSIM = 1;
 var frequency = 0;
 $(function() {
     var $wrapper = $('.tab-wrapper'),
@@ -27,11 +27,11 @@ $(function() {
             'width': '90%'
         }, 'fast');
         if (dataTab == "tab0") {
-            unlockSIM = 1;
+            currentSIM = 1;
             $getWrapper.find($allTabs).filter('[data-tab=tab1]').hide();
             $getWrapper.find($allTabs).filter('[data-tab=tab0]').show();
         } else if (dataTab == "tab1") {
-            unlockSIM = 2;
+            currentSIM = 2;
             $getWrapper.find($allTabs).filter('[data-tab=tab0]').hide();
             $getWrapper.find($allTabs).filter('[data-tab=tab1]').show();
         }
@@ -39,8 +39,8 @@ $(function() {
     })
 
     //弹出一个iframe层
-    initBindEvent("Change_SIM_pin");
     initBindEvent("Change_SIM_pin1");
+    initBindEvent("Change_SIM_pin2");
     bindUnblockEvent("unblock_SIM");
     bindUnblockEvent("unblock_SIM1");
 
@@ -50,64 +50,12 @@ $(function() {
         getMainParameters(layer, form);
 
         form.on('checkbox(SIMpin)', function(data) {
-            console.log(data)
             var checked = data.elem.checked;
-            var type, times;
-            if (checked) {
-                type = 1 //lock
-            } else {
-                type = 2 //unlock
-            }
-            times = MobileData[(unlockSIM - 1)].pin_times;
-            parent.layer.open({
-                type: 2,
-                title: false,
-                closeBtn: 0,
-                //shadeClose: true,
-                shade: 0.8,
-                area: ['400px', '320px'],
-                content: ['lockSimPin.html?SIM=' + unlockSIM + '&type=' + type + '&times=' + times, 'no'],
-                end: function(index, layero) {
-                    var unlockSIM = $("#unlockSIM").val();
-                    if (unlockSIM == 1) {
-                        layui.use(['layer', 'form'], function() {
-                            var layer = layui.layer;
-                            var form = layui.form;
-                            getMainParameters(layer, form);
-                        })
-                    }
-                }
-            });
+            lockSimPinTip(checked);
         });
         form.on('checkbox(SIMpin2)', function(data) {
-            console.log(data)
             var checked = data.elem.checked;
-            var type, times;
-            if (checked) {
-                type = 1 //lock
-            } else {
-                type = 2 //unlock
-            }
-            times = MobileData[(unlockSIM - 1)].pin_times;
-            parent.layer.open({
-                type: 2,
-                title: false,
-                closeBtn: 0,
-                //shadeClose: true,
-                shade: 0.8,
-                area: ['400px', '320px'],
-                content: ['lockSimPin.html?SIM=' + unlockSIM + '&type=' + type + '&times=' + times, 'no'],
-                end: function(index, layero) {
-                    var unlockSIM = $("#unlockSIM").val();
-                    if (unlockSIM == 1) {
-                        layui.use(['layer', 'form'], function() {
-                            var layer = layui.layer;
-                            var form = layui.form;
-                            getMainParameters(layer, form);
-                        })
-                    }
-                }
-            });
+            lockSimPinTip(checked);
 
         });
     })
@@ -136,10 +84,51 @@ $(function() {
 
 })
 
+function lockSimPinTip(checked) {
+    var type, times;
+    if (checked) {
+        type = 1 //lock
+    } else {
+        type = 2 //unlock
+    }
+    times = MobileData[(currentSIM - 1)].pin_times;
+    parent.layer.open({
+        type: 2,
+        title: false,
+        closeBtn: 0,
+        //shadeClose: true,
+        shade: 0.8,
+        area: ['400px', '320px'],
+        content: ['lockSimPin.html?SIM=' + currentSIM + '&type=' + type + '&times=' + times, 'no'],
+        end: function(index, layero) {
+            var unlockSIM = $("#unlockSIM").val();
+            if (unlockSIM == 1) {
+                layui.use(['layer', 'form'], function() {
+                    var layer = layui.layer;
+                    var form = layui.form;
+                    getMainParameters(layer, form);
+                })
+            } else {
+                if (MobileData[(currentSIM - 1)].pin_lock == 0) {
+                    $("#SIM_pin_lock" + currentSIM + " input").prop("checked", false);
+                    $("#Change_SIM_pin" + currentSIM).attr("disabled", "disabled");
+                } else {
+                    $("#SIM_pin_lock" + currentSIM + " input").prop("checked", true);
+                    $("#Change_SIM_pin" + currentSIM).removeAttr("disabled");
+                }
+                layui.use(['form'], function() {
+                    var form = layui.form;
+                    form.render();
+                });
+            }
+        }
+    });
+}
+
 function initBindEvent(id) {
     console.log(id)
     $('#' + id).on('click', function() {
-        console.log(unlockSIM)
+        console.log(currentSIM)
             //iframe层
         parent.layer.open({
             type: 2,
@@ -148,7 +137,7 @@ function initBindEvent(id) {
             //shadeClose: true,
             shade: 0.8,
             area: ['400px', '415px'],
-            content: ['changeSimPin.html?SIM=' + unlockSIM, 'no'],
+            content: ['changeSimPin.html?SIM=' + currentSIM, 'no'],
             end: function(index, layero) {
                 var unlockSIM = $("#unlockSIM").val();
                 if (unlockSIM == 1) {
@@ -162,6 +151,33 @@ function initBindEvent(id) {
         });
     });
 
+}
+
+function bindUnblockEvent(id) {
+    $('#' + id).on('click', function() {
+        console.log(currentSIM)
+        var times = MobileData[(currentSIM - 1)].puk_times;
+        //iframe层
+        parent.layer.open({
+            type: 2,
+            title: false,
+            closeBtn: 0,
+            //shadeClose: true,
+            shade: 0.8,
+            area: ['400px', '510px'],
+            content: ['unblockSIM.html?SIM=' + currentSIM + '&times=' + times, 'no'],
+            end: function(index, layero) {
+                var unlockSIM = $("#unlockSIM").val();
+                if (unlockSIM == 1) {
+                    layui.use(['layer', 'form'], function() {
+                        var layer = layui.layer;
+                        var form = layui.form;
+                        getMainParameters(layer, form);
+                    })
+                }
+            }
+        });
+    });
 }
 var MobileData;
 
@@ -193,7 +209,7 @@ function getMainParameters(layer, form) {
                 // json.sim[0].pin_times = 3;
                 // json.sim[0].puk_times = 10;
                 // json.sim[1].isblock = 0;
-                //json.sim[1].pin_lock = 1;
+                // json.sim[1].pin_lock = 1;
                 // json.sim[1].pin_times = 3;
                 // json.sim[1].puk_times = 10;
 
@@ -234,33 +250,6 @@ function getMainParameters(layer, form) {
     });
 }
 
-function bindUnblockEvent(id) {
-    $('#' + id).on('click', function() {
-        console.log(unlockSIM)
-        var times = MobileData[(unlockSIM - 1)].pin_times;
-        //iframe层
-        parent.layer.open({
-            type: 2,
-            title: false,
-            closeBtn: 0,
-            //shadeClose: true,
-            shade: 0.8,
-            area: ['400px', '510px'],
-            content: ['unblockSIM.html?SIM=' + unlockSIM + '&times=' + times, 'no'],
-            end: function(index, layero) {
-                var unlockSIM = $("#unlockSIM").val();
-                if (unlockSIM == 1) {
-                    layui.use(['layer', 'form'], function() {
-                        var layer = layui.layer;
-                        var form = layui.form;
-                        getMainParameters(layer, form);
-                    })
-                }
-            }
-        });
-    });
-}
-
 function renderDataUsage(json, i) {
     var limitNum1, limitNum2, waringNum1, waringNum2;
     if (i == 0) {
@@ -276,11 +265,11 @@ function renderDataUsage(json, i) {
             $(".sim-block-c").hide();
         }
         if (json[i].pin_lock == 0) {
-            $("#SIM_pin_lock input").removeAttr("checked");
-            $("#Change_SIM_pin").attr("disabled", "disabled");
+            $("#SIM_pin_lock1 input").removeAttr("checked");
+            $("#Change_SIM_pin1").attr("disabled", "disabled");
         } else {
-            $("#SIM_pin_lock input").attr("checked", "checked");
-            $("#Change_SIM_pin").removeAttr("disabled");
+            $("#SIM_pin_lock1 input").attr("checked", "checked");
+            $("#Change_SIM_pin1").removeAttr("disabled");
         }
 
         if (json[i].mobile_data == 1) { //Mobile data:                
@@ -358,10 +347,10 @@ function renderDataUsage(json, i) {
 
         if (json[i].pin_lock == 0) {
             $("#SIM_pin_lock2 input").removeAttr("checked");
-            $("#Change_SIM_pin1").prop("disabled", "disabled");
+            $("#Change_SIM_pin2").prop("disabled", "disabled");
         } else {
             $("#SIM_pin_lock2 input").attr("checked", "checked");
-            $("#Change_SIM_pin1").prop("disabled", false);
+            $("#Change_SIM_pin2").prop("disabled", false);
         }
 
         if (json[i].mobile_data == 1) {
@@ -429,57 +418,65 @@ function renderDataUsage(json, i) {
     var unit = json[i].sim_data_limt_unit == 0 ? "MB" : "GB"
     var unit2 = json[i].warning_limit_unit == 0 ? "MB" : "GB"
     if (i == 0) {
+
         var Xdate = [];
         var Ydata = [];
         var AllY = 0;
         if (json[i].sim_data_limt_unit == 0) {
-            //Ydata = json[i].days;
-            for (var k = 0; k < json[i].days.length; k++) {
-                AllY += Number(json[i].days[k]);
+
+            for (var k = 0; k < json[i].data.length; k++) {
+                AllY += Number(json[i].data[k]);
                 Ydata[k] = AllY.toFixed(3);
             }
             waringNum1 = Number(json[i].data_warning_size);
         } else {
-            //Ydata = json[i].days;
-            for (var p = 0; p < json[i].days.length; p++) {
-                Ydata[p] = (Number(json[i].days[p]) / 1024).toFixed(3);
+
+            for (var p = 0; p < json[i].data.length; p++) {
+                Ydata[p] = (Number(json[i].data[p]) / 1024).toFixed(3);
                 AllY += Number(Ydata[p]);
                 Ydata[p] = AllY.toFixed(3);
             }
             waringNum1 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
         }
-        console.log(Ydata)
-        if (Ydata.length > 0) {
-            for (var j = 0; j < Ydata.length; j++) {
-                Xdate.push(j);
-            }
-        }
+        // if (Ydata.length > 0) {
+        //     for (var j = 0; j < Ydata.length; j++) {
+        //         Xdate.push(j);
+        //     }
+        // }
+        Xdate = json[i].days;
+        $(".now-month1").text(Xdate[0]);
+        var len2 = Xdate.length;
+        $(".now-month2").text(Xdate[len2 - 1]);
         renderEchart("used_MB", Xdate, Ydata, unit, limitNum1, unit2, waringNum1)
     } else {
         var Xdate1 = [];
         var Ydata1 = [];
         var AllY1 = 0;
         if (json[i].sim_data_limt_unit == 0) {
-            //Ydata1 = json[i].days;
-            for (var a = 0; a < json[i].days.length; a++) {
-                AllY1 += Number(json[i].days[a]);
+
+            for (var a = 0; a < json[i].data.length; a++) {
+                AllY1 += Number(json[i].data[a]);
                 Ydata1[a] = AllY1.toFixed(3);
             }
             waringNum2 = Number(json[i].data_warning_size);
         } else {
             //Ydata1 = json[i].days;
-            for (var b = 0; b < json[i].days.length; b++) {
-                Ydata1[b] = (Number(json[i].days[b]) / 1024).toFixed(3);
+            for (var b = 0; b < json[i].data.length; b++) {
+                Ydata1[b] = (Number(json[i].data[b]) / 1024).toFixed(3);
                 AllY1 += Number(Ydata1[b]);
                 Ydata1[b] = AllY1.toFixed(3);
             }
             waringNum2 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
         }
-        if (Ydata1.length > 0) {
-            for (var k = 0; k < Ydata1.length; k++) {
-                Xdate1.push(k);
-            }
-        }
+        // if (Ydata1.length > 0) {
+        //     for (var k = 0; k < Ydata1.length; k++) {
+        //         Xdate1.push(k);
+        //     }
+        // }
+        Xdate1 = json[i].days;
+        $(".now-month3").text(Xdate1[0]);
+        var len4 = Xdate1.length;
+        $(".now-month4").text(Xdate1[len4 - 1]);
         //Xdate1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
         //Ydata1 = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 9001, 90002, 90002, 90002];
         //Ydata1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40];
@@ -495,7 +492,7 @@ function renderDataUsage(json, i) {
         $("#DataRoaming").show();
         $("#setDataWaring").show();
         $("#setDataLimit").show();
-        $("#SIM_pin_lock").show();
+        $("#SIM_pin_lock1").show();
 
     });
 }
@@ -559,7 +556,7 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
             trigger: 'axis',
             formatter: function(params, ticket, callback) {
                 if (params.length <= 0) return "";
-                var html = "day:" + (Number(params[0].axisValue) + 1) + "<br />\r\n";
+                var html = "day:" + (Number(params[0].axisValue)) + "<br />\r\n";
                 for (var i = 0; i < params.length; i++) {
                     var dataObj = params[i];
                     html += dataObj.value + " " + unit + "<br />\r\n";
@@ -678,7 +675,7 @@ function getDatausageVal() {
     if (switchMBLim == 1) {
         dataLimit = dataLimit * 1024;
     }
-    var SIM_pin_lock = $("#SIM_pin_lock input").is(":checked") == true ? 1 : 0;
+    var SIM_pin_lock = $("#SIM_pin_lock1 input").is(":checked") == true ? 1 : 0;
 
 
     var mobileData2 = $("#mobileData2 input").is(":checked") == true ? 1 : 0;

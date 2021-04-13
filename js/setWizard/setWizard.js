@@ -189,6 +189,7 @@ function renderWifiList(json) {
         savedStr = "",
         encryptStr = "",
         ConnectedStr = "",
+        ConnectedClass = "",
         wifiImg = "wifi-icon4.png";
     var signal = 0;
     //es5字符串拼接：
@@ -200,11 +201,15 @@ function renderWifiList(json) {
                 encryptStr = "icon-wifi.png"
             }
             if (json[i].is_connected == 1) {
+                ConnectedClass = "color-green";
                 if (2400 < Number(json[i].freq) && Number(json[i].freq) < 2900) {
                     ConnectedStr = "Connected (2.4GHz)";
                 } else if (5100 < Number(json[i].freq) && Number(json[i].freq) < 5900) {
                     ConnectedStr = "Connected (5GHz)";
                 }
+            } else if (json[i].is_connected == 2) {
+                ConnectedClass = "color-red";
+                ConnectedStr = "Connected(No internet)";
             } else {
                 ConnectedStr = "Connecting";
             }
@@ -220,7 +225,7 @@ function renderWifiList(json) {
             }
             //str += '<div class="row setWifi-item -flex-display -justify-box" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
             //有感叹号图标
-            str += '<div class="row -flex-display -justify-box concected-wifi" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="color-green">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div><div class=""><img class="detail-wifi-icon" src="images/icon-info.png"></div></div>'
+            str += '<div class="row -flex-display -justify-box concected-wifi" id="wifi_tips' + i + '"><input class="dom_saved_data" value="" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '" style="display:none;"><div class="-radio-flex"><div class="myAp wifi-name wifi-name-green">' + json[i].ssid + '</div><div class="c9"><img class="connecting-img" src="images/loading.gif" /><span id="Connecting-status" class="' + ConnectedClass + '">' + ConnectedStr + '</span></div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div><div class=""><img class="detail-wifi-icon" src="images/icon-info.png"></div></div>'
         }
     }
     for (let j = 0; j < json.length; j++) {
@@ -316,7 +321,7 @@ function forgetWifiHtml(infoHtml) {
         title: false,
         closeBtn: 0,
         shade: 0.8,
-        area: ['534px', '63%'],
+        area: ['534px', '585px'],
         //area: '534px',
         content: ["WirelessNameInfo.html?ssid=" + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {

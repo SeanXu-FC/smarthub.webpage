@@ -139,25 +139,29 @@ function check2() {
 
         sp2.innerHTML = "Password strength: <span style='color: #909090;'>Too short</span>"; //密码不能小于6个字符 The password cannot be less than 6 characters
 
-    } else if (oPwd2.length >= 8) {
+    } else if (8 <= oPwd2.length && oPwd2.length <= 10) {
         sp2.innerHTML = "";
+        sp2.innerHTML = "Password strength: <span style='color: #ff002a;'>Weak</span>"; //密码等级'较弱'，建议字母+数字 Password level 'weak', letter + number is recommended
+        // var mmzz1 = /^[0-9]{8,100}$|^[a-zA-Z]{8,64}$/; //较弱：全是数字或全是字母 6-16个字符
 
-        var mmzz1 = /^[0-9]{8,100}$|^[a-zA-Z]{8,64}$/; //较弱：全是数字或全是字母 6-16个字符
+        // var mmzz2 = /^[A-Za-z0-9]{8,64}$/; //中级：数字、26个英文字母 6-16个字符
 
-        var mmzz2 = /^[A-Za-z0-9]{8,64}$/; //中级：数字、26个英文字母 6-16个字符
+        // var mmzz3 = /^[\da-zA-Z!@#$%|+-^&*.~]{8,64}$/; //较高：由数字、26个英文字母或者下划线组成的字符串 6-16个字符^[\da-zA-Z!@#$%^&*]*$
 
-        var mmzz3 = /^[\da-zA-Z!@#$%|+-^&*.~]{8,64}$/; //较高：由数字、26个英文字母或者下划线组成的字符串 6-16个字符^[\da-zA-Z!@#$%^&*]*$
+        // if (oPwd2.match(mmzz1)) {
+        //     sp2.innerHTML = "Password strength: <span style='color: #ff002a;'>Weak</span>"; //密码等级'较弱'，建议字母+数字 Password level 'weak', letter + number is recommended
 
-        if (oPwd2.match(mmzz1)) {
-            sp2.innerHTML = "Password strength: <span style='color: #ff002a;'>Weak</span>"; //密码等级'较弱'，建议字母+数字 Password level 'weak', letter + number is recommended
+        // } else if (oPwd2.match(mmzz2)) {
+        //     sp2.innerHTML = "Password strength:<span style='color: #f69c00;'>Fair</span>"; //密码等级'中等'，建议字母+数字+特殊符 Password level 'medium', letters + numbers + special characters are recommended
 
-        } else if (oPwd2.match(mmzz2)) {
-            sp2.innerHTML = "Password strength:<span style='color: #f69c00;'>Fair</span>"; //密码等级'中等'，建议字母+数字+特殊符 Password level 'medium', letters + numbers + special characters are recommended
+        // } else if (oPwd2.match(mmzz3)) {
+        //     sp2.innerHTML = "Password strength: <span style='color: #26b167;'>Strong</span>"; //密码等级'较强'
 
-        } else if (oPwd2.match(mmzz3)) {
-            sp2.innerHTML = "Password strength: <span style='color: #26b167;'>Strong</span>"; //密码等级'较强'
+        // }
 
-        }
-
+    } else if (10 < oPwd2.length && oPwd2.length <= 13) {
+        sp2.innerHTML = "Password strength:<span style='color: #f69c00;'>Fair</span>"; //密码等级'中等'，建议字母+数字+特殊符 Password level 'medium', letters + numbers + special characters are recommended
+    } else if (13 < oPwd2.length && oPwd2.length <= 64) {
+        sp2.innerHTML = "Password strength: <span style='color: #26b167;'>Strong</span>"; //密码等级'较强'
     }
 }

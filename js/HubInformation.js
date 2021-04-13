@@ -22,15 +22,9 @@ $(function() {
     }
 
     $("#btnSave").click(function() {
-        var domain = window.location.host;
-        // self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
-        //console.log(self.location.href + "/action/down");
-        //console.log(('https:' == document.location.protocol ? 'https://' : 'http://') + domain);
-        //console.log(('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down");
-        window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
-        //console.log(self.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down")
-        //window.open("http://198.18.248.1/action/down", "_self");
-        //console.log(window.open("/action/down", "_self"))
+        getFile();
+        //var domain = window.location.host;
+        //window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
     });
 
 
@@ -49,6 +43,58 @@ $(function() {
     });
 
 })
+
+function getFile() {
+    var formData = new FormData();
+    var xhr = new XMLHttpRequest();
+    xhr.upload.onerror = function(error) {
+        console.log("Upload fail！", error);
+    }
+    xhr.upload.onload = function() {
+        console.log('上传成功');
+    }
+    xhr.open('post', '/action/down', true);
+    xhr.send();
+    xhr.onreadystatechange = state_Change;
+
+    function state_Change() {
+        console.log("xhr", xhr)
+        if (xhr.readyState == 4) { // 4 = "loaded"
+            if (xhr.status == 200) { // 200 = OK
+                console.log(xhr.response)
+                let blob = new Blob([xhr.response]);
+                console.log(blob)
+                const url = window.URL.createObjectURL(blob);
+                console.log(url)
+
+            } else {
+                console.log("Upload fail11！");
+            }
+        }
+    }
+}
+
+function getFile1() {
+    $.ajax({
+        url: "/action/down",
+        type: "post",
+        dataType: "json",
+        contentType: "application/octet-stream;charset=utf-8",
+        success: function(res) {
+            console.log("aaaaaa", res)
+
+        },
+        error: function(jqXHR) {
+            console.log("bbbbb", JSON.stringify(jqXHR))
+            console.log(jqXHR)
+            let blob = new Blob([jqXHR.responseText]);
+            console.log(blob)
+            const url = window.URL.createObjectURL(blob);
+            console.log(url)
+
+        }
+    })
+}
 
 function getInfoData(layer, loading) {
     var data = {
@@ -90,7 +136,12 @@ function getInfoData(layer, loading) {
                 $("#MAC6174").html(res.result.Qca6174Mac);
                 $("#Platform_version").html(res.result.PlatformVersion ? res.result.PlatformVersion : "--");
                 $("#Product_version").html(res.result.BundleVersion);
-                $("#Cellular_signal").html(res.result.MobileSignalStrength + " dB");
+                if (res.result.MobileSignalStrength == -444 || res.result.MobileSignalStrength == "-444") {
+                    $("#Cellular_signal").html("No network");
+                } else {
+                    $("#Cellular_signal").html(res.result.MobileSignalStrength + " dB");
+                }
+
                 if (res.result.AdminPwd) {
                     qrcode(res.result.AdminPwd);
                     $("#code_text").text(res.result.AdminPwd);

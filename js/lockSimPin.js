@@ -71,6 +71,9 @@ function unlockSIM(layer, params) {
                 $(parent.frames["my-iframe"].document).find("#unlockSIM").val(1);
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index); //关闭当前页
+            } else if (res.error) {
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.error.message + '!</div>';
+                promptMessage("Error message", tip, closeLockSim);
             } else {
                 if (res.result.pintimes == 0) {
                     $(parent.frames["my-iframe"].document).find("#unlockSIM").val(1);
@@ -89,4 +92,9 @@ function unlockSIM(layer, params) {
             promptMessage("Error message", tip);
         }
     });
+}
+
+function closeLockSim() {
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index); //关闭当前页
 }

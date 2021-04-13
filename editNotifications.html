@@ -659,7 +659,7 @@
             <div class="layui-form-item layui-form-text mt-20">
                 <label class=" layui-form-label Allow-notifications " style="margin-top:-14px;width:228px; ">Notification message:</label>
                 <div class="layui-input-block " style="margin-left:262px; ">
-                    <textarea maxlength="256" class="layui-textarea" oninput="WidthCheckIOStr(this,256);"></textarea>
+                    <textarea maxlength="256" id="alert_areatext" class="layui-textarea" oninput="WidthCheckIOStr(this,256);"></textarea>
                     <p class="font-left"><span id="wordCheck">256</span> characters left</p>
                 </div>
             </div>
@@ -688,7 +688,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210409"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210413"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -703,7 +703,7 @@
             var volt = GetUrlParam("volt");
             oldVolt = volt;
             var alertID = GetUrlParam("alertID");
-            console.log("alertID", alertID);
+            console.log("Notifications", Notifications);
             $("#alert_ID").val(alertID);
             layui.use('layer', function() {
                 var layer = layui.layer;
@@ -730,10 +730,14 @@
                 var form = layui.form;
                 if (Notifications == 1) {
                     $("#Notifications").attr("checked", "checked");
-                    $("#func_check").removeAttr("disabled");
+                    $("#volts_input").removeAttr("disabled");
+                    $("#security").removeAttr("disabled");
+                    $("#alert_areatext").removeAttr("disabled");
                 } else {
                     $("#Notifications").removeAttr("checked");
-                    $("#func_check").attr("disabled", "disabled");
+                    $("#volts_input").attr("disabled", "disabled");
+                    $("#security").attr("disabled", "disabled");
+                    $("#alert_areatext").attr("disabled", "disabled");
                 }
 
                 $("#volts_input").val(volt);
@@ -746,14 +750,19 @@
                 $("#security option[value='" + trigType + "']").prop("selected", true);
                 form.render();
 
-                form.on('switch(switchTest)', function(data) {
+                form.on('checkbox(switchTest)', function(data) {
                     //开关是否开启，true或者false
                     var checked = data.elem.checked;
-                    console.log("checked", checked)
                     if (checked) { //开启用户才可以操作
                         $("#func_check").removeAttr("disabled");
+                        $("#volts_input").removeAttr("disabled");
+                        $("#security").removeAttr("disabled");
+                        $("#alert_areatext").removeAttr("disabled");
                     } else {
                         $("#func_check").attr("disabled", "disabled");
+                        $("#volts_input").attr("disabled", "disabled");
+                        $("#security").attr("disabled", "disabled");
+                        $("#alert_areatext").attr("disabled", "disabled");
 
                     }
                     form.render();

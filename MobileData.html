@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210409" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210409" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210413" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210413" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -750,7 +750,9 @@
         }
         
         .now-month1,
-        .now-month2 {
+        .now-month2,
+        .now-month3,
+        .now-month4 {
             font-family: OpenSans;
             font-size: 14px;
             color: #343434;
@@ -902,8 +904,7 @@
                                             <!-- <img src="images/usage.png"> -->
                                             <!-- <span class="echart-text">Usage (<span class="echart_Ytext1">MB</span>)</span> -->
                                             <div class="usedMB-echart" id="used_MB"></div>
-                                            <div class="-flex-display -justify-box"><span class="now-month1">1
-                                                    Jan</span><span class="now-month2">31 Jan</span></div>
+                                            <div class="-flex-display -justify-box"><span class="now-month1"></span><span class="now-month2"></span></div>
                                         </div>
                                         <p class="widthper50 mt-20 mb-10 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
                                                 <e style="font-size:26px;font-weight:600" id="allUsed_MB">0</e><span
@@ -1035,11 +1036,11 @@
                                                 <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 50px;">
                                                     <label class="layui-form-label SIM-pin-lock mt-0 mb-0">Lock
                                                         SIM:</label>
-                                                    <div class="layui-input-block mt-30" id="SIM_pin_lock" style="display:none;">
+                                                    <div class="layui-input-block mt-30" id="SIM_pin_lock1" style="display:none;">
                                                         <input type="checkbox" name="open" lay-skin="primary" lay-filter="SIMpin">
                                                     </div>
                                                 </div>
-                                                <button class="Rectangle-1182 width-auto Unlock-SIM Change-SIM-pin" id="Change_SIM_pin">Change SIM
+                                                <button class="Rectangle-1182 width-auto Unlock-SIM Change-SIM-pin" id="Change_SIM_pin1">Change SIM
                                                     PIN</button>
                                             </div>
                                         </div>
@@ -1097,9 +1098,8 @@
                                             <!-- <img src="images/usage.png"> -->
                                             <!-- <span class="echart-text">Usage (<span class="echart_Ytext1">MB</span>)</span> -->
                                             <div class="usedMB-echart" id="used_MB2"></div>
-                                            <div class="-flex-display -justify-box"><span class="now-month1"></span><span class="now-month2"></span></div>
-                                            <div class="-flex-display -justify-box"><span class="now-month1">1
-                                                    Jan</span><span class="now-month2">31 Jan</span></div>
+
+                                            <div class="-flex-display -justify-box"><span class="now-month3"></span><span class="now-month4"></span></div>
                                         </div>
                                         <p class="widthper50 mt-20 mb-10 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
                                                 <e style="font-size:26px;font-weight:600" id="allUsed_MB2">0</e><span
@@ -1224,7 +1224,7 @@
                                                         <input type="checkbox" lay-skin="primary" lay-filter="SIMpin2">
                                                     </div>
                                                 </div>
-                                                <button class="Rectangle-1182 width-auto Unlock-SIM Change-SIM-pin" id="Change_SIM_pin1">Change SIM
+                                                <button class="Rectangle-1182 width-auto Unlock-SIM Change-SIM-pin" id="Change_SIM_pin2">Change SIM
                                                     PIN</button>
                                             </div>
                                         </div>
@@ -1247,10 +1247,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210409"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210409"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210413"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210413"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210409"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210413"></script>
 
 </body>
 

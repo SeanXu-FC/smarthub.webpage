@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210409" rel="stylesheet" />
+    <link href="css/style.css?mv=20210413" rel="stylesheet" />
     <title>Document</title>
     <style>
         * {
@@ -129,7 +129,7 @@
         }
         
         .Password {
-            width: 125px;
+            width: 170px;
             height: 24px;
             font-family: OpenSans;
             font-size: 18px;
@@ -163,7 +163,7 @@
         }
         
         .Rectangle-1188 {
-            width: auto;
+            width: 100px;
             height: 40px;
             padding: 5px 10px;
             border-radius: 5px;
@@ -193,7 +193,7 @@
 <body>
     <div id="enterPass1" class="Rectangle-1187">
 
-        <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Change <span id="unlock_name"></span>PIN
+        <h3 class="Enter-admin-password Enter-the-password-for-network-Mynetwork1">Change <span id="unlock_name"></span> PIN
         </h3>
 
         <div class="row">
@@ -217,7 +217,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210409"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210413"></script>
     <script type="text/javascript">
         var SIM;
         $(function() {
@@ -233,7 +233,7 @@
                 var len = $('#Current_PIN').val().length;
                 var len1 = $('#New_PIN').val().length;
                 var len2 = $('#New_PIN1').val().length;
-                if (2 <= len && 2 <= len1 && 2 <= len2) {
+                if (3 <= len && 3 <= len1 && 3 <= len2 && $('#New_PIN').val() == $('#New_PIN1').val()) {
                     $("#OK_btn").removeAttr("disabled");
                     $("#OK_btn").css("opacity", "1");
 
@@ -259,6 +259,10 @@
             })
         });
 
+        function closeLockSim() {
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index); //关闭当前页
+        }
         //解锁SIM卡
         function unlockSIM(layer, params) {
             var loading = layer.load(0, {
@@ -292,8 +296,10 @@
                         $(parent.frames["my-iframe"].document).find("#unlockSIM").val(1);
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index); //关闭当前页
-                    } else {
-
+                    } else if (res.error) {
+                        var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' +
+                            res.error.message + '!</div>';
+                        promptMessage("Error message", tip, closeLockSim);
                     }
                 },
                 error: function(jqXHR) {
