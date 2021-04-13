@@ -1,6 +1,6 @@
-//var reqUrlProxy = "/proxy";
+var reqUrlProxy = "/proxy";
 var restart0 = true;
-var reqUrlProxy = "";
+//var reqUrlProxy = "";
 //获取url中的参数
 function GetUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -35,6 +35,7 @@ function WidthCheckIO(str, maxLen) {
 
     str.value = str.value.replace(/[^\x00-\xff]+/g, '');
     str.value = str.value.replace(/(^\s*)/g, "");
+    str.value = str.value.replace(/[')]/g, "");
     //length 获取字数数
     for (var i = 0; i < str.value.length; i++) {
         //charCodeAt()获取字符串中某一个字符的编码 
@@ -77,7 +78,7 @@ function WidthCheckPassword(str, maxLen) {
     }
 }
 
-function promptMessage(title, content) {
+function promptMessage(title, content, fn) {
     layui.use(['layer'], function() {
         var layer = layui.layer;
         layer.open({
@@ -91,9 +92,14 @@ function promptMessage(title, content) {
             shade: 0, //不显示遮罩                            
             yes: function(index) {
                 layer.close(index);
-                var domain = window.location.host;
-                top.location.href = ('https:' == document.location.protocol ? 'https://' :
-                    'http://') + domain;
+                if (fn) {
+                    fn();
+                } else {
+                    var domain = window.location.host;
+                    top.location.href = ('https:' == document.location.protocol ? 'https://' :
+                        'http://') + domain;
+                }
+
             }
         });
     })

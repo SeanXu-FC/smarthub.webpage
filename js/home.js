@@ -63,7 +63,7 @@ function getHomeData(layer, loading) {
             if (res.result) {
                 var json = res.result;
                 var arr = ['Connected', 'Connected(2.4GHz)', 'Connected(5GHz)', 'On', 'Off',
-                    'Error'
+                    'Error', 'Not connected', 'No internet'
                 ];
                 if (json.cloud.status == 0) {
                     $('.cloud').eq(0).text(arr[5]);
@@ -77,18 +77,22 @@ function getHomeData(layer, loading) {
 
                 if (json.sta.status == 0) {
                     $('.connected24').eq(0).text(arr[4]);
-                    //$('.r_06').attr("src", "images/r_06_gray.png");
+                    $('.WiFiNetwork').attr("src", "images/r_03_off.png");
                     //$('#connected24').attr("src", "images/s_wifi_nonea.png");
-                    $('.connected24').css('color', 'red');
+                    $('.connected24').css('color', '#909090');
                     $(".imgIcon1 .ssid").text("-");
-                    $(".WiFiNetwork-disable").show();
                 } else if (json.sta.status == 2) {
-                    $('.connected24').eq(0).text(arr[5]);
+                    $('.connected24').eq(0).text(arr[6]);
                     //$('.r_06').attr("src", "images/r_06_gray.png");
                     //$('#connected24').attr("src", "images/s_wifi_nonea.png");
-                    $('.connected24').css('color', 'red');
-                    $(".imgIcon1 .ssid").text("-");
-                    $(".WiFiNetwork-disable").show();
+                    $('.connected24').css('color', '#333');
+                    $(".imgIcon1 .ssid").text(json.sta.sta_ssid ? json.sta.sta_ssid : "-");
+                } else if (json.sta.status == 3) {
+                    $('.connected24').eq(0).text(arr[7]);
+                    $('.WiFiNetwork').attr("src", "images/r_03_gray.png");
+                    //$('#connected24').attr("src", "images/s_wifi_nonea.png");
+                    $('.connected24').css('color', '#ff0000');
+                    $(".imgIcon1 .ssid").text(json.sta.sta_ssid ? json.sta.sta_ssid : "-");
                 } else {
                     if (json.sta.band == 0) {
                         $('.connected24').eq(0).text(arr[1]);
@@ -111,9 +115,9 @@ function getHomeData(layer, loading) {
                     's_wifi_04a.png', 's_wifi_05a.png'
                 ];
                 if (json.mobile.active_sim == 99) {
-                    $('.Connected4G').eq(0).text(arr[4]);
-                    $('#Connected4G').attr("src", "images/mobileSignal-none.png");
-                    $('.Connected4G').css('color', 'red')
+                    $('.Connected4G').eq(0).text("Sim not insert");
+                    //$('#Connected4G').attr("src", "images/mobileSignal-none.png");
+                    $('.Connected4G').css('color', '#ff0000')
                     $('.NetworkProvider').eq(0).text('-');
                     $('.active_sim').eq(0).text('-');
                     // $('.imsi').eq(0).text('-');
@@ -126,15 +130,12 @@ function getHomeData(layer, loading) {
                     $(".mobiledataImg-disable").show();
                 } else {
                     var mobileStatus = "";
-                    if (json.mobile.status == 0) {
-                        if (json.mobile.act_num == 0) {
-                            mobileStatus = "Disconnected(3G)"
-                        } else {
-                            mobileStatus = "Disconnected(4G)"
-                        }
 
-                        $('.Connected4G').eq(0).text(mobileStatus);
-                        $('.Connected4G').css('color', 'red')
+                    if (json.mobile.status == 1) {
+                        $("#Connected4G").hide();
+                        $('.Connected4G').eq(0).text(arr[4]);
+                        $('.Connected4G').css('color', '#909090')
+                        $(".mobiledataImg").attr("src", "images/r_04_close.png");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -146,7 +147,52 @@ function getHomeData(layer, loading) {
                         // $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
                         // $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
                         $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
-                        $(".mobiledataImg-disable").show();
+                    } else if (json.mobile.status == 2) {
+                        $('.Connected4G').eq(0).text("Connecting...");
+                        $('.Connected4G').css('color', '#333');
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
+                    } else if (json.mobile.status == 4) {
+                        $('.Connected4G').eq(0).text("Not in use");
+                        $('.Connected4G').css('color', '#333');
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
+                    } else if (json.mobile.status == 5) {
+                        $('.Connected4G').eq(0).text("Network unavailable");
+                        $('.Connected4G').css('color', '#ff0000');
+                        $(".mobiledataImg").attr("src", "images/r_04_gray.png");
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
+                    } else if (json.mobile.status == 6) {
+                        $('.Connected4G').eq(0).text("Internet unavailable");
+                        $('.Connected4G').css('color', '#ff0000');
+                        $(".mobiledataImg").attr("src", "images/r_04_gray.png");
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
+                    } else if (json.mobile.status == 7) {
+                        $('.Connected4G').eq(0).text("Establish connecting");
+                        $('.Connected4G').css('color', '#333');
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
+                    } else if (json.mobile.status == 8) {
+                        $("#Connected4G").hide();
+                        $('.Connected4G').eq(0).text("Sim not insert");
+                        $('.Connected4G').css('color', '#ff0000');
+                        $(".mobiledataImg").attr("src", "images/r_04_gray.png");
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
                     } else {
                         if (json.mobile.act_num == 0) {
                             mobileStatus = "Connected(3G)"
@@ -166,7 +212,6 @@ function getHomeData(layer, loading) {
                         // $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
                         $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
                         $('.Connected4G').css('color', '#26b167')
-                        $(".mobiledataImg-disable").hide();
                     }
                     if (json.mobile.signal);
                     if (json.mobile.signal > 0 && json.mobile.signal <= 6) {
@@ -324,7 +369,7 @@ function progressBar() {
             clearInterval(progressBarTimer);
             clearInterval(progressTimer);
             parent.layer.close(progress);
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Qca9563 loss connection with IMX8!</div>';
+            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">The router self-check has timed out!</div>';
             promptMessage("Error message", tip);
             return;
         }
@@ -340,7 +385,7 @@ var progressInitFlag = false;
 function getInfoData() {
     var data = {
         "jsonrpc": "2.0",
-        "method": "GetHubInfo",
+        "method": "GetModulesSelfCheckStatus",
         "params": {
 
         },
@@ -355,21 +400,32 @@ function getInfoData() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            if (res.result && res.result.ipq_ipaddr) {
-                // clearInterval(progressTimer);
-                // clearInterval(progressBarTimer);
-                // $(parent.document).find("#div3").myProgress({
-                //     speed: 10,
-                //     percent: 100,
-                //     width: "100%",
-                // });
-                // parent.layer.close(progress);
+            if (res.result && res.result.SelfCheck == 0) {
+                clearInterval(progressTimer);
+                clearInterval(progressBarTimer);
+                $(parent.document).find("#div3").myProgress({
+                    speed: 10,
+                    percent: 100,
+                    width: "100%",
+                });
+                parent.layer.close(progress);
 
-            } else {
+            } else if (res.result && res.result.SelfCheck == 1) {
                 if (!progressInitFlag) {
                     progressInitFlag = true;
                     progressBar();
                 }
+            } else if (res.error) {
+                clearInterval(progressTimer);
+                clearInterval(progressBarTimer);
+                $(parent.document).find("#div3").myProgress({
+                    speed: 10,
+                    percent: 100,
+                    width: "100%",
+                });
+                parent.layer.close(progress);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.error.message + '!</div>';
+                promptMessage("Error message", tip, fn);
             }
         },
         error: function(jqXHR) {
@@ -388,6 +444,9 @@ function getInfoData() {
     });
 }
 
+function fn() {
+
+}
 
 
 function getCloud() {
