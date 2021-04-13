@@ -312,9 +312,7 @@ function forgetWifiHtml(infoHtml) {
     var is_saved = infoHtml.attr("is_saved");
     var is_connected = infoHtml.attr("is_connected");
 
-    if (is_connected != '1') {
-        return;
-    }
+
     //iframe层
     parent.layer.open({
         type: 2,

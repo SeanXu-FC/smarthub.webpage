@@ -267,7 +267,6 @@ function renderWifiList(json) {
             } else {
                 encryptStr = "icon-wifi.png"
             }
-
             if (json[i].is_connected == 1) {
                 if (2400 < Number(json[i].freq) && Number(json[i].freq) < 2900) {
                     ConnectedStr = "Connected (2.4GHz)";
@@ -425,9 +424,7 @@ function forgetWifiHtml(infoHtml) {
     var is_saved = infoHtml.attr("is_saved");
     var is_connected = infoHtml.attr("is_connected");
 
-    if (is_connected != '1') {
-        return;
-    }
+
     //iframe层
     parent.layer.open({
         type: 2,
