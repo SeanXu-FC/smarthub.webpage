@@ -200,6 +200,7 @@ function renderWifiList(json) {
             } else {
                 encryptStr = "icon-wifi.png"
             }
+
             if (json[i].is_connected == 1) {
                 ConnectedClass = "color-green";
                 if (2400 < Number(json[i].freq) && Number(json[i].freq) < 2900) {
@@ -255,7 +256,7 @@ function renderWifiList(json) {
             str += '<div class="row setWifi-item -flex-display -justify-box wifi" style="margin-bottom:13px;" id="wifi_tips' + j + '"><input class="dom_saved_data" value="" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '" style="display:none;"><div class="-radio-flex"><div class="wifi-name-set">' + json[j].ssid + '</div><div class="c9" style="padding-left:0">' + savedStr + '</div></div><div class=""><img class="wifi-icon" src="images/' + wifiImg + '"></div></div>'
         }
     }
-    str += ' <div class="row mt-30 add-Available-networks" style="display: flex;"><div class="col-md-2 pl-0"><div><img src="images/icon-add.png"></div></div><div class="col-md-10"><span class="addN">Create network</span></div></div>'
+    str += ' <div class="row mt-30 add-Available-networks" style="display: flex;"><div class="col-md-2 pl-0"><div><img src="images/icon-add.png"></div></div><div class="col-md-10"><span class="addN">Add network</span></div></div>'
     $("#set_wizard_c").html(str);
     bindEvent();
 }

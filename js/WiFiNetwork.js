@@ -267,6 +267,7 @@ function renderWifiList(json) {
             } else {
                 encryptStr = "icon-wifi.png"
             }
+
             if (json[i].is_connected == 1) {
                 if (2400 < Number(json[i].freq) && Number(json[i].freq) < 2900) {
                     ConnectedStr = "Connected (2.4GHz)";
@@ -291,7 +292,7 @@ function renderWifiList(json) {
                 wifiImg = "s_wifi_05.png";
             }
 
-            str += '<img class="wifi-icon" src="images/' + wifiImg + '"></div></td><td style="padding-left: 0;"><div class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div></td><td class="wifi-info" style="display:none"><span class="save-wifi-info" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '"></span></td></tr>'
+            str += '<img class="wifi-icon" src="images/' + wifiImg + '"></div></td><td style="padding-left: 0;"><div id="wifi_infoIcon" class="col-md-2 wireless"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:-2px;"></div></td><td class="wifi-info" style="display:none"><span class="save-wifi-info" bssid="' + json[i].bssid + '" encrypt="' + json[i].encrypt + '" freq="' + json[i].freq + '" is_connected="' + json[i].is_connected + '" is_saved="' + json[i].is_saved + '" rssi="' + json[i].rssi + '" ssid="' + json[i].ssid + '"></span></td></tr>'
 
         }
     }
@@ -366,7 +367,7 @@ function bindEvent() {
         $("#saved_id").attr("passwordIncorrect", "");
         enterPasswordHtml(infoHtml);
     });
-    $('.wireless').on('click', function() {
+    $('#wifi_infoIcon').on('click', function() {
         var infoHtml = $(this).parents("tr").children(".wifi-info").children("span");
         forgetWifiHtml(infoHtml);
     });

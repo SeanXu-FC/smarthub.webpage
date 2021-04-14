@@ -234,7 +234,7 @@ function getHomeData(layer, loading) {
                     $('.Status').eq(0).text(arr[4]);
                     $('.Name').eq(0).text(json.ap.name);
                     $('.clg').css({
-                        'color': 'red'
+                        'color': '#909090'
                     })
                     $('.r_06').attr("src", "images/r_06_gray.png");
                 } else {
@@ -358,13 +358,13 @@ function progressBar() {
     progress = parentTipMessage(tip);
     $(parent.document).find("#div3").myProgress({
         speed: 10,
-        percent: ((progressI / 600) * 100).toFixed(0),
+        percent: ((progressI / 800) * 100).toFixed(0),
         width: "100%",
     });
 
     progressBarTimer = setInterval(() => {
         progressI = progressI + 1;
-        if (progressI == 600) { //progressI=600进度条达到100%，时间达到1分钟
+        if (800 <= progressI) { //progressI=800进度条达到100%，时间达到80s
             progressInitFlag = false;
             clearInterval(progressBarTimer);
             clearInterval(progressTimer);
@@ -375,7 +375,7 @@ function progressBar() {
         }
         $(parent.document).find("#div3").myProgress({
             speed: 10,
-            percent: ((progressI / 600) * 100).toFixed(0),
+            percent: ((progressI / 800) * 100).toFixed(0),
             width: "100%",
         });
     }, 100);

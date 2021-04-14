@@ -418,31 +418,27 @@ function renderDataUsage(json, i) {
     var unit = json[i].sim_data_limt_unit == 0 ? "MB" : "GB"
     var unit2 = json[i].warning_limit_unit == 0 ? "MB" : "GB"
     if (i == 0) {
-
         var Xdate = [];
         var Ydata = [];
         var AllY = 0;
-        if (json[i].sim_data_limt_unit == 0) {
+        if (json[i].data) {
+            if (json[i].sim_data_limt_unit == 0) {
 
-            for (var k = 0; k < json[i].data.length; k++) {
-                AllY += Number(json[i].data[k]);
-                Ydata[k] = AllY.toFixed(3);
+                for (var k = 0; k < json[i].data.length; k++) {
+                    AllY += Number(json[i].data[k]);
+                    Ydata[k] = AllY.toFixed(3);
+                }
+                waringNum1 = Number(json[i].data_warning_size);
+            } else {
+                for (var p = 0; p < json[i].data.length; p++) {
+                    Ydata[p] = (Number(json[i].data[p]) / 1024).toFixed(3);
+                    AllY += Number(Ydata[p]);
+                    Ydata[p] = AllY.toFixed(3);
+                }
+                waringNum1 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
             }
-            waringNum1 = Number(json[i].data_warning_size);
-        } else {
-
-            for (var p = 0; p < json[i].data.length; p++) {
-                Ydata[p] = (Number(json[i].data[p]) / 1024).toFixed(3);
-                AllY += Number(Ydata[p]);
-                Ydata[p] = AllY.toFixed(3);
-            }
-            waringNum1 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
         }
-        // if (Ydata.length > 0) {
-        //     for (var j = 0; j < Ydata.length; j++) {
-        //         Xdate.push(j);
-        //     }
-        // }
+
         Xdate = json[i].days;
         $(".now-month1").text(Xdate[0]);
         var len2 = Xdate.length;
@@ -452,27 +448,26 @@ function renderDataUsage(json, i) {
         var Xdate1 = [];
         var Ydata1 = [];
         var AllY1 = 0;
-        if (json[i].sim_data_limt_unit == 0) {
+        if (json[i].data) {
+            if (json[i].sim_data_limt_unit == 0) {
 
-            for (var a = 0; a < json[i].data.length; a++) {
-                AllY1 += Number(json[i].data[a]);
-                Ydata1[a] = AllY1.toFixed(3);
+                for (var a = 0; a < json[i].data.length; a++) {
+                    AllY1 += Number(json[i].data[a]);
+                    Ydata1[a] = AllY1.toFixed(3);
+                }
+                waringNum2 = Number(json[i].data_warning_size);
+            } else {
+                //Ydata1 = json[i].days;
+                for (var b = 0; b < json[i].data.length; b++) {
+                    Ydata1[b] = (Number(json[i].data[b]) / 1024).toFixed(3);
+                    AllY1 += Number(Ydata1[b]);
+                    Ydata1[b] = AllY1.toFixed(3);
+                }
+                waringNum2 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
             }
-            waringNum2 = Number(json[i].data_warning_size);
-        } else {
-            //Ydata1 = json[i].days;
-            for (var b = 0; b < json[i].data.length; b++) {
-                Ydata1[b] = (Number(json[i].data[b]) / 1024).toFixed(3);
-                AllY1 += Number(Ydata1[b]);
-                Ydata1[b] = AllY1.toFixed(3);
-            }
-            waringNum2 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
         }
-        // if (Ydata1.length > 0) {
-        //     for (var k = 0; k < Ydata1.length; k++) {
-        //         Xdate1.push(k);
-        //     }
-        // }
+
+
         Xdate1 = json[i].days;
         $(".now-month3").text(Xdate1[0]);
         var len4 = Xdate1.length;
