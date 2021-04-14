@@ -22,9 +22,10 @@ $(function() {
     }
 
     $("#btnSave").click(function() {
-        getFile();
-        //var domain = window.location.host;
-        //window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
+        //getFile();
+        $(this).prop("disabled", "disabled");
+        var domain = window.location.host;
+        window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
     });
 
 
@@ -115,6 +116,7 @@ function getInfoData(layer, loading) {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             layer.close(loading);
+            $("#btnSave").prop("disabled", false);
             if (res.result) {
                 $("#model").html(res.result.Model);
                 //$("#iv").html(res.result.ipq_version);
@@ -156,6 +158,7 @@ function getInfoData(layer, loading) {
         },
         error: function(jqXHR) {
             console.log("Error message", JSON.stringify(jqXHR))
+            $("#btnSave").prop("disabled", false);
             frequency++;
             if (frequency < 3) {
                 setTimeout(() => {
