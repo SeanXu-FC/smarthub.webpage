@@ -334,13 +334,13 @@ var timer = null; //定时器
 function bindEvent() {
 
 
-    $('.Rectangle-1205 .wifi').hover(function() {
-        var infoHtml = $(this).parents("tr").children(".wifi-info").children("span");
+    $('.Rectangle-1205 .wifi-table .tip-dom').hover(function() {
+        var infoHtml = $(this).children(".wifi-info").children("span");
         var ssid = infoHtml.attr("ssid");
         var freq = infoHtml.attr("freq");
         var bssid = infoHtml.attr("bssid");
         var encrypt = infoHtml.attr("encrypt");
-        var tipId = $(this).parents("tr").attr("id");
+        var tipId = $(this).attr("id");
         if (2400 < freq && freq < 2900) {
             freq = "2.4GHz"
         } else if (5030 < freq && freq < 5900) {
@@ -352,7 +352,7 @@ function bindEvent() {
             tipIndex = layer.tips(tipStr, "#" + tipId, {
                 area: ['auto', 'auto'],
                 time: 0,
-                tips: [2, "#f9f9f9"]
+                tips: [1, "#f9f9f9"]
             });
         });
     }, function() {
@@ -403,7 +403,7 @@ function addNetworkHtml() {
                         wifiJson[i].is_connected = 0;
                     }
                     if (connectingSsid == wifiJson[i].ssid && connectingEncrypt == wifiJson[i].encrypt) {
-                        wifiJson[i].is_connected = 2;
+                        wifiJson[i].is_connected = 9;
                     }
                 }
                 renderWifiList(wifiJson);
@@ -493,7 +493,7 @@ function enterPasswordHtml(infoHtml) {
                         wifiJson[i].is_connected = 0;
                     }
                     if (connectingSsid == wifiJson[i].ssid && connectingBssid == wifiJson[i].bssid) {
-                        wifiJson[i].is_connected = 2;
+                        wifiJson[i].is_connected = 9;
                     }
                 }
                 renderWifiList(wifiJson);
@@ -564,7 +564,7 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
                         var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
                         for (var i = 0; i < wifiJson.length; i++) {
                             if (res.result.ssid == wifiJson[i].ssid && res.result.bssid == wifiJson[i].bssid) {
-                                wifiJson[i].is_connected = 2;
+                                wifiJson[i].is_connected = 9;
                                 infoDOM.attr("ssid", res.result.ssid);
                                 infoDOM.attr("bssid", res.result.bssid);
                                 infoDOM.attr("encrypt", wifiJson[i].encrypt);
@@ -633,7 +633,7 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
                             wifiJson[i].is_connected = 0;
                         }
                         if (ssid == wifiJson[i].ssid && bssid == wifiJson[i].bssid) {
-                            wifiJson[i].is_connected = 2;
+                            wifiJson[i].is_connected = 9;
                         }
                     }
                     renderWifiList(wifiJson);
@@ -707,7 +707,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
                             wifiJson[i].is_connected = 0;
                         }
                         if (ssid == wifiJson[i].ssid && bssid == wifiJson[i].bssid) {
-                            wifiJson[i].is_connected = 2;
+                            wifiJson[i].is_connected = 9;
                         }
                     }
                     renderWifiList(wifiJson);

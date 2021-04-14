@@ -369,6 +369,8 @@ function progressBar() {
             clearInterval(progressBarTimer);
             clearInterval(progressTimer);
             parent.layer.close(progress);
+            progressI = 0;
+            progressInitFlag = false;
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">The router self-check has timed out!</div>';
             promptMessage("Error message", tip);
             return;
@@ -410,12 +412,14 @@ function getInfoData() {
                 });
                 parent.layer.close(progress);
 
-            } else if (res.result && res.result.SelfCheck == 1) {
+            }
+            else if (res.result && res.result.SelfCheck == 1) {
                 if (!progressInitFlag) {
                     progressInitFlag = true;
                     progressBar();
                 }
-            } else if (res.error) {
+            }
+            else if (res.error) {
                 clearInterval(progressTimer);
                 clearInterval(progressBarTimer);
                 $(parent.document).find("#div3").myProgress({

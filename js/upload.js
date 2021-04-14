@@ -113,7 +113,7 @@ function toUploading(files) {
                         $("#upload").hide();
                         $("#upgrade").removeClass("disable-btn");
                         console.log(resObj)
-                        $("#version").html(resObj.id);
+
 
                     } else {
                         layer.msg("Upload fail:" + msg);
