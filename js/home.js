@@ -188,7 +188,7 @@ function getHomeData(layer, loading) {
                             .active_sim : '-');
                     } else if (json.mobile.status == 8) {
                         $("#Connected4G").hide();
-                        $('.Connected4G').eq(0).text("Sim not insert");
+                        $('.Connected4G').eq(0).text("Switching SIM");
                         $('.Connected4G').css('color', '#ff0000');
                         $(".mobiledataImg").attr("src", "images/r_04_gray.png");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
