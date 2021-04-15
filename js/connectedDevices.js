@@ -41,7 +41,7 @@ function getConnected(layer, loading) {
                 }
                 $('#main').html(main);
 
-                var arr = ['Ethernet', 'Wireless'];
+                var arr = ['Ethernet', 'WiFi'];
                 var arrImg = ['Group 2902.png', 'Group 2901.png', 'Group 2903.png'];
                 for (var i = 0; i < json.length; i++) {
                     if (json[i].DType == 0) {

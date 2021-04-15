@@ -196,15 +196,6 @@
             /* height: 30px; */
         }
         
-        .correct {
-            display: none;
-            color: green;
-            margin: 10px 0 10px 104px;
-            font-weight: bold;
-            /* visibility: hidden; */
-            /* height: 30px; */
-        }
-        
         .SKY546H {
             /* width: 102px; */
             height: 33px;
@@ -350,11 +341,15 @@
         
         .correct {
             display: none;
-            color: green;
-            margin: 10px 0 10px 54px;
-            font-weight: bold;
-            /* visibility: hidden; */
-            /* height: 30px; */
+            font-size: 15px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+            padding-top: 5px;
         }
         
         .btn-bottom {
@@ -392,7 +387,7 @@
                         <input type="password" value="" id="pwd" class="Rectangle-1188 pwd layui-input" oninput="WidthCheckPassword(this,64);" style="display: inline-block;" />
                         <span class="SHOW" style="position:absolute; top:10px;left:388px;cursor: pointer;" onclick="change()">SHOW</span>
                         <div class="error">Password is incorrect</div>
-                        <div class="correct">Password is correct</div>
+                        <div class="correct">Password should be at least 8 characters long</div>
                     </div>
 
                 </div>
@@ -405,7 +400,7 @@
 
 
     </div>
-    <script type="text/javascript" src="js/common.js?mv=20210414"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210415"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
@@ -468,9 +463,11 @@
                     }
                 } else if (security == "WPA2-PSK") {
                     if (8 <= len2 && len2 < 64) {
+                        $(".correct").hide();
                         $("#save_btn").prop("disabled", false);
                         $("#save_btn").css("opacity", "1");
                     } else {
+                        $(".correct").show();
                         $("#save_btn").prop("disabled", true);
                         $("#save_btn").css("opacity", "0.5");
                     }

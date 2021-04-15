@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210414" rel="stylesheet" />
+    <link href="css/style.css?mv=20210415" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210414"></script>
+    <script src="js/lanConfiguration.js?mv=20210415"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210414"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210415"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -473,6 +473,9 @@
         var loading, interval, t = 10;
         var frequency = 0;
         $(function() {
+            $(window).on('beforeunload', function() {
+                clearInterval(timer);
+            });
             $("#cancel2").on("click", function() {
                 eco_refresh('my-iframe')
             });

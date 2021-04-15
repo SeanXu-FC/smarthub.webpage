@@ -7,6 +7,9 @@ $(function() {
         var layer = layui.layer;
         getWLANScan(layer, form);
     });
+    $(window).on('beforeunload', function() {
+        clearInterval(timer);
+    });
 })
 
 function getWLANScan(layer, form) {

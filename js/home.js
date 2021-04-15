@@ -15,12 +15,14 @@ $(function() {
         getHomeData(layer, loading);
         timer = setInterval(() => {
             getHomeData(layer, loading);
-        }, 10000);
+        }, 2000);
     })
     getStatus();
 
     $(window).on('beforeunload', function() {
         clearInterval(timer);
+        clearInterval(progressBarTimer);
+        clearInterval(progressTimer);
     });
 
 
@@ -412,14 +414,12 @@ function getInfoData() {
                 });
                 parent.layer.close(progress);
 
-            }
-            else if (res.result && res.result.SelfCheck == 1) {
+            } else if (res.result && res.result.SelfCheck == 1) {
                 if (!progressInitFlag) {
                     progressInitFlag = true;
                     progressBar();
                 }
-            }
-            else if (res.error) {
+            } else if (res.error) {
                 clearInterval(progressTimer);
                 clearInterval(progressBarTimer);
                 $(parent.document).find("#div3").myProgress({

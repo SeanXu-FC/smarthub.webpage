@@ -23,11 +23,12 @@ $(function() {
 
     $('#pw').on("input", function() {
         var len = $(this).val().length;
-        if (len <= 8) {
-
+        if (len < 8) {
+            $("#btn1").prop("disabled", "disabled");
             $(".len-tip")
-                .text('Please enter a password with more than 8 digits!')
+                .text('Password should be at least 8 characters long!')
         } else {
+            $("#btn1").prop("disabled", false);
             $(".len-tip")
                 .text(' ')
         }
@@ -455,9 +456,9 @@ function APsave() {
     var WpaKey = $(".pwd").val();
     var len = $("#pw").val().length;
     if ($("#EncryptionType").val() != 0) {
-        if (len <= 8) {
+        if (len < 8) {
             $(".len-tip")
-                .text('Please enter a password with more than 8 digits!')
+                .text('Password should be at least 8 characters long!')
             return;
         }
     }

@@ -203,17 +203,6 @@ function getMainParameters(layer, form) {
             if (res.result) {
                 var json = res.result;
 
-                //模拟数据
-                // json.sim[0].isblock = 1;
-                // json.sim[0].pin_lock = 0;
-                // json.sim[0].pin_times = 3;
-                // json.sim[0].puk_times = 10;
-                // json.sim[1].isblock = 0;
-                // json.sim[1].pin_lock = 1;
-                // json.sim[1].pin_times = 3;
-                // json.sim[1].puk_times = 10;
-
-
 
                 if (json.auo_switch == 0) { //Mobile data:                
                     $("#autoSwitch input").removeAttr("checked");
@@ -438,8 +427,11 @@ function renderDataUsage(json, i) {
                 waringNum1 = (Number(json[i].data_warning_size) / 1024).toFixed(2);
             }
         }
-
+        // for (var a = 0; a < json[i].days.length; a++) {
+        //     json[i].days[a] = json[i].days[a].replace(".", "/")
+        // }
         Xdate = json[i].days;
+        console.log(Xdate)
         $(".now-month1").text(Xdate[0]);
         var len2 = Xdate.length;
         $(".now-month2").text(Xdate[len2 - 1]);
@@ -551,7 +543,7 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
             trigger: 'axis',
             formatter: function(params, ticket, callback) {
                 if (params.length <= 0) return "";
-                var html = "day:" + (Number(params[0].axisValue)) + "<br />\r\n";
+                var html = "day:" + (params[0].axisValue) + "<br />\r\n";
                 for (var i = 0; i < params.length; i++) {
                     var dataObj = params[i];
                     html += dataObj.value + " " + unit + "<br />\r\n";

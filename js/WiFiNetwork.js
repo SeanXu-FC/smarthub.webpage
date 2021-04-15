@@ -10,6 +10,9 @@ $(function() {
             changeSwitchStatus(layer, form, checked)
         });
     });
+    $(window).on('beforeunload', function() {
+        clearInterval(timer);
+    });
 })
 
 function getSwitchStatus(layer, form) {
