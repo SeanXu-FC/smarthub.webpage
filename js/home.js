@@ -13,14 +13,12 @@ $(function() {
             shade: false
         });
         getHomeData(layer, loading);
-        timer = setInterval(() => {
-            getHomeData(layer, loading);
-        }, 2000);
+
     })
     getStatus();
 
     $(window).on('beforeunload', function() {
-        clearInterval(timer);
+        clearTimeout(timer);
         clearInterval(progressBarTimer);
         clearInterval(progressTimer);
     });
@@ -61,7 +59,15 @@ function getHomeData(layer, loading) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            layer.close(loading);
+            if (loading) {
+                layer.close(loading);
+            }
+            timer = setTimeout(() => {
+                layui.use(['layer', 'form'], function() {
+                    var layer = layui.layer;
+                    getHomeData(layer);
+                })
+            }, 2000);
             if (res.result) {
                 var json = res.result;
                 var arr = ['Connected', 'Connected(2.4GHz)', 'Connected(5GHz)', 'On', 'Off',
@@ -279,7 +285,9 @@ function getHomeData(layer, loading) {
             console.log("Error message", JSON.stringify(jqXHR))
             frequency1++;
             if (frequency1 > 2) {
-                layer.close(loading);
+                if (loading) {
+                    layer.close(loading);
+                }
                 frequency1 = 0;
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                 promptMessage("Error message", tip);

@@ -55,6 +55,8 @@ function getFile() {
         console.log('上传成功');
     }
     xhr.open('post', '/action/down', true);
+    //xhr.responseType = 'arraybuffer';
+    xhr.responseType = 'blob'
     xhr.send();
     xhr.onreadystatechange = state_Change;
 
@@ -63,8 +65,15 @@ function getFile() {
         if (xhr.readyState == 4) { // 4 = "loaded"
             if (xhr.status == 200) { // 200 = OK
                 console.log(xhr.response)
-                let blob = new Blob([xhr.response]);
+                let bufferArray = xhr.response;
+                let uint8Array = new Uint8Array(bufferArray);　　　　　　
+                for (var i = 0; i < bufferArray.length; ++i) {　　　　　　
+                    uint8Array[i] = bufferArray[i];
+                }
+                let blob = new Blob([uint8Array], { type: 'application/x-tar' })
                 console.log(blob)
+                    // let blob = new Blob([xhr.response]);
+                    // console.log(blob)
                 const url = window.URL.createObjectURL(blob);
                 console.log(url)
 

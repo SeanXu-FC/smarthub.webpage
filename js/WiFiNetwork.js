@@ -397,14 +397,12 @@ function addNetworkHtml() {
             var newWifi = {
                 ssid: connectingSsid,
                 encrypt: connectingEncrypt,
-                is_connected: 2
+                is_connected: 9
             }
             wifiJson.unshift(newWifi);
             if (connectingSsid && connectingEncrypt) {
                 for (var i = 0; i < wifiJson.length; i++) {
-                    if (wifiJson[i].is_connected == 1 && connectingSsid != wifiJson[i].ssid) {
-                        wifiJson[i].is_connected = 0;
-                    }
+                    wifiJson[i].is_connected = 0;
                     if (connectingSsid == wifiJson[i].ssid && connectingEncrypt == wifiJson[i].encrypt) {
                         wifiJson[i].is_connected = 9;
                     }
@@ -492,7 +490,7 @@ function enterPasswordHtml(infoHtml) {
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
             if (connectingSsid && connectingBssid) {
                 for (var i = 0; i < wifiJson.length; i++) {
-                    if (wifiJson[i].is_connected == 1) {
+                    if (wifiJson[i].is_connected == 1 || wifiJson[i].is_connected == 2) {
                         wifiJson[i].is_connected = 0;
                     }
                     if (connectingSsid == wifiJson[i].ssid && connectingBssid == wifiJson[i].bssid) {
@@ -632,7 +630,7 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
                 if (ssid && bssid) {
                     for (var i = 0; i < wifiJson.length; i++) {
-                        if (wifiJson[i].is_connected == 1) {
+                        if (wifiJson[i].is_connected == 1 || wifiJson[i].is_connected == 2) {
                             wifiJson[i].is_connected = 0;
                         }
                         if (ssid == wifiJson[i].ssid && bssid == wifiJson[i].bssid) {
@@ -706,7 +704,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
                 if (ssid && bssid) {
                     for (var i = 0; i < wifiJson.length; i++) {
-                        if (wifiJson[i].is_connected == 1) {
+                        if (wifiJson[i].is_connected == 1 || wifiJson[i].is_connected == 2) {
                             wifiJson[i].is_connected = 0;
                         }
                         if (ssid == wifiJson[i].ssid && bssid == wifiJson[i].bssid) {
