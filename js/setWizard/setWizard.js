@@ -418,6 +418,8 @@ function addNetworkHtml() {
             }
             wifiJson.unshift(newWifi);
             if (connectingSsid && connectingEncrypt) {
+                console.log(connectingSsid)
+
                 for (var i = 0; i < wifiJson.length; i++) {
                     wifiJson[i].is_connected = 0;
                     if (connectingSsid == wifiJson[i].ssid && connectingEncrypt == wifiJson[i].encrypt) {
@@ -425,11 +427,12 @@ function addNetworkHtml() {
                     }
                 }
                 renderWifiList(wifiJson);
+                $("#set_wizard_c .connecting-img").show();
                 clearInterval(timer);
-                $(".connecting-img1").show();
                 timer = setInterval(function() {
                     pollingWifiStatus("", "AddNetwork");
                 }, 3000)
+                document.getElementById("set_wizard_c").scrollTop = 0;
             }
         }
     });
@@ -570,6 +573,7 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
                     }
 
                 }
+                document.getElementById("set_wizard_c").scrollTop = 0;
 
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {
@@ -640,6 +644,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
                     }
 
                 }
+                document.getElementById("set_wizard_c").scrollTop = 0;
 
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {

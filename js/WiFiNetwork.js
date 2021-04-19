@@ -413,6 +413,7 @@ function addNetworkHtml() {
                 timer = setInterval(function() {
                     pollingWifiStatus("", "AddNetwork", newWifi);
                 }, 3000)
+                document.getElementById("WLAN_list_c").scrollTop = 0;
             }
 
         }
@@ -653,6 +654,7 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
                     }
 
                 }
+                document.getElementById("WLAN_list_c").scrollTop = 0;
 
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {
@@ -723,6 +725,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
                     }
 
                 }
+                document.getElementById("WLAN_list_c").scrollTop = 0;
 
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {
@@ -795,6 +798,7 @@ function promptMessagePoll(title, content, fn) {
         });
     })
 }
+
 
 function arrSort(prop) {
     return function(obj1, obj2) {
