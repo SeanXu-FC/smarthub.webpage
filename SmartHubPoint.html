@@ -12,7 +12,7 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210419" rel="stylesheet" />
+    <link href="css/style.css?mv=20210422" rel="stylesheet" />
     <link rel="stylesheet" href="layui/css/layui.css">
 
     <title>Document</title>
@@ -235,6 +235,7 @@
             letter-spacing: normal;
             text-align: left;
             color: #343434;
+            padding-right: 60px;
         }
         
         .My-access-pointHZ {
@@ -488,7 +489,7 @@
                                     </tr>
                                     <tr id="pwd">
                                         <td class="col-sm-3 czjz Access-point-name">Password:</td>
-                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point access_point_password" value="" style="width:80%"><span id="eye" class="pass-show" style="margin-left:-50px;">SHOW</span>
+                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point access_point_password" value="" style="width:80%" oninput="WidthCheckPassword(this,64)"><span id="eye" class="pass-show" style="margin-left:-50px;">SHOW</span>
                                             <p class="len-tip"></p>
                                         </td>
                                     </tr>
@@ -556,9 +557,9 @@
 
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210419"></script>
-    <script src="js/SmartHubPoint.js?mv=20210419"></script>
-    <!-- <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210419"></script> -->
+    <script type="text/javascript" src="js/common.js?mv=20210422"></script>
+    <script src="js/SmartHubPoint.js?mv=20210422"></script>
+    <!-- <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210422"></script> -->
 </body>
 
 </html>

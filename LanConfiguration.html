@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210419" rel="stylesheet" />
+    <link href="css/style.css?mv=20210422" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210419"></script>
+    <script src="js/lanConfiguration.js?mv=20210422"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210419"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210422"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -420,7 +420,7 @@
                             <div class="form-group form-inline">
                                 <label for="" class="col-sm-4 control-label Configure-IP">DHCP lease time:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" id="leasetime" class="form-control Rectangle-1282 Configure-IP" name="sec" placeholder="" style="border: solid 1px #707070;"><span style="margin-left:10px;">seconds</span>
+                                    <input type="number" id="leasetime" class="form-control Rectangle-1282 Configure-IP" name="sec" placeholder="" style="border: solid 1px #707070;"><span style="margin-left:10px;">seconds</span>
                                 </div>
                             </div>
                             <div class="btn1" id="btn02">
@@ -470,7 +470,8 @@
 
 
     <script>
-        var loading, interval, t = 10;
+        var loading, interval, t = 10,
+            timer = null;;
         var frequency = 0;
         $(function() {
             $(window).on('beforeunload', function() {
@@ -942,7 +943,7 @@
                     var msg = layero.text();
                     console.log(msg)
                     var i = 10;
-                    var timer = null;
+                    timer = null;
                     var fn = function() {
                         layero.find(".layui-layer-content").html(
                             '<i class="layui-layer-ico layui-layer-ico16"></i>' + msg + '(' + i +

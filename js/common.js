@@ -54,13 +54,12 @@ function WidthCheckIO(str, maxLen) {
 }
 
 
-//限制输入单引号和)和输入长度
+//限制输入中文、单引号和)和输入长度
 function WidthCheckPassword(str, maxLen) {
     var w = 0;
     var tempCount = 0;
-    str.value = str.value.replace(/[')！￥……（）——、【】？《》。，：；“”·‘’]/g, "");
+    str.value = str.value.replace(/[^"!#$% &'()*+,-.:;<=>{~|^\\}`\x5B\x5D_?@/A-Za-z0-9]/g, ''); //不能放正则里的特殊字符可以用16进制代替，比如\x5B\x5D为[]
 
-    str.value = str.value.replace(/[\u4e00-\u9fa5]/g, '');
     //length 获取字数数
     for (var i = 0; i < str.value.length; i++) {
         //charCodeAt()获取字符串中某一个字符的编码 
@@ -77,6 +76,33 @@ function WidthCheckPassword(str, maxLen) {
         }
     }
 }
+
+//限制输入中文、单引号和)和输入长度
+function WidthCheckPassword1(str, maxLen) {
+    var w = 0;
+    var tempCount = 0;
+    str.value = str.value.replace(/[！￥……（）——、【】？《》。，：；“”·‘’]/g, "");
+
+    //str.value = str.value.replace(/[\u4e00-\u9fa5]/g, '');
+    var reg = /^[\da-zA-Z!@#$%|+-^&*.~]{8,64}$/; //数字、字母、特殊字符
+    str.value = str.value.replace(/^[\da-zA-Z!@#$%|+-^&*.~]{8,64}$/g, '');
+    //length 获取字数数
+    for (var i = 0; i < str.value.length; i++) {
+        //charCodeAt()获取字符串中某一个字符的编码 
+        var c = str.value.charCodeAt(i);
+        //单字节加1 
+        if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+            w++;
+        } else {
+            w += 2;
+        }
+        if (w > maxLen) {
+            str.value = str.value.substr(0, i);
+            break;
+        }
+    }
+}
+
 
 function promptMessage(title, content, fn) {
     layui.use(['layer'], function() {

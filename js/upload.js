@@ -1,11 +1,21 @@
 ﻿var frequency = 0;
+var fileName = "";
 $(function() {
     getVersion();
 
     $("#fileUpload").change(function() {
         var files = document.getElementById("fileUpload").files;
+        fileName = files[0].name;
+        var file = new File([files[0]], "upgrade.tar.bz2", {
+            type: files[0].type
+        });
+        console.log(file)
+        var filesArr = [
+            file
+        ]
         console.log(files)
-        toUploading(files);
+        console.log(filesArr)
+        toUploading(filesArr);
     })
 
     var box = document.querySelector('#upload');
@@ -20,7 +30,15 @@ $(function() {
         e.preventDefault(); //浏览器默认会打开该文件，因此停掉该默认事件
         //选中的文件
         var files = e.dataTransfer.files;
-        toUploading(files);
+        fileName = files[0].name;
+        var file = new File([files[0]], "upgrade.tar.bz2", {
+            type: files[0].type
+        });
+        console.log(file)
+        var filesArr = [
+            file
+        ]
+        toUploading(filesArr);
 
     }, false);
 
@@ -63,7 +81,8 @@ $(function() {
 })
 
 function toUploading(files) {
-    $("#upload_name").text(files[0].name);
+    console.log(fileName)
+    $("#upload_name").text(fileName);
     $("#upload_size").text((files[0].size / 1048576).toFixed(0));
     layui.use(['layer', 'element', 'form', 'upload'], function() {
         var layer = layui.layer,
@@ -74,11 +93,13 @@ function toUploading(files) {
         Array.prototype.slice.call(files).forEach(function(file) {
             formData.append('file', file);
         });
-        formData.forEach(function(value, key) {
-            if (value instanceof File) {
-                formData.set(key, value, value.name.replace(/ /g, ''))
-            }
-        })
+        // formData.forEach(function(value, key) {
+        //     if (value instanceof File) {
+        //         //formData.set(key, value, value.name.replace(/ /g, ''));
+        //         //formData.set(key, value, "upgrade.tar.bz2")
+        //         formData.set("name", "upgrade.tar.bz2");
+        //     }
+        // })
         formData.append("mode", "0");
         console.log(formData);
         var xhr = new XMLHttpRequest();
@@ -173,6 +194,7 @@ function getVersion() {
 }
 
 function toUpgrade() {
+    $("#upgrade").addClass("disable-btn");
     $.ajax({
         url: "/action/upload",
         type: "post",
@@ -181,6 +203,7 @@ function toUpgrade() {
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         success: function(res) {
             console.log(res)
+            $("#upgrade").removeClass("disable-btn");
             if (res.code == 100) {
                 var domain = window.location.host;
                 window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";

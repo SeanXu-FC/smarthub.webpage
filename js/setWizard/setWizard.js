@@ -10,6 +10,11 @@ $(function() {
     $(window).on('beforeunload', function() {
         clearInterval(timer);
     });
+    $(".Continue").click(function() {
+        var domain = window.location.host;
+        window.location.href = ('https:' == document.location.protocol ?
+            'https://' : 'http://') + domain + "/setupWizard-2.html";
+    })
 })
 
 function getWLANScan(layer, form) {

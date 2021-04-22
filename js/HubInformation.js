@@ -41,6 +41,7 @@ $(function() {
             shade: false
         });
         getInfoData(layer, loading);
+        getLogNumber(layer);
     });
 
 })
@@ -192,4 +193,37 @@ function qrcode(str) {
         background: '#fff',
         foreground: '#000'
     });
+}
+
+function getLogNumber(layer) {
+
+    $.ajax({
+        url: "/action/criticalLog",
+        type: "post",
+        data: "mode=2",
+        dataType: "json",
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        success: function(res) {
+            console.log(res)
+            if (Number(res.code) < 0) {
+                $("#log_id").text("Save system logs")
+            } else {
+                $("#log_id").text(res.msg)
+            }
+        },
+        error: function(jqXHR) {
+            console.log("Error message", JSON.stringify(jqXHR))
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getLogNumber(layer);
+                }, 5000);
+            } else {
+
+                frequency = 0;
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
+        }
+    })
 }
