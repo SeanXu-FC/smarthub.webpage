@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210419" rel="stylesheet" />
+    <link href="css/style.css?mv=20210408" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -22,7 +22,7 @@
         
         .lan {
             position: relative;
-            width: 600px;
+            width: 400px;
         }
         
         .lanBt {
@@ -49,6 +49,20 @@
             right: 45px;
             padding-right: 20px;
             vertical-align: middle;
+        }
+        
+        .waring-edit {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            top: 30px;
+            right: 45px;
+            padding-right: 20px;
+            vertical-align: middle;
+        }
+        
+        .waring-edit a {
+            color: #007de9
         }
         
         .edit-first {
@@ -156,6 +170,26 @@
         .layui-layer-btn a.layui-layer-btn0 {
             color: #fff;
         }
+        
+        .alertIo-title {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: left;
+            color: #333333;
+            margin: 10px 0;
+        }
+        
+        .voltage-waring {
+            height: auto;
+            border-radius: 10px;
+            border: solid 1px #707070;
+            padding: 10px;
+        }
     </style>
 </head>
 
@@ -163,15 +197,22 @@
     <div class="container-fluid" style="padding:30px 70px;">
         <h3 class="Channels-configuration">Alert notifications</h3>
         <input style="display: none" id="saved_id" name="saved_id" />
-        <div class="mt-40">
+        <div class="mt-30">
             <div class="lan">
-                <div class="mt-20 Rectangle-1234 inputsEdit" dataId="1">
+                <div class="voltage-waring inputsEdit0 mb-30" dataId="1">
+                    <p class="lan-h Bilge-pump">Low voltage warning</p>
+                    <p class="Digital-input mt-10 mytooltip" id="Notifications0">Notifications --</p>
+                    <span class="waring-edit Edit "><a href="#">Edit</a></span>
+                </div>
+            </div>
+            <div class="alertIo-title">Router inputs</div>
+            <div class="lan">
+                <div class="Rectangle-1234 inputsEdit" dataId="1">
                     <p class="lan-h Bilge-pump" id="name1">--</p>
                     <p class="mt-10 Channel">Channel 1 </p>
                     <p class="Digital-input mt-10 mytooltip" id="Notifications1">Notifications --</p>
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
-
             </div>
 
             <div class="lan mt-10">
@@ -204,7 +245,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210419"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210408"></script>
     <script>
         var frequency = 0;
         $(function() {
@@ -249,6 +290,30 @@
                     }
                 });
             });
+            //低电压警告弹出一个iframe层
+            $('.inputsEdit0').on('click', function() {
+                var LowVoltWarning = $(this).children("#Notifications0").attr("LowVoltWarning");
+                var LowVoltValue = $(this).children("#Notifications0").attr("LowVoltValue");
+                //iframe层
+                parent.layer.open({
+                    type: 2,
+                    title: false,
+                    closeBtn: 0,
+                    //shadeClose: true,
+                    shade: 0.8,
+                    area: ['693px', '315px'],
+                    content: ['alertLowWaring.html?LowVoltWarning=' + LowVoltWarning +
+                        '&LowVoltValue=' + LowVoltValue, 'no'
+                    ],
+                    end: function() {
+                        var ChannelID = $("#saved_id").val();
+                        console.log(ChannelID)
+                        if (ChannelID) {
+                            location.reload();
+                        }
+                    }
+                });
+            });
 
         })
 
@@ -273,7 +338,15 @@
                     layer.close(loading);
                     if (res.result && res.result.io_date) {
                         var json = res.result.io_date;
-
+                        if (res.result.LowVoltWarning == 0) {
+                            $("#Notifications0").text("Notifications disabled");
+                            $("#Notifications0").removeClass("text-green")
+                        } else {
+                            $("#Notifications0").text("Notifications enabled");
+                            $("#Notifications0").addClass("text-green")
+                        }
+                        $("#Notifications0").attr("LowVoltWarning", res.result.LowVoltWarning);
+                        $("#Notifications0").attr("LowVoltValue", res.result.LowVoltValue);
                         for (var i = 0; i < json.length; i++) {
                             if (i < 4) {
                                 $("#name" + (i + 1)).text(json[i].name);
