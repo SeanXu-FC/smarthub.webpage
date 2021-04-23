@@ -205,10 +205,10 @@ function getLogNumber(layer) {
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         success: function(res) {
             console.log(res)
-            if (Number(res.code) < 0) {
-                $("#log_id").text("Save system logs")
+            if (0 <= Number(res.code)) {
+                $("#btnSave").text(res.msg)
             } else {
-                $("#log_id").text(res.msg)
+                $("#btnSave").text("Save system logs")
             }
         },
         error: function(jqXHR) {
