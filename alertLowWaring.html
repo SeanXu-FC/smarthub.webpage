@@ -683,7 +683,7 @@
                 volt = parseFloat(volt).toFixed(1);
                 volt = Number(volt)
                 volt = Number(volt).toFixed(1)
-                console.log("volt4", volt)
+                console.log("Notifications", Notifications)
 
                 saveData(Notifications, volt)
             })
@@ -769,7 +769,7 @@
                         "method": "IoConfigure",
                         "params": {
                             "mode": 3,
-                            "LowVoltWarning": Number(oldWarning),
+                            "LowVoltWarning": Number(Notifications),
                             "LowVoltValue": Number(oldVolt),
                         },
                         "id": "9.1"
