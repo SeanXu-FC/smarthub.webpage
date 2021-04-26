@@ -96,7 +96,7 @@ function getHomeData(layer, loading) {
                     $(".imgIcon1 .ssid").text("-");
                 } else if (json.sta.status == 2) {
                     $('.connected24').eq(0).text(arr[6]);
-                    //$('.r_06').attr("src", "images/r_06_gray.png");
+                    $('.WiFiNetwork').attr("src", "images/r_03.png");
                     //$('#connected24').attr("src", "images/s_wifi_nonea.png");
                     $('.connected24').css('color', '#333');
                     $(".imgIcon1 .ssid").text(json.sta.sta_ssid ? json.sta.sta_ssid : "-");
@@ -112,7 +112,7 @@ function getHomeData(layer, loading) {
                     } else {
                         $('.connected24').eq(0).text(arr[2]);
                     }
-                    $('.r_06').attr("src", "images/r_06.png");
+                    $('.WiFiNetwork').attr("src", "images/r_03.png");
                     $('.ssid').eq(0).text(json.sta.sta_ssid);
                     $('.connected24').css('color', '#26b167');
                     $(".WiFiNetwork-disable").hide();
@@ -129,6 +129,7 @@ function getHomeData(layer, loading) {
                 ];
                 if (json.mobile.active_sim == 99) {
                     $('.Connected4G').eq(0).text("Sim not insert");
+                    $(".mobiledataImg").attr("src", "images/r_04_close.png");
                     //$('#Connected4G').attr("src", "images/mobileSignal-none.png");
                     $('.Connected4G').css('color', '#ff0000')
                     $('.NetworkProvider').eq(0).text('-');
@@ -164,6 +165,7 @@ function getHomeData(layer, loading) {
                     } else if (json.mobile.status == 2) {
                         $('.Connected4G').eq(0).text("Connecting...");
                         $('.Connected4G').css('color', '#333');
+                        $(".mobiledataImg").attr("src", "images/r_04.png");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -172,6 +174,7 @@ function getHomeData(layer, loading) {
                     } else if (json.mobile.status == 3) {
                         $('.Connected4G').eq(0).text("Switch Sim Card");
                         $('.Connected4G').css('color', '#333');
+                        $(".mobiledataImg").attr("src", "images/r_04.png");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -180,6 +183,7 @@ function getHomeData(layer, loading) {
                     } else if (json.mobile.status == 4) {
                         $('.Connected4G').eq(0).text("Not in use");
                         $('.Connected4G').css('color', '#333');
+                        $(".mobiledataImg").attr("src", "images/r_04.png");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -218,6 +222,7 @@ function getHomeData(layer, loading) {
                             $('.Connected4G').eq(0).text("Dialing(4G)");
                         }
                         $('.Connected4G').css('color', '#333');
+                        $(".mobiledataImg").attr("src", "images/r_04.png");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -230,6 +235,7 @@ function getHomeData(layer, loading) {
                             mobileStatus = "Connected(4G)"
                         }
                         $('.Connected4G').eq(0).text(mobileStatus);
+                        $(".mobiledataImg").attr("src", "images/r_04.png");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -445,12 +451,14 @@ function getInfoData() {
                 });
                 parent.layer.close(progress);
 
-            } else if (res.result && res.result.SelfCheck == 1) {
-                if (!progressInitFlag) {
-                    progressInitFlag = true;
-                    progressBar();
-                }
-            } else if (res.error) {
+            }
+            // else if (res.result && res.result.SelfCheck == 1) {
+            //     if (!progressInitFlag) {
+            //         progressInitFlag = true;
+            //         progressBar();
+            //     }
+            // }
+            else if (res.error) {
                 clearInterval(progressTimer);
                 clearInterval(progressBarTimer);
                 $(parent.document).find("#div3").myProgress({

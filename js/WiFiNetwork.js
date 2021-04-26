@@ -279,7 +279,7 @@ function renderWifiList(json) {
                 }
             } else if (json[i].is_connected == 2) {
                 //ConnectedClass = "color-red"
-                ConnectedStr = "Connected(No internet)";
+                ConnectedStr = "No internet";
             } else {
                 ConnectedStr = "Connecting";
             }
@@ -372,7 +372,7 @@ function bindEvent() {
     });
     $('#wifi_infoIcon').on('click', function() {
         var infoHtml = $(this).parents("tr").children(".wifi-info").children("span");
-        forgetWifiHtml(infoHtml);
+        wifiHtmlDetail(infoHtml)
     });
     $('.add-Available-networks').on('click', function() {
         $(".layui-layer").css("background", "none");
@@ -419,6 +419,58 @@ function addNetworkHtml() {
         }
     });
 }
+
+var clickFlag = true; //禁止连续多次点击
+function wifiHtmlDetail(infoHtml) {
+    if (clickFlag) {
+        clickFlag = false;
+        var ssid = infoHtml.attr("ssid");
+        var bssid = infoHtml.attr("bssid");
+        var data = {
+            "jsonrpc": "2.0",
+            "method": "WlanStationConfig",
+            "params": {
+                "operate_code": 5,
+                "ssid": ssid,
+                "bssid": bssid ? bssid : "",
+            },
+            "id": "9.1"
+        };
+        data = JSON.stringify(data);
+        $.ajax({
+            type: "post",
+            timeout: 7000,
+            url: "/action/action",
+            data: data,
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function(res) {
+                clickFlag = true;
+                if (res.result && res.result.status) {
+                    forgetWifiHtml(infoHtml);
+                } else if (res.error) {
+                    layui.use(['form', 'layer'], function() {
+                        var layer = layui.layer;
+                        layer.msg("An error occurred：" + res.error.message);
+                    })
+                } else {
+                    layui.use(['form', 'layer'], function() {
+                        var layer = layui.layer;
+                        layer.msg("WiFi is not connected, unable to get details", { time: 3000 });
+                    })
+                }
+            },
+            error: function(jqXHR) {
+                console.log("Error message", JSON.stringify(jqXHR))
+                clickFlag = true;
+                var tip =
+                    '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
+                promptMessage("Error message", tip);
+            }
+        })
+    }
+
+}
 //删除/忘记wifi
 function forgetWifiHtml(infoHtml) {
     var ssid = infoHtml.attr("ssid");
@@ -426,8 +478,6 @@ function forgetWifiHtml(infoHtml) {
     var encrypt = infoHtml.attr("encrypt");
     var is_saved = infoHtml.attr("is_saved");
     var is_connected = infoHtml.attr("is_connected");
-
-
     //iframe层
     parent.layer.open({
         type: 2,
@@ -529,7 +579,7 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
         dataType: "json",
         contentType: "application/json",
         success: function(res) {
-            if (res.result.status) {
+            if (res.result && res.result.status) {
                 $("#Connecting-status").text(res.result.status);
                 if (res.result.status == "Connect Error") {
                     clearInterval(timer);

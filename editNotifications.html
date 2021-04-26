@@ -220,7 +220,7 @@
         }
         
         .wirelessInfo {
-            padding: 20px;
+            padding: 30px;
         }
         
         .layui-textarea {
@@ -687,7 +687,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210422"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210426"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -791,23 +791,6 @@
 
         });
 
-        function getUrlPara1(paraName) {
-            var url = document.location.toString();
-            var arrObj = url.split("?");
-            if (arrObj.length > 1) {
-                var arrPara = arrObj[1].split("&");
-                var arr;
-                for (var i = 0; i < arrPara.length; i++) {
-                    arr = arrPara[i].split("=");
-                    if (arr != null && arr[0] == paraName) {
-                        return arr[1];
-                    }
-                }
-                return "";
-            } else {
-                return "";
-            }
-        }
 
         function getMonitoringData(Id, layer, loading) {
             var data = {
@@ -931,9 +914,6 @@
             })
         }
 
-        function isInteger(obj) {
-            return obj % 1 === 0
-        }
 
         $('#cancel').click(function() {
             $(parent.frames["my-iframe"].document).find("#saved_id").val("");
@@ -973,30 +953,6 @@
             $("#wordCheck").text(maxLen - str.value.length);
         }
         var maxstrlen = 256;
-
-        function checkWord(c) {
-            len = maxstrlen;
-            var str = c.value;
-            myLen = getStrleng(str);
-            var wck = $("#wordCheck");
-            if (myLen > len * 2) {
-                c.value = str.substring(0, i + 1);
-            } else {
-                wck.innerHTML = Math.floor((len * 2 - myLen) / 2);
-            }
-        }
-
-        function getStrleng(str) {
-            myLen = 0;
-            for (var i = 0;
-                (i < str.length) && (myLen <= maxstrlen * 2); i++) {
-                if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128) //字符编码，128以内的是数字，英文字符，已经英文的符号等
-                    myLen++;
-                else
-                    myLen += 2;
-                return myLen;
-            }
-        }
     </script>
 </body>
 

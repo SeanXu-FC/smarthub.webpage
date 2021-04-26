@@ -14,10 +14,10 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210422"></script>
+    <script src="js/lanConfiguration.js?mv=20210426"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210422"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210426"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -400,7 +400,7 @@
             });
 
             $("#btn2").on("click", function() {
-                var leasetime = $('#leasetime').val() / 3600;
+                var leasetime = Number($('#leasetime').val());
                 var data = {
                     "jsonrpc": "2.0",
                     "method": "SetLanSettings",
@@ -425,7 +425,7 @@
                             '#endip_ipinput input[name="ipTwo"]').val() + '.' + $(
                             '#endip_ipinput input[name="ipThree"]').val() + '.' + $(
                             '#endip_ipinput input[name="ipFour"]').val(),
-                        "DHCPLeaseTime": leasetime
+                        "DHCPLeaseTime": Number(leasetime)
                     },
                     "id": "9.1"
                 }
@@ -513,8 +513,8 @@
                         $('#endip').ipinput({
                             value: json.EndIPAddress
                         });
-                        var lease = $('input[name="sec"]').eq(0).val(timeConversion(json
-                            .DHCPLeaseTime));
+                        var lease = $('input[name="sec"]').eq(0).val(json
+                            .DHCPLeaseTime);
                     } else {
                         var tip =
                             '<div class="custom-waring"><img src="../images/waring.png"><span class="waring-text">' +
