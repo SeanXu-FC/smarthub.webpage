@@ -167,7 +167,7 @@ function parentTipMessage(content) {
     // })
     var tip = parent.layer.msg(content, {
         skin: 'layui-layer-molv',
-        shade: 0.4,
+        shade: [0.4, '#000'],
         time: 0,
         area: ['421px', '136px']
     });

@@ -115,6 +115,7 @@ function toUploading(files) {
         }
         $("#upload_progress").removeClass("layui-hide");
         xhr.upload.onprogress = function(e) {
+            console.log(e.loaded, e.total)
             var value = Math.floor(100 * e.loaded / e.total);
             element.progress('upload_progress', value + '%') //设置页面进度条
             $("#upgrade").prop("disabled", true);
@@ -129,6 +130,7 @@ function toUploading(files) {
                 if (xhr.status == 200) { // 200 = OK
                     var resObj = JSON.parse(xhr.response)
                     if (resObj.code == 0) {
+                        console.log(resObj.code)
                         layer.msg("Upload successful！");
                         $("#upload_success").show();
                         $("#upload").hide();
@@ -195,6 +197,7 @@ function getVersion() {
 
 function toUpgrade() {
     $("#upgrade").addClass("disable-btn");
+    $(".upload-img").hide();
     $.ajax({
         url: "/action/upload",
         type: "post",
@@ -208,7 +211,7 @@ function toUpgrade() {
                 var domain = window.location.host;
                 window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/flashops.html";
             } else {
-
+                $(".upload-img").show();
             }
         }
     })

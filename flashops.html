@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <title>OpenWrt - Flashing...</title>
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210426" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210428" />
     <style>
         .Software-upgrade {
             font-family: OpenSans;
@@ -64,7 +64,8 @@
         }
         
         .progress-row {
-            width: 1279px;
+            /* width: 1279px; */
+            width: 100%;
         }
         
         .progress-time {
@@ -93,6 +94,10 @@
         .gif-img {
             padding-top: 6px;
             margin-left: 10px;
+        }
+        
+        .layui-layer-shade {
+            width: 408px !important;
         }
     </style>
 
@@ -125,7 +130,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
 <script src="js/jquery.myProgress.js"></script>
-<script type="text/javascript" src="js/common.js?mv=20210426"></script>
+<script type="text/javascript" src="js/common.js?mv=20210428"></script>
 
 <script type="text/javascript">
     var interval = null,
@@ -141,14 +146,16 @@
             layui.use(['form', 'layer'], function() {
                 var form = layui.form;
                 var layer = layui.layer;
-                loading = parent.layer.msg('', {
-                    time: false,
-                    offset: ['10000px', '50px'],
-                    shade: [0.1, '#fff']
-                }); //开启禁止点击的透明遮罩
-
+                // loading = parent.layer.msg('', {
+                //     time: false,
+                //     offset: ['0px', '0px'],
+                //     area: ['408px', '100%'],
+                //     shade: [0.1, '#fff']
+                // }); //开启禁止点击的透明遮罩
+                $("#upgrade_mask", window.parent.document).show();
                 // $(".layui-layer-loading .layui-layer-content").after(
                 //     "Waiting for changes to be applied...");
+
                 status = $("#my-iframe", window.parent.document).attr("src");
                 progress(0, 100);
                 status = GetUrlParam("status");
@@ -214,7 +221,7 @@
             clearInterval(interval);
             no4Getstatus(layer);
         } else if (data.status == "0") { //升级失败
-            parent.layer.close(loading); //关闭禁止点击的透明遮罩
+            $("#upgrade_mask", window.parent.document).hide(); //关闭禁止点击的透明遮罩
             $(".progress-time").hide();
             timeRemainingStatus = data.status;
             clearInterval(interval);
@@ -225,7 +232,7 @@
             $(".gif-img").hide();
             upfailPromptMessage("Fail message", data.steps);
         } else if (data.status == "1") { //升级成功
-            parent.layer.close(loading); //关闭禁止点击的透明遮罩
+            $("#upgrade_mask", window.parent.document).hide(); //关闭禁止点击的透明遮罩
             $(".progress-time").hide();
             timeRemainingStatus = data.status;
             StateResponse(1);
@@ -238,7 +245,7 @@
 
             upPromptMessage("Success message", data.steps);
         } else if (data.status == "3") { //没有升级 
-            parent.layer.close(loading); //关闭禁止点击的透明遮罩
+            $("#upgrade_mask", window.parent.document).hide(); //关闭禁止点击的透明遮罩
             $(".progress-time").hide();
             timeRemainingStatus = data.status;
             $("#steps").html(data.steps);
@@ -286,7 +293,7 @@
                         progress(res.result.count, res.result.total);
                         statusHandle(data);
                     } else if (res.error) {
-                        parent.layer.close(loading); //关闭禁止点击的透明遮罩
+                        $("#upgrade_mask", window.parent.document).hide(); //关闭禁止点击的透明遮罩
                         layui.use(['form', 'layer'], function() {
                             var layer = layui.layer;
                             layer.msg("An error occurred：" + res.error.message);
@@ -299,9 +306,8 @@
 
                     frequency++;
                     if (frequency > 7) {
-                        parent.layer.close(loading); //关闭禁止点击的透明遮罩
+                        $("#upgrade_mask", window.parent.document).hide(); //关闭禁止点击的透明遮罩
                         frequency = 0;
-                        parent.layer.close(loading);
                         var tip =
                             '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
                         promptMessage("Tips", tip);

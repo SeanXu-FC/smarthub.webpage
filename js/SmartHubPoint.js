@@ -20,6 +20,14 @@ $(function() {
     $("#btn1").on("click", function() {
         APsave();
     })
+    $('.ssid').on("input", function() {
+        var len = $(this).val().length;
+        if (len > 32) {
+            $("#btn1").prop("disabled", "disabled");
+        } else {
+            $("#btn1").prop("disabled", false);
+        }
+    })
 
     $('#pw').on("input", function() {
         var len = $(this).val().length;
@@ -27,12 +35,13 @@ $(function() {
             $("#btn1").prop("disabled", "disabled");
             $(".len-tip")
                 .text('Password should be at least 8 characters long!')
+        } else if (len > 64) {
+            $("#btn1").prop("disabled", "disabled");
         } else {
             $("#btn1").prop("disabled", false);
             $(".len-tip")
                 .text(' ')
         }
-
     })
 
 
@@ -463,6 +472,9 @@ function APsave() {
         }
     }
 
+
+    //WpaKey = WpaKey.replace("*", "\*");
+    console.log(WpaKey)
     var data = {
         "jsonrpc": "2.0",
 
