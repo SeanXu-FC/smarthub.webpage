@@ -448,8 +448,9 @@ function addNetworkHtml() {
                     pollingWifiStatus("", "AddNetwork", newWifi);
                 }, 3000)
                 document.getElementById("WLAN_list_c").scrollTop = 0;
+            } else {
+                TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
-
         }
     });
 }
@@ -541,6 +542,8 @@ function forgetWifiHtml(infoHtml) {
                 timer = setInterval(function() {
                     pollingWifiStatus(infoHtml, "forgetWifi");
                 }, 3000)
+            } else {
+                TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
 
         }
@@ -590,7 +593,6 @@ function enterPasswordHtml(infoHtml) {
                     pollingWifiStatus(infoHtml, "EnterPassword");
                 }, 3000)
             } else {
-
                 TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
         }
@@ -723,7 +725,6 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-            TimerPollingWifiList(); //开启每隔15s获取wifi列表
             if (res.result) {
                 $("#Connecting-status").text(res.result.status);
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
@@ -737,18 +738,16 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
                         }
                     }
                     renderWifiList(wifiJson);
-                    if (res.result.status != "Connected" && res.result.status != "Password Incorrect") {
+                    if (res.result.status == "Password Incorrect") {
+                        $("#saved_id").attr("passwordIncorrect", "enterWifiIncorrect");
+                        infoHtml.attr("is_saved", 0);
+                        enterPasswordHtml(infoHtml);
+                    } else {
                         clearInterval(timer);
                         $(".connecting-img").show();
                         timer = setInterval(function() {
                             pollingWifiStatus(infoHtml, "EnterPassword");
                         }, 3000)
-                    } else if (res.result.status == "Password Incorrect") {
-                        $("#saved_id").attr("passwordIncorrect", "enterWifiIncorrect");
-                        infoHtml.attr("is_saved", 0);
-                        enterPasswordHtml(infoHtml);
-                    } else {
-                        $("#Connecting-status").text(res.result.status);
                     }
 
                 }
@@ -759,6 +758,7 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
                     var layer = layui.layer;
                     layer.msg("An error occurred：" + res.error.message);
                 })
+                TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
         },
         error: function(jqXHR) {
