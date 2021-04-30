@@ -1,5 +1,6 @@
 var frequency = 0;
 var queryWifiListTimer = null;
+var queryStatusTimerout = null;
 var wifiListTimerQueryFlag = false; //其他操作正在进行需要中断定时查询wifi列表标志
 $(function() {
 
@@ -15,6 +16,7 @@ $(function() {
         $(window).on('beforeunload', function() {
             clearInterval(timer);
             clearInterval(queryWifiListTimer);
+            clearTimeout(queryStatusTimerout);
         });
     })
     //开启每隔15s获取wifi列表定时器
@@ -90,10 +92,22 @@ function getSwitchStatus(layer, form) {
 
         },
         error: function(jqXHR) {
-            parent.layer.close(loading);
             console.log(JSON.stringify(jqXHR))
-            var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
-            promptMessage("Error message", tip);
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    layui.use(['form', 'layer'], function() {
+                        var form = layui.form;
+                        var layer = layui.layer;
+                        getSwitchStatus(layer, form);
+                    });
+                }, 5000);
+            } else {
+                frequency = 0;
+                parent.layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
     });
 }
@@ -435,6 +449,7 @@ function addNetworkHtml() {
             }
             wifiJson.unshift(newWifi);
             if (connectingSsid && connectingEncrypt) {
+                clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
                 for (var i = 0; i < wifiJson.length; i++) {
                     wifiJson[i].is_connected = 0;
                     if (connectingSsid == wifiJson[i].ssid && connectingEncrypt == wifiJson[i].encrypt) {
@@ -528,8 +543,8 @@ function forgetWifiHtml(infoHtml) {
             var connectingBssid = $("#saved_id").attr("bssid");
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
             if (connectingSsid && connectingBssid) {
+                clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
                 for (var i = 0; i < wifiJson.length; i++) {
-
                     if (connectingSsid == wifiJson[i].ssid && connectingBssid == wifiJson[i].bssid) {
                         wifiJson.splice(i, 1);
                         sessionStorage.setItem('wifiJson', JSON.stringify(wifiJson))
@@ -578,6 +593,7 @@ function enterPasswordHtml(infoHtml) {
             var connectingBssid = $("#saved_id").attr("bssid");
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
             if (connectingSsid && connectingBssid) {
+                clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
                 for (var i = 0; i < wifiJson.length; i++) {
                     if (wifiJson[i].is_connected == 1 || wifiJson[i].is_connected == 2) {
                         wifiJson[i].is_connected = 0;
@@ -600,7 +616,7 @@ function enterPasswordHtml(infoHtml) {
 }
 //轮询当前wifi连接状态
 function pollingWifiStatus(infoDOM, type, newWifi) {
-    var timeout0 = 2000;
+    var timeout0 = 3000;
     data = {
         "jsonrpc": "2.0",
         "method": "WlanStationConfig",
@@ -640,13 +656,14 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
                 }
 
                 if (res.result.status == "Password Incorrect" && type == "EnterPassword") { //密码错误从新弹框输入
+
+                    $("#saved_id").attr("passwordIncorrect", "enterWifiIncorrect")
+                    infoDOM.attr("is_saved", 0);
+                    enterPasswordHtml(infoDOM, type);
                     clearInterval(timer);
                     timer = setInterval(function() {
                         pollingWifiStatus(infoDOM);
                     }, 3000)
-                    $("#saved_id").attr("passwordIncorrect", "enterWifiIncorrect")
-                    infoDOM.attr("is_saved", 0);
-                    enterPasswordHtml(infoDOM, type);
                 }
                 if (res.result.status == "Password Incorrect" && type == "AddNetwork") { //新增wifi密码错误从新弹框输入
                     clearInterval(timer);
@@ -693,8 +710,9 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
             }
         },
         error: function(jqXHR) {
-            clearInterval(timer);
-            pollingWifiStatus();
+            queryStatusTimerout = setTimeout(() => {
+                pollingWifiStatus();
+            }, 5000);
         }
 
     });

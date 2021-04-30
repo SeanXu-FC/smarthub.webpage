@@ -440,6 +440,22 @@ function getData(layer, loading) {
 
 
 }
+//将字符串转化为二进制的数据
+function strToBinary(str) {
+    var result = [];
+    var list = str.split("");
+    for (var i = 0; i < list.length; i++) {
+        if (i != 0) {
+            //加空格，分割二进制
+            result.push(" ");
+        }
+        var item = list[i];
+        //将字符串转化为二进制数据
+        var binaryStr = item.charCodeAt().toString(2);
+        result.push(binaryStr);
+    }
+    return result.join("");
+}
 
 function APsave() {
     var serverStatus = 1;
@@ -472,9 +488,9 @@ function APsave() {
         }
     }
 
-
-    //WpaKey = WpaKey.replace("*", "\*");
-    console.log(WpaKey)
+    //var WpaKeyBuf = strToBinary(WpaKey);
+    //WpaKeyBuf = WpaKeyBuf.replace(/\*/g, "\\*");
+    //console.log(WpaKeyBuf)
     var data = {
         "jsonrpc": "2.0",
 

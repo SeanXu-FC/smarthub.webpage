@@ -313,7 +313,7 @@ function getHomeData(layer, loading) {
         error: function(jqXHR) {
             console.log("Error message", JSON.stringify(jqXHR))
             frequency1++;
-            if (frequency1 < 3) {
+            if (frequency1 < 5) {
                 setTimeout(() => {
                     layui.use(['layer', 'form'], function() {
                         var layer = layui.layer;
@@ -458,12 +458,14 @@ function getInfoData() {
                 });
                 parent.layer.close(progress);
 
-            } else if (res.result && res.result.SelfCheck == 1) {
-                if (!progressInitFlag) {
-                    progressInitFlag = true;
-                    progressBar();
-                }
-            } else if (res.error) {
+            }
+            // else if (res.result && res.result.SelfCheck == 1) {
+            //     if (!progressInitFlag) {
+            //         progressInitFlag = true;
+            //         progressBar();
+            //     }
+            // }
+            else if (res.error) {
                 clearInterval(progressTimer);
                 clearInterval(progressBarTimer);
                 $(parent.document).find("#div3").myProgress({
