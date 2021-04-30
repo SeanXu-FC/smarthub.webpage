@@ -129,10 +129,10 @@ function getInfoData(layer, loading) {
             $("#btnSave").prop("disabled", false);
             if (res.result) {
                 $("#model").html(res.result.Model);
-                $("#model_number").html(res.result.TotalVersion)
+                $("#model_number").html(res.result.ModelNum)
                     //$("#iv").html(res.result.ipq_version);
                     //$("#nv").html(res.result.nxp_version);
-                $("#Application_version").html(res.result.ModelNum);
+                $("#Application_version").html(res.result.TotalVersion);
                 $("#sn").html(res.result.serial_num);
                 $("#iMeiInfo").html(res.result.IMEI);
                 $("#voltage").html(res.result.Voltage + " V");
@@ -199,7 +199,7 @@ function qrcode(str) {
 function getLogNumber(layer) {
 
     $.ajax({
-        url: "/action/criticalLog",
+        url: reqUrlProxy + "/action/criticalLog",
         type: "post",
         data: "mode=2",
         dataType: "json",
