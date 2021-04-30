@@ -60,6 +60,7 @@ function getHomeData(layer, loading) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            frequency1 = 0;
             if (loading) {
                 layer.close(loading);
             }
