@@ -199,7 +199,7 @@ function qrcode(str) {
 function getLogNumber(layer) {
 
     $.ajax({
-        url: reqUrlProxy + "/action/criticalLog",
+        url: "/action/criticalLog",
         type: "post",
         data: "mode=2",
         dataType: "json",
