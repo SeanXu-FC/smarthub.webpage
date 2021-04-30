@@ -67,7 +67,7 @@ function getHomeData(layer, loading) {
             timer = setTimeout(() => {
                 layui.use(['layer', 'form'], function() {
                     var layer = layui.layer;
-                    getHomeData(layer);
+                    getHomeData(layer, loading);
                 })
             }, 2000);
             if (res.result) {
@@ -318,7 +318,7 @@ function getHomeData(layer, loading) {
                 setTimeout(() => {
                     layui.use(['layer', 'form'], function() {
                         var layer = layui.layer;
-                        getHomeData(layer);
+                        getHomeData(layer, loading);
                     })
                 }, 5000);
             } else {
@@ -459,14 +459,12 @@ function getInfoData() {
                 });
                 parent.layer.close(progress);
 
-            }
-            // else if (res.result && res.result.SelfCheck == 1) {
-            //     if (!progressInitFlag) {
-            //         progressInitFlag = true;
-            //         progressBar();
-            //     }
-            // }
-            else if (res.error) {
+            } else if (res.result && res.result.SelfCheck == 1) {
+                if (!progressInitFlag) {
+                    progressInitFlag = true;
+                    progressBar();
+                }
+            } else if (res.error) {
                 clearInterval(progressTimer);
                 clearInterval(progressBarTimer);
                 $(parent.document).find("#div3").myProgress({

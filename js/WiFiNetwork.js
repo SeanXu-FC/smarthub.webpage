@@ -1,12 +1,14 @@
+var layer, form;
 var frequency = 0;
+var frequencyWifiList = 0;
 var queryWifiListTimer = null;
 var queryStatusTimerout = null;
 var wifiListTimerQueryFlag = false; //其他操作正在进行需要中断定时查询wifi列表标志
 $(function() {
 
         layui.use(['form', 'layer'], function() {
-            var form = layui.form;
-            var layer = layui.layer;
+            form = layui.form;
+            layer = layui.layer;
             getSwitchStatus(layer, form);
             form.on('switch(switchTest)', function(data) {
                 var checked = data.elem.checked;
@@ -64,6 +66,7 @@ function getSwitchStatus(layer, form) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            frequency = 0;
             parent.layer.close(loading);
             console.log(222222)
             if (res.result) {
@@ -94,7 +97,7 @@ function getSwitchStatus(layer, form) {
         error: function(jqXHR) {
             console.log(JSON.stringify(jqXHR))
             frequency++;
-            if (frequency < 3) {
+            if (frequency < 5) {
                 setTimeout(() => {
                     layui.use(['form', 'layer'], function() {
                         var form = layui.form;
@@ -114,6 +117,9 @@ function getSwitchStatus(layer, form) {
 
 function changeSwitchStatus(layer, form, checked) {
     clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
+    var loading = layer.load(0, {
+        shade: false,
+    });
     var mode;
     if (checked == false) {
         mode = 0;
@@ -138,7 +144,7 @@ function changeSwitchStatus(layer, form, checked) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-
+            layer.close(loading);
             if (res.result) {
                 if (res.result.error_code && res.result.error_code == 1) {
                     if (mode) {
@@ -174,9 +180,9 @@ function changeSwitchStatus(layer, form, checked) {
         },
         error: function(jqXHR) {
             console.log(JSON.stringify(jqXHR))
+            layer.close(loading);
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
-            TimerPollingWifiList(); //开启每隔15s获取wifi列表
         }
     });
 }
@@ -201,6 +207,7 @@ function getWLANScan(layer) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            frequency = 0;
             if (res.result && res.result.status == "WlanStationConfig Scan Done") {
                 setTimeout(() => {
                     getWLANData(layer, loading);
@@ -220,11 +227,11 @@ function getWLANScan(layer) {
         error: function(jqXHR) {
             console.log(JSON.stringify(jqXHR))
             frequency++;
-            if (frequency < 3) {
+            if (frequency < 5) {
                 setTimeout(() => {
 
                     getWLANScan(layer);
-                }, 5000);
+                }, 3000);
             } else {
                 frequency = 0;
                 parent.layer.close(loading);
@@ -253,6 +260,7 @@ function getWLANData(layer, loading) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            frequency = 0;
             if (res.result && res.result.ap_list && res.result.ap_list.length > 0) {
                 var json = res.result.ap_list;
                 json.sort(arrSort("rssi"));
@@ -262,13 +270,13 @@ function getWLANData(layer, loading) {
                 renderWifiList(json);
 
             } else if (res.result && res.result.ap_list && res.result.ap_list.length < 1) { //返回列表为空再请求两次
-                frequency++;
-                if (frequency < 3) {
+                frequencyWifiList++;
+                if (frequencyWifiList < 3) {
                     setTimeout(() => {
                         getWLANData(layer, loading);
                     }, 5000);
                 } else {
-                    frequency = 0;
+                    frequencyWifiList = 0;
                     $(".search-container").hide();
                     parent.layer.close(loading);
                 }
@@ -283,10 +291,10 @@ function getWLANData(layer, loading) {
         error: function(jqXHR) {
             console.log(JSON.stringify(jqXHR))
             frequency++;
-            if (frequency < 3) {
+            if (frequency < 5) {
                 setTimeout(() => {
                     getWLANData(layer, loading);
-                }, 5000);
+                }, 3000);
             } else {
                 frequency = 0;
                 $(".search-container").hide();
@@ -634,6 +642,7 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
         dataType: "json",
         contentType: "application/json",
         success: function(res) {
+            frequency = 0;
             if (res.result && res.result.status) {
                 $("#Connecting-status").text(res.result.status);
                 if (res.result.status == "Connect Error") {
@@ -707,18 +716,41 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
             if (status == 'timeout') { //超时,status还有success,error等值的情况
                 console.log(status)
                 ajaxTimeout.abort();
+                frequency++;
+                if (frequency < 5) {
+                    queryStatusTimerout = setTimeout(() => {
+                        pollingWifiStatus();
+                    }, 5000);
+                } else {
+                    frequency = 0;
+                    $(".search-container").hide();
+                    parent.layer.close(loading);
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                    promptMessage("Error message", tip);
+                }
             }
         },
         error: function(jqXHR) {
-            queryStatusTimerout = setTimeout(() => {
-                pollingWifiStatus();
-            }, 5000);
+            frequency++;
+            if (frequency < 6) {
+                queryStatusTimerout = setTimeout(() => {
+                    pollingWifiStatus();
+                }, 5000);
+            } else {
+                frequency = 0;
+                $(".search-container").hide();
+                parent.layer.close(loading);
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
+            }
         }
-
     });
 }
 //已经保存的WiFi直接连接
 function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
+    var loading = layer.load(0, {
+        shade: false,
+    });
     if (encrypt.indexOf(("[OPEN]")) != -1) {
         encrypt = "None";
     }
@@ -743,6 +775,8 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            layer.close(loading);
+            frequency = 0;
             if (res.result) {
                 $("#Connecting-status").text(res.result.status);
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
@@ -772,31 +806,34 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
                 document.getElementById("WLAN_list_c").scrollTop = 0;
 
             } else if (res.error) {
+                layer.close(loading);
                 layui.use(['form', 'layer'], function() {
                     var layer = layui.layer;
                     layer.msg("An error occurred：" + res.error.message);
                 })
-                TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
         },
         error: function(jqXHR) {
             console.log(JSON.stringify(jqXHR))
             frequency++;
-            if (frequency < 3) {
+            if (frequency < 4) {
                 setTimeout(() => {
                     savedWifiConnect(ssid, bssid, encrypt, infoHtml);
-                }, 5000);
+                }, 3000);
             } else {
+                layer.close(loading);
                 frequency = 0;
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                 promptMessage("Error message", tip);
-                TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
         }
     });
 }
 //无密码的WiFi直接连接
 function noPWDWifiConnect(ssid, bssid, is_saved) {
+    var loading = layer.load(0, {
+        shade: false,
+    });
     var data = {
         "jsonrpc": "2.0",
         "method": "WlanStationConfig",
@@ -819,6 +856,8 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
+            layer.close(loading);
+            frequency = 0;
             TimerPollingWifiList(); //开启每隔15s获取wifi列表
             if (res.result) {
                 var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
@@ -846,6 +885,7 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
                 document.getElementById("WLAN_list_c").scrollTop = 0;
 
             } else if (res.error) {
+                layer.close(loading);
                 layui.use(['form', 'layer'], function() {
                     var layer = layui.layer;
                     layer.msg("An error occurred：" + res.error.message);
@@ -855,15 +895,15 @@ function noPWDWifiConnect(ssid, bssid, is_saved) {
         error: function(jqXHR) {
             console.log(JSON.stringify(jqXHR))
             frequency++;
-            if (frequency < 3) {
+            if (frequency < 4) {
                 setTimeout(() => {
                     noPWDWifiConnect(ssid, bssid, is_saved);
-                }, 5000);
+                }, 3000);
             } else {
+                layer.close(loading);
                 frequency = 0;
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                 promptMessage("Error message", tip);
-                TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
         }
     });
