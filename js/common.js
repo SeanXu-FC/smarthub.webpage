@@ -1,6 +1,6 @@
-//var reqUrlProxy = "/proxy";
+var reqUrlProxy = "/proxy";
 var restart0 = true;
-var reqUrlProxy = "";
+//var reqUrlProxy = "";
 //获取url中的参数
 function GetUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
