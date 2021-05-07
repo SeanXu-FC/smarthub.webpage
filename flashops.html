@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <title>OpenWrt - Flashing...</title>
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210430" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210408" />
     <style>
         .Software-upgrade {
             font-family: OpenSans;
@@ -21,7 +21,7 @@
             line-height: 1.36;
             letter-spacing: normal;
             text-align: left;
-            color: #861f41;
+            color: #009fe3;
             border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
         }
@@ -99,6 +99,16 @@
         .layui-layer-shade {
             width: 408px !important;
         }
+        
+        .card-close {
+            width: 14px;
+            height: 14px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            display: none;
+        }
     </style>
 
 </head>
@@ -130,7 +140,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
 <script src="js/jquery.myProgress.js"></script>
-<script type="text/javascript" src="js/common.js?mv=20210430"></script>
+<script type="text/javascript" src="js/common.js?mv=20210408"></script>
 
 <script type="text/javascript">
     var interval = null,
@@ -171,6 +181,7 @@
                 } else {
                     no4Getstatus(layer);
                 }
+
             });
 
             $(window).on('beforeunload', function() {
@@ -243,7 +254,8 @@
             progress(100, 100);
             $(".gif-img").hide();
 
-            upPromptMessage("Success message", data.steps);
+            //upPromptMessage("Success message", data.steps);
+            ejectTip(data.steps);
         } else if (data.status == "3") { //没有升级 
             $("#upgrade_mask", window.parent.document).hide(); //关闭禁止点击的透明遮罩
             $(".progress-time").hide();
@@ -409,6 +421,39 @@
                 }
             });
         })
+    }
+
+    function ejectTip(msg) {
+
+        var loading = parent.layer.msg(msg, {
+            icon: 16,
+            time: false,
+            shade: [0.5, '#fff'],
+            success: function(layero, index) {
+                var msg = layero.text();
+                console.log(msg)
+                var i = 60;
+                var timer = null;
+                var fn = function() {
+                    layero.find(".layui-layer-content").html(
+                        '<i class="layui-layer-ico layui-layer-ico16"></i><div>' + msg + '(' + i +
+                        's)</div>');
+                    if (!i) {
+                        parent.layer.close(index);
+                        clearInterval(timer);
+                        upPromptMessage("Success message", "Upgrade success");
+                        // $(".card-close").show();
+                        // $(".card-close").on("click", function() {
+                        //         parent.layer.close(index);
+                        //     })
+                    }
+                    i--;
+                };
+                timer = setInterval(fn, 1000);
+                fn();
+            },
+        });
+
     }
 </script>
 
