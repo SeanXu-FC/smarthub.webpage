@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210430" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210430"></script>
+    <link href="css/style.css?mv=20210511" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210511"></script>
     <title>Document</title>
     <style>
         * {
@@ -22,12 +22,12 @@
         }
         
         .Rectangle-1182:hover {
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
         }
         
         .Rectangle-1182.active {
-            background-color: #861f41;
+            background-color: #009fe3;
         }
         
         .Password-is-incorrect {
@@ -57,7 +57,7 @@
         }
         
         .forget-pwd {
-            color: #861f41;
+            color: #009fe3;
             margin: 15px 0 10px 104px;
             font-family: OpenSans;
             font-size: 18px;
@@ -86,16 +86,16 @@
         }
         
         .Rectangle-1182:hover {
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
         }
         
         .Rectangle-1182.active {
-            background-color: #861f41;
+            background-color: #009fe3;
         }
         
         .Rectangle-1182.active:disabled {
-            background-color: #861f41;
+            background-color: #009fe3;
         }
         
         .Cancel {
@@ -196,7 +196,7 @@
             height: 50px;
             /* padding: 0 20px; */
             border-radius: 5px;
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
         }
         
@@ -257,7 +257,7 @@
             cursor: pointer;
             font-size: 12px;
             font-weight: bold;
-            color: #861f41;
+            color: #009fe3;
         }
     </style>
 </head>
@@ -293,7 +293,7 @@
     </div>
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210430"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210511"></script>
     <script>
         var srcStr;
         $(function() {
@@ -387,7 +387,7 @@
 
         function login() {
             $.ajax({
-                url: "/action/login",
+                url: " /action/login",
                 type: "post",
                 data: $('#loginInfo').serialize(),
                 //data: "username=admin&password=123456",

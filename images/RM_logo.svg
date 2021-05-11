@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="RM_logo" width="200" height="34.622" viewBox="0 0 200 34.622">
     <defs>
         <style>
-            .cls-1{fill:#760f31}
+            .cls-1{fill:#fff}
         </style>
     </defs>
     <path id="Path_1" d="M626.917 376.3h5.927c.189-2.531-.161-4.062-1.25-5.223-1.143-1.26-2.762-1.779-5.505-1.779h-10.55l-1.846 19.756h5.931l1.361-14.567h3.879c1.725 0 2.176.401 2.053 1.813z" class="cls-1" transform="translate(-489.028 -362.588)"/>

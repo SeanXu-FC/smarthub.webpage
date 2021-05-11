@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <title>OpenWrt - Flashing...</title>
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210430" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210511" />
     <style>
         .Software-upgrade {
             font-family: OpenSans;
@@ -21,7 +21,7 @@
             line-height: 1.36;
             letter-spacing: normal;
             text-align: left;
-            color: #861f41;
+            color: #009fe3;
             border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
         }
@@ -88,7 +88,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
 <script src="js/jquery.myProgress.js"></script>
-<script type="text/javascript" src="js/common.js?mv=20210430"></script>
+<script type="text/javascript" src="js/common.js?mv=20210511"></script>
 
 <script type="text/javascript">
     var interval = null,
@@ -202,7 +202,7 @@
             data = JSON.stringify(data);
             $.ajax({
                 type: "post",
-                url: "/action/action?",
+                url: " /action/action?",
                 data: data,
                 timeout: 0,
                 dataType: "json",
@@ -257,7 +257,7 @@
         data = JSON.stringify(data);
         $.ajax({
             type: "post",
-            url: "/action/action?",
+            url: " /action/action?",
             data: data,
             dataType: "json",
             contentType: "application/json;charset=utf-8",

@@ -12,7 +12,7 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210430" rel="stylesheet" />
+    <link href="css/style.css?mv=20210511" rel="stylesheet" />
     <link rel="stylesheet" href="layui/css/layui.css">
 
     <title>Document</title>
@@ -87,7 +87,7 @@
         
         .layui-form-pane .layui-form-switch {
             margin-top: 0px;
-            margin-left: 10px;
+            margin-left: 45px;
         }
         /* .layui-form-switch em {
             top: -1px;
@@ -98,7 +98,7 @@
             height: 38px;
             line-height: 38px;
             padding: 0 18px;
-            background-color: #861f41 !important;
+            background-color: #009fe3 !important;
             color: #fff !important;
             white-space: nowrap;
             text-align: center;
@@ -160,7 +160,7 @@
             line-height: 1.36;
             letter-spacing: normal;
             text-align: left;
-            color: #861f41
+            color: #343434
         }
         
         .Your-SmartHub-access-point-allows-other-devices-to-connect-to-the-SmartHubs-cellular-or-wireless-network-data {
@@ -236,6 +236,7 @@
             text-align: left;
             color: #343434;
             padding-right: 60px;
+            border-radius: 5px;
         }
         
         .My-access-pointHZ {
@@ -271,7 +272,7 @@
         }
         
         .Path-101:hover {
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
         }
         
@@ -293,12 +294,12 @@
         }
         
         .Rectangle-1182:hover {
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
         }
         
         .Rectangle-1182.active {
-            background-color: #861f41;
+            background-color: #009fe3;
         }
         
         .Rectangle-1182 {
@@ -306,7 +307,7 @@
             height: 52px;
             /* padding: 0 20px; */
             border-radius: 5px;
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
         }
         
@@ -432,7 +433,7 @@
             line-height: 1.42;
             letter-spacing: normal;
             text-align: left;
-            color: #861f41;
+            color: #009fe3;
             margin-left: -50px;
         }
     </style>
@@ -484,12 +485,13 @@
                                     </tr>
                                     <tr>
                                         <td class="col-sm-3 czjz Access-point-name mt-20">Access point name (SSID):</td>
-                                        <td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="" style="width:80%">
+                                        <td class="col-sm-9"><input type="text" class="form-control ssid My-access-point" value="" style="width:320px">
+                                            <p class="len-tip SSIDlen"></p>
                                         </td>
                                     </tr>
                                     <tr id="pwd">
                                         <td class="col-sm-3 czjz Access-point-name">Password:</td>
-                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point access_point_password" value="" style="width:80%" oninput="WidthCheckPassword(this,64)"><span id="eye" class="pass-show" style="margin-left:-50px;">SHOW</span>
+                                        <td class="col-sm-9"><input type="password" id="pw" class="form-control pwd  My-access-point access_point_password" value="" style="width:320px" oninput="WidthCheckPassword(this,64)"><span id="eye" class="pass-show" style="margin-left:-50px;">SHOW</span>
                                             <p class="len-tip"></p>
                                         </td>
                                     </tr>
@@ -501,23 +503,23 @@
                                     </tr> -->
                                     <tr>
                                         <td class="czjz Access-point-name">Preferred Wi-Fi channel:</td>
-                                        <td><select name="type" class="form-control select_00 channel My-access-point" style="width:80%"></select></td>
+                                        <td><select name="type" class="form-control select_00 channel My-access-point" style="width:320px"></select></td>
                                     </tr>
                                     <tr>
                                         <td class="czjz Access-point-name">Channel width:</td>
                                         <td>
-                                            <select name="type" id="HTmode" class="form-control  My-access-pointHZ" style="width:80%">
+                                            <select name="type" id="HTmode" class="form-control  My-access-pointHZ" style="width:320px">
                                             </select>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td class="czjz Access-point-name">Encryption type:</td>
-                                        <td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point" style="width:80%"></select></td>
+                                        <td><select name="type" id="EncryptionType" class="form-control select_02 EncryptionType My-access-point" style="width:320px"></select></td>
                                     </tr>
                                     <tr style="display:none;">
                                         <td class="czjz Access-point-name">country Code:</td>
-                                        <td><select name="type" class="form-control select_03 countryCode My-access-point" style="width:80%"></select></td>
+                                        <td><select name="type" class="form-control select_03 countryCode My-access-point" style="width:320px"></select></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -557,9 +559,9 @@
 
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210430"></script>
-    <script src="js/SmartHubPoint.js?mv=20210430"></script>
-    <!-- <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210430"></script> -->
+    <script type="text/javascript" src="js/common.js?mv=20210511"></script>
+    <script src="js/SmartHubPoint.js?mv=20210511"></script>
+    <!-- <script type="text/javascript" src="js/SmartHubPointSave.js?mv=20210511"></script> -->
 </body>
 
 </html>

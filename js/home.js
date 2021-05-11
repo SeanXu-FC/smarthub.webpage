@@ -229,6 +229,15 @@ function getHomeData(layer, loading) {
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
                             .active_sim : '-');
                         $img.eq(1).hide();
+                    } else if (json.mobile.status == 9) {
+                        $('.Connected4G').eq(0).text("SIM is blocked");
+                        $('.Connected4G').css('color', '#333');
+                        $(".mobiledataImg").attr("src", "images/r_04.png");
+                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                            .provider : '-');
+                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                            .active_sim : '-');
+                        $img.eq(1).hide();
                     } else {
                         if (json.mobile.act_num == 0) {
                             mobileStatus = "Connected(3G)"
@@ -358,7 +367,7 @@ function getStatus() {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: "/action/action?",
+        url: "/action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",

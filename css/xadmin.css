@@ -33,6 +33,11 @@ body {
     /* background-color: #eee; */
 }
 
+img[src=""],
+img:not([src]) {
+    opacity: 0;
+}
+
 .login-bg {
     /*background: #eeeeee url() 0 0 no-repeat;*/
     background: url(../images/login-bg1.jpg) no-repeat center;
@@ -250,10 +255,10 @@ xblock {
     width: 100%;
     /* height: 65px; */
     height: 67px;
-    background-color: #fff;
     /* background-color: #03387f; */
     /* border-bottom: 1px solid rgba(3, 56, 127, 0.2); */
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.13);
+    background-color: #0e1013;
 }
 
 .main .logo {
@@ -304,14 +309,12 @@ xblock {
     line-height: 1.37;
     letter-spacing: normal;
     text-align: left;
-    color: #861f41;
+    color: #fff;
     color: grape-purple;
     margin-top: 7px;
 }
 
-.Smart-Hub-Manager:hover {
-    color: #861f41;
-}
+.Smart-Hub-Manager:hover {}
 
 .layui-nav .layui-nav-more {
     margin-top: 6px;
@@ -618,7 +621,7 @@ table td {
 
 .footer span {
     color: #f00;
-    color: #861f41;
+    color: #009fe3;
     font-weight: bold;
     font-size: 14px;
 }
@@ -675,7 +678,7 @@ table td {
         /* line-height: 1.37; */
         letter-spacing: normal;
         text-align: left;
-        color: #861f41;
+        color: #009fe3;
         margin-top: 20px;
     }
     .logo a img {
@@ -837,12 +840,12 @@ table td {
 }
 
 .main-menu li a.nav-a-active cite {
-    color: #861f41;
+    color: #009fe3;
     font-weight: 800;
 }
 
 .sub-menu li a.nav-a-active cite {
-    color: #861f41;
+    color: #009fe3;
     font-weight: bold;
 }
 

@@ -24,8 +24,12 @@ $(function() {
         var len = $(this).val().length;
         if (len > 32) {
             $("#btn1").prop("disabled", "disabled");
+            $(".SSIDlen")
+                .text('SSID cannot exceed 32 characters!')
         } else {
             $("#btn1").prop("disabled", false);
+            $(".SSIDlen")
+                .text('')
         }
     })
 

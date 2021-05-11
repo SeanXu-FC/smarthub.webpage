@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210430" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210430" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210511" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210511" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -96,7 +96,7 @@
             line-height: 1.36;
             letter-spacing: normal;
             text-align: left;
-            color: #861f41;
+            color: #343434;
             border-bottom: solid 1px #ddd;
             padding-bottom: 10px;
             padding-top: 20px;
@@ -125,7 +125,7 @@
             line-height: 1;
             letter-spacing: normal;
             text-align: left;
-            color: #861f41;
+            color: #009fe3;
             cursor: pointer;
         }
         
@@ -164,18 +164,18 @@
         }
         
         .tab-menu li:hover {
-            color: #861f41;
+            color: #009fe3;
         }
         
         .tab-menu li.active {
             font-weight: 600;
-            color: #861f41;
+            color: #343434;
             opacity: 1;
             font-size: 26px;
         }
         
         .tab-menu li.active:hover {
-            color: #861f41;
+            color: #343434;
         }
         
         .tab-content>div {
@@ -189,7 +189,7 @@
             position: absolute;
             width: 0;
             height: 4px;
-            background-color: #861f41;
+            background-color: #009fe3;
             top: 55px;
             left: 7px;
         }
@@ -270,6 +270,13 @@
         
         .Rectangle-1185 {
             width: 74px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+        }
+        
+        .Rectangle-1186 {
+            width: 182px;
             height: 32px;
             border-radius: 5px;
             border: solid 1px #707070;
@@ -418,7 +425,7 @@
             line-height: 1.35;
             letter-spacing: normal;
             text-align: center;
-            color: #861f41;
+            color: #009fe3;
         }
         
         .pl30 {
@@ -438,7 +445,7 @@
             line-height: 1.38;
             letter-spacing: normal;
             text-align: center;
-            color: #861f41;
+            color: #009fe3;
         }
         
         .z1 {
@@ -496,10 +503,10 @@
         /* .Rectangle-1182 {
             width: 174px;
             height: 42px;
-            border-color: #861f41;
-            border: 1px solid #861f41;
+            border-color: #009fe3;
+            border: 1px solid #009fe3;
             border-radius: 5px;
-            background-color: #861f41; 
+            background-color: #009fe3; 
     }*/
         
         .Change-SIM-pin {
@@ -522,7 +529,7 @@
         }
         
         .Rectangle-1205 table>tbody>tr:hover {
-            background-color: #fff1f6;
+            background-color: #d1f1ff;
         }
         
         .Rectangle-1205 table>tbody>tr:nth-child(2):hover,
@@ -600,7 +607,7 @@
             line-height: 1.61;
             letter-spacing: normal;
             text-align: left;
-            color: #861f41;
+            color: #009fe3;
             margin-left: 134px;
         }
         
@@ -637,7 +644,7 @@
             height: 50px;
             padding: 0 20px;
             border-radius: 5px;
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
             font-family: OpenSans;
             font-size: 20px;
@@ -674,8 +681,7 @@
             width: 140px;
             height: 50px;
             border-radius: 5px;
-            border: solid 1px #707070;
-            background-color: #f1f1f1;
+            background-color: #f2f2f7;
             color: #434343 !important;
             margin-right: 20px;
             font-family: OpenSans;
@@ -742,7 +748,7 @@
         }
         
         .usage-content {
-            padding: 0px 200px 20px 15px;
+            padding: 0px 160px 20px 15px;
         }
         
         .management-content {
@@ -825,6 +831,26 @@
         .Change-SIM-pin:disabled {
             opacity: 0.5;
         }
+        
+        .div-split {
+            border-top: 1px solid #707070;
+            opacity: 0.3;
+        }
+        
+        .resetAPN-p {
+            font-family: OpenSans;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: #009fe3;
+            position: absolute;
+            top: 14px;
+            right: 8px;
+        }
     </style>
 </head>
 
@@ -904,16 +930,18 @@
                                             <!-- <img src="images/usage.png"> -->
                                             <!-- <span class="echart-text">Usage (<span class="echart_Ytext1">MB</span>)</span> -->
                                             <div class="usedMB-echart" id="used_MB"></div>
-                                            <div class="-flex-display -justify-box"><span class="now-month1"></span><span class="now-month2"></span></div>
+                                            <div class="-flex-display -justify-box" style="line-height:22px"><span class="now-month1"></span><span class="now-month2"></span></div>
                                         </div>
-                                        <p class="widthper50 mt-20 mb-10 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
+                                        <p class="widthper50 text-center" style="font-size:14px;font-weight:normal">
+                                            <span style="font-size:18px;font-weight:600">
                                                 <e style="font-size:26px;font-weight:600" id="allUsed_MB">0</e><span
                                                     class="limit_unit">MB</span>
                                             </span> of <span style="font-size:18px;font-weight:600">
                                                 <e style="font-size:26px;font-weight:600" id="redmian_MB">0</e><span
                                                     class="limit_unit">MB</span>
                                             </span> used</p>
-                                        <div class="useage-describe mb-20">Data usage is measured by the router and may differ to your provider's measurements</div>
+                                        <div class="useage-describe">Data usage is measured by the router and may differ to your provider's measurements</div>
+                                        <div class="div-split mb-30"></div>
                                         <h4 class="limit-subtiltle">Router data usage cycle</h4>
                                         <div class="-flex-display -align-box -justify-box mt-30">
                                             <div>
@@ -957,9 +985,10 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="div-split mb-20 mt-20"></div>
 
 
-                                        <h4 class="limit-subtiltle mt-40">Data warning and limit</h4>
+                                        <h4 class="limit-subtiltle mt-30">Data warning and limit</h4>
                                         <div class="layui-form -flex-display -align-box -justify-box mt-30">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Set data warning:</div>
@@ -1010,18 +1039,37 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <h4 class="limit-subtiltle mt-40">SIM info</h4>
+                                        <div class="div-split mb-20 mt-20"></div>
+                                        <h4 class="limit-subtiltle mt-40">Mobile network</h4>
                                         <div class="mt-20">
                                             <div class="z1">
-                                                <div class="row">
-                                                    <label class="Network-provider col-md-6 mt-15">Network
+                                                <div class="-flex-display -align-box -justify-box">
+                                                    <label class="Network-provider mt-15">Network
                                                         provider:</label><span class="col-md-6 valColor" id="provider"></span>
                                                 </div>
-                                                <div class="row">
-                                                    <label class="Network-provider col-md-6 mt-15">SIM IMSI
+                                                <div class="-flex-display -align-box -justify-box">
+                                                    <label class="Network-provider mt-15" style="max-width: 395px;">SIM
+                                                        IMSI
                                                         (International
                                                         Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15 valColor" id="sim_imsi"></span>
                                                 </div>
+                                                <div class="-flex-display -align-box -justify-box mt-25">
+                                                    <label class="Network-provider mt-15">APN (Access Point
+                                                        Name):</label>
+                                                    <input type="text" name="text" value="" class="Rectangle-1186 pl-10" id="AP_Name" oninput="WidthCheckPassword(this,64)">
+                                                </div>
+                                                <div class="-flex-display -align-box -justify-box">
+                                                    <label class="Network-provider mt-15">Username:</label>
+                                                    <input type="text" name="text" value="" class="Rectangle-1186 pl-10" id="Username" oninput="WidthCheckPassword(this,64)">
+                                                </div>
+                                                <div class="-flex-display -align-box -justify-box" style="position: relative;">
+                                                    <label class="Network-provider mt-15">Password:</label>
+                                                    <input type="password" name="text" value="" class="Rectangle-1186 pl-10" id="Password" oninput="WidthCheckPassword(this,64)">
+                                                    <span class="resetAPN-p" id="resetAPN_p">SHOW</span>
+                                                </div>
+                                                <div class="useage-describe mt-20">The mobile network Access Point Name provides all the details that your router needs to connect to mobile data
+                                                </div>
+                                                <button class="Rectangle-1182 width-auto Unlock-SIM Change-SIM-pin mt-20 mb-10" id="Reset_APN_settings">Reset APN settings</button>
                                                 <!-- <div class="row">
                                                     <label class="Network-provider col-md-6 mt-15" style="display:inline-block">SIM telephone number:</label><span class="col-md-6 mt-15 valColor" id="sim_tele_num1"></span>
                                                 </div> -->
@@ -1033,7 +1081,9 @@
                                                 </div> -->
                                                 <div style="clear:both;"></div>
                                                 <!-- <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div> -->
-                                                <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 50px;">
+                                                <div class="div-split mb-20 mt-20"></div>
+                                                <h4 class="limit-subtiltle mt-30">SIM lock</h4>
+                                                <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 20px;">
                                                     <label class="layui-form-label SIM-pin-lock mt-0 mb-0">Lock
                                                         SIM:</label>
                                                     <div class="layui-input-block mt-30" id="SIM_pin_lock1" style="display:none;">
@@ -1099,16 +1149,18 @@
                                             <!-- <span class="echart-text">Usage (<span class="echart_Ytext1">MB</span>)</span> -->
                                             <div class="usedMB-echart" id="used_MB2"></div>
 
-                                            <div class="-flex-display -justify-box"><span class="now-month3"></span><span class="now-month4"></span></div>
+                                            <div class="-flex-display -justify-box" style="line-height:22px"><span class="now-month3"></span><span class="now-month4"></span></div>
                                         </div>
-                                        <p class="widthper50 mt-20 mb-10 text-center" style="font-size:14px;font-weight:normal"><span style="font-size:18px;font-weight:600">
+                                        <p class="widthper50 text-center" style="font-size:14px;font-weight:normal">
+                                            <span style="font-size:18px;font-weight:600">
                                                 <e style="font-size:26px;font-weight:600" id="allUsed_MB2">0</e><span
                                                     class="limit_unit2">MB</span>
                                             </span> of <span style="font-size:18px;font-weight:600">
                                                 <e style="font-size:26px;font-weight:600" id="redmian_MB2">0</e><span
                                                     class="limit_unit2">MB</span>
                                             </span> used</p>
-                                        <div class="useage-describe mb-20">Data usage is measured by the router and may differ to your provider's measurements</div>
+                                        <div class="useage-describe">Data usage is measured by the router and may differ to your provider's measurements</div>
+                                        <div class="div-split mb-30"></div>
                                         <h4 class="limit-subtiltle">Router data usage cycle</h4>
                                         <div class="-flex-display -align-box -justify-box mt-30">
                                             <div>
@@ -1152,9 +1204,9 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="div-split mb-20 mt-20"></div>
 
-
-                                        <h4 class="limit-subtiltle mt-40">Data warning and limit</h4>
+                                        <h4 class="limit-subtiltle mt-30">Data warning and limit</h4>
                                         <div class="layui-form -flex-display -align-box -justify-box mt-30">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Set data warning:</div>
@@ -1203,7 +1255,8 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <h4 class="limit-subtiltle mt-40">SIM info</h4>
+                                        <div class="div-split mb-20 mt-20"></div>
+                                        <h4 class="limit-subtiltle mt-40">Mobile network</h4>
                                         <div class="mt-20">
                                             <div class="z1">
 
@@ -1212,14 +1265,33 @@
                                                         provider:</label><span class="col-md-6 valColor" id="provider2"></span>
                                                 </div>
                                                 <div class="row">
-                                                    <label class="Network-provider col-md-6 mt-15">SIM IMSI
+                                                    <label class="Network-provider col-md-6 mt-15" style="max-width: 395px;">SIM IMSI
                                                         (International
                                                         Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15 valColor" id="sim_imsi2"></span>
                                                 </div>
+                                                <div class="-flex-display -align-box -justify-box mt-25">
+                                                    <label class="Network-provider mt-15">APN (Access Point
+                                                        Name):</label>
+                                                    <input type="text" name="text" value="" class="Rectangle-1186 pl-10" id="AP_Name2" oninput="WidthCheckPassword(this,64)">
+                                                </div>
+                                                <div class="-flex-display -align-box -justify-box">
+                                                    <label class="Network-provider mt-15">Username:</label>
+                                                    <input type="text" name="text" value="" class="Rectangle-1186 pl-10" id="Username2" oninput="WidthCheckPassword(this,64)">
+                                                </div>
+                                                <div class="-flex-display -align-box -justify-box" style="position: relative;">
+                                                    <label class="Network-provider mt-15">Password:</label>
+                                                    <input type="password" name="text" value="" class="Rectangle-1186 pl-10" id="Password2" oninput="WidthCheckPassword(this,64)">
+                                                    <span class="resetAPN-p" id="resetAPN_p2">SHOW</span>
+                                                </div>
+                                                <div class="useage-describe mt-20">The mobile network Access Point Name provides all the details that your router needs to connect to mobile data
+                                                </div>
+                                                <button class="Rectangle-1182 width-auto Unlock-SIM Change-SIM-pin mt-20 mb-10" id="Reset_APN_settings2">Reset APN settings</button>
                                                 <div style="clear:both;"></div>
-                                                <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 50px;">
-                                                    <label class="layui-form-label SIM-pin-lock mt-0 mb-0">SIM pin
-                                                        lock:</label>
+                                                <div class="div-split mb-20 mt-20"></div>
+                                                <h4 class="limit-subtiltle mt-30">SIM lock</h4>
+                                                <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 20px;">
+                                                    <label class="layui-form-label SIM-pin-lock mt-0 mb-0">Lock
+                                                        SIM:</label>
                                                     <div class="layui-input-block mt-30" id="SIM_pin_lock2">
                                                         <input type="checkbox" lay-skin="primary" lay-filter="SIMpin2">
                                                     </div>
@@ -1247,10 +1319,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210430"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210430"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210511"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210511"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210430"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210511"></script>
 
 </body>
 

@@ -100,7 +100,7 @@ $(function() {
         console.log($('#chagePWD').serialize())
 
         $.ajax({
-            url: "/action/password",
+            url: " /action/password",
             type: "post",
             data: $('#chagePWD').serialize(),
             //data: "username=admin&password=123456",

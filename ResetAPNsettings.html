@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link href="css/style.css?mv=20210511" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210511"></script>
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        .Path-101 {
+            width: 114px;
+            height: 50px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        .Path-101:hover {
+            background-color: #009fe3;
+            color: #fff;
+        }
+        /* .Rectangle-1187 {
+            width: 534px;
+            height: 347px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+        } */
+        /* .Rectangle-1182 {
+        width: 124px;
+        height: 50px;
+        border-radius: 5px;
+        background-color: #009fe3;
+        background-color: #f1f1f1;
+    } */
+        
+        .Rectangle-1182:hover {
+            background-color: #009fe3;
+            color: #fff;
+        }
+        
+        .Rectangle-1182.active {
+            background-color: #009fe3;
+        }
+        
+        .Cancel {
+            /* width: 62px;
+  height: 27px; */
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 50px;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+            width: 114px;
+            height: 50px;
+            border-radius: 5px;
+            background-color: #f2f2f7;
+        }
+        
+        .OK {
+            /* width: 28px;
+            height: 27px; */
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.35;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+        }
+        
+        #enterPass,
+        #enterPass1 {
+            /* position: absolute;
+            top: 50%;
+            left: 50%; */
+            width: 500px;
+            height: 318px;
+            /* margin-left: -250px;
+            margin-top: -152px; */
+            padding: 40px;
+            z-index: 999999;
+            border-radius: 5px;
+        }
+        
+        .Password-is-incorrect {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.33;
+            letter-spacing: normal;
+            text-align: left;
+            color: #ff002a;
+            margin-left: 90px;
+            margin-top: 10px;
+        }
+        
+        .Rectangle-1185 {
+            width: 235px;
+            height: 32px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            padding: 5px 10px;
+        }
+        
+        .Enter-the-password-for-network-Mynetwork1 {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.42;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Password {
+            /* width: 86px; */
+            height: 24px;
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+            margin-left: 15px;
+        }
+        
+        .SHOW {
+            font-family: OpenSans;
+            font-size: 12px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.42;
+            letter-spacing: normal;
+            text-align: left;
+            color: #009fe3;
+            margin-left: -66px;
+        }
+        
+        .Rectangle-1188 {
+            width: 344px;
+            height: 40px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #ffffff;
+        }
+        
+        .Rectangle-1187 {
+            width: 500px;
+            height: 440px;
+            border-radius: 5px;
+            /* border: solid 1px #707070; */
+            background-color: #ffffff;
+        }
+        
+        #pwd {
+            padding: 5px 10px
+        }
+        
+        .error {
+            color: #f00;
+            display: none;
+            margin: 10px 0 10px 104px;
+            font-weight: bold;
+            /* visibility: hidden; */
+            /* height: 30px; */
+        }
+        
+        .correct {
+            display: none;
+            color: green;
+            margin: 10px 0 10px 104px;
+            font-weight: bold;
+            /* visibility: hidden; */
+            /* height: 30px; */
+        }
+        
+        .SKY546H {
+            width: 102px;
+            height: 33px;
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.08;
+            letter-spacing: normal;
+            text-align: center;
+            color: #343434;
+        }
+        
+        .wirelessInfo {
+            padding: 20px;
+        }
+        
+        .layui-form-label {
+            width: 300px !important;
+        }
+        
+        .form-control-static {
+            padding-top: 12px;
+        }
+        
+        .Status {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Connected {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .layui-form-switch {
+            margin-top: 12px;
+        }
+        
+        .Forget-network {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 50px;
+            letter-spacing: normal;
+            text-align: center;
+            color: #363636;
+            width: 124px;
+            height: 50px;
+            border-radius: 5px;
+            background-color: #009fe3;
+        }
+        
+        .Path-97 {
+            width: 136px;
+            height: 42px;
+            border-radius: 5px;
+            border: solid 1px #707070;
+            background-color: #f1f1f1;
+        }
+        
+        .Forget-wireless-network-SKY546H {
+            font-family: OpenSans;
+            font-size: 24px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.08;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Authentication-details-for-this-network-will-be-erased {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
+        
+        .Rectangle-1213 {
+            /* width: 494px;
+            height: 218px; */
+            border-radius: 5px;
+            /* border: solid 1px #707070; */
+            background-color: #ffffff;
+        }
+        
+        .Rectangle-1182 {
+            /* width: 136px; */
+            height: 42px;
+            border-radius: 5px;
+            background-color: #009fe3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container wirelessInfo form-inline Rectangle-1213 mt-20">
+        <div class="layui-form">
+            <div class="Forget-wireless-network-SKY546H">Reset APN settings?</div>
+            <div class="layui-form-item Authentication-details-for-this-network-will-be-erased mt-20">
+                Settings will be reset to your provider's default APN information
+            </div>
+            <div class="row pt-30">
+                <span class="col-md-2 col-md-offset-4" id="forget_wifi" style="display: inline-block;float: right;"><button
+                        class=" Forget-network layui-btn">Reset</button></span>
+                <span class="col-md-4 col-md-offset-2 connected" style="display: inline-block;float: right;"><button
+                        id="btn" class="active Cancel">Cancel</button></span>
+
+            </div>
+        </div>
+    </div>
+    <script src="layui/layui.js " charset="utf-8 "></script>
+    <script>
+        var SIM, layer;
+        $(function() {
+            SIM = GetUrlParam("SIM");
+            $('#btn').click(function() {
+                setTimeout(() => {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index); //关闭当前页
+                }, 200);
+            });
+            $('#forget_wifi').click(function() {
+                forgetWifi();
+            });
+            layui.use(['form'], function() {
+                var form = layui.form;
+                layer = layui.layer;
+            });
+        })
+
+        function forgetWifi() {
+            var loading = layer.load(0, {
+                shade: false
+            });
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "ResetApn",
+                "params": {
+                    "sim_id": Number(SIM),
+                },
+                "id": "9.1"
+            };
+            //$(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr("bssid", bssid);
+            //return;
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    layer.close(loading);
+                    console.log("res", res)
+                    if (res.result) {
+                        if (res.result.status == 1) {
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(index); //关闭当前页
+                        } else {
+                            layui.use(['layer'], function() {
+                                var layer = layui.layer;
+                                layer.msg("Reset failed!");
+                            })
+                        }
+                    } else if (res.error) {
+                        layui.use(['layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
+                    }
+                },
+                error: function(jqXHR) {
+                    console.log("Error message", JSON.stringify(jqXHR))
+                    layer.close(loading);
+                    var tip =
+                        '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
+                    promptMessage("Error message", tip);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

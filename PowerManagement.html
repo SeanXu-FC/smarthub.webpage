@@ -30,7 +30,7 @@
             line-height: 1.36;
             letter-spacing: normal;
             text-align: left;
-            color: #861f41
+            color: #343434
         }
         
         .btn1 {
@@ -48,7 +48,7 @@
         }
         
         .Path-101:hover {
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
         }
         
@@ -65,12 +65,12 @@
         }
         
         .Rectangle-1182:hover {
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
         }
         
         .Rectangle-1182.active {
-            background-color: #861f41;
+            background-color: #009fe3;
         }
         
         .Rectangle-1182 {
@@ -78,7 +78,7 @@
             height: 52px;
             /* padding: 0 20px; */
             border-radius: 5px;
-            background-color: #861f41;
+            background-color: #009fe3;
             color: #fff;
         }
         
@@ -211,11 +211,11 @@
         }
         
         .right-describe {
-            opacity: 0.74;
+            opacity: 0.5;
             font-family: OpenSans;
             font-size: 14px;
             color: #343434;
-            padding-left: 40px;
+            padding-left: 30px;
         }
         
         .layui-form-radio {
@@ -227,10 +227,10 @@
             color: #343434 !important;
         }
         
-        .layui-form-checkbox span {
+        .layui-form-checkbox[lay-skin=primary] span {
             font-size: 18px;
-            color: #343434 !important;
-            padding-left: 5px;
+            color: #3a3a3a;
+            padding-left: 10px;
         }
         
         .input-name {
@@ -270,117 +270,106 @@
         .layui-form-select .layui-input {
             padding-right: 15px;
         }
+        
+        .layui-form-pane .layui-form-radio,
+        .layui-form-pane .layui-form-switch {
+            margin-left: 0;
+        }
+        
+        .layui-form-pane .layui-input-block {
+            margin-left: 0;
+        }
+        
+        .title-describe {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: #3a3a3a;
+            padding-left: 30px;
+        }
+        
+        .disable-color {
+            color: #3a3a3a;
+            opacity: 0.5;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid" style="margin:30px 70px;">
         <div class="row">
-            <div style="position:relative;margin-bottom:40px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="LAN-configuration">Power management
+            <div style="position:relative;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="LAN-configuration">Power management
             </div>
             <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">Changes-saved</div>
             <div id="error" class="error-icon Password-successfully-changed Changes-saved"></div>
             <div class="form-horizontal" name="formdata" id="content">
                 <div id="main">
                     <div id="d2">
-                        <div class="layui-form layui-form-pane -flex-display -align-box">
-                            <div class="item-left">
-                                <label class="Set-monthly-data-limit mt-10 mb-0">Enable low power mode:</label>
-                                <p class="left-describe">Low power mode will run the router in a low power state. The router will be woken on conditions determined by the low power mode selected
-                                </p>
-                            </div>
-                            <div class="layui-input-block pt-5" id="AutoSim">
-                                <input type="checkbox" value="" name="open" lay-skin="primary" lay-filter="SIMswitch">
-                            </div>
-                        </div>
-                        <div class="layui-form layui-form-pane -flex-display mt-30">
-                            <div class="item-left">
-                                <label class="Set-monthly-data-limit mt-10 mb-0">Low power mode:</label>
-                                <p class="left-describe">Both modes will duty cycle between active and sleep
-                                </p>
-                            </div>
+                        <div class="layui-form layui-form-pane -flex-display" style="margin-top:12px">
                             <div class="layui-input-block pt-5" id="low_power">
-                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="1" title="Low power mode 1">
-                                <p class="right-describe">Ethernet is on. Router will wake on input, LTE and on LAN
+                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="1" title="Always on">
+                                <p class="right-describe">
                                 </p>
-                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="0" title="Low power mode 2 (lowest power)">
-                                <p class="right-describe">Ethernet is off. Router will wake on input and LTE
+                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="0" title="Low power mode">
+                                <p class="right-describe">Router will run in a low power state and will wake on LTE and alert notifications
                                 </p>
                             </div>
                         </div>
-                        <div class="layui-form layui-form-pane -flex-display mt-40">
-                            <div class="item-left">
-                                <label class="Set-monthly-data-limit mt-10 mb-0">Define which inputs should wake or put
-                                    the router to sleep:</label>
-                                <p class="left-describe">Each input channel can be chosen to either wake or put the router to sleep (sleep inputs will be ignored if a wake input is active)
-                                </p>
-                            </div>
-                            <div class="layui-input-block pt-5" id="input_power">
-                                <div class="-flex-display -align-box mt-10">
-                                    <span class="input-name" id="input-name0">--</span>
-                                    <select class="input-select " id="input_channels0">
-                                        <option value="None">None</option>
-                                        <option value="Wake">Wake</option>
-                                        <option value="Sleep">Sleep</option>
-                                    </select>
-                                    <!--<input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels0" id="input_channels0" title="--" value="Weak signal">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>-->
-                                </div>
-                                <div class="-flex-display -align-box mt-10">
-                                    <span class="input-name" id="input-name1">--</span>
-                                    <select class="input-select " id="input_channels1">
-                                        <option value="None">None</option>
-                                        <option value="Wake">Wake</option>
-                                        <option value="Sleep">Sleep</option>
-                                    </select>
-                                    <!-- <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels1" id="input_channels1" title="--" value="Data limit reached">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div> -->
-                                </div>
-                                <div class="-flex-display -align-box mt-10">
-                                    <span class="input-name" id="input-name2">--</span>
-                                    <select class="input-select " id="input_channels2">
-                                        <option value="None">None</option>
-                                        <option value="Wake">Wake</option>
-                                        <option value="Sleep">Sleep</option>
-                                    </select>
-                                    <!-- <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels2" id="input_channels2" title="--" value="hen roaming">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div> -->
-                                </div>
-                                <div class="-flex-display -align-box mt-10">
-                                    <span class="input-name" id="input-name3">--</span>
-                                    <select class="input-select " id="input_channels3">
-                                        <option value="None">None</option>
-                                        <option value="Wake">Wake</option>
-                                        <option value="Sleep">Sleep</option>
-                                    </select>
-                                    <!-- <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels3" id="input_channels3" title="--" value="No network">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div> -->
+                        <div class="content-center">
+                            <div class="title-describe mt-30">Also wake on:</div>
+                            <div class="layui-form layui-form-pane -flex-display ml-20">
+                                <div class="layui-input-block pt-5" id="input_power">
+                                    <div class="mt-20">
+                                        <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="LAN_signal" id="LAN_signal" title="LAN signal" value="LAN signal">
+                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>LAN signal</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    </div>
+                                    <div class="mt-20">
+                                        <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels0" id="input_channels0" title="--" value="Weak signal">
+                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    </div>
+                                    <div class="mt-20">
+                                        <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels1" id="input_channels1" title="--" value="Data limit reached">
+                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    </div>
+                                    <div class="mt-20">
+                                        <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels2" id="input_channels2" title="--" value="hen roaming">
+                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    </div>
+                                    <div class="mt-20">
+                                        <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels3" id="input_channels3" title="--" value="No network">
+                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="layui-form layui-form-pane -flex-display mt-30">
-                            <div class="item-left">
-                                <label class="Set-monthly-data-limit mt-10 mb-0">Define outputs to wake Digital
-                                    switching on router waking:</label>
-                                <p class="left-describe">Output channels can be assigned to wake Digital switching when the router is awake
-                                </p>
+                            <p class="right-describe mt-20">Router will run in a low power state and will wake on LTE and alert notifications
+                            </p>
+                            <div class="title-describe mt-40">Turn on these outputs when waking from low power mode:
                             </div>
-                            <div class="layui-input-block pt-5" id="Output_power">
-                                <div class="mt-10">
-                                    <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels4" id="Output_channels4" title="--" value="Weak signal">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>
-                                </div>
-                                <div class="mt-10">
-                                    <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels5" id="Output_channels5" title="--" value="Data limit reached">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
-                                </div>
-                                <div class="mt-10">
-                                    <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels6" id="Output_channels6" title="--" value="hen roaming">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
-                                </div>
-                                <div class="mt-10">
-                                    <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels7" id="Output_channels7" title="--" value="No network">
-                                    <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
+                            <div class="layui-form layui-form-pane -flex-display ml-20">
+                                <div class="layui-input-block pt-5" id="Output_power">
+                                    <div class="mt-20">
+                                        <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels4" id="Output_channels4" title="--" value="Weak signal">
+                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    </div>
+                                    <div class="mt-20">
+                                        <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels5" id="Output_channels5" title="--" value="Data limit reached">
+                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    </div>
+                                    <div class="mt-20">
+                                        <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels6" id="Output_channels6" title="--" value="hen roaming">
+                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    </div>
+                                    <div class="mt-20">
+                                        <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels7" id="Output_channels7" title="--" value="No network">
+                                        <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -412,6 +401,19 @@
                     shade: false
                 });
                 getMonitoringData(layer, loading);
+                form.on('radio(activeSIM)', function(data) {
+                    var value = data.value;
+                    console.log(value);
+                    if (value == 1) {
+                        checkedRadioDisabled(true, {
+                            "opacity": "0.5"
+                        });
+                    } else {
+                        checkedRadioDisabled(false, {
+                            "opacity": "1"
+                        });
+                    }
+                });
             });
             $("#btn2").on("click", function() {
                 getSimManagementVal()
@@ -441,6 +443,9 @@
                     $('input[name="activeSIM"]').prop("checked", false);
                     if (res.result.LowPowerMode == 1) {
                         $('input[name="activeSIM"]').eq(0).prop("checked", true);
+                        checkedRadioDisabled(true, {
+                            "opacity": "0.5"
+                        });
                     } else {
                         $('input[name="activeSIM"]').eq(1).prop("checked", true);
                     }
@@ -448,33 +453,13 @@
                     if (res.result && res.result.io_date) {
                         var json = res.result.io_date;
                         for (var i = 0; i < json.length; i++) {
-
                             if (i < 4) {
-                                $("#input-name" + i).text(json[i].name)
-                                if (json[i].types == 0) { //types=0都禁用并不勾选
-                                    $("#input_channels" + i).prop("disabled", true);
-                                    $("#input_channels" + i + " option[value='None']").prop("selected",
-                                        true);
-                                } else {
-                                    if (json[i].wake_func == 1 || json[i].wake_func == 2) {
-                                        $("#input_channels" + i + " option[value='Wake']").prop("selected",
-                                            true);
-                                    } else if (json[i].wake_func == 3 || json[i].wake_func == 4) {
-                                        $("#input_channels" + i + " option[value='Sleep']").prop("selected",
-                                            true);
-                                    } else if (json[i].wake_func == 0) {
-                                        $("#input_channels" + i + " option[value='None']").prop("selected",
-                                            true);
-                                    }
-                                }
+                                $("#input_channels" + i).attr("title", json[i].name)
+
 
                             } else { //types！=0根据wake_func判断
                                 $("#Output_channels" + i).attr("title", json[i].name);
-                                if (json[i].wake_func == 1) {
-                                    $("#Output_channels" + i).prop("checked", true);
-                                } else {
-                                    $("#Output_channels" + i).prop("checked", false);
-                                }
+
                             }
 
                         }
@@ -614,7 +599,20 @@
                     }
                 });
             });
+        }
 
+        function checkedRadioDisabled(flag, cssObj) {
+            $("#LAN_signal").prop("disabled", flag);
+            $("#input_channels0").prop("disabled", flag);
+            $("#input_channels1").prop("disabled", flag);
+            $("#input_channels2").prop("disabled", flag);
+            $("#input_channels3").prop("disabled", flag);
+            $("#Output_channels4").prop("disabled", flag);
+            $("#Output_channels5").prop("disabled", flag);
+            $("#Output_channels6").prop("disabled", flag);
+            $("#Output_channels7").prop("disabled", flag);
+            $(".layui-form-checkbox span").css(cssObj)
+            $(".title-describe").css(cssObj)
         }
     </script>
 

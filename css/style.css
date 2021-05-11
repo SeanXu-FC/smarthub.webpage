@@ -1,3 +1,7 @@
+button {
+    border: none !important;
+}
+
 button:disabled {
     opacity: 0.7;
 }
@@ -496,7 +500,7 @@ button:disabled {
 
 .bb1c {
     border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .w80 {
@@ -711,7 +715,7 @@ body.min990 {
     height: 38px;
     line-height: 38px;
     padding: 0 18px;
-    background-color: #861f41;
+    background-color: #009fe3;
     color: #fff !important;
     white-space: nowrap;
     text-align: center;
@@ -737,8 +741,8 @@ body.min990 {
 }
 
 .layui-layer-btn .layui-layer-btn0 {
-    border-color: #861f41 !important;
-    background-color: #861f41 !important;
+    border-color: #009fe3 !important;
+    background-color: #009fe3 !important;
     border-radius: 4px;
 }
 

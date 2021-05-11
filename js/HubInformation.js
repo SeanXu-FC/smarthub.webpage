@@ -25,7 +25,9 @@ $(function() {
         //getFile();
         $(this).prop("disabled", "disabled");
         var domain = window.location.host;
-        window.location.href = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
+        var url = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + " /action/down";
+        downloadFile(url)
+            //window.location.href = url;
     });
 
 
@@ -85,26 +87,14 @@ function getFile() {
     }
 }
 
-function getFile1() {
-    $.ajax({
-        url: "/action/down",
-        type: "post",
-        dataType: "json",
-        contentType: "application/octet-stream;charset=utf-8",
-        success: function(res) {
-            console.log("aaaaaa", res)
-
-        },
-        error: function(jqXHR) {
-            console.log("bbbbb", JSON.stringify(jqXHR))
-            console.log(jqXHR)
-            let blob = new Blob([jqXHR.responseText]);
-            console.log(blob)
-            const url = window.URL.createObjectURL(blob);
-            console.log(url)
-
-        }
-    })
+function downloadFile(url) {
+    setTimeout(function() {
+        var net = window.open(url);
+        net.addEventListener("beforeunload", (e) => {
+            console.log("下载完成")
+            $("#btnSave").prop("disabled", false)
+        });
+    }, 1000)
 }
 
 function getInfoData(layer, loading) {

@@ -71,6 +71,38 @@ $(function() {
         })
     })
 
+    $('#Reset_APN_settings').on('click', function() {
+        //iframe层
+        ResetAPNsettings(0)
+        $(window).resize();
+    });
+    $('#Reset_APN_settings2').on('click', function() {
+        //iframe层
+        ResetAPNsettings(1)
+        $(window).resize();
+    });
+
+    $("#resetAPN_p").on("click", function() {
+        var type = $("#Password").attr("type");
+        if (type == "password") {
+            $("#Password").attr("type", "text");
+            $(this).text("HIDE");
+        } else if (type == "text") {
+            $("#Password").attr("type", "password");
+            $(this).text("SHOW")
+        }
+    })
+    $("#resetAPN_p2").on("click", function() {
+        var type = $("#Password2").attr("type");
+        if (type == "password") {
+            $("#Password2").attr("type", "text");
+            $(this).text("HIDE");
+        } else if (type == "text") {
+            $("#Password2").attr("type", "password");
+            $(this).text("SHOW")
+        }
+    })
+
     // $("#dataWaring input").on('input', function(e) {
     //     var valLimit = $("#dataLimit input").val();
     //     var uintLimit = $("#switchMBLim").val();
@@ -83,6 +115,28 @@ $(function() {
     // })
 
 })
+
+function ResetAPNsettings(SIM) {
+    console.log(SIM)
+    parent.layer.open({
+        id: "ResetAPNsettings",
+        type: 2,
+        title: false,
+        closeBtn: 0,
+        shade: 0.8,
+        area: ['534px', '260px'],
+        //area: '534px',
+        content: ['ResetAPNsettings.html?SIM=' + SIM, 'no'],
+        end: function() {
+            layui.use(['layer', 'form'], function() {
+                var layer = layui.layer;
+                var form = layui.form;
+                getMainParameters(layer, form);
+            })
+
+        }
+    });
+}
 
 function lockSimPinTip(checked) {
     var type, times;
@@ -210,7 +264,7 @@ function getMainParameters(layer, form) {
                     $("#autoSwitch input").attr("checked", "checked");
                 }
 
-
+                //json.sim[0].isblock = 1
                 MobileData = json.sim;
                 console.log("MobileData", MobileData)
                 renderDataUsage(MobileData, 0);
@@ -248,7 +302,6 @@ function renderDataUsage(json, i) {
         if (json[i].isblock == 1) {
             $(".content1 .content1-contianer").hide();
             $(".sim-block-c").show();
-            return;
         } else {
             $(".content1 .content1-contianer").show();
             $(".sim-block-c").hide();
@@ -319,6 +372,9 @@ function renderDataUsage(json, i) {
 
         $("#provider").text(json[i].provider);
         $("#sim_imsi").text(json[i].imsi);
+        $("#AP_Name").val(json[i].apn_name);
+        $("#Username").val(json[i].apn_username);
+        $("#Password").val(json[i].apn_password);
 
     } else {
         if (json[i].provider) {
@@ -328,7 +384,7 @@ function renderDataUsage(json, i) {
         if (json[i].isblock == 1) {
             $(".content2 .content2-contianer").hide();
             $(".sim-block-c2").show();
-            return;
+
         } else {
             $(".content2 .content2-contianer").show();
             $(".sim-block-c2").hide();
@@ -401,6 +457,9 @@ function renderDataUsage(json, i) {
 
         $("#provider2").text(json[i].provider);
         $("#sim_imsi2").text(json[i].imsi);
+        $("#AP_Name2").val(json[i].apn_name);
+        $("#Username2").val(json[i].apn_username);
+        $("#Password2").val(json[i].apn_password);
 
     }
 
@@ -553,8 +612,8 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
         },
         grid: {
             left: '0px',
-            right: '135px',
-            bottom: '10px',
+            right: '130px',
+            bottom: '20px',
             top: '20px',
             containLabel: true
         },
@@ -614,8 +673,8 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
                     normal: {
                         color: new echarts.graphic.LinearGradient(
                             0, 0, 0, 1, [
-                                { offset: 0, color: '#cda4b1' },
-                                { offset: 1, color: '#faf5f7' },
+                                { offset: 0, color: '#00bcd4' },
+                                { offset: 1, color: '#fff' },
 
                             ]
                         )
@@ -623,7 +682,7 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
                 },
                 itemStyle: {
                     normal: {
-                        color: '#861f41'
+                        color: '#00bcd4'
                     }
                 },
                 data: Ydata,
@@ -662,6 +721,9 @@ function getDatausageVal() {
     if (switchMBLim == 1) {
         dataLimit = dataLimit * 1024;
     }
+    var apn_name = $("#AP_Name").val();
+    var apn_username = $("#Username").val();
+    var apn_password = $("#Password").val();
     var SIM_pin_lock = $("#SIM_pin_lock1 input").is(":checked") == true ? 1 : 0;
 
 
@@ -680,6 +742,9 @@ function getDatausageVal() {
     if (switchMBLim2 == 1) {
         dataLimit2 = dataLimit2 * 1024;
     }
+    var apn_name2 = $("#AP_Name2").val();
+    var apn_username2 = $("#Username2").val();
+    var apn_password2 = $("#Password2").val();
     var SIM_pin_lock2 = $("#SIM_pin_lock2 input").is(":checked") == true ? 1 : 0;
 
 
@@ -706,6 +771,9 @@ function getDatausageVal() {
                 "usage_reminder_flag": Number(setDataLimit),
                 "monthly_data_limit": Number(dataLimit),
                 "sim_data_limt_unit": Number(switchMBLim),
+                "apn_name": apn_name,
+                "apn_password": apn_password,
+                "apn_username": apn_username,
                 "lock_sim": Number(SIM_pin_lock)
             },
             {
@@ -719,11 +787,15 @@ function getDatausageVal() {
                 "usage_reminder_flag": Number(setDataLimit2),
                 "monthly_data_limit": Number(dataLimit2),
                 "sim_data_limt_unit": Number(switchMBLim2),
+                "apn_name": apn_name2,
+                "apn_password": apn_password2,
+                "apn_username": apn_username2,
                 "lock_sim": Number(SIM_pin_lock2)
             }
         ]
 
     }
+    console.log("params", params)
     layui.use(['layer'], function() {
         var layer = layui.layer;
         setDatausage(layer, params)

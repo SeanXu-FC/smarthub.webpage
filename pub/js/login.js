@@ -68,7 +68,7 @@ function login() {
     console.log($('#loginInfo').serialize())
         //return;
     $.ajax({
-        url: "/action/login",
+        url: " /action/login",
         type: "post",
         data: $('#loginInfo').serialize(),
         //data: "username=admin&password=123456",

@@ -53,7 +53,7 @@ $(function() {
 
     $(".upload-img").on("click", function() {
         $.ajax({
-            url: "/action/upload",
+            url: " /action/upload",
             type: "post",
             data: "mode=2",
             dataType: "json",
@@ -120,7 +120,7 @@ function toUploading(files) {
             element.progress('upload_progress', value + '%') //设置页面进度条
             $("#upgrade").prop("disabled", true);
         }
-        xhr.open('post', '/action/upload', true);
+        xhr.open('post', ' /action/upload', true);
         xhr.send(formData);
         xhr.onreadystatechange = state_Change;
 
@@ -162,7 +162,7 @@ function getVersion() {
     data = JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: "/action/action",
+        url: " /action/action",
         data: data,
         dataType: "json",
         contentType: "application/json;charset=utf-8",
@@ -199,7 +199,7 @@ function toUpgrade() {
     $("#upgrade").addClass("disable-btn");
     $(".upload-img").hide();
     $.ajax({
-        url: "/action/upload",
+        url: " /action/upload",
         type: "post",
         data: "mode=1",
         dataType: "json",
