@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210511" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210511"></script>
+    <link href="css/style.css?mv=20210513" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210513"></script>
     <title>Document</title>
     <style>
         * {
@@ -406,7 +406,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210511"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210513"></script>
     <script>
         var ssid, bssid, encrypt, is_saved;
         $(function() {
@@ -506,10 +506,10 @@
                         }
                         var signal = Math.abs(res.result.rssi);
                         console.log(signal)
-                        if (signal <= 70) {
+                        if (signal < 70) {
                             console.log(11)
                             $("#Signal_strength").text("Good");
-                        } else if (signal > 70) {
+                        } else if (signal >= 70) {
                             console.log(22)
                             $("#Signal_strength").text("Weak");
                         }

@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <title>OpenWrt - Flashing...</title>
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210511" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210513" />
     <style>
         .Software-upgrade {
             font-family: OpenSans;
@@ -140,7 +140,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
 <script src="js/jquery.myProgress.js"></script>
-<script type="text/javascript" src="js/common.js?mv=20210511"></script>
+<script type="text/javascript" src="js/common.js?mv=20210513"></script>
 
 <script type="text/javascript">
     var interval = null,
@@ -225,6 +225,18 @@
             StateResponse(1);
             $("#steps").html(data.steps);
             return4Getstatus(layer, 1000 * 60); //清除进度条轮询定时器，60s后再开启
+        } else if (data.status == "11" || data.status == "12") { //其他方式在升级
+            //$("#upgrade_mask", window.parent.document).hide(); //关闭禁止点击的透明遮罩
+            $(".progress-time").hide();
+            timeRemainingStatus = data.status;
+            StateResponse(1);
+            $("#steps").html(data.steps);
+            $("#upgrade_tip").hide();
+            clearInterval(interval);
+
+            $(".gif-img").hide();
+
+            upPromptMessage("Prompt information", data.steps);
         } else if (data.status == "2") { //升级中
             $(".progress-time").hide();
             timeRemainingStatus = data.status;
@@ -254,7 +266,7 @@
             progress(100, 100);
             $(".gif-img").hide();
 
-            //upPromptMessage("Success message", data.steps);
+            //upPromptMessage("Prompt information", data.steps);
             ejectTip(data.steps);
         } else if (data.status == "3") { //没有升级 
             $("#upgrade_mask", window.parent.document).hide(); //关闭禁止点击的透明遮罩
@@ -285,7 +297,8 @@
                 "jsonrpc": "2.0",
                 "method": "GetUpgradeStatusAndProgress",
                 "params": {
-                    "status": 0
+                    "status": 0,
+                    "SourcesTypes": 0
                 },
                 "id": "9.1"
 
@@ -354,7 +367,8 @@
             "jsonrpc": "2.0",
             "method": "GetUpgradeStatusAndProgress",
             "params": {
-                "status": status
+                "status": status,
+                "SourcesTypes": 0
             },
             "id": "9.1"
 

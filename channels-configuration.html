@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210511" rel="stylesheet" />
+    <link href="css/style.css?mv=20210513" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -234,7 +234,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210511"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210513"></script>
     <script>
         var frequency = 0;
         $(function() {
@@ -248,6 +248,7 @@
             //弹出一个iframe层
             $('.inputsEdit').on('click', function() {
                 var name = $(this).children(".Bilge-pump").text();
+                name = escape(name);
                 var dataId = $(this).attr("dataId");
                 var types = $(this).children(".Bilge-pump").attr("types");
                 var alertID = $(this).children(".Bilge-pump").attr("alertID");
@@ -274,6 +275,7 @@
 
             $('.outputsEdit').on('click', function() {
                 var name = $(this).children(".Bilge-pump").text();
+                name = escape(name);
                 var types = $(this).children(".Bilge-pump").attr("types");
                 var dataId = $(this).attr("dataId");
                 var alertID = $(this).children(".Bilge-pump").attr("alertID");

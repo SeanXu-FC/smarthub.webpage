@@ -25,7 +25,7 @@ $(function() {
         //getFile();
         $(this).prop("disabled", "disabled");
         var domain = window.location.host;
-        var url = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + " /action/down";
+        var url = ('https:' == document.location.protocol ? 'https://' : 'http://') + domain + "/action/down";
         downloadFile(url)
             //window.location.href = url;
     });
@@ -94,7 +94,7 @@ function downloadFile(url) {
             console.log("下载完成")
             $("#btnSave").prop("disabled", false)
         });
-    }, 1000)
+    }, 500)
 }
 
 function getInfoData(layer, loading) {

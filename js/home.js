@@ -97,7 +97,7 @@ function getHomeData(layer, loading) {
                     $(".imgIcon1 .ssid").text("-");
                 } else if (json.sta.status == 2) {
                     $('.connected24').eq(0).text(arr[6]);
-                    $('.WiFiNetwork').attr("src", "images/r_03.png");
+                    $('.WiFiNetwork').attr("src", "images/r_03_nouse.png");
                     //$('#connected24').attr("src", "images/s_wifi_nonea.png");
                     $('.connected24').css('color', '#333');
                     $(".imgIcon1 .ssid").text(json.sta.sta_ssid ? json.sta.sta_ssid : "-");
@@ -145,7 +145,6 @@ function getHomeData(layer, loading) {
                     $(".mobiledataImg-disable").show();
                 } else {
                     var mobileStatus = "";
-
                     if (json.mobile.status == 1) {
                         $("#Connected4G").hide();
                         $('.Connected4G').eq(0).text(arr[4]);
@@ -184,7 +183,7 @@ function getHomeData(layer, loading) {
                     } else if (json.mobile.status == 4) {
                         $('.Connected4G').eq(0).text("Not in use");
                         $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04.png");
+                        $(".mobiledataImg").attr("src", "images/r_04_nouse.png");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -301,7 +300,8 @@ function getHomeData(layer, loading) {
 
                 if (json.sta.status == 1) {
                     if (json.sta.signal);
-                    signal = Math.abs(json.sta.signal);
+                    var signal = Math.abs(json.sta.signal);
+                    console.log("signal", signal)
                     if (100 > signal && signal >= 85) {
                         $img.eq(0).attr("src", 'images/' + WiFiSignalArr[1]);
                     } else if (85 > signal && signal >= 70) {
@@ -359,7 +359,8 @@ function getStatus() {
         "jsonrpc": "2.0",
         "method": "GetUpgradeStatusAndProgress",
         "params": {
-            "status": 0
+            "status": 0,
+            "SourcesTypes": 0
         },
         "id": "9.1"
 
@@ -374,7 +375,11 @@ function getStatus() {
         success: function(res) {
             if (res.result) {
                 var data = res.result;
-                if (data.status != "3") { //升级成功
+                //data.status = 11
+                if (data.status == "11" || data.status == "12") {
+                    var tip = '<div style="font-size: 19px;padding: 20px;text-align: center;word-wrap:break-word;">' + data.steps + '</div>';
+                    parentPromptMessage("Error message", tip);
+                } else if (data.status != "3") { //升级成功
                     $("#my-iframe", window.parent.document).attr("src", "flashops.html?status=" + data
                         .status + "&steps=" + data.steps + "&count=" + data.count + "&total=" + data.total);
                 } else {

@@ -658,7 +658,7 @@
             <div class="layui-form-item layui-form-text mt-20">
                 <label class=" layui-form-label Allow-notifications " style="margin-top:-14px;width:228px; ">Notification message:</label>
                 <div class="layui-input-block " style="margin-left:262px; ">
-                    <textarea maxlength="256" id="alert_areatext" class="layui-textarea" oninput="WidthCheckIOStr(this,256);"></textarea>
+                    <textarea maxlength="256" id="alert_areatext" class="layui-textarea" oninput="WidthCheckPassword(this,64)"></textarea>
                     <p class="font-left"><span id="wordCheck">256</span> characters left</p>
                 </div>
             </div>
@@ -687,7 +687,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210511"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210513"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -695,7 +695,7 @@
             var dataId = GetUrlParam("dataId");
             savedataId = dataId;
             var name = GetUrlParam("name");
-
+            name = unescape(name);
             var Notifications = GetUrlParam("Notifications");
             var trigType = GetUrlParam("trigType");
             oldTrigType = trigType;

@@ -869,3 +869,79 @@ table td {
     border-radius: 12px;
     background: #fefefe;
 }
+
+
+/*wifi列表未连接wifi详情 tips */
+
+#wifi_some_info .tips-c {
+    color: #000;
+    font-size: 16px;
+    line-height: 45px;
+    z-index: 999;
+    padding: 32px 45px 0;
+}
+
+#wifi_some_info .tip-title {
+    font-family: OpenSans;
+    font-size: 24px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.08;
+    letter-spacing: normal;
+    text-align: left;
+    color: #343434;
+    padding-bottom: 20px;
+}
+
+#wifi_some_info .-flex-dis {
+    display: flex;
+    align-items: center;
+}
+
+#wifi_some_info .tip-l {
+    display: inline-block;
+    min-width: 190px;
+    text-align: left;
+    padding-right: 20px;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.61;
+}
+
+#wifi_some_info .tip-r {
+    max-width: 300px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#wifi_some_info .layui-layer-tips {
+    left: 401px !important;
+}
+
+.layui-layer-btn a {
+    width: 131px;
+    height: 44px !important;
+    line-height: 44px !important;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.layui-layer-page .layui-layer-btn.layui-layer-btn-r {
+    padding-bottom: 30px !important;
+}
+
+
+/* tips */

@@ -99,7 +99,7 @@ function getSwitchStatus(layer, form) {
                 form.render();
                 $("#WLAN_swtich_c").show();
             } else if (res.error) {
-                layer.msg("An error occurred：" + res.error.message);
+                layer.msg(res.error.message);
                 console.log("15s获取wifi列表重新开启")
                 TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
@@ -186,7 +186,7 @@ function changeSwitchStatus(layer, form, checked) {
                 }
             } else if (res.error) {
                 layer.msg("An error occurred：" + res.error.message);
-                if (mode == 0) {
+                if (mode == 0) { //mode == 0没有关闭成功，所以开关还是打开的，需要轮询更新
                     console.log("15s获取wifi列表重新开启")
                     TimerPollingWifiList(); //开启每隔15s获取wifi列表
                 }
@@ -397,7 +397,7 @@ function renderWifiList(json) {
             } else {
                 savedStr = "Encrypted";
             }
-            str += '<tr class="tip-dom" id="wifi_tips' + j + '"><td class="col-md-8 wifi"><div class="wifi-name">' + json[j].ssid + '</div><div class=" c9 Connected-24GHz" style="padding-left:0">' + savedStr + '</div></td><td><div class="col-md-2"><img class="wifi-icon" src="images/' + wifiImg + '"></div></td><td></td><td class="wifi-info"  style="display:none"><span class="save-wifi-info" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '"></span></td></tr>'
+            str += '<tr class="tip-dom" id="wifi_tips' + j + '"><td class="col-md-8 wifi"><div class="wifi-name">' + json[j].ssid + '</div><div class=" c9 Connected-24GHz" style="padding-left:0">' + savedStr + '</div></td><td><div class="col-md-2"><img class="wifi-icon" src="images/' + wifiImg + '"></div></td><td style="padding-left: 0;"><div class="col-md-2 wireless wifi-infoIcon"><img src="images/icon-info.png" style="display: inline-block;margin-left:3px;margin-top:5px;"></div></td><td class="wifi-info"  style="display:none"><span class="save-wifi-info" bssid="' + json[j].bssid + '" encrypt="' + json[j].encrypt + '" freq="' + json[j].freq + '" is_connected="' + json[j].is_connected + '" is_saved="' + json[j].is_saved + '" rssi="' + json[j].rssi + '" ssid="' + json[j].ssid + '"></span></td></tr>'
         }
     }
     str += '<tr><td colspan="3" class="add-Available-networks"><div class="col-md-2" style="padding-left:0"><img src="images/icon-add.png" style="display: inline-block;"></div><div class="col-md-10"><span style="display: inline-block;margin-top:3px;margin-left:-10px;" class="addN">Add network</span></div></td></tr></table>';
@@ -409,31 +409,58 @@ function renderWifiList(json) {
 function bindEvent() {
 
 
-    $('.Rectangle-1205 .wifi-table .tip-dom').hover(function() {
-        var infoHtml = $(this).children(".wifi-info").children("span");
+    // $('.Rectangle-1205 .wifi-table .tip-dom').hover(function() {
+    //     var infoHtml = $(this).children(".wifi-info").children("span");
+    //     var ssid = infoHtml.attr("ssid");
+    //     var freq = infoHtml.attr("freq");
+    //     var bssid = infoHtml.attr("bssid");
+    //     var encrypt = infoHtml.attr("encrypt");
+    //     var tipId = $(this).attr("id");
+
+    //     if (2400 < freq && freq < 2900) {
+    //         freq = "2.4GHz"
+    //     } else if (5030 < freq && freq < 5900) {
+    //         freq = "5GHz"
+    //     }
+    //     var tipStr = '<div class="tips-c"><div class="-flex-dis"><span class="tip-l">Ssid:</span><span class="tip-r">' + ssid + '</span></div><div class="-flex-dis"><span class="tip-l">Frequency band:</span><span class="tip-r">' + freq + '</span></div><div class="-flex-dis"><span class="tip-l">Security:</span><span class="tip-r">' + encrypt + '</span></div><div class="-flex-dis"><span class="tip-l">MAC address:</span><span class="tip-r">' + bssid + '</span></div></div>'
+    //     layui.use('layer', function() {
+    //         var layer = layui.layer;
+    //         tipIndex = layer.tips(tipStr, "#" + tipId, {
+    //             area: ['auto', 'auto'],
+    //             time: 0,
+    //             tips: [1, "#f9f9f9"]
+    //         });
+    //     });
+    // }, function() {
+    //     layer.close(tipIndex)
+    // });
+
+    $(".wifi-infoIcon").on('click', function() {
+        var infoHtml = $(this).parents("tr").children(".wifi-info").children("span");
         var ssid = infoHtml.attr("ssid");
         var freq = infoHtml.attr("freq");
         var bssid = infoHtml.attr("bssid");
         var encrypt = infoHtml.attr("encrypt");
-        var tipId = $(this).attr("id");
+
+        var signal = infoHtml.attr("rssi");
+        signal = Math.abs(signal);
+        console.log(signal)
+        if (signal < 70) {
+            console.log(11)
+            signal = "Good";
+        } else if (signal >= 70) {
+            console.log(22)
+            signal = "Weak";
+        }
 
         if (2400 < freq && freq < 2900) {
             freq = "2.4GHz"
         } else if (5030 < freq && freq < 5900) {
             freq = "5GHz"
         }
-        var tipStr = '<div class="tips-c"><div class="-flex-dis"><span class="tip-l">Ssid:</span><span class="tip-r">' + ssid + '</span></div><div class="-flex-dis"><span class="tip-l">Frequency band:</span><span class="tip-r">' + freq + '</span></div><div class="-flex-dis"><span class="tip-l">Security:</span><span class="tip-r">' + encrypt + '</span></div><div class="-flex-dis"><span class="tip-l">MAC address:</span><span class="tip-r">' + bssid + '</span></div></div>'
-        layui.use('layer', function() {
-            var layer = layui.layer;
-            tipIndex = layer.tips(tipStr, "#" + tipId, {
-                area: ['auto', 'auto'],
-                time: 0,
-                tips: [1, "#f9f9f9"]
-            });
-        });
-    }, function() {
-        layer.close(tipIndex)
-    });
+        var tipStr = '<div class="tips-c"><div class="tip-title">' + ssid + '</div><div class="-flex-dis"><span class="tip-l">Signal strength:</span><span class="tip-r">' + signal + '</span></div><div class="-flex-dis"><span class="tip-l">Frequency band:</span><span class="tip-r">' + freq + '</span></div><div class="-flex-dis"><span class="tip-l">Security:</span><span class="tip-r">' + encrypt + '</span></div><div class="-flex-dis"><span class="tip-l">MAC address:</span><span class="tip-r">' + bssid + '</span></div></div>'
+        promptWifiMessage(ssid, tipStr, infoHtml);
+    })
 
 
 
@@ -453,6 +480,29 @@ function bindEvent() {
         addNetworkHtml();
 
     });
+}
+
+function promptWifiMessage(title, content, infoHtml) {
+
+    layui.use(['layer'], function() {
+        var layer = layui.layer;
+        parent.layer.open({
+            type: 1,
+            id: 'wifi_some_info', //防止重复弹出   
+            title: false,
+            area: ['512px', '350px'],
+            content: content,
+            btn: 'Connect',
+            btnAlign: 'r', //按钮居中 
+            closeBtn: 1,
+            shade: [0.4, '#000'], //不显示遮罩                            
+            yes: function(index) {
+                parent.layer.close(index);
+                $("#saved_id").attr("passwordIncorrect", "");
+                enterPasswordHtml(infoHtml);
+            }
+        });
+    })
 }
 //新增wifi并连接
 function addNetworkHtml() {
@@ -762,13 +812,20 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
                     }
 
                 }
-            } else if (res.error && res.error.message == "WLAN DEVICE NOT READY") {
+            } else if (res.error) {
                 clearInterval(timer);
-                layui.use(['form', 'layer'], function() {
-                    var form = layui.form;
-                    var layer = layui.layer;
-                    getSwitchStatus(layer, form);
-                });
+                if (res.error.message == "WLAN DEVICE NOT READY") {
+                    layui.use(['form', 'layer'], function() {
+                        var form = layui.form;
+                        var layer = layui.layer;
+                        getSwitchStatus(layer, form);
+                    });
+                } else {
+                    var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.error.message + '</div>';
+                    promptMessage("Error message", tip, fn);
+                    console.log("15s获取wifi列表重新开启")
+                    TimerPollingWifiList(); //开启每隔15s获取wifi列表
+                }
             }
         },
         // complete: function(XMLHttpRequest, status) { //请求完成后最终执行参数       
@@ -807,6 +864,8 @@ function pollingWifiStatus(infoDOM, type, newWifi) {
         }
     });
 }
+//空函数，防止弹框跳首页
+function fn() {};
 //已经保存的WiFi直接连接
 function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
     var loading = layer.load(0, {

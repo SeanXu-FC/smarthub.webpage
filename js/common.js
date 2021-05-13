@@ -58,7 +58,10 @@ function WidthCheckIO(str, maxLen) {
 function WidthCheckPassword(str, maxLen) {
     var w = 0;
     var tempCount = 0;
-    str.value = str.value.replace(/[^"!#$% &'()*+,-.:;<=>{~|^\\}`\x5B\x5D_?@/A-Za-z0-9]/g, ''); //不能放正则里的特殊字符可以用16进制代替，比如\x5B\x5D为[]
+    if (str) {
+        str.value = str.value.replace(/[^"!#$% &'()*+,-.:;<=>{~|^\\}`\x5B\x5D_?@/A-Za-z0-9]/g, ''); //不能放正则里的特殊字符可以用16进制代替，比如\x5B\x5D为[]
+
+    }
 
     //length 获取字数数
     for (var i = 0; i < str.value.length; i++) {
@@ -118,6 +121,34 @@ function promptMessage(title, content, fn) {
             shade: 0, //不显示遮罩                            
             yes: function(index) {
                 layer.close(index);
+                if (fn) {
+                    fn();
+                } else {
+                    var domain = window.location.host;
+                    top.location.href = ('https:' == document.location.protocol ? 'https://' :
+                        'http://') + domain;
+                }
+
+            }
+        });
+    })
+}
+
+function parentPromptMessage(title, content, fn) {
+    layui.use(['layer'], function() {
+        var layer = layui.layer;
+        parent.layer.open({
+            type: 1,
+            id: 'layerDemo1', //防止重复弹出   
+            title: title,
+            content: content,
+            area: ['421px', 'auto'],
+            btn: 'close',
+            btnAlign: 'c', //按钮居中 
+            closeBtn: 0,
+            hade: [0.8, '#000'], //显示遮罩                            
+            yes: function(index) {
+                parent.layer.close(index);
                 if (fn) {
                     fn();
                 } else {
