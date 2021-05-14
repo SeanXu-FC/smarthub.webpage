@@ -391,8 +391,8 @@
     <script src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/common.js?mv=20210330"></script>
     <script>
-        var powerData;
-        var frequency = 0;
+        var powerData,
+            frequency = 0;
         $(function() {
             layui.use(['layer', 'form'], function() {
                 var layer = layui.layer;
@@ -409,7 +409,7 @@
                             "opacity": "0.5"
                         });
                     } else {
-                        getMonitoringData(layer, loading);
+                        renderHtml(layer, loading)
                     }
                 });
             });
@@ -453,6 +453,91 @@
                             $("#LAN_signal").prop("checked", false);
                         }
                     }
+                    if (res.result && res.result.io_date) {
+                        var json = res.result.io_date;
+                        for (var i = 0; i < json.length; i++) {
+                            if (i < 4) {
+                                $("#input_channels" + i).attr("title", json[i].name)
+                                if (json[i].status == 1) {
+                                    $("#input_channels" + i).prop("disabled", false);
+                                    if (json[i].types != 0) {
+                                        if (json[i].wake_func == 1) {
+                                            $("#input_channels" + i).prop("checked", true);
+                                        } else {
+                                            $("#input_channels" + i).prop("checked", false);
+                                        }
+                                    }
+                                } else {
+                                    $("#input_channels" + i).prop("disabled", true);
+                                    $("#input_channels" + i).prop("checked", false);
+                                }
+
+                            } else {
+                                $("#Output_channels" + i).attr("title", json[i].name);
+                                if (json[i].status == 1) {
+                                    $("#Output_channels" + i).prop("disabled", false);
+                                    if (json[i].wake_func == 1) {
+                                        $("#Output_channels" + i).prop("checked", true);
+                                    } else {
+                                        $("#Output_channels" + i).prop("checked", false);
+                                    }
+                                } else {
+                                    $("#Output_channels" + i).prop("disabled", true);
+                                    $("#Output_channels" + i).prop("checked", false);
+                                }
+
+                            }
+
+                        }
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render();
+                        });
+                    } else if (res.error) {
+                        layui.use(['form', 'layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg("An error occurred：" + res.error.message);
+                        })
+                    }
+
+                },
+                error: function(jqXHR) {
+                    console.log("Error message", JSON.stringify(jqXHR));
+                    frequency++;
+                    if (frequency < 3) {
+                        setTimeout(() => {
+                            getMonitoringData(layer, loading);
+                        }, 5000);
+                    } else {
+                        frequency = 0;
+                        layer.close(loading);
+                        var tip =
+                            '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                        promptMessage("Error message", tip);
+                    }
+                }
+            })
+        }
+
+        function renderHtml(layer, loading) {
+            var data = {
+                "jsonrpc": "2.0",
+                "method": "IoConfigure",
+                "params": {
+                    "mode": "0",
+                },
+                "id": "9.1"
+            }
+            data = JSON.stringify(data);
+            $.ajax({
+                type: "post",
+                url: "/action/action",
+                data: data,
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                success: function(res) {
+                    layer.close(loading);
+                    powerData = res.result;
 
                     if (res.result && res.result.io_date) {
                         var json = res.result.io_date;
