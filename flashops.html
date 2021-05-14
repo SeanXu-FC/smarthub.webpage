@@ -10,7 +10,7 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <title>OpenWrt - Flashing...</title>
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210513" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210514" />
     <style>
         .Software-upgrade {
             font-family: OpenSans;
@@ -140,7 +140,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="layui/layui.js " charset="utf-8 "></script>
 <script src="js/jquery.myProgress.js"></script>
-<script type="text/javascript" src="js/common.js?mv=20210513"></script>
+<script type="text/javascript" src="js/common.js?mv=20210514"></script>
 
 <script type="text/javascript">
     var interval = null,
@@ -218,7 +218,7 @@
             return4Getstatus(layer, 1000 * 60 * 5); //清除进度条轮询定时器，5分钟后再开启
         } else if (data.status == "8") { //重置中
             $(".progress-time").show();
-            if (timeRemainingStatus == 5) {
+            if (timeRemainingStatus == 8) {
                 $(".progress-time").text("Please restart manually")
             }
             timeRemainingStatus = data.status;

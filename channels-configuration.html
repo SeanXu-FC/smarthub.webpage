@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210513" rel="stylesheet" />
+    <link href="css/style.css?mv=20210514" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -156,6 +156,18 @@
         .layui-layer-btn a.layui-layer-btn0 {
             color: #fff;
         }
+        
+        .disabled-status {
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: left;
+            color: #909090;
+        }
     </style>
 </head>
 
@@ -178,7 +190,7 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="5">
                     <p class="lan-h Bilge-pump" id="name5">--</p>
                     <p class="mt-10 Channel">Channel 5 </p>
-                    <!-- <p class="mt-10 Digital-input" id="type5">--</p> -->
+                    <p class="mt-10 disabled-status" id="type5"></p>
                     <span class="lan-edit Edit edit-first "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -195,7 +207,7 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="6">
                     <p class="lan-h Bilge-pump" id="name6">--</p>
                     <p class="mt-10 Channel">Channel 6 </p>
-                    <!-- <p class="mt-10 Digital-input" id="type6">--</p> -->
+                    <p class="mt-10 disabled-status" id="type6"></p>
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -211,7 +223,7 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="7">
                     <p class="lan-h Bilge-pump" id="name7">--</p>
                     <p class="mt-10 Channel">Channel 7 </p>
-                    <!-- <p class="mt-10 Digital-input" id="type7">--</p> -->
+                    <p class="mt-10 disabled-status" id="type7"></p>
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
@@ -227,14 +239,14 @@
                 <div class="mt-20 Rectangle-1234 outputsEdit" dataId="8">
                     <p class="lan-h Bilge-pump" id="name8">--</p>
                     <p class="mt-10 Channel">Channel 8 </p>
-                    <!-- <p class="mt-10 Digital-input" id="type8">--</p> -->
+                    <p class="mt-10 disabled-status" id="type8"></p>
                     <span class="lan-edit Edit "><a href="#">Edit</a></span>
                 </div>
             </div>
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210513"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210514"></script>
     <script>
         var frequency = 0;
         $(function() {
@@ -252,6 +264,7 @@
                 var dataId = $(this).attr("dataId");
                 var types = $(this).children(".Bilge-pump").attr("types");
                 var alertID = $(this).children(".Bilge-pump").attr("alertID");
+                var status = $(this).children(".Bilge-pump").attr("status");
                 //iframe层
                 parent.layer.open({
                     type: 2,
@@ -261,7 +274,8 @@
                     shade: 0.8,
                     area: ['761px', '440px'],
                     content: ['editInput.html?ChannelID=' + dataId + '&name=' + name +
-                        '&types=' + types + '&alertid=' + alertID, 'no'
+                        '&types=' + types + '&alertid=' + alertID + '&status=' + status,
+                        'no'
                     ],
                     end: function() {
                         var ChannelID = $("#saved_id").val();
@@ -279,6 +293,7 @@
                 var types = $(this).children(".Bilge-pump").attr("types");
                 var dataId = $(this).attr("dataId");
                 var alertID = $(this).children(".Bilge-pump").attr("alertID");
+                var status = $(this).children(".Bilge-pump").attr("status");
                 //iframe层
                 parent.layer.open({
                     type: 2,
@@ -288,7 +303,8 @@
                     shade: 0.8,
                     area: ['761px', '365px'],
                     content: ['editOutput.html?ChannelID=' + dataId + '&name=' + name +
-                        '&types=' + types + '&alertid=' + alertID, 'no'
+                        '&types=' + types + '&alertid=' + alertID + '&status=' + status,
+                        'no'
                     ],
                     end: function() {
                         var ChannelID = $("#saved_id").val();
@@ -326,20 +342,29 @@
                             $("#name" + (i + 1)).text(json[i].name);
                             $("#name" + (i + 1)).attr("types", json[i].types)
                             $("#name" + (i + 1)).attr("alertID", json[i].alter_id)
+                            $("#name" + (i + 1)).attr("status", json[i].status);
                             if (i < 4) {
-                                if (json[i].types == 0) {
-                                    $("#type" + (i + 1)).text("Analog input");
-                                } else if (json[i].types == 2) {
-                                    $("#type" + (i + 1)).text("Digital negative input");
+                                if (json[i].status == 1) {
+
+                                    if (json[i].types == 0) {
+                                        $("#type" + (i + 1)).text("Analog input");
+                                    } else if (json[i].types == 2) {
+                                        $("#type" + (i + 1)).text("Digital negative input");
+                                    } else {
+                                        $("#type" + (i + 1)).text("Digital postive input");
+                                    }
                                 } else {
-                                    $("#type" + (i + 1)).text("Digital postive input");
+                                    $("#type" + (i + 1)).text("DISABLED");
+                                    $("#type" + (i + 1)).removeClass("Digital-input").addClass(
+                                        "disabled-status")
                                 }
+
                             } else {
-                                // if (json[i].types == 0) {
-                                //     $("#type" + (i + 1)).text("Active low output");
-                                // } else if (json[i].types == 1) {
-                                //     $("#type" + (i + 1)).text("Active high output");
-                                // }
+                                if (json[i].status == 0) {
+                                    $("#type" + (i + 1)).text("DISABLED");
+                                } else {
+                                    $("#type" + (i + 1)).text("");
+                                }
                             }
                         }
                         layui.use(['form'], function() {

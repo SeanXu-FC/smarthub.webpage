@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210513" rel="stylesheet" />
+    <link href="css/style.css?mv=20210514" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -227,6 +227,18 @@
         .layui-layer-btn a.layui-layer-btn0 {
             color: #fff;
         }
+        
+        .disabled-status {
+            font-family: OpenSans;
+            font-size: 16px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 2.55;
+            letter-spacing: normal;
+            text-align: left;
+            color: #909090;
+        }
     </style>
 </head>
 
@@ -248,7 +260,7 @@
                 <div class="mt-20 Rectangle-1234" style="position:relative">
                     <p class="lan-h Bilge-pump" id="name5">--</p>
                     <p class="mt-10 Channel">Channel 5 </p>
-                    <!-- <p class="HIGH-LEVEL" id="LEVEL5">-- LEVEL</p> -->
+                    <span class="disabled-status" id="LEVEL5"></span>
                     <div class="layui-form layui-form-pane layui-form-item aa">
                         <div class="layui-input-block channels-switch">
                             <input id="Switch5" type="checkbox" name="5" lay-skin="switch" lay-text="ON|OFF" checked>
@@ -269,7 +281,7 @@
                 <div class="mt-20 Rectangle-1234" style="position:relative">
                     <p class="lan-h Bilge-pump" id="name6"></p>
                     <p class="mt-10 Channel">Channel 6 </p>
-                    <!-- <p class="HIGH-LEVEL" id="LEVEL6">-- LEVEL</p> -->
+                    <span class="disabled-status" id="LEVEL6"></span>
                     <div class="layui-form layui-form-pane layui-form-item aa">
                         <div class="layui-input-block channels-switch">
                             <input id="Switch6" type="checkbox" name="6" lay-skin="switch" lay-text="ON|OFF">
@@ -289,7 +301,7 @@
                 <div class="mt-20 Rectangle-1234" style="position:relative">
                     <p class="lan-h Bilge-pump" id="name7"></p>
                     <p class="mt-10 Channel">Channel 7 </p>
-                    <!-- <p class="HIGH-LEVEL" id="LEVEL7">-- LEVEL</p> -->
+                    <span class="disabled-status" id="LEVEL7"></span>
                     <div class="layui-form layui-form-pane layui-form-item aa">
                         <div class="layui-input-block channels-switch">
                             <input id="Switch7" type="checkbox" name="7" lay-skin="switch" lay-text="ON|OFF">
@@ -309,7 +321,8 @@
                 <div class="mt-20 Rectangle-1234" style="position:relative">
                     <p class="lan-h Bilge-pump" id="name8"></p>
                     <p class="mt-10 Channel">Channel 8 </p>
-                    <!-- <p class="HIGH-LEVEL" id="LEVEL8">-- LEVEL</p> -->
+
+                    <span class="disabled-status" id="LEVEL8"></span>
                     <div class="layui-form layui-form-pane layui-form-item aa" lay-filter="Switch8">
                         <div class="layui-input-block channels-switch">
                             <input id="Switch8" type="checkbox" name="8" lay-skin="switch" lay-text="ON|OFF" checked>
@@ -320,7 +333,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210513"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210514"></script>
     <script>
         var timer = null;
         var frequency = 0;
@@ -375,31 +388,47 @@
                         for (var i = 0; i < json.length; i++) {
                             $("#name" + (i + 1)).text(json[i].name)
                             if (i < 4) {
-                                if (json[i].volt == -1) {
-                                    $("#Voltage" + (i + 1)).text("ACTIVE");
-                                    $("#Voltage" + (i + 1)).removeClass("active-color")
-                                    $("#Voltage" + (i + 1)).addClass("Voltage-text active-color");
-                                } else if (json[i].volt == -2) {
-                                    $("#Voltage" + (i + 1)).text("INACTIVE");
-                                    $("#Voltage" + (i + 1)).removeClass("active-color")
-                                    $("#Voltage" + (i + 1)).addClass("Voltage-text");
-                                } else if (json[i].volt == -3) {
-                                    $("#Voltage" + (i + 1)).text("UNKNOWN");
-                                    $("#Voltage" + (i + 1)).removeClass("active-color")
-                                    $("#Voltage" + (i + 1)).addClass("Voltage-text");
+                                if (json[i].status == 1) {
+                                    if (json[i].volt == -1) {
+                                        $("#Voltage" + (i + 1)).text("ACTIVE");
+                                        $("#Voltage" + (i + 1)).removeClass("active-color")
+                                        $("#Voltage" + (i + 1)).addClass("Voltage-text active-color");
+                                    } else if (json[i].volt == -2) {
+                                        $("#Voltage" + (i + 1)).text("INACTIVE");
+                                        $("#Voltage" + (i + 1)).removeClass("active-color")
+                                        $("#Voltage" + (i + 1)).addClass("Voltage-text");
+                                    } else if (json[i].volt == -3) {
+                                        $("#Voltage" + (i + 1)).text("UNKNOWN");
+                                        $("#Voltage" + (i + 1)).removeClass("active-color")
+                                        $("#Voltage" + (i + 1)).addClass("Voltage-text");
+                                    } else {
+                                        $("#Voltage" + (i + 1)).text(json[i].volt + "v");
+                                        $("#Voltage" + (i + 1)).removeClass("active-color")
+                                        $("#Voltage" + (i + 1)).removeClass("Voltage-text")
+                                    }
                                 } else {
-                                    $("#Voltage" + (i + 1)).text(json[i].volt + "v");
+                                    $("#Voltage" + (i + 1)).text("DISABLED");
                                     $("#Voltage" + (i + 1)).removeClass("active-color")
                                     $("#Voltage" + (i + 1)).removeClass("Voltage-text")
+                                    $("#Voltage" + (i + 1)).addClass("disabled-status");
                                 }
+
                             } else {
-                                if (json[i].types != 0) {
-                                    $("#LEVEL" + (i + 1)).text("HIGH LEVEL");
-                                    $("#Switch" + (i + 1)).attr("checked", "checked")
+                                if (json[i].status == 1) {
+                                    $("#LEVEL" + (i + 1)).text("");
+                                    if (json[i].types != 0) {
+
+                                        $("#Switch" + (i + 1)).attr("checked", "checked")
+                                    } else {
+
+                                        $("#Switch" + (i + 1)).removeAttr("checked")
+                                    }
                                 } else {
-                                    $("#LEVEL" + (i + 1)).text("LOW LEVEL");
                                     $("#Switch" + (i + 1)).removeAttr("checked")
+                                    $("#Switch" + (i + 1)).prop("disabled", true)
+                                    $("#LEVEL" + (i + 1)).text("DISABLED");
                                 }
+
                             }
                         }
                         form.render("checkbox");

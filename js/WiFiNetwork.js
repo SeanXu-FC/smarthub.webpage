@@ -672,7 +672,6 @@ function forgetWifiHtml(infoHtml) {
 function enterPasswordHtml(infoHtml) {
     clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
     var ssid = infoHtml.attr("ssid");
-    ssid = escape(ssid);
     var bssid = infoHtml.attr("bssid");
     var encrypt = infoHtml.attr("encrypt");
     var is_saved = infoHtml.attr("is_saved");
@@ -685,7 +684,8 @@ function enterPasswordHtml(infoHtml) {
         return;
     }
     console.log("ssid", ssid)
-        //iframe层
+    ssid = escape(ssid);
+    //iframe层
     parent.layer.open({
         type: 2,
         title: false,

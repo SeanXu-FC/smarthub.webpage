@@ -9,10 +9,8 @@
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210513" rel="stylesheet" />
+    <link href="css/style.css?mv=20210514" rel="stylesheet" />
 
     <title>Document</title>
     <style>
@@ -498,6 +496,16 @@
             justify-content: flex-end;
             margin-right: 23px;
         }
+        
+        .Enable-checked {
+            padding-left: 16px;
+            justify-content: flex-start;
+        }
+        
+        .Enable-name {
+            padding-top: 4px;
+            padding-left: 10px;
+        }
     </style>
 </head>
 
@@ -505,6 +513,11 @@
     <div class="container wirelessInfo form-inline" id="wirelessInfo">
         <div class="layui-form">
             <div class="Edit-input">Edit input</div>
+            <div class="Enable-checked -flex-display -align-box mt-20">
+                <input id="Enable_checked" type="checkbox" name="Enable_checked" lay-skin="primary" lay-filter="switchTest" class="Rectangle-1233">
+                <span class="Channel-number Enable-name">
+                    Enable</span>
+            </div>
             <div class="layui-form-item mt-20">
                 <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Channel
                     number:</label>
@@ -553,12 +566,15 @@
             </div> -->
             <!-- <div class="layui-form-item mt-20">
                 <div>
-                    <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Wake function:</label>
-                    <label class="Enable-if-you-want-this-input-to-wake-the-SmartHub Enable-if-you-want-this-input-to-wake-the-SmartHub" style="text-indent: 15px;margin-top: 10px;">Enable if you want this input to wake the SmartHub</label>
+                    <label class="layui-form-label Status Enable-if-you-want-this-input-to-wake-the-SmartHub Channel-number">Wake
+                        function:</label>
+                    <label class="Enable-if-you-want-this-input-to-wake-the-SmartHub Enable-if-you-want-this-input-to-wake-the-SmartHub" style="text-indent: 15px;margin-top: 10px;">Enable if you want this input to wake the
+                        SmartHub</label>
                 </div>
 
                 <div class="layui-input-block" style="margin-top:-34px;margin-left: 381px;">
-                    <input type="checkbox" name="like1[write]" lay-skin="primary" title="" checked="" class="Rectangle-1233">
+                    <input type="checkbox" name="open" lay-skin="primary" lay-filter="switchTest" class="Rectangle-1233">
+                    <input id="Notifications" type="checkbox" name="open" lay-skin="primary" lay-filter="switchTest">
                 </div>
             </div> -->
 
@@ -570,17 +586,21 @@
 
 
     </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210513"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210514"></script>
     <script>
         var saveChannelID;
         $(function() {
             var name = GetUrlParam("name");
             name = unescape(name);
-            console.log("name", name)
+
             var ChannelID = GetUrlParam("ChannelID");
             var types = GetUrlParam("types");
             var alertid = GetUrlParam("alertid");
+            var status = GetUrlParam("status");
+            console.log("status", status)
             saveChannelID = ChannelID;
             $("#channel-number").text(ChannelID)
             $("#type_select option[value='" + types + "']").prop("selected", true);
@@ -589,8 +609,18 @@
             $("#btn").on("click", function() {
                 var name = $(".name-input").val();
                 saveData(name, ChannelID)
-
             })
+
+            layui.use(['form', 'layer'], function() {
+                var layer = layui.layer;
+                var form = layui.form;
+                if (status == 1) {
+                    $("#Enable_checked").attr("checked", "checked");
+                } else {
+                    $("#Enable_checked").removeAttr("checked");
+                }
+                form.render();
+            });
 
         });
 
@@ -608,10 +638,7 @@
 
         //保存数据
         function saveData(name, ChannelID) {
-            //var alertId = Number($("#alert_ID").val());
-            // if (alertId < 1000 || alertId > 65000) {
-            //     return;
-            // }
+            var Enable_checked = $("#Enable_checked").is(":checked") == true ? 1 : 0;
             var data = {
                 "jsonrpc": "2.0",
                 "method": "IoConfigure",
@@ -620,7 +647,8 @@
                     "id": Number(ChannelID),
                     "name": name,
                     "types": Number($("#type_select").val()),
-                    //"alter_id": Number($("#alert_ID").val())
+                    "status": Enable_checked
+                        //"alter_id": Number($("#alert_ID").val())
                 },
                 "id": "9.1"
             }

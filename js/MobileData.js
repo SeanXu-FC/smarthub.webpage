@@ -152,7 +152,7 @@ function lockSimPinTip(checked) {
         closeBtn: 0,
         //shadeClose: true,
         shade: 0.8,
-        area: ['400px', '320px'],
+        area: ['400px', '350px'],
         content: ['lockSimPin.html?SIM=' + currentSIM + '&type=' + type + '&times=' + times, 'no'],
         end: function(index, layero) {
             var unlockSIM = $("#unlockSIM").val();
@@ -163,6 +163,7 @@ function lockSimPinTip(checked) {
                     getMainParameters(layer, form);
                 })
             } else {
+                console.log("currentSIM", currentSIM)
                 if (MobileData[(currentSIM - 1)].pin_lock == 0) {
                     $("#SIM_pin_lock" + currentSIM + " input").prop("checked", false);
                     $("#Change_SIM_pin" + currentSIM).attr("disabled", "disabled");
@@ -190,7 +191,7 @@ function initBindEvent(id) {
             closeBtn: 0,
             //shadeClose: true,
             shade: 0.8,
-            area: ['400px', '415px'],
+            area: ['400px', '440px'],
             content: ['changeSimPin.html?SIM=' + currentSIM, 'no'],
             end: function(index, layero) {
                 var unlockSIM = $("#unlockSIM").val();
@@ -218,7 +219,7 @@ function bindUnblockEvent(id) {
             closeBtn: 0,
             //shadeClose: true,
             shade: 0.8,
-            area: ['400px', '510px'],
+            area: ['400px', '550px'],
             content: ['unblockSIM.html?SIM=' + currentSIM + '&times=' + times, 'no'],
             end: function(index, layero) {
                 var unlockSIM = $("#unlockSIM").val();
@@ -380,7 +381,6 @@ function renderDataUsage(json, i) {
         if (json[i].provider) {
             $("#SIM_provider2").text("(" + json[i].provider + ")");
         }
-
         if (json[i].isblock == 1) {
             $(".content2 .content2-contianer").hide();
             $(".sim-block-c2").show();

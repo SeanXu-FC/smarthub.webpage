@@ -312,10 +312,10 @@
                     <div id="d2">
                         <div class="layui-form layui-form-pane -flex-display" style="margin-top:12px">
                             <div class="layui-input-block pt-5" id="low_power">
-                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="1" title="Always on">
+                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="2" title="Always on">
                                 <p class="right-describe">
                                 </p>
-                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="0" title="Low power mode">
+                                <input type="radio" lay-filter="activeSIM" name="activeSIM" value="1" title="Low power mode">
                                 <p class="right-describe">Router will run in a low power state and will wake on LTE and alert notifications
                                 </p>
                             </div>
@@ -404,14 +404,12 @@
                 form.on('radio(activeSIM)', function(data) {
                     var value = data.value;
                     console.log(value);
-                    if (value == 1) {
+                    if (value == 2) {
                         checkedRadioDisabled(true, {
                             "opacity": "0.5"
                         });
                     } else {
-                        checkedRadioDisabled(false, {
-                            "opacity": "1"
-                        });
+                        getMonitoringData(layer, loading);
                     }
                 });
             });
@@ -441,13 +439,19 @@
                     layer.close(loading);
                     powerData = res.result;
                     $('input[name="activeSIM"]').prop("checked", false);
-                    if (res.result.LowPowerMode == 1) {
+                    if (res.result.LowPowerMode == 2) {
                         $('input[name="activeSIM"]').eq(0).prop("checked", true);
                         checkedRadioDisabled(true, {
                             "opacity": "0.5"
                         });
                     } else {
                         $('input[name="activeSIM"]').eq(1).prop("checked", true);
+                        $("#LAN_signal").prop("disabled", false);
+                        if (res.result.LowPowerMode == 1) {
+                            $("#LAN_signal").prop("checked", true);
+                        } else {
+                            $("#LAN_signal").prop("checked", false);
+                        }
                     }
 
                     if (res.result && res.result.io_date) {
@@ -455,10 +459,33 @@
                         for (var i = 0; i < json.length; i++) {
                             if (i < 4) {
                                 $("#input_channels" + i).attr("title", json[i].name)
+                                if (json[i].status == 1) {
+                                    $("#input_channels" + i).prop("disabled", false);
+                                    if (json[i].types != 0) {
+                                        if (json[i].wake_func == 1) {
+                                            $("#input_channels" + i).prop("checked", true);
+                                        } else {
+                                            $("#input_channels" + i).prop("checked", false);
+                                        }
+                                    }
+                                } else {
+                                    $("#input_channels" + i).prop("disabled", true);
+                                    $("#input_channels" + i).prop("checked", false);
+                                }
 
-
-                            } else { //types！=0根据wake_func判断
+                            } else {
                                 $("#Output_channels" + i).attr("title", json[i].name);
+                                if (json[i].status == 1) {
+                                    $("#Output_channels" + i).prop("disabled", false);
+                                    if (json[i].wake_func == 1) {
+                                        $("#Output_channels" + i).prop("checked", true);
+                                    } else {
+                                        $("#Output_channels" + i).prop("checked", false);
+                                    }
+                                } else {
+                                    $("#Output_channels" + i).prop("disabled", true);
+                                    $("#Output_channels" + i).prop("checked", false);
+                                }
 
                             }
 
@@ -495,65 +522,57 @@
 
         //设置前获取各项的值
         function getSimManagementVal() {
-            var EnableLowpower = $("#AutoSim input").is(":checked") == true ? 1 : 0;
+            var params;
             var lowPower = $("input[name='activeSIM']:checked").val();
-            var wakeup_data = [];
-            var inputArr = [{
-                id: 1,
-                wake_func: 0
-            }, {
-                id: 2,
-                wake_func: 0
-            }, {
-                id: 3,
-                wake_func: 0
-            }, {
-                id: 4,
-                wake_func: 0
-            }];
-            for (var i = 0; i < inputArr.length; i++) {
-                console.log($("#input_channels" + i).val())
-                if ($("#input_channels" + i).val() == "Wake") {
-                    if (powerData.io_date[i].types == 1)
-                        inputArr[i].wake_func = 2;
-                    else if (powerData.io_date[i].types == 2)
-                        inputArr[i].wake_func = 1;
-                } else if ($("#input_channels" + i).val() == "Sleep") {
-                    if (powerData.io_date[i].types == 1)
-                        inputArr[i].wake_func = 4;
-                    else if (powerData.io_date[i].types == 2)
-                        inputArr[i].wake_func = 3;
-                } else { //没有勾选wake_func统一传0
-                    inputArr[i].wake_func = 0;
+            if (lowPower == "2") {
+                params = {
+                    "LowPowerMode": Number(lowPower),
+                    "mode": 5
                 }
-                // input_channels0 = $("#input_channels0").is(":checked") == true ? powerData.io_date[i].wake_func: 0;
-                // input_channels1 = $("#input_channels1").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
-                // input_channels2 = $("#input_channels2").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
-                // input_channels3 = $("#input_channels3").is(":checked") == true ? powerData.io_date[i].wake_func : 0;
-            }
-            var Output_channels4 = $("#Output_channels4").is(":checked") == true ? 1 : 0;
-            var Output_channels5 = $("#Output_channels5").is(":checked") == true ? 1 : 0;
-            var Output_channels6 = $("#Output_channels6").is(":checked") == true ? 1 : 0;
-            var Output_channels7 = $("#Output_channels7").is(":checked") == true ? 1 : 0;
-            var outputArr = [{
-                "id": 5,
-                "wake_func": Output_channels4
-            }, {
-                "id": 6,
-                "wake_func": Output_channels5
-            }, {
-                "id": 7,
-                "wake_func": Output_channels6
-            }, {
-                "id": 8,
-                "wake_func": Output_channels7
-            }]
-            wakeup_data = inputArr.concat(outputArr)
-            var params = {
-                "wakeup_data": wakeup_data,
-                "LowPowerMode": Number(lowPower),
-                "LowPower": Number(EnableLowpower),
-                "mode": 5
+            } else {
+                var LAN_signal = $("#LAN_signal").is(":checked") == true ? 1 : 0;
+                var wakeup_data = [];
+                var input_channels0 = $("#input_channels0").is(":checked") == true ? 1 : 0;
+                var input_channels1 = $("#input_channels1").is(":checked") == true ? 1 : 0;
+                var input_channels2 = $("#input_channels2").is(":checked") == true ? 1 : 0;
+                var input_channels3 = $("#input_channels3").is(":checked") == true ? 1 : 0;
+                var inputArr = [{
+                    id: 1,
+                    wake_func: input_channels0
+                }, {
+                    id: 2,
+                    wake_func: input_channels1
+                }, {
+                    id: 3,
+                    wake_func: input_channels2
+                }, {
+                    id: 4,
+                    wake_func: input_channels3
+                }];
+
+                var Output_channels4 = $("#Output_channels4").is(":checked") == true ? 1 : 0;
+                var Output_channels5 = $("#Output_channels5").is(":checked") == true ? 1 : 0;
+                var Output_channels6 = $("#Output_channels6").is(":checked") == true ? 1 : 0;
+                var Output_channels7 = $("#Output_channels7").is(":checked") == true ? 1 : 0;
+                var outputArr = [{
+                    "id": 5,
+                    "wake_func": Output_channels4
+                }, {
+                    "id": 6,
+                    "wake_func": Output_channels5
+                }, {
+                    "id": 7,
+                    "wake_func": Output_channels6
+                }, {
+                    "id": 8,
+                    "wake_func": Output_channels7
+                }]
+                wakeup_data = inputArr.concat(outputArr)
+                params = {
+                    "wakeup_data": wakeup_data,
+                    "LowPowerMode": Number(LAN_signal),
+                    "mode": 5
+                }
             }
 
             console.log(params)

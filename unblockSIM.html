@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210513" rel="stylesheet" />
+    <link href="css/style.css?mv=20210514" rel="stylesheet" />
     <title>Document</title>
     <style>
         * {
@@ -188,6 +188,19 @@
             background-color: #009fe3;
             color: #fff;
         }
+        
+        .len-tip {
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+            padding: 5px 0 0 14px;
+        }
     </style>
 </head>
 
@@ -209,10 +222,12 @@
         <div class="row">
             <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">PUK:</label>
             <input type="number" id="PUK_input" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
+            <p class="len-tip">PUK length must be 8 bits!</p>
         </div>
         <div class="row">
             <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">New PIN:</label>
             <input type="number" id="PIN_input" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
+            <p class="len-tip">Length must be between 4 and 8bits!</p>
         </div>
         <div class="row mt-40" style="text-align: center;">
             <button class="Path-101 Cancel" id="cancel">Cancel</button>
@@ -223,7 +238,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210513"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210514"></script>
     <script type="text/javascript">
         var SIM, times;
         $(function() {
@@ -240,13 +255,14 @@
             $('#PIN_input,#PUK_input').bind("keyup", function() {
                 var len = $('#PIN_input').val().length;
                 var len1 = $('#PUK_input').val().length;
-                if (3 <= len && 3 <= len1) {
+                if (4 <= len && len <= 8 && 8 == len1) {
                     $("#OK_btn").removeAttr("disabled");
                     $("#OK_btn").css("opacity", "1");
-
+                    $(".len-tip").hide();
                 } else {
                     $("#OK_btn").attr("disabled", "true");
                     $("#OK_btn").css("opacity", "0.5");
+                    $(".len-tip").show();
                 }
             });
 

@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210513" rel="stylesheet" />
+    <link href="css/style.css?mv=20210514" rel="stylesheet" />
     <title>Document</title>
     <style>
         * {
@@ -187,6 +187,18 @@
             background-color: #009fe3;
             color: #fff;
         }
+        
+        .len-tip {
+            font-family: OpenSans;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.61;
+            letter-spacing: normal;
+            text-align: left;
+            color: #343434;
+        }
     </style>
 </head>
 
@@ -208,6 +220,7 @@
             <label class="col-md-2 col-md-offset-2 Password mt-30" style="padding-left:0;">Confirm new PIN:</label>
             <input type="number" id="New_PIN1" value="" class="col-md-7 Rectangle-1188 pwd" autocomplete="off" />
         </div>
+        <p class="len-tip">Length must be between 4 and 8 bits!</p>
         <div class="row mt-40" style="text-align: center;">
             <button class="Path-101 Cancel" id="cancel">Cancel</button>
             <span class="connected"><button class="Rectangle-1182 active OK" id="OK_btn" disabled
@@ -217,7 +230,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210513"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210514"></script>
     <script type="text/javascript">
         var SIM;
         $(function() {
@@ -233,13 +246,15 @@
                 var len = $('#Current_PIN').val().length;
                 var len1 = $('#New_PIN').val().length;
                 var len2 = $('#New_PIN1').val().length;
-                if (3 <= len && 3 <= len1 && 3 <= len2 && $('#New_PIN').val() == $('#New_PIN1').val()) {
+                if (4 <= len && len <= 8 && 4 <= len1 && len1 <= 8 && 4 <= len2 && len2 <= 8 && $(
+                        '#New_PIN').val() == $('#New_PIN1').val()) {
                     $("#OK_btn").removeAttr("disabled");
                     $("#OK_btn").css("opacity", "1");
-
+                    $(".len-tip").hide();
                 } else {
                     $("#OK_btn").attr("disabled", "true");
                     $("#OK_btn").css("opacity", "0.5");
+                    $(".len-tip").show();
                 }
             });
 

@@ -16,12 +16,14 @@ $(function() {
 
     $('#PIN_input').bind("keyup", function() {
         var len = $('#PIN_input').val().length;
-        if (len <= 2) {
-            $("#OK_btn").attr("disabled", "true");
-            $("#OK_btn").css("opacity", "0.5");
-        } else {
+        if (4 <= len && len <= 8) {
             $("#OK_btn").removeAttr("disabled");
             $("#OK_btn").css("opacity", "1");
+            $(".len-tip").hide();
+        } else {
+            $("#OK_btn").attr("disabled", "true");
+            $("#OK_btn").css("opacity", "0.5");
+            $(".len-tip").show();
         }
     });
 
@@ -72,6 +74,7 @@ function unlockSIM(layer, params) {
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index); //关闭当前页
             } else if (res.error) {
+                $(parent.frames["my-iframe"].document).find("#unlockSIM").val("");
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.error.message + '!</div>';
                 promptMessage("Error message", tip, closeLockSim);
             } else {
