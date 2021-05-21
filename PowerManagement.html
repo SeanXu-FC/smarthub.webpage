@@ -519,7 +519,10 @@
             })
         }
 
-        function renderHtml(layer, loading) {
+        function renderHtml(layer) {
+            var loading = layer.load(0, {
+                shade: false
+            });
             var data = {
                 "jsonrpc": "2.0",
                 "method": "IoConfigure",
@@ -539,7 +542,14 @@
                     layer.close(loading);
                     powerData = res.result;
 
+                    $("#LAN_signal").prop("disabled", false);
+                    if (res.result.LowPowerMode == 1) {
+                        $("#LAN_signal").prop("checked", true);
+                    } else {
+                        $("#LAN_signal").prop("checked", false);
+                    }
                     if (res.result && res.result.io_date) {
+
                         var json = res.result.io_date;
                         for (var i = 0; i < json.length; i++) {
                             if (i < 4) {
@@ -580,6 +590,7 @@
                             form.render();
                         });
                     } else if (res.error) {
+                        layer.close(loading);
                         layui.use(['form', 'layer'], function() {
                             var layer = layui.layer;
                             layer.msg("An error occurred：" + res.error.message);

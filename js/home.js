@@ -297,6 +297,13 @@ function getHomeData(layer, loading) {
                 $('#WirelessConnections span').text('(' + json.dev.ap_num + ')');
                 $('#EthernetConnections span').text('(' + json.dev.eth_num + ')');
 
+                if (Number(json.dev.ap_num) < 1) {
+                    $('#WirelessConnections').css({ "opacity": "0.5" })
+                }
+                if (Number(json.dev.eth_num) < 1) {
+                    $('#EthernetConnections').css({ "opacity": "0.5" })
+                }
+
 
                 if (json.sta.status == 1) {
                     if (json.sta.signal);

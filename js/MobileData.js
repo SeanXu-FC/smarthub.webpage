@@ -413,11 +413,13 @@ function renderDataUsage(json, i) {
 
         if (json[i].usage_reminder_flag == 1) {
             $("#setDataLimit input").attr("checked", "checked");
+            $("#has_limit").show();
         } else {
             $("#setDataLimit input").removeAttr("checked");
             $(".data-limit-opcity").addClass("opacity5");
             $("#dataLimit input").attr("disabled", "disabled");
             $("#switchMBLim").attr("disabled", "disabled");
+            $("#has_limit").hide();
         }
         $("#switchMBLim option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
         if (json[i].sim_data_limt_unit == 0) {
@@ -503,11 +505,13 @@ function renderDataUsage(json, i) {
 
         if (json[i].usage_reminder_flag == 1) {
             $("#setDataLimit2 input").attr("checked", "checked");
+            $("#has_limit2").show();
         } else {
             $("#setDataLimit2 input").removeAttr("checked");
             $(".data-limit-opcity2").addClass("opacity5");
             $("#dataLimit2 input").attr("disabled", "disabled");
             $("#switchMBLim2").attr("disabled", "disabled");
+            $("#has_limit2").hide();
         }
         $("#switchMBLim2 option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
         if (json[i].sim_data_limt_unit == 0) {
@@ -555,7 +559,7 @@ function renderDataUsage(json, i) {
         $(".now-month1").text(Xdate[0]);
         var len2 = Xdate.length;
         $(".now-month2").text(Xdate[len2 - 1]);
-        renderEchart("used_MB", Xdate, Ydata, unit, limitNum1, unit2, waringNum1)
+        renderEchart("used_MB", Xdate, Ydata, unit, limitNum1, unit2, waringNum1, json[0].data_warning_flag, json[0].usage_reminder_flag)
     } else {
         var Xdate1 = [];
         var Ydata1 = [];
@@ -588,7 +592,7 @@ function renderDataUsage(json, i) {
         //Ydata1 = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 9001, 90002, 90002, 90002];
         //Ydata1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40];
         //Ydata1 = [];
-        renderEchart("used_MB2", Xdate1, Ydata1, unit, limitNum2, unit2, waringNum2)
+        renderEchart("used_MB2", Xdate1, Ydata1, unit, limitNum2, unit2, waringNum2, json[1].data_warning_flag, json[1].usage_reminder_flag)
     }
 
     layui.use(['form'], function() {
@@ -605,7 +609,7 @@ function renderDataUsage(json, i) {
 }
 
 // 渲染图表
-function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
+function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum, data_warning_flag, usage_reminder_flag) {
     var myChartGL = echarts.init(document.getElementById(id));
     myChartGL.clear();
     var markLineObj = null;
@@ -616,14 +620,10 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
     var differNum = (limitNum / fenmu) - (waringNum / fenmu);
     textLine = differNum > 0.1 ? '' : '\r\n'
 
+    var lineArr = [];
     if (Ydata.length > 0) {
-        markLineObj = {
-            symbol: ['none', 'none'], //['none']表示是一条横线；['arrow', 'none']表示线的左边是箭头，右边没右箭头；['none','arrow']表示线的左边没有箭头，右边有箭头
-            label: {
-                position: "end", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                //formatter: limitNum + unit + " limit"
-            },
-            data: [{
+        if (usage_reminder_flag == 1) {
+            var limitLine = {
                 name: "limit",
                 label: { formatter: limitNum + unit + " limit" + textLine },
                 silent: false, //鼠标悬停事件 true没有，false有
@@ -634,7 +634,11 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
                     width: 1 //宽度
                 },
                 yAxis: limitNum // 警戒线的标注值，可以有多个yAxis,多条警示线 或者采用 {type : 'average', name: '平均值'}，type值有 max min average，分为最大，最小，平均值
-            }, {
+            }
+            lineArr.push(limitLine);
+        }
+        if (data_warning_flag == 1) {
+            var waringLine = {
                 name: "waring",
                 label: { formatter: textLine + waringNum + unit + " waring", },
                 silent: false, //鼠标悬停事件 true没有，false有
@@ -645,7 +649,16 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum) {
                     width: 1 //宽度
                 },
                 yAxis: waringNum // 警戒线的标注值，可以有多个yAxis,多条警示线 或者采用 {type : 'average', name: '平均值'}，type值有 max min average，分为最大，最小，平均值
-            }]
+            }
+            lineArr.push(waringLine);
+        }
+        markLineObj = {
+            symbol: ['none', 'none'], //['none']表示是一条横线；['arrow', 'none']表示线的左边是箭头，右边没右箭头；['none','arrow']表示线的左边没有箭头，右边有箭头
+            label: {
+                position: "end", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                //formatter: limitNum + unit + " limit"
+            },
+            data: lineArr
         }
     }
     var optionBranchGL = {
