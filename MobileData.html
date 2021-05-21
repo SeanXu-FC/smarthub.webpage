@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210514" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210514" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210521" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210521" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -891,7 +891,7 @@
                             <div class="tab-content usage-content">
                                 <div class="content1">
                                     <div class="content1-contianer">
-                                        <table class="mt-10 table-responsive">
+                                        <table class="mt-10 table-responsive" style="width:100%;">
                                             <tr>
                                                 <td>
                                                     <div class="Mobile-data">Mobile data:</div>
@@ -989,20 +989,20 @@
 
 
                                         <h4 class="limit-subtiltle mt-30">Data warning and limit</h4>
-                                        <div class="layui-form -flex-display -align-box -justify-box mt-30">
+                                        <div class="layui-form -flex-display -justify-box mt-30">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Set data warning:</div>
                                                 <div class="The-remaining-data">
                                                     Notifications will be sent to RayConnect when the data warning has been reached
                                                 </div>
                                             </div>
-                                            <div class="layui-input-inline" id="setDataWaring" style="display:none;">
-                                                <div class="layui-input-block mt-30">
+                                            <div class="layui-input-inline" id="setDataWaring" style="display:none;line-height: 1;">
+                                                <div class="layui-input-block">
                                                     <input type="checkbox" name="open" lay-skin="primary" lay-filter="setDataWaring">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                        <div class="Data-warning-opcity -flex-display -align-box -justify-box mt-20">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Data warning:</div>
                                             </div>
@@ -1014,20 +1014,20 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="layui-form -flex-display -align-box -justify-box mt-30">
+                                        <div class="layui-form -flex-display -justify-box mt-40">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Set data limit:</div>
                                                 <div class="The-remaining-data">
                                                     Notifications will be sent to RayConnect when the data limit has been reached
                                                 </div>
                                             </div>
-                                            <div class="layui-input-inline" id="setDataLimit" style="display:none;">
-                                                <div class="layui-input-block mt-30">
+                                            <div class="layui-input-inline" id="setDataLimit" style="display:none;line-height:1">
+                                                <div class="layui-input-block">
                                                     <input type="checkbox" name="open" lay-skin="primary" lay-filter="dataLimit">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                        <div class="data-limit-opcity -flex-display -align-box -justify-box mt-20">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Data limit:</div>
                                             </div>
@@ -1083,10 +1083,10 @@
                                                 <!-- <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div> -->
                                                 <div class="div-split mb-20 mt-20"></div>
                                                 <h4 class="limit-subtiltle mt-30">SIM lock</h4>
-                                                <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 20px;">
+                                                <div class="layui-form layui-form-pane layui-form-item -flex-display -align-box" style="margin-top: 20px;">
                                                     <label class="layui-form-label SIM-pin-lock mt-0 mb-0">Lock
                                                         SIM:</label>
-                                                    <div class="layui-input-block mt-30" id="SIM_pin_lock1" style="display:none;">
+                                                    <div class="layui-input-block" id="SIM_pin_lock1" style="display:none;line-height: 1;">
                                                         <input type="checkbox" name="open" lay-skin="primary" lay-filter="SIMpin">
                                                     </div>
                                                 </div>
@@ -1109,7 +1109,7 @@
 
                                 <div class="content2">
                                     <div class="content2-contianer">
-                                        <table class="mt-10 table-responsive">
+                                        <table class="mt-10 table-responsive" style="width:100%;">
                                             <tr>
                                                 <td>
                                                     <div class="Mobile-data">Mobile data:</div>
@@ -1207,18 +1207,18 @@
                                         <div class="div-split mb-20 mt-20"></div>
 
                                         <h4 class="limit-subtiltle mt-30">Data warning and limit</h4>
-                                        <div class="layui-form -flex-display -align-box -justify-box mt-30">
+                                        <div class="layui-form -flex-display -justify-box mt-30">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Set data warning:</div>
                                                 <div class="The-remaining-data">
                                                     Notifications will be sent to RayConnect when the data warning has been reached
                                                 </div>
                                             </div>
-                                            <div class="layui-input-inline" id="setDataWaring2">
+                                            <div class="layui-input-inline" id="setDataWaring2" style="line-height: 1;">
                                                 <input type="checkbox" name="open" lay-skin="primary" lay-filter="setDataWaring2">
                                             </div>
                                         </div>
-                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                        <div class="Data-warning-opcity2 -flex-display -align-box -justify-box mt-20">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Data warning:</div>
                                             </div>
@@ -1230,20 +1230,20 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="layui-form -flex-display -align-box -justify-box mt-30">
+                                        <div class="layui-form -flex-display -justify-box mt-40">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Set data limit:</div>
                                                 <div class="The-remaining-data">
                                                     Notifications will be sent to RayConnect when the data limit has been reached
                                                 </div>
                                             </div>
-                                            <div class="layui-input-inline" id="setDataLimit2">
+                                            <div class="layui-input-inline" id="setDataLimit2" style="line-height:1">
                                                 <div class="layui-input-block pt-5">
                                                     <input type="checkbox" name="open" lay-skin="primary" lay-filter="dataLimit2">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="-flex-display -align-box -justify-box mt-30">
+                                        <div class="data-limit-opcity2 -flex-display -align-box -justify-box mt-20">
                                             <div>
                                                 <div class="Set-monthly-data-limit">Data limit:</div>
                                             </div>
@@ -1289,10 +1289,10 @@
                                                 <div style="clear:both;"></div>
                                                 <div class="div-split mb-20 mt-20"></div>
                                                 <h4 class="limit-subtiltle mt-30">SIM lock</h4>
-                                                <div class="layui-form layui-form-pane layui-form-item" style="margin-top: 20px;">
+                                                <div class="layui-form layui-form-pane layui-form-item -flex-display -align-box" style="margin-top: 20px;">
                                                     <label class="layui-form-label SIM-pin-lock mt-0 mb-0">Lock
                                                         SIM:</label>
-                                                    <div class="layui-input-block mt-30" id="SIM_pin_lock2">
+                                                    <div class="layui-input-block" id="SIM_pin_lock2" style="line-height: 1;">
                                                         <input type="checkbox" lay-skin="primary" lay-filter="SIMpin2">
                                                     </div>
                                                 </div>
@@ -1319,10 +1319,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210514"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210514"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210521"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210521"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210514"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210521"></script>
 
 </body>
 

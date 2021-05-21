@@ -77,33 +77,33 @@ function getHomeData(layer, loading) {
                 ];
                 if (json.cloud.status == "Error") {
                     $('.cloud').eq(0).text(json.cloud.status);
-                    $('.r_01').attr("src", "images/r_01_gray.png");
+                    $('.r_01').attr("src", "images/r_01_gray.png?v=20210518");
                     $('.cloud').css('color', 'red')
                 } else if (json.cloud.status == "Connected") {
                     $('.Connected').eq(0).text(json.cloud.status);
-                    $('.r_01').attr("src", "images/r_01.png");
+                    $('.r_01').attr("src", "images/r_01.png?v=20210518");
                     $('.cloud').css('color', '#26b167');
                 } else {
                     $('.Connected').eq(0).text(json.cloud.status);
-                    $('.r_01').attr("src", "images/r_01.png");
+                    $('.r_01').attr("src", "images/r_01.png?v=20210518");
                     $('.cloud').css('color', '#333');
                 }
 
                 if (json.sta.status == 0) {
                     $('.connected24').eq(0).text(arr[4]);
-                    $('.WiFiNetwork').attr("src", "images/r_03_off.png");
+                    $('.WiFiNetwork').attr("src", "images/r_03_off.png?v=20210518");
                     //$('#connected24').attr("src", "images/s_wifi_nonea.png");
                     $('.connected24').css('color', '#909090');
                     $(".imgIcon1 .ssid").text("-");
                 } else if (json.sta.status == 2) {
                     $('.connected24').eq(0).text(arr[6]);
-                    $('.WiFiNetwork').attr("src", "images/r_03_nouse.png");
+                    $('.WiFiNetwork').attr("src", "images/r_03_nouse.png?v=20210518");
                     //$('#connected24').attr("src", "images/s_wifi_nonea.png");
                     $('.connected24').css('color', '#333');
                     $(".imgIcon1 .ssid").text(json.sta.sta_ssid ? json.sta.sta_ssid : "-");
                 } else if (json.sta.status == 3) {
                     $('.connected24').eq(0).text(arr[7]);
-                    $('.WiFiNetwork').attr("src", "images/r_03_gray.png");
+                    $('.WiFiNetwork').attr("src", "images/r_03_gray.png?v=20210518");
                     //$('#connected24').attr("src", "images/s_wifi_nonea.png");
                     $('.connected24').css('color', '#ff0000');
                     $(".imgIcon1 .ssid").text(json.sta.sta_ssid ? json.sta.sta_ssid : "-");
@@ -113,7 +113,7 @@ function getHomeData(layer, loading) {
                     } else {
                         $('.connected24').eq(0).text(arr[2]);
                     }
-                    $('.WiFiNetwork').attr("src", "images/r_03.png");
+                    $('.WiFiNetwork').attr("src", "images/r_03.png?v=20210518");
                     $('.ssid').eq(0).text(json.sta.sta_ssid);
                     $('.connected24').css('color', '#26b167');
                     $(".WiFiNetwork-disable").hide();
@@ -130,7 +130,7 @@ function getHomeData(layer, loading) {
                 ];
                 if (json.mobile.active_sim == 99) {
                     $('.Connected4G').eq(0).text("Sim not insert");
-                    $(".mobiledataImg").attr("src", "images/r_04_close.png");
+                    $(".mobiledataImg").attr("src", "images/r_04_close.png?v=20210518");
                     //$('#Connected4G').attr("src", "images/mobileSignal-none.png");
                     $('.Connected4G').css('color', '#ff0000')
                     $('.NetworkProvider').eq(0).text('-');
@@ -149,7 +149,7 @@ function getHomeData(layer, loading) {
                         $("#Connected4G").hide();
                         $('.Connected4G').eq(0).text(arr[4]);
                         $('.Connected4G').css('color', '#909090')
-                        $(".mobiledataImg").attr("src", "images/r_04_close.png");
+                        $(".mobiledataImg").attr("src", "images/r_04_close.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -165,7 +165,7 @@ function getHomeData(layer, loading) {
                     } else if (json.mobile.status == 2) {
                         $('.Connected4G').eq(0).text("Connecting...");
                         $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04.png");
+                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -174,7 +174,7 @@ function getHomeData(layer, loading) {
                     } else if (json.mobile.status == 3) {
                         $('.Connected4G').eq(0).text("Switch Sim Card");
                         $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04.png");
+                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -183,7 +183,7 @@ function getHomeData(layer, loading) {
                     } else if (json.mobile.status == 4) {
                         $('.Connected4G').eq(0).text("Not in use");
                         $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04_nouse.png");
+                        $(".mobiledataImg").attr("src", "images/r_04_nouse.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -196,7 +196,7 @@ function getHomeData(layer, loading) {
                             $('.Connected4G').eq(0).text("Network unavailable(4G)");
                         }
                         $('.Connected4G').css('color', '#ff0000');
-                        $(".mobiledataImg").attr("src", "images/r_04_gray.png");
+                        $(".mobiledataImg").attr("src", "images/r_04_gray.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -209,7 +209,7 @@ function getHomeData(layer, loading) {
                             $('.Connected4G').eq(0).text("Internet unavailable(4G)");
                         }
                         $('.Connected4G').css('color', '#ff0000');
-                        $(".mobiledataImg").attr("src", "images/r_04_gray.png");
+                        $(".mobiledataImg").attr("src", "images/r_04_gray.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -222,7 +222,7 @@ function getHomeData(layer, loading) {
                             $('.Connected4G').eq(0).text("Dialing(4G)");
                         }
                         $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04.png");
+                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -231,7 +231,7 @@ function getHomeData(layer, loading) {
                     } else if (json.mobile.status == 9) {
                         $('.Connected4G').eq(0).text("SIM is blocked");
                         $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04.png");
+                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -244,7 +244,7 @@ function getHomeData(layer, loading) {
                             mobileStatus = "Connected(4G)"
                         }
                         $('.Connected4G').eq(0).text(mobileStatus);
-                        $(".mobiledataImg").attr("src", "images/r_04.png");
+                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
@@ -282,7 +282,7 @@ function getHomeData(layer, loading) {
                     $('.clg').css({
                         'color': '#909090'
                     })
-                    $('.r_06').attr("src", "images/r_06_gray.png");
+                    $('.r_06').attr("src", "images/r_06_gray.png?v=20210518");
                 } else {
                     $('.Status').eq(0).text(arr[3]);
                     $('.Name').eq(0).text(json.ap.name);
@@ -301,7 +301,6 @@ function getHomeData(layer, loading) {
                 if (json.sta.status == 1) {
                     if (json.sta.signal);
                     var signal = Math.abs(json.sta.signal);
-                    console.log("signal", signal)
                     if (100 > signal && signal >= 85) {
                         $img.eq(0).attr("src", 'images/' + WiFiSignalArr[1]);
                     } else if (85 > signal && signal >= 70) {

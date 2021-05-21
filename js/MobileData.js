@@ -58,6 +58,55 @@ $(function() {
             lockSimPinTip(checked);
 
         });
+        form.on('checkbox(setDataWaring)', function(data) {
+            var checked = data.elem.checked;
+            if (checked) {
+                $(".Data-warning-opcity").removeClass("opacity5")
+                $("#dataWaring input").removeAttr("disabled");
+                $("#switchMBWar").removeAttr("disabled");
+            } else {
+                $(".Data-warning-opcity").addClass("opacity5");
+                $("#dataWaring input").attr("disabled", "disabled");
+                $("#switchMBWar").attr("disabled", "disabled");
+            }
+        });
+        form.on('checkbox(setDataWaring2)', function(data) {
+            var checked = data.elem.checked;
+            if (checked) {
+                $(".Data-warning-opcity2").removeClass("opacity5")
+                $("#dataWaring2 input").removeAttr("disabled");
+                $("#switchMBWar2").removeAttr("disabled");
+            } else {
+                $(".Data-warning-opcity2").addClass("opacity5");
+                $("#dataWaring2 input").attr("disabled", "disabled");
+                $("#switchMBWar2").attr("disabled", "disabled");
+            }
+        });
+        form.on('checkbox(dataLimit)', function(data) {
+            var checked = data.elem.checked;
+            if (checked) {
+                $(".data-limit-opcity").removeClass("opacity5")
+                $("#dataLimit input").removeAttr("disabled");
+                $("#switchMBLim").removeAttr("disabled");
+            } else {
+                $(".data-limit-opcity").addClass("opacity5");
+                $("#dataLimit input").attr("disabled", "disabled");
+                $("#switchMBLim").attr("disabled", "disabled");
+            }
+        });
+        form.on('checkbox(dataLimit2)', function(data) {
+            var checked = data.elem.checked;
+            if (checked) {
+                $(".data-limit-opcity2").removeClass("opacity5")
+                $("#dataLimit2 input").removeAttr("disabled");
+                $("#switchMBLim2").removeAttr("disabled");
+            } else {
+                $(".data-limit-opcity2").addClass("opacity5");
+                $("#dataLimit2 input").attr("disabled", "disabled");
+                $("#switchMBLim2").attr("disabled", "disabled");
+            }
+        });
+
     })
 
     $("#btn_saved1").on("click", function() {
@@ -350,6 +399,9 @@ function renderDataUsage(json, i) {
             $("#setDataWaring input").attr("checked", "checked");
         } else {
             $("#setDataWaring input").removeAttr("checked");
+            $(".Data-warning-opcity").addClass("opacity5");
+            $("#dataWaring input").attr("disabled", "disabled");
+            $("#switchMBWar").attr("disabled", "disabled");
         }
         $("#switchMBWar option[value='" + json[i].warning_limit_unit + "']").prop("selected", true);
         if (json[i].warning_limit_unit == 0) {
@@ -363,6 +415,9 @@ function renderDataUsage(json, i) {
             $("#setDataLimit input").attr("checked", "checked");
         } else {
             $("#setDataLimit input").removeAttr("checked");
+            $(".data-limit-opcity").addClass("opacity5");
+            $("#dataLimit input").attr("disabled", "disabled");
+            $("#switchMBLim").attr("disabled", "disabled");
         }
         $("#switchMBLim option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
         if (json[i].sim_data_limt_unit == 0) {
@@ -433,6 +488,9 @@ function renderDataUsage(json, i) {
             $("#setDataWaring2 input").attr("checked", "checked");
         } else {
             $("#setDataWaring2 input").removeAttr("checked");
+            $(".Data-warning-opcity2").addClass("opacity5");
+            $("#dataWaring2 input").attr("disabled", "disabled");
+            $("#switchMBWar2").attr("disabled", "disabled");
         }
         $("#switchMBWar2 option[value='" + json[i].warning_limit_unit + "']").prop("selected", true);
         if (json[i].warning_limit_unit == 0) {
@@ -447,6 +505,9 @@ function renderDataUsage(json, i) {
             $("#setDataLimit2 input").attr("checked", "checked");
         } else {
             $("#setDataLimit2 input").removeAttr("checked");
+            $(".data-limit-opcity2").addClass("opacity5");
+            $("#dataLimit2 input").attr("disabled", "disabled");
+            $("#switchMBLim2").attr("disabled", "disabled");
         }
         $("#switchMBLim2 option[value='" + json[i].sim_data_limt_unit + "']").prop("selected", true);
         if (json[i].sim_data_limt_unit == 0) {
@@ -749,14 +810,39 @@ function getDatausageVal() {
 
 
     if (Number(dataWaring) > Number(dataLimit)) {
-        console.log(dataWaring, dataLimit)
-        layer.msg("data warning cannot be greater than data limit");
+        layer.msg("SIM1 data warning cannot be greater than data limit");
         return;
     }
     if (Number(dataWaring2) > Number(dataLimit2)) {
-        layer.msg("data warning cannot be greater than data limit");
+        layer.msg("SIM2 data warning cannot be greater than data limit");
         return;
     }
+
+    if (apn_name.length > 63) {
+        layer.msg("SIM1 APN (Access Point Name) cannot be greater than 64 bits");
+        return;
+    }
+    if (apn_name2.length > 63) {
+        layer.msg("SIM2 APN (Access Point Name) cannot be greater than 64 bits");
+        return;
+    }
+    if (apn_username.length > 63) {
+        layer.msg("SIM1 Username cannot be greater than 64 bits");
+        return;
+    }
+    if (apn_username2.length > 63) {
+        layer.msg("SIM2 Username cannot be greater than 64 bits");
+        return;
+    }
+    if (apn_password.length > 63) {
+        layer.msg("SIM1 Password cannot be greater than 64 bits");
+        return;
+    }
+    if (apn_password2.length > 63) {
+        layer.msg("SIM2 Password cannot be greater than 64 bits");
+        return;
+    }
+
 
     var params = {
         "auto_switch": autoSwitch,

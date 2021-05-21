@@ -6,6 +6,10 @@ button:disabled {
     opacity: 0.7;
 }
 
+.opacity5 {
+    opacity: 0.5 !important;
+}
+
 .mt-5 {
     margin-top: 5px
 }

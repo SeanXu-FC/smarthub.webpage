@@ -658,7 +658,7 @@
             <div class="layui-form-item layui-form-text mt-20">
                 <label class=" layui-form-label Allow-notifications " style="margin-top:-14px;width:228px; ">Notification message:</label>
                 <div class="layui-input-block " style="margin-left:262px; ">
-                    <textarea maxlength="256" id="alert_areatext" class="layui-textarea" oninput="WidthCheckPassword(this,64)"></textarea>
+                    <textarea maxlength="256" id="alert_areatext" class="layui-textarea" oninput="WidthCheckIOStr(this,256)"></textarea>
                     <p class="font-left"><span id="wordCheck">256</span> characters left</p>
                 </div>
             </div>
@@ -687,7 +687,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210514"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210521"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -926,8 +926,13 @@
         function WidthCheckIOStr(str, maxLen) {
             var w = 0;
             var tempCount = 0;
-            console.log(str.value.length)
-                //length 获取字数数
+            if (str) {
+                str.value = str.value.replace(/[^"!#$% &'()*+,-.:;<=>{~|^\\}`\x5B\x5D_?@/A-Za-z0-9]/g,
+                    ''); //不能放正则里的特殊字符可以用16进制代替，比如\x5B\x5D为[]
+
+            }
+
+            //length 获取字数数
             for (var i = 0; i < str.value.length; i++) {
                 //charCodeAt()获取字符串中某一个字符的编码 
                 var c = str.value.charCodeAt(i);
@@ -941,14 +946,6 @@
                     str.value = str.value.substr(0, i);
                     break;
                 }
-            }
-
-            if (str.value.indexOf("'") != -1) {
-                str.value = str.value.replace(/\'/g, "");
-                layui.use(['form', 'layer'], function() {
-                    var layer = layui.layer;
-                    layer.msg("Cannot enter special string ' ");
-                })
             }
             $("#wordCheck").text(maxLen - str.value.length);
         }

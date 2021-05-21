@@ -43,58 +43,104 @@ $(function() {
             shade: false
         });
         getInfoData(layer, loading);
+        getMobileInfo(layer);
         getLogNumber(layer);
     });
 
 })
 
-function getFile() {
-    var formData = new FormData();
-    var xhr = new XMLHttpRequest();
-    xhr.upload.onerror = function(error) {
-        console.log("Upload fail！", error);
-    }
-    xhr.upload.onload = function() {
-        console.log('上传成功');
-    }
-    xhr.open('post', '/action/down', true);
-    //xhr.responseType = 'arraybuffer';
-    xhr.responseType = 'blob'
-    xhr.send();
-    xhr.onreadystatechange = state_Change;
+function getMobileInfo(layer) {
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "GetHomeStatus",
+        "params": {
 
-    function state_Change() {
-        console.log("xhr", xhr)
-        if (xhr.readyState == 4) { // 4 = "loaded"
-            if (xhr.status == 200) { // 200 = OK
-                console.log(xhr.response)
-                let bufferArray = xhr.response;
-                let uint8Array = new Uint8Array(bufferArray);　　　　　　
-                for (var i = 0; i < bufferArray.length; ++i) {　　　　　　
-                    uint8Array[i] = bufferArray[i];
+        },
+        "id": "9.1"
+    };
+
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            frequency = 0;
+            console.log("qqqqq", res)
+            if (res.result.mobile) {
+                $("#mobile_CSQ").html(res.result.mobile.csq);
+                $("#mobile_PLMN").html(res.result.mobile.plmn);
+                $("#Ceil_ID").html(res.result.mobile.cell_id);
+                $("#Location_Area_Code").html(res.result.mobile.lac);
+                $("#Connection_Type").html(res.result.mobile.act);
+                $("#Connection_Band").html(res.result.mobile.band);
+                $("#Network_provider").html(res.result.mobile.provider)
+                switch (res.result.mobile.cgreg) {
+                    case 0:
+                        $("#Register_Status").text("Not registered");
+                        break;
+                    case 1:
+                        $("#Register_Status").text("Registered, home network");
+                        break;
+                    case 2:
+                        $("#Register_Status").text("Not registered");
+                        break;
+                    case 3:
+                        $("#Register_Status").text("Registration denied");
+                        break;
+                    case 4:
+                        $("#Register_Status").text("Unknown");
+                        break;
+                    case 5:
+                        $("#Register_Status").text("Registered, roaming");
+                        break;
+                    default:
+                        break;
                 }
-                let blob = new Blob([uint8Array], { type: 'application/x-tar' })
-                console.log(blob)
-                    // let blob = new Blob([xhr.response]);
-                    // console.log(blob)
-                const url = window.URL.createObjectURL(blob);
-                console.log(url)
-
+                switch (res.result.mobile.simStatus) {
+                    case 0:
+                        $("#Sim_Card_Status").text("Unknown");
+                        break;
+                    case 1:
+                        $("#Sim_Card_Status").text("Not inserted");
+                        break;
+                    case 2:
+                        $("#Sim_Card_Status").text("Ready");
+                        break;
+                    case 3:
+                        $("#Sim_Card_Status").text("PIN Need");
+                        break;
+                    case 4:
+                        $("#Sim_Card_Status").text("PUK Need");
+                        break;
+                    default:
+                        break;
+                }
+            } else if (res.error) {
+                layui.use(['form', 'layer'], function() {
+                    var layer = layui.layer;
+                    layer.msg("An error occurred：" + res.error.message);
+                })
+            }
+        },
+        error: function(jqXHR) {
+            console.log("Error message", JSON.stringify(jqXHR))
+            $("#btnSave").prop("disabled", false);
+            frequency++;
+            if (frequency < 3) {
+                setTimeout(() => {
+                    getMobileInfo(layer);
+                }, 5000);
             } else {
-                console.log("Upload fail11！");
+
+                frequency = 0;
+                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
+                promptMessage("Error message", tip);
             }
         }
-    }
-}
-
-function downloadFile(url) {
-    setTimeout(function() {
-        var net = window.open(url);
-        net.addEventListener("beforeunload", (e) => {
-            console.log("下载完成")
-            $("#btnSave").prop("disabled", false)
-        });
-    }, 500)
+    });
 }
 
 function getInfoData(layer, loading) {
@@ -116,6 +162,7 @@ function getInfoData(layer, loading) {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             layer.close(loading);
+            frequency = 0;
             $("#btnSave").prop("disabled", false);
             if (res.result) {
                 $("#model").html(res.result.Model);
@@ -175,6 +222,57 @@ function getInfoData(layer, loading) {
         }
     });
 }
+
+function getFile() {
+    var formData = new FormData();
+    var xhr = new XMLHttpRequest();
+    xhr.upload.onerror = function(error) {
+        console.log("Upload fail！", error);
+    }
+    xhr.upload.onload = function() {
+        console.log('上传成功');
+    }
+    xhr.open('post', '/action/down', true);
+    //xhr.responseType = 'arraybuffer';
+    xhr.responseType = 'blob'
+    xhr.send();
+    xhr.onreadystatechange = state_Change;
+
+    function state_Change() {
+        console.log("xhr", xhr)
+        if (xhr.readyState == 4) { // 4 = "loaded"
+            if (xhr.status == 200) { // 200 = OK
+                console.log(xhr.response)
+                let bufferArray = xhr.response;
+                let uint8Array = new Uint8Array(bufferArray);　　　　　　
+                for (var i = 0; i < bufferArray.length; ++i) {　　　　　　
+                    uint8Array[i] = bufferArray[i];
+                }
+                let blob = new Blob([uint8Array], { type: 'application/x-tar' })
+                console.log(blob)
+                    // let blob = new Blob([xhr.response]);
+                    // console.log(blob)
+                const url = window.URL.createObjectURL(blob);
+                console.log(url)
+
+            } else {
+                console.log("Upload fail11！");
+            }
+        }
+    }
+}
+
+function downloadFile(url) {
+    setTimeout(function() {
+        var net = window.open(url);
+        net.addEventListener("beforeunload", (e) => {
+            console.log("下载完成")
+            $("#btnSave").prop("disabled", false)
+        });
+    }, 500)
+}
+
+
 
 function qrcode(str) {
     $('#code').qrcode({

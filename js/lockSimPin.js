@@ -75,8 +75,13 @@ function unlockSIM(layer, params) {
                 parent.layer.close(index); //关闭当前页
             } else if (res.error) {
                 $(parent.frames["my-iframe"].document).find("#unlockSIM").val("");
-                var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.error.message + '!</div>';
-                promptMessage("Error message", tip, closeLockSim);
+                layui.use(['layer'], function() {
+                    var layer = layui.layer;
+                    layer.msg(res.error.message);
+                })
+
+                //var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">' + res.error.message + '!</div>';
+                //promptMessage("Error message", tip, closeLockSim);
             } else {
                 if (res.result.pintimes == 0) {
                     $(parent.frames["my-iframe"].document).find("#unlockSIM").val(1);

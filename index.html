@@ -15,11 +15,11 @@
     <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="bookmark" href="images/favicon.ico" />
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css?mv=20210514">
-    <link href="css/style.css?mv=20210514" rel="stylesheet" />
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210514" />
+    <link rel="stylesheet" href="css/xadmin.css?mv=20210521">
+    <link href="css/style.css?mv=20210521" rel="stylesheet" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210521" />
 
-    <script type="text/javascript" src="js/common.js?mv=20210514"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210521"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script>
         let flag = navigator.userAgent.match(
@@ -27,6 +27,21 @@
         )
         if (flag) {
             var domain = window.location.host;
+            top.location.href = ('https:' == document.location.protocol ? 'https://' :
+                'http://') + domain + "/app/index.html";
+        }
+        var windowWidth = $(window).width();
+        var domain = window.location.host;
+        window.onresize = function() {
+            return (() => {
+                windowWidth = $(window).width();
+                if (windowWidth <= 800) {
+                    top.location.href = ('https:' == document.location.protocol ? 'https://' :
+                        'http://') + domain + "/app/index.html";
+                }
+            })()
+        }
+        if (windowWidth <= 800) {
             top.location.href = ('https:' == document.location.protocol ? 'https://' :
                 'http://') + domain + "/app/index.html";
         }
@@ -308,7 +323,7 @@
     <!-- Top start -->
     <div class="main">
         <div class="logo">
-            <a><img src="images/RM_logo.svg"></a>
+            <a><img src="images/RM_logo.svg?v=20210518"></a>
             <!-- <a><img src="images/logo-Raymarine.png"></a> -->
             <!-- <a href="./index.html"></a> -->
         </div>
@@ -332,7 +347,7 @@
 
             <ul id="nav" class="main-menu" lay-filter="leftNav">
                 <li>
-                    <a href="javascript:;" data-url="home.html" target="my-iframe" class="title nav-a-active">
+                    <a href="javascript:;" data-url="home.html??mv=20210521" target="my-iframe" class="title nav-a-active">
                         <!-- <i class="iconfont">&#xe616;</i> -->
                         <cite class="hd">STATUS </cite>
                         <!-- <i class="iconfont nav_right ">&#xe603;</i> -->
@@ -512,7 +527,7 @@
             </ul> -->
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show" style="min-width: 873px;">
-                    <iframe src="home.html" id="my-iframe" name="my-iframe" frameborder="0" scrolling="yes"></iframe>
+                    <iframe src="home.html??mv=20210521" id="my-iframe" name="my-iframe" frameborder="0" scrolling="yes"></iframe>
                     <!-- <iframe src="{:url('')}" frameborder="0" scrolling="yes" class="x-iframe"></iframe> -->
                 </div>
             </div>
@@ -522,18 +537,18 @@
 
 
     <div class="footer" style="background:#fff;color:#333;z-index:2;font-size:14px;">
-        <div class="copyright">Copyright ©2020 Raymarine All Rights Reserved <span>V1.38</span></div>
+        <div class="copyright">Copyright ©2020 Raymarine All Rights Reserved <span>V1.39</span></div>
     </div>
     <!-- Bottom end -->
     <!-- 禁止右侧菜单点击遮罩 -->
     <div class="layui-layer-shade" id="upgrade_mask" times="1" style="z-index: 19891014; background-color: rgb(255, 255, 255); opacity: 0.1;width:408px;"></div>
 
     <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js?mv=20210514"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20210521"></script>
     <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
     <script src="js/jquery.myProgress.js"></script>
-    <script type="text/javascript" src="js/index.js?mv=20210514"></script>
+    <script type="text/javascript" src="js/index.js?mv=20210521"></script>
 
 </body>
 

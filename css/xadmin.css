@@ -33,6 +33,10 @@ body {
     /* background-color: #eee; */
 }
 
+.opacity5 {
+    opacity: 0.5 !important;
+}
+
 img[src=""],
 img:not([src]) {
     opacity: 0;
@@ -700,9 +704,9 @@ table td {
     }
     .left-nav {
         position: absolute;
-        top: 86px;
+        top: 77px;
         bottom: 42px;
-        left: -280px;
+        left: 0px;
         z-index: 2;
         padding-top: 10px;
         background-color: #EEEEEE;
@@ -714,6 +718,10 @@ table td {
         border-right: 1px solid #e5e5e5;
         box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
         /*width: 0px;*/
+    }
+    #side-nav {
+        margin-top: 20px;
+        margin-left: 30px;
     }
     .mCont {
         position: absolute;

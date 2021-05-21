@@ -154,7 +154,7 @@ function changeSwitchStatus(layer, form, checked) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
-
+            //swithcData.othis[0].classList.remove('layui-form-onswitch'); //switch失能
             layer.close(loading);
             if (res.result) {
                 if (res.result.error_code && res.result.error_code == 1) {
@@ -197,7 +197,7 @@ function changeSwitchStatus(layer, form, checked) {
         },
         error: function(jqXHR) {
             console.log(JSON.stringify(jqXHR))
-
+                //swithcData.othis[0].classList.remove('layui-form-onswitch'); //switch失能
             layer.close(loading);
             var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication, please try again later!</div>';
             promptMessage("Error message", tip);
