@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210521" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210521" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210527" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210527" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -851,6 +851,37 @@
             top: 14px;
             right: 8px;
         }
+        
+        .layui-input-inline {
+            width: 180px;
+            text-align: left;
+        }
+        
+        .layui-input-block {
+            margin-left: 0;
+        }
+        
+        .layui-form-item {
+            width: 180px;
+        }
+        
+        .layui-form-pane .layui-input-block {
+            margin-left: 10px;
+        }
+        
+        @media screen and (max-width: 1192px) {
+            .Mobile-data-big {
+                font-size: 30px;
+            }
+            .Path-97 {
+                width: 120px;
+                height: 40px;
+            }
+            #btn_saved1 {
+                width: 120px;
+                height: 40px;
+            }
+        }
     </style>
 </head>
 
@@ -906,7 +937,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="Mobile-data">Data roaming:</div>
+                                                    <div class="Mobile-data">Data roaming (outside of the UK):</div>
                                                     <div class="sm Use-cellular-network-for-data-connection">Use mobile data when roaming, this may result in additional fees</div>
                                                 </td>
                                                 <td>
@@ -1021,7 +1052,7 @@
                                             <div>
                                                 <div class="Set-monthly-data-limit">Set data limit:</div>
                                                 <div class="The-remaining-data">
-                                                    Notifications will be sent to RayConnect when the data limit has been reached
+                                                    Mobile data will turn off and notifications will be sent to RayConnect when the data limit has been reached
                                                 </div>
                                             </div>
                                             <div class="layui-input-inline" id="setDataLimit" style="display:none;line-height:1">
@@ -1059,15 +1090,15 @@
                                                 <div class="-flex-display -align-box -justify-box mt-25">
                                                     <label class="Network-provider mt-15">APN (Access Point
                                                         Name):</label>
-                                                    <input type="text" name="text" value="" class="Rectangle-1186 pl-10" id="AP_Name" oninput="WidthCheckPassword(this,64)">
+                                                    <input type="text" name="text" value="" class="Rectangle-1186 pl-10" id="AP_Name" oninput="WidthCheckPassword(this,63)">
                                                 </div>
                                                 <div class="-flex-display -align-box -justify-box">
                                                     <label class="Network-provider mt-15">Username:</label>
-                                                    <input type="text" name="text" value="" class="Rectangle-1186 pl-10" id="Username" oninput="WidthCheckPassword(this,64)">
+                                                    <input type="text" name="text" value="" class="Rectangle-1186 pl-10" id="Username" oninput="WidthCheckPassword(this,63)">
                                                 </div>
                                                 <div class="-flex-display -align-box -justify-box" style="position: relative;">
                                                     <label class="Network-provider mt-15">Password:</label>
-                                                    <input type="password" name="text" value="" class="Rectangle-1186 pl-10" id="Password" oninput="WidthCheckPassword(this,64)">
+                                                    <input type="password" name="text" value="" class="Rectangle-1186 pl-10" id="Password" oninput="WidthCheckPassword(this,63)">
                                                     <span class="resetAPN-p" id="resetAPN_p">SHOW</span>
                                                 </div>
                                                 <div class="useage-describe mt-20">The mobile network Access Point Name provides all the details that your router needs to connect to mobile data
@@ -1086,10 +1117,10 @@
                                                 <!-- <div class="SIM-pin mt-0" style="margin-top: 50px;">SIM pin</div> -->
                                                 <div class="div-split mb-20 mt-20"></div>
                                                 <h4 class="limit-subtiltle mt-30">SIM lock</h4>
-                                                <div class="layui-form layui-form-pane layui-form-item -flex-display -align-box" style="margin-top: 20px;">
-                                                    <label class="layui-form-label SIM-pin-lock mt-0 mb-0">Lock
+                                                <div class="layui-form  -flex-display -justify-box mt-30">
+                                                    <label class="Network-provider SIM-pin-lock mt-0 mb-20">Lock
                                                         SIM:</label>
-                                                    <div class="layui-input-block" id="SIM_pin_lock1" style="display:none;line-height: 1;">
+                                                    <div class="layui-input-inline" id="SIM_pin_lock1" style="display:none;line-height: 1;">
                                                         <input type="checkbox" name="open" lay-skin="primary" lay-filter="SIMpin">
                                                     </div>
                                                 </div>
@@ -1127,7 +1158,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="Mobile-data">Data roaming:</div>
+                                                    <div class="Mobile-data">Data roaming (outside of the UK):</div>
                                                     <div class="sm Use-cellular-network-for-data-connection">Use mobile data when roaming, this may result in additional fees</div>
                                                 </td>
                                                 <td>
@@ -1239,7 +1270,7 @@
                                             <div>
                                                 <div class="Set-monthly-data-limit">Set data limit:</div>
                                                 <div class="The-remaining-data">
-                                                    Notifications will be sent to RayConnect when the data limit has been reached
+                                                    Mobile data will turn off and notifications will be sent to RayConnect when the data limit has been reached
                                                 </div>
                                             </div>
                                             <div class="layui-input-inline" id="setDataLimit2" style="line-height:1">
@@ -1294,10 +1325,10 @@
                                                 <div style="clear:both;"></div>
                                                 <div class="div-split mb-20 mt-20"></div>
                                                 <h4 class="limit-subtiltle mt-30">SIM lock</h4>
-                                                <div class="layui-form layui-form-pane layui-form-item -flex-display -align-box" style="margin-top: 20px;">
-                                                    <label class="layui-form-label SIM-pin-lock mt-0 mb-0">Lock
+                                                <div class="layui-form  -flex-display -justify-box mt-30">
+                                                    <label class="Network-provider SIM-pin-lock mt-0 mb-20">Lock
                                                         SIM:</label>
-                                                    <div class="layui-input-block" id="SIM_pin_lock2" style="line-height: 1;">
+                                                    <div class="layui-input-inline" id="SIM_pin_lock2" style="line-height: 1;">
                                                         <input type="checkbox" lay-skin="primary" lay-filter="SIMpin2">
                                                     </div>
                                                 </div>
@@ -1324,10 +1355,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210521"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210521"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210527"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210527"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210521"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210527"></script>
 
 </body>
 

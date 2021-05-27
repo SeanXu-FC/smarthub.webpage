@@ -2,806 +2,708 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Expires" content="0">
-	<meta http-equiv="Pragma" content="no-cache">
-	<meta http-equiv="Cache-control" content="no-cache">
-	<meta http-equiv="Cache" content="no-cache">
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<title>YachtSense Link Marine Cloud Router Help Page</title>
-	<style>
-		ul li a u {
-			color: blue;
-		}
-
-		ul,
-		li {
-			padding: 0;
-			margin: 0;
-			list-style: none
-		}
-
-		a {
-			text-decoration: none;
-			font-family: OpenSans-Semibold;
-			color: #0078ac;
-		}
-
-		a:link {
-			text-decoration: none;
-			font-family: OpenSans-Semibold;
-			color: #0078ac;
-		}
-
-		a:visited {
-			text-decoration: none;
-			font-family: OpenSans-Semibold;
-			color: #343434;
-		}
-
-		a:hover {
-			text-decoration: none;
-			font-family: OpenSans-Semibold;
-			color: #009fe3;
-		}
-
-		a:active {
-			text-decoration: none;
-			font-family: OpenSans-Semibold;
-			color: #009fe3;
-		}
-
-		a:focus {
-			text-decoration: none;
-			font-family: OpenSans-Semibold;
-			color: #009fe3;
-		}
-
-		.container-fluid {
-			margin: 30px 70px;
-		}
-
-		.div-2 {
-			background-color: #EBEBEB;
-			margin: 0px 0px;
-			width: 100%;
-		}
-
-		.first-menu li a {
-			font-family: OpenSans-Semibold;
-			font-size: 24px;
-			font-weight: bold;
-			display: flex;
-			align-items: center;
-			height: 40px;
-			color: #555555;
-		}
-
-		.first-menu li .content {
-			font-family: OpenSans-Semibold;
-			margin-left: 30px;
-			padding-left: 0;
-		}
-
-		.first-menu li .second-menu li a {
-			font-family: OpenSans-Semibold;
-			font-size: 22px;
-			font-weight: 600;
-			padding-left: 30px;
-			height: 30px;
-			color: #26b167;
-		}
-
-		.first-menu li .second-menu li a .Dot {
-			font-family: OpenSans-Semibold;
-			display: inline-block;
-			width: 8px;
-			height: 8px;
-			border-radius: 50%;
-			background: linear-gradient(top, #333 0%, #999 100%);
-			background: -webkit-linear-gradient(top, #333 0%, #999 100%);
-			margin-right: 6px;
-		}
-
-		.first-menu li .second-menu li .content {
-			font-family: OpenSans-Semibold;
-			margin-left: 60px;
-		}
-
-		.first-menu li .second-menu li .third-menu li a {
-			font-family: OpenSans-Semibold;
-			font-size: 18px;
-			font-weight: 500;
-			padding-left: 60px;
-			height: 26px;
-		}
-
-		.first-menu li .second-menu li .third-menu li a .Dot {
-			font-family: OpenSans-Semibold;
-			display: inline-block;
-			width: 6px;
-			height: 6px;
-			border-radius: 50%;
-			background: linear-gradient(top, #333 0%, #999 100%);
-			background: -webkit-linear-gradient(top, #333 0%, #999 100%);
-			margin-right: 6px;
-		}
-
-		.first-menu li .second-menu li .third-menu li .content {
-			font-family: OpenSans-Semibold;
-			margin-left: 90px;
-		}
-
-		.arrow-right {
-			width: 20px;
-			height: 20px;
-			margin-right: 10px;
-		}
-
-		.content {
-			font-family: OpenSans-Semibold;
-			font-size: 16px;
-			font-weight: 500;
-			padding: 20px;
-			border-radius: 6px;
-			padding: 8px 20px;
-			word-wrap: break-word;
-		}
-
-		.disNone {
-			display: none;
-		}
-
-		.disVisi {
-			display: block;
-		}
-
-		.rotate-90reg {
-			transform: rotate(90deg);
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <title>YachtSense Link Marine Cloud Router Help Page</title>
+    <style>
+        ul li a u {
+            color: blue;
+        }
+        
+        ul,
+        li {
+            padding: 0;
+            margin: 0;
+            list-style: none
+        }
+        
+        a {
+            text-decoration: none;
+            font-family: OpenSans-Semibold;
+            color: #0078ac;
+        }
+        
+        a:link {
+            text-decoration: none;
+            font-family: OpenSans-Semibold;
+            color: #0078ac;
+        }
+        
+        a:visited {
+            text-decoration: none;
+            font-family: OpenSans-Semibold;
+            color: #343434;
+        }
+        
+        a:hover {
+            text-decoration: none;
+            font-family: OpenSans-Semibold;
+            color: #009fe3;
+        }
+        
+        a:active {
+            text-decoration: none;
+            font-family: OpenSans-Semibold;
+            color: #009fe3;
+        }
+        
+        a:focus {
+            text-decoration: none;
+            font-family: OpenSans-Semibold;
+            color: #009fe3;
+        }
+        
+        .container-fluid {
+            margin: 30px 70px;
+        }
+        
+        .div-2 {
+            background-color: #EBEBEB;
+            margin: 0px 0px;
+            width: 100%;
+        }
+        
+        .first-menu li a {
+            font-family: OpenSans-Semibold;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            height: 40px;
+            color: #555555;
+        }
+        
+        .first-menu li .content {
+            font-family: OpenSans-Semibold;
+            margin-left: 30px;
+            padding-left: 0;
+        }
+        
+        .first-menu li .second-menu li a {
+            font-family: OpenSans-Semibold;
+            font-size: 22px;
+            font-weight: 600;
+            padding-left: 30px;
+            height: 30px;
+            color: #26b167;
+        }
+        
+        .first-menu li .second-menu li a .Dot {
+            font-family: OpenSans-Semibold;
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(top, #333 0%, #999 100%);
+            background: -webkit-linear-gradient(top, #333 0%, #999 100%);
+            margin-right: 6px;
+        }
+        
+        .first-menu li .second-menu li .content {
+            font-family: OpenSans-Semibold;
+            margin-left: 60px;
+        }
+        
+        .first-menu li .second-menu li .third-menu li a {
+            font-family: OpenSans-Semibold;
+            font-size: 18px;
+            font-weight: 500;
+            padding-left: 60px;
+            height: 26px;
+        }
+        
+        .first-menu li .second-menu li .third-menu li a .Dot {
+            font-family: OpenSans-Semibold;
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: linear-gradient(top, #333 0%, #999 100%);
+            background: -webkit-linear-gradient(top, #333 0%, #999 100%);
+            margin-right: 6px;
+        }
+        
+        .first-menu li .second-menu li .third-menu li .content {
+            font-family: OpenSans-Semibold;
+            margin-left: 90px;
+        }
+        
+        .arrow-right {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        
+        .content {
+            font-family: OpenSans-Semibold;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 20px;
+            border-radius: 6px;
+            padding: 8px 20px;
+            word-wrap: break-word;
+        }
+        
+        .disNone {
+            display: none;
+        }
+        
+        .disVisi {
+            display: block;
+        }
+        
+        .rotate-90reg {
+            transform: rotate(90deg);
+        }
+    </style>
 </head>
 
 <body>
-	<div class="container-fluid">
+    <div class="container-fluid">
 
-		<IMG SRC="images/router.png">
-		<FONT FACE="OpenSans-Semibold" color="#343434" size="44px">&nbsp;Help</FONT>
+        <IMG SRC="images/router.png">
+        <FONT FACE="OpenSans-Semibold" color="#343434" size="44px">&nbsp;Help</FONT>
 
-		<hr>
-		<p>
-			<FONT FACE="OpenSans-Regular" color="#343434" size="4">
-				Click the links below to expand the available help content.</FONT>
-		</p>
+        <hr>
+        <p>
+            <FONT FACE="OpenSans-Regular" color="#343434" size="4">
+                Click the links below to expand the available help content.</FONT>
+        </p>
 
-		<hr>
+        <hr>
 
-		<ul class="first-menu">
-			<li>
-				<a href="javascript:;"><img class="arrow-right" src="images/arrow.png">Status page</a>
-				<ul class="second-menu disNone">
-					<div style="margin-left:30px">
-						<FONT FACE="OpenSans-Regular" color="#343434" size="4">The Status page provides information on
-							the status of your router’s network connections, including the number of devices connected
-							to the router’s access point (internal Wi-Fi) and the wired network (devices connected to
-							the router’s
-							4 x RayNet network ports). Status information is provided for the following connections:
-						</FONT>
-					</div>
+        <ul class="first-menu">
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="images/arrow.png">Status page</a>
+                <ul class="second-menu disNone">
+                    <div style="margin-left:30px">
+                        <FONT FACE="OpenSans-Regular" color="#343434" size="4">The Status page provides information on the status of your router’s network connections, including the number of devices connected to the router’s access point (internal Wi-Fi) and the wired network (devices connected to the router’s
+                            4 x RayNet network ports). Status information is provided for the following connections:
+                        </FONT>
+                    </div>
 
-					<li>
-						<a href="javascript:;"><span class="Dot"></span>Cloud</a>
-						<div class="content disNone">
-							The Cloud status identifies when the Router has an active connection to the Raymarine cloud
-							service.
-							<hr>
-						</div>
-					</li>
-					<li>
-						<a href="javascript:;"><span class="Dot"></span>Wi-Fi network</a>
-						<div class="content disNone">
-							The Wi-Fi network section shows the status of the external wireless network connection
-							(e.g.: connection to marina Wi-Fi), the name of the connected network, and the signal
-							strength.
-							<hr>
-						</div>
-					</li>
-					<li>
-						<a href="javascript:;"><span class="Dot"></span>Mobile network</a>
-						<div class="content disNone">
-							The Mobile network section shows the status of the mobile network connection, the name of
-							your network provider, and which SIM card is in use.
-							<hr>
-						</div>
-					</li>
-					<li>
-						<a href="javascript:;"><span class="Dot"></span>Router access point</a>
-						<div class="content disNone">
-							The Router access point section shows the connection status of the internal Wi-Fi connection
-							and the access point’s name (SSID).
-							<hr>
-						</div>
-					</li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Cloud</a>
+                        <div class="content disNone">
+                            The Cloud status identifies when the Router has an active connection to the Raymarine cloud service.
+                            <hr>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Wi-Fi network</a>
+                        <div class="content disNone">
+                            The Wi-Fi network section shows the status of the external wireless network connection (e.g.: connection to marina Wi-Fi), the name of the connected network, and the signal strength.
+                            <hr>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Mobile network</a>
+                        <div class="content disNone">
+                            The Mobile network section shows the status of the mobile network connection, the name of your network provider, and which SIM card is in use.
+                            <hr>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Router access point</a>
+                        <div class="content disNone">
+                            The Router access point section shows the connection status of the internal Wi-Fi connection and the access point’s name (SSID).
+                            <hr>
+                        </div>
+                    </li>
 
 
-					<hr>
-				</ul>
-			</li>
+                    <hr>
+                </ul>
+            </li>
 
-			<li>
-				<a href="javascript:;"><img class="arrow-right" src="images/arrow.png">Basic settings</a>
-				<ul class="second-menu disNone">
-					<div style="margin-left:30px">
-						<FONT FACE="OpenSans-Regular" color="#343434" size="4">The following Basic settings pages are
-							available:
-						</FONT>
-					</div>
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="images/arrow.png">Basic settings</a>
+                <ul class="second-menu disNone">
+                    <div style="margin-left:30px">
+                        <FONT FACE="OpenSans-Regular" color="#343434" size="4">The following Basic settings pages are available:
+                        </FONT>
+                    </div>
 
 
-					<li>
-						<a href="javascript:;"><span class="Dot"></span>Wi-Fi network page</a>
-						<ul class="third-menu disNone">
-							<div style="margin-left:60px">
-								<FONT FACE="OpenSans-Regular" color="#343434" size="3">
-									<p>The router can connect to available Wi-Fi access points to provide internet
-										access to the router and its connected devices. The Wi-Fi network page allows
-										you to connect to a Wi-Fi access point, such as the Wi-Fi provided
-										by your marina. When connected to a Wi-Fi connection that has a connection to
-										the internet, the router will provide internet access to Wi-Fi and RayNet
-										connected devices.
-									</p>
-									<p><b>Note:</b> The router will connect automatically to saved Wi-Fi networks when
-										they are in range. When available the Wi-Fi network connection will be used in
-										preference to the cellular connection.</p>
-									<p>From the Wi-Fi page you can:</p>
-								</FONT>
-							</div>
-							<li>
-								<a href="javascript:;"><span class="Dot"></span>enable and disable the Wi-Fi network</a>
-								<div class="content disNone">
-									Select the toggle switch to enable and disable the Wi-Fi network.
-									<hr>
-								</div>
-							</li>
-							<li>
-								<a href="javascript:;"><span class="Dot"></span>view details of available Wi-Fi networks
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Wi-Fi network page</a>
+                        <ul class="third-menu disNone">
+                            <div style="margin-left:60px">
+                                <FONT FACE="OpenSans-Regular" color="#343434" size="3">
+                                    <p>The router can connect to available Wi-Fi access points to provide internet access to the router and its connected devices. The Wi-Fi network page allows you to connect to a Wi-Fi access point, such as the Wi-Fi provided
+                                        by your marina. When connected to a Wi-Fi connection that has a connection to the internet, the router will provide internet access to Wi-Fi and RayNet connected devices.
+                                    </p>
+                                    <p><b>Note:</b> The router will connect automatically to saved Wi-Fi networks when they are in range. When available the Wi-Fi network connection will be used in preference to the cellular connection.</p>
+                                    <p>From the Wi-Fi page you can:</p>
+                                </FONT>
+                            </div>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>enable and disable the Wi-Fi network</a>
+                                <div class="content disNone">
+                                    Select the toggle switch to enable and disable the Wi-Fi network.
+                                    <hr>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>view details of available Wi-Fi networks
 									that are in range</a>
-								<div class="content disNone">
-									Select the <b>Info</b> icon next to the Wi-Fi network to view details about the
-									network.
-									<hr>
-								</div>
-							</li>
-							<li>
-								<a href="javascript:;"><span class="Dot"></span>connect to an available Wi-Fi
+                                <div class="content disNone">
+                                    Select the <b>Info</b> icon next to the Wi-Fi network to view details about the network.
+                                    <hr>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>connect to an available Wi-Fi
 									network</a>
-								<div class="content disNone">Follow the steps below to connect to a Wi-Fi network that
-									is listed on the Wi-Fi network page.
-									<ul>
-										<li>1. Select the Wi-Fi network you want to connect to from the list.</li>
-										<li>2. Enter the password for the network in the <b>Password</b> field.</li>
-										<li>3. Select <b>Connect</b>.</li>
-									</ul>
-									<hr>
-								</div>
-							</li>
-							<li>
-								<a href="javascript:;"><span class="Dot"></span>add a Wi-Fi network manually</a>
-								<div class="content disNone">You can connect to a network that is not in the list but is
-									in range, i.e.: a hidden Wi-Fi network (Wi-Fi network that is not broadcasting its
-									SSID).
-									<ul>
-										<li>1. Select <b>Add network</b>.</li>
-										<li>2. Enter the Wi-Fi network name (SSID) in the <b>Network name</b> field.
-										</li>
-										<li>3. Select the security type from the <b>Security</b> drop down box.</li>
-										<li>4. Enter the networks password in the <b>Password</b> field.</li>
-										<li>5. Select <b>Connect</B>.</li>
-									</ul>
-									<hr>
-								</div>
-							</li>
-							<li>
-								<a href="javascript:;"><span class="Dot"></span>forget a saved Wi-Fi network</a>
-								<div class="content disNone">When the router connects to a Wi-Fi network the details
-									will automatically be saved so that the router can connect to it automatically when
-									ever it is in range. If you do not wish to connect to this Wi-Fi network in future
-									you can ‘forget’ the network by following the steps below:
-									<ul>
-										<li>1. Select the <b>Info</b> icon next to the saved Wi-Fi network to display
-											the network's information.</li>
-										<li>2. Select <b>Forget network</b>.</li>
-										<div>Alternatively, you can also turn off automatic network connection by
-											disabling <b>Connect automatically</b> from the Info dialog.
-											<hr>
-										</div>
+                                <div class="content disNone">Follow the steps below to connect to a Wi-Fi network that is listed on the Wi-Fi network page.
+                                    <ul>
+                                        <li>1. Select the Wi-Fi network you want to connect to from the list.</li>
+                                        <li>2. Enter the password for the network in the <b>Password</b> field.</li>
+                                        <li>3. Select <b>Connect</b>.</li>
+                                    </ul>
+                                    <hr>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>add a Wi-Fi network manually</a>
+                                <div class="content disNone">You can connect to a network that is not in the list but is in range, i.e.: a hidden Wi-Fi network (Wi-Fi network that is not broadcasting its SSID).
+                                    <ul>
+                                        <li>1. Select <b>Add network</b>.</li>
+                                        <li>2. Enter the Wi-Fi network name (SSID) in the <b>Network name</b> field.
+                                        </li>
+                                        <li>3. Select the security type from the <b>Security</b> drop down box.</li>
+                                        <li>4. Enter the networks password in the <b>Password</b> field.</li>
+                                        <li>5. Select <b>Connect</B>.</li>
+                                    </ul>
+                                    <hr>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="javascript:;"><span class="Dot"></span>forget a saved Wi-Fi network</a>
+                                <div class="content disNone">When the router connects to a Wi-Fi network the details will automatically be saved so that the router can connect to it automatically when ever it is in range. If you do not wish to connect to this Wi-Fi network in future
+                                    you can ‘forget’ the network by following the steps below:
+                                    <ul>
+                                        <li>1. Select the <b>Info</b> icon next to the saved Wi-Fi network to display the network's information.</li>
+                                        <li>2. Select <b>Forget network</b>.</li>
+                                        <div>Alternatively, you can also turn off automatic network connection by disabling <b>Connect automatically</b> from the Info dialog.
+                                            <hr>
+                                        </div>
 
-									</ul>
-								</div>
-							</li>
-							<hr>
-						</ul>
-					</li>
-					<li>
-						<a href="javascript:;"><span class="Dot"></span>Mobile data & SIM management page</a>
-						<ul class="third-menu disNone">
-							<div style="margin-left:60px">
-								<FONT FACE="OpenSans-Regular" color="#343434" size="3">
-									<p>The router can use cellular networks to provide internet access to the router and
-										its connected devices. The Mobile data & SIM management page provides access to
-										settings related to the router’s cellular connections,
-										SIM management options and mobile data usage statistics. When the cellular
-										connection is active and data is available the router will provide internet
-										access to Wi-Fi and RayNet connected devices.</p>
-									<p><b>Note:</b> The Router will connect automatically to saved Wi-Fi networks when
-										they are in range. When available the Wi-Fi network connection will be used in
-										preference to the cellular connection.</p>
-									<p>When using dual SIM cards you can enable automatic switching between SIMs when
-										there is no network coverage or when data limit on one SIM has been reached,
-										using the checkbox at the top of the page.</p>
-									<p>From the Mobile data & SIM management page you can select <b>SIM1</b> or
-										<b>SIM2</b> to view information and settings for each SIM card.</p>
-									<p>The available information and options are:
-							</div>
-							<div style="margin-left:90px">
-								<FONT FACE="OpenSans-Regular" color="#343434" size="3">
-									<ul>
-										<li><b>Mobile data:</b> — switches mobile data on and off, when switched on the
-											router can access the internet using your SIM card’s data allowance.</li>
-										<li><b>Data roaming:</b> — switches data roaming on and off. Data roaming allows
-											you to use your data allowance when outside of your home country.</li>
-										<li><b>Data usage graph</b> — view data usage statistics.</li>
-										<li><b>Data usage cycle</b> — set the date at which your data allowance renews
-											each month.</li>
-										<li><b>Data warning and limit</b> — set data warning and limit so that you do
-											not exceed your data allowance. You will be notified by the RayConnect app
-											when the specified data warning and data limit for the month has
-											been reached.
-										</li>
-										<li><b>SIM info</b> — View SIM card details.</li>
-										<li><b>Lock SIM</b> — Lock the SIM card or change the pin for the SIM card.</li>
-									</ul>
-									</p>
-									<hr>
-								</FONT>
-							</div>
-						</ul>
-					</li>
-					<li>
-						<a href="javascript:;"><span class="Dot"></span>Router access point page</a>
-						<ul class="third-menu disNone">
-							<div style="margin-left:60px">
-								<FONT FACE="OpenSans-Regular" color="#343434" size="3">
-									<p>Wi-Fi enabled devices can connect to the router’s access point and connect to the
-										internet using the router’s Wi-Fi network connection or cellular network
-										connections. The Router access point page provides access to
-										the router’s access point settings.</p>
-									<p>The router’s access point can be enabled and disabled using the toggle switch at
-										the top of the page. When enabled the router’s access point settings can be
-										configured.
-									</p>
-									<p>The following settings are available:
+                                    </ul>
+                                </div>
+                            </li>
+                            <hr>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Mobile data & SIM management page</a>
+                        <ul class="third-menu disNone">
+                            <div style="margin-left:60px">
+                                <FONT FACE="OpenSans-Regular" color="#343434" size="3">
+                                    <p>The router can use cellular networks to provide internet access to the router and its connected devices. The Mobile data & SIM management page provides access to settings related to the router’s cellular connections,
+                                        SIM management options and mobile data usage statistics. When the cellular connection is active and data is available the router will provide internet access to Wi-Fi and RayNet connected devices.</p>
+                                    <p><b>Note:</b> The Router will connect automatically to saved Wi-Fi networks when they are in range. When available the Wi-Fi network connection will be used in preference to the cellular connection.</p>
+                                    <p>When using dual SIM cards you can enable automatic switching between SIMs when there is no network coverage or when data limit on one SIM has been reached, using the checkbox at the top of the page.</p>
+                                    <p>From the Mobile data & SIM management page you can select <b>SIM1</b> or
+                                        <b>SIM2</b> to view information and settings for each SIM card.</p>
+                                    <p>The available information and options are:
+                            </div>
+                            <div style="margin-left:90px">
+                                <FONT FACE="OpenSans-Regular" color="#343434" size="3">
+                                    <ul>
+                                        <li><b>Mobile data:</b> — switches mobile data on and off, when switched on the router can access the internet using your SIM card’s data allowance.</li>
+                                        <li><b>Data roaming:</b> — switches data roaming on and off. Data roaming allows you to use your data allowance when outside of your home country.</li>
+                                        <li><b>Data usage graph</b> — view data usage statistics.</li>
+                                        <li><b>Data usage cycle</b> — set the date at which your data allowance renews each month.</li>
+                                        <li><b>Data warning and limit</b> — set data warning and limit so that you do not exceed your data allowance. You will be notified by the RayConnect app when the specified data warning and data limit for the month has
+                                            been reached.
+                                        </li>
+                                        <li><b>SIM info</b> — View SIM card details.</li>
+                                        <li><b>Lock SIM</b> — Lock the SIM card or change the pin for the SIM card.</li>
+                                    </ul>
+                                    </p>
+                                    <hr>
+                                </FONT>
+                            </div>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Router access point page</a>
+                        <ul class="third-menu disNone">
+                            <div style="margin-left:60px">
+                                <FONT FACE="OpenSans-Regular" color="#343434" size="3">
+                                    <p>Wi-Fi enabled devices can connect to the router’s access point and connect to the internet using the router’s Wi-Fi network connection or cellular network connections. The Router access point page provides access to
+                                        the router’s access point settings.</p>
+                                    <p>The router’s access point can be enabled and disabled using the toggle switch at the top of the page. When enabled the router’s access point settings can be configured.
+                                    </p>
+                                    <p>The following settings are available:
 
-								</FONT>
-							</div>
-							<div style="margin-left:90px">
-								<FONT FACE="OpenSans-Regular" color="#343434" size="3">
-									<ul>
-										<li><b>Access point name (SSID)</b> — this is the name of the network that you
-											should connect your mobile device(s) to.</li>
-										<li><b>Password</b> — this is the password that needs to be entered when
-											connecting your mobile device(s).</li>
-										<li><b>Preferred Wi-Fi channel</b> — allows you to select your preferred Wi-Fi
-											channel. Interference can occur in areas where many Wi-Fi networks are using
-											the same channe. Moving to a less-congested channel should
-											eliminate this interference.
-										</li>
-										<li><b>Channel width</b> — allows you to switch between single channel (20 MHz)
-											144 Mb and Dual channel (40 MHz) 300 Mb channel width. Dual channel provides
-											faster speed, however in areas where there is wireless channel
-											congestion a single channel may reduce interference.</li>
-										<li><b>Encryption type</b> — allows selection of the type of encryption used,
-											WPA2–PSA is the default and recommended encryption type.
-											<p><b>Note:</b> If the encryption type is changed to <b>No encryption</b>
-												anyone within range will be able to connect to the router.</p>
-										</li>
-									</ul>
-									</p>
-								</FONT>
-							</div>
-							<div style="margin-left:60px">
-								<FONT FACE="OpenSans-Regular" color="#343434" size="3">
-									<p>If any of the default settings are changed, select <b>Save</b> at the top of the
-										page to save the settings.</p>
-									<hr>
-								</FONT>
-							</div>
+                                </FONT>
+                            </div>
+                            <div style="margin-left:90px">
+                                <FONT FACE="OpenSans-Regular" color="#343434" size="3">
+                                    <ul>
+                                        <li><b>Access point name (SSID)</b> — this is the name of the network that you should connect your mobile device(s) to.</li>
+                                        <li><b>Password</b> — this is the password that needs to be entered when connecting your mobile device(s).</li>
+                                        <li><b>Preferred Wi-Fi channel</b> — allows you to select your preferred Wi-Fi channel. Interference can occur in areas where many Wi-Fi networks are using the same channe. Moving to a less-congested channel should
+                                            eliminate this interference.
+                                        </li>
+                                        <li><b>Channel width</b> — allows you to switch between single channel (20 MHz) 144 Mb and Dual channel (40 MHz) 300 Mb channel width. Dual channel provides faster speed, however in areas where there is wireless channel
+                                            congestion a single channel may reduce interference.</li>
+                                        <li><b>Encryption type</b> — allows selection of the type of encryption used, WPA2–PSA is the default and recommended encryption type.
+                                            <p><b>Note:</b> If the encryption type is changed to <b>No encryption</b> anyone within range will be able to connect to the router.</p>
+                                        </li>
+                                    </ul>
+                                    </p>
+                                </FONT>
+                            </div>
+                            <div style="margin-left:60px">
+                                <FONT FACE="OpenSans-Regular" color="#343434" size="3">
+                                    <p>If any of the default settings are changed, select <b>Save</b> at the top of the page to save the settings.</p>
+                                    <hr>
+                                </FONT>
+                            </div>
 
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a href="javascript:;"><span class="Dot"></span>Info page</a>
-				<ul class="third-menu disNone">
-					<div style="margin-left:60px">
-						<FONT FACE="OpenSans-Regular" color="#343434" size="3">Information about your router can be
-							found on the Info page. The following information is available:</FONT>
-					</div>
-					<div style="margin-left:90px">
-						<FONT FACE="OpenSans-Regular" color="#343434" size="3">
-							<ul>
-								<li>- Model name</li>
-								<li>- Model number</li>
-								<li>- Serial number</li>
-								<li>- IMEI number</li>
-								<li>- Voltage</li>
-								<li>- Current draw</li>
-								<li>- Temperature</li>
-								<li>- Operating hours</li>
-								<li>- Ethernet MAC addresses</li>
-								<li>- Wi-Fi MAC addresses</li>
-								<li>- Software version
-									<div style="margin-left:60px">
-										<FONT FACE="OpenSans-Regular" color="#343434" size="3">
-											<ul>
-												<li>- Application version</li>
-												<li>- Platform version</li>
-												<li>- Product bundle version</li>
-											</ul>
-										</FONT>
-									</div>
-								</li>
-								<li>Cellular signal strength (RSSI)</li>
+                    </li>
+                    </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><span class="Dot"></span>Info page</a>
+                <ul class="third-menu disNone">
+                    <div style="margin-left:60px">
+                        <FONT FACE="OpenSans-Regular" color="#343434" size="3">Information about your router can be found on the Info page. The following information is available:</FONT>
+                    </div>
+                    <div style="margin-left:90px">
+                        <FONT FACE="OpenSans-Regular" color="#343434" size="3">
+                            <ul>
+                                <li>- Model name</li>
+                                <li>- Model number</li>
+                                <li>- Serial number</li>
+                                <li>- IMEI number</li>
+                                <li>- Voltage</li>
+                                <li>- Current draw</li>
+                                <li>- Temperature</li>
+                                <li>- Operating hours</li>
+                                <li>- Ethernet MAC addresses</li>
+                                <li>- Wi-Fi MAC addresses</li>
+                                <li>- Software version
+                                    <div style="margin-left:60px">
+                                        <FONT FACE="OpenSans-Regular" color="#343434" size="3">
+                                            <ul>
+                                                <li>- Application version</li>
+                                                <li>- Platform version</li>
+                                                <li>- Product bundle version</li>
+                                            </ul>
+                                        </FONT>
+                                    </div>
+                                </li>
+                                <li>Cellular signal strength (RSSI)</li>
 
-							</ul>
-						</FONT>
-					</div>
-					<div style="margin-left:60px">
-						<FONT FACE="OpenSans-Regular" color="#343434" size="3">
-							A QR code is available at the bottom of the Info page that can be used for onboarding to the
-							Raymarine cloud service. For troubleshooting purposes you can also save any crash logs by
-							selecting <b>Save crash logs</b>.
-						</FONT>
-					</div>
-				</ul>
-				<hr>
-			</li>
+                            </ul>
+                        </FONT>
+                    </div>
+                    <div style="margin-left:60px">
+                        <FONT FACE="OpenSans-Regular" color="#343434" size="3">
+                            A QR code is available at the bottom of the Info page that can be used for onboarding to the Raymarine cloud service. For troubleshooting purposes you can also save any crash logs by selecting <b>Save crash logs</b>.
+                        </FONT>
+                    </div>
+                </ul>
+                <hr>
+            </li>
 
-		</ul>
-		</li>
+            </ul>
+            </li>
 
 
-		<li>
-			<a href="javascript:;"><img class="arrow-right" src="images/arrow.png">Connected devices page</a>
-			<div class="content disNone">
-				<FONT FACE="OpenSans-Regular" color="#343434" size="4">The connected devices page provides a list of all
-					devices connected to the router using ethernet or wireless connections. The details available are:
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="images/arrow.png">Connected devices page</a>
+                <div class="content disNone">
+                    <FONT FACE="OpenSans-Regular" color="#343434" size="4">The connected devices page provides a list of all devices connected to the router using ethernet or wireless connections. The details available are:
 
-					<ul>
-						<li>- Device name</li>
-						<li>- MAC address</li>
-						<li>- IP address</li>
-						<li>- Connection type</li>
+                        <ul>
+                            <li>- Device name</li>
+                            <li>- MAC address</li>
+                            <li>- IP address</li>
+                            <li>- Connection type</li>
 
-					</ul>
-					<hr>
-				</FONT>
-			</div>
+                        </ul>
+                        <hr>
+                    </FONT>
+                </div>
 
-		</li>
+            </li>
 
 
-		<li>
-			<a href="javascript:;"><img class="arrow-right" src="images/arrow.png">Advanced settings</a>
-			<ul class="second-menu disNone">
-				<div style="margin-left:30px">
-					<FONT FACE="OpenSans-Regular" color="#343434" size="4">The following Advanced settings pages are
-						available:
-					</FONT>
-				</div>
+            <li>
+                <a href="javascript:;"><img class="arrow-right" src="images/arrow.png">Advanced settings</a>
+                <ul class="second-menu disNone">
+                    <div style="margin-left:30px">
+                        <FONT FACE="OpenSans-Regular" color="#343434" size="4">The following Advanced settings pages are available:
+                        </FONT>
+                    </div>
 
-				<li>
-					<a href="javascript:;"><span class="Dot"></span>LAN configuration page</a>
-					<div class="content disNone">
-						<p>The LAN configuration page provides advanced settings for the SeaTalkhs(RayNet) wired
-							network.
-						</p>
-						<p>By default and to ensure compatibility with Raymarine MFDs the <b>Configure IP</b> setting is
-							set to <b>Automatically (DHCP on)</b>. Under normal circumstances these settings should not
-							need to be changed.</p>
-						<p>The available Configure IP options are:</p>
-						<div style="margin-left:60px">
-							<ul>
-								<li><b>Automatically (DHCP on)</b> — This is the recommended setting which allows IP
-									addresses to be automatically assigned to connected devices by the router using IP
-									addresses within the range stated in the DHCP server
-									settings.
-								</li>
-								<li><b>Manually (DHCP on)</b> — This setting allows you to manually configure the
-									router’s LAN IP address, subnet mask and default gateway and allows connecting
-									devices to be automatically assigned an IP address within
-									the range you specify in the DHCP server settings.</li>
-								<li><b>Manually (DHCP off)</b> — This settings allows you to manually configure the
-									router’s LAN IP Address, subnet mask and default gateway, but does not assign IP
-									addresses to connected devices.
-									<p><b>Note:</b> With DHCP switched off, each device will have to be manually
-										assigned an IP address in the same range as your router’s IP address.</p>
-								</li>
-							</ul>
-						</div>
-						<hr>
-					</div>
-				</li>
-				<li>
-					<a href="javascript:;"><span class="Dot"></span>Wi-Fi configuration page</a>
-					<div class="content disNone">
-						<p>The Wi-Fi configuration page provides advanced settings for the router’s Wi-Fi access point.
-						</p>
-						<p>The Router’s Wi-Fi IP address, subnet mask and default gateway can be configured. The IP
-							address range used for the Wi-Fi DHCP server can also be set.</p>
-						<hr>
-					</div>
-				</li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Ethernet configuration page</a>
+                        <div class="content disNone">
+                            <p>The Ethernet configuration page provides advanced settings for the SeaTalkhs(RayNet) wired network.
+                            </p>
+                            <p>By default and to ensure compatibility with Raymarine MFDs the <b>Configure IP</b> setting is set to <b>Automatically (DHCP on)</b>. Under normal circumstances these settings should not need to be changed.</p>
+                            <p>The available Configure IP options are:</p>
+                            <div style="margin-left:60px">
+                                <ul>
+                                    <li><b>Automatically (DHCP on)</b> — This is the recommended setting which allows IP addresses to be automatically assigned to connected devices by the router using IP addresses within the range stated in the DHCP server
+                                        settings.
+                                    </li>
+                                    <li><b>Manually (DHCP on)</b> — This setting allows you to manually configure the router’s LAN IP address, subnet mask and default gateway and allows connecting devices to be automatically assigned an IP address within
+                                        the range you specify in the DHCP server settings.</li>
+                                    <li><b>Manually (DHCP off)</b> — This settings allows you to manually configure the router’s LAN IP Address, subnet mask and default gateway, but does not assign IP addresses to connected devices.
+                                        <p><b>Note:</b> With DHCP switched off, each device will have to be manually assigned an IP address in the same range as your router’s IP address.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Wi-Fi configuration page</a>
+                        <div class="content disNone">
+                            <p>The Wi-Fi configuration page provides advanced settings for the router’s Wi-Fi access point.
+                            </p>
+                            <p>The Router’s Wi-Fi IP address, subnet mask and default gateway can be configured. The IP address range used for the Wi-Fi DHCP server can also be set.</p>
+                            <hr>
+                        </div>
+                    </li>
 
-				<li>
-					<a href="javascript:;"><span class="Dot"></span>GNSS page</a>
-					<div class="content disNone">The GNSS page provides settings and information for the router’s
-						internal / built-in GNSS receiver.
-						<div style="margin-left:60px">
-							<ul>
-								<li><b>GNSS fix status</b> — provides position fix status.</li>
-								<li><b>Internal GNSS</b> — enables and disables the internal GNSS receiver.</li>
-								<li><b>Restart GNSS</b> — reboots the internal GNSS receiver.</li>
-								<li><b>GNSS Constellations</b> — enables use of a second GNSS constellation (either
-									GLONASS or Beidou GNSS can be used in addition to the GPS constellation).</li>
-								<li><b>Differential positioning</b> — enables use of Satellite Based Augmentation
-									Systems (SBAS) to enhance your position fix.</li>
-								<li><b>Differential positioning systems</b> — allows selection of specific localized
-									Satellite Based Augmentation Systems (SBAS).</li>
-								<li><b>Satellites in use</b> — provides details of the positioning satellites currently
-									being tracked.</li>
-							</ul>
-						</div>
-						<hr>
-					</div>
-				</li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>GNSS page</a>
+                        <div class="content disNone">The GNSS page provides settings and information for the router’s internal / built-in GNSS receiver.
+                            <div style="margin-left:60px">
+                                <ul>
+                                    <li><b>GNSS fix status</b> — provides position fix status.</li>
+                                    <li><b>Internal GNSS</b> — enables and disables the internal GNSS receiver.</li>
+                                    <li><b>Restart GNSS</b> — reboots the internal GNSS receiver.</li>
+                                    <li><b>GNSS Constellations</b> — enables use of a second GNSS constellation (either GLONASS or Beidou GNSS can be used in addition to the GPS constellation).</li>
+                                    <li><b>Differential positioning</b> — enables use of Satellite Based Augmentation Systems (SBAS) to enhance your position fix.</li>
+                                    <li><b>Differential positioning systems</b> — allows selection of specific localized Satellite Based Augmentation Systems (SBAS).</li>
+                                    <li><b>Satellites in use</b> — provides details of the positioning satellites currently being tracked.</li>
+                                </ul>
+                            </div>
+                            <hr>
+                        </div>
+                    </li>
 
-				<li>
-					<a href="javascript:;"><span class="Dot"></span>Inputs & outputs</a>
-					<div class="content disNone">Settings and status pages are available for the management of devices
-						connected to the router’s inputs & outputs connections.
-						<div style="margin-left:60px">
-							<ul>
-								<li><b>Channel monitoring and control</b> page — view channel input and output details:
-									<div style="margin-left:90px">
-										<ul>
-											<li>- For input channels (channels 1 to 4) the channel number, channel name
-												and voltage is displayed.</li>
-											<li>- For output channels (channels 5 to 8) the channel number, channel name
-												is displayed and a toggle switch to turn the channel on and off is
-												available.
-											</li>
-										</ul>
-										<hr>
-									</div>
-								</li>
-								<li><b>Channel configuration</b> page — configure input and output channels:
-									<div style="margin-left:90px">
-										<ul>
-											<li>- For input channels (channels 1 to 4) the channel name and input type
-												can be configured. The input type can be configured as either:
-												<b>Analog</b>, <b>Digital positive</b> or <b>Digital negative</b>.</li>
-											<li>- For output channels (channels 5 to 8) the channel name can be
-												configured.
-											</li>
-										</ul>
-										<hr>
-									</div>
-								</li>
-								<li><b>Alert notifications</b> page — this page allows configuration of low voltage
-									alert notifications. A product low voltage warning can be set which triggers when
-									the voltage available to the router drops below a specified
-									value. Low voltage warnings can also be configured for each input channel (Channels
-									1 to 4).
-									<p><b>Note:</b> Each input channel warning must be configured with a unique Alert ID
-										with a value between 1,000 and 65,000.</p>
-									<hr>
-								</li>
-							</ul>
-						</div>
-						<hr>
-					</div>
-				</li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Inputs & outputs</a>
+                        <div class="content disNone">Settings and status pages are available for the management of devices connected to the router’s inputs & outputs connections.
+                            <div style="margin-left:60px">
+                                <ul>
+                                    <li><b>Channel monitoring and control</b> page — view channel input and output details:
+                                        <div style="margin-left:90px">
+                                            <ul>
+                                                <li>- For input channels (channels 1 to 4) the channel number, channel name and voltage is displayed.</li>
+                                                <li>- For output channels (channels 5 to 8) the channel number, channel name is displayed and a toggle switch to turn the channel on and off is available.
+                                                </li>
+                                            </ul>
+                                            <hr>
+                                        </div>
+                                    </li>
+                                    <li><b>Channel configuration</b> page — configure input and output channels:
+                                        <div style="margin-left:90px">
+                                            <ul>
+                                                <li>- For input channels (channels 1 to 4) the channel name and input type can be configured. The input type can be configured as either:
+                                                    <b>Analog</b>, <b>Digital positive</b> or <b>Digital negative</b>.</li>
+                                                <li>- For output channels (channels 5 to 8) the channel name can be configured.
+                                                </li>
+                                            </ul>
+                                            <hr>
+                                        </div>
+                                    </li>
+                                    <li><b>Alert notifications</b> page — this page allows configuration of low voltage alert notifications. A product low voltage warning can be set which triggers when the voltage available to the router drops below a specified
+                                        value. Low voltage warnings can also be configured for each input channel (Channels 1 to 4).
+                                        <p><b>Note:</b> Each input channel warning must be configured with a unique Alert ID with a value between 1,000 and 65,000.</p>
+                                        <hr>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr>
+                        </div>
+                    </li>
 
-				<li>
-					<a href="javascript:;"><span class="Dot"></span>Power management page</a>
-					<div class="content disNone">The router includes power management options to help reduce power
-						consumption whilst maintaining the ability to connect to the router remotely.
-						<p>With <b>Always on</b> selected the router is fully powered.</p>
-						<p>With <b>Low power mode</b> selected the router is placed into a low power state. In Low power
-							mode Wi-Fi connections are disabled.</p>
-						<p>In low power mode the router can be woken by:</p>
-						<div style="margin-left:60px">
-							<ul>
-								<li>- a remote device connected to the Raymarine cloud service, via the RayConnect app
-								</li>
-								<li>- an alert notification, configured in the <b>Alert notifications</b> page.</li>
-								<li>- a Wake On LAN (WOL) signal from a device connected to the router’s SeaTalkhs
-									network ports, when <b>LAN signal</b> is selected under <b>Also wake On:</b>.</li>
-								<li>- a device such as a switch, connected to one of the router’s input channels, when
-									the relevant input channel is selected under <b>Also wake On:</b>.</li>
-							</ul>
-						</div>
-						<p><b>Note:</b> When power cycled the router will also revert to Always on mode.</p>
-						<p>The input channels (Channels 1 to 4) can also be used to place the router into low power
-							mode.
-						</p>
-						<p>The router’s output channels (Channels 5 to 8) can be used to wake connected devices or
-							systems that have a wake-on-power input feature. Place a tick in the relevant output channel
-							to wake the connected device when the router
-							is woken from lower power mode.</p>
-						<p><b>Important:</b> To keep changes made to the Power management options click <b>Save</b>.</p>
-						<hr>
-					</div>
-				</li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Power management page</a>
+                        <div class="content disNone">The router includes power management options to help reduce power consumption whilst maintaining the ability to connect to the router remotely.
+                            <p>With <b>Always on</b> selected the router is fully powered.</p>
+                            <p>With <b>Low power mode</b> selected the router is placed into a low power state. In Low power mode Wi-Fi connections are disabled.</p>
+                            <p>In low power mode the router can be woken by:</p>
+                            <div style="margin-left:60px">
+                                <ul>
+                                    <li>- a remote device connected to the Raymarine cloud service, via the RayConnect app
+                                    </li>
+                                    <li>- an alert notification, configured in the <b>Alert notifications</b> page.</li>
+                                    <li>- a Wake On LAN (WOL) signal from a device connected to the router’s SeaTalkhs network ports, when <b>LAN signal</b> is selected under <b>Also wake On:</b>.</li>
+                                    <li>- a device such as a switch, connected to one of the router’s input channels, when the relevant input channel is selected under <b>Also wake On:</b>.</li>
+                                </ul>
+                            </div>
+                            <p><b>Note:</b> When power cycled the router will also revert to Always on mode.</p>
+                            <p>The input channels (Channels 1 to 4) can also be used to place the router into low power mode.
+                            </p>
+                            <p>The router’s output channels (Channels 5 to 8) can be used to wake connected devices or systems that have a wake-on-power input feature. Place a tick in the relevant output channel to wake the connected device when the router
+                                is woken from lower power mode.</p>
+                            <p><b>Important:</b> To keep changes made to the Power management options click <b>Save</b>.</p>
+                            <hr>
+                        </div>
+                    </li>
 
-				<li>
-					<a href="javascript:;"><span class="Dot"></span>Software upgrade page</a>
-					<div class="content disNone">
-						<p>Raymarine regularly issues software updates for its products which provide new and enhanced
-							features and improved performance and usability. It’s important to ensure that you have the
-							latest software for your products by regularly
-							checking the Raymarine website for new software releases.</p>
-						<p>To upgrade the software on your router follow the steps below:</p>
-						<p><b>Note:</b> The instructions below are for upgrading using a personal computer </p>
-						<div style="margin-left:60px">
-							<ul>
-								<li>1. Check your router’s current software version (Software version is available on
-									the Software upgrade page).</li>
-								<li>2. If available, Download updated software from the Raymarine website: <a
-										href="http://www.raymarine.com/software"
-										target="_blank"><u>www.raymarine.com/software</u></a></li>
-								<li>3. Open the router’s Software upgrade page located under Advanced settings.</li>
-								<li>4. Click <b>Browse file to upload</b>.</li>
-								<li>5. Locate and select the downloaded file. The file will then be uploaded to the
-									router.
-								</li>
-								<li>6. Click <b>Upgrade</b>. The router will now be upgraded. The upgrade process can
-									take some time, do NOT disconnect the device you are upgrading from until the
-									process is complete. </li>
-							</ul>
-							<p><b>Note:</b> Once the process is complete the router will reboot.</p>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Software upgrade page</a>
+                        <div class="content disNone">
+                            <p>Raymarine regularly issues software updates for its products which provide new and enhanced features and improved performance and usability. It’s important to ensure that you have the latest software for your products by regularly
+                                checking the Raymarine website for new software releases.</p>
+                            <p>To upgrade the software on your router follow the steps below:</p>
+                            <p><b>Note:</b> The instructions below are for upgrading using a personal computer </p>
+                            <div style="margin-left:60px">
+                                <ul>
+                                    <li>1. Check your router’s current software version (Software version is available on the Software upgrade page).</li>
+                                    <li>2. If available, Download updated software from the Raymarine website: <a href="http://www.raymarine.com/software" target="_blank"><u>www.raymarine.com/software</u></a></li>
+                                    <li>3. Open the router’s Software upgrade page located under Advanced settings.</li>
+                                    <li>4. Click <b>Browse file to upload</b>.</li>
+                                    <li>5. Locate and select the downloaded file. The file will then be uploaded to the router.
+                                    </li>
+                                    <li>6. Click <b>Upgrade</b>. The router will now be upgraded. The upgrade process can take some time, do NOT disconnect the device you are upgrading from until the process is complete. </li>
+                                </ul>
+                                <p><b>Note:</b> Once the process is complete the router will reboot.</p>
 
-						</div>
-						<hr>
-					</div>
-				</li>
+                            </div>
+                            <hr>
+                        </div>
+                    </li>
 
-				<li>
-					<a href="javascript:;"><span class="Dot"></span>Restart and factory reset page</a>
-					<div class="content disNone">If you encounter problems with your router it can be restarted or reset
-						to its factory default settings from the Restart & factory reset page.
-						<div style="margin-left:60px">
-							<ul>
-								<li>- Click <b>Restart router</b> to reboot the router.</li>
-								<li>- Click <b>Reset to factory defaults</b> to remove all changes made to the router's
-									settings and reset it to the default settings.</li>
-							</ul>
-						</div>
-						<hr>
-					</div>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Restart and factory reset page</a>
+                        <div class="content disNone">If you encounter problems with your router it can be restarted or reset to its factory default settings from the Restart & factory reset page.
+                            <div style="margin-left:60px">
+                                <ul>
+                                    <li>- Click <b>Restart router</b> to reboot the router.</li>
+                                    <li>- Click <b>Reset to factory defaults</b> to remove all changes made to the router's settings and reset it to the default settings.</li>
+                                </ul>
+                            </div>
+                            <hr>
+                        </div>
 
-				</li>
+                    </li>
 
-				<li>
-					<a href="javascript:;"><span class="Dot"></span>Admin password page</a>
-					<div class="content disNone">
-						<p>The default password used to access the router’s web interface can be changed.</p>
-						<p>To change the password follow the steps below:</p>
-						<div style="margin-left:60px">
-							<ul>
-								<li>1. Enter the current password in the <b>Current password:</b> field.</li>
-								<li>2. Enter your new password in the <b>Create new password:</b> field.</li>
-								<li>3. Re-enter the new password in the <b>Confirm new password:</b> field.</li>
-								<li>4. Click <b>Change password</b>.</li>
-							</ul>
-						</div>
-						<hr>
-					</div>
-				</li>
+                    <li>
+                        <a href="javascript:;"><span class="Dot"></span>Admin password page</a>
+                        <div class="content disNone">
+                            <p>The default password used to access the router’s web interface can be changed.</p>
+                            <p>To change the password follow the steps below:</p>
+                            <div style="margin-left:60px">
+                                <ul>
+                                    <li>1. Enter the current password in the <b>Current password:</b> field.</li>
+                                    <li>2. Enter your new password in the <b>Create new password:</b> field.</li>
+                                    <li>3. Re-enter the new password in the <b>Confirm new password:</b> field.</li>
+                                    <li>4. Click <b>Change password</b>.</li>
+                                </ul>
+                            </div>
+                            <hr>
+                        </div>
+                    </li>
 
-			</ul>
-		</li>
+                </ul>
+            </li>
 
-		</ul>
-	</div>
-	</div>
+        </ul>
+    </div>
+    </div>
 
 
 
-	<div class="div-2" width="100%">
-		<br>
-		<table width="100%">
-			<td width="5%">&nbsp;
-			</td>
-			<td width="95%">
-				<IMG SRC="images/manuals.png">
-				<FONT FACE="OpenSans-Semibold" color="#343434" size="44px">&nbsp;Manuals and Documents</FONT>
+    <div class="div-2" width="100%">
+        <br>
+        <table width="100%">
+            <td width="5%">&nbsp;
+            </td>
+            <td width="95%">
+                <IMG SRC="images/manuals.png">
+                <FONT FACE="OpenSans-Semibold" color="#343434" size="44px">&nbsp;Manuals and Documents</FONT>
 
-				<br><br>
-				<FONT FACE="OpenSans-Regular" color="#343434" size="4">Access the full documentation for your Router by
-					scanning the QR code or clicking the link below.</FONT>
+                <br><br>
+                <FONT FACE="OpenSans-Regular" color="#343434" size="4">Access the full documentation for your Router by scanning the QR code or clicking the link below.</FONT>
 
-				<br><br><img src="images/QR_Code.png">
-				<br>
-				<br>
-				<FONT FACE="OpenSans-Regular" color="#343434" size="4">
-					<a href="https://tinyurl.com/yywjo3mj" target="_blank"><u>View full product documentation </u></a>
-				</FONT>
-	</div>
+                <br><br><img src="images/QR_Code.png">
+                <br>
+                <br>
+                <FONT FACE="OpenSans-Regular" color="#343434" size="4">
+                    <a href="https://tinyurl.com/yywjo3mj" target="_blank"><u>View full product documentation </u></a>
+                </FONT>
+    </div>
 
-	</td>
+    </td>
 
-	</table>
-	<br>
-
-
-	</div>
-
-	<br>
+    </table>
+    <br>
 
 
-	<table width="100%">
-		<td width="5%">&nbsp;
-		</td>
-		<td width="95%">
+    </div>
 
-			<p>
-				<FONT FACE="OpenSans-Regular" color="#343434" size="2">
-					Publication: 81399 (Rev 2)
-					<br> Date: 05-2021
-					<br>
-					<Br> ©2021 Raymarine UK Limited. All rights reserved.
+    <br>
 
-		</td>
-	</table>
 
-	</FONT>
-	</p>
+    <table width="100%">
+        <td width="5%">&nbsp;
+        </td>
+        <td width="95%">
+
+            <p>
+                <FONT FACE="OpenSans-Regular" color="#343434" size="2">
+                    Publication: 81399 (Rev 2)
+                    <br> Date: 05-2021
+                    <br>
+                    <Br> ©2021 Raymarine UK Limited. All rights reserved.
+
+        </td>
+    </table>
+
+    </FONT>
+    </p>
 
 </body>
 <script>
-	$(".first-menu a").on("click", function () {
-		var isContent = $(this).parent().children().is('.content');
-		var disCss;
-		if (isContent) {
-			disCss = $(this).parent().children(".content").hasClass("disNone");
-			$(".content").removeClass("disVisi").addClass("disNone");
-			if (disCss) {
-				$(this).parent().children(".content").removeClass("disNone").addClass("disVisi");
-			} else {
-				$(this).parent().children(".content").removeClass("disVisi").addClass("disNone");
-			}
-		} else {
-			disCss = $(this).parent().children("ul").hasClass("disNone");
-			$(".content").removeClass("disVisi").addClass("disNone");
-			if (disCss) {
-				$(this).parent().children("ul").removeClass("disNone").addClass("disVisi");
-			} else {
-				$(this).parent().children("ul").removeClass("disVisi").addClass("disNone");
-			}
-		}
+    $(".first-menu a").on("click", function() {
+        var isContent = $(this).parent().children().is('.content');
+        var disCss;
+        if (isContent) {
+            disCss = $(this).parent().children(".content").hasClass("disNone");
+            $(".content").removeClass("disVisi").addClass("disNone");
+            if (disCss) {
+                $(this).parent().children(".content").removeClass("disNone").addClass("disVisi");
+            } else {
+                $(this).parent().children(".content").removeClass("disVisi").addClass("disNone");
+            }
+        } else {
+            disCss = $(this).parent().children("ul").hasClass("disNone");
+            $(".content").removeClass("disVisi").addClass("disNone");
+            if (disCss) {
+                $(this).parent().children("ul").removeClass("disNone").addClass("disVisi");
+            } else {
+                $(this).parent().children("ul").removeClass("disVisi").addClass("disNone");
+            }
+        }
 
 
-		if (disCss) {
-			$(this).children(".arrow-right").addClass("rotate-90reg");
-		} else {
-			$(this).children(".arrow-right").removeClass("rotate-90reg");
-		}
+        if (disCss) {
+            $(this).children(".arrow-right").addClass("rotate-90reg");
+        } else {
+            $(this).children(".arrow-right").removeClass("rotate-90reg");
+        }
 
-	})
+    })
 </script>
 
 </html>

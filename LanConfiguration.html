@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210521" rel="stylesheet" />
+    <link href="css/style.css?mv=20210527" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210521"></script>
+    <script src="js/lanConfiguration.js?mv=20210527"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210521"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210527"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -40,8 +40,8 @@
         
         .btn1 {
             position: absolute;
-            top: 22px;
-            right: 80px;
+            top: 31px;
+            right: 70px;
         }
         
         .Path-101 {
@@ -284,14 +284,31 @@
         .layui-layer-loading .layui-layer-loading2 {
             background-position: 30px 0;
         }
+        
+        @media screen and (max-width: 1192px) {
+            .LAN-configuration {
+                font-size: 30px;
+            }
+            .Path-101 {
+                width: 120px;
+                height: 40px;
+            }
+            .Rectangle-1182 {
+                width: 120px;
+                height: 40px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid" style="margin:30px 70px;">
         <div class="row">
-            <div style="position:relative;margin-bottom:40px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="LAN-configuration">Ethernet configuration
+            <div>
+                <div style="position:relative;margin-bottom:40px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="LAN-configuration">Ethernet configuration
+                </div>
             </div>
+
             <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">Changes-saved</div>
             <div id="error" class="error-icon Password-successfully-changed Changes-saved"></div>
             <div class="form-horizontal" name="formdata" id="content">
@@ -305,7 +322,7 @@
                     </label>
 
                     <div class="col-sm-8 selectContent">
-                        <select class="form-control width100 Automatically-DHCP-on" id="rsd" style="width:480px;border: solid 1px #707070;">
+                        <select class="form-control width100 Automatically-DHCP-on" id="rsd" style="width:263px;border: solid 1px #707070;">
                             <option value="Automatically (DHCP on)">Automatically (DHCP on)
                             </option>
                             <option value="Manually (DHCP off)">Manually (DHCP off)</option>

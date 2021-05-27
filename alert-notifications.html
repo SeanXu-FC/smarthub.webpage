@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210521" rel="stylesheet" />
+    <link href="css/style.css?mv=20210527" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -191,6 +191,12 @@
             border: solid 1px #707070;
             padding: 10px;
         }
+        
+        @media screen and (max-width: 1192px) {
+            .Channels-configuration {
+                font-size: 30px;
+            }
+        }
     </style>
 </head>
 
@@ -246,7 +252,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210521"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210527"></script>
     <script>
         var frequency = 0;
         $(function() {
@@ -264,6 +270,7 @@
                 name = escape(name);
                 var alertID = $(this).children(".Digital-input").attr("alertID");
                 var Notifications = $(this).children(".Digital-input").attr("Notifications");
+                var status = $(this).children(".Digital-input").attr("status");
                 var trigType = $(this).children(".Digital-input").attr("trigType");
                 var volt = $(this).children(".Digital-input").attr("volt");
                 var noti_msg = $(this).children(".Digital-input").attr("noti_msg");
@@ -281,7 +288,7 @@
                     content: ['editNotifications.html?dataId=' + dataId + '&name=' + name +
                         '&alertID=' + alertID +
                         '&Notifications=' + Notifications + '&trigType=' + trigType +
-                        '&volt=' + volt + '&types=' + types, 'no'
+                        '&volt=' + volt + '&types=' + types + '&status=' + status, 'no'
                     ],
                     end: function() {
                         var ChannelID = $("#saved_id").val();
@@ -354,17 +361,24 @@
                                 $("#name" + (i + 1)).text(json[i].name);
                                 $("#Notifications" + (i + 1)).attr("alertID", json[i].alter_id);
                                 $("#Notifications" + (i + 1)).attr("Notifications", json[i].notification);
+                                $("#Notifications" + (i + 1)).attr("status", json[i].status);
                                 $("#Notifications" + (i + 1)).attr("trigType", json[i].trig_cond_type);
                                 $("#Notifications" + (i + 1)).attr("volt", json[i].trig_cond_value);
                                 $("#Notifications" + (i + 1)).attr("noti_msg", json[i].noti_msg);
                                 $("#Notifications" + (i + 1)).attr("types", json[i].types);
-                                if (json[i].notification == 0) {
+                                if (json[i].status == 0) {
                                     $("#Notifications" + (i + 1)).text("Notifications disabled");
                                     $("#Notifications" + (i + 1)).removeClass("text-green")
                                 } else {
-                                    $("#Notifications" + (i + 1)).text("Notifications enabled");
-                                    $("#Notifications" + (i + 1)).addClass("text-green")
+                                    if (json[i].notification == 0) {
+                                        $("#Notifications" + (i + 1)).text("Notifications disabled");
+                                        $("#Notifications" + (i + 1)).removeClass("text-green")
+                                    } else {
+                                        $("#Notifications" + (i + 1)).text("Notifications enabled");
+                                        $("#Notifications" + (i + 1)).addClass("text-green")
+                                    }
                                 }
+
                                 var titleStr = "";
                                 if (json[i].notification == 1) {
                                     titleStr += "Alert trigger condition: Value above, " + json[i].volt +

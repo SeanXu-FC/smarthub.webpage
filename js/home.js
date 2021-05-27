@@ -29,12 +29,33 @@ $(function() {
             if (url == "home.html" || url == undefined) {
                 $(parent.document).find("#my-iframe").attr("src", url);
             } else {
+
                 var login = getCookie("LogInStaus");
                 if (login) {
                     $(parent.document).find("#my-iframe").attr("src", url);
                 } else {
                     LoginMessage(url);
                 }
+
+                if (url == "connectedDevices.html") {
+                    $(parent.document).find("#side-nav #nav a").removeClass("nav-a-active");
+                    $(parent.document).find("#side-nav>#nav>li:nth-child(3) a").addClass("nav-a-active")
+                } else {
+                    $(parent.document).find("#side-nav>#nav>li:nth-child(2)").addClass("open")
+                    $(parent.document).find(".left-nav #nav li.open .sub-menu").css("display", "block")
+                    $(parent.document).find("#side-nav #nav a").removeClass("nav-a-active");
+                    if (url == "WiFiNetwork-info1.html") {
+                        $(parent.document).find("#side-nav>#nav>li:nth-child(2) .sub-menu li:nth-child(1) a").addClass("nav-a-active")
+                    }
+                    if (url == "MobileData.html") {
+                        $(parent.document).find("#side-nav>#nav>li:nth-child(2) .sub-menu li:nth-child(2) a").addClass("nav-a-active")
+                    }
+                    if (url == "SmartHubPoint.html") {
+                        $(parent.document).find("#side-nav>#nav>li:nth-child(2) .sub-menu li:nth-child(3) a").addClass("nav-a-active")
+                    }
+                }
+
+
             }
         })
         //getCloud();

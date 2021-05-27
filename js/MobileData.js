@@ -832,27 +832,27 @@ function getDatausageVal() {
     }
 
     if (apn_name.length > 63) {
-        layer.msg("SIM1 APN (Access Point Name) cannot be greater than 64 bits");
+        layer.msg("SIM1 APN (Access Point Name) cannot be greater than 63 bits");
         return;
     }
     if (apn_name2.length > 63) {
-        layer.msg("SIM2 APN (Access Point Name) cannot be greater than 64 bits");
+        layer.msg("SIM2 APN (Access Point Name) cannot be greater than 63 bits");
         return;
     }
     if (apn_username.length > 63) {
-        layer.msg("SIM1 Username cannot be greater than 64 bits");
+        layer.msg("SIM1 Username cannot be greater than 63 bits");
         return;
     }
     if (apn_username2.length > 63) {
-        layer.msg("SIM2 Username cannot be greater than 64 bits");
+        layer.msg("SIM2 Username cannot be greater than 63 bits");
         return;
     }
     if (apn_password.length > 63) {
-        layer.msg("SIM1 Password cannot be greater than 64 bits");
+        layer.msg("SIM1 Password cannot be greater than 63 bits");
         return;
     }
     if (apn_password2.length > 63) {
-        layer.msg("SIM2 Password cannot be greater than 64 bits");
+        layer.msg("SIM2 Password cannot be greater than 63 bits");
         return;
     }
 

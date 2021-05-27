@@ -68,16 +68,24 @@ function getMobileInfo(layer) {
         contentType: "application/json;charset=utf-8",
         success: function(res) {
             frequency = 0;
-            console.log("qqqqq", res)
             if (res.result.mobile) {
-                $("#mobile_CSQ").html(res.result.mobile.csq);
-                $("#mobile_PLMN").html(res.result.mobile.plmn);
-                $("#Ceil_ID").html(res.result.mobile.cell_id);
-                $("#Location_Area_Code").html(res.result.mobile.lac);
-                $("#Connection_Type").html(res.result.mobile.act);
-                $("#Connection_Band").html(res.result.mobile.band);
-                $("#Network_provider").html(res.result.mobile.provider)
-                switch (res.result.mobile.cgreg) {
+                $("#mobile_CSQ").html(res.result.mobile.csq ? res.result.mobile.csq : "--");
+                $("#mobile_RSRQ").html(res.result.mobile.rsrq ? res.result.mobile.rsrq + " dB" : "--");
+                $("#mobile_RSRP").html(res.result.mobile.rsrp ? res.result.mobile.rsrp + " dBm" : "--");
+                $("#mobile_SINR").html(res.result.mobile.sinr ? res.result.mobile.sinr + " dB" : "--");
+                $("#mobile_PLMN").html(res.result.mobile.plmn ? res.result.mobile.plmn : "--");
+                $("#Ceil_ID").html(res.result.mobile.cell_id ? res.result.mobile.cell_id : "--");
+                $("#Location_Area_Code").html(res.result.mobile.lac ? res.result.mobile.lac : "--");
+                $("#Connection_Type").html(res.result.mobile.act ? res.result.mobile.act : "--");
+                $("#Connection_Band").html(res.result.mobile.band ? res.result.mobile.band : "--");
+                $("#Network_provider").html(res.result.mobile.provider ? res.result.mobile.provider : "--")
+                if (res.result.mobile.qrssi == -444 || res.result.mobile.qrssi == "-444") {
+                    $("#Cellular_signal").html("No network");
+                } else {
+                    $("#Cellular_signal").html(res.result.mobile.qrssi + " dB");
+                }
+
+                switch (Number(res.result.mobile.cgreg)) {
                     case 0:
                         $("#Register_Status").text("Not registered");
                         break;
@@ -97,9 +105,11 @@ function getMobileInfo(layer) {
                         $("#Register_Status").text("Registered, roaming");
                         break;
                     default:
+                        $("#Sim_Card_Status").text("--");
                         break;
                 }
-                switch (res.result.mobile.simStatus) {
+
+                switch (Number(res.result.mobile.simStatus)) {
                     case 0:
                         $("#Sim_Card_Status").text("Unknown");
                         break;
@@ -116,6 +126,7 @@ function getMobileInfo(layer) {
                         $("#Sim_Card_Status").text("PUK Need");
                         break;
                     default:
+                        $("#Sim_Card_Status").text("--");
                         break;
                 }
             } else if (res.error) {
@@ -186,11 +197,7 @@ function getInfoData(layer, loading) {
                 $("#MAC6174").html(res.result.Qca6174Mac);
                 $("#Platform_version").html(res.result.PlatformVersion ? res.result.PlatformVersion : "--");
                 $("#Product_version").html(res.result.BundleVersion);
-                if (res.result.MobileSignalStrength == -444 || res.result.MobileSignalStrength == "-444") {
-                    $("#Cellular_signal").html("No network");
-                } else {
-                    $("#Cellular_signal").html(res.result.MobileSignalStrength + " dB");
-                }
+
 
                 if (res.result.AdminPwd) {
                     qrcode(res.result.AdminPwd);
@@ -268,6 +275,10 @@ function downloadFile(url) {
         net.addEventListener("beforeunload", (e) => {
             console.log("下载完成")
             $("#btnSave").prop("disabled", false)
+            layui.use('layer', function() {
+                var layer = layui.layer;
+                getLogNumber(layer);
+            });
         });
     }, 500)
 }

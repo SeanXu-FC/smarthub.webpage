@@ -35,8 +35,8 @@
         
         .btn1 {
             position: absolute;
-            top: 22px;
-            right: 80px;
+            top: 31px;
+            right: 70px;
         }
         
         .Path-101 {
@@ -231,6 +231,7 @@
             font-size: 18px;
             color: #3a3a3a;
             padding-left: 10px;
+            line-height: 22px;
         }
         
         .input-name {
@@ -297,6 +298,20 @@
             color: #3a3a3a;
             opacity: 0.5;
         }
+        
+        @media screen and (max-width: 1192px) {
+            .LAN-configuration {
+                font-size: 30px;
+            }
+            .Path-101 {
+                width: 120px;
+                height: 40px;
+            }
+            .Rectangle-1182 {
+                width: 120px;
+                height: 40px;
+            }
+        }
     </style>
 </head>
 
@@ -314,6 +329,7 @@
                             <div class="layui-input-block pt-5" id="low_power">
                                 <input type="radio" lay-filter="activeSIM" name="activeSIM" value="2" title="Always on">
                                 <p class="right-describe">
+                                    Router will always be on
                                 </p>
                                 <input type="radio" lay-filter="activeSIM" name="activeSIM" value="1" title="Low power mode">
                                 <p class="right-describe">Router will run in a low power state and will wake on LTE and alert notifications
@@ -324,48 +340,48 @@
                             <div class="title-describe mt-30">Also wake on:</div>
                             <div class="layui-form layui-form-pane -flex-display ml-20">
                                 <div class="layui-input-block pt-5" id="input_power">
-                                    <div class="mt-20">
+                                    <div class="mt-15">
                                         <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="LAN_signal" id="LAN_signal" title="LAN signal" value="LAN signal">
                                         <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>LAN signal</span><i class="layui-icon layui-icon-ok"></i></div>
                                     </div>
-                                    <div class="mt-20">
+                                    <div class="mt-15">
                                         <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels0" id="input_channels0" title="--" value="Weak signal">
                                         <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>
                                     </div>
-                                    <div class="mt-20">
+                                    <div class="mt-15">
                                         <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels1" id="input_channels1" title="--" value="Data limit reached">
                                         <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
                                     </div>
-                                    <div class="mt-20">
+                                    <div class="mt-15">
                                         <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels2" id="input_channels2" title="--" value="hen roaming">
                                         <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
                                     </div>
-                                    <div class="mt-20">
+                                    <div class="mt-15">
                                         <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="input_channels3" id="input_channels3" title="--" value="No network">
                                         <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
                                     </div>
 
                                 </div>
                             </div>
-                            <p class="right-describe mt-20">Router will run in a low power state and will wake on LTE and alert notifications
+                            <p class="right-describe mt-20">Input channels can be set to wake the router from low power mode when they are switched on
                             </p>
                             <div class="title-describe mt-40">Turn on these outputs when waking from low power mode:
                             </div>
                             <div class="layui-form layui-form-pane -flex-display ml-20">
                                 <div class="layui-input-block pt-5" id="Output_power">
-                                    <div class="mt-20">
+                                    <div class="mt-15">
                                         <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels4" id="Output_channels4" title="--" value="Weak signal">
                                         <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Weak signal</span><i class="layui-icon layui-icon-ok"></i></div>
                                     </div>
-                                    <div class="mt-20">
+                                    <div class="mt-15">
                                         <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels5" id="Output_channels5" title="--" value="Data limit reached">
                                         <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>Data limit reached</span><i class="layui-icon layui-icon-ok"></i></div>
                                     </div>
-                                    <div class="mt-20">
+                                    <div class="mt-15">
                                         <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels6" id="Output_channels6" title="--" value="hen roaming">
                                         <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>When roaming</span><i class="layui-icon layui-icon-ok"></i></div>
                                     </div>
-                                    <div class="mt-20">
+                                    <div class="mt-15">
                                         <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="Output_channels7" id="Output_channels7" title="--" value="No network">
                                         <div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>No network</span><i class="layui-icon layui-icon-ok"></i></div>
                                     </div>

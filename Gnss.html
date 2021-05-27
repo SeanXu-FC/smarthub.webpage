@@ -10,11 +10,10 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css">
-    <link href="css/style.css?mv=20210521" rel="stylesheet" />
+    <link href="css/style.css?mv=20210527" rel="stylesheet" />
     <title>Document</title>
     <style>
         .mc {
-            margin: 20px 0 0 40px;
             position: relative
         }
         
@@ -49,6 +48,11 @@
             color: #343434;
             border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
+        }
+        
+        .container-fluid {
+            margin: 30px 70px;
+            padding: 0;
         }
         
         .Rectangle-1182 {
@@ -172,8 +176,8 @@
         
         .btn1 {
             position: absolute;
-            top: -3px;
-            right: 80px;
+            top: 0px;
+            right: 0px;
         }
         
         .Path-101 {
@@ -299,6 +303,20 @@
             font-weight: normal;
             text-align: left;
             color: #343434 !important;
+        }
+        
+        @media screen and (max-width: 1192px) {
+            .GNSS {
+                font-size: 30px;
+            }
+            .Path-101 {
+                width: 120px;
+                height: 40px;
+            }
+            .Rectangle-1182 {
+                width: 120px;
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -465,7 +483,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210521"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210527"></script>
 
     <script>
         $(function() {

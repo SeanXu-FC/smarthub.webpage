@@ -687,7 +687,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210521"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210527"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -697,6 +697,7 @@
             var name = GetUrlParam("name");
             name = unescape(name);
             var Notifications = GetUrlParam("Notifications");
+            var status = GetUrlParam("status");
             var trigType = GetUrlParam("trigType");
             oldTrigType = trigType;
             var volt = GetUrlParam("volt");
@@ -727,16 +728,23 @@
             layui.use(['form', 'layer'], function() {
                 var layer = layui.layer;
                 var form = layui.form;
-                if (Notifications == 1) {
-                    $("#Notifications").attr("checked", "checked");
-                    $("#volts_input").removeAttr("disabled");
-                    $("#security").removeAttr("disabled");
-                    $("#alert_areatext").removeAttr("disabled");
-                } else {
+                if (status == 0) {
                     $("#Notifications").removeAttr("checked");
                     $("#volts_input").attr("disabled", "disabled");
                     $("#security").attr("disabled", "disabled");
                     $("#alert_areatext").attr("disabled", "disabled");
+                } else {
+                    if (Notifications == 1) {
+                        $("#Notifications").attr("checked", "checked");
+                        $("#volts_input").removeAttr("disabled");
+                        $("#security").removeAttr("disabled");
+                        $("#alert_areatext").removeAttr("disabled");
+                    } else {
+                        $("#Notifications").removeAttr("checked");
+                        $("#volts_input").attr("disabled", "disabled");
+                        $("#security").attr("disabled", "disabled");
+                        $("#alert_areatext").attr("disabled", "disabled");
+                    }
                 }
 
                 $("#volts_input").val(volt);
