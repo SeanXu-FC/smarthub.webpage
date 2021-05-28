@@ -12,10 +12,9 @@ $(function() {
         $("#side-nav #nav a").removeClass("nav-a-active");
         $(this).addClass("nav-a-active");
         var a = $(this).attr("data-url");
-        if (a) {
+        if (a && a != "home.html") {
             a = a + "?v=" + Math.random();
         }
-
         "home.html" == a || void 0 == a ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : getCookie("LogInStaus") ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : LoginMessage(a)
     })
 
