@@ -419,13 +419,17 @@
                 getMonitoringData(layer, loading);
                 form.on('radio(activeSIM)', function(data) {
                     var value = data.value;
-                    console.log(value);
+
                     if (value == 2) {
                         checkedRadioDisabled(true, {
                             "opacity": "0.5"
                         });
+
                     } else {
                         renderHtml(layer, loading)
+                        $(".title-describe").css({
+                            "opacity": "1"
+                        })
                     }
                 });
             });
@@ -455,20 +459,7 @@
                     layer.close(loading);
                     powerData = res.result;
                     $('input[name="activeSIM"]').prop("checked", false);
-                    if (res.result.LowPowerMode == 2) {
-                        $('input[name="activeSIM"]').eq(0).prop("checked", true);
-                        checkedRadioDisabled(true, {
-                            "opacity": "0.5"
-                        });
-                    } else {
-                        $('input[name="activeSIM"]').eq(1).prop("checked", true);
-                        $("#LAN_signal").prop("disabled", false);
-                        if (res.result.LowPowerMode == 1) {
-                            $("#LAN_signal").prop("checked", true);
-                        } else {
-                            $("#LAN_signal").prop("checked", false);
-                        }
-                    }
+
                     if (res.result && res.result.io_date) {
                         var json = res.result.io_date;
                         for (var i = 0; i < json.length; i++) {
@@ -505,10 +496,35 @@
                             }
 
                         }
+
+                        if (res.result.LowPowerMode == 2) {
+                            $('input[name="activeSIM"]').eq(0).prop("checked", true);
+                            checkedRadioDisabled(true, {
+                                "opacity": "0.5"
+                            });
+
+                        } else {
+                            $('input[name="activeSIM"]').eq(1).prop("checked", true);
+                            $("#LAN_signal").prop("disabled", false);
+                            if (res.result.LowPowerMode == 1) {
+                                $("#LAN_signal").prop("checked", true);
+                            } else {
+                                $("#LAN_signal").prop("checked", false);
+                            }
+                        }
                         layui.use(['form'], function() {
                             var form = layui.form;
                             form.render();
                         });
+
+                        if (res.result.LowPowerMode == 2) { //需要在form.render();改变透明度，不然form.render()后又重新渲染了
+                            $(".layui-form-checkbox span").css(
+                                "opacity", "0.5"
+                            )
+                        }
+
+
+
                     } else if (res.error) {
                         layui.use(['form', 'layer'], function() {
                             var layer = layui.layer;
@@ -687,7 +703,6 @@
                 }
             }
 
-            console.log(params)
             setPowerManagement(params)
         }
         //保存
@@ -733,6 +748,7 @@
         }
 
         function checkedRadioDisabled(flag, cssObj) {
+
             $("#LAN_signal").prop("disabled", flag);
             $("#input_channels0").prop("disabled", flag);
             $("#input_channels1").prop("disabled", flag);

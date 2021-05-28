@@ -115,7 +115,6 @@ function toUploading(files) {
         }
         $("#upload_progress").removeClass("layui-hide");
         xhr.upload.onprogress = function(e) {
-            console.log(e.loaded, e.total)
             var value = Math.floor(100 * e.loaded / e.total);
             element.progress('upload_progress', value + '%') //设置页面进度条
             $("#upgrade").prop("disabled", true);
