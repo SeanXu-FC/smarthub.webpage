@@ -14,10 +14,10 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210528"></script>
+    <script src="js/lanConfiguration.js?mv=20210408"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210528"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210408"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -281,6 +281,10 @@
             color: #343434;
         }
         
+        .layui-layer-dialog .layui-layer-content {
+            font-size: 18px !important;
+        }
+        
         @media screen and (max-width: 1192px) {
             .LAN-configuration {
                 font-size: 30px;
@@ -415,6 +419,16 @@
 
             $("#btn2").on("click", function() {
                 var leasetime = Number($('#leasetime').val());
+                if (Number(leasetime) > 172800) {
+                    layui.use(['form', 'layer'], function() {
+                        var layer = layui.layer;
+                        layer.msg("DHCP lease time cannot be greater than 172800S!", {
+                            time: 3000,
+                            area: ['400px', '80px']
+                        });
+                    })
+                    return;
+                }
                 var data = {
                     "jsonrpc": "2.0",
                     "method": "SetLanSettings",

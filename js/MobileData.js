@@ -166,7 +166,6 @@ $(function() {
 })
 
 function ResetAPNsettings(SIM) {
-    console.log(SIM)
     parent.layer.open({
         id: "ResetAPNsettings",
         type: 2,
@@ -212,7 +211,6 @@ function lockSimPinTip(checked) {
                     getMainParameters(layer, form);
                 })
             } else {
-                console.log("currentSIM", currentSIM)
                 if (MobileData[(currentSIM - 1)].pin_lock == 0) {
                     $("#SIM_pin_lock" + currentSIM + " input").prop("checked", false);
                     $("#Change_SIM_pin" + currentSIM).attr("disabled", "disabled");
@@ -230,10 +228,8 @@ function lockSimPinTip(checked) {
 }
 
 function initBindEvent(id) {
-    console.log(id)
     $('#' + id).on('click', function() {
-        console.log(currentSIM)
-            //iframe层
+        //iframe层
         parent.layer.open({
             type: 2,
             title: false,
@@ -259,7 +255,6 @@ function initBindEvent(id) {
 
 function bindUnblockEvent(id) {
     $('#' + id).on('click', function() {
-        console.log(currentSIM)
         var times = MobileData[(currentSIM - 1)].puk_times;
         //iframe层
         parent.layer.open({
@@ -316,7 +311,6 @@ function getMainParameters(layer, form) {
 
                 //json.sim[0].isblock = 1
                 MobileData = json.sim;
-                console.log("MobileData", MobileData)
                 renderDataUsage(MobileData, 0);
                 setTimeout(() => {
                     renderDataUsage(MobileData, 1);
@@ -555,7 +549,6 @@ function renderDataUsage(json, i) {
         //     json[i].days[a] = json[i].days[a].replace(".", "/")
         // }
         Xdate = json[i].days;
-        console.log(Xdate)
         $(".now-month1").text(Xdate[0]);
         var len2 = Xdate.length;
         $(".now-month2").text(Xdate[len2 - 1]);
@@ -714,13 +707,9 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum, data_w
             type: 'value',
             max: limitNum,
             max: function(extent) {
-                console.log(extent)
-
                 if (extent.max != "-Infinity") {
-                    console.log(limitNum)
                     return extent.max > limitNum ? extent.max : limitNum //强制改变Y周最大值，以便定值横线能显示
                 } else {
-                    console.log(limitNum)
                     return limitNum
                 }
 
@@ -822,11 +811,11 @@ function getDatausageVal() {
     var SIM_pin_lock2 = $("#SIM_pin_lock2 input").is(":checked") == true ? 1 : 0;
 
 
-    if (Number(dataWaring) > Number(dataLimit)) {
+    if (setDataWaring == 1 && setDataLimit == 1 && Number(dataWaring) > Number(dataLimit)) {
         layer.msg("SIM1 data warning cannot be greater than data limit");
         return;
     }
-    if (Number(dataWaring2) > Number(dataLimit2)) {
+    if (setDataWaring2 == 1 && setDataLimit2 == 1 && Number(dataWaring2) > Number(dataLimit2)) {
         layer.msg("SIM2 data warning cannot be greater than data limit");
         return;
     }
@@ -894,7 +883,6 @@ function getDatausageVal() {
         ]
 
     }
-    console.log("params", params)
     layui.use(['layer'], function() {
         var layer = layui.layer;
         setDatausage(layer, params)
