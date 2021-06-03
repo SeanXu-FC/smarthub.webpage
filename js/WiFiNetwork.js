@@ -441,25 +441,32 @@ function bindEvent() {
         var freq = infoHtml.attr("freq");
         var bssid = infoHtml.attr("bssid");
         var encrypt = infoHtml.attr("encrypt");
+        var is_saved = infoHtml.attr("is_saved");
 
         var signal = infoHtml.attr("rssi");
-        signal = Math.abs(signal);
-        console.log(signal)
-        if (signal < 70) {
-            console.log(11)
-            signal = "Good";
-        } else if (signal >= 70) {
-            console.log(22)
-            signal = "Weak";
+
+        if (is_saved == 1) {
+            forgetSavedWifi(infoHtml);
+        } else {
+            signal = Math.abs(signal);
+            console.log(signal)
+            if (signal < 70) {
+                console.log(11)
+                signal = "Good";
+            } else if (signal >= 70) {
+                console.log(22)
+                signal = "Weak";
+            }
+
+            if (2400 < freq && freq < 2900) {
+                freq = "2.4GHz"
+            } else if (5030 < freq && freq < 5900) {
+                freq = "5GHz"
+            }
+            var tipStr = '<div class="tips-c"><div class="tip-title">' + ssid + '</div><div class="-flex-dis"><span class="tip-l">Signal strength:</span><span class="tip-r">' + signal + '</span></div><div class="-flex-dis"><span class="tip-l">Frequency band:</span><span class="tip-r">' + freq + '</span></div><div class="-flex-dis"><span class="tip-l">Security:</span><span class="tip-r">' + encrypt + '</span></div><div class="-flex-dis"><span class="tip-l">MAC address:</span><span class="tip-r">' + bssid + '</span></div></div>'
+            promptWifiMessage(ssid, tipStr, infoHtml);
         }
 
-        if (2400 < freq && freq < 2900) {
-            freq = "2.4GHz"
-        } else if (5030 < freq && freq < 5900) {
-            freq = "5GHz"
-        }
-        var tipStr = '<div class="tips-c"><div class="tip-title">' + ssid + '</div><div class="-flex-dis"><span class="tip-l">Signal strength:</span><span class="tip-r">' + signal + '</span></div><div class="-flex-dis"><span class="tip-l">Frequency band:</span><span class="tip-r">' + freq + '</span></div><div class="-flex-dis"><span class="tip-l">Security:</span><span class="tip-r">' + encrypt + '</span></div><div class="-flex-dis"><span class="tip-l">MAC address:</span><span class="tip-r">' + bssid + '</span></div></div>'
-        promptWifiMessage(ssid, tipStr, infoHtml);
     })
 
 
@@ -621,6 +628,9 @@ function forgetWifiHtml(infoHtml) {
     var ssid = infoHtml.attr("ssid");
     ssid = escape(ssid);
     var bssid = infoHtml.attr("bssid");
+    var encrypt = infoHtml.attr("encrypt");
+    var is_saved = infoHtml.attr("is_saved");
+    var is_connected = infoHtml.attr("is_connected");
     if (ssid && bssid) {} else {
         layui.use(['form', 'layer'], function() {
             var layer = layui.layer;
@@ -628,9 +638,7 @@ function forgetWifiHtml(infoHtml) {
         })
         return;
     }
-    var encrypt = infoHtml.attr("encrypt");
-    var is_saved = infoHtml.attr("is_saved");
-    var is_connected = infoHtml.attr("is_connected");
+
     //iframe层
     parent.layer.open({
         type: 2,
@@ -664,6 +672,59 @@ function forgetWifiHtml(infoHtml) {
                 TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
 
+        }
+    });
+    $(window).resize();
+}
+//删除/忘记已经保存的wifi
+function forgetSavedWifi(infoHtml) {
+    clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
+    var ssid = infoHtml.attr("ssid");
+    ssid = escape(ssid);
+    var bssid = infoHtml.attr("bssid");
+    var encrypt = infoHtml.attr("encrypt");
+    var is_saved = infoHtml.attr("is_saved");
+    var is_connected = infoHtml.attr("is_connected");
+    if (ssid && bssid) {} else {
+        layui.use(['form', 'layer'], function() {
+            var layer = layui.layer;
+            layer.msg("WiFi is not connected, unable to get details", { time: 3000 });
+        })
+        return;
+    }
+
+    //iframe层
+    parent.layer.open({
+        type: 2,
+        title: false,
+        closeBtn: 0,
+        shade: 0.8,
+        area: ['534px', '465px'],
+        //area: '534px',
+        content: ["SavedWifi.html?ssid=" + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
+        end: function() {
+            var connectingSsid = $("#saved_id").val();
+            var connectingBssid = $("#saved_id").attr("bssid");
+            var go_connect = $("#saved_id").attr("go_connect");
+            var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
+            if (connectingSsid && connectingBssid) {
+                if (go_connect) { //点击连接按钮
+                    savedWifiConnect(connectingSsid, connectingBssid, encrypt, infoHtml);
+                } else {
+                    clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
+                    for (var i = 0; i < wifiJson.length; i++) {
+                        if (connectingSsid == wifiJson[i].ssid && connectingBssid == wifiJson[i].bssid) {
+                            wifiJson.splice(i, 1);
+                            sessionStorage.setItem('wifiJson', JSON.stringify(wifiJson))
+                        }
+                    }
+                    renderWifiList(wifiJson);
+                    clearInterval(timer);
+                    updateWifiList();
+                    console.log("15s获取wifi列表重新开启")
+                    TimerPollingWifiList(); //开启每隔15s获取wifi列表
+                }
+            }
         }
     });
     $(window).resize();
