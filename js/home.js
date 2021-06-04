@@ -446,13 +446,13 @@ function progressBar() {
     progress = parentTipMessage(tip);
     $(parent.document).find("#div3").myProgress({
         speed: 10,
-        percent: ((progressI / 800) * 100).toFixed(0),
+        percent: ((progressI / 1000) * 100).toFixed(0),
         width: "100%",
     });
 
     progressBarTimer = setInterval(() => {
         progressI = progressI + 1;
-        if (800 <= progressI) { //progressI=800进度条达到100%，时间达到80s
+        if (1000 <= progressI) { //progressI=1000进度条达到100%，时间达到80s
             progressInitFlag = false;
             clearInterval(progressBarTimer);
             clearInterval(progressTimer);
@@ -465,7 +465,7 @@ function progressBar() {
         }
         $(parent.document).find("#div3").myProgress({
             speed: 10,
-            percent: ((progressI / 800) * 100).toFixed(0),
+            percent: ((progressI / 1000) * 100).toFixed(0),
             width: "100%",
         });
     }, 100);
