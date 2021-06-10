@@ -175,7 +175,7 @@
         }
         
         .Rectangle-1182 {
-            width: 87px;
+            width: 98px;
             height: 42px;
             /* padding: 0 20px; */
             border-radius: 5px;
@@ -220,7 +220,7 @@
         }
         
         .wirelessInfo {
-            padding: 30px 30px 30px 50px;
+            padding: 30px 30px 20px 30px;
         }
         
         .layui-textarea {
@@ -277,7 +277,7 @@
         }
         
         .Forget-network {
-            width: 87px;
+            width: 97px;
             height: 42px;
             font-family: OpenSans;
             font-size: 22px;
@@ -289,7 +289,7 @@
         }
         
         .Close {
-            font-family: OpenSans;
+            font-family: "OpenSans-Semibold";
             font-size: 22px;
             font-weight: normal;
             font-stretch: normal;
@@ -428,7 +428,7 @@
         }
         
         .Edit-Air-conditioner-notifications {
-            font-family: OpenSans;
+            font-family: "OpenSans-Semibold";
             font-size: 24px;
             font-weight: 600;
             font-stretch: normal;
@@ -449,6 +449,7 @@
             letter-spacing: normal;
             text-align: left;
             color: #333333 !important;
+            width: 330px;
         }
         
         .Channel-has {
@@ -566,7 +567,7 @@
         .btn-div {
             display: flex;
             justify-content: flex-end;
-            padding-right: 51px;
+            padding-right: 10px;
             align-items: center
         }
         
@@ -589,6 +590,10 @@
         
         .layui-form-item {
             justify-content: flex-start;
+        }
+        
+        .layui-input-block {
+            margin-left: 0px;
         }
         
         .lowVoltageInput {
@@ -616,7 +621,7 @@
 
             <div class="layui-form-item -flex-display">
 
-                <label class="layui-form-label Allow-notifications" style="width:330px;">Notify when voltage is
+                <label class="layui-form-label Allow-notifications">Notify when voltage is
                     below:</label>
 
                 <div class="layui-input-block -flex-display">
@@ -625,7 +630,7 @@
                 </div>
             </div>
 
-            <div class="btn-div row mt-20 ">
+            <div class="btn-div row mt-30 ">
                 <button id="cancel" class="Path-97 layui-btn Forget-network">Cancel</button>
                 <button data-method="notice" id="btn" class="Rectangle-1182 active Close ">Save</button>
             </div>
@@ -637,7 +642,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210528"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210610"></script>
     <script>
         var oldWarning, oldVolt;
         $(function() {

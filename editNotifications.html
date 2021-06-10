@@ -175,7 +175,7 @@
         }
         
         .Rectangle-1182 {
-            width: 87px;
+            width: 98px;
             height: 42px;
             /* padding: 0 20px; */
             border-radius: 5px;
@@ -277,7 +277,7 @@
         }
         
         .Forget-network {
-            width: 87px;
+            width: 97px;
             height: 42px;
             font-family: OpenSans;
             font-size: 22px;
@@ -289,7 +289,7 @@
         }
         
         .Close {
-            font-family: OpenSans;
+            font-family: "OpenSans-Semibold";
             font-size: 22px;
             font-weight: normal;
             font-stretch: normal;
@@ -428,7 +428,7 @@
         }
         
         .Edit-Air-conditioner-notifications {
-            font-family: OpenSans;
+            font-family: "OpenSans-Semibold";
             font-size: 24px;
             font-weight: 600;
             font-stretch: normal;
@@ -452,7 +452,7 @@
         }
         
         .Channel-has {
-            font-family: OpenSans;
+            font-family: "OpenSans-Semibold";
             font-size: 18px;
             font-weight: 600;
             font-stretch: normal;
@@ -687,7 +687,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210528"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210610"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -709,6 +709,7 @@
                 var layer = layui.layer;
                 var loading = layer.load(2, {
                     shade: false,
+                    area: ['520px', '300px'],
                     offset: ['255px', '366px']
                 });
                 getMonitoringData(dataId, layer, loading);

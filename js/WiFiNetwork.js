@@ -709,7 +709,8 @@ function forgetSavedWifi(infoHtml) {
             var wifiJson = JSON.parse(sessionStorage.getItem('wifiJson'));
             if (connectingSsid && connectingBssid) {
                 if (go_connect) { //点击连接按钮
-                    savedWifiConnect(connectingSsid, connectingBssid, encrypt, infoHtml);
+                    enterPasswordHtml(infoHtml);
+                    //savedWifiConnect(connectingSsid, connectingBssid, encrypt, infoHtml);
                 } else {
                     clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
                     for (var i = 0; i < wifiJson.length; i++) {

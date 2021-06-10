@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210408" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210408" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210610" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210610" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -88,7 +88,6 @@
         }
         
         .Mobile-data-big {
-            font-family: OpenSans;
             font-size: 44px;
             font-weight: 600;
             font-stretch: normal;
@@ -172,6 +171,7 @@
             color: #343434;
             opacity: 1;
             font-size: 26px;
+            font-family: 'OpenSans-Bold';
         }
         
         .tab-menu li.active:hover {
@@ -454,7 +454,7 @@
         
         .Network-provider {
             /* width: 152px; */
-            height: 24px;
+            height: 35px;
             font-family: OpenSans;
             font-size: 18px;
             font-weight: normal;
@@ -646,8 +646,9 @@
             border-radius: 5px;
             background-color: #009fe3;
             color: #fff;
-            font-family: OpenSans;
-            font-size: 20px;
+            font-family: "OpenSans-Semibold";
+            font-size: 22px;
+            font-weight: 600;
             text-align: center;
         }
         
@@ -679,7 +680,7 @@
         
         .Path-97 {
             width: 140px;
-            height: 50px;
+            height: 52px;
             border-radius: 5px;
             background-color: #f2f2f7;
             color: #434343 !important;
@@ -733,7 +734,7 @@
         }
         
         .limit-subtiltle {
-            font-family: OpenSans;
+            font-family: 'OpenSans-Semibold';
             font-size: 24px;
             font-weight: 600;
             text-align: left;
@@ -838,7 +839,7 @@
         }
         
         .resetAPN-p {
-            font-family: OpenSans;
+            font-family: "OpenSans-Bold";
             font-size: 12px;
             font-weight: bold;
             font-stretch: normal;
@@ -867,6 +868,10 @@
         
         .layui-form-pane .layui-input-block {
             margin-left: 10px;
+        }
+        
+        .network-mode {
+            align-items: flex-start;
         }
         
         @media screen and (max-width: 1192px) {
@@ -1087,6 +1092,15 @@
                                                         (International
                                                         Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15 valColor" id="sim_imsi"></span>
                                                 </div>
+                                                <div class="layui-form network-mode -flex-display -justify-box mt-25">
+                                                    <label class="Network-provider mt-15">Preferred network
+                                                        mode:</label>
+                                                    <div class="layui-input-block pt-10" id="network_mode1" style="width: 184px;">
+                                                        <input type="radio" lay-filter="activeSIM" name="activeSIM" value="0" title="3G/4G Auto">
+                                                        <input type="radio" lay-filter="activeSIM" name="activeSIM" value="1" title="4G only">
+                                                        <input type="radio" lay-filter="activeSIM" name="activeSIM" value="2" title="3G only">
+                                                    </div>
+                                                </div>
                                                 <div class="-flex-display -align-box -justify-box mt-25">
                                                     <label class="Network-provider mt-15">APN (Access Point
                                                         Name):</label>
@@ -1305,6 +1319,15 @@
                                                         (International
                                                         Mobile Subscriber Identity) number:</label><span class="col-md-6 mt-15 valColor" id="sim_imsi2"></span>
                                                 </div>
+                                                <div class="layui-form network-mode -flex-display -justify-box mt-25">
+                                                    <label class="Network-provider mt-15">Preferred network
+                                                        mode:</label>
+                                                    <div class="layui-input-block pt-10" id="network_mode2" style="width: 184px;">
+                                                        <input type="radio" lay-filter="activeSIM2" name="activeSIM2" value="0" title="3G/4G Auto">
+                                                        <input type="radio" lay-filter="activeSIM2" name="activeSIM2" value="1" title="4G only">
+                                                        <input type="radio" lay-filter="activeSIM2" name="activeSIM2" value="2" title="3G only">
+                                                    </div>
+                                                </div>
                                                 <div class="-flex-display -align-box -justify-box mt-25">
                                                     <label class="Network-provider mt-15">APN (Access Point
                                                         Name):</label>
@@ -1355,10 +1378,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210408"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210408"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210610"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210610"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210408"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210610"></script>
 
 </body>
 

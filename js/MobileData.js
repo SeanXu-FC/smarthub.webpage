@@ -424,6 +424,7 @@ function renderDataUsage(json, i) {
 
         $("#provider").text(json[i].provider);
         $("#sim_imsi").text(json[i].imsi);
+        $('input[name="activeSIM"]').eq(json[i].network_type).prop("checked", true);
         $("#AP_Name").val(json[i].apn_name);
         $("#Username").val(json[i].apn_username);
         $("#Password").val(json[i].apn_password);
@@ -516,6 +517,7 @@ function renderDataUsage(json, i) {
 
         $("#provider2").text(json[i].provider);
         $("#sim_imsi2").text(json[i].imsi);
+        $('input[name="activeSIM2"]').eq(json[i].network_type).prop("checked", true);
         $("#AP_Name2").val(json[i].apn_name);
         $("#Username2").val(json[i].apn_username);
         $("#Password2").val(json[i].apn_password);
@@ -784,6 +786,7 @@ function getDatausageVal() {
     if (switchMBLim == 1) {
         dataLimit = dataLimit * 1024;
     }
+    var networkMode = $("input[name='activeSIM']:checked").val();
     var apn_name = $("#AP_Name").val();
     var apn_username = $("#Username").val();
     var apn_password = $("#Password").val();
@@ -805,6 +808,7 @@ function getDatausageVal() {
     if (switchMBLim2 == 1) {
         dataLimit2 = dataLimit2 * 1024;
     }
+    var networkMode2 = $("input[name='activeSIM2']:checked").val();
     var apn_name2 = $("#AP_Name2").val();
     var apn_username2 = $("#Username2").val();
     var apn_password2 = $("#Password2").val();
@@ -859,6 +863,7 @@ function getDatausageVal() {
                 "usage_reminder_flag": Number(setDataLimit),
                 "monthly_data_limit": Number(dataLimit),
                 "sim_data_limt_unit": Number(switchMBLim),
+                "network_type": Number(networkMode),
                 "apn_name": apn_name,
                 "apn_password": apn_password,
                 "apn_username": apn_username,
@@ -875,6 +880,7 @@ function getDatausageVal() {
                 "usage_reminder_flag": Number(setDataLimit2),
                 "monthly_data_limit": Number(dataLimit2),
                 "sim_data_limt_unit": Number(switchMBLim2),
+                "network_type": Number(networkMode2),
                 "apn_name": apn_name2,
                 "apn_password": apn_password2,
                 "apn_username": apn_username2,

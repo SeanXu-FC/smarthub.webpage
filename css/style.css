@@ -1,3 +1,31 @@
+@font-face {
+    font-family: 'OpenSans';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/OpenSans/OpenSans-Regular.ttf) format('woff');
+}
+
+@font-face {
+    font-family: 'OpenSans-Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/OpenSans/OpenSans-Bold.ttf) format('woff');
+}
+
+@font-face {
+    font-family: 'OpenSans-Semibold';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/OpenSans/OpenSans-Semibold.ttf) format('woff');
+}
+
+@font-face {
+    font-family: 'OpenSans-Light';
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/OpenSans/OpenSans-Light.ttf) format('woff');
+}
+
 button {
     border: none !important;
 }
@@ -8,6 +36,21 @@ button:disabled {
 
 .opacity5 {
     opacity: 0.5 !important;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'OpenSans-Semibold';
 }
 
 .mt-5 {
@@ -710,8 +753,12 @@ body.min990 {
     zoom: 1
 }
 
+.layui-layer {
+    border-radius: 5px;
+}
+
 .layui-layer-iframe iframe {
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .layui-btn {

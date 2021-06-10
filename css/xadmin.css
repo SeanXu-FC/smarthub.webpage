@@ -26,7 +26,7 @@ html {
 body {
     width: 100%;
     min-height: 100%;
-    font: normal 100% Arial, sans-serif;
+    font: OpenSans;
     /* font-size: 14px;
     font-size: 1.4rem; */
     font-size: 62.5%;
@@ -305,7 +305,7 @@ xblock {
     width: auto;
     height: 43px;
     /* line-height: 52px; */
-    font-family: OpenSans;
+    font-family: "OpenSans-Semibold";
     font-size: 38px;
     font-weight: 600;
     font-stretch: normal;
@@ -438,6 +438,10 @@ xblock {
     padding: 20px 0px 20px 0px;
     display: block;
     cursor: pointer;
+}
+
+.left-nav #nav li .sub-menu li a {
+    font-family: "OpenSans-Bold";
 }
 
 .left-nav #nav li .sub-menu {
@@ -839,22 +843,26 @@ table td {
     font-size: 24px;
     font-weight: bold;
     color: #555555;
+    font-family: 'OpenSans-Bold';
 }
 
 .sub-menu li a cite {
     font-size: 21px;
     font-weight: normal;
     color: #666;
+    font-family: 'OpenSans';
 }
 
 .main-menu li a.nav-a-active cite {
     color: #009fe3;
     font-weight: 800;
+    font-family: 'OpenSans-Bold';
 }
 
 .sub-menu li a.nav-a-active cite {
     color: #009fe3;
     font-weight: bold;
+    font-family: 'OpenSans-Bold';
 }
 
 .layui-tab-content::-webkit-scrollbar {
@@ -890,7 +898,7 @@ table td {
 }
 
 #wifi_some_info .tip-title {
-    font-family: OpenSans;
+    font-family: "OpenSans-Semibold";
     font-size: 24px;
     font-weight: 600;
     font-stretch: normal;
@@ -926,6 +934,7 @@ table td {
     white-space: nowrap;
     font-size: 18px;
     font-weight: 600;
+    font-family: "OpenSans-Semibold";
 }
 
 #wifi_some_info .layui-layer-tips {
@@ -938,13 +947,15 @@ table td {
     line-height: 44px !important;
     display: inline-block;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 600 !important;
+    ;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
+    font-family: "OpenSans-Semibold";
 }
 
 .layui-layer-page .layui-layer-btn.layui-layer-btn-r {

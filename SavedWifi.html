@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210408" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210408"></script>
+    <link href="css/style.css?mv=20210610" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210610"></script>
     <title>Document</title>
     <style>
         * {
@@ -187,13 +187,15 @@
         }
         
         .Forget-network {
-            width: 71.8px;
-            height: 42px;
-            /* padding: 0 20px; */
+            width: 162px;
+            height: 44px;
             border-radius: 5px;
             background-color: #009fe3;
             color: #fff;
             padding: 0 10px;
+            font-family: "OpenSans-Semibold";
+            font-size: 18px;
+            font-weight: 600;
         }
         
         #pwd {
@@ -220,7 +222,7 @@
         
         .SKY546H {
             height: 33px;
-            font-family: OpenSans;
+            font-family: "OpenSans-Semibold";
             font-size: 24px;
             font-weight: 600;
             font-stretch: normal;
@@ -260,7 +262,7 @@
         }
         
         .Connected {
-            font-family: OpenSans;
+            font-family: "OpenSans-Semibold";
             font-size: 18px;
             font-weight: 600;
             font-stretch: normal;
@@ -389,14 +391,14 @@
             <div class="btn-bottom mt-20 mb-20">
                 <!-- <button id="layerDemo" data-method="notice" class="Path-97 layui-btn Forget-network" disabled>Forget
                     network</button> -->
-                <button id="layerDemo" class="Forget-network active ml-20" style="width:auto;">Forget
+                <button id="layerDemo" class="Forget-network active ml-20">Forget
                     network</button>
-                <button id="saved_connect" class="Forget-network active ml-20" style="width:auto;">Connect</button>
+                <button id="saved_connect" class="Forget-network active ml-20">Connect</button>
             </div>
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210408"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210610"></script>
     <script>
         var ssid, bssid, encrypt, is_saved;
         $(function() {
@@ -497,8 +499,8 @@
                         $(".Security").text(res.result.encrypt);
                         $(".Security").attr("title", res.result.encrypt);
                         $(".MAC-address").text(res.result.bssid);
-                        //$(".Connected-Status").text(res.result.status);
-                        $(".Connected-Status").text("Disconnected");
+                        $(".Connected-Status").text(res.result.status);
+
                         if (res.result.is_saved == 0) {
                             $('#layerDemo').hide();
                         }
