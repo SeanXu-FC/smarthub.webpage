@@ -14,10 +14,10 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210610"></script>
+    <script src="js/lanConfiguration.js?mv=20210611"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210610"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -425,6 +425,13 @@
                             time: 3000,
                             area: ['400px', '80px']
                         });
+                    })
+                    return;
+                }
+                if (Number(leasetime) < 60) {
+                    layui.use(['form', 'layer'], function() {
+                        var layer = layui.layer;
+                        layer.msg("Lease time must be greater than 60s!");
                     })
                     return;
                 }

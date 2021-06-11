@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css">
-    <link href="css/style.css?mv=20210610" rel="stylesheet" />
+    <link href="css/style.css?mv=20210611" rel="stylesheet" />
     <title>Document</title>
     <style>
         .mc {
@@ -349,7 +349,7 @@
                 <tr>
                     <td>
                         <div class="form-group form-line mt-20">
-                            <button type="submit" class="btn layui-btn Restart-GNSS">Restart
+                            <button id="Restart_GNSS" type="button" class="btn layui-btn Restart-GNSS">Restart
                                 GNSS</button>
                         </div>
                     </td>
@@ -360,8 +360,8 @@
 
                     </td>
                     <td class="col-sm-7 col-sm-offset-2 pt-30">
-                        <div class="layui-form" style="padding-left: 15px !important;">
-                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="GLONASS" value="1" checked>
+                        <div class="layui-form" id="Constellations_Glonass" style="padding-left: 15px !important;">
+                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="GLONASS" value="1">
                             <!-- <div class="GNSS-Fix-status">GLONASS</div> -->
                         </div>
 
@@ -371,19 +371,72 @@
                     <td class="col-sm-3 Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data pt-0">
                         Select which other satellite constellations are used to determine position,in addition to the GPS system </td>
                     <td class="col-sm-7 col-sm-offset-2">
-                        <div class="layui-form" style="padding-left: 15px !important;">
+                        <div class="layui-form" id="Constellations_Beldou" style="padding-left: 15px !important;">
                             <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="BEIDOU" value="1">
                         </div>
 
                     </td>
                 </tr>
                 <tr>
+                    <td class="col-sm-3 Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data pt-0">
+                    </td>
+                    <td class="col-sm-7 col-sm-offset-2">
+                        <div class="layui-form" id="Constellations_GPS" style="padding-left: 15px !important;">
+                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="GPS" value="1">
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-sm-3 Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data pt-0">
+                    </td>
+                    <td class="col-sm-7 col-sm-offset-2">
+                        <div class="layui-form" id="Constellations_SBAS" style="padding-left: 15px !important;">
+                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="SBAS" value="1">
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-sm-3 Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data pt-0">
+                    </td>
+                    <td class="col-sm-7 col-sm-offset-2">
+                        <div class="layui-form" id="Constellations_GALILEO" style="padding-left: 15px !important;">
+                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="GALILEO" value="1">
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-sm-3 Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data pt-0">
+                    </td>
+                    <td class="col-sm-7 col-sm-offset-2">
+                        <div class="layui-form" id="Constellations_IMES" style="padding-left: 15px !important;">
+                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="IMES" value="1">
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-sm-3 Disable-if-you-do-not-want-to-use-the-routers-internal-GNSS-receiver-as-a-source-for-positioning-data pt-0">
+                    </td>
+                    <td class="col-sm-7 col-sm-offset-2">
+                        <div class="layui-form" id="Constellations_QZSS" style="padding-left: 15px !important;">
+                            <input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" class="GNSS-Fix-status" lay-filter="layTransferCheckbox" title="QZSS" value="1">
+                        </div>
+
+                    </td>
+                </tr>
+
+
+
+                <tr>
                     <td class="col-sm-3 GNSS-Fix-status pt-30" style="vertical-align: bottom;padding-bottom: 0px;">
                         Differential positioning:</td>
                     <td class="col-sm-7 col-sm-offset-2 pt-30" style="padding-bottom: 0;">
                         <div class="layui-form layui-form-pane layui-form-item" style="padding-left: 6px !important;">
-                            <div class="layui-input-block">
-                                <input type="checkbox" checked="" name="open" lay-skin="primary" lay-filter="DifferentialPositioning" lay-text="ON|OFF">
+                            <div class="layui-input-block" id="Enable_SBAS">
+                                <input type="checkbox" name="open" lay-skin="primary" lay-filter="DifferentialPositioning" lay-text="ON|OFF">
                             </div>
                         </div>
                     </td>
@@ -399,29 +452,52 @@
                         <div id="test2" class="demo-transfer"></div>
                         <div class="layui-transfer-box" data-index="0" style="width: 373px; height: 253px;">
                             <ul class="layui-transfer-data layui-form" id="positioning_systems_ul" style="height: 253px;overflow-y:auto;">
-                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="Alcomsat(Algeria)" value="1">
+                                <li>
+                                    <input type="checkbox" id="ALCOMSAT" name="layTransferLeftCheck" lay-skin="primary" lay-filter="ALCOMSAT" title="Alcomsat(Algeria)" value="1">
                                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                        <span>Alcomsat(Algeria)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                        <span>Alcomsat(Algeria)</span>
+                                        <i class="layui-icon layui-icon-ok"></i>
+                                    </div>
                                 </li>
-                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="AUS-NZ(Australia New Zealand)" value="2">
+                                <li><input type="checkbox" id="AUS-NZ" name="layTransferLeftCheck" lay-skin="primary" lay-filter="AUS-NZ" title="AUS-NZ(Australia New Zealand)" value="2">
                                     <div class="layui-unselect layui-form-checkbox " lay-skin="primary">
                                         <span>AUS-NZ(Australia New Zealand)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
-                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="BDSBAS(China)" value="3">
+                                <li><input type="checkbox" id="BDSBAS" name="layTransferLeftCheck" lay-skin="primary" lay-filter="BDSBAS" title="BDSBAS(China)" value="3">
                                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
                                         <span>BDSBAS(China)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
-                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="EGNOS(Europe)" value="4">
+                                <li><input type="checkbox" id="EGNOS" name="layTransferLeftCheck" lay-skin="primary" lay-filter="EGNOS" title="EGNOS(Europe)" value="4">
                                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
                                         <span>EGNOS(Europe)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
-                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="GAGAN(Indian)" value="5">
+                                <li><input type="checkbox" id="GAGAN" name="layTransferLeftCheck" lay-skin="primary" lay-filter="GAGAN" title="GAGAN(Indian)" value="5">
                                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
                                         <span>GAGAN(Indian)</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
-                                <li><input type="checkbox" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTransferCheckbox" title="KAAS(Korea)" value="6">
+                                <li><input type="checkbox" id="KAAS" name="layTransferLeftCheck" lay-skin="primary" lay-filter="KAAS" title="KAAS(Korea)" value="6">
                                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
                                         <span>KAAS(Korea)</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" id="MSAS" name="layTransferLeftCheck" lay-skin="primary" lay-filter="MSAS" title="MSAS" value="6">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>MSAS</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" id="NSAS" name="layTransferLeftCheck" lay-skin="primary" lay-filter="NSAS" title="NSAS" value="6">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>NSAS</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" id="SDCM" name="layTransferLeftCheck" lay-skin="primary" lay-filter="SDCM" title="SDCM" value="6">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>SDCM</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" id="WAAS" name="layTransferLeftCheck" lay-skin="primary" lay-filter="layTraWAASnsferCheckbox" title="WAAS" value="6">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>WAAS</span><i class="layui-icon layui-icon-ok"></i></div>
+                                </li>
+                                <li><input type="checkbox" id="QZSS" name="layTransferLeftCheck" lay-skin="primary" lay-filter="QZSS" title="QZSS" value="6">
+                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                        <span>QZSS</span><i class="layui-icon layui-icon-ok"></i></div>
                                 </li>
 
                             </ul>
@@ -474,7 +550,7 @@
             <div class="btn1" id="btn02">
                 <span class="qx" style="display: inline-block;margin-left:148px;"><button id="cancel"
                         class="Path-101 Cancel">Cancel</button></span>
-                <span class="connected" style="display: inline-block;"><button id="btn2"
+                <span class="connected" style="display: inline-block;"><button id="btn_save"
                         class="Rectangle-1182 active OK">Save</button></span>
             </div>
         </div>
@@ -483,7 +559,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210610"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
 
     <script>
         var Ws, auth_token, frequency = 0;
@@ -494,6 +570,9 @@
                     shade: false
                 });
                 getGnss(layer, loading);
+            });
+            $("#Restart_GNSS").on("click", function() {
+                ResetGNSS();
             });
             //页面刷新
             $("#cancel").on("click", function() {
@@ -517,6 +596,10 @@
             $(window).on('beforeunload', function() {
                 console.log('监听iframe关闭');
                 stop();
+            });
+
+            $("#btn_save").on("click", function() {
+                getSaveVal();
             });
         })
 
@@ -598,16 +681,97 @@
                 if (received_msg.responseTo == "authenticate") {
                     getGnssData();
                 }
+                if (received_msg.responseTo == "resetGnss" && received_msg.state == true) {
+                    layui.use(['form', 'layer'], function() {
+                        var layer = layui.layer;
+                        layer.msg("Reset GNSS succeeded!");
+                    })
+                }
                 if (received_msg.responseTo == "getGnss") {
-                    if (received_msg.gnss && received_msg.gnss.EnableSBAS && received_msg.gnss.EnableSBASSats &&
-                        received_msg.gnss.EnableConstellations) {
-
+                    if (received_msg.gnss) {
+                        if (received_msg.gnss.EnableSBAS) {
+                            $("#Enable_SBAS input").attr("checked", "checked");
+                        }
+                        if (received_msg.gnss.EnableConstellations && received_msg.gnss.EnableConstellations
+                            .length) {
+                            for (var i = 0; i < received_msg.gnss.EnableConstellations.length; i++) {
+                                if (received_msg.gnss.EnableConstellations[i] == "GLONASS") {
+                                    $("#Constellations_Glonass input").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableConstellations[i] == "BEIDOU") {
+                                    $("#Constellations_Beldou input").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableConstellations[i] == "GPS") {
+                                    $("#Constellations_GPS input").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableConstellations[i] == "SBAS") {
+                                    $("#Constellations_SBAS input").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableConstellations[i] == "GALILEO") {
+                                    $("#Constellations_GALILEO input").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableConstellations[i] == "IMES") {
+                                    $("#Constellations_IMES input").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableConstellations[i] == "QZSS") {
+                                    $("#Constellations_QZSS input").attr("checked", "checked");
+                                }
+                            }
+                        }
+                        if (received_msg.gnss.EnableSBASSats && received_msg.gnss.EnableSBASSats
+                            .length) {
+                            for (var i = 0; i < received_msg.gnss.EnableSBASSats.length; i++) {
+                                if (received_msg.gnss.EnableSBASSats[i] == "ALCOMSAT") {
+                                    $("#ALCOMSAT").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "AUSNZ") {
+                                    $("#AUS-NZ").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "BDSBAS") {
+                                    $("#BDSBAS").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "EGNOS") {
+                                    $("#EGNOS").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "GAGAN") {
+                                    $("#GAGAN").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "KASS") {
+                                    $("#KAAS").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "MSAS") {
+                                    $("#MSAS").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "NSAS") {
+                                    $("#NSAS").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "SDCM") {
+                                    $("#SDCM").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "WAAS") {
+                                    $("#WAAS").attr("checked", "checked");
+                                }
+                                if (received_msg.gnss.EnableSBASSats[i] == "QZSS") {
+                                    $("#QZSS").attr("checked", "checked");
+                                }
+                            }
+                        }
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render();
+                        });
                     } else if (received_msg.gnss && received_msg.gnss.error) {
                         layui.use(['form', 'layer'], function() {
                             var layer = layui.layer;
                             layer.msg(received_msg.gnss.error);
                         })
                     }
+                }
+                if (received_msg.responseTo == "setGnss" && received_msg.state == true) {
+                    layui.use(['form', 'layer'], function() {
+                        var layer = layui.layer;
+                        layer.msg("Saved successfully!");
+                    })
                 }
             };
 
@@ -642,6 +806,109 @@
             }
             param = JSON.stringify(param);
             console.log(param)
+            Ws.send(param);
+        }
+
+        function ResetGNSS() {
+            var param = {
+                "request": "resetGnss"
+            }
+            param = JSON.stringify(param);
+            console.log(param)
+            Ws.send(param);
+        }
+        //获取保存需要的值
+        function getSaveVal() {
+            var Enable_SBAS = $("#Enable_SBAS input").is(":checked");
+            var EnableConstellations = [];
+            var GLONASS = $("#Constellations_Glonass input").is(":checked");
+            if (GLONASS) {
+                EnableConstellations.push("GLONASS");
+            }
+            var BEIDOU = $("#Constellations_Beldou input").is(":checked");
+            if (BEIDOU) {
+                EnableConstellations.push("BEIDOU");
+            }
+            var GPS = $("#Constellations_GPS input").is(":checked");
+            if (GPS) {
+                EnableConstellations.push("GPS");
+            }
+            var SBAS = $("#Constellations_SBAS input").is(":checked");
+            if (SBAS) {
+                EnableConstellations.push("SBAS");
+            }
+            var GALILEO = $("#Constellations_GALILEO input").is(":checked");
+            if (GALILEO) {
+                EnableConstellations.push("GALILEO");
+            }
+            var IMES = $("#Constellations_IMES input").is(":checked");
+            if (IMES) {
+                EnableConstellations.push("IMES");
+            }
+            var QZSS = $("#Constellations_QZSS input").is(":checked");
+            if (QZSS) {
+                EnableConstellations.push("QZSS");
+            }
+            var EnableSBASSats = [];
+            var ALCOMSAT = $("#ALCOMSAT").is(":checked");
+            if (ALCOMSAT) {
+                EnableSBASSats.push("ALCOMSAT")
+            }
+            var AUSNZ = $("#AUS-NZ").is(":checked");
+            if (AUSNZ) {
+                EnableSBASSats.push("AUSNZ")
+            }
+            var BDSBAS = $("#BDSBAS").is(":checked");
+            if (BDSBAS) {
+                EnableSBASSats.push("BDSBAS")
+            }
+            var EGNOS = $("#EGNOS").is(":checked");
+            if (EGNOS) {
+                EnableSBASSats.push("EGNOS")
+            }
+            var GAGAN = $("#GAGAN").is(":checked");
+            if (GAGAN) {
+                EnableSBASSats.push("GAGAN")
+            }
+            var KASS = $("#KAAS").is(":checked");
+            if (KASS) {
+                EnableSBASSats.push("KASS")
+            }
+            var MSAS = $("#MSAS").is(":checked");
+            if (MSAS) {
+                EnableSBASSats.push("MSAS")
+            }
+            var NSAS = $("#NSAS").is(":checked");
+            if (NSAS) {
+                EnableSBASSats.push("NSAS")
+            }
+            var SDCM = $("#SDCM").is(":checked");
+            if (SDCM) {
+                EnableSBASSats.push("SDCM")
+            }
+            var WAAS = $("#WAAS").is(":checked");
+            if (WAAS) {
+                EnableSBASSats.push("WAAS")
+            }
+            var QZSS = $("#QZSS").is(":checked");
+            if (QZSS) {
+                EnableSBASSats.push("QZSS")
+            }
+            var param = {
+                "request": "setGnss",
+                "config": {
+                    "EnableSBAS": Enable_SBAS,
+                    "EnableSBASSats": EnableSBASSats,
+                    "EnableConstellations": EnableConstellations
+                }
+            }
+            console.log(param)
+            saveGNSS(param)
+        }
+
+        function saveGNSS(param) {
+            param = JSON.stringify(param);
+            console.log(param);
             Ws.send(param);
         }
     </script>

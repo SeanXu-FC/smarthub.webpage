@@ -721,10 +721,16 @@ function forgetSavedWifi(infoHtml) {
                     }
                     renderWifiList(wifiJson);
                     clearInterval(timer);
-                    updateWifiList();
+                    setTimeout(() => {
+                        updateWifiList();
+                    }, 500);
+
                     console.log("15s获取wifi列表重新开启")
                     TimerPollingWifiList(); //开启每隔15s获取wifi列表
                 }
+            } else {
+                console.log("15s获取wifi列表重新开启")
+                TimerPollingWifiList(); //开启每隔15s获取wifi列表
             }
         }
     });
