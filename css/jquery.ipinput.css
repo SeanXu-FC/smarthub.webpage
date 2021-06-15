@@ -8,7 +8,7 @@
     margin-top: 0px;
     margin-bottom: 0px;
     width: 24%;
-    height: 90%;
+    height: 100%;
     text-align: center;
 }
 
@@ -24,6 +24,7 @@
     width: 100%;
     width: 358px !important;
     height: 34px !important;
+    padding: 0 12px !important;
     font-size: 14px;
     line-height: 1.42857;
     color: rgb(85, 85, 85);
