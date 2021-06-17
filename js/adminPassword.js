@@ -97,7 +97,6 @@ $(function() {
     });
 
     $('#btn').on('click', function() {
-        console.log($('#chagePWD').serialize())
 
         $.ajax({
             url: "/action/password",
@@ -112,10 +111,18 @@ $(function() {
                 } else {
                     $('#success').show(1000);
                     clearCookie("LogInStaus");
+                    var RememberPassword = JSON.parse(localStorage.getItem("RememberPassword"));
+                    if (RememberPassword && RememberPassword.status) {
+                        RememberOBJ = {
+                            status: true,
+                            password: $("#pwd3").val()
+                        }
+                        RememberOBJ = JSON.stringify(RememberOBJ)
+                        localStorage.setItem("RememberPassword", RememberOBJ)
+                    }
                     setTimeout(() => {
                         top.location.href = "/index.html";
                     }, 3000);
-
                 }
 
             }

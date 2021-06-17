@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210611" rel="stylesheet" />
+    <link href="css/style.css?mv=20210617" rel="stylesheet" />
     <title>Document</title>
     <style>
         * {
@@ -229,12 +229,11 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <script type="text/javascript">
         var SIM;
         $(function() {
             SIM = GetUrlParam("SIM");
-            console.log("SIM2", SIM)
             $("#unlock_name").text("SIM" + SIM);
             // 按钮禁掉和灰掉
             $(".connected button").prop("disabled", true);
@@ -265,7 +264,6 @@
 
 
             $("#OK_btn").on("click", function() {
-                console.log(111)
                 layui.use(['layer'], function() {
                     var layer = layui.layer;
                     unlockSIM(layer)

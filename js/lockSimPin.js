@@ -4,7 +4,7 @@ $(function() {
     type = GetUrlParam("type");
     times = GetUrlParam("times");
 
-    console.log("SIM2", SIM)
+
 
     $("#lock_type").text(type == 1 ? "lock" : "unlock");
     $("#unlock_name").text("SIM" + SIM);
@@ -35,7 +35,7 @@ $(function() {
 
 
     $("#OK_btn").on("click", function() {
-        console.log(111)
+
         layui.use(['layer'], function() {
             var layer = layui.layer;
             unlockSIM(layer)

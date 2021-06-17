@@ -22,7 +22,7 @@ $(function() {
     })
     $('.ssid').on("input", function() {
         var len = $(this).val().length;
-        console.log(len)
+
         if (len > 32) {
             $("#btn1").prop("disabled", "disabled");
             $(".SSIDlen")
@@ -391,7 +391,7 @@ function getData(layer, loading) {
                 })
 
                 if (json[index].vap_config[index].SecurityMode == "1") {
-                    console.log($(".pwd1").val())
+
 
                     $("#pwd").show();
                     //$("#pwd1").show();
@@ -555,7 +555,7 @@ function ejectTip() {
         shade: [0.5, '#fff'],
         success: function(layero, index) {
             var msg = layero.text();
-            console.log(msg)
+
             var i = 10;
             var timer = null;
             var fn = function() {

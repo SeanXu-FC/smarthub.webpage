@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210611" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <link href="css/style.css?mv=20210617" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <title>Document</title>
     <style>
         * {
@@ -398,7 +398,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <script>
         var ssid, bssid, encrypt, is_saved;
         $(function() {
@@ -409,14 +409,14 @@
 
             encrypt = GetUrlParam("bssid");
             is_saved = GetUrlParam("is_saved");
-            console.log("is_saved", is_saved)
+
             layui.use(['layer', 'form'], function() {
                 var form = layui.form,
                     layer = layui.layer;
                 getWifiDetail(layer, form);
                 form.on('switch(switchTest)', function(data) {
                     var checked = data.elem.checked;
-                    console.log(checked)
+
                     changeSwitchStatus(layer, form, checked)
                 });
             });
@@ -448,7 +448,7 @@
                     end: function() {
                         var flag = $(parent.frames["my-iframe"].document).find(
                             "#wifiDetai_info").val();
-                        console.log(flag)
+
                         if (!flag) {
                             var index = parent.layer.getFrameIndex(window.name);
                             parent.layer.close(index); //关闭当前页
@@ -507,12 +507,12 @@
                             $('#layerDemo').hide();
                         }
                         var signal = Math.abs(res.result.rssi);
-                        console.log(signal)
+
                         if (signal < 70) {
-                            console.log(11)
+
                             $("#Signal_strength").text("Good");
                         } else if (signal >= 70) {
-                            console.log(22)
+
                             $("#Signal_strength").text("Weak");
                         }
                         var Channel;
@@ -591,7 +591,7 @@
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
-                    console.log("res", res)
+
                     if (res.result) {
                         //layer.msg(res.result.status);
                     } else if (res.error) {

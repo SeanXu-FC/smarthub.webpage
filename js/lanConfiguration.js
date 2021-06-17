@@ -9,7 +9,7 @@ $(function() {
     //方法1：
     $("#rsd").bind("change", function() {
         var divId = map[this.value];
-        console.log(divId)
+
         if (divId === "d1") {
             $("#d1").slideDown(500);
             $("#d2").hide();

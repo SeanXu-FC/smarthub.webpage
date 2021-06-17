@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210611" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <link href="css/style.css?mv=20210617" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <title>Document</title>
     <style>
         * {
@@ -260,6 +260,17 @@
             font-weight: bold;
             color: #009fe3;
         }
+        
+        .Remember-password {
+            padding-left: 104px;
+        }
+        
+        .layui-form-checkbox[lay-skin=primary] span {
+            font-family: OpenSans;
+            font-size: 18px;
+            font-weight: normal;
+            color: #343434;
+        }
     </style>
 </head>
 
@@ -281,6 +292,12 @@
 
                     </div>
                     <div class="error">Password is incorrect</div>
+
+                    <div class="layui-form Remember-password mt-20">
+                        <div class="layui-input-inline" id="Remember_password" style="line-height: 1;">
+                            <input type="checkbox" lay-skin="primary" lay-filter="Remember_password" title="Remember the password">
+                        </div>
+                    </div>
                     <div class="forget-pwd">Forgot password?</div>
                 </div>
             </form>
@@ -294,13 +311,13 @@
     </div>
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <script>
         var srcStr;
         $(function() {
+
             srcStr = GetUrlParam("url");
-            console.log("srcStr0", srcStr)
-                // 按钮禁掉和灰掉
+            // 按钮禁掉和灰掉
             $(".connected button").prop("disabled", true);
             $(".connected button").css("opacity", "0.5");
 
@@ -309,9 +326,29 @@
                 $('.error').show();
             }
 
-
-
-
+            layui.use(['layer', 'form'], function() {
+                var layer = layui.layer;
+                var form = layui.form;
+                var RememberPassword = JSON.parse(localStorage.getItem("RememberPassword"));
+                if (RememberPassword && RememberPassword.status) {
+                    $("#Remember_password input").attr("checked", "checked");
+                    $("#pwd").val(RememberPassword.password)
+                    var len = $("#pwd").val().length;
+                    if (7 < len && len < 64) {
+                        $("#btn").removeAttr("disabled");
+                        $("#btn").css("opacity", "1");
+                    } else {
+                        $("#btn").attr("disabled", "disabled");
+                        $("#btn").css("opacity", "0.5");
+                    }
+                } else {
+                    $("#Remember_password input").removeAttr("checked");
+                }
+                layui.use(['form'], function() {
+                    var form = layui.form;
+                    form.render();
+                });
+            });
             $('#btn').click(function() {
                 login();
             });
@@ -331,24 +368,19 @@
             //     }
             // })
             $('#pwd').on("input", function() {
-
                 $('.error').hide();
                 var len = $(this).val().length;
                 if (7 < len && len < 64) {
-
                     $("#btn").removeAttr("disabled");
                     $("#btn").css("opacity", "1");
                 } else {
-
                     $("#btn").attr("disabled", "disabled");
                     $("#btn").css("opacity", "0.5");
                 }
             }).on('mouseup', function() {
-
                 $('.error').hide();
                 var len = $(this).val().length;
                 if (7 < len && len < 64) {
-
                     $("#btn").removeAttr("disabled");
                     $("#btn").css("opacity", "1");
                 } else {
@@ -399,6 +431,20 @@
                         $(".error").show();
                     } else {
                         $(parent.document).find("#my-iframe").attr("src", srcStr);
+                        var RememberOBJ = {};
+                        if ($("#Remember_password input").is(":checked")) {
+                            RememberOBJ = {
+                                status: true,
+                                password: $("#pwd").val()
+                            }
+                        } else {
+                            RememberOBJ = {
+                                status: false,
+                                password: ""
+                            }
+                        }
+                        RememberOBJ = JSON.stringify(RememberOBJ)
+                        localStorage.setItem("RememberPassword", RememberOBJ)
                         var index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index); //关闭当前页                       
                     }

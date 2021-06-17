@@ -687,7 +687,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <script>
         var oldTrigType, oldVolt, oldNoti_msg, savedataId;
         $(function() {
@@ -703,7 +703,7 @@
             var volt = GetUrlParam("volt");
             oldVolt = volt;
             var alertID = GetUrlParam("alertID");
-            console.log("Notifications", Notifications);
+
             $("#alert_ID").val(alertID);
             layui.use('layer', function() {
                 var layer = layui.layer;
@@ -716,7 +716,7 @@
             });
 
             var types = GetUrlParam("types");
-            console.log("types", types)
+
             var str = "";
             if (types == 0) {
                 str = '<option value="0">Value below</option><option value="1">Value above</option>'
@@ -788,10 +788,10 @@
                 volt = parseFloat(volt).toFixed(1);
                 volt = Number(volt)
                 volt = Number(volt).toFixed(1)
-                console.log("volt4", volt)
+
                 var noti_msg = $(".layui-textarea").val() ? $(".layui-textarea").val() : '';
                 //var wake_func = $("#func_check").is(":checked") == true ? 1 : 0;;
-                console.log("noti_msg", noti_msg)
+
                 noti_msg = noti_msg.replace(/(\s*$)/g, "");
                 var alert_ID = Number($("#alert_ID").val());
                 saveData(dataId, Notifications, trigType, volt, noti_msg, alert_ID)
@@ -826,7 +826,7 @@
                                 $(".layui-textarea").val(json[i].noti_msg);
                                 oldNoti_msg = json[i].noti_msg;
                                 $("#wordCheck").text(256 - json[i].noti_msg.length);
-                                console.log("oldNoti_msg", oldNoti_msg)
+
                             }
                         }
                     }
@@ -856,7 +856,7 @@
 
         //保存数据
         function saveData(dataId, Notifications, trigType, volt, noti_msg, alert_ID) {
-            console.log("222", alert_ID)
+
             if (Notifications == 1) { //如果是打开的才传用户操作的
                 var data = {
                     "jsonrpc": "2.0",

@@ -246,21 +246,21 @@ function getFile() {
     xhr.onreadystatechange = state_Change;
 
     function state_Change() {
-        console.log("xhr", xhr)
+
         if (xhr.readyState == 4) { // 4 = "loaded"
             if (xhr.status == 200) { // 200 = OK
-                console.log(xhr.response)
+
                 let bufferArray = xhr.response;
                 let uint8Array = new Uint8Array(bufferArray);　　　　　　
                 for (var i = 0; i < bufferArray.length; ++i) {　　　　　　
                     uint8Array[i] = bufferArray[i];
                 }
                 let blob = new Blob([uint8Array], { type: 'application/x-tar' })
-                console.log(blob)
-                    // let blob = new Blob([xhr.response]);
-                    // console.log(blob)
+
+                // let blob = new Blob([xhr.response]);
+                // console.log(blob)
                 const url = window.URL.createObjectURL(blob);
-                console.log(url)
+
 
             } else {
                 console.log("Upload fail11！");
@@ -304,7 +304,7 @@ function getLogNumber(layer) {
         dataType: "json",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         success: function(res) {
-            console.log(res)
+
             if (0 <= Number(res.code)) {
                 $("#btnSave").text(res.msg)
             } else {

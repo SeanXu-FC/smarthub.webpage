@@ -53,7 +53,7 @@ $(function() {
             contentType: "application/x-www-form-urlencoded;charset=utf-8",
             success: function success(res) {
                 if (res.result.flag == "success") {
-                    console.log(res);
+
                     alert("Password modified successfully");
                 } else {
                     console.log("An error occurred：" + res.result.flag);

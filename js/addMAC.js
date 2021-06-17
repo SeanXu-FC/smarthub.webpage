@@ -4,7 +4,7 @@ $(function() {
             layer = layui.layer;
         getMACData(layer, form, "", 0)
     });
-    console.log(12345)
+
     $("#Device_SN_i").bind("input", function() {
         startGetMAC();
     })
@@ -107,9 +107,9 @@ var SNlen = 7;
 
 function startGetMAC() {
     SNlen = $("#SN_select").val();
-    console.log(SNlen)
+
     if ($("#Device_SN_i").val().length == SNlen) {
-        console.log($("#Device_SN_i").val())
+
 
         var ImxMac_Adress = $("#ImxMac_Adress_i").val();
         var QCA_WANaddress = $("#QCA_WANaddress_i").val();
@@ -157,7 +157,7 @@ function getMacAddr(layer) {
         shade: [0.5, '#fff']
     });
     var Device_SN = $("#Device_SN_i").val();
-    console.log("Device_SN", Device_SN)
+
     var ajaxTimeout = $.ajax({
         url: "http://oa.fastrain.com:9898/macs/getMac",
         type: "get", //get请求方式
@@ -170,7 +170,7 @@ function getMacAddr(layer) {
             num: 3 //返回mac个数
         },
         success: function(res) {
-            console.log(res)
+
             if (res.code == 1) {
                 if (res.result.mac_addr1) {
                     res.result.mac_addr1 = sertStr(res.result.mac_addr1);
@@ -267,7 +267,7 @@ function setPassword(layer, loading) {
         WifiPassword: WIFI_Password,
         MAC6174: Qca6174Mac,
     }
-    console.log(param)
+
     var ajaxTimeout1 = $.ajax({
         url: "http://oa.fastrain.com:9898/macs/getMacBack",
         type: "get", //get请求方式
@@ -283,7 +283,7 @@ function setPassword(layer, loading) {
             MAC6174: Qca6174Mac,
         },
         success: function(res) {
-            console.log(res)
+
             parent.layer.close(loading);
             if (res.code == 0) {
                 layui.use(['form', 'layer'], function() {
@@ -905,16 +905,16 @@ function exportPDF() {
     copyDom.height(targetDom.height() + "px");
     $('body').append(copyDom);
     let cont = document.getElementById('export_content');
-    console.log(cont.offsetHeight);
+
     html2canvas(targetDom, {
         // windowHeight:2000,
         height: cont.offsetHeight, //给canvas设置高度，
         onrendered: function(canvas) {
-            console.log('回调开始');
+
             //通过html2canvas将html渲染成canvas，然后获取图片数据
             let imgData = canvas.toDataURL('image/jpeg', 1.0);
             // console.log(imgData);
-            console.log(canvas.width, canvas.height);
+
             //初始化pdf，设置相应格式
             let doc = new jsPDF("p", "mm", "a4");
             // let doc = new jsPDF('', 'pt', 'a4')
@@ -937,8 +937,8 @@ function toExcel(event) {
     // 创建一个Blob对象，第一个参数是文件的数据，第二个参数是文件类型属性对象
     var blob = new Blob([html], { type: "application/vnd.ms-excel" });
     var a = event.target;
-    console.log(event.target)
-        // 利用URL的createObjectURL方法为元素a生成blobURL
+
+    // 利用URL的createObjectURL方法为元素a生成blobURL
     a.href = URL.createObjectURL(blob);
     if ($("#Device_SN_i").val()) {
         var SNNum = $("#Device_SN_i").val();

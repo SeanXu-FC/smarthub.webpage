@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210611" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <link href="css/style.css?mv=20210617" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <title>Document</title>
     <style>
         * {
@@ -395,7 +395,7 @@
                 contentType: "application/json;charset=utf-8",
                 success: function(res) {
                     layer.close(loading);
-                    console.log("res", res)
+
                     if (res.result) {
                         if (res.result.status == "WlanStationConfig Remove Done") {
                             $(parent.frames["my-iframe"].document).find("#saved_id").val(ssid).attr("bssid",

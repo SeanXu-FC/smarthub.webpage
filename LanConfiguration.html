@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210611" rel="stylesheet" />
+    <link href="css/style.css?mv=20210617" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210611"></script>
+    <script src="js/lanConfiguration.js?mv=20210617"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -282,10 +282,6 @@
         
         .layui-layer-loading .layui-layer-loading2 {
             background-position: 30px 0;
-        }
-        
-        .ipinput_div {
-            padding: 0 12px !important;
         }
         
         @media screen and (max-width: 1192px) {
@@ -639,7 +635,6 @@
                     dataType: "json",
                     contentType: "application/json;charset=utf-8",
                     success: function(res) {
-                        console.log(data);
                         if (res.result) {
                             ejectTip();
                             $("#btn3").removeAttr("disabled");
@@ -968,7 +963,6 @@
                 shade: [0.5, '#fff'],
                 success: function(layero, index) {
                     var msg = layero.text();
-                    console.log(msg)
                     var i = 20;
                     timer = null;
                     var fn = function() {

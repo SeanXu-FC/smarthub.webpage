@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css">
-    <link href="css/style.css?mv=20210611" rel="stylesheet" />
+    <link href="css/style.css?mv=20210617" rel="stylesheet" />
     <title>Document</title>
     <style>
         .mc {
@@ -330,7 +330,7 @@
             <table class="table table-hover table-responsive mt-40">
                 <tr>
                     <td class="col-sm-3 GNSS-Fix-status">GNSS Fix status: </td>
-                    <td class="col-sm-7 col-sm-offset-2 GNSS-Fix-status" style="padding-left: 22px !important;">Fix</td>
+                    <td class="col-sm-7 col-sm-offset-2 GNSS-Fix-status" id="Gnss_status" style="padding-left: 22px !important;">--</td>
                 </tr>
                 <tr>
                     <td class="GNSS-Fix-status pt-30">Internal GNSS:
@@ -340,7 +340,7 @@
                     <td class="col-sm-7 col-sm-offset-2 pt-30">
                         <div class="layui-form layui-form-pane layui-form-item" style="padding-left:6px !important">
                             <div class="layui-input-block">
-                                <input type="checkbox" checked name="open" lay-skin="primary" lay-filter="InternalGNSS:">
+                                <input id="Internal_GNSS" type="checkbox" name="open" lay-skin="primary" lay-filter="InternalGNSS:">
                             </div>
                         </div>
                     </td>
@@ -513,38 +513,11 @@
                     <th class="Satellite-IDPRN">Satellite ID/PRN</th>
                     <th class="Satellite-IDPRN">Constellation</th>
                     <th class="Satellite-IDPRN">Used in fix flag</th>
-                    <th class="Satellite-IDPRN">1.2</th>
+                    <th class="Satellite-IDPRN">HDOP</th>
                     <th class="Satellite-IDPRN">Azimuth</th>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="GLONASS">40</td>
-                        <td class="GLONASS">Constellation</td>
-                        <td class="GLONASS">Yes</td>
-                        <td class="GLONASS">2.0</td>
-                        <td class="GLONASS">137.3 SE</td>
-                    </tr>
-                    <tr class="Rectangle-1228">
-                        <td class="GLONASS">41</td>
-                        <td class="GLONASS">Constellation</td>
-                        <td class="GLONASS">No</td>
-                        <td class="GLONASS">5.2</td>
-                        <td class="GLONASS">120.4 SE</td>
-                    </tr>
-                    <tr>
-                        <td class="GLONASS">50</td>
-                        <td class="GLONASS">Constellation</td>
-                        <td class="GLONASS">No</td>
-                        <td class="GLONASS">7.3</td>
-                        <td class="GLONASS">180.1 NE</td>
-                    </tr>
-                    <tr class="Rectangle-1228">
-                        <td class="GLONASS">62</td>
-                        <td class="GLONASS">Constellation</td>
-                        <td class="GLONASS">Yes</td>
-                        <td class="GLONASS">HDOP</td>
-                        <td class="GLONASS">130.3 SE</td>
-                    </tr>
+                <tbody id="Satellites_body">
+
                 </tbody>
             </table>
             <div class="btn1" id="btn02">
@@ -559,7 +532,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
 
     <script>
         var Ws, auth_token, frequency = 0;
@@ -594,7 +567,7 @@
             })
 
             $(window).on('beforeunload', function() {
-                console.log('监听iframe关闭');
+
                 stop();
             });
 
@@ -605,7 +578,7 @@
 
         function getGnss(layer, loading) {
             var domain = window.location.host;
-            console.log(domain)
+
             var data = {
                 "jsonrpc": "2.0",
                 "method": "GetGnssAuthToken",
@@ -660,7 +633,7 @@
         function connectWebsocket(ipaddr) {
             var http = document.location.protocol == "https" ? "wss://" : "ws://";
             var url = http + "[" + ipaddr + "]:7778";
-            console.log(url)
+
             Ws = new_ws(url);
             Ws.onopen = function() {
                 console.log("连接已打开...");
@@ -669,7 +642,7 @@
                     "token": auth_token
                 }
                 param = JSON.stringify(param);
-                console.log(param)
+
                 sendmsg(param)
             };
 
@@ -677,7 +650,7 @@
 
                 //收到服务器发来的消息时
                 var received_msg = JSON.parse(evt.data);
-                console.log(received_msg);
+                console.log(received_msg)
                 if (received_msg.responseTo == "authenticate") {
                     getGnssData();
                 }
@@ -689,6 +662,12 @@
                 }
                 if (received_msg.responseTo == "getGnss") {
                     if (received_msg.gnss) {
+                        if (received_msg.gnss.Fix) {
+                            $("#Gnss_status").text(received_msg.gnss.Fix);
+                        }
+                        if (received_msg.gnss.InternalGPSEnabled) {
+                            $("#Internal_GNSS").attr("checked", "checked");
+                        }
                         if (received_msg.gnss.EnableSBAS) {
                             $("#Enable_SBAS input").attr("checked", "checked");
                         }
@@ -756,6 +735,26 @@
                                 }
                             }
                         }
+
+                        if (received_msg.gnss.SatsInView) {
+                            var htmlStr = "",
+                                fixGlag = "",
+                                grayClass = "";
+                            var fixGlag = "";
+                            for (var i = 0; i < received_msg.gnss.SatsInView.length; i++) {
+                                grayClass = i % 2 == 0 ? "" : "Rectangle-1228";
+                                fixGlag = received_msg.gnss.SatsInView[i].isUsedInFix ? "Yes" : "No";
+                                htmlStr += '<tr class="' + grayClass + '"><td class="GLONASS">' + received_msg.gnss
+                                    .SatsInView[i].id +
+                                    '</td>' +
+                                    '<td class="GLONASS">Constellation</td>' +
+                                    '<td class="GLONASS">' + fixGlag + '</td>' +
+                                    '<td class="GLONASS">2.0</td>' +
+                                    '<td class="GLONASS">137.3 SE</td></tr>'
+                            }
+                            $("#Satellites_body").html(htmlStr)
+                        }
+
                         layui.use(['form'], function() {
                             var form = layui.form;
                             form.render();
@@ -787,7 +786,6 @@
         }
         //连接ws
         function new_ws(urlpath) {
-            console.log(urlpath)
             return new WebSocket(urlpath);
         }
 
@@ -805,7 +803,6 @@
                 "request": "getGnss"
             }
             param = JSON.stringify(param);
-            console.log(param)
             Ws.send(param);
         }
 
@@ -814,7 +811,6 @@
                 "request": "resetGnss"
             }
             param = JSON.stringify(param);
-            console.log(param)
             Ws.send(param);
         }
         //获取保存需要的值
@@ -902,13 +898,11 @@
                     "EnableConstellations": EnableConstellations
                 }
             }
-            console.log(param)
             saveGNSS(param)
         }
 
         function saveGNSS(param) {
             param = JSON.stringify(param);
-            console.log(param);
             Ws.send(param);
         }
     </script>

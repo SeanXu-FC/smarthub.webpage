@@ -65,8 +65,8 @@ $(function() {
 function login() {
     var $userId = $("#userId");
     var $pwd = $("#pwd");
-    console.log($('#loginInfo').serialize())
-        //return;
+
+    //return;
     $.ajax({
         url: "/action/login",
         type: "post",

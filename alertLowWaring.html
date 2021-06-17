@@ -642,7 +642,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <script>
         var oldWarning, oldVolt;
         $(function() {
@@ -688,7 +688,6 @@
                 volt = parseFloat(volt).toFixed(1);
                 volt = Number(volt)
                 volt = Number(volt).toFixed(1)
-                console.log("Notifications", Notifications)
 
                 saveData(Notifications, volt)
             })
@@ -721,7 +720,7 @@
                                 $(".layui-textarea").val(json[i].noti_msg);
                                 oldNoti_msg = json[i].noti_msg;
                                 $("#wordCheck").text(256 - json[i].noti_msg.length);
-                                console.log("oldNoti_msg", oldNoti_msg)
+
                             }
                         }
                     }
@@ -828,8 +827,7 @@
         function WidthCheckIOStr(str, maxLen) {
             var w = 0;
             var tempCount = 0;
-            console.log(str.value.length)
-                //length 获取字数数
+            //length 获取字数数
             for (var i = 0; i < str.value.length; i++) {
                 //charCodeAt()获取字符串中某一个字符的编码 
                 var c = str.value.charCodeAt(i);

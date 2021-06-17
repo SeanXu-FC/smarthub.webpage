@@ -9,12 +9,11 @@ $(function() {
         var file = new File([files[0]], "upgrade.tar.bz2", {
             type: files[0].type
         });
-        console.log(file)
+
         var filesArr = [
             file
         ]
-        console.log(files)
-        console.log(filesArr)
+
         toUploading(filesArr);
     })
 
@@ -23,7 +22,7 @@ $(function() {
     //只要鼠标拖拽悬停在该区域就会触发
     box.addEventListener('dragover', function(e) {
         e.preventDefault(); //注意，如果dragover不阻止默认事件，drop事件就不会触发
-        console.log('dragover');
+
     }, false);
     //鼠标拖拽释放
     box.addEventListener('drop', function(e) {
@@ -34,7 +33,7 @@ $(function() {
         var file = new File([files[0]], "upgrade.tar.bz2", {
             type: files[0].type
         });
-        console.log(file)
+
         var filesArr = [
             file
         ]
@@ -59,7 +58,7 @@ $(function() {
             dataType: "json",
             contentType: "application/x-www-form-urlencoded;charset=utf-8",
             success: function(res) {
-                console.log(res)
+
                 if (res.code == 100) {
                     eco_refresh('my-iframe');
                     // $("#upload_success").hide();
@@ -81,7 +80,7 @@ $(function() {
 })
 
 function toUploading(files) {
-    console.log(fileName)
+
     $("#upload_name").text(fileName);
     $("#upload_size").text((files[0].size / 1048576).toFixed(0));
     layui.use(['layer', 'element', 'form', 'upload'], function() {
@@ -101,7 +100,7 @@ function toUploading(files) {
         //     }
         // })
         formData.append("mode", "0");
-        console.log(formData);
+
         var xhr = new XMLHttpRequest();
         xhr.upload.onerror = function(error) {
             console.log(error);
@@ -124,17 +123,17 @@ function toUploading(files) {
         xhr.onreadystatechange = state_Change;
 
         function state_Change() {
-            console.log("xhr", xhr)
+
             if (xhr.readyState == 4) { // 4 = "loaded"
                 if (xhr.status == 200) { // 200 = OK
                     var resObj = JSON.parse(xhr.response)
                     if (resObj.code == 0) {
-                        console.log(resObj.code)
+
                         layer.msg("Upload successful！");
                         $("#upload_success").show();
                         $("#upload").hide();
                         $("#upgrade").removeClass("disable-btn");
-                        console.log(resObj)
+
 
 
                     } else {
@@ -204,7 +203,7 @@ function toUpgrade() {
         dataType: "json",
         contentType: "application/x-www-form-urlencoded;charset=utf-8",
         success: function(res) {
-            console.log(res)
+
             $("#upgrade").removeClass("disable-btn");
             if (res.code == 100) {
                 var domain = window.location.host;

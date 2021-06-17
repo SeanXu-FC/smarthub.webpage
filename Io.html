@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210611" rel="stylesheet" />
+    <link href="css/style.css?mv=20210617" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -293,7 +293,7 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <script>
         $(function() {
             layui.use(['layer', 'form'], function() {
@@ -306,8 +306,6 @@
                 form.on('switch', function(data) {
                     var checked = data.elem.checked;
                     var name = data.elem.name;
-                    console.log(checked)
-                    console.log(data.elem.name)
                     changeSwitch(layer, form, checked, name)
                 });
             });

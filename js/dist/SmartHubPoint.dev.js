@@ -263,35 +263,35 @@ $(function() {
                     $("#eye1").hide();
                     $("#pwd").hide();
                     $("#pwd1").hide();
-                    console.log('000');
+
                 } else if (this.value == 5 && this.value == 0) {
                     $("#pwd1").show();
-                    console.log('111000');
+
                     $("#pwd").hide();
                 } else if (this.value == 1) {
                     $("#pwd1").show();
-                    console.log('111');
+
                     $("#pwd").hide();
                 } else if (this.value == 5 && this.value == 1) {
                     $("#pwd1").show();
-                    console.log('555111');
+
                     $("#pwd").hide();
                 } else if (this.value == 5) {
                     $("#eye").show();
                     $("#eye1").hide();
                     $("#pwd").show();
                     $("#pwd1").hide();
-                    console.log('555');
+
                 } else if (this.value == 5 && this.value == 2 && this.value == 3 && this.value == 4) {
                     $("#eye").hide();
                     $("#eye1").hide();
                     $("#pwd").hide();
                     $("#pwd1").hide();
-                    console.log('555000');
+
                 } else {
                     $("#pwd").val(json[index].vap_config[index].WpaKey);
                     $("#pwd1").hide();
-                    console.log('222333');
+
                     $("#pwd").show();
                     $("#eye").hide();
                     $("#eye1").hide();
@@ -312,21 +312,21 @@ $(function() {
                     $("#eye1").hide();
                     $("#pwd").hide();
                     $("#pwd1").hide();
-                    console.log('000');
+
                 } else if (this.value == 1) {
                     $("#pwd1").show();
-                    console.log('111');
+
                     $("#pwd").hide();
                 } else if (this.value == 5) {
                     $("#eye").show();
                     $("#eye1").hide();
                     $("#pwd").show();
                     $("#pwd1").hide();
-                    console.log('555');
+
                 } else {
                     $("#pwd").val(json[index].vap_config[index].WpaKey);
                     $("#pwd1").hide();
-                    console.log('222333');
+
                     $("#pwd").show();
                 } //console.log($("#pwd").val(json[index].vap_config[index].WpaKey));
 

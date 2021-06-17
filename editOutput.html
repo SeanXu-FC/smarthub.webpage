@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210611" rel="stylesheet" />
+    <link href="css/style.css?mv=20210617" rel="stylesheet" />
 
     <title>Document</title>
     <style>
@@ -548,7 +548,7 @@
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210611"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <script>
         var saveChannelID;
         $(function() {
@@ -560,9 +560,8 @@
             saveChannelID = ChannelID;
             $("#channel-number").text(ChannelID)
             var status = GetUrlParam("status");
-            console.log("status", status)
-            console.log("types", types)
-                //$("#alert_ID").val(alertid)
+
+            //$("#alert_ID").val(alertid)
             layui.use('layer', function() {
                 var layer = layui.layer;
                 // $("#security option[value='" + types + "']").prop("selected", true);

@@ -268,6 +268,7 @@ function bindUnblockEvent(id) {
             end: function(index, layero) {
                 var unlockSIM = $("#unlockSIM").val();
                 if (unlockSIM == 1) {
+                    //eco_refresh('my-iframe')
                     layui.use(['layer', 'form'], function() {
                         var layer = layui.layer;
                         var form = layui.form;
@@ -314,7 +315,7 @@ function getMainParameters(layer, form) {
                 renderDataUsage(MobileData, 0);
                 setTimeout(() => {
                     renderDataUsage(MobileData, 1);
-                }, 500);
+                }, 1000);
             } else {
                 layer.msg(res.error.message)
             }
@@ -343,6 +344,7 @@ function renderDataUsage(json, i) {
         if (json[i].provider) {
             $("#SIM_provider1").text("(" + json[i].provider + ")");
         }
+
         if (json[i].isblock == 1) {
             $(".content1 .content1-contianer").hide();
             $(".sim-block-c").show();
@@ -350,13 +352,16 @@ function renderDataUsage(json, i) {
             $(".content1 .content1-contianer").show();
             $(".sim-block-c").hide();
         }
+
         if (json[i].pin_lock == 0) {
             $("#SIM_pin_lock1 input").removeAttr("checked");
             $("#Change_SIM_pin1").attr("disabled", "disabled");
         } else {
-            $("#SIM_pin_lock1 input").attr("checked", "checked");
             $("#Change_SIM_pin1").removeAttr("disabled");
+            $("#SIM_pin_lock1 input").prop("checked", true);
         }
+
+
 
         if (json[i].mobile_data == 1) { //Mobile data:                
             $("#mobileData input").attr("checked", "checked");
@@ -523,6 +528,18 @@ function renderDataUsage(json, i) {
         $("#Password2").val(json[i].apn_password);
 
     }
+    layui.use(['layer', 'form'], function() {
+        var layer = layui.layer;
+        var form = layui.form;
+        $("#autoSwitch").show();
+        $("#mobileData").show();
+        $("#DataRoaming").show();
+        $("#setDataWaring").show();
+        $("#setDataLimit").show();
+        $("#SIM_pin_lock1").show();
+        form.render();
+    });
+
 
     var unit = json[i].sim_data_limt_unit == 0 ? "MB" : "GB"
     var unit2 = json[i].warning_limit_unit == 0 ? "MB" : "GB"
@@ -590,17 +607,7 @@ function renderDataUsage(json, i) {
         renderEchart("used_MB2", Xdate1, Ydata1, unit, limitNum2, unit2, waringNum2, json[1].data_warning_flag, json[1].usage_reminder_flag)
     }
 
-    layui.use(['form'], function() {
-        var form = layui.form;
-        form.render();
-        $("#autoSwitch").show();
-        $("#mobileData").show();
-        $("#DataRoaming").show();
-        $("#setDataWaring").show();
-        $("#setDataLimit").show();
-        $("#SIM_pin_lock1").show();
 
-    });
 }
 
 // 渲染图表

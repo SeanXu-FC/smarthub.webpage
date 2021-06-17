@@ -165,133 +165,147 @@ function getHomeData(layer, loading) {
                     $('.cell').eq(0).text('-');
                     $(".mobiledataImg-disable").show();
                 } else {
-                    var mobileStatus = "";
-                    if (json.mobile.status == 1) {
-                        $("#Connected4G").hide();
-                        $('.Connected4G').eq(0).text(arr[4]);
-                        $('.Connected4G').css('color', '#909090')
-                        $(".mobiledataImg").attr("src", "images/r_04_close.png?v=20210518");
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
-                            .provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
-                            .active_sim : '-');
-                        // $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
-                        // $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
-                        // $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
-                        // $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
-                        // $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
-                        // $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
-                        $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
-                        $img.eq(1).hide();
-                    } else if (json.mobile.status == 2) {
-                        $('.Connected4G').eq(0).text("Connecting...");
-                        $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
-                            .provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
-                            .active_sim : '-');
-                        $img.eq(1).hide();
-                    } else if (json.mobile.status == 3) {
-                        $('.Connected4G').eq(0).text("Switch Sim Card");
-                        $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
-                            .provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
-                            .active_sim : '-');
-                        $img.eq(1).hide();
-                    } else if (json.mobile.status == 4) {
-                        $('.Connected4G').eq(0).text("Not in use");
-                        $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04_nouse.png?v=20210518");
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
-                            .provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
-                            .active_sim : '-');
-                        $img.eq(1).hide();
-                    } else if (json.mobile.status == 6) {
-                        if (json.mobile.act_num == 0) {
-                            $('.Connected4G').eq(0).text("Network unavailable(3G)");
-                        } else {
-                            $('.Connected4G').eq(0).text("Network unavailable(4G)");
-                        }
+                    if (json.mobile.simStatus == 3) {
+                        $('.Connected4G').eq(0).text("Sim is lock");
                         $('.Connected4G').css('color', '#ff0000');
                         $(".mobiledataImg").attr("src", "images/r_04_gray.png?v=20210518");
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
-                            .provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
-                            .active_sim : '-');
-                        $img.eq(1).hide();
-                    } else if (json.mobile.status == 7) {
-                        if (json.mobile.act_num == 0) {
-                            $('.Connected4G').eq(0).text("Internet unavailable(3G)");
-                        } else {
-                            $('.Connected4G').eq(0).text("Internet unavailable(4G)");
-                        }
-                        $('.Connected4G').css('color', '#ff0000');
-                        $(".mobiledataImg").attr("src", "images/r_04_gray.png?v=20210518");
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
-                            .provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
-                            .active_sim : '-');
-                        $img.eq(1).hide();
-                    } else if (json.mobile.status == 8) {
-                        if (json.mobile.act_num == 0) {
-                            $('.Connected4G').eq(0).text("Dialing(3G)");
-                        } else {
-                            $('.Connected4G').eq(0).text("Dialing(4G)");
-                        }
-                        $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
-                            .provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
-                            .active_sim : '-');
-                        $img.eq(1).hide();
-                    } else if (json.mobile.status == 9) {
-                        $('.Connected4G').eq(0).text("SIM is blocked");
-                        $('.Connected4G').css('color', '#333');
-                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
                             .provider : '-');
                         $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
                             .active_sim : '-');
                         $img.eq(1).hide();
                     } else {
-                        if (json.mobile.act_num == 0) {
-                            mobileStatus = "Connected(3G)"
+                        var mobileStatus = "";
+                        if (json.mobile.status == 1) {
+                            $("#Connected4G").hide();
+                            $('.Connected4G').eq(0).text(arr[4]);
+                            $('.Connected4G').css('color', '#909090')
+                            $(".mobiledataImg").attr("src", "images/r_04_close.png?v=20210518");
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
+                            // $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
+                            // $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
+                            // $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
+                            // $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
+                            // $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
+                            // $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
+                            $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
+                            $img.eq(1).hide();
+                        } else if (json.mobile.status == 2) {
+
+                            $('.Connected4G').eq(0).text("Connecting...");
+                            $('.Connected4G').css('color', '#333');
+                            $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
+                            $img.eq(1).hide();
+                        } else if (json.mobile.status == 3) {
+                            $('.Connected4G').eq(0).text("Switch sim card");
+                            $('.Connected4G').css('color', '#333');
+                            $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
+                            $img.eq(1).hide();
+                        } else if (json.mobile.status == 4) {
+                            $('.Connected4G').eq(0).text("Not in use");
+                            $('.Connected4G').css('color', '#333');
+                            $(".mobiledataImg").attr("src", "images/r_04_nouse.png?v=20210518");
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
+                            $img.eq(1).hide();
+                        } else if (json.mobile.status == 6) {
+                            if (json.mobile.act_num == 0) {
+                                $('.Connected4G').eq(0).text("Network unavailable(3G)");
+                            } else {
+                                $('.Connected4G').eq(0).text("Network unavailable(4G)");
+                            }
+
+                            $('.Connected4G').css('color', '#ff0000');
+                            $(".mobiledataImg").attr("src", "images/r_04_gray.png?v=20210518");
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
+                            $img.eq(1).hide();
+                        } else if (json.mobile.status == 7) {
+                            if (json.mobile.act_num == 0) {
+                                $('.Connected4G').eq(0).text("Internet unavailable(3G)");
+                            } else {
+                                $('.Connected4G').eq(0).text("Internet unavailable(4G)");
+                            }
+                            $('.Connected4G').css('color', '#ff0000');
+                            $(".mobiledataImg").attr("src", "images/r_04_gray.png?v=20210518");
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
+                            $img.eq(1).hide();
+                        } else if (json.mobile.status == 8) {
+                            if (json.mobile.act_num == 0) {
+                                $('.Connected4G').eq(0).text("Dialing(3G)");
+                            } else {
+                                $('.Connected4G').eq(0).text("Dialing(4G)");
+                            }
+                            $('.Connected4G').css('color', '#333');
+                            $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
+                            $img.eq(1).hide();
+                        } else if (json.mobile.status == 9) {
+                            $('.Connected4G').eq(0).text("SIM is blocked");
+                            $('.Connected4G').css('color', '#333');
+                            $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
+                            $img.eq(1).hide();
                         } else {
-                            mobileStatus = "Connected(4G)"
+                            if (json.mobile.act_num == 0) {
+                                mobileStatus = "Connected(3G)"
+                            } else {
+                                mobileStatus = "Connected(4G)"
+                            }
+                            $('.Connected4G').eq(0).text(mobileStatus);
+                            $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
+                            $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
+                                .provider : '-');
+                            $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
+                                .active_sim : '-');
+                            // $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
+                            // $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
+                            // $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
+                            // $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
+                            // $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
+                            // $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
+                            $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
+                            $('.Connected4G').css('color', '#26b167');
+                            $img.eq(1).show();
                         }
-                        $('.Connected4G').eq(0).text(mobileStatus);
-                        $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
-                        $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
-                            .provider : '-');
-                        $('.active_sim').eq(0).text(json.mobile.active_sim ? json.mobile
-                            .active_sim : '-');
-                        // $('.imsi').eq(0).text(json.mobile.imsi ? json.mobile.imsi : '-');
-                        // $('.plmn').eq(0).text(json.mobile.plmn ? json.mobile.plmn : '-');
-                        // $('.csq').eq(0).text(json.mobile.csq ? json.mobile.csq : '-');
-                        // $('.location').eq(0).text(json.mobile.lca ? json.mobile.lca : '-');
-                        // $('.act').eq(0).text(json.mobile.act ? json.mobile.act : '-');
-                        // $('.register').eq(0).text(json.mobile.cgreg ? json.mobile.cgreg : '');
-                        $('.cell').eq(0).text(json.mobile.cell_id ? json.mobile.cell_id : '-');
-                        $('.Connected4G').css('color', '#26b167');
-                        $img.eq(1).show();
+                        if (json.mobile.signal);
+                        if (json.mobile.signal > 0 && json.mobile.signal <= 6) {
+                            $img.eq(1).attr("src", 'images/' + MobileSignalArr[1]);
+                        } else if (json.mobile.signal > 6 && json.mobile.signal <= 12) {
+                            $img.eq(1).attr("src", 'images/' + MobileSignalArr[2]);
+                        } else if (json.mobile.signal > 12 && json.mobile.signal <= 18) {
+                            $img.eq(1).attr("src", 'images/' + MobileSignalArr[3]);
+                        } else if (json.mobile.signal > 18 && json.mobile.signal <= 24) {
+                            $img.eq(1).attr("src", 'images/' + MobileSignalArr[4]);
+                        } else if (json.mobile.signal > 24 && json.mobile.signal <= 30) {
+                            $img.eq(1).attr("src", 'images/' + MobileSignalArr[5]);
+                        }
                     }
-                    if (json.mobile.signal);
-                    if (json.mobile.signal > 0 && json.mobile.signal <= 6) {
-                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[1]);
-                    } else if (json.mobile.signal > 6 && json.mobile.signal <= 12) {
-                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[2]);
-                    } else if (json.mobile.signal > 12 && json.mobile.signal <= 18) {
-                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[3]);
-                    } else if (json.mobile.signal > 18 && json.mobile.signal <= 24) {
-                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[4]);
-                    } else if (json.mobile.signal > 24 && json.mobile.signal <= 30) {
-                        $img.eq(1).attr("src", 'images/' + MobileSignalArr[5]);
-                    }
+
                 }
 
 
@@ -544,23 +558,6 @@ function getCloud() {
     $.ajax({
         type: "post",
         url: "http://yachtsense.raymarine.com:7777/status",
-        dataType: "json",
-        contentType: "application/json;charset=utf-8",
-        success: function(res) {
-            console.log(res)
-
-        },
-        error: function(jqXHR) {
-            console.log("Error message", JSON.stringify(jqXHR))
-        }
-    })
-}
-
-function getCnss() {
-
-    $.ajax({
-        type: "post",
-        url: "http://yachtsense.raymarine.com:4000",
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function(res) {
