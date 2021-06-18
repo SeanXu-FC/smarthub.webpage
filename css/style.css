@@ -798,7 +798,7 @@ body.min990 {
 }
 
 .layui-layer-msg {
-    border-radius: 10px !important;
+    border-radius: 5px !important;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) !important;
 }
 

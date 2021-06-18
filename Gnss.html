@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css">
-    <link href="css/style.css?mv=20210617" rel="stylesheet" />
+    <link href="css/style.css?mv=20210618" rel="stylesheet" />
     <title>Document</title>
     <style>
         .mc {
@@ -532,7 +532,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
 
     <script>
         var Ws, auth_token, frequency = 0;
@@ -739,18 +739,21 @@
                         if (received_msg.gnss.SatsInView) {
                             var htmlStr = "",
                                 fixGlag = "",
-                                grayClass = "";
+                                grayClass = "",
+                                constellation = "";
                             var fixGlag = "";
                             for (var i = 0; i < received_msg.gnss.SatsInView.length; i++) {
+                                constellation = returnConstellation(received_msg.gnss.SatsInView[i].id);
                                 grayClass = i % 2 == 0 ? "" : "Rectangle-1228";
                                 fixGlag = received_msg.gnss.SatsInView[i].isUsedInFix ? "Yes" : "No";
                                 htmlStr += '<tr class="' + grayClass + '"><td class="GLONASS">' + received_msg.gnss
                                     .SatsInView[i].id +
                                     '</td>' +
-                                    '<td class="GLONASS">Constellation</td>' +
+                                    '<td class="GLONASS">' + constellation + '</td>' +
                                     '<td class="GLONASS">' + fixGlag + '</td>' +
-                                    '<td class="GLONASS">2.0</td>' +
-                                    '<td class="GLONASS">137.3 SE</td></tr>'
+                                    '<td class="GLONASS">' + received_msg.gnss.HDOP + '</td>' +
+                                    '<td class="GLONASS">' + received_msg.gnss.SatsInView[i].azimuth.toFixed(1) +
+                                    '</td></tr>'
                             }
                             $("#Satellites_body").html(htmlStr)
                         }
@@ -815,6 +818,7 @@
         }
         //获取保存需要的值
         function getSaveVal() {
+            var Internal_GNSS = $("#Internal_GNSS").is(":checked");
             var Enable_SBAS = $("#Enable_SBAS input").is(":checked");
             var EnableConstellations = [];
             var GLONASS = $("#Constellations_Glonass input").is(":checked");
@@ -893,17 +897,31 @@
             var param = {
                 "request": "setGnss",
                 "config": {
+                    "InternalGPSEnabled": Internal_GNSS,
                     "EnableSBAS": Enable_SBAS,
                     "EnableSBASSats": EnableSBASSats,
                     "EnableConstellations": EnableConstellations
                 }
             }
+            console.log(param)
             saveGNSS(param)
         }
 
         function saveGNSS(param) {
             param = JSON.stringify(param);
             Ws.send(param);
+        }
+
+        function returnConstellation(id) {
+            var Constellation = "";
+            if (1 <= id && id <= 37) {
+                Constellation = "GPS"
+            } else if (38 <= id && id <= 61) {
+                Constellation = "GLONASS"
+            } else if (120 <= id && id <= 138) {
+                Constellation = "WAAS"
+            }
+            return Constellation;
         }
     </script>
 </body>

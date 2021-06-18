@@ -354,7 +354,7 @@ function renderDataUsage(json, i) {
         }
 
         if (json[i].pin_lock == 0) {
-            $("#SIM_pin_lock1 input").removeAttr("checked");
+            $("#SIM_pin_lock1 input").prop("checked", false);
             $("#Change_SIM_pin1").attr("disabled", "disabled");
         } else {
             $("#Change_SIM_pin1").removeAttr("disabled");
@@ -448,10 +448,10 @@ function renderDataUsage(json, i) {
         }
 
         if (json[i].pin_lock == 0) {
-            $("#SIM_pin_lock2 input").removeAttr("checked");
+            $("#SIM_pin_lock2 input").prop("checked", false);
             $("#Change_SIM_pin2").prop("disabled", "disabled");
         } else {
-            $("#SIM_pin_lock2 input").attr("checked", "checked");
+            $("#SIM_pin_lock2 input").prop("checked", true);
             $("#Change_SIM_pin2").prop("disabled", false);
         }
 

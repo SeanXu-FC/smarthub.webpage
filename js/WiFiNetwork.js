@@ -41,7 +41,10 @@ function TimerPollingWifiList() {
 
             layui.use(['form', 'layer'], function() {
                 var layer = layui.layer;
-                getWLANData(layer);
+                var loading = layer.load(0, {
+                    shade: [0.5, '#fff'],
+                });
+                getWLANData15s(layer, loading);
             });
         }
     }, 15 * 1000)
@@ -129,7 +132,7 @@ function getSwitchStatus(layer, form) {
 function changeSwitchStatus(layer, form, checked) {
     clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
     var loading = layer.load(0, {
-        shade: false,
+        shade: [0.5, '#fff'],
     });
     var mode;
     if (checked == false) {
@@ -320,6 +323,42 @@ function getWLANData(layer, loading) {
                 var tip = '<div style="padding: 20px;text-align: center;word-wrap:break-word;">Abnormal communication!</div>';
                 promptMessage("Error message", tip);
             }
+        }
+    });
+}
+//15s获取wifi列表
+function getWLANData15s(layer, loading) {
+
+    var data = {
+        "jsonrpc": "2.0",
+        "method": "WlanStationConfig",
+        "params": {
+            "operate_code": 10
+        },
+        "id": "9.1"
+    };
+    data = JSON.stringify(data);
+    $.ajax({
+        type: "post",
+        url: "/action/action",
+        data: data,
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function(res) {
+            frequency = 0;
+            layer.close(loading);
+            if (res.result && res.result.ap_list && res.result.ap_list.length > 0) {
+                var json = res.result.ap_list;
+                json.sort(arrSort("rssi"));
+                sessionStorage.setItem('wifiJson', JSON.stringify(json));
+                $(".search-container").hide();
+                renderWifiList(json);
+            }
+        },
+        error: function(jqXHR) {
+            console.log(JSON.stringify(jqXHR))
+            layer.close(loading);
+
         }
     });
 }
@@ -937,7 +976,7 @@ function fn() {};
 //已经保存的WiFi直接连接
 function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
     var loading = layer.load(0, {
-        shade: false,
+        shade: [0.5, '#fff'],
     });
     if (encrypt.indexOf(("[OPEN]")) != -1) {
         encrypt = "None";
@@ -1024,7 +1063,7 @@ function savedWifiConnect(ssid, bssid, encrypt, infoHtml) {
 //无密码的WiFi直接连接
 function noPWDWifiConnect(ssid, bssid, is_saved, infoHtml) {
     var loading = layer.load(0, {
-        shade: false,
+        shade: [0.5, '#fff'],
     });
     var data = {
         "jsonrpc": "2.0",

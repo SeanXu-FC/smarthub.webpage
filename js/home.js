@@ -166,7 +166,7 @@ function getHomeData(layer, loading) {
                     $(".mobiledataImg-disable").show();
                 } else {
                     if (json.mobile.simStatus == 3) {
-                        $('.Connected4G').eq(0).text("Sim is lock");
+                        $('.Connected4G').eq(0).text("SIM Locked");
                         $('.Connected4G').css('color', '#ff0000');
                         $(".mobiledataImg").attr("src", "images/r_04_gray.png?v=20210518");
                         $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
@@ -262,7 +262,7 @@ function getHomeData(layer, loading) {
                                 .active_sim : '-');
                             $img.eq(1).hide();
                         } else if (json.mobile.status == 9) {
-                            $('.Connected4G').eq(0).text("SIM is blocked");
+                            $('.Connected4G').eq(0).text("SIM Blocked");
                             $('.Connected4G').css('color', '#333');
                             $(".mobiledataImg").attr("src", "images/r_04.png?v=20210518");
                             $('.NetworkProvider').eq(0).text(json.mobile.provider ? json.mobile
