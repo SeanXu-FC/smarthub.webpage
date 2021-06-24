@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <title>Document</title>
     <style>
         * {
@@ -346,6 +346,7 @@
     <script>
         var ssid, bssid, is_saved, layer;
         $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             ssid = GetUrlParam("ssid");
             ssid = unescape(ssid);
             bssid = GetUrlParam("bssid");

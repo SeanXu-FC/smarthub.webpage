@@ -675,6 +675,7 @@
 
 </body>
 <script>
+document.body.style.zoom = localStorage.getItem("dpr");
     $(".first-menu a").on("click", function() {
         var isContent = $(this).parent().children().is('.content');
         var disCss;

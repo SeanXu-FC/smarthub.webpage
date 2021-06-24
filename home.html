@@ -11,16 +11,16 @@
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
 
 
-    <link rel="stylesheet" href="css/style.css?mv=20210618">
+    <link rel="stylesheet" href="css/style.css?mv=20210624">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css?mv=20210618">
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210618" />
+    <link rel="stylesheet" href="css/xadmin.css?mv=20210624">
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210624" />
 
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20210624"></script>
     <title>Document</title>
     <style>
         /* img {
@@ -68,8 +68,8 @@
             position: relative;
             overflow: hidden;
             zoom: 1;
-            border: 0px solid #f00"
-
+            border: 0px solid #f00;
+            margin: 0 auto;
         }
         
         .status {
@@ -84,7 +84,7 @@
         .mobiledataImg {
             position: absolute;
             top: 265px;
-            left: 258px;
+            left: 277px;
             z-index: 2;
             width: 67px;
             height: auto;
@@ -95,7 +95,7 @@
         .WiFiNetwork {
             position: absolute;
             top: 145px;
-            left: 183px;
+            left: 204px;
             z-index: 1;
             width: 96px;
             height: auto;
@@ -106,7 +106,9 @@
         
         .w520 {
             position: relative;
-            width: 520px
+            /* width: 520px */
+            width: 329px;
+            margin: 0 auto;
         }
         
         .r_01 {
@@ -227,8 +229,7 @@
             text-align: center;
             color: #343434;
         }
-        
-        @media (max-width: 1366px) {
+        /* @media (max-width: 1366px) {
             .left-nav {
                 width: auto !important;
             }
@@ -236,222 +237,248 @@
                 margin-top: 20px;
                 margin-left: 30px;
             }
-            /* .ml-40 {
-                margin-left: 0px !important;
-            } */
-            .bd1 {
-                width: 560px;
-                height: auto;
-                position: relative;
-                overflow: hidden;
-                zoom: 1;
-                border: 0px solid #f00"
-
-            }
-            .status {
-                font-weight: 600;
-                color: #343434;
-                border-bottom: solid 1px #d2d2d2;
-                padding-bottom: 10px;
-                width: 92%
-            }
-            .mobiledataImg {
-                position: absolute;
-                top: 180px;
-                left: 264px;
-                z-index: 2;
-                width: 42px;
-                max-width: 100%;
-                height: auto;
-                display: block;
-                background-color: #fff;
-            }
-            .WiFiNetwork {
-                position: absolute;
-                top: 120px;
-                left: 211px;
-                z-index: 1;
-                width: 50px;
-                max-width: 100%;
-                height: auto;
-                display: block;
-                background-color: #fff;
-                padding: 5px 0;
-            }
-            .w520 {
-                position: relative;
-                width: 520px
-            }
-            .r_01 {
-                display: block;
-                width: 80px;
-                max-width: 100%;
-                height: auto;
-                margin: 0 auto
-            }
-            .r_02 {
-                display: block;
-                margin: 0 auto;
-                width: 60px;
-                max-width: 100%;
-                height: auto;
-            }
-            .group2916 {
-                display: block;
-                margin: 0 auto;
-                width: 70px;
-                max-width: 100%;
-                height: auto;
-            }
-            .r_06 {
-                display: block;
-                margin: 5px auto;
-                width: 50px;
-                max-width: 100%;
-                height: auto;
-            }
-            .r_07 {
-                display: block;
-                margin: 0 auto;
-                width: 220px;
-                max-width: 100%;
-                height: auto;
-            }
-            #EthernetConnections {
-                margin-right: 28px;
-            }
-            .Group2901 {
-                margin-left: 21px;
-                width: 20px;
-                max-width: 100%;
-                height: auto;
-                display: inline-block;
-            }
-            .Group2902 {
-                width: 60px;
-                max-width: 100%;
-                height: auto;
-                display: inline-block;
-            }
-            .Group2903 {
-                margin-left: 10px;
-                width: 80px;
-                max-width: 100%;
-                height: auto;
-                display: inline-block;
-            }
-            .ml85 {
-                margin-left: 100px;
-            }
+          
+        
+        .bd1 {
+            width: 560px;
+            height: auto;
+            position: relative;
+            overflow: hidden;
+            zoom: 1;
+            border: 0px solid #f00;
+            margin: 0 auto;
         }
         
-        @media (max-width:1400px) {
-            .bd1 {
-                width: 560px;
-                height: auto;
-                position: relative;
-                overflow: hidden;
-                zoom: 1;
-                border: 0px solid #f00"
-
-            }
-            .status {
-                font-weight: 600;
-                color: #343434;
-                border-bottom: solid 1px #d2d2d2;
-                padding-bottom: 10px !important;
-                width: 92%
-            }
-            .mobiledataImg {
-                position: absolute;
-                top: 237px;
-                left: 261px;
-                z-index: 2;
-                width: 56px;
-                max-width: 100%;
-                height: auto;
-                display: block;
-                background-color: #fff;
-            }
-            .WiFiNetwork {
-                position: absolute;
-                top: 130px;
-                left: 197px;
-                z-index: 1;
-                width: 69px;
-                max-width: 100%;
-                height: auto;
-                display: block;
-                background-color: #fff;
-                padding: 5px 0;
-            }
-            .w520 {
-                position: relative;
-                width: 520px;
-                max-width: 100%;
-            }
-            .r_01 {
-                display: block;
-                width: 100px;
-                max-width: 100%;
-                height: auto;
-                margin: 0 auto
-            }
-            .r_02 {
-                display: block;
-                margin: 0 auto;
-                width: 70px;
-                max-width: 100%;
-                height: auto;
-            }
-            .group2916 {
-                display: block;
-                margin: 0 auto;
-                width: 90px;
-                max-width: 100%;
-                height: auto;
-            }
-            .r_06 {
-                display: block;
-                margin: 5px auto;
-                width: 55px;
-                max-width: 100%;
-                height: auto;
-            }
-            .r_07 {
-                display: block;
-                margin: 0 auto;
-                width: 329px;
-                max-width: 100%;
-                height: auto;
-            }
-            .Group2901 {
-                margin-left: 21px;
-                width: 34px;
-                max-width: 100%;
-                height: auto;
-                display: inline-block;
-            }
-            .Group2902 {
-                width: 100px;
-                max-width: 100%;
-                height: auto;
-                display: inline-block;
-            }
-            .Group2903 {
-                margin-left: 10px;
-                width: 100px;
-                max-width: 100%;
-                height: auto;
-                display: inline-block;
-            }
+        .status {
+            font-weight: 600;
+            color: #343434;
+            border-bottom: solid 1px #d2d2d2;
+            padding-bottom: 10px;
+            width: 92%
         }
         
-        @media (max-width:1600px) {
-            .status {
-                font-size: 30px;
-            }
+        .mobiledataImg {
+            position: absolute;
+            top: 180px;
+            left: 281px;
+            z-index: 2;
+            width: 42px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            background-color: #fff;
         }
+        
+        .WiFiNetwork {
+            position: absolute;
+            top: 120px;
+            left: 218px;
+            z-index: 1;
+            width: 50px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            background-color: #fff;
+            padding: 5px 0;
+        }
+        
+        .w520 {
+            position: relative;
+            width: 329px;
+            margin: 0 auto;
+        }
+        
+        .r_01 {
+            display: block;
+            width: 80px;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto
+        }
+        
+        .r_02 {
+            display: block;
+            margin: 0 auto;
+            width: 60px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .group2916 {
+            display: block;
+            margin: 0 auto;
+            width: 70px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .r_06 {
+            display: block;
+            margin: 5px auto;
+            width: 50px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .r_07 {
+            display: block;
+            margin: 0 auto;
+            width: 220px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        #EthernetConnections {
+            margin-right: 28px;
+        }
+        
+        .Group2901 {
+            margin-left: 21px;
+            width: 20px;
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+        
+        .Group2902 {
+            width: 60px;
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+        
+        .Group2903 {
+            margin-left: 10px;
+            width: 80px;
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+        
+        .ml85 {
+            margin-left: 100px;
+        }
+    }
+    @media (max-width:1400px) {
+        .bd1 {
+            width: 560px;
+            height: auto;
+            position: relative;
+            overflow: hidden;
+            zoom: 1;
+            border: 0px solid #f00;
+            margin: 0 auto;
+        }
+        
+        .status {
+            font-weight: 600;
+            color: #343434;
+            border-bottom: solid 1px #d2d2d2;
+            padding-bottom: 10px !important;
+            width: 92%
+        }
+        
+        .mobiledataImg {
+            position: absolute;
+            top: 237px;
+            left: 281px;
+            z-index: 2;
+            width: 56px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            background-color: #fff;
+        }
+        
+        .WiFiNetwork {
+            position: absolute;
+            top: 130px;
+            left: 218px;
+            z-index: 1;
+            width: 69px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            background-color: #fff;
+            padding: 5px 0;
+        }
+        
+        .w520 {
+            position: relative;
+            width: 329px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .r_01 {
+            display: block;
+            width: 100px;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto
+        }
+        
+        .r_02 {
+            display: block;
+            margin: 0 auto;
+            width: 70px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .group2916 {
+            display: block;
+            margin: 0 auto;
+            width: 90px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .r_06 {
+            display: block;
+            margin: 5px auto;
+            width: 55px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .r_07 {
+            display: block;
+            margin: 0 auto;
+            width: 329px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .Group2901 {
+            margin-left: 21px;
+            width: 34px;
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+        
+        .Group2902 {
+            width: 100px;
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+        
+        .Group2903 {
+            margin-left: 10px;
+            width: 100px;
+            max-width: 100%;
+            height: auto;
+            display: inline-block;
+        }
+    }
+    @media (max-width:1600px) {
+        .status {
+            font-size: 30px;
+        }
+    }
+    */
     </style>
 </head>
 
@@ -459,101 +486,106 @@
     <div class="container-fluid" id="Home_c">
         <div class="row">
             <h4 class="ml-40 mt-10 status">Status</h4>
-            <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-1 mt-20">
-                <div class="bd bd1">
-                    <a href="javascript:;" data-url="WiFiNetwork-info1.html" title="Wi-Fi network "><img src="images/r_03.png?v=20210518 " class="WiFiNetwork"></a>
-                    <a href="javascript:;" data-url="MobileData.html" title="Mobile data & SIM management"><img src="images/r_04.png?v=20210518 " class="mobiledataImg"></a>
-                    <div class="w520">
-                        <img src="images/r_01.png?v=20210518 " class="r_01">
-                    </div>
-                    <div class="w520">
-                        <img src="images/r_02.png?v=20210518 " class="r_02">
+            <div class="-flex-display -justify-box">
+                <div class=" mt-20" style="flex:4;">
+                    <div class="bd bd1">
+                        <a href="javascript:;" data-url="WiFiNetwork-info1.html" title="Wi-Fi network "><img src="images/r_03.png?v=20210518 " class="WiFiNetwork"></a>
+                        <a href="javascript:;" data-url="MobileData.html" title="Mobile data & SIM management"><img src="images/r_04.png?v=20210518 " class="mobiledataImg"></a>
+                        <div class="w520">
+                            <img src="images/r_01.png?v=20210518 " class="r_01">
+                        </div>
+                        <div class="w520">
+                            <img src="images/r_02.png?v=20210518 " class="r_02">
 
-                    </div>
-                    <div class="w520">
-                        <img src="images/Group 2916.png?v=20210518 " class="group2916">
-                    </div>
-                    <div class="w520">
-                        <a href="javascript:;" data-url="SmartHubPoint.html" title="Router access point "><img src="images/r_06.png?v=20210518" class="r_06"></a>
-                    </div>
-                    <div class="w520">
-                        <img src="images/r_07.png?v=20210518 " class="r_07">
-                    </div>
-                    <div class="w520" id="connected_devices" data-url="connectedDevices.html">
-                        <div style="float:left;margin-left:20px; cursor: pointer;">
-                            <div class="Wireless-Connections" id="WirelessConnections">Wi-Fi connections
-                                <span></span></div>
-                            <!-- <div class="mt-10" id="">
-                                <span><img src="images/Group 2901.png?v=20210518 " title="Wi-Fi"
-                                        class="Group2901"></span>
-                                <span><img src="images/Group 2901.png?v=20210518 " title="Wi-Fi"
-                                        class="Group2901"></span>
-                                <span><img src="images/Group 2901.png?v=20210518 " title="Wi-Fi"
-                                        class="Group2901"></span>
-                            </div> -->
                         </div>
-                        <div style="float:right ;cursor: pointer;">
-                            <div class="Ethernet-Connections" id="EthernetConnections">Ethernet connections
-                                <span></span></div>
-                            <!-- <div class="mt-10 ">
-                                <span><img src="images/Group 2902.png?v=20210518 " title="Ethernet"
-                                        class="Group2902"></span>
-                                <span><img src="images/Group 2903.png?v=20210518 " title="Ethernet"
-                                        class="Group2902"></span>
-                            </div> -->
+                        <div class="w520">
+                            <img src="images/Group 2916.png?v=20210518 " class="group2916">
+                        </div>
+                        <div class="w520">
+                            <a href="javascript:;" data-url="SmartHubPoint.html" title="Router access point "><img src="images/r_06.png?v=20210518" class="r_06"></a>
+                        </div>
+                        <div class="w520">
+                            <img src="images/r_07.png?v=20210518 " class="r_07">
+                        </div>
+                        <div class="w520" id="connected_devices" data-url="connectedDevices.html" style="height: 30px;width:520px;position:relative;">
+                            <div style="cursor: pointer; position: absolute;margin-left: 20px;">
+                                <div class="Wireless-Connections" id="WirelessConnections">Wi-Fi connections
+                                    <span></span></div>
+                                <!-- <div class="mt-10" id="">
+                                    <span><img src="images/Group 2901.png?v=20210518 " title="Wi-Fi"
+                                            class="Group2901"></span>
+                                    <span><img src="images/Group 2901.png?v=20210518 " title="Wi-Fi"
+                                            class="Group2901"></span>
+                                    <span><img src="images/Group 2901.png?v=20210518 " title="Wi-Fi"
+                                            class="Group2901"></span>
+                                </div> -->
+                            </div>
+                            <div style="position: absolute;cursor: pointer;right: 0;">
+                                <div class="Ethernet-Connections" id="EthernetConnections">Ethernet connections
+                                    <span></span></div>
+                                <!-- <div class="mt-10 ">
+                                    <span><img src="images/Group 2902.png?v=20210518 " title="Ethernet"
+                                            class="Group2902"></span>
+                                    <span><img src="images/Group 2903.png?v=20210518 " title="Ethernet"
+                                            class="Group2902"></span>
+                                </div> -->
+                            </div>
                         </div>
                     </div>
+                    <!-- <img class="img-responsive " src="img/home001.png "> -->
                 </div>
-                <!-- <img class="img-responsive " src="img/home001.png "> -->
+                <div class="" style="flex:6;">
+                    <div class="mt-20 mb-10 bb1c w96 ">
+                        <h3 class="fw26 ">Cloud</h3>
+                        <div class="mb-10 mt-10 font18 home-left" id="connected">Status:<span class="ml-100 Connected cloud"></span>
+                        </div>
+                    </div>
+                    <div class="mt-20 mb-10 bb1c w96 ">
+                        <h3 class="fw26"><a href="javascript:;" data-url="WiFiNetwork-info1.html" target="_self">Wi-Fi
+                                network</a>
+                        </h3>
+                        <div class="mb-10 mt-10 font18 home-left">Status:<span class="ml-100 Connected connected24"></span>
+                        </div>
+                        <div class="mb-10 mt-10 font18 home-left imgIcon1">Network:<span class="ml-85 MyText ssid"></span><img id="connected24" class="imgIcon"></div>
+                    </div>
+                    <div class="mt-20 mb-10 bb1c w96 ">
+                        <h3 class="fw26"><a href="javascript:;" data-url="MobileData.html" target="_self">Mobile
+                                network</a>
+                        </h3>
+                        <div class="mb-10 mt-10 font18 home-left imgIcon1">Status:<span class="ml-100 Connected Connected4G"></span><img id="Connected4G" class="imgIcon"></div>
+                        <div class="mb-10 mt-10 font18 home-left ">Network provider:<span class="ml-16 MyText NetworkProvider"></span>
+                        </div>
+                        <div class="mb-10 mt-10 font18 home-left ">SIM card(in use):<span class="ml-20 MyText active_sim"></span>
+                        </div>
+                        <!-- <div class="mb-10 mt-10 font18 ">IMSI:<span class="MyText imsi" style="margin-left: 115px;"></span>
+                        </div>
+                        <div class="mb-10 mt-10 font18 ">PLMN:<span class="MyText plmn" style="margin-left: 102px;"></span>
+                        </div>
+                        <div class="mb-10 mt-10 font18 ">CSQ:<span class="MyText csq" style="margin-left: 112px;"></span>
+                        </div>
+                        <div class="mb-10 mt-10 font18 ">LOCATION:<span class=" MyText location" style="margin-left: 63px;"></span></div>
+                        <div class="mb-10 mt-10 font18 ">CELL:<span class=" MyText cell" style="margin-left: 108px;"></span>
+                        </div>
+                        <div class="mb-10 mt-10 font18 ">ACT:<span class=" MyText act" style="margin-left: 119px;"></span>
+                        </div>
+                        <div class="mb-10 mt-10 font18 ">REGISTER:<span class=" MyText register" style="margin-left: 60px;"></span></div> -->
+                    </div>
+                    <div class="mb-10 mt-20 bb1c w96 " style="border-bottom: 0px solid #ccc;">
+                        <h3 class="fw26 "><a href="javascript:;" data-url="SmartHubPoint.html" target="_self">Router
+                                access
+                                point</a></h3>
+                        <div class="mb-10 mt-10 font18 home-left">Status:<span class="ml-100 Connected clg Status "></span>
+                        </div>
+                        <div class="mb-10 mt-10 font18 home-left">Name:<span class="ml-103 MyText Name"></span></div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6 col-md-offset-1 col-sm-6 col-lg-6 " style="float:right">
-                <div class="mt-20 mb-10 bb1c w80 ">
-                    <h3 class="fw26 ">Cloud</h3>
-                    <div class="mb-10 mt-10 font18 home-left" id="connected">Status:<span class="ml-100 Connected cloud"></span>
-                    </div>
-                </div>
-                <div class="mt-20 mb-10 bb1c w80 ">
-                    <h3 class="fw26"><a href="javascript:;" data-url="WiFiNetwork-info1.html" target="_self">Wi-Fi
-                            network</a>
-                    </h3>
-                    <div class="mb-10 mt-10 font18 home-left">Status:<span class="ml-100 Connected connected24"></span>
-                    </div>
-                    <div class="mb-10 mt-10 font18 home-left imgIcon1">Network:<span class="ml-85 MyText ssid"></span><img id="connected24" class="imgIcon"></div>
-                </div>
-                <div class="mt-20 mb-10 bb1c w80 ">
-                    <h3 class="fw26"><a href="javascript:;" data-url="MobileData.html" target="_self">Mobile network</a>
-                    </h3>
-                    <div class="mb-10 mt-10 font18 home-left imgIcon1">Status:<span class="ml-100 Connected Connected4G"></span><img id="Connected4G" class="imgIcon"></div>
-                    <div class="mb-10 mt-10 font18 home-left ">Network provider:<span class="ml-16 MyText NetworkProvider"></span>
-                    </div>
-                    <div class="mb-10 mt-10 font18 home-left ">SIM card(in use):<span class="ml-20 MyText active_sim"></span>
-                    </div>
-                    <!-- <div class="mb-10 mt-10 font18 ">IMSI:<span class="MyText imsi" style="margin-left: 115px;"></span>
-                    </div>
-                    <div class="mb-10 mt-10 font18 ">PLMN:<span class="MyText plmn" style="margin-left: 102px;"></span>
-                    </div>
-                    <div class="mb-10 mt-10 font18 ">CSQ:<span class="MyText csq" style="margin-left: 112px;"></span>
-                    </div>
-                    <div class="mb-10 mt-10 font18 ">LOCATION:<span class=" MyText location" style="margin-left: 63px;"></span></div>
-                    <div class="mb-10 mt-10 font18 ">CELL:<span class=" MyText cell" style="margin-left: 108px;"></span>
-                    </div>
-                    <div class="mb-10 mt-10 font18 ">ACT:<span class=" MyText act" style="margin-left: 119px;"></span>
-                    </div>
-                    <div class="mb-10 mt-10 font18 ">REGISTER:<span class=" MyText register" style="margin-left: 60px;"></span></div> -->
-                </div>
-                <div class="mb-10 mt-20 bb1c w80 " style="border-bottom: 0px solid #ccc;">
-                    <h3 class="fw26 "><a href="javascript:;" data-url="SmartHubPoint.html" target="_self">Router access
-                            point</a></h3>
-                    <div class="mb-10 mt-10 font18 home-left">Status:<span class="ml-100 Connected clg Status "></span>
-                    </div>
-                    <div class="mb-10 mt-10 font18 home-left">Name:<span class="ml-103 MyText Name"></span></div>
-                </div>
-            </div>
+
         </div>
     </div>
 </body>
 <script src="js/jquery.myProgress.js"></script>
-<script type="text/javascript" src="js/home.js?mv=20210618"></script>
+<script type="text/javascript" src="js/home.js?mv=20210624"></script>
 <!-- <script>
     setTimeout(function() {
         $.ajax({

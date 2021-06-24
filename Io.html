@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -293,9 +293,10 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script>
         $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             layui.use(['layer', 'form'], function() {
                 var layer = layui.layer;
                 var form = layui.form;

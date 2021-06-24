@@ -7,7 +7,7 @@ var queryWifiListTimer = null;
 var queryStatusTimerout = null;
 var wifiListTimerQueryFlag = false; //其他操作正在进行需要中断定时查询wifi列表标志
 $(function() {
-
+        document.body.style.zoom = 0.57;
         layui.use(['form', 'layer'], function() {
             form = layui.form;
             layer = layui.layer;
@@ -531,12 +531,14 @@ function bindEvent() {
 function promptWifiMessage(title, content, infoHtml) {
 
     layui.use(['layer'], function() {
+        var divWH = gitWinWH(512, 350);
         var layer = layui.layer;
         parent.layer.open({
             type: 1,
             id: 'wifi_some_info', //防止重复弹出   
             title: false,
             area: ['512px', '350px'],
+            offset: [divWH.h, divWH.w],
             content: content,
             btn: 'Connect',
             btnAlign: 'r', //按钮居中 
@@ -553,12 +555,14 @@ function promptWifiMessage(title, content, infoHtml) {
 //新增wifi并连接
 function addNetworkHtml() {
     clearTimerPollingWifiList(); //其他操作正在进行需要中断定时查询wifi列表
+    var divWH = gitWinWH(540, 360);
     parent.layer.open({
         type: 2,
         title: false,
         closeBtn: 0,
         shade: 0.8,
         area: ['541px', '361px'],
+        offset: [divWH.h, divWH.w],
         content: ['AddNetwork.html', 'no'],
         end: function() {
             var connectingSsid = $("#saved_id").val();
@@ -677,7 +681,7 @@ function forgetWifiHtml(infoHtml) {
         })
         return;
     }
-
+    var divWH = gitWinWH(534, 584);
     //iframe层
     parent.layer.open({
         type: 2,
@@ -685,6 +689,7 @@ function forgetWifiHtml(infoHtml) {
         closeBtn: 0,
         shade: 0.8,
         area: ['534px', '585px'],
+        offset: [divWH.h, divWH.w],
         //area: '534px',
         content: ["WirelessNameInfo.html?ssid=" + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
@@ -731,7 +736,7 @@ function forgetSavedWifi(infoHtml) {
         })
         return;
     }
-
+    var divWH = gitWinWH(534, 464);
     //iframe层
     parent.layer.open({
         type: 2,
@@ -739,6 +744,7 @@ function forgetSavedWifi(infoHtml) {
         closeBtn: 0,
         shade: 0.8,
         area: ['534px', '465px'],
+        offset: [divWH.h, divWH.w],
         //area: '534px',
         content: ["SavedWifi.html?ssid=" + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
@@ -792,6 +798,7 @@ function enterPasswordHtml(infoHtml) {
     }
 
     ssid = escape(ssid);
+    var divWH = gitWinWH(520, 360);
     //iframe层
     parent.layer.open({
         type: 2,
@@ -799,6 +806,7 @@ function enterPasswordHtml(infoHtml) {
         closeBtn: 0,
         shade: 0.8,
         area: ['521px', '360px'],
+        offset: [divWH.h, divWH.w],
         content: ["EnterPassword.html?ssid=" + ssid + "&bssid=" + bssid + "&encrypt=" + encrypt + "&is_saved=" + is_saved, 'no'],
         end: function() {
             var connectingSsid = $("#saved_id").val();

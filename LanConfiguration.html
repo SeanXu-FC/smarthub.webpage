@@ -12,12 +12,12 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210618"></script>
+    <script src="js/lanConfiguration.js?mv=20210624"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -36,12 +36,16 @@
             letter-spacing: normal;
             text-align: left;
             color: #343434;
+            position: relative;
+            border-bottom: solid 1px #ddd;
+            padding-bottom: 10px;
         }
         
         .btn1 {
-            position: absolute;
+            position: fixed;
             top: 31px;
             right: 70px;
+            z-index: 999;
         }
         
         .Path-101 {
@@ -147,10 +151,15 @@
             letter-spacing: normal;
             text-align: left;
             color: #343434;
+            padding-top: 10px;
+        }
+        
+        .form-horizontal {
+            padding-top: 130px;
         }
         
         .form-horizontal .control-label {
-            padding-top: 7px;
+            padding-top: 10px;
             margin-bottom: 0;
             text-align: left;
             color: #333;
@@ -284,6 +293,18 @@
             background-position: 30px 0;
         }
         
+        #leasetime {
+            width: 100px;
+        }
+        
+        .top-title-c {
+            position: fixed;
+            width: 90%;
+            background-color: #fff;
+            padding-top: 30px;
+            z-index: 999;
+        }
+        
         @media screen and (max-width: 1192px) {
             .LAN-configuration {
                 font-size: 30px;
@@ -301,10 +322,10 @@
 </head>
 
 <body>
-    <div class="container-fluid" style="margin:30px 70px;">
+    <div class="container-fluid" style="margin:0 70px 30px 70px;">
         <div class="row">
-            <div>
-                <div style="position:relative;margin-bottom:40px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="LAN-configuration">Ethernet configuration
+            <div class="top-title-c">
+                <div class="LAN-configuration">Ethernet configuration
                 </div>
             </div>
 
@@ -490,6 +511,7 @@
             timer = null;;
         var frequency = 0;
         $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             $(window).on('beforeunload', function() {
                 clearInterval(timer);
             });
@@ -506,8 +528,22 @@
                 });
                 getLanData(layer, loading);
             });
-            $("#btn2").on("click", function() {
 
+            $('input').on("focus", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(".container-fluid").css({
+                        "padding-bottom": "500px",
+                    })
+                }
+            });
+
+            $('input').on("blur", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(".container-fluid").css("padding-bottom", "0px")
+                }
+            });
+
+            $("#btn2").on("click", function() {
                 var leasetime = $('#leasetime').val();
                 var toing = true;
                 if (Number(leasetime) > 172800) {
@@ -935,6 +971,21 @@
                         });
                     })
 
+                    $(".ipinput_input").on("focus", function() {
+                        if (localStorage.getItem("noPC")) {
+                            $(".container-fluid").css({
+                                "padding-bottom": "500px",
+                            })
+                        }
+                    });
+                    $(".ipinput_input").on("blur", function() {
+                        if (localStorage.getItem("noPC")) {
+                            $(".container-fluid").css({
+                                "padding-bottom": "0px",
+                            })
+                        }
+                    });
+
                 },
                 error: function(jqXHR) {
                     console.log("Error message", JSON.stringify(jqXHR))
@@ -956,11 +1007,13 @@
         }
 
         function ejectTip() {
-
+            var divWH = gitWinWH(560, 80);
             var loading = parent.layer.msg('Waiting for changes to be applied...', {
                 icon: 16,
                 time: false,
                 shade: [0.5, '#fff'],
+                area: ['560px', '80px'],
+                offset: [divWH.h, divWH.w],
                 success: function(layero, index) {
                     var msg = layero.text();
                     var i = 20;

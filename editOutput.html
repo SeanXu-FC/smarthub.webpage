@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
 
     <title>Document</title>
     <style>
@@ -224,6 +224,7 @@
         
         .wirelessInfo {
             padding: 30px;
+            height: 100%;
         }
         
         .layui-form-label {
@@ -548,10 +549,11 @@
 
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script>
         var saveChannelID;
         $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             var name = GetUrlParam("name");
             name = unescape(name);
             var ChannelID = GetUrlParam("ChannelID");
@@ -583,6 +585,25 @@
                 name = $("#output_name").val();
                 saveData(name, ChannelID)
             })
+            $('input').on("focus", function() {
+                if (localStorage.getItem("noPC")) {
+                    positionTop = $(parent.document).find(".layui-layer-iframe").css("top");
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        "0px");
+                    $("#wirelessInfo").css({
+                        "padding-bottom": "150px",
+                        "overflow-y": "auto"
+                    })
+                }
+            });
+
+            $('input').on("blur", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        positionTop);
+                    $("#wirelessInfo").css("padding-bottom", "0px")
+                }
+            });
         });
 
 

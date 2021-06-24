@@ -1,6 +1,7 @@
 var currentSIM = 1;
 var frequency = 0;
 $(function() {
+    document.body.style.zoom = localStorage.getItem("dpr");
     var $wrapper = $('.tab-wrapper'),
         $allTabs = $wrapper.find('.tab-content > div'),
         $tabMenu = $wrapper.find('.tab-menu li'),
@@ -130,6 +131,11 @@ $(function() {
         ResetAPNsettings(1)
         $(window).resize();
     });
+    $('#Detect_SIMs').on('click', function() {
+        //iframe层
+        DetectSIMs(1)
+        $(window).resize();
+    });
 
     $("#resetAPN_p").on("click", function() {
         var type = $("#Password").attr("type");
@@ -152,6 +158,20 @@ $(function() {
         }
     })
 
+    $('input').on("focus", function() {
+        if (localStorage.getItem("noPC")) {
+            $(".container-fluid").css({
+                "padding-bottom": "300px",
+            })
+        }
+    });
+
+    $('input').on("blur", function() {
+        if (localStorage.getItem("noPC")) {
+            $(".container-fluid").css("padding-bottom", "0px")
+        }
+    });
+
     // $("#dataWaring input").on('input', function(e) {
     //     var valLimit = $("#dataLimit input").val();
     //     var uintLimit = $("#switchMBLim").val();
@@ -165,7 +185,31 @@ $(function() {
 
 })
 
+function DetectSIMs(SIM) {
+    var divWH = gitWinWH(570, 220);
+    parent.layer.open({
+        id: "DetectSIMs",
+        type: 2,
+        title: false,
+        closeBtn: 0,
+        shade: 0.8,
+        area: ['570px', '220px'],
+        offset: [divWH.h, divWH.w],
+        //area: '534px',
+        content: ['DetectSIMs.html?SIM=1', 'no'],
+        end: function() {
+            layui.use(['layer', 'form'], function() {
+                var layer = layui.layer;
+                var form = layui.form;
+                getMainParameters(layer, form);
+            })
+
+        }
+    });
+}
+
 function ResetAPNsettings(SIM) {
+    var divWH = gitWinWH(534, 260);
     parent.layer.open({
         id: "ResetAPNsettings",
         type: 2,
@@ -173,6 +217,7 @@ function ResetAPNsettings(SIM) {
         closeBtn: 0,
         shade: 0.8,
         area: ['534px', '260px'],
+        offset: [divWH.h, divWH.w],
         //area: '534px',
         content: ['ResetAPNsettings.html?SIM=' + SIM, 'no'],
         end: function() {
@@ -194,6 +239,7 @@ function lockSimPinTip(checked) {
         type = 2 //unlock
     }
     times = MobileData[(currentSIM - 1)].pin_times;
+    var divWH = gitWinWH(400, 350);
     parent.layer.open({
         type: 2,
         title: false,
@@ -201,6 +247,7 @@ function lockSimPinTip(checked) {
         //shadeClose: true,
         shade: 0.8,
         area: ['400px', '350px'],
+        offset: [divWH.h, divWH.w],
         content: ['lockSimPin.html?SIM=' + currentSIM + '&type=' + type + '&times=' + times, 'no'],
         end: function(index, layero) {
             var unlockSIM = $("#unlockSIM").val();
@@ -230,6 +277,7 @@ function lockSimPinTip(checked) {
 function initBindEvent(id) {
     $('#' + id).on('click', function() {
         //iframe层
+        var divWH = gitWinWH(400, 440);
         parent.layer.open({
             type: 2,
             title: false,
@@ -237,6 +285,7 @@ function initBindEvent(id) {
             //shadeClose: true,
             shade: 0.8,
             area: ['400px', '440px'],
+            offset: [divWH.h, divWH.w],
             content: ['changeSimPin.html?SIM=' + currentSIM, 'no'],
             end: function(index, layero) {
                 var unlockSIM = $("#unlockSIM").val();
@@ -257,6 +306,7 @@ function bindUnblockEvent(id) {
     $('#' + id).on('click', function() {
         var times = MobileData[(currentSIM - 1)].puk_times;
         //iframe层
+        var divWH = gitWinWH(400, 550);
         parent.layer.open({
             type: 2,
             title: false,
@@ -264,6 +314,7 @@ function bindUnblockEvent(id) {
             //shadeClose: true,
             shade: 0.8,
             area: ['400px', '550px'],
+            offset: [divWH.h, divWH.w],
             content: ['unblockSIM.html?SIM=' + currentSIM + '&times=' + times, 'no'],
             end: function(index, layero) {
                 var unlockSIM = $("#unlockSIM").val();
@@ -303,7 +354,7 @@ function getMainParameters(layer, form) {
             if (res.result) {
                 var json = res.result;
 
-
+                $('input[name="primarySIM"]').eq(json.primary_sim).prop("checked", true);
                 if (json.auo_switch == 0) { //Mobile data:                
                     $("#autoSwitch input").removeAttr("checked");
                 } else {
@@ -343,15 +394,39 @@ function renderDataUsage(json, i) {
     if (i == 0) {
         if (json[i].provider) {
             $("#SIM_provider1").text("(" + json[i].provider + ")");
+            $("#network_mode_SIM1").attr("title", "SIM1 (" + json[i].provider + ")");
         }
 
-        if (json[i].isblock == 1) {
+        if (json[i].sim_status == 1) { //未插卡       
             $(".content1 .content1-contianer").hide();
+            $("#unblock_SIM").hide();
+            $("#unblock_SIM1_div").text("SIM not insert");
             $(".sim-block-c").show();
+            $(".network-mode-top").css("opacity", "0.5");
+            $(".auto-switch").css("opacity", "0.5");
+            $("#network_mode_top input").prop("disabled", true);
+            $("#autoSwitch input").prop("disabled", true);
         } else {
-            $(".content1 .content1-contianer").show();
-            $(".sim-block-c").hide();
+            $("#unblock_SIM").show();
+            if (json[i].isblock == 1) {
+                $(".content1 .content1-contianer").hide();
+                $("#unblock_SIM1_div").text("SIM is blocked");
+                $(".sim-block-c").show();
+                $(".network-mode-top").css("opacity", "0.5");
+                $(".auto-switch").css("opacity", "0.5");
+                $("#network_mode_top input").prop("disabled", true);
+                $("#autoSwitch input").prop("disabled", true);
+            } else {
+                $(".content1 .content1-contianer").show();
+                $(".sim-block-c").hide();
+                $(".network-mode-top").css("opacity", "1");
+                $(".auto-switch").css("opacity", "1");
+                $("#network_mode_top input").prop("disabled", false);
+                $("#autoSwitch input").prop("disabled", false);
+            }
         }
+
+
 
         if (json[i].pin_lock == 0) {
             $("#SIM_pin_lock1 input").prop("checked", false);
@@ -437,15 +512,25 @@ function renderDataUsage(json, i) {
     } else {
         if (json[i].provider) {
             $("#SIM_provider2").text("(" + json[i].provider + ")");
+            $("#network_mode_SIM2").attr("title", "SIM2 (" + json[i].provider + ")");
         }
-        if (json[i].isblock == 1) {
+        if (json[i].sim_status == 1) { //未插卡       
             $(".content2 .content2-contianer").hide();
+            $("#unblock_SIM1").hide();
+            $("#unblock_SIM2_div").text("SIM not insert");
             $(".sim-block-c2").show();
-
         } else {
-            $(".content2 .content2-contianer").show();
-            $(".sim-block-c2").hide();
+            $("#unblock_SIM1").show();
+            if (json[i].isblock == 1) {
+                $(".content2 .content2-contianer").hide();
+                $(".sim-block-c2").show();
+                $("#unblock_SIM2_div").text("SIM is blocked");
+            } else {
+                $(".content2 .content2-contianer").show();
+                $(".sim-block-c2").hide();
+            }
         }
+
 
         if (json[i].pin_lock == 0) {
             $("#SIM_pin_lock2 input").prop("checked", false);
@@ -777,6 +862,7 @@ function renderEchart(id, Xdate, Ydata, unit, limitNum, unit2, waringNum, data_w
 
 //设置前获取Datausage各项的值
 function getDatausageVal() {
+    var primarySIM = $("input[name='primarySIM']:checked").val();
     var autoSwitch = $("#autoSwitch input").is(":checked") == true ? 1 : 0;
     var mobileData = $("#mobileData input").is(":checked") == true ? 1 : 0;
     var DataRoaming = $("#DataRoaming input").is(":checked") == true ? 1 : 0;
@@ -859,6 +945,7 @@ function getDatausageVal() {
 
     var params = {
         "auto_switch": autoSwitch,
+        "primary_sim": Number(primarySIM),
         "sim": [{
                 "sim_id": 0,
                 "mobile_data": Number(mobileData),
@@ -896,6 +983,7 @@ function getDatausageVal() {
         ]
 
     }
+
     layui.use(['layer'], function() {
         var layer = layui.layer;
         setDatausage(layer, params)

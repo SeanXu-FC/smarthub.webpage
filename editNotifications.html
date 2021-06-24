@@ -228,7 +228,7 @@
             width: 88%;
             padding-left: 10px;
             border-radius: 5px;
-            border: 1px solid #333 !important;
+            border: 1px solid #333;
             font-family: OpenSans;
             font-size: 18px;
             font-weight: normal;
@@ -610,6 +610,15 @@
             text-align: left;
             color: #343434;
         }
+        
+        .layui-input {
+            border: 1px solid #333;
+        }
+        
+        .layui-input[disabled],
+        .layui-textarea[disabled] {
+            border: 1px solid #aaa;
+        }
     </style>
 </head>
 
@@ -648,7 +657,7 @@
                         </select>
                     </div>
                     <div class="layui-input-inline" style="width:38px;">
-                        <input type="number" id="volts_input" name="price_min " placeholder=" " autocomplete="off " class="layui-input" style="width: 56px;margin-left:24px ;border:1px solid #333">
+                        <input type="number" id="volts_input" name="price_min " placeholder=" " autocomplete="off " class="layui-input" style="width: 56px;margin-left:24px ;">
                     </div>
                     <label class="layui-form-label volts " style="margin-left:22px;width: 60px !important; ">volts</label>
                 </div>
@@ -687,11 +696,11 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script>
-        var oldTrigType, oldVolt, oldNoti_msg, savedataId;
+        var oldTrigType, oldVolt, oldNoti_msg, savedataId, positionTop;
         $(function() {
-
+            document.body.style.zoom = localStorage.getItem("dpr");
             var dataId = GetUrlParam("dataId");
             savedataId = dataId;
             var name = GetUrlParam("name");
@@ -789,14 +798,57 @@
                 volt = Number(volt)
                 volt = Number(volt).toFixed(1)
 
+
                 var noti_msg = $(".layui-textarea").val() ? $(".layui-textarea").val() : '';
                 //var wake_func = $("#func_check").is(":checked") == true ? 1 : 0;;
 
                 noti_msg = noti_msg.replace(/(\s*$)/g, "");
                 var alert_ID = Number($("#alert_ID").val());
+                if (volt < 0 || volt > 50) {
+                    layui.use(['form', 'layer'], function() {
+                        var layer = layui.layer;
+                        layer.msg("The voltage value must be between 0 and 50!");
+                    })
+                    return;
+                }
                 saveData(dataId, Notifications, trigType, volt, noti_msg, alert_ID)
 
             })
+
+            $('input,textarea').on("focus", function() {
+                if (localStorage.getItem("noPC")) {
+                    positionTop = $(parent.document).find(".layui-layer-iframe").css("top")
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        "0px");
+                    $("#wirelessInfo").css({
+                        "padding-bottom": "250px",
+                        "height": "100%",
+                        "overflow-y": "auto"
+                    })
+                }
+            });
+            $('input,textarea').on("blur", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        positionTop);
+                    $("#wirelessInfo").css({
+                        "padding-bottom": "0px",
+                        "height": "100%",
+                        "overflow-y": "auto"
+                    })
+                }
+            });
+            $('#security').on("click", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        "0px");
+                    $("#wirelessInfo").css({
+                        "padding-bottom": "250px",
+                        "height": "100%",
+                        "overflow-y": "auto"
+                    })
+                }
+            });
 
         });
 

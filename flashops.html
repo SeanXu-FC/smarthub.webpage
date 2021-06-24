@@ -156,6 +156,7 @@
         status = "undefined",
         loading = null;
     $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             layui.use(['form', 'layer'], function() {
                 var form = layui.form;
                 var layer = layui.layer;
@@ -441,11 +442,12 @@
     }
 
     function ejectTip(msg) {
-
+        var divWH = gitWinWH(120, 80);
         var loading = parent.layer.msg(msg, {
             icon: 16,
             time: false,
             shade: [0.5, '#fff'],
+            offset: [divWH.h, divWH.w],
             success: function(layero, index) {
                 var msg = layero.text();
 

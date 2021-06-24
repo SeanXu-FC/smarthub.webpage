@@ -12,8 +12,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <title>Document</title>
     <style>
         * {
@@ -68,8 +68,11 @@
             margin: 17px 60.5px 27.5px 0.5px;
             font-family: OpenSans;
             font-size: 18px;
+            /* font-size: 12px; */
             text-align: left;
             color: #343434;
+            margin-left: 0;
+            margin-right: 0;
         }
         
         .Path-101 {
@@ -151,6 +154,7 @@
         .Enter-the-password-for-network-Mynetwork1 {
             font-family: "OpenSans-Semibold";
             font-size: 24px;
+            /* font-size: 13px; */
             font-weight: 600;
             font-stretch: normal;
             font-style: normal;
@@ -311,11 +315,11 @@
     </div>
 
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script>
-        var srcStr;
+        var srcStr, positionTop;
         $(function() {
-
+            document.body.style.zoom = localStorage.getItem("dpr");
             srcStr = GetUrlParam("url");
             // 按钮禁掉和灰掉
             $(".connected button").prop("disabled", true);
@@ -351,6 +355,23 @@
             });
             $('#btn').click(function() {
                 login();
+            });
+
+            $('input').on("focus", function() {
+                if (localStorage.getItem("noPC")) {
+                    positionTop = $(parent.document).find(".layui-layer-iframe").css("top");
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        "0px");
+                    $("#wirelessInfo").css("padding-bottom", "220px")
+                }
+            });
+
+            $('input').on("blur", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        positionTop);
+                    $("#wirelessInfo").css("padding-bottom", "0px")
+                }
             });
 
             //password

@@ -221,6 +221,7 @@
         
         .wirelessInfo {
             padding: 30px 30px 20px 30px;
+            height: 100%;
         }
         
         .layui-textarea {
@@ -355,7 +356,6 @@
         
         .Enable-if-you-want-this-input-to-wake-the-SmartHub {
             width: 330px !important;
-            height: 19px;
             opacity: 0.74;
             font-family: OpenSans;
             font-size: 14px;
@@ -626,7 +626,7 @@
 
                 <div class="layui-input-block -flex-display">
                     <input type="number" id="volts_input" name="price_min " placeholder=" " autocomplete="off " class="layui-input lowVoltageInput">
-                    <label class="layui-form-label volts " style="width: 60px !important; ">volts</label>
+                    <label class="layui-form-label volts " style="width: 80px !important; ">volts</label>
                 </div>
             </div>
 
@@ -642,11 +642,11 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script>
-        var oldWarning, oldVolt;
+        var oldWarning, oldVolt, positionTop;
         $(function() {
-
+            document.body.style.zoom = localStorage.getItem("dpr");
             var LowVoltWarning = GetUrlParam("LowVoltWarning");
             oldWarning = LowVoltWarning;
             var LowVoltValue = GetUrlParam("LowVoltValue");
@@ -691,6 +691,25 @@
 
                 saveData(Notifications, volt)
             })
+            $('input').on("focus", function() {
+                if (localStorage.getItem("noPC")) {
+                    positionTop = $(parent.document).find(".layui-layer-iframe").css("top");
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        "0px");
+                    $("#wirelessInfo").css({
+                        "padding-bottom": "60px",
+                        "overflow-y": "auto"
+                    })
+                }
+            });
+
+            $('input').on("blur", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        positionTop);
+                    $("#wirelessInfo").css("padding-bottom", "0px")
+                }
+            });
 
         });
 

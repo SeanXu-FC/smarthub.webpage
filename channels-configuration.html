@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -252,10 +252,11 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script>
         var frequency = 0;
         $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             layui.use('layer', function() {
                 var layer = layui.layer;
                 var loading = layer.load(0, {
@@ -272,6 +273,7 @@
                 var alertID = $(this).children(".Bilge-pump").attr("alertID");
                 var status = $(this).children(".Bilge-pump").attr("status");
                 //iframe层
+                var divWH = gitWinWH(550, 440);
                 parent.layer.open({
                     type: 2,
                     title: false,
@@ -279,6 +281,7 @@
                     //shadeClose: true,
                     shade: 0.8,
                     area: ['550px', '440px'],
+                    offset: [divWH.h, divWH.w],
                     content: ['editInput.html?ChannelID=' + dataId + '&name=' + name +
                         '&types=' + types + '&alertid=' + alertID + '&status=' + status,
                         'no'
@@ -301,6 +304,7 @@
                 var alertID = $(this).children(".Bilge-pump").attr("alertID");
                 var status = $(this).children(".Bilge-pump").attr("status");
                 //iframe层
+                var divWH = gitWinWH(550, 364);
                 parent.layer.open({
                     type: 2,
                     title: false,
@@ -308,6 +312,7 @@
                     //shadeClose: true,
                     shade: 0.8,
                     area: ['550px', '365px'],
+                    offset: [divWH.h, divWH.w],
                     content: ['editOutput.html?ChannelID=' + dataId + '&name=' + name +
                         '&types=' + types + '&alertid=' + alertID + '&status=' + status,
                         'no'

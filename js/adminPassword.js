@@ -1,4 +1,5 @@
 $(function() {
+    document.body.style.zoom = localStorage.getItem("dpr");
     // 按钮禁掉和灰掉
     $(".Change-password").prop("disabled", true);
     $(".Change-password").css("opacity", "0.5");
@@ -35,6 +36,25 @@ $(function() {
             $(this).text("HIDE");
         }
     })
+
+    $('input').on("focus", function() {
+        if (localStorage.getItem("noPC")) {
+            $("#chagePWD").css({
+                "padding-bottom": "400px",
+            })
+            setTimeout(() => {
+                $(this).scrollIntoViewIfNeeded();
+            }, 1000);
+
+        }
+    });
+
+    $('input').on("blur", function() {
+        if (localStorage.getItem("noPC")) {
+            $("#chagePWD").css("padding-bottom", "0px")
+        }
+    });
+
 
 
     $('#pwd,#pwd2,#pwd3').bind("keyup", function() {

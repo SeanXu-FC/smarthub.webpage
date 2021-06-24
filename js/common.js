@@ -137,12 +137,14 @@ function promptMessage(title, content, fn) {
 function parentPromptMessage(title, content, fn) {
     layui.use(['layer'], function() {
         var layer = layui.layer;
+        var divWH = gitWinWH(420, 200);
         parent.layer.open({
             type: 1,
             id: 'layerDemo1', //防止重复弹出   
             title: title,
             content: content,
             area: ['421px', 'auto'],
+            offset: [divWH.h, divWH.w],
             btn: 'close',
             btnAlign: 'c', //按钮居中 
             closeBtn: 0,
@@ -162,7 +164,26 @@ function parentPromptMessage(title, content, fn) {
     })
 }
 
+function getDpr() {
+    var dpr = 1;
+    if (Number($(window).width()) <= 1360) {
+        //dpr = (Number($(window).width() / 1360) - 0.07).toFixed(2);
+        dpr = (Number($(window).width() / 1360)).toFixed(2);
+    }
+    localStorage.setItem("dpr", dpr);
+    var whOBJ = { //获取window顶层可视窗口宽高
+        w: Number($(window).width()),
+        h: Number($(window).height())
+    }
+    whOBJ = JSON.stringify(whOBJ);
+    localStorage.setItem("whOBJ", whOBJ);
+    return dpr;
+    //return 1
+}
+
 function LoginMessage(url) {
+    var dpr = localStorage.getItem("dpr");
+    var divWH = gitWinWH(540, 420);
     parent.layer.open({
         type: 2,
         id: 'loginMsg', //防止重复弹出   
@@ -170,10 +191,25 @@ function LoginMessage(url) {
         closeBtn: 0,
         shade: 0.8,
         area: ['541px', '420px'],
+        //area: ['308px', '239px'],
+        offset: [divWH.h, divWH.w],
+        //offset: 'auto',
         content: ["LoginTip.html?url=" + url, 'no'],
         end: function() {}
     });
 }
+//获取window可视窗口宽高
+function gitWinWH(divW, divH) {
+    var dpr = localStorage.getItem("dpr");
+
+    var whOBJ = JSON.parse(localStorage.getItem("whOBJ"));
+    var divWH = {
+        w: (whOBJ.w / dpr / 2 - divW / 2) + "px",
+        h: (whOBJ.h / dpr / 2 - divH / 2) + "px"
+    }
+    return divWH;
+}
+
 
 
 function tipMessage(content) {
@@ -196,11 +232,13 @@ function parentTipMessage(content) {
     //         area: '400px'
     //     });
     // })
+    var divWH = gitWinWH(420, 136);
     var tip = parent.layer.msg(content, {
         skin: 'layui-layer-molv',
         shade: [0.4, '#000'],
         time: 0,
-        area: ['421px', '136px']
+        area: ['421px', '136px'],
+        offset: [divWH.h, divWH.w],
     });
     return tip;
 }

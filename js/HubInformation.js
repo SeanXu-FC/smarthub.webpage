@@ -1,5 +1,7 @@
 var frequency = 0;
 $(function() {
+    document.body.style.zoom = localStorage.getItem("dpr");
+
     function timeConversion(millisec) {
 
         var seconds = (millisec / 1).toFixed(1);
@@ -69,66 +71,103 @@ function getMobileInfo(layer) {
         success: function(res) {
             frequency = 0;
             if (res.result.mobile) {
-                $("#mobile_CSQ").html(res.result.mobile.csq ? res.result.mobile.csq : "--");
-                $("#mobile_RSRQ").html(res.result.mobile.rsrq ? res.result.mobile.rsrq + " dB" : "--");
-                $("#mobile_RSRP").html(res.result.mobile.rsrp ? res.result.mobile.rsrp + " dBm" : "--");
-                $("#mobile_SINR").html(res.result.mobile.sinr ? res.result.mobile.sinr + " dB" : "--");
-                $("#mobile_PLMN").html(res.result.mobile.plmn ? res.result.mobile.plmn : "--");
-                $("#Ceil_ID").html(res.result.mobile.cell_id ? res.result.mobile.cell_id : "--");
-                $("#Location_Area_Code").html(res.result.mobile.lac ? res.result.mobile.lac : "--");
-                $("#Connection_Type").html(res.result.mobile.act ? res.result.mobile.act : "--");
-                $("#Connection_Band").html(res.result.mobile.band ? res.result.mobile.band : "--");
-                $("#Network_provider").html(res.result.mobile.provider ? res.result.mobile.provider : "--")
-                if (res.result.mobile.qrssi == -444 || res.result.mobile.qrssi == "-444") {
-                    $("#Cellular_signal").html("No network");
+                if (res.result.mobile.simStatus == 1) {
+                    $("#mobile_CSQ").html("--");
+                    $("#mobile_RSRQ").html("--");
+                    $("#mobile_RSRP").html("--");
+                    $("#mobile_SINR").html("--");
+                    $("#mobile_PLMN").html("--");
+                    $("#Ceil_ID").html("--");
+                    $("#Location_Area_Code").html("--");
+                    $("#Connection_Type").html("--");
+                    $("#Connection_Band").html("--");
+                    $("#Network_provider").html("--")
+                    $("#Cellular_signal").html("--");
+                    $("#Sim_Card_Status").text("--");
+
+                    switch (Number(res.result.mobile.simStatus)) {
+                        case 0:
+                            $("#Sim_Card_Status").text("Unknown");
+                            break;
+                        case 1:
+                            $("#Sim_Card_Status").text("Not inserted");
+                            break;
+                        case 2:
+                            $("#Sim_Card_Status").text("Ready");
+                            break;
+                        case 3:
+                            $("#Sim_Card_Status").text("PIN Need");
+                            break;
+                        case 4:
+                            $("#Sim_Card_Status").text("PUK Need");
+                            break;
+                        default:
+                            $("#Sim_Card_Status").text("--");
+                            break;
+                    }
                 } else {
-                    $("#Cellular_signal").html(res.result.mobile.qrssi + " dB");
+                    $("#mobile_CSQ").html(res.result.mobile.csq ? res.result.mobile.csq : "--");
+                    $("#mobile_RSRQ").html(res.result.mobile.rsrq ? res.result.mobile.rsrq + " dB" : "--");
+                    $("#mobile_RSRP").html(res.result.mobile.rsrp ? res.result.mobile.rsrp + " dBm" : "--");
+                    $("#mobile_SINR").html(res.result.mobile.sinr ? res.result.mobile.sinr + " dB" : "--");
+                    $("#mobile_PLMN").html(res.result.mobile.plmn ? res.result.mobile.plmn : "--");
+                    $("#Ceil_ID").html(res.result.mobile.cell_id ? res.result.mobile.cell_id : "--");
+                    $("#Location_Area_Code").html(res.result.mobile.lac ? res.result.mobile.lac : "--");
+                    $("#Connection_Type").html(res.result.mobile.act ? res.result.mobile.act : "--");
+                    $("#Connection_Band").html(res.result.mobile.band ? res.result.mobile.band : "--");
+                    $("#Network_provider").html(res.result.mobile.provider ? res.result.mobile.provider : "--")
+                    if (res.result.mobile.qrssi == -444 || res.result.mobile.qrssi == "-444") {
+                        $("#Cellular_signal").html("No network");
+                    } else {
+                        $("#Cellular_signal").html(res.result.mobile.qrssi + " dB");
+                    }
+
+                    switch (Number(res.result.mobile.cgreg)) {
+                        case 0:
+                            $("#Register_Status").text("Not registered");
+                            break;
+                        case 1:
+                            $("#Register_Status").text("Registered, home network");
+                            break;
+                        case 2:
+                            $("#Register_Status").text("Not registered");
+                            break;
+                        case 3:
+                            $("#Register_Status").text("Registration denied");
+                            break;
+                        case 4:
+                            $("#Register_Status").text("Unknown");
+                            break;
+                        case 5:
+                            $("#Register_Status").text("Registered, roaming");
+                            break;
+                        default:
+                            $("#Sim_Card_Status").text("--");
+                            break;
+                    }
+
+                    switch (Number(res.result.mobile.simStatus)) {
+                        case 0:
+                            $("#Sim_Card_Status").text("Unknown");
+                            break;
+                        case 1:
+                            $("#Sim_Card_Status").text("Not inserted");
+                            break;
+                        case 2:
+                            $("#Sim_Card_Status").text("Ready");
+                            break;
+                        case 3:
+                            $("#Sim_Card_Status").text("PIN Need");
+                            break;
+                        case 4:
+                            $("#Sim_Card_Status").text("PUK Need");
+                            break;
+                        default:
+                            $("#Sim_Card_Status").text("--");
+                            break;
+                    }
                 }
 
-                switch (Number(res.result.mobile.cgreg)) {
-                    case 0:
-                        $("#Register_Status").text("Not registered");
-                        break;
-                    case 1:
-                        $("#Register_Status").text("Registered, home network");
-                        break;
-                    case 2:
-                        $("#Register_Status").text("Not registered");
-                        break;
-                    case 3:
-                        $("#Register_Status").text("Registration denied");
-                        break;
-                    case 4:
-                        $("#Register_Status").text("Unknown");
-                        break;
-                    case 5:
-                        $("#Register_Status").text("Registered, roaming");
-                        break;
-                    default:
-                        $("#Sim_Card_Status").text("--");
-                        break;
-                }
-
-                switch (Number(res.result.mobile.simStatus)) {
-                    case 0:
-                        $("#Sim_Card_Status").text("Unknown");
-                        break;
-                    case 1:
-                        $("#Sim_Card_Status").text("Not inserted");
-                        break;
-                    case 2:
-                        $("#Sim_Card_Status").text("Ready");
-                        break;
-                    case 3:
-                        $("#Sim_Card_Status").text("PIN Need");
-                        break;
-                    case 4:
-                        $("#Sim_Card_Status").text("PUK Need");
-                        break;
-                    default:
-                        $("#Sim_Card_Status").text("--");
-                        break;
-                }
             } else if (res.error) {
                 layui.use(['form', 'layer'], function() {
                     var layer = layui.layer;

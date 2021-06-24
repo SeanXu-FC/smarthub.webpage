@@ -1,5 +1,6 @@
-var SIM, type, times;
+var SIM, type, times, positionTop;
 $(function() {
+    document.body.style.zoom = localStorage.getItem("dpr");
     SIM = GetUrlParam("SIM");
     type = GetUrlParam("type");
     times = GetUrlParam("times");
@@ -41,6 +42,27 @@ $(function() {
             unlockSIM(layer)
         })
     })
+
+
+    $('input').on("focus", function() {
+        if (localStorage.getItem("noPC")) {
+            positionTop = $(parent.document).find(".layui-layer-iframe").css("top");
+            $(parent.document).find(".layui-layer-iframe").css("top",
+                "0px");
+            $("#enterPass1").css({
+                "padding-bottom": "100px",
+                "overflow-y": "auto"
+            })
+        }
+    });
+
+    $('input').on("blur", function() {
+        if (localStorage.getItem("noPC")) {
+            $(parent.document).find(".layui-layer-iframe").css("top",
+                positionTop);
+            $("#enterPass1").css("padding-bottom", "0px")
+        }
+    });
 });
 
 //解锁SIM卡

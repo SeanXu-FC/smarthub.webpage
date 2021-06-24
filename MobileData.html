@@ -12,8 +12,8 @@
     <base href="/">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210618" rel="stylesheet" media="all">
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
+    <link href="layui/css/modules/laydate/default/laydate.css?mv=20210624" rel="stylesheet" media="all">
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
     <title>Document</title>
     <style type="text/css">
         table {
@@ -26,7 +26,7 @@
         }
         
         .mc {
-            margin: 140px 0 0 10px;
+            margin: 115px 0 0 10px;
             position: relative
         }
         
@@ -874,6 +874,23 @@
         
         .network-mode {
             align-items: flex-start;
+            max-width: 885px;
+        }
+        
+        .network-mode-top {
+            align-items: flex-start;
+            max-width: 885px;
+            padding-left: 15px;
+        }
+        
+        .Detect-SIMs-c {
+            position: relative;
+        }
+        
+        .Detect-SIMs {
+            position: absolute;
+            right: 40px;
+            top: 17px;
         }
         
         @media screen and (max-width: 1192px) {
@@ -887,6 +904,12 @@
             #btn_saved1 {
                 width: 120px;
                 height: 40px;
+            }
+        }
+        
+        @media screen and (max-width: 1192px) {
+            .save-btn1 {
+                right: 20px;
             }
         }
     </style>
@@ -904,10 +927,18 @@
             <input style="display: none" id="unlockSIM" name="unlockSIM" />
 
 
-            <div class="main mb-30">
+            <div class="main mb-20">
                 <div class="advancedContent" style="overflow: hidden;zoom:1;">
                     <div class="body1">
-                        <div class="auto-switch -flex-display">
+                        <div class="layui-form network-mode-top -flex-display -justify-box">
+                            <label class="Network-provider mt-15">Primary SIM:</label>
+                            <div class="layui-input-block pt-10" id="network_mode_top" style="width: 330px;">
+                                <input type="radio" id="network_mode_SIM1" lay-filter="primarySIM" name="primarySIM" value="0" title="SIM1">
+                                <input type="radio" id="network_mode_SIM2" lay-filter="primarySIM" name="primarySIM" value="1" title="SIM2">
+                            </div>
+
+                        </div>
+                        <div class="auto-switch -flex-display mt-25">
                             <div>
                                 <p class="Mobile-data">Allow SIM to switch when no network signal found or when data limit has been reached:</p>
                                 <p class="sm Use-cellular-network-for-data-connection">Condition is dependent on roaming and data limit settings
@@ -920,11 +951,15 @@
                             </div>
                         </div>
                         <div class="tab-wrapper content" id="content">
+                            <div class="Detect-SIMs-c">
+                                <ul class="tab-menu ml-10 Data-usage-simmenu mt-20">
+                                    <li class="SIM1-SIM2 active">SIM1<span id="SIM_provider1"></span></li>
+                                    <li class="SIM1-SIM2">SIM2<span id="SIM_provider2"></span></li>
+                                </ul>
+                                <button class="Rectangle-1182 width-auto Unlock-SIM Detect-SIMs" id="Detect_SIMs">Detect
+                                    SIMs</button>
+                            </div>
 
-                            <ul class="tab-menu ml-10 Data-usage-simmenu mt-20">
-                                <li class="SIM1-SIM2 active">SIM1<span id="SIM_provider1"></span></li>
-                                <li class="SIM1-SIM2">SIM2<span id="SIM_provider2"></span></li>
-                            </ul>
 
                             <div class="tab-content usage-content">
                                 <div class="content1">
@@ -944,7 +979,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="Mobile-data">Data roaming (outside of the UK):</div>
+                                                    <div class="Mobile-data">Data roaming:</div>
                                                     <div class="sm Use-cellular-network-for-data-connection">Use mobile data when roaming, this may result in additional fees</div>
                                                 </td>
                                                 <td>
@@ -1146,7 +1181,8 @@
                                         </div>
                                     </div>
                                     <div class="sim-block-c">
-                                        <div class="sim-block">SIM is blocked</div><button class="Rectangle-1182 width-auto Unlock-SIM" id="unblock_SIM"><span
+                                        <div id="unblock_SIM1_div" class="sim-block">SIM is blocked</div>
+                                        <button class="Rectangle-1182 width-auto Unlock-SIM" id="unblock_SIM"><span
                                                 class="Change-SIM-pin">Unblock SIM</span></button>
                                     </div>
 
@@ -1174,7 +1210,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="Mobile-data">Data roaming (outside of the UK):</div>
+                                                    <div class="Mobile-data">Data roaming:</div>
                                                     <div class="sm Use-cellular-network-for-data-connection">Use mobile data when roaming, this may result in additional fees</div>
                                                 </td>
                                                 <td>
@@ -1363,7 +1399,7 @@
                                         </div>
                                     </div>
                                     <div class="sim-block-c2">
-                                        <div class="sim-block">SIM is blocked</div><button class="Rectangle-1182 width-auto Unlock-SIM" id="unblock_SIM1"><span
+                                        <div id="unblock_SIM2_div" class="sim-block">SIM is blocked</div><button class="Rectangle-1182 width-auto Unlock-SIM" id="unblock_SIM1"><span
                                                 class="Change-SIM-pin">Unblock SIM</span></button>
                                     </div>
 
@@ -1380,10 +1416,10 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
         <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="js/common.js?mv=20210618"></script>
-        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210618"></script>
+        <script type="text/javascript" src="js/common.js?mv=20210624"></script>
+        <script type="text/javascript" src="layui/lay/modules/laydate.js?mv=20210624"></script>
         <script type="text/javascript" src="plugins/echart/echarts.min.js"></script>
-        <script type="text/javascript" src="js/MobileData.js?mv=20210618"></script>
+        <script type="text/javascript" src="js/MobileData.js?mv=20210624"></script>
 
 </body>
 

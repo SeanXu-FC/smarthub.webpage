@@ -1,5 +1,6 @@
 var frequency = 0;
 $(function() {
+    document.body.style.zoom = localStorage.getItem("dpr");
     layui.use('layer', function() {
         var layer = layui.layer;
         var loading = layer.load(0, {

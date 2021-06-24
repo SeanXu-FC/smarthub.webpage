@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
     <title>Document</title>
     <style>
         .Restart-factory-reset {
@@ -101,11 +101,14 @@
     </div>
 
     <script src="layui/layui.js " charset="utf-8 "></script>
+    <script type="text/javascript" src="js/common.js?mv=20210617"></script>
     <script>
+        document.body.style.zoom = localStorage.getItem("dpr");
         //弹出一个iframe层
         $('.restartSmartHub').on('click', function() {
 
             //iframe层
+            var divWH = gitWinWH(660, 182);
             parent.layer.open({
                 type: 2,
                 title: false,
@@ -113,6 +116,7 @@
                 //shadeClose: true,
                 shade: 0.8,
                 area: ['660px', '182px'],
+                offset: [divWH.h, divWH.w],
                 content: ['restartSmartHub.html', 'no'],
             });
         });
@@ -120,6 +124,7 @@
         $('.restartFactoryDefaults').on('click', function() {
 
             //iframe层
+            var divWH = gitWinWH(660, 296);
             parent.layer.open({
                 type: 2,
                 title: false,
@@ -127,6 +132,7 @@
                 //shadeClose: true,
                 shade: 0.8,
                 area: ['660px', '297px'],
+                offset: [divWH.h, divWH.w],
                 content: ['restartFactoryDefaults.html', 'no'],
             });
         });

@@ -38,6 +38,11 @@ button:disabled {
     opacity: 0.5 !important;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 .h1,
 .h2,
 .h3,
@@ -554,6 +559,10 @@ h6 {
     width: 80%;
 }
 
+.w96 {
+    width: 96%;
+}
+
 .red {
     color: #f00;
 }
@@ -824,6 +833,25 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+.layui-form-checkbox[lay-skin=primary] i {
+    border: 1px solid #707070 !important;
+}
+
+.layui-layer-page .layui-layer-content div {
+    font-family: "OpenSans-Semibold" !important;
+    font-size: 24px !important;
+    text-align: left !important;
+}
+
+.layui-input {
+    border: 1px solid #333;
+}
+
+.layui-input[disabled],
+.layui-textarea[disabled] {
+    border: 1px solid #aaa;
 }
 
 ::-webkit-scrollbar {

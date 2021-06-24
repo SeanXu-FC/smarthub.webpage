@@ -14,10 +14,10 @@
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/jquery.ipinput.css" rel="stylesheet" />
-    <script src="js/lanConfiguration.js?mv=20210618"></script>
+    <script src="js/lanConfiguration.js?mv=20210624"></script>
     <script src="js/jquery.ipinput.js"></script>
     <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <title>Document</title>
     <style>
         .btn-primary.active {
@@ -36,12 +36,16 @@
             letter-spacing: normal;
             text-align: left;
             color: #343434;
+            background-color: #fff;
+            padding-top: 30px;
+            z-index: 999;
         }
         
         .btn1 {
-            position: absolute;
+            position: fixed;
             top: 31px;
             right: 70px;
+            z-index: 999;
         }
         
         .Path-101 {
@@ -147,6 +151,10 @@
             letter-spacing: normal;
             text-align: left;
             color: #343434;
+        }
+        
+        .form-horizontal {
+            padding-top: 130px;
         }
         
         .form-horizontal .control-label {
@@ -284,6 +292,10 @@
             font-size: 18px !important;
         }
         
+        #leasetime {
+            width: 100px;
+        }
+        
         @media screen and (max-width: 1192px) {
             .LAN-configuration {
                 font-size: 30px;
@@ -301,9 +313,9 @@
 </head>
 
 <body>
-    <div class="container-fluid" style="margin:30px 70px;">
+    <div class="container-fluid" style="margin:0 70px 30px 70px;">
         <div class="row">
-            <div style="position:relative;margin-bottom:40px;border-bottom: solid 1px #ddd;padding-bottom: 10px;" class="LAN-configuration">Wi-Fi configuration
+            <div style="position:fixed;margin-bottom:40px;border-bottom: solid 1px #ddd;padding-bottom: 10px;width:90%;" class="LAN-configuration">Wi-Fi configuration
             </div>
             <div id="success" class="Rectangle-1269 Password-successfully-changed Changes-saved">Changes-saved</div>
             <div id="error" class="error-icon Password-successfully-changed Changes-saved"></div>
@@ -407,13 +419,35 @@
     <script>
         var frequency = 0;
         $(function() {
-
+            document.body.style.zoom = localStorage.getItem("dpr");
             layui.use('layer', function() {
                 var layer = layui.layer;
                 var loading = layer.load(0, {
                     shade: false
                 });
                 getWlanData(layer, loading);
+            });
+
+            $("#startip_ipinput .ipinput_input").on("focus", function() {
+                //if (localStorage.getItem("noPC")) {
+                $(".container-fluid").css({
+                        "padding-bottom": "500px",
+                    })
+                    //}
+            });
+
+            $('input').on("focus", function() {
+                //if (localStorage.getItem("noPC")) {
+                $(".container-fluid").css({
+                        "padding-bottom": "500px",
+                    })
+                    //}
+            });
+
+            $('input').on("blur", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(".container-fluid").css("padding-bottom", "0px")
+                }
             });
 
             $("#btn2").on("click", function() {
@@ -549,6 +583,21 @@
                         });
                         var lease = $('input[name="sec"]').eq(0).val(json
                             .DHCPLeaseTime);
+
+                        $(".ipinput_input").on("focus", function() {
+                            if (localStorage.getItem("noPC")) {
+                                $(".container-fluid").css({
+                                    "padding-bottom": "500px",
+                                })
+                            }
+                        });
+                        $(".ipinput_input").on("blur", function() {
+                            if (localStorage.getItem("noPC")) {
+                                $(".container-fluid").css({
+                                    "padding-bottom": "0px",
+                                })
+                            }
+                        });
                     } else {
                         var tip =
                             '<div class="custom-waring"><img src="../images/waring.png"><span class="waring-text">' +

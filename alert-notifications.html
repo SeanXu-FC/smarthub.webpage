@@ -12,7 +12,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link href="layui/css/layui.css" rel="stylesheet" />
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
     <title>Document</title>
     <style>
         body {
@@ -252,10 +252,11 @@
         </div>
     </div>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script>
         var frequency = 0;
         $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             layui.use('layer', function() {
                 var layer = layui.layer;
                 var loading = layer.load(0, {
@@ -278,6 +279,7 @@
 
                 var types = $(this).children(".Digital-input").attr("types");
                 //iframe层
+                var divWH = gitWinWH(760, 520);
                 parent.layer.open({
                     type: 2,
                     title: false,
@@ -285,6 +287,7 @@
                     //shadeClose: true,
                     shade: 0.8,
                     area: ['761px', '520px'],
+                    offset: [divWH.h, divWH.w],
                     content: ['editNotifications.html?dataId=' + dataId + '&name=' + name +
                         '&alertID=' + alertID +
                         '&Notifications=' + Notifications + '&trigType=' + trigType +
@@ -304,13 +307,15 @@
                 var LowVoltWarning = $(this).children("#Notifications0").attr("LowVoltWarning");
                 var LowVoltValue = $(this).children("#Notifications0").attr("LowVoltValue");
                 //iframe层
+                var divWH = gitWinWH(530, 314);
                 parent.layer.open({
                     type: 2,
                     title: false,
                     closeBtn: 0,
                     //shadeClose: true,
                     shade: 0.8,
-                    area: ['497px', '315px'],
+                    area: ['530px', '315px'],
+                    offset: [divWH.h, divWH.w],
                     content: ['alertLowWaring.html?LowVoltWarning=' + LowVoltWarning +
                         '&LowVoltValue=' + LowVoltValue, 'no'
                     ],

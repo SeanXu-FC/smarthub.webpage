@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
 
     <link rel="stylesheet" href="layui/css/layui.css">
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
     <title>Document</title>
     <style>
         .mc {
@@ -1124,13 +1124,14 @@
     <div id="bg1"></div> -->
 
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
-    <script src="js/WiFiNetwork.js?mv=20210618"></script>
+    <script src="js/WiFiNetwork.js?mv=20210624"></script>
 
     <script>
         $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             var isShow = true;
             $(".connected button").prop("disabled", true);
             $(".connected button").css("opacity", "0.5");

@@ -15,23 +15,34 @@
     <link rel="shortcut icon" href="images/favicon.ico" />
     <link rel="bookmark" href="images/favicon.ico" />
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/xadmin.css?mv=20210618">
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
-    <link rel="stylesheet" href="css/myProgress.css?mv=20210618" />
+    <link rel="stylesheet" href="css/xadmin.css?mv=20210624">
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
+    <link rel="stylesheet" href="css/myProgress.css?mv=20210624" />
 
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script>
         let flag = navigator.userAgent.match(
-            /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+            /(phone|iPhone|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
         )
-        if (flag) {
-            var domain = window.location.host;
-            top.location.href = ('https:' == document.location.protocol ? 'https://' :
-                'http://') + domain + "/app/index.html";
+
+        // if (flag) {
+        //     if ($(window).width() < $(window).height()) {
+        //         var domain = window.location.host;
+        //         top.location.href = ('https:' == document.location.protocol ? 'https://' :
+        //             'http://') + domain + "/app/index.html";
+        //     }
+        // }
+        if ((navigator.userAgent.match(
+                /(Android)/i
+            ))) {
+            /*window.location.href="你的手机版地址";*/
+            //$(".layui-layer-iframe").css("top", "0px !important")
+            localStorage.setItem("noPC", true);
+
         }
-        var windowWidth = $(window).width();
-        var domain = window.location.host;
+        //var windowWidth = $(window).width();
+        //var domain = window.location.host;
         // window.onresize = function() {
         //     return (() => {
         //         windowWidth = $(window).width();
@@ -42,11 +53,12 @@
         //         }
         //     })()
         // }
-        if (windowWidth < 1279) {
-            top.location.href = ('https:' == document.location.protocol ? 'https://' :
-                'http://') + domain + "/app/index.html";
-            //top.location.href = "http://localhost:8080/#/Home"
-        }
+
+        // if (windowWidth < 1279) {
+        //     top.location.href = ('https:' == document.location.protocol ? 'https://' :
+        //         'http://') + domain + "/app/index.html";
+        //     //top.location.href = "http://localhost:8080/#/Home"
+        // }
     </script>
     <style>
         body {
@@ -324,21 +336,14 @@
 
     <!-- Top start -->
     <div class="main">
-        <div class="logo">
+        <div class="logo -flex-display -justify-box">
             <a><img src="images/RM_logo.svg?v=20210518"></a>
-            <!-- <a><img src="images/logo-Raymarine.png"></a> -->
-            <!-- <a href="./index.html"></a> -->
+            <div class="Smart-Hub-Manager">YachtSense Link Router</div>
         </div>
-        <!-- <div class="left_open">
-            <i title="Expand the left column" class="iconfont">&#xe620;</i>
-        </div> -->
 
-        <ul class="layui-nav right" lay-filter="">
+        <!-- <ul class="layui-nav" lay-filter="">
             <li class="Smart-Hub-Manager">YachtSense Link Router</li>
-            <!-- <li class="layui-nav-item to-index">
-                <div id="result"><a href="/" id="logout">exit</a></div>
-            </li> -->
-        </ul>
+        </ul> -->
 
     </div>
     <!-- Top end -->
@@ -546,11 +551,11 @@
     <div class="layui-layer-shade" id="upgrade_mask" times="1" style="z-index: 19891014; background-color: rgb(255, 255, 255); opacity: 0.1;width:408px;"></div>
 
     <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/xadmin.js?mv=20210624"></script>
     <script type="text/javascript" src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script type="text/javascript" src="layui/lay/modules/layer.js"></script>
     <script src="js/jquery.myProgress.js"></script>
-    <script type="text/javascript" src="js/index.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/index.js?mv=20210624"></script>
 
 </body>
 

@@ -1,6 +1,7 @@
 ﻿var frequency = 0;
 var fileName = "";
 $(function() {
+    document.body.style.zoom = localStorage.getItem("dpr");
     getVersion();
 
     $("#fileUpload").change(function() {

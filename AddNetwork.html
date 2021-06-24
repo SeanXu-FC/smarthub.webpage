@@ -212,7 +212,8 @@
         }
         
         .wirelessInfo {
-            padding: 20px;
+            padding: 20px 0 20px 20px;
+            height: 100%;
         }
         
         .layui-form-label {
@@ -222,7 +223,7 @@
         .layui-input,
         .layui-textarea {
             /* display: block; */
-            width: 83%;
+            width: 76%;
             padding-left: 10px;
         }
         
@@ -310,7 +311,7 @@
         
         .form-control {
             display: block;
-            width: 83%;
+            width: 76%;
             height: 40px;
             padding: 6px 12px;
             font-size: 18px;
@@ -401,13 +402,14 @@
 
 
     </div>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
     <script>
         var layer;
         $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             layui.use('layer', function() {
                 layer = layui.layer;
             });
@@ -499,6 +501,26 @@
                     $("#wpa").show();
                     $("#save_btn").prop("disabled", true);
                     $("#save_btn").css("opacity", "0.5");
+                }
+            });
+
+            $('input').on("focus", function() {
+                if (localStorage.getItem("noPC")) {
+                    positionTop = $(parent.document).find(".layui-layer-iframe").css("top");
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        "0px");
+                    $("#wirelessInfo").css({
+                        "padding-bottom": "100px",
+                        "overflow-y": "auto"
+                    })
+                }
+            });
+
+            $('input').on("blur", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        positionTop);
+                    $("#wirelessInfo").css("padding-bottom", "0px")
                 }
             });
 

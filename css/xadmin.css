@@ -266,11 +266,12 @@ xblock {
 }
 
 .main .logo {
-    padding-top: 0px
+    padding-top: 0px;
+    position: relative;
 }
 
 .main .logo a {
-    float: left;
+    display: inline-block;
     color: #fff;
     font-size: 18px;
     /* padding-left: 20px; */
@@ -310,12 +311,14 @@ xblock {
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.37;
+    line-height: 1.6;
     letter-spacing: normal;
     text-align: left;
     color: #fff;
     color: grape-purple;
-    margin-top: 7px;
+    margin-right: 20px;
+    position: absolute;
+    right: 20px;
 }
 
 .Smart-Hub-Manager:hover {}
@@ -330,7 +333,6 @@ xblock {
 
 .main .right {
     background-color: rgba(0, 0, 0, 0);
-    float: right;
 }
 
 .main .left_open {
@@ -656,7 +658,8 @@ table td {
     border-color: #03387f !important;
 }
 
-@media screen and (max-width: 768px) {
+
+/* @media screen and (max-width: 768px) {
     .fast-add {
         display: none;
     }
@@ -667,23 +670,15 @@ table td {
         width: 200px;
     }
     .logo a {
-        /* text-indent: 2em; */
         height: 38px;
         width: 87px;
-        /* color: #fff; */
-        /* background: url(../images/RM_logo.svg) no-repeat; */
         margin: 0px 0 0 0px;
     }
-    /* .main .left_open {
-        float: right;
-    } */
     .Smart-Hub-Manager {
         font-family: OpenSans;
         font-size: 14px;
-        /* font-weight: 600; */
         font-stretch: normal;
         font-style: normal;
-        /* line-height: 1.37; */
         letter-spacing: normal;
         text-align: left;
         color: #009fe3;
@@ -721,7 +716,6 @@ table td {
         overflow-x: hidden;
         border-right: 1px solid #e5e5e5;
         box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
-        /*width: 0px;*/
     }
     #side-nav {
         margin-top: 20px;
@@ -731,9 +725,7 @@ table td {
         position: absolute;
         top: 180px;
         left: 0px;
-        /* width: 350px; */
         width: 80%;
-        /* max-height: 480px; */
         overflow: hidden;
         zoom: 1;
         border: 1px solid #333;
@@ -747,10 +739,9 @@ table td {
         margin: 30px auto;
     }
     .modal-content {
-        /* width: 80%; */
         padding: 30px;
     }
-}
+} */
 
 
 /* product-sort */
@@ -946,7 +937,7 @@ table td {
     height: 44px !important;
     line-height: 44px !important;
     display: inline-block;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600 !important;
     ;
     font-stretch: normal;

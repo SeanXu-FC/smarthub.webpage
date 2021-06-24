@@ -9,16 +9,23 @@ $(function() {
         $("#enterPass").hide(500)
     });
     $("#side-nav #nav a").on("click", function() {
-        $("#side-nav #nav a").removeClass("nav-a-active");
-        $(this).addClass("nav-a-active");
-        var a = $(this).attr("data-url");
-        if (a && a != "home.html") {
-            a = a + "?v=" + Math.random();
-        }
-        "home.html" == a || void 0 == a ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : getCookie("LogInStaus") ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : LoginMessage(a)
-    })
-
-
+            $("#side-nav #nav a").removeClass("nav-a-active");
+            $(this).addClass("nav-a-active");
+            var a = $(this).attr("data-url");
+            if (a && a != "home.html") {
+                a = a + "?v=" + Math.random();
+            }
+            "home.html" == a || void 0 == a ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : getCookie("LogInStaus") ? ($("#my-iframe").attr("src"), $("#my-iframe").attr("src", a)) : LoginMessage(a)
+        })
+        // alert($(window).width())
+        // alert(getDpr())
+        //document.body.style.zoom = (Number($(window).width()) / 1280 - 0.07).toFixed(2);
+    document.body.style.zoom = getDpr();
+    // $('body').css({
+    //     transform: "scale(0.6)",
+    //     transformOrigin: "left top",
+    //     backgroundSize: "100%"
+    // });
 });
 
 function _isMobile() { return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) }

@@ -10,7 +10,7 @@
     <meta http-equiv="Cache" content="no-cache">
     <link rel="stylesheet" href="css/bootstrap/3.3.7/bootstrap.min.css">
     <link rel="stylesheet" href="layui/css/layui.css" media="all">
-    <link href="css/style.css?mv=20210618" rel="stylesheet" />
+    <link href="css/style.css?mv=20210624" rel="stylesheet" />
     <title>Document</title>
     <style>
         * {
@@ -83,13 +83,8 @@
         
         #enterPass,
         #enterPass1 {
-            /* position: absolute;
-            top: 50%;
-            left: 50%; */
-            width: 400px;
-            height: 318px;
-            /* margin-left: -250px;
-            margin-top: -152px; */
+            width: 100%;
+            height: 100%;
             padding: 40px;
             z-index: 999999;
         }
@@ -129,7 +124,7 @@
         }
         
         .Password {
-            width: 125px;
+            width: 95px;
             height: 24px;
             font-family: OpenSans;
             font-size: 18px;
@@ -199,7 +194,7 @@
             letter-spacing: normal;
             text-align: left;
             color: #343434;
-            padding: 5px 0 0 68px;
+            padding: 5px 0 0 114px;
         }
     </style>
 </head>
@@ -238,10 +233,11 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/3.3.7/bootstrap.min.js"></script>
     <script src="layui/layui.js " charset="utf-8 "></script>
-    <script type="text/javascript" src="js/common.js?mv=20210618"></script>
+    <script type="text/javascript" src="js/common.js?mv=20210624"></script>
     <script type="text/javascript">
-        var SIM, times;
+        var SIM, times, positionTop;
         $(function() {
+            document.body.style.zoom = localStorage.getItem("dpr");
             SIM = GetUrlParam("SIM");
             times = GetUrlParam("times");
 
@@ -280,6 +276,27 @@
                     unlockSIM(layer)
                 })
             })
+
+
+            $('input').on("focus", function() {
+                if (localStorage.getItem("noPC")) {
+                    positionTop = $(parent.document).find(".layui-layer-iframe").css("top");
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        "0px");
+                    $("#enterPass1").css({
+                        "padding-bottom": "260px",
+                        "overflow-y": "auto"
+                    })
+                }
+            });
+
+            $('input').on("blur", function() {
+                if (localStorage.getItem("noPC")) {
+                    $(parent.document).find(".layui-layer-iframe").css("top",
+                        positionTop);
+                    $("#enterPass1").css("padding-bottom", "0px")
+                }
+            });
         });
 
         function closeLockSim() {

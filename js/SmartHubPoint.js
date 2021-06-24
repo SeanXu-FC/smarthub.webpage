@@ -1,4 +1,5 @@
 $(function() {
+    document.body.style.zoom = localStorage.getItem("dpr");
     layui.use('layer', function() {
         var layer = layui.layer;
         var loading = layer.load(0, {
@@ -138,6 +139,20 @@ $(function() {
             });
             getData(layer, loading);
         });
+    });
+
+    $('input').on("focus", function() {
+        if (localStorage.getItem("noPC")) {
+            $(".container-fluid").css({
+                "padding-bottom": "300px",
+            })
+        }
+    });
+
+    $('input').on("blur", function() {
+        if (localStorage.getItem("noPC")) {
+            $(".container-fluid").css("padding-bottom", "0px")
+        }
     });
 
 });
@@ -548,11 +563,13 @@ function APsave() {
 }
 
 function ejectTip() {
-
+    var divWH = gitWinWH(560, 80);
     var loading = parent.layer.msg('Waiting for changes to be applied...', {
         icon: 16,
         time: false,
         shade: [0.5, '#fff'],
+        area: ['560px', '80px'],
+        offset: [divWH.h, divWH.w],
         success: function(layero, index) {
             var msg = layero.text();
 
